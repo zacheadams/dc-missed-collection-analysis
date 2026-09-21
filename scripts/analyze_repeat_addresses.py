@@ -10,7 +10,11 @@ import os
 from collections import defaultdict
 from datetime import datetime
 
+import sys
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.join(BASE_DIR, "scripts"))
+from update_map_data import get_smd_ward
 
 def extract_polys(geom):
     gtype = geom.get("type")
@@ -43,7 +47,6 @@ def point_in_ring(x, y, ring):
 def analyze_repeat_addresses():
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
     sr_path = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
-    map_data_path = os.path.join(BASE_DIR, "data/dc_map_data_v2.json")
     output_path = os.path.join(BASE_DIR, "data/smd_180d_address_stats.json")
 
     with open(smd_path, "r", encoding="utf-8") as f:
@@ -52,23 +55,20 @@ def analyze_repeat_addresses():
     with open(sr_path, "r", encoding="utf-8") as f:
         sr_data = json.load(f)
 
-    with open(map_data_path, "r", encoding="utf-8") as f:
-        v2 = json.load(f)
-
-    ward_map = {f["properties"]["smd_id"]: f["properties"]["ward"] for f in v2["smds"]["features"]}
-
     smd_cache = []
     for feat in smds_geojson["features"]:
         props = feat["properties"]
         smd_id = props.get("SMD_ID")
+        anc_id = props.get("ANC_ID")
+        ward = get_smd_ward(smd_id, anc_id)
         rings = extract_polys(feat["geometry"])
         all_lons = [p[0] for r in rings for p in r]
         all_lats = [p[1] for r in rings for p in r]
         bbox = (min(all_lons), min(all_lats), max(all_lons), max(all_lats)) if all_lons else (0,0,0,0)
         smd_cache.append({
             "smd_id": smd_id,
-            "anc_id": props.get("ANC_ID"),
-            "ward": ward_map.get(smd_id),
+            "anc_id": anc_id,
+            "ward": ward,
             "rings": rings,
             "bbox": bbox,
             "trash": 0,

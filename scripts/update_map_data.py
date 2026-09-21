@@ -62,6 +62,21 @@ def get_bbox(polys):
                 if y > max_y: max_y = y
     return (min_x, min_y, max_x, max_y)
 
+def get_smd_ward(smd_id, anc_id):
+    """
+    Deterministically map DC SMDs and ANCs to their official Wards pursuant
+    to the DC 2022 redistricting act (D.C. Law 24-148).
+    All ANCs belong to the Ward of their first digit, with the sole exception
+    of cross-ward ANC 3/4G (3/4G01-3/4G04 in Ward 4, 3/4G05-3/4G07 in Ward 3).
+    """
+    if anc_id == "3/4G":
+        try:
+            num = int(smd_id[-2:])
+            return 4 if num <= 4 else 3
+        except Exception:
+            return 3
+    return int(anc_id[0])
+
 def update_map_data():
     sr_path = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
@@ -137,24 +152,9 @@ def update_map_data():
             "total": 0
         })
 
-    # Assign Ward to SMDs by checking centroid/first polygon vertex against Wards
+    # Assign official Ward to each SMD pursuant to DC Law 24-148
     for smd in smd_index:
-        bx1, by1, bx2, by2 = smd["bbox"]
-        cx = (bx1 + bx2) / 2.0
-        cy = (by1 + by2) / 2.0
-        assigned_ward = None
-        for w in ward_index:
-            if w["bbox"][0] <= cx <= w["bbox"][2] and w["bbox"][1] <= cy <= w["bbox"][3]:
-                if any(is_point_in_poly(cx, cy, wp) for wp in w["polys"]):
-                    assigned_ward = w["ward"]
-                    break
-        if assigned_ward is None:
-            # Fallback to ANC first character
-            try:
-                assigned_ward = int(smd["anc_id"][0])
-            except Exception:
-                assigned_ward = 1
-        smd["ward"] = assigned_ward
+        smd["ward"] = get_smd_ward(smd["smd_id"], smd["anc_id"])
 
     # Match 30-day tickets to SMDs
     matched_count = 0
