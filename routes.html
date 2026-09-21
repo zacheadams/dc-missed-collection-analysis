@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DC DPW Collection Routes Analysis • Trash &amp; Recycling Performance Report</title>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070a12;
+      --bg-card: #0d1322;
+      --bg-panel: rgba(13, 19, 34, 0.94);
+      --border: rgba(255, 255, 255, 0.11);
+      --border-bright: rgba(56, 189, 248, 0.45);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
+      --trash-color: #ef4444;
+      --recycle-color: #10b981;
+      --warning-color: #f59e0b;
+      --purple-color: #a855f7;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 20px 80px 20px;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding: 12px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-link.active {
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+
+    .github-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .github-link:hover {
+      color: #fff;
+      border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Header */
+    .site-header {
+      margin-bottom: 28px;
+    }
+
+    .site-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .site-subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 900px;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .kpi-val {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .kpi-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Section Styling */
+    .section-title-wrap {
+      margin: 40px 0 20px 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-heading {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Chart Grid */
+    .chart-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(620px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 680px) {
+      .chart-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-header {
+      margin-bottom: 16px;
+    }
+
+    .chart-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .chart-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chart-canvas-wrap {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      width: 100%;
+    }
+
+    .chart-footnote {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      line-height: 1.4;
+    }
+
+    /* Findings / Pattern Cards */
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 520px) {
+      .patterns-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pattern-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .pattern-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .tag-blue {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .tag-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .tag-red {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .tag-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .pattern-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .pattern-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .pattern-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .pattern-table th {
+      text-align: left;
+      padding: 6px 8px;
+      color: var(--text-dim);
+      font-weight: 700;
+      font-size: 11px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pattern-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+
+    /* Interactive Table Section */
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      background: var(--bg-card);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .filter-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-tab.active {
+      background: #0284c7;
+      color: #ffffff;
+    }
+
+    .table-search {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: #fff;
+      min-width: 280px;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+
+    .table-search:focus {
+      border-color: #38bdf8;
+    }
+
+    .table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .data-table-wrap {
+      overflow-x: auto;
+      max-height: 600px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    .data-table th {
+      background: #0f172a;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .data-table th:hover {
+      color: #38bdf8;
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .pill-trash {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .pill-rec {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .status-widespread {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .status-chronic {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .status-standard {
+      background: rgba(148, 163, 184, 0.1);
+      color: #94a3b8;
+    }
+
+    .status-zero {
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+    }
+
+    .table-footer {
+      padding: 12px 18px;
+      background: #0f172a;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-note {
+      margin-top: 40px;
+      padding: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-container">
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">&larr; District &amp; SMD Map &amp; Report</a>
+        <a href="routes.html" class="nav-link active">DPW Route-Level Analysis</a>
+      </div>
+      <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="github-link">
+        GitHub Repository
+      </a>
+    </nav>
+
+    <!-- Header -->
+    <header class="site-header">
+      <h1 class="site-title">Washington, DC DPW Collection Routes Analysis</h1>
+      <p class="site-subtitle">
+        Operational performance evaluation across 103 DPW Trash Routes and 120 DPW Recycling Routes over the past 180 days (March 24 – September 20, 2026). This report analyzes address deduplication, distinct-day repeat failures, schedule bottlenecks, and service area dynamics.
+      </p>
+    </header>
+
+    <!-- KPI Summary Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Matched Route Requests</div>
+        <div class="kpi-val">8,751</div>
+        <div class="kpi-sub">6,197 Trash • 2,554 Recycling</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Unique Complaining Properties</div>
+        <div class="kpi-val">5,920</div>
+        <div class="kpi-sub">1.48 requests / complaining address</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Multi-Day Repeat Properties</div>
+        <div class="kpi-val">1,392</div>
+        <div class="kpi-sub">23.5% chronic repeat failure rate (&ge;2 days)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Route Coverage</div>
+        <div class="kpi-val">223 Routes</div>
+        <div class="kpi-sub">103 Trash Routes • 120 Recycling Routes</div>
+      </div>
+    </div>
+
+    <!-- Section 1: Visualizations -->
+    <div class="section-title-wrap">
+      <div>
+        <h2 class="section-heading">Operational Visualizations</h2>
+        <div class="section-desc">Standalone charts with explicit time scope and data source footnotes for communications and reporting.</div>
+      </div>
+    </div>
+
+    <!-- Charts Row 1: Top 10 Trash & Recycling Routes -->
+    <div class="chart-grid-2">
+      <!-- Chart 1: Top 10 Trash Routes -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Top 10 Trash Routes by Missed Collections</div>
+          <div class="chart-sub">Single-Incident Properties vs. Multi-Day Repeat Properties (180 Days)</div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartTopTrash"></canvas>
+        </div>
+        <div class="chart-footnote">
+          Source: DC Open Data 311 (S0441) • DPW Trash Route Boundaries • 180-Day Scope (March 24 – September 20, 2026)
+        </div>
+      </div>
+
+      <!-- Chart 2: Top 10 Recycling Routes -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Top 10 Recycling Routes by Missed Collections</div>
+          <div class="chart-sub">Single-Incident Properties vs. Multi-Day Repeat Properties (180 Days)</div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartTopRec"></canvas>
+        </div>
+        <div class="chart-footnote">
+          Source: DC Open Data 311 (S0321) • DPW Recycling Route Boundaries • 180-Day Scope (March 24 – September 20, 2026)
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row 2: Scheduled Day of Week & Chronic Recurrence -->
+    <div class="chart-grid-2">
+      <!-- Chart 3: Day of Week -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Missed Collections by Scheduled Collection Day</div>
+          <div class="chart-sub">Trash vs. Recycling Volume across Collection Days (180 Days)</div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartDayOfWeek"></canvas>
+        </div>
+        <div class="chart-footnote">
+          Source: DC Open Data 311 (S0441 / S0321) • DPW Route Schedules • 180-Day Scope (March 24 – September 20, 2026)
+        </div>
+      </div>
+
+      <!-- Chart 4: Chronic Repeat Rates -->
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Chronic Recurrence: Highest Multi-Day Repeat Rates</div>
+          <div class="chart-sub">% of Complaining Properties Submitting Tickets Across &ge;2 Distinct Days (Min 15 Reqs)</div>
+        </div>
+        <div class="chart-canvas-wrap">
+          <canvas id="chartChronic"></canvas>
+        </div>
+        <div class="chart-footnote">
+          Source: DC Open Data 311 (S0441 / S0321) • Distinct-Day Address Deduplication • 180-Day Scope (March 24 – September 20, 2026)
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Key Findings & Identified Patterns -->
+    <div class="section-title-wrap">
+      <div>
+        <h2 class="section-heading">Key Operational Patterns Identified</h2>
+        <div class="section-desc">Core logistical and systemic failure modes revealed through route-level address analysis.</div>
+      </div>
+    </div>
+
+    <div class="patterns-grid">
+      <!-- Pattern 1 -->
+      <div class="pattern-card">
+        <span class="pattern-tag tag-blue">Pattern 1 • Concentration Skew</span>
+        <h3 class="pattern-title">Extreme Pareto Distribution Across Truck Routes</h3>
+        <p class="pattern-body">
+          Missed collection complaints are heavily concentrated in a small minority of truck routes. The top 10 trash routes account for 23.1% of all missed trash tickets District-wide (1,432 of 6,197 requests). Similarly, the top 10 recycling routes drive 21.9% of all recycling failures. While the median trash route generated 51 requests over 180 days, high-failure corridors such as <strong>Route OR304</strong> (Upper Northwest) and <strong>Route IC203</strong> (Dupont/Adams Morgan) exceeded 198 to 220 requests each.
+        </p>
+        <table class="pattern-table">
+          <thead>
+            <tr><th>Metric</th><th>Top 10 Routes</th><th>Median Route</th><th>Bottom 25%</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Trash Route Volume</td><td>143.2 reqs/route</td><td>51.0 reqs/route</td><td>14.0 reqs/route</td></tr>
+            <tr><td>Recycling Route Volume</td><td>55.8 reqs/route</td><td>16.5 reqs/route</td><td>4.0 reqs/route</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pattern 2 -->
+      <div class="pattern-card">
+        <span class="pattern-tag tag-amber">Pattern 2 • Schedule Bottlenecks</span>
+        <h3 class="pattern-title">Mid-Week Wednesday Trash Peak &amp; Early-Week Recycling Surge</h3>
+        <p class="pattern-body">
+          Evaluating tickets by scheduled pickup day reveals distinct weekly operational bottlenecks. For trash collection, <strong>Wednesday routes lead the District</strong> with 1,369 service requests (982 unique properties), followed by Tuesday/Friday twice-weekly routes (1,047 requests). For recycling, early-week operations on <strong>Monday and Tuesday account for 48.7% of all missed recycling complaints</strong> (1,245 of 2,554 requests), whereas Friday recycling routes generated fewer complaints (368 requests).
+        </p>
+        <table class="pattern-table">
+          <thead>
+            <tr><th>Collection Schedule</th><th>Trash Requests</th><th>Recycling Requests</th><th>Total Volume</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Wednesday</td><td>1,369 reqs</td><td>522 reqs</td><td>1,891 reqs</td></tr>
+            <tr><td>Tuesday (Single + 2x)</td><td>2,002 reqs</td><td>624 reqs</td><td>2,626 reqs</td></tr>
+            <tr><td>Monday (Single + 2x)</td><td>1,448 reqs</td><td>621 reqs</td><td>2,069 reqs</td></tr>
+            <tr><td>Friday (Single)</td><td>857 reqs</td><td>368 reqs</td><td>1,225 reqs</td></tr>
+            <tr><td>Thursday (Single)</td><td>521 reqs</td><td>419 reqs</td><td>940 reqs</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pattern 3 -->
+      <div class="pattern-card">
+        <span class="pattern-tag tag-purple">Pattern 3 • Failure Typology</span>
+        <h3 class="pattern-title">Widespread Route Skips vs. Chronic Resolution Failures</h3>
+        <p class="pattern-body">
+          Address-level deduplication identifies two fundamentally different failure mechanics:
+          <br><br>
+          <strong>Widespread Route Bypasses:</strong> Routes such as <strong>OR706</strong> and <strong>OR708</strong> in Ward 7 exhibit high unique address counts (96 to 98 properties) but relatively low repeat rates (18.4% to 21.9%). Collection crews bypassed entire blockfaces or alley corridors on pickup day, but re-service generally resolved the issue without repeat tickets on subsequent weeks.
+          <br><br>
+          <strong>Chronic Problem Resolution Failures:</strong> In contrast, routes like <strong>Recycling Route R209_2</strong> (Ward 2) and <strong>Trash Route OR309</strong> (Ward 3) suffer from persistent recurrence. On R209_2, <strong>50.0% of all complaining properties</strong> (14 of 28 addresses) submitted tickets across 2 to 5 distinct collection cycles, averaging <strong>2.54 requests per complaining property</strong>. This demonstrates that closing 311 tickets failed to fix the underlying physical obstacles.
+        </p>
+      </div>
+
+      <!-- Pattern 4 -->
+      <div class="pattern-card">
+        <span class="pattern-tag tag-red">Pattern 4 • Service Area Paradox</span>
+        <h3 class="pattern-title">Twice-Weekly Inner City Service Shows Stubborn Recurrence</h3>
+        <p class="pattern-body">
+          DPW divides trash collection into two operational models: <strong>Outer Ring</strong> (once-weekly residential collection) and <strong>Inner City</strong> (twice-weekly collection in dense historic rowhouse and commercial corridors).
+          <br><br>
+          Despite receiving twice the collection frequency, Inner City routes average <strong>61.5 requests per route</strong> (comparable to 59.7 reqs/route in the Outer Ring). Crucially, <strong>Route IC203</strong> ranks #2 across all 103 trash routes in the city with 198 requests and a 32.0% multi-day repeat rate. Tight historic alleyways, parked vehicle obstructions, and overflow container crowding frequently prevent trucks from completing alleys, leading to chronic repeat failures despite two weekly passes.
+        </p>
+        <table class="pattern-table">
+          <thead>
+            <tr><th>Service Model</th><th>Routes</th><th>Total Requests</th><th>Unique Addrs</th><th>Repeat Rate</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Outer Ring (1x/week)</td><td>77 routes</td><td>4,597 reqs</td><td>3,315 addrs</td><td>21.1%</td></tr>
+            <tr><td>Inner City (2x/week)</td><td>26 routes</td><td>1,600 reqs</td><td>1,209 addrs</td><td>19.7%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section 3: Interactive Route Matrix -->
+    <div class="section-title-wrap">
+      <div>
+        <h2 class="section-heading">Route Performance Matrix</h2>
+        <div class="section-desc">Search, filter, and sort performance metrics across all 103 Trash Routes and 120 Recycling Routes.</div>
+      </div>
+    </div>
+
+    <div class="table-controls">
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="setTableFilter('all', this)">All Routes (223)</button>
+        <button class="filter-tab" onclick="setTableFilter('Trash', this)">Trash Routes (103)</button>
+        <button class="filter-tab" onclick="setTableFilter('Recycling', this)">Recycling Routes (120)</button>
+      </div>
+      <input type="text" class="table-search" id="routeSearch" placeholder="Search Route ID, Schedule, or Area..." oninput="handleRouteSearch(this.value)">
+    </div>
+
+    <div class="table-card">
+      <div class="data-table-wrap">
+        <table class="data-table" id="routesTable">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">Route ID &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(1)">Type &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(2)">Schedule &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(3)">Service Area / Notes &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(4, true)">Total Reqs &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(5, true)">Unique Addrs &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(6, true)">Repeat Addrs &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(7, true)">Repeat Rate % &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(8, true)">Req/Addr &#x25B4;&#x25BE;</th>
+              <th onclick="sortTable(9)">Classification &#x25B4;&#x25BE;</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+      <div class="table-footer">
+        <span id="tableRecordCount">Showing 223 routes</span>
+        <span>Public Aggregated DPW Route Data • 180-Day Scope (Mar 24 – Sep 20, 2026)</span>
+      </div>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+      <strong>Data Sources &amp; Methodology:</strong> 311 service request records for Missed Trash (<code>S0441</code>) and Missed Recycling (<code>S0321</code>) were retrieved from the Open Data DC GIS FeatureServer spanning March 24, 2026 through September 20, 2026. Service requests were spatially joined to DPW Collection Route polygon boundaries (140 Trash route features and 173 Recycling route features). Properties were deduplicated using unique Master Address Repository (MAR) IDs and street address strings. Repeat addresses were calculated by identifying properties with service requests submitted across two or more distinct collection calendar dates. All data is public domain.
+    </div>
+
+  </div>
+
+  <script>
+    // Embedded Route Datasets
+    const ALL_ROUTES = [{"route_id": "OR808", "type": "Trash", "route_name": "Trash Route OR808", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 39, "unique_addrs": 30, "repeat_addrs": 7, "single_addrs": 23, "repeat_rate": 23.3, "req_per_addr": 1.3, "classification": "Standard Operation"}, {"route_id": "OR708", "type": "Trash", "route_name": "Trash Route OR708", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 131, "unique_addrs": 96, "repeat_addrs": 21, "single_addrs": 75, "repeat_rate": 21.9, "req_per_addr": 1.36, "classification": "Widespread Skips"}, {"route_id": "OR709", "type": "Trash", "route_name": "Trash Route OR709", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 71, "unique_addrs": 61, "repeat_addrs": 8, "single_addrs": 53, "repeat_rate": 13.1, "req_per_addr": 1.16, "classification": "Standard Operation"}, {"route_id": "OR710", "type": "Trash", "route_name": "Trash Route OR710", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 180, "unique_addrs": 117, "repeat_addrs": 35, "single_addrs": 82, "repeat_rate": 29.9, "req_per_addr": 1.54, "classification": "Chronic Recurrence"}, {"route_id": "OR701", "type": "Trash", "route_name": "Trash Route OR701", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 69, "unique_addrs": 56, "repeat_addrs": 7, "single_addrs": 49, "repeat_rate": 12.5, "req_per_addr": 1.23, "classification": "Standard Operation"}, {"route_id": "OR702", "type": "Trash", "route_name": "Trash Route OR702", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 60, "unique_addrs": 45, "repeat_addrs": 12, "single_addrs": 33, "repeat_rate": 26.7, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "OR703", "type": "Trash", "route_name": "Trash Route OR703", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 101, "unique_addrs": 70, "repeat_addrs": 21, "single_addrs": 49, "repeat_rate": 30.0, "req_per_addr": 1.44, "classification": "Chronic Recurrence"}, {"route_id": "OR706", "type": "Trash", "route_name": "Trash Route OR706", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 131, "unique_addrs": 98, "repeat_addrs": 18, "single_addrs": 80, "repeat_rate": 18.4, "req_per_addr": 1.34, "classification": "Widespread Skips"}, {"route_id": "OR803", "type": "Trash", "route_name": "Trash Route OR803", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 74, "unique_addrs": 46, "repeat_addrs": 12, "single_addrs": 34, "repeat_rate": 26.1, "req_per_addr": 1.61, "classification": "Standard Operation"}, {"route_id": "OR812", "type": "Trash", "route_name": "Trash Route OR812", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 38, "unique_addrs": 29, "repeat_addrs": 6, "single_addrs": 23, "repeat_rate": 20.7, "req_per_addr": 1.31, "classification": "Standard Operation"}, {"route_id": "OR810", "type": "Trash", "route_name": "Trash Route OR810", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 24, "unique_addrs": 20, "repeat_addrs": 3, "single_addrs": 17, "repeat_rate": 15.0, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "OR802", "type": "Trash", "route_name": "Trash Route OR802", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 33, "unique_addrs": 26, "repeat_addrs": 5, "single_addrs": 21, "repeat_rate": 19.2, "req_per_addr": 1.27, "classification": "Standard Operation"}, {"route_id": "OR805", "type": "Trash", "route_name": "Trash Route OR805", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 57, "unique_addrs": 43, "repeat_addrs": 7, "single_addrs": 36, "repeat_rate": 16.3, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "OR811", "type": "Trash", "route_name": "Trash Route OR811", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 28, "unique_addrs": 22, "repeat_addrs": 2, "single_addrs": 20, "repeat_rate": 9.1, "req_per_addr": 1.27, "classification": "Standard Operation"}, {"route_id": "OR806", "type": "Trash", "route_name": "Trash Route OR806", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 60, "unique_addrs": 39, "repeat_addrs": 11, "single_addrs": 28, "repeat_rate": 28.2, "req_per_addr": 1.54, "classification": "Chronic Recurrence"}, {"route_id": "OR705", "type": "Trash", "route_name": "Trash Route OR705", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 112, "unique_addrs": 89, "repeat_addrs": 14, "single_addrs": 75, "repeat_rate": 15.7, "req_per_addr": 1.26, "classification": "Widespread Skips"}, {"route_id": "OR804", "type": "Trash", "route_name": "Trash Route OR804", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 71, "unique_addrs": 45, "repeat_addrs": 12, "single_addrs": 33, "repeat_rate": 26.7, "req_per_addr": 1.58, "classification": "Standard Operation"}, {"route_id": "OR313", "type": "Trash", "route_name": "Trash Route OR313", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 6, "repeat_addrs": 0, "single_addrs": 6, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "OR312", "type": "Trash", "route_name": "Trash Route OR312", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 78, "unique_addrs": 63, "repeat_addrs": 10, "single_addrs": 53, "repeat_rate": 15.9, "req_per_addr": 1.24, "classification": "Standard Operation"}, {"route_id": "OR310", "type": "Trash", "route_name": "Trash Route OR310", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 48, "unique_addrs": 37, "repeat_addrs": 8, "single_addrs": 29, "repeat_rate": 21.6, "req_per_addr": 1.3, "classification": "Standard Operation"}, {"route_id": "OR309", "type": "Trash", "route_name": "Trash Route OR309", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 116, "unique_addrs": 76, "repeat_addrs": 27, "single_addrs": 49, "repeat_rate": 35.5, "req_per_addr": 1.53, "classification": "Chronic Recurrence"}, {"route_id": "OR307", "type": "Trash", "route_name": "Trash Route OR307", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 96, "unique_addrs": 71, "repeat_addrs": 15, "single_addrs": 56, "repeat_rate": 21.1, "req_per_addr": 1.35, "classification": "Widespread Skips"}, {"route_id": "OR305", "type": "Trash", "route_name": "Trash Route OR305", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 109, "unique_addrs": 80, "repeat_addrs": 19, "single_addrs": 61, "repeat_rate": 23.8, "req_per_addr": 1.36, "classification": "Widespread Skips"}, {"route_id": "OR303", "type": "Trash", "route_name": "Trash Route OR303", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 104, "unique_addrs": 76, "repeat_addrs": 17, "single_addrs": 59, "repeat_rate": 22.4, "req_per_addr": 1.37, "classification": "Widespread Skips"}, {"route_id": "OR304", "type": "Trash", "route_name": "Trash Route OR304", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 220, "unique_addrs": 138, "repeat_addrs": 41, "single_addrs": 97, "repeat_rate": 29.7, "req_per_addr": 1.59, "classification": "Chronic Recurrence"}, {"route_id": "OR301", "type": "Trash", "route_name": "Trash Route OR301", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 16, "unique_addrs": 16, "repeat_addrs": 0, "single_addrs": 16, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "OR405", "type": "Trash", "route_name": "Trash Route OR405", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 39, "unique_addrs": 36, "repeat_addrs": 1, "single_addrs": 35, "repeat_rate": 2.8, "req_per_addr": 1.08, "classification": "Standard Operation"}, {"route_id": "OR404", "type": "Trash", "route_name": "Trash Route OR404", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 81, "unique_addrs": 62, "repeat_addrs": 14, "single_addrs": 48, "repeat_rate": 22.6, "req_per_addr": 1.31, "classification": "Standard Operation"}, {"route_id": "OR403", "type": "Trash", "route_name": "Trash Route OR403", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 127, "unique_addrs": 86, "repeat_addrs": 20, "single_addrs": 66, "repeat_rate": 23.3, "req_per_addr": 1.48, "classification": "Widespread Skips"}, {"route_id": "OR402", "type": "Trash", "route_name": "Trash Route OR402", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 93, "unique_addrs": 72, "repeat_addrs": 16, "single_addrs": 56, "repeat_rate": 22.2, "req_per_addr": 1.29, "classification": "Widespread Skips"}, {"route_id": "OR401", "type": "Trash", "route_name": "Trash Route OR401", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 124, "unique_addrs": 88, "repeat_addrs": 15, "single_addrs": 73, "repeat_rate": 17.0, "req_per_addr": 1.41, "classification": "Widespread Skips"}, {"route_id": "OR302", "type": "Trash", "route_name": "Trash Route OR302", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 55, "unique_addrs": 38, "repeat_addrs": 6, "single_addrs": 32, "repeat_rate": 15.8, "req_per_addr": 1.45, "classification": "Standard Operation"}, {"route_id": "OR306", "type": "Trash", "route_name": "Trash Route OR306", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 35, "unique_addrs": 24, "repeat_addrs": 2, "single_addrs": 22, "repeat_rate": 8.3, "req_per_addr": 1.46, "classification": "Standard Operation"}, {"route_id": "OR311", "type": "Trash", "route_name": "Trash Route OR311", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 18, "unique_addrs": 14, "repeat_addrs": 2, "single_addrs": 12, "repeat_rate": 14.3, "req_per_addr": 1.29, "classification": "Standard Operation"}, {"route_id": "OR101", "type": "Trash", "route_name": "Trash Route OR101", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 33, "unique_addrs": 28, "repeat_addrs": 3, "single_addrs": 25, "repeat_rate": 10.7, "req_per_addr": 1.18, "classification": "Standard Operation"}, {"route_id": "OR102", "type": "Trash", "route_name": "Trash Route OR102", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 4, "unique_addrs": 4, "repeat_addrs": 0, "single_addrs": 4, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "OR317", "type": "Trash", "route_name": "Trash Route OR317", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 27, "unique_addrs": 23, "repeat_addrs": 3, "single_addrs": 20, "repeat_rate": 13.0, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "OR316", "type": "Trash", "route_name": "Trash Route OR316", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 53, "unique_addrs": 34, "repeat_addrs": 10, "single_addrs": 24, "repeat_rate": 29.4, "req_per_addr": 1.56, "classification": "Chronic Recurrence"}, {"route_id": "OR315", "type": "Trash", "route_name": "Trash Route OR315", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 30, "unique_addrs": 26, "repeat_addrs": 2, "single_addrs": 24, "repeat_rate": 7.7, "req_per_addr": 1.15, "classification": "Standard Operation"}, {"route_id": "OR308", "type": "Trash", "route_name": "Trash Route OR308", "schedule": "Thursday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 25, "unique_addrs": 18, "repeat_addrs": 5, "single_addrs": 13, "repeat_rate": 27.8, "req_per_addr": 1.39, "classification": "Standard Operation"}, {"route_id": "OR602", "type": "Trash", "route_name": "Trash Route OR602", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 22, "repeat_addrs": 3, "single_addrs": 19, "repeat_rate": 13.6, "req_per_addr": 1.64, "classification": "Standard Operation"}, {"route_id": "OR506", "type": "Trash", "route_name": "Trash Route OR506", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 49, "unique_addrs": 37, "repeat_addrs": 6, "single_addrs": 31, "repeat_rate": 16.2, "req_per_addr": 1.32, "classification": "Standard Operation"}, {"route_id": "OR601", "type": "Trash", "route_name": "Trash Route OR601", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 24, "repeat_addrs": 8, "single_addrs": 16, "repeat_rate": 33.3, "req_per_addr": 1.5, "classification": "Standard Operation"}, {"route_id": "OR508", "type": "Trash", "route_name": "Trash Route OR508", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 24, "unique_addrs": 17, "repeat_addrs": 5, "single_addrs": 12, "repeat_rate": 29.4, "req_per_addr": 1.41, "classification": "Standard Operation"}, {"route_id": "OR503", "type": "Trash", "route_name": "Trash Route OR503", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 63, "unique_addrs": 46, "repeat_addrs": 13, "single_addrs": 33, "repeat_rate": 28.3, "req_per_addr": 1.37, "classification": "Chronic Recurrence"}, {"route_id": "OR707", "type": "Trash", "route_name": "Trash Route OR707", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 69, "unique_addrs": 58, "repeat_addrs": 9, "single_addrs": 49, "repeat_rate": 15.5, "req_per_addr": 1.19, "classification": "Standard Operation"}, {"route_id": "OR711", "type": "Trash", "route_name": "Trash Route OR711", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 54, "unique_addrs": 41, "repeat_addrs": 6, "single_addrs": 35, "repeat_rate": 14.6, "req_per_addr": 1.32, "classification": "Standard Operation"}, {"route_id": "OR502", "type": "Trash", "route_name": "Trash Route OR502", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 60, "unique_addrs": 45, "repeat_addrs": 11, "single_addrs": 34, "repeat_rate": 24.4, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "OR501", "type": "Trash", "route_name": "Trash Route OR501", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 19, "repeat_addrs": 2, "single_addrs": 17, "repeat_rate": 10.5, "req_per_addr": 1.11, "classification": "Standard Operation"}, {"route_id": "OR507", "type": "Trash", "route_name": "Trash Route OR507", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 74, "unique_addrs": 52, "repeat_addrs": 14, "single_addrs": 38, "repeat_rate": 26.9, "req_per_addr": 1.42, "classification": "Standard Operation"}, {"route_id": "OR603", "type": "Trash", "route_name": "Trash Route OR603", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 35, "unique_addrs": 25, "repeat_addrs": 5, "single_addrs": 20, "repeat_rate": 20.0, "req_per_addr": 1.4, "classification": "Standard Operation"}, {"route_id": "OR704", "type": "Trash", "route_name": "Trash Route OR704", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 66, "unique_addrs": 42, "repeat_addrs": 12, "single_addrs": 30, "repeat_rate": 28.6, "req_per_addr": 1.57, "classification": "Chronic Recurrence"}, {"route_id": "OR505", "type": "Trash", "route_name": "Trash Route OR505", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 76, "unique_addrs": 50, "repeat_addrs": 11, "single_addrs": 39, "repeat_rate": 22.0, "req_per_addr": 1.52, "classification": "Standard Operation"}, {"route_id": "OR409", "type": "Trash", "route_name": "Trash Route OR409", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Delayed", "total": 65, "unique_addrs": 38, "repeat_addrs": 12, "single_addrs": 26, "repeat_rate": 31.6, "req_per_addr": 1.71, "classification": "Chronic Recurrence"}, {"route_id": "OR411", "type": "Trash", "route_name": "Trash Route OR411", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 57, "unique_addrs": 46, "repeat_addrs": 6, "single_addrs": 40, "repeat_rate": 13.0, "req_per_addr": 1.24, "classification": "Standard Operation"}, {"route_id": "OR413", "type": "Trash", "route_name": "Trash Route OR413", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 59, "unique_addrs": 44, "repeat_addrs": 8, "single_addrs": 36, "repeat_rate": 18.2, "req_per_addr": 1.34, "classification": "Standard Operation"}, {"route_id": "OR410", "type": "Trash", "route_name": "Trash Route OR410", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 50, "unique_addrs": 32, "repeat_addrs": 6, "single_addrs": 26, "repeat_rate": 18.8, "req_per_addr": 1.56, "classification": "Standard Operation"}, {"route_id": "OR407", "type": "Trash", "route_name": "Trash Route OR407", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 33, "unique_addrs": 27, "repeat_addrs": 3, "single_addrs": 24, "repeat_rate": 11.1, "req_per_addr": 1.22, "classification": "Standard Operation"}, {"route_id": "OR406", "type": "Trash", "route_name": "Trash Route OR406", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 23, "unique_addrs": 15, "repeat_addrs": 2, "single_addrs": 13, "repeat_rate": 13.3, "req_per_addr": 1.53, "classification": "Standard Operation"}, {"route_id": "OR415", "type": "Trash", "route_name": "Trash Route OR415", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 9, "unique_addrs": 9, "repeat_addrs": 0, "single_addrs": 9, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "OR509", "type": "Trash", "route_name": "Trash Route OR509", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 42, "unique_addrs": 31, "repeat_addrs": 6, "single_addrs": 25, "repeat_rate": 19.4, "req_per_addr": 1.35, "classification": "Standard Operation"}, {"route_id": "OR512", "type": "Trash", "route_name": "Trash Route OR512", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 59, "unique_addrs": 46, "repeat_addrs": 12, "single_addrs": 34, "repeat_rate": 26.1, "req_per_addr": 1.28, "classification": "Standard Operation"}, {"route_id": "OR515", "type": "Trash", "route_name": "Trash Route OR515", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 97, "unique_addrs": 67, "repeat_addrs": 15, "single_addrs": 52, "repeat_rate": 22.4, "req_per_addr": 1.45, "classification": "Standard Operation"}, {"route_id": "OR511", "type": "Trash", "route_name": "Trash Route OR511", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 26, "unique_addrs": 22, "repeat_addrs": 2, "single_addrs": 20, "repeat_rate": 9.1, "req_per_addr": 1.18, "classification": "Standard Operation"}, {"route_id": "OR414", "type": "Trash", "route_name": "Trash Route OR414", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 17, "unique_addrs": 13, "repeat_addrs": 3, "single_addrs": 10, "repeat_rate": 23.1, "req_per_addr": 1.31, "classification": "Standard Operation"}, {"route_id": "OR513", "type": "Trash", "route_name": "Trash Route OR513", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 70, "unique_addrs": 51, "repeat_addrs": 10, "single_addrs": 41, "repeat_rate": 19.6, "req_per_addr": 1.37, "classification": "Standard Operation"}, {"route_id": "OR417", "type": "Trash", "route_name": "Trash Route OR417", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 40, "unique_addrs": 30, "repeat_addrs": 8, "single_addrs": 22, "repeat_rate": 26.7, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "OR504", "type": "Trash", "route_name": "Trash Route OR504", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 122, "unique_addrs": 78, "repeat_addrs": 22, "single_addrs": 56, "repeat_rate": 28.2, "req_per_addr": 1.56, "classification": "Chronic Recurrence"}, {"route_id": "OR516", "type": "Trash", "route_name": "Trash Route OR516", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 86, "unique_addrs": 60, "repeat_addrs": 15, "single_addrs": 45, "repeat_rate": 25.0, "req_per_addr": 1.43, "classification": "Standard Operation"}, {"route_id": "OR510", "type": "Trash", "route_name": "Trash Route OR510", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 39, "unique_addrs": 25, "repeat_addrs": 5, "single_addrs": 20, "repeat_rate": 20.0, "req_per_addr": 1.56, "classification": "Standard Operation"}, {"route_id": "OR416", "type": "Trash", "route_name": "Trash Route OR416", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 53, "unique_addrs": 35, "repeat_addrs": 5, "single_addrs": 30, "repeat_rate": 14.3, "req_per_addr": 1.51, "classification": "Standard Operation"}, {"route_id": "OR418", "type": "Trash", "route_name": "Trash Route OR418", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 57, "unique_addrs": 40, "repeat_addrs": 10, "single_addrs": 30, "repeat_rate": 25.0, "req_per_addr": 1.43, "classification": "Standard Operation"}, {"route_id": "IC101", "type": "Trash", "route_name": "Trash Route IC101", "schedule": "Tuesday/Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 62, "unique_addrs": 45, "repeat_addrs": 6, "single_addrs": 39, "repeat_rate": 13.3, "req_per_addr": 1.38, "classification": "Standard Operation"}, {"route_id": "IC103", "type": "Trash", "route_name": "Trash Route IC103", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 102, "unique_addrs": 71, "repeat_addrs": 13, "single_addrs": 58, "repeat_rate": 18.3, "req_per_addr": 1.44, "classification": "Widespread Skips"}, {"route_id": "IC203", "type": "Trash", "route_name": "Trash Route IC203", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 198, "unique_addrs": 125, "repeat_addrs": 40, "single_addrs": 85, "repeat_rate": 32.0, "req_per_addr": 1.58, "classification": "Chronic Recurrence"}, {"route_id": "IC201", "type": "Trash", "route_name": "Trash Route IC201", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 65, "unique_addrs": 48, "repeat_addrs": 12, "single_addrs": 36, "repeat_rate": 25.0, "req_per_addr": 1.35, "classification": "Standard Operation"}, {"route_id": "IC106", "type": "Trash", "route_name": "Trash Route IC106", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 43, "repeat_addrs": 6, "single_addrs": 37, "repeat_rate": 14.0, "req_per_addr": 1.16, "classification": "Standard Operation"}, {"route_id": "IC204", "type": "Trash", "route_name": "Trash Route IC204", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 39, "unique_addrs": 33, "repeat_addrs": 4, "single_addrs": 29, "repeat_rate": 12.1, "req_per_addr": 1.18, "classification": "Standard Operation"}, {"route_id": "IC205", "type": "Trash", "route_name": "Trash Route IC205", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 35, "unique_addrs": 28, "repeat_addrs": 7, "single_addrs": 21, "repeat_rate": 25.0, "req_per_addr": 1.25, "classification": "Standard Operation"}, {"route_id": "IC202", "type": "Trash", "route_name": "Trash Route IC202", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 108, "unique_addrs": 81, "repeat_addrs": 20, "single_addrs": 61, "repeat_rate": 24.7, "req_per_addr": 1.33, "classification": "Widespread Skips"}, {"route_id": "IC206", "type": "Trash", "route_name": "Trash Route IC206", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 41, "unique_addrs": 36, "repeat_addrs": 3, "single_addrs": 33, "repeat_rate": 8.3, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "IC105", "type": "Trash", "route_name": "Trash Route IC105", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 61, "unique_addrs": 52, "repeat_addrs": 6, "single_addrs": 46, "repeat_rate": 11.5, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "IC102", "type": "Trash", "route_name": "Trash Route IC102", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 92, "unique_addrs": 71, "repeat_addrs": 14, "single_addrs": 57, "repeat_rate": 19.7, "req_per_addr": 1.3, "classification": "Widespread Skips"}, {"route_id": "IC104", "type": "Trash", "route_name": "Trash Route IC104", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 143, "unique_addrs": 109, "repeat_addrs": 22, "single_addrs": 87, "repeat_rate": 20.2, "req_per_addr": 1.31, "classification": "Widespread Skips"}, {"route_id": "IC601", "type": "Trash", "route_name": "Trash Route IC601", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 30, "unique_addrs": 22, "repeat_addrs": 6, "single_addrs": 16, "repeat_rate": 27.3, "req_per_addr": 1.36, "classification": "Standard Operation"}, {"route_id": "IC608", "type": "Trash", "route_name": "Trash Route IC608", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 40, "unique_addrs": 32, "repeat_addrs": 5, "single_addrs": 27, "repeat_rate": 15.6, "req_per_addr": 1.25, "classification": "Standard Operation"}, {"route_id": "IC609", "type": "Trash", "route_name": "Trash Route IC609", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 64, "unique_addrs": 50, "repeat_addrs": 11, "single_addrs": 39, "repeat_rate": 22.0, "req_per_addr": 1.28, "classification": "Standard Operation"}, {"route_id": "IC604", "type": "Trash", "route_name": "Trash Route IC604", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 17, "unique_addrs": 10, "repeat_addrs": 2, "single_addrs": 8, "repeat_rate": 20.0, "req_per_addr": 1.7, "classification": "Standard Operation"}, {"route_id": "IC606", "type": "Trash", "route_name": "Trash Route IC606", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 78, "unique_addrs": 56, "repeat_addrs": 13, "single_addrs": 43, "repeat_rate": 23.2, "req_per_addr": 1.39, "classification": "Standard Operation"}, {"route_id": "IC610", "type": "Trash", "route_name": "Trash Route IC610", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 18, "unique_addrs": 16, "repeat_addrs": 1, "single_addrs": 15, "repeat_rate": 6.2, "req_per_addr": 1.12, "classification": "Standard Operation"}, {"route_id": "IC607", "type": "Trash", "route_name": "Trash Route IC607", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 57, "unique_addrs": 45, "repeat_addrs": 5, "single_addrs": 40, "repeat_rate": 11.1, "req_per_addr": 1.27, "classification": "Standard Operation"}, {"route_id": "IC605", "type": "Trash", "route_name": "Trash Route IC605", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 70, "unique_addrs": 61, "repeat_addrs": 7, "single_addrs": 54, "repeat_rate": 11.5, "req_per_addr": 1.15, "classification": "Standard Operation"}, {"route_id": "IC602", "type": "Trash", "route_name": "Trash Route IC602", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 81, "unique_addrs": 55, "repeat_addrs": 9, "single_addrs": 46, "repeat_rate": 16.4, "req_per_addr": 1.47, "classification": "Standard Operation"}, {"route_id": "IC611", "type": "Trash", "route_name": "Trash Route IC611", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 53, "unique_addrs": 41, "repeat_addrs": 7, "single_addrs": 34, "repeat_rate": 17.1, "req_per_addr": 1.29, "classification": "Standard Operation"}, {"route_id": "IC603", "type": "Trash", "route_name": "Trash Route IC603", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 52, "unique_addrs": 39, "repeat_addrs": 8, "single_addrs": 31, "repeat_rate": 20.5, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "IC612", "type": "Trash", "route_name": "Trash Route IC612", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 40, "unique_addrs": 33, "repeat_addrs": 5, "single_addrs": 28, "repeat_rate": 15.2, "req_per_addr": 1.21, "classification": "Standard Operation"}, {"route_id": "IC20", "type": "Trash", "route_name": "Trash Route IC20", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 32, "unique_addrs": 26, "repeat_addrs": 4, "single_addrs": 22, "repeat_rate": 15.4, "req_per_addr": 1.23, "classification": "Standard Operation"}, {"route_id": "IC21", "type": "Trash", "route_name": "Trash Route IC21", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 19, "unique_addrs": 12, "repeat_addrs": 5, "single_addrs": 7, "repeat_rate": 41.7, "req_per_addr": 1.58, "classification": "Standard Operation"}, {"route_id": "OR11", "type": "Trash", "route_name": "Trash Route OR11", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 1, "unique_addrs": 1, "repeat_addrs": 0, "single_addrs": 1, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "IC11", "type": "Trash", "route_name": "Trash Route IC11", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 7, "repeat_addrs": 0, "single_addrs": 7, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "IC10", "type": "Trash", "route_name": "Trash Route IC10", "schedule": "Monday/Thursday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 7, "repeat_addrs": 1, "single_addrs": 6, "repeat_rate": 14.3, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "OR30", "type": "Trash", "route_name": "Trash Route OR30", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 50, "unique_addrs": 33, "repeat_addrs": 5, "single_addrs": 28, "repeat_rate": 15.2, "req_per_addr": 1.52, "classification": "Standard Operation"}, {"route_id": "OR21", "type": "Trash", "route_name": "Trash Route OR21", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 1, "unique_addrs": 1, "repeat_addrs": 0, "single_addrs": 1, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R419_3B", "type": "Recycling", "route_name": "Recycling Route R419_3B", "schedule": "Wednesday", "service_area": "OR_419B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 4, "unique_addrs": 4, "repeat_addrs": 0, "single_addrs": 4, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R420_3", "type": "Recycling", "route_name": "Recycling Route R420_3", "schedule": "Wednesday", "service_area": "OR_420", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 10, "unique_addrs": 8, "repeat_addrs": 2, "single_addrs": 6, "repeat_rate": 25.0, "req_per_addr": 1.25, "classification": "Standard Operation"}, {"route_id": "R423_3", "type": "Recycling", "route_name": "Recycling Route R423_3", "schedule": "Wednesday", "service_area": "OR_423", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 21, "repeat_addrs": 7, "single_addrs": 14, "repeat_rate": 33.3, "req_per_addr": 1.71, "classification": "Standard Operation"}, {"route_id": "R521_3", "type": "Recycling", "route_name": "Recycling Route R521_3", "schedule": "Wednesday", "service_area": "OR_521", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 19, "unique_addrs": 19, "repeat_addrs": 0, "single_addrs": 19, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R424_3", "type": "Recycling", "route_name": "Recycling Route R424_3", "schedule": "Wednesday", "service_area": "OR_424", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 52, "unique_addrs": 44, "repeat_addrs": 8, "single_addrs": 36, "repeat_rate": 18.2, "req_per_addr": 1.18, "classification": "Widespread Skips"}, {"route_id": "R519_3", "type": "Recycling", "route_name": "Recycling Route R519_3", "schedule": "Wednesday", "service_area": "OR_519", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 13, "unique_addrs": 12, "repeat_addrs": 1, "single_addrs": 11, "repeat_rate": 8.3, "req_per_addr": 1.08, "classification": "Standard Operation"}, {"route_id": "R520_3B", "type": "Recycling", "route_name": "Recycling Route R520_3B", "schedule": "Wednesday", "service_area": "OR_520B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 11, "repeat_addrs": 5, "single_addrs": 6, "repeat_rate": 45.5, "req_per_addr": 1.91, "classification": "Standard Operation"}, {"route_id": "R518_3", "type": "Recycling", "route_name": "Recycling Route R518_3", "schedule": "Wednesday", "service_area": "OR_518", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 11, "unique_addrs": 11, "repeat_addrs": 0, "single_addrs": 11, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R525_3", "type": "Recycling", "route_name": "Recycling Route R525_3", "schedule": "Wednesday", "service_area": "OR_525", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 17, "repeat_addrs": 4, "single_addrs": 13, "repeat_rate": 23.5, "req_per_addr": 1.24, "classification": "Standard Operation"}, {"route_id": "R523_3", "type": "Recycling", "route_name": "Recycling Route R523_3", "schedule": "Wednesday", "service_area": "OR_523", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 12, "repeat_addrs": 0, "single_addrs": 12, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R522_3", "type": "Recycling", "route_name": "Recycling Route R522_3", "schedule": "Wednesday", "service_area": "OR_522", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 26, "unique_addrs": 16, "repeat_addrs": 4, "single_addrs": 12, "repeat_rate": 25.0, "req_per_addr": 1.62, "classification": "Standard Operation"}, {"route_id": "R527_3", "type": "Recycling", "route_name": "Recycling Route R527_3", "schedule": "Wednesday", "service_area": "OR_527", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 60, "unique_addrs": 48, "repeat_addrs": 6, "single_addrs": 42, "repeat_rate": 12.5, "req_per_addr": 1.25, "classification": "Widespread Skips"}, {"route_id": "R526_3B", "type": "Recycling", "route_name": "Recycling Route R526_3B", "schedule": "Wednesday", "service_area": "OR_526B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 40, "unique_addrs": 31, "repeat_addrs": 6, "single_addrs": 25, "repeat_rate": 19.4, "req_per_addr": 1.29, "classification": "Standard Operation"}, {"route_id": "R418_3", "type": "Recycling", "route_name": "Recycling Route R418_3", "schedule": "Wednesday", "service_area": "OR_418", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 11, "unique_addrs": 10, "repeat_addrs": 1, "single_addrs": 9, "repeat_rate": 10.0, "req_per_addr": 1.1, "classification": "Standard Operation"}, {"route_id": "R526_3", "type": "Recycling", "route_name": "Recycling Route R526_3", "schedule": "Wednesday", "service_area": "OR_526", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 64, "unique_addrs": 52, "repeat_addrs": 7, "single_addrs": 45, "repeat_rate": 13.5, "req_per_addr": 1.23, "classification": "Widespread Skips"}, {"route_id": "R421_3", "type": "Recycling", "route_name": "Recycling Route R421_3", "schedule": "Wednesday", "service_area": "OR_421", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 9, "unique_addrs": 8, "repeat_addrs": 1, "single_addrs": 7, "repeat_rate": 12.5, "req_per_addr": 1.12, "classification": "Standard Operation"}, {"route_id": "R422_3", "type": "Recycling", "route_name": "Recycling Route R422_3", "schedule": "Wednesday", "service_area": "OR_422", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 25, "unique_addrs": 24, "repeat_addrs": 1, "single_addrs": 23, "repeat_rate": 4.2, "req_per_addr": 1.04, "classification": "Standard Operation"}, {"route_id": "R520_3A", "type": "Recycling", "route_name": "Recycling Route R520_3A", "schedule": "Wednesday", "service_area": "OR_520A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 6, "repeat_addrs": 0, "single_addrs": 6, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R416_3", "type": "Recycling", "route_name": "Recycling Route R416_3", "schedule": "Wednesday", "service_area": "OR_416", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 16, "unique_addrs": 15, "repeat_addrs": 1, "single_addrs": 14, "repeat_rate": 6.7, "req_per_addr": 1.07, "classification": "Standard Operation"}, {"route_id": "R419_3A", "type": "Recycling", "route_name": "Recycling Route R419_3A", "schedule": "Wednesday", "service_area": "OR_419A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 9, "repeat_addrs": 2, "single_addrs": 7, "repeat_rate": 22.2, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "R425_3", "type": "Recycling", "route_name": "Recycling Route R425_3", "schedule": "Wednesday", "service_area": "OR_425", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 27, "unique_addrs": 24, "repeat_addrs": 2, "single_addrs": 22, "repeat_rate": 8.3, "req_per_addr": 1.12, "classification": "Standard Operation"}, {"route_id": "R426_3", "type": "Recycling", "route_name": "Recycling Route R426_3", "schedule": "Wednesday", "service_area": "OR_426", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 13, "unique_addrs": 12, "repeat_addrs": 1, "single_addrs": 11, "repeat_rate": 8.3, "req_per_addr": 1.08, "classification": "Standard Operation"}, {"route_id": "R524_3", "type": "Recycling", "route_name": "Recycling Route R524_3", "schedule": "Wednesday", "service_area": "OR_524", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 4, "repeat_addrs": 2, "single_addrs": 2, "repeat_rate": 50.0, "req_per_addr": 2.0, "classification": "Standard Operation"}, {"route_id": "R511_2", "type": "Recycling", "route_name": "Recycling Route R511_2", "schedule": "Tuesday", "service_area": "OR_511", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 14, "unique_addrs": 11, "repeat_addrs": 2, "single_addrs": 9, "repeat_rate": 18.2, "req_per_addr": 1.27, "classification": "Standard Operation"}, {"route_id": "R510_2A", "type": "Recycling", "route_name": "Recycling Route R510_2A", "schedule": "Tuesday", "service_area": "OR_510A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 25, "unique_addrs": 21, "repeat_addrs": 3, "single_addrs": 18, "repeat_rate": 14.3, "req_per_addr": 1.19, "classification": "Standard Operation"}, {"route_id": "R508_2B", "type": "Recycling", "route_name": "Recycling Route R508_2B", "schedule": "Tuesday", "service_area": "OR_508B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 42, "repeat_addrs": 7, "single_addrs": 35, "repeat_rate": 16.7, "req_per_addr": 1.19, "classification": "Widespread Skips"}, {"route_id": "R509_2", "type": "Recycling", "route_name": "Recycling Route R509_2", "schedule": "Tuesday", "service_area": "OR_509", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 31, "unique_addrs": 25, "repeat_addrs": 4, "single_addrs": 21, "repeat_rate": 16.0, "req_per_addr": 1.24, "classification": "Standard Operation"}, {"route_id": "R508_2A", "type": "Recycling", "route_name": "Recycling Route R508_2A", "schedule": "Tuesday", "service_area": "OR_508A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 5, "repeat_addrs": 1, "single_addrs": 4, "repeat_rate": 20.0, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "R711_2", "type": "Recycling", "route_name": "Recycling Route R711_2", "schedule": "Tuesday", "service_area": "OR_711", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 10, "unique_addrs": 6, "repeat_addrs": 2, "single_addrs": 4, "repeat_rate": 33.3, "req_per_addr": 1.67, "classification": "Standard Operation"}, {"route_id": "R714_2A", "type": "Recycling", "route_name": "Recycling Route R714_2A", "schedule": "Tuesday", "service_area": "OR_714A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 26, "unique_addrs": 22, "repeat_addrs": 2, "single_addrs": 20, "repeat_rate": 9.1, "req_per_addr": 1.18, "classification": "Standard Operation"}, {"route_id": "R712_2B", "type": "Recycling", "route_name": "Recycling Route R712_2B", "schedule": "Tuesday", "service_area": "OR_712B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 19, "repeat_addrs": 1, "single_addrs": 18, "repeat_rate": 5.3, "req_per_addr": 1.11, "classification": "Standard Operation"}, {"route_id": "R713_2A", "type": "Recycling", "route_name": "Recycling Route R713_2A", "schedule": "Tuesday", "service_area": "OR_713A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 2, "unique_addrs": 2, "repeat_addrs": 0, "single_addrs": 2, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R604_2A", "type": "Recycling", "route_name": "Recycling Route R604_2A", "schedule": "Tuesday", "service_area": "OR_604A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 6, "repeat_addrs": 2, "single_addrs": 4, "repeat_rate": 33.3, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "R604_2B", "type": "Recycling", "route_name": "Recycling Route R604_2B", "schedule": "Tuesday", "service_area": "OR_604B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 7, "repeat_addrs": 1, "single_addrs": 6, "repeat_rate": 14.3, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "R713_2B", "type": "Recycling", "route_name": "Recycling Route R713_2B", "schedule": "Tuesday", "service_area": "OR_713B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 11, "unique_addrs": 8, "repeat_addrs": 2, "single_addrs": 6, "repeat_rate": 25.0, "req_per_addr": 1.38, "classification": "Standard Operation"}, {"route_id": "R714_2B", "type": "Recycling", "route_name": "Recycling Route R714_2B", "schedule": "Tuesday", "service_area": "OR_714B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 4, "repeat_addrs": 2, "single_addrs": 2, "repeat_rate": 50.0, "req_per_addr": 1.5, "classification": "Standard Operation"}, {"route_id": "R712_2A", "type": "Recycling", "route_name": "Recycling Route R712_2A", "schedule": "Tuesday", "service_area": "OR_712A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 22, "unique_addrs": 21, "repeat_addrs": 1, "single_addrs": 20, "repeat_rate": 4.8, "req_per_addr": 1.05, "classification": "Standard Operation"}, {"route_id": "R715_2A", "type": "Recycling", "route_name": "Recycling Route R715_2A", "schedule": "Tuesday", "service_area": "OR_715A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 13, "unique_addrs": 13, "repeat_addrs": 0, "single_addrs": 13, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R510_2B", "type": "Recycling", "route_name": "Recycling Route R510_2B", "schedule": "Tuesday", "service_area": "OR_510B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 13, "unique_addrs": 12, "repeat_addrs": 1, "single_addrs": 11, "repeat_rate": 8.3, "req_per_addr": 1.08, "classification": "Standard Operation"}, {"route_id": "R715_2B", "type": "Recycling", "route_name": "Recycling Route R715_2B", "schedule": "Tuesday", "service_area": "OR_715B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 9, "unique_addrs": 9, "repeat_addrs": 0, "single_addrs": 9, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R321_4", "type": "Recycling", "route_name": "Recycling Route R321_4", "schedule": "Thursday", "service_area": "OR_321", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 86, "unique_addrs": 56, "repeat_addrs": 15, "single_addrs": 41, "repeat_rate": 26.8, "req_per_addr": 1.54, "classification": "Widespread Skips"}, {"route_id": "R318_4", "type": "Recycling", "route_name": "Recycling Route R318_4", "schedule": "Thursday", "service_area": "OR_318", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 28, "unique_addrs": 18, "repeat_addrs": 5, "single_addrs": 13, "repeat_rate": 27.8, "req_per_addr": 1.56, "classification": "Standard Operation"}, {"route_id": "R320_4", "type": "Recycling", "route_name": "Recycling Route R320_4", "schedule": "Thursday", "service_area": "OR_320", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 27, "unique_addrs": 19, "repeat_addrs": 6, "single_addrs": 13, "repeat_rate": 31.6, "req_per_addr": 1.42, "classification": "Standard Operation"}, {"route_id": "R324_4", "type": "Recycling", "route_name": "Recycling Route R324_4", "schedule": "Thursday", "service_area": "OR_324", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 10, "unique_addrs": 5, "repeat_addrs": 1, "single_addrs": 4, "repeat_rate": 20.0, "req_per_addr": 2.0, "classification": "Standard Operation"}, {"route_id": "R323_4", "type": "Recycling", "route_name": "Recycling Route R323_4", "schedule": "Thursday", "service_area": "OR_323", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 7, "repeat_addrs": 0, "single_addrs": 7, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R322_4", "type": "Recycling", "route_name": "Recycling Route R322_4", "schedule": "Thursday", "service_area": "OR_322", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 16, "repeat_addrs": 3, "single_addrs": 13, "repeat_rate": 18.8, "req_per_addr": 1.31, "classification": "Standard Operation"}, {"route_id": "R328_4A", "type": "Recycling", "route_name": "Recycling Route R328_4A", "schedule": "Thursday", "service_area": "OR_328A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 49, "unique_addrs": 28, "repeat_addrs": 9, "single_addrs": 19, "repeat_rate": 32.1, "req_per_addr": 1.75, "classification": "Chronic Recurrence"}, {"route_id": "R326_4A", "type": "Recycling", "route_name": "Recycling Route R326_4A", "schedule": "Thursday", "service_area": "OR_326A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 3, "unique_addrs": 2, "repeat_addrs": 1, "single_addrs": 1, "repeat_rate": 50.0, "req_per_addr": 1.5, "classification": "Standard Operation"}, {"route_id": "R325_4", "type": "Recycling", "route_name": "Recycling Route R325_4", "schedule": "Thursday", "service_area": "OR_325", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 9, "unique_addrs": 8, "repeat_addrs": 1, "single_addrs": 7, "repeat_rate": 12.5, "req_per_addr": 1.12, "classification": "Standard Operation"}, {"route_id": "R103_4", "type": "Recycling", "route_name": "Recycling Route R103_4", "schedule": "Thursday", "service_area": "OR_103", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 17, "repeat_addrs": 4, "single_addrs": 13, "repeat_rate": 23.5, "req_per_addr": 1.24, "classification": "Standard Operation"}, {"route_id": "R404_4B", "type": "Recycling", "route_name": "Recycling Route R404_4B", "schedule": "Thursday", "service_area": "OR_404B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 5, "repeat_addrs": 1, "single_addrs": 4, "repeat_rate": 20.0, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "R405_4", "type": "Recycling", "route_name": "Recycling Route R405_4", "schedule": "Thursday", "service_area": "OR_405", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 18, "unique_addrs": 15, "repeat_addrs": 2, "single_addrs": 13, "repeat_rate": 13.3, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "R404_4A", "type": "Recycling", "route_name": "Recycling Route R404_4A", "schedule": "Thursday", "service_area": "OR_404A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 6, "repeat_addrs": 1, "single_addrs": 5, "repeat_rate": 16.7, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R319_4", "type": "Recycling", "route_name": "Recycling Route R319_4", "schedule": "Thursday", "service_area": "OR_319", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 27, "unique_addrs": 24, "repeat_addrs": 3, "single_addrs": 21, "repeat_rate": 12.5, "req_per_addr": 1.12, "classification": "Standard Operation"}, {"route_id": "R326_4B", "type": "Recycling", "route_name": "Recycling Route R326_4B", "schedule": "Thursday", "service_area": "OR_326B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 6, "repeat_addrs": 1, "single_addrs": 5, "repeat_rate": 16.7, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R328_4B", "type": "Recycling", "route_name": "Recycling Route R328_4B", "schedule": "Thursday", "service_area": "OR_328B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 6, "repeat_addrs": 1, "single_addrs": 5, "repeat_rate": 16.7, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R314_1", "type": "Recycling", "route_name": "Recycling Route R314_1", "schedule": "Monday", "service_area": "OR_314", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 7, "unique_addrs": 6, "repeat_addrs": 1, "single_addrs": 5, "repeat_rate": 16.7, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R317_1", "type": "Recycling", "route_name": "Recycling Route R317_1", "schedule": "Monday", "service_area": "OR_317", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 16, "unique_addrs": 15, "repeat_addrs": 1, "single_addrs": 14, "repeat_rate": 6.7, "req_per_addr": 1.07, "classification": "Standard Operation"}, {"route_id": "R406_1", "type": "Recycling", "route_name": "Recycling Route R406_1", "schedule": "Monday", "service_area": "OR_406", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 3, "unique_addrs": 2, "repeat_addrs": 1, "single_addrs": 1, "repeat_rate": 50.0, "req_per_addr": 1.5, "classification": "Standard Operation"}, {"route_id": "R407_1", "type": "Recycling", "route_name": "Recycling Route R407_1", "schedule": "Monday", "service_area": "OR_407", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 22, "unique_addrs": 22, "repeat_addrs": 0, "single_addrs": 22, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R408_1", "type": "Recycling", "route_name": "Recycling Route R408_1", "schedule": "Monday", "service_area": "OR_408", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 25, "repeat_addrs": 5, "single_addrs": 20, "repeat_rate": 20.0, "req_per_addr": 1.44, "classification": "Standard Operation"}, {"route_id": "R316_1", "type": "Recycling", "route_name": "Recycling Route R316_1", "schedule": "Monday", "service_area": "OR_316", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 34, "unique_addrs": 22, "repeat_addrs": 6, "single_addrs": 16, "repeat_rate": 27.3, "req_per_addr": 1.55, "classification": "Standard Operation"}, {"route_id": "R315_1", "type": "Recycling", "route_name": "Recycling Route R315_1", "schedule": "Monday", "service_area": "OR_315", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 49, "unique_addrs": 36, "repeat_addrs": 8, "single_addrs": 28, "repeat_rate": 22.2, "req_per_addr": 1.36, "classification": "Standard Operation"}, {"route_id": "R323_1", "type": "Recycling", "route_name": "Recycling Route R323_1", "schedule": "Monday", "service_area": "OR_323", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 83, "unique_addrs": 67, "repeat_addrs": 11, "single_addrs": 56, "repeat_rate": 16.4, "req_per_addr": 1.24, "classification": "Widespread Skips"}, {"route_id": "R320_1", "type": "Recycling", "route_name": "Recycling Route R320_1", "schedule": "Monday", "service_area": "OR_320", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 56, "unique_addrs": 42, "repeat_addrs": 10, "single_addrs": 32, "repeat_rate": 23.8, "req_per_addr": 1.33, "classification": "Widespread Skips"}, {"route_id": "R321_1B", "type": "Recycling", "route_name": "Recycling Route R321_1B", "schedule": "Monday", "service_area": "OR_321B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 20, "unique_addrs": 19, "repeat_addrs": 1, "single_addrs": 18, "repeat_rate": 5.3, "req_per_addr": 1.05, "classification": "Standard Operation"}, {"route_id": "R319_1", "type": "Recycling", "route_name": "Recycling Route R319_1", "schedule": "Monday", "service_area": "OR_319", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 10, "repeat_addrs": 2, "single_addrs": 8, "repeat_rate": 20.0, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "R409_1B", "type": "Recycling", "route_name": "Recycling Route R409_1B", "schedule": "Monday", "service_area": "OR_409B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 5, "unique_addrs": 5, "repeat_addrs": 0, "single_addrs": 5, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R409_1A", "type": "Recycling", "route_name": "Recycling Route R409_1A", "schedule": "Monday", "service_area": "OR_409A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 47, "unique_addrs": 34, "repeat_addrs": 10, "single_addrs": 24, "repeat_rate": 29.4, "req_per_addr": 1.38, "classification": "Chronic Recurrence"}, {"route_id": "R321_1A", "type": "Recycling", "route_name": "Recycling Route R321_1A", "schedule": "Monday", "service_area": "OR_321A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 36, "repeat_addrs": 12, "single_addrs": 24, "repeat_rate": 33.3, "req_per_addr": 1.39, "classification": "Chronic Recurrence"}, {"route_id": "R814_5B", "type": "Recycling", "route_name": "Recycling Route R814_5B", "schedule": "Friday", "service_area": "OR_814B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 45, "unique_addrs": 35, "repeat_addrs": 8, "single_addrs": 27, "repeat_rate": 22.9, "req_per_addr": 1.29, "classification": "Standard Operation"}, {"route_id": "R813_5", "type": "Recycling", "route_name": "Recycling Route R813_5", "schedule": "Friday", "service_area": "OR_813", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 24, "unique_addrs": 17, "repeat_addrs": 3, "single_addrs": 14, "repeat_rate": 17.6, "req_per_addr": 1.41, "classification": "Standard Operation"}, {"route_id": "R816_5", "type": "Recycling", "route_name": "Recycling Route R816_5", "schedule": "Friday", "service_area": "OR_816", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 23, "unique_addrs": 15, "repeat_addrs": 5, "single_addrs": 10, "repeat_rate": 33.3, "req_per_addr": 1.53, "classification": "Standard Operation"}, {"route_id": "R712_5A", "type": "Recycling", "route_name": "Recycling Route R712_5A", "schedule": "Friday", "service_area": "OR_712A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 22, "unique_addrs": 14, "repeat_addrs": 4, "single_addrs": 10, "repeat_rate": 28.6, "req_per_addr": 1.57, "classification": "Standard Operation"}, {"route_id": "R711_5A", "type": "Recycling", "route_name": "Recycling Route R711_5A", "schedule": "Friday", "service_area": "OR_711A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 5, "unique_addrs": 5, "repeat_addrs": 0, "single_addrs": 5, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R715_5B", "type": "Recycling", "route_name": "Recycling Route R715_5B", "schedule": "Friday", "service_area": "OR_715B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 15, "unique_addrs": 15, "repeat_addrs": 0, "single_addrs": 15, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R716_5B", "type": "Recycling", "route_name": "Recycling Route R716_5B", "schedule": "Friday", "service_area": "OR_716B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 14, "unique_addrs": 12, "repeat_addrs": 1, "single_addrs": 11, "repeat_rate": 8.3, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R814_5A", "type": "Recycling", "route_name": "Recycling Route R814_5A", "schedule": "Friday", "service_area": "OR_814A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 30, "unique_addrs": 23, "repeat_addrs": 6, "single_addrs": 17, "repeat_rate": 26.1, "req_per_addr": 1.3, "classification": "Standard Operation"}, {"route_id": "R711_5B", "type": "Recycling", "route_name": "Recycling Route R711_5B", "schedule": "Friday", "service_area": "OR_711B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 24, "unique_addrs": 21, "repeat_addrs": 2, "single_addrs": 19, "repeat_rate": 9.5, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "R716_5A", "type": "Recycling", "route_name": "Recycling Route R716_5A", "schedule": "Friday", "service_area": "OR_716A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 12, "repeat_addrs": 0, "single_addrs": 12, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R815_5", "type": "Recycling", "route_name": "Recycling Route R815_5", "schedule": "Friday", "service_area": "OR_815", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 8, "repeat_addrs": 0, "single_addrs": 8, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R812_5", "type": "Recycling", "route_name": "Recycling Route R812_5", "schedule": "Friday", "service_area": "OR_812", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 20, "unique_addrs": 12, "repeat_addrs": 2, "single_addrs": 10, "repeat_rate": 16.7, "req_per_addr": 1.67, "classification": "Standard Operation"}, {"route_id": "R715_5A", "type": "Recycling", "route_name": "Recycling Route R715_5A", "schedule": "Friday", "service_area": "OR_715A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 15, "unique_addrs": 13, "repeat_addrs": 2, "single_addrs": 11, "repeat_rate": 15.4, "req_per_addr": 1.15, "classification": "Standard Operation"}, {"route_id": "R712_5B", "type": "Recycling", "route_name": "Recycling Route R712_5B", "schedule": "Friday", "service_area": "OR_712B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 11, "repeat_addrs": 0, "single_addrs": 11, "repeat_rate": 0.0, "req_per_addr": 1.09, "classification": "Standard Operation"}, {"route_id": "R619_1", "type": "Recycling", "route_name": "Recycling Route R619_1", "schedule": "Monday", "service_area": "IC_619", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 28, "unique_addrs": 13, "repeat_addrs": 5, "single_addrs": 8, "repeat_rate": 38.5, "req_per_addr": 2.15, "classification": "Standard Operation"}, {"route_id": "R614_1", "type": "Recycling", "route_name": "Recycling Route R614_1", "schedule": "Monday", "service_area": "IC_614", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 18, "unique_addrs": 13, "repeat_addrs": 3, "single_addrs": 10, "repeat_rate": 23.1, "req_per_addr": 1.38, "classification": "Standard Operation"}, {"route_id": "R621_1", "type": "Recycling", "route_name": "Recycling Route R621_1", "schedule": "Monday", "service_area": "IC_621", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 11, "unique_addrs": 10, "repeat_addrs": 1, "single_addrs": 9, "repeat_rate": 10.0, "req_per_addr": 1.1, "classification": "Standard Operation"}, {"route_id": "R615_1", "type": "Recycling", "route_name": "Recycling Route R615_1", "schedule": "Monday", "service_area": "IC_615", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 15, "unique_addrs": 9, "repeat_addrs": 4, "single_addrs": 5, "repeat_rate": 44.4, "req_per_addr": 1.67, "classification": "Standard Operation"}, {"route_id": "R618_1", "type": "Recycling", "route_name": "Recycling Route R618_1", "schedule": "Monday", "service_area": "IC_618", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 44, "unique_addrs": 35, "repeat_addrs": 5, "single_addrs": 30, "repeat_rate": 14.3, "req_per_addr": 1.26, "classification": "Standard Operation"}, {"route_id": "R617_1", "type": "Recycling", "route_name": "Recycling Route R617_1", "schedule": "Monday", "service_area": "IC_617", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 14, "unique_addrs": 7, "repeat_addrs": 3, "single_addrs": 4, "repeat_rate": 42.9, "req_per_addr": 2.0, "classification": "Standard Operation"}, {"route_id": "R616_1", "type": "Recycling", "route_name": "Recycling Route R616_1", "schedule": "Monday", "service_area": "IC_616", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 17, "unique_addrs": 13, "repeat_addrs": 2, "single_addrs": 11, "repeat_rate": 15.4, "req_per_addr": 1.31, "classification": "Standard Operation"}, {"route_id": "R620_1", "type": "Recycling", "route_name": "Recycling Route R620_1", "schedule": "Monday", "service_area": "IC_620", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 5, "repeat_addrs": 1, "single_addrs": 4, "repeat_rate": 20.0, "req_per_addr": 1.2, "classification": "Standard Operation"}, {"route_id": "R613_1", "type": "Recycling", "route_name": "Recycling Route R613_1", "schedule": "Monday", "service_area": "IC_613", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 22, "unique_addrs": 15, "repeat_addrs": 4, "single_addrs": 11, "repeat_rate": 26.7, "req_per_addr": 1.47, "classification": "Standard Operation"}, {"route_id": "R113_2", "type": "Recycling", "route_name": "Recycling Route R113_2", "schedule": "Tuesday", "service_area": "IC_113", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 40, "unique_addrs": 25, "repeat_addrs": 5, "single_addrs": 20, "repeat_rate": 20.0, "req_per_addr": 1.6, "classification": "Standard Operation"}, {"route_id": "R108_2", "type": "Recycling", "route_name": "Recycling Route R108_2", "schedule": "Tuesday", "service_area": "IC_108", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 41, "unique_addrs": 27, "repeat_addrs": 6, "single_addrs": 21, "repeat_rate": 22.2, "req_per_addr": 1.52, "classification": "Standard Operation"}, {"route_id": "R209_2", "type": "Recycling", "route_name": "Recycling Route R209_2", "schedule": "Tuesday", "service_area": "IC_209", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 71, "unique_addrs": 28, "repeat_addrs": 14, "single_addrs": 14, "repeat_rate": 50.0, "req_per_addr": 2.54, "classification": "Chronic Recurrence"}, {"route_id": "R207_2", "type": "Recycling", "route_name": "Recycling Route R207_2", "schedule": "Tuesday", "service_area": "IC_207", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 11, "unique_addrs": 11, "repeat_addrs": 0, "single_addrs": 11, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R208_2", "type": "Recycling", "route_name": "Recycling Route R208_2", "schedule": "Tuesday", "service_area": "IC_208", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 9, "unique_addrs": 7, "repeat_addrs": 1, "single_addrs": 6, "repeat_rate": 14.3, "req_per_addr": 1.29, "classification": "Standard Operation"}, {"route_id": "R109_2", "type": "Recycling", "route_name": "Recycling Route R109_2", "schedule": "Tuesday", "service_area": "IC_109", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 45, "unique_addrs": 33, "repeat_addrs": 10, "single_addrs": 23, "repeat_rate": 30.3, "req_per_addr": 1.36, "classification": "Chronic Recurrence"}, {"route_id": "R110_2", "type": "Recycling", "route_name": "Recycling Route R110_2", "schedule": "Tuesday", "service_area": "IC_110", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 41, "repeat_addrs": 5, "single_addrs": 36, "repeat_rate": 12.2, "req_per_addr": 1.22, "classification": "Widespread Skips"}, {"route_id": "R107_2", "type": "Recycling", "route_name": "Recycling Route R107_2", "schedule": "Tuesday", "service_area": "IC_107", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 23, "unique_addrs": 15, "repeat_addrs": 4, "single_addrs": 11, "repeat_rate": 26.7, "req_per_addr": 1.53, "classification": "Standard Operation"}, {"route_id": "R111_2", "type": "Recycling", "route_name": "Recycling Route R111_2", "schedule": "Tuesday", "service_area": "IC_111", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 9, "unique_addrs": 9, "repeat_addrs": 0, "single_addrs": 9, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R112_2", "type": "Recycling", "route_name": "Recycling Route R112_2", "schedule": "Tuesday", "service_area": "IC_112", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 27, "unique_addrs": 19, "repeat_addrs": 6, "single_addrs": 13, "repeat_rate": 31.6, "req_per_addr": 1.42, "classification": "Standard Operation"}, {"route_id": "R616_4", "type": "Recycling", "route_name": "Recycling Route R616_4", "schedule": "Thursday", "service_area": "IC_616", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 7, "repeat_addrs": 1, "single_addrs": 6, "repeat_rate": 14.3, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "R617_4", "type": "Recycling", "route_name": "Recycling Route R617_4", "schedule": "Thursday", "service_area": "IC_617", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 13, "unique_addrs": 10, "repeat_addrs": 2, "single_addrs": 8, "repeat_rate": 20.0, "req_per_addr": 1.3, "classification": "Standard Operation"}, {"route_id": "R618_4", "type": "Recycling", "route_name": "Recycling Route R618_4", "schedule": "Thursday", "service_area": "IC_618", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 9, "repeat_addrs": 2, "single_addrs": 7, "repeat_rate": 22.2, "req_per_addr": 1.33, "classification": "Standard Operation"}, {"route_id": "R614_4", "type": "Recycling", "route_name": "Recycling Route R614_4", "schedule": "Thursday", "service_area": "IC_614", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 18, "repeat_addrs": 2, "single_addrs": 16, "repeat_rate": 11.1, "req_per_addr": 1.17, "classification": "Standard Operation"}, {"route_id": "R615_4", "type": "Recycling", "route_name": "Recycling Route R615_4", "schedule": "Thursday", "service_area": "IC_615", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 2, "unique_addrs": 2, "repeat_addrs": 0, "single_addrs": 2, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R613_4", "type": "Recycling", "route_name": "Recycling Route R613_4", "schedule": "Thursday", "service_area": "IC_613", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 16, "unique_addrs": 13, "repeat_addrs": 2, "single_addrs": 11, "repeat_rate": 15.4, "req_per_addr": 1.23, "classification": "Standard Operation"}, {"route_id": "R207_5", "type": "Recycling", "route_name": "Recycling Route R207_5", "schedule": "Friday", "service_area": "IC_207", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 8, "repeat_addrs": 0, "single_addrs": 8, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R210_5", "type": "Recycling", "route_name": "Recycling Route R210_5", "schedule": "Friday", "service_area": "IC_210", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 31, "repeat_addrs": 8, "single_addrs": 23, "repeat_rate": 25.8, "req_per_addr": 1.61, "classification": "Standard Operation"}, {"route_id": "R107_5", "type": "Recycling", "route_name": "Recycling Route R107_5", "schedule": "Friday", "service_area": "IC_107", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 23, "unique_addrs": 19, "repeat_addrs": 4, "single_addrs": 15, "repeat_rate": 21.1, "req_per_addr": 1.21, "classification": "Standard Operation"}, {"route_id": "R208_5", "type": "Recycling", "route_name": "Recycling Route R208_5", "schedule": "Friday", "service_area": "IC_208", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 2, "unique_addrs": 2, "repeat_addrs": 0, "single_addrs": 2, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "R209_5", "type": "Recycling", "route_name": "Recycling Route R209_5", "schedule": "Friday", "service_area": "IC_209", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 12, "unique_addrs": 6, "repeat_addrs": 2, "single_addrs": 4, "repeat_rate": 33.3, "req_per_addr": 2.0, "classification": "Standard Operation"}, {"route_id": "RSP10_1", "type": "Recycling", "route_name": "Recycling Route RSP10_1", "schedule": "Monday", "service_area": "OR_10", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 3, "repeat_addrs": 2, "single_addrs": 1, "repeat_rate": 66.7, "req_per_addr": 2.0, "classification": "Standard Operation"}, {"route_id": "RSP21_2", "type": "Recycling", "route_name": "Recycling Route RSP21_2", "schedule": "Tuesday", "service_area": "IC_21", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 15, "unique_addrs": 13, "repeat_addrs": 1, "single_addrs": 12, "repeat_rate": 7.7, "req_per_addr": 1.15, "classification": "Standard Operation"}, {"route_id": "RSP20_2", "type": "Recycling", "route_name": "Recycling Route RSP20_2", "schedule": "Tuesday", "service_area": "IC_20", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 8, "unique_addrs": 7, "repeat_addrs": 1, "single_addrs": 6, "repeat_rate": 14.3, "req_per_addr": 1.14, "classification": "Standard Operation"}, {"route_id": "RSP50_5", "type": "Recycling", "route_name": "Recycling Route RSP50_5", "schedule": "Friday", "service_area": "IC_50", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 4, "unique_addrs": 4, "repeat_addrs": 0, "single_addrs": 4, "repeat_rate": 0.0, "req_per_addr": 1.0, "classification": "Standard Operation"}, {"route_id": "RSP40_4", "type": "Recycling", "route_name": "Recycling Route RSP40_4", "schedule": "Thursday", "service_area": "OR_40", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 14, "unique_addrs": 5, "repeat_addrs": 2, "single_addrs": 3, "repeat_rate": 40.0, "req_per_addr": 2.8, "classification": "Standard Operation"}, {"route_id": "RSP30_3", "type": "Recycling", "route_name": "Recycling Route RSP30_3", "schedule": "Wednesday", "service_area": "OR_30", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 6, "unique_addrs": 3, "repeat_addrs": 2, "single_addrs": 1, "repeat_rate": 66.7, "req_per_addr": 2.0, "classification": "Standard Operation"}];
+
+    // Chart 1: Top 10 Trash Routes
+    const ctxTrash = document.getElementById('chartTopTrash').getContext('2d');
+    new Chart(ctxTrash, {
+      type: 'bar',
+      data: {
+        labels: ["OR304", "IC203", "OR710", "IC104", "OR708", "OR706", "OR403", "OR401", "OR504", "OR309"],
+        datasets: [
+          {
+            label: 'Single-Incident Addresses',
+            data: [97, 85, 82, 87, 75, 80, 66, 73, 56, 49],
+            backgroundColor: '#3b82f6',
+            borderRadius: 4
+          },
+          {
+            label: 'Multi-Day Repeat Addresses',
+            data: [41, 40, 35, 22, 21, 18, 20, 15, 22, 27],
+            backgroundColor: '#a855f7',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          },
+          y: {
+            stacked: true,
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#e2e8f0', font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 } }
+          },
+          tooltip: {
+            callbacks: {
+              afterBody: function(items) {
+                const idx = items[0].dataIndex;
+                const routes = [{"route_id": "OR304", "type": "Trash", "route_name": "Trash Route OR304", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 220, "unique_addrs": 138, "repeat_addrs": 41, "single_addrs": 97, "repeat_rate": 29.7, "req_per_addr": 1.59, "classification": "Chronic Recurrence"}, {"route_id": "IC203", "type": "Trash", "route_name": "Trash Route IC203", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 198, "unique_addrs": 125, "repeat_addrs": 40, "single_addrs": 85, "repeat_rate": 32.0, "req_per_addr": 1.58, "classification": "Chronic Recurrence"}, {"route_id": "OR710", "type": "Trash", "route_name": "Trash Route OR710", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 180, "unique_addrs": 117, "repeat_addrs": 35, "single_addrs": 82, "repeat_rate": 29.9, "req_per_addr": 1.54, "classification": "Chronic Recurrence"}, {"route_id": "IC104", "type": "Trash", "route_name": "Trash Route IC104", "schedule": "Tuesday/Friday", "service_area": "Inner City", "runs_per_week": 2, "status": "Scheduled Other Day", "total": 143, "unique_addrs": 109, "repeat_addrs": 22, "single_addrs": 87, "repeat_rate": 20.2, "req_per_addr": 1.31, "classification": "Widespread Skips"}, {"route_id": "OR708", "type": "Trash", "route_name": "Trash Route OR708", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 131, "unique_addrs": 96, "repeat_addrs": 21, "single_addrs": 75, "repeat_rate": 21.9, "req_per_addr": 1.36, "classification": "Widespread Skips"}, {"route_id": "OR706", "type": "Trash", "route_name": "Trash Route OR706", "schedule": "Friday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 131, "unique_addrs": 98, "repeat_addrs": 18, "single_addrs": 80, "repeat_rate": 18.4, "req_per_addr": 1.34, "classification": "Widespread Skips"}, {"route_id": "OR403", "type": "Trash", "route_name": "Trash Route OR403", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 127, "unique_addrs": 86, "repeat_addrs": 20, "single_addrs": 66, "repeat_rate": 23.3, "req_per_addr": 1.48, "classification": "Widespread Skips"}, {"route_id": "OR401", "type": "Trash", "route_name": "Trash Route OR401", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 124, "unique_addrs": 88, "repeat_addrs": 15, "single_addrs": 73, "repeat_rate": 17.0, "req_per_addr": 1.41, "classification": "Widespread Skips"}, {"route_id": "OR504", "type": "Trash", "route_name": "Trash Route OR504", "schedule": "Wednesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "In Progress", "total": 122, "unique_addrs": 78, "repeat_addrs": 22, "single_addrs": 56, "repeat_rate": 28.2, "req_per_addr": 1.56, "classification": "Chronic Recurrence"}, {"route_id": "OR309", "type": "Trash", "route_name": "Trash Route OR309", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 116, "unique_addrs": 76, "repeat_addrs": 27, "single_addrs": 49, "repeat_rate": 35.5, "req_per_addr": 1.53, "classification": "Chronic Recurrence"}];
+                const r = routes[idx];
+                return `Total Requests: ${r.total}\nSchedule: ${r.schedule} (${r.service_area})\nRepeat Rate: ${r.repeat_rate}% (${r.req_per_addr} req/addr)`;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Chart 2: Top 10 Recycling Routes
+    const ctxRec = document.getElementById('chartTopRec').getContext('2d');
+    new Chart(ctxRec, {
+      type: 'bar',
+      data: {
+        labels: ["R321_4", "R323_1", "R209_2", "R526_3", "R527_3", "R320_1", "R424_3", "R508_2B", "R321_1A", "R110_2"],
+        datasets: [
+          {
+            label: 'Single-Incident Addresses',
+            data: [41, 56, 14, 45, 42, 32, 36, 35, 24, 36],
+            backgroundColor: '#10b981',
+            borderRadius: 4
+          },
+          {
+            label: 'Multi-Day Repeat Addresses',
+            data: [15, 11, 14, 7, 6, 10, 8, 7, 12, 5],
+            backgroundColor: '#a855f7',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          },
+          y: {
+            stacked: true,
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#e2e8f0', font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 } }
+          },
+          tooltip: {
+            callbacks: {
+              afterBody: function(items) {
+                const idx = items[0].dataIndex;
+                const routes = [{"route_id": "R321_4", "type": "Recycling", "route_name": "Recycling Route R321_4", "schedule": "Thursday", "service_area": "OR_321", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 86, "unique_addrs": 56, "repeat_addrs": 15, "single_addrs": 41, "repeat_rate": 26.8, "req_per_addr": 1.54, "classification": "Widespread Skips"}, {"route_id": "R323_1", "type": "Recycling", "route_name": "Recycling Route R323_1", "schedule": "Monday", "service_area": "OR_323", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 83, "unique_addrs": 67, "repeat_addrs": 11, "single_addrs": 56, "repeat_rate": 16.4, "req_per_addr": 1.24, "classification": "Widespread Skips"}, {"route_id": "R209_2", "type": "Recycling", "route_name": "Recycling Route R209_2", "schedule": "Tuesday", "service_area": "IC_209", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 71, "unique_addrs": 28, "repeat_addrs": 14, "single_addrs": 14, "repeat_rate": 50.0, "req_per_addr": 2.54, "classification": "Chronic Recurrence"}, {"route_id": "R526_3", "type": "Recycling", "route_name": "Recycling Route R526_3", "schedule": "Wednesday", "service_area": "OR_526", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 64, "unique_addrs": 52, "repeat_addrs": 7, "single_addrs": 45, "repeat_rate": 13.5, "req_per_addr": 1.23, "classification": "Widespread Skips"}, {"route_id": "R527_3", "type": "Recycling", "route_name": "Recycling Route R527_3", "schedule": "Wednesday", "service_area": "OR_527", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 60, "unique_addrs": 48, "repeat_addrs": 6, "single_addrs": 42, "repeat_rate": 12.5, "req_per_addr": 1.25, "classification": "Widespread Skips"}, {"route_id": "R320_1", "type": "Recycling", "route_name": "Recycling Route R320_1", "schedule": "Monday", "service_area": "OR_320", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 56, "unique_addrs": 42, "repeat_addrs": 10, "single_addrs": 32, "repeat_rate": 23.8, "req_per_addr": 1.33, "classification": "Widespread Skips"}, {"route_id": "R424_3", "type": "Recycling", "route_name": "Recycling Route R424_3", "schedule": "Wednesday", "service_area": "OR_424", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 52, "unique_addrs": 44, "repeat_addrs": 8, "single_addrs": 36, "repeat_rate": 18.2, "req_per_addr": 1.18, "classification": "Widespread Skips"}, {"route_id": "R508_2B", "type": "Recycling", "route_name": "Recycling Route R508_2B", "schedule": "Tuesday", "service_area": "OR_508B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 42, "repeat_addrs": 7, "single_addrs": 35, "repeat_rate": 16.7, "req_per_addr": 1.19, "classification": "Widespread Skips"}, {"route_id": "R321_1A", "type": "Recycling", "route_name": "Recycling Route R321_1A", "schedule": "Monday", "service_area": "OR_321A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 36, "repeat_addrs": 12, "single_addrs": 24, "repeat_rate": 33.3, "req_per_addr": 1.39, "classification": "Chronic Recurrence"}, {"route_id": "R110_2", "type": "Recycling", "route_name": "Recycling Route R110_2", "schedule": "Tuesday", "service_area": "IC_110", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 41, "repeat_addrs": 5, "single_addrs": 36, "repeat_rate": 12.2, "req_per_addr": 1.22, "classification": "Widespread Skips"}];
+                const r = routes[idx];
+                return `Total Requests: ${r.total}\nSchedule: ${r.schedule}\nRepeat Rate: ${r.repeat_rate}% (${r.req_per_addr} req/addr)`;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Chart 3: Day of Week Breakdown
+    const ctxDay = document.getElementById('chartDayOfWeek').getContext('2d');
+    new Chart(ctxDay, {
+      type: 'bar',
+      data: {
+        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Monday/Thursday", "Tuesday/Friday"],
+        datasets: [
+          {
+            label: 'Missed Trash (S0441)',
+            data: [1313, 663, 1054, 225, 1280, 615, 1047],
+            backgroundColor: '#ef4444',
+            borderRadius: 4
+          },
+          {
+            label: 'Missed Recycling (S0321)',
+            data: [621, 624, 522, 419, 368, 0, 0],
+            backgroundColor: '#10b981',
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#94a3b8', font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 } }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: { color: '#e2e8f0', font: { family: "'Plus Jakarta Sans', sans-serif", size: 11 } }
+          }
+        }
+      }
+    });
+
+    // Chart 4: Chronic Repeat Routes
+    const chronicCombined = [{"route_id": "R209_2", "type": "Recycling", "route_name": "Recycling Route R209_2", "schedule": "Tuesday", "service_area": "IC_209", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 71, "unique_addrs": 28, "repeat_addrs": 14, "single_addrs": 14, "repeat_rate": 50.0, "req_per_addr": 2.54, "classification": "Chronic Recurrence"}, {"route_id": "R520_3B", "type": "Recycling", "route_name": "Recycling Route R520_3B", "schedule": "Wednesday", "service_area": "OR_520B", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 21, "unique_addrs": 11, "repeat_addrs": 5, "single_addrs": 6, "repeat_rate": 45.5, "req_per_addr": 1.91, "classification": "Standard Operation"}, {"route_id": "R615_1", "type": "Recycling", "route_name": "Recycling Route R615_1", "schedule": "Monday", "service_area": "IC_615", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 15, "unique_addrs": 9, "repeat_addrs": 4, "single_addrs": 5, "repeat_rate": 44.4, "req_per_addr": 1.67, "classification": "Standard Operation"}, {"route_id": "R619_1", "type": "Recycling", "route_name": "Recycling Route R619_1", "schedule": "Monday", "service_area": "IC_619", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 28, "unique_addrs": 13, "repeat_addrs": 5, "single_addrs": 8, "repeat_rate": 38.5, "req_per_addr": 2.15, "classification": "Standard Operation"}, {"route_id": "OR309", "type": "Trash", "route_name": "Trash Route OR309", "schedule": "Monday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 116, "unique_addrs": 76, "repeat_addrs": 27, "single_addrs": 49, "repeat_rate": 35.5, "req_per_addr": 1.53, "classification": "Chronic Recurrence"}, {"route_id": "OR601", "type": "Trash", "route_name": "Trash Route OR601", "schedule": "Tuesday", "service_area": "Outer Ring", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 24, "repeat_addrs": 8, "single_addrs": 16, "repeat_rate": 33.3, "req_per_addr": 1.5, "classification": "Standard Operation"}, {"route_id": "R423_3", "type": "Recycling", "route_name": "Recycling Route R423_3", "schedule": "Wednesday", "service_area": "OR_423", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 36, "unique_addrs": 21, "repeat_addrs": 7, "single_addrs": 14, "repeat_rate": 33.3, "req_per_addr": 1.71, "classification": "Standard Operation"}, {"route_id": "R321_1A", "type": "Recycling", "route_name": "Recycling Route R321_1A", "schedule": "Monday", "service_area": "OR_321A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 50, "unique_addrs": 36, "repeat_addrs": 12, "single_addrs": 24, "repeat_rate": 33.3, "req_per_addr": 1.39, "classification": "Chronic Recurrence"}, {"route_id": "R816_5", "type": "Recycling", "route_name": "Recycling Route R816_5", "schedule": "Friday", "service_area": "OR_816", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 23, "unique_addrs": 15, "repeat_addrs": 5, "single_addrs": 10, "repeat_rate": 33.3, "req_per_addr": 1.53, "classification": "Standard Operation"}, {"route_id": "R328_4A", "type": "Recycling", "route_name": "Recycling Route R328_4A", "schedule": "Thursday", "service_area": "OR_328A", "runs_per_week": 1, "status": "Scheduled Other Day", "total": 49, "unique_addrs": 28, "repeat_addrs": 9, "single_addrs": 19, "repeat_rate": 32.1, "req_per_addr": 1.75, "classification": "Chronic Recurrence"}];
+    const ctxChronic = document.getElementById('chartChronic').getContext('2d');
+    new Chart(ctxChronic, {
+      type: 'bar',
+      data: {
+        labels: chronicCombined.map(r => `${r.route_id} (${r.type[0]})`),
+        datasets: [
+          {
+            label: 'Multi-Day Repeat Rate %',
+            data: chronicCombined.map(r => r.repeat_rate),
+            backgroundColor: chronicCombined.map(r => r.type === 'Trash' ? '#f87171' : '#34d399'),
+            borderRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: '#94a3b8', font: { family: "'JetBrains Mono', monospace", size: 11 } }
+          },
+          y: {
+            max: 60,
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            ticks: {
+              color: '#94a3b8',
+              font: { family: "'JetBrains Mono', monospace", size: 11 },
+              callback: val => val + '%'
+            }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              afterBody: function(items) {
+                const idx = items[0].dataIndex;
+                const r = chronicCombined[idx];
+                return `Type: ${r.type} Route\nSchedule: ${r.schedule}\nTotal Reqs: ${r.total}\nRepeat Addrs: ${r.repeat_addrs} of ${r.unique_addrs} (${r.repeat_rate}%)`;
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Table Rendering & Interaction
+    let currentFilterType = 'all';
+    let searchQuery = '';
+    let sortColumnIdx = 4;
+    let sortAsc = false;
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      let filtered = ALL_ROUTES.filter(r => {
+        if (currentFilterType !== 'all' && r.type !== currentFilterType) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const match = r.route_id.toLowerCase().includes(q) ||
+                        r.schedule.toLowerCase().includes(q) ||
+                        r.service_area.toLowerCase().includes(q) ||
+                        r.classification.toLowerCase().includes(q);
+          if (!match) return false;
+        }
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        let vA, vB;
+        switch(sortColumnIdx) {
+          case 0: vA = a.route_id; vB = b.route_id; break;
+          case 1: vA = a.type; vB = b.type; break;
+          case 2: vA = a.schedule; vB = b.schedule; break;
+          case 3: vA = a.service_area; vB = b.service_area; break;
+          case 4: vA = a.total; vB = b.total; break;
+          case 5: vA = a.unique_addrs; vB = b.unique_addrs; break;
+          case 6: vA = a.repeat_addrs; vB = b.repeat_addrs; break;
+          case 7: vA = a.repeat_rate; vB = b.repeat_rate; break;
+          case 8: vA = a.req_per_addr; vB = b.req_per_addr; break;
+          case 9: vA = a.classification; vB = b.classification; break;
+          default: vA = a.total; vB = b.total;
+        }
+        if (vA < vB) return sortAsc ? -1 : 1;
+        if (vA > vB) return sortAsc ? 1 : -1;
+        return 0;
+      });
+
+      tbody.innerHTML = filtered.map(r => `
+        <tr>
+          <td><strong style="color: #fff; font-family: var(--font-mono);">${r.route_id}</strong></td>
+          <td><span class="pill ${r.type === 'Trash' ? 'pill-trash' : 'pill-rec'}">${r.type}</span></td>
+          <td>${r.schedule}</td>
+          <td style="color: #94a3b8;">${r.service_area}</td>
+          <td><strong style="color: #fff; font-family: var(--font-mono); font-size: 13px;">${r.total}</strong></td>
+          <td style="font-family: var(--font-mono);">${r.unique_addrs}</td>
+          <td style="font-family: var(--font-mono); color: ${r.repeat_addrs > 0 ? '#c084fc' : '#64748b'};">${r.repeat_addrs}</td>
+          <td><strong style="font-family: var(--font-mono); color: ${r.repeat_rate >= 30 ? '#fbbf24' : '#e2e8f0'};">${r.repeat_rate}%</strong></td>
+          <td style="font-family: var(--font-mono);">${r.req_per_addr}</td>
+          <td><span class="status-badge status-${r.classification.toLowerCase().replace(/\s+/g, '-')}">${r.classification}</span></td>
+        </tr>
+      `).join('');
+
+      document.getElementById('tableRecordCount').innerText = `Showing ${filtered.length} of ${ALL_ROUTES.length} routes`;
+    }
+
+    function setTableFilter(type, btn) {
+      currentFilterType = type;
+      document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderTable();
+    }
+
+    function handleRouteSearch(val) {
+      searchQuery = val.trim();
+      renderTable();
+    }
+
+    function sortTable(colIdx, isNumeric) {
+      if (sortColumnIdx === colIdx) {
+        sortAsc = !sortAsc;
+      } else {
+        sortColumnIdx = colIdx;
+        sortAsc = isNumeric ? false : true;
+      }
+      renderTable();
+    }
+
+    // Initial render
+    renderTable();
+  </script>
+</body>
+</html>
