@@ -3,7 +3,7 @@
     "period": "180 Days (March 24 \u2013 September 20, 2026)",
     "trash_routes_count": 103,
     "recycle_routes_count": 120,
-    "trash_requests_matched": 6197,
+    "trash_requests_matched": 6199,
     "recycle_requests_matched": 2554
   },
   "trash_routes": [
@@ -39,12 +39,12 @@
       "neighborhoods": "River Terrace, Twining, Dupont Park",
       "ancs": "ANC 7B, 7D",
       "area_desc": "Ward 7 \u2022 River Terrace, Twining, Dupont Park (ANC 7B, 7D)",
-      "total": 131,
+      "total": 132,
       "unique_addrs": 96,
-      "repeat_addrs": 21,
-      "single_addrs": 75,
-      "repeat_rate": 21.9,
-      "req_per_addr": 1.36,
+      "repeat_addrs": 22,
+      "single_addrs": 74,
+      "repeat_rate": 22.9,
+      "req_per_addr": 1.38,
       "classification": "Widespread Skips"
     },
     {
@@ -1259,12 +1259,12 @@
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
       "ancs": "ANC 5F, 5E",
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
-      "total": 97,
-      "unique_addrs": 67,
+      "total": 98,
+      "unique_addrs": 68,
       "repeat_addrs": 15,
-      "single_addrs": 52,
-      "repeat_rate": 22.4,
-      "req_per_addr": 1.45,
+      "single_addrs": 53,
+      "repeat_rate": 22.1,
+      "req_per_addr": 1.44,
       "classification": "Standard Operation"
     },
     {
