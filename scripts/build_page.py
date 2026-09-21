@@ -2253,6 +2253,7 @@ html_page += f'''
             <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid rgba(56, 189, 248, 0.25); font-size: 11px; color: #93c5fd;">
               DPW Trash Route: <strong style="color: #ffffff;">${{tr.route_area}}</strong>
               <span style="color: #cbd5e1; font-size: 10px; margin-left: 4px;">(${{tr.days}})</span>
+              ${{tr.area_desc ? `<div style="color: #e2e8f0; font-size: 10px; margin-top: 2px;">Area: <strong style="color: #facc15;">${{tr.area_desc}}</strong></div>` : ''}}
             </div>
           `;
         }}
@@ -2265,6 +2266,7 @@ html_page += f'''
             <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(52, 211, 153, 0.25); font-size: 11px; color: #6ee7b7;">
               DPW Recycling Route: <strong style="color: #ffffff;">${{rr.route}}</strong>
               <span style="color: #cbd5e1; font-size: 10px; margin-left: 4px;">(${{rr.day}})</span>
+              ${{rr.area_desc ? `<div style="color: #e2e8f0; font-size: 10px; margin-top: 2px;">Area: <strong style="color: #facc15;">${{rr.area_desc}}</strong></div>` : ''}}
             </div>
           `;
         }}
@@ -2374,11 +2376,12 @@ html_page += f'''
                 <div style="font-weight: 800; font-size: 13px; color: #ffffff; margin-bottom: 2px;">
                   DPW Trash Route: <span style="color: #60a5fa;">${{p.route_area}}</span>
                 </div>
+                ${{p.area_desc ? `<div style="font-size: 11px; color: #facc15; font-weight: 600; margin-bottom: 3px;">${{p.area_desc}}</div>` : ''}}
                 <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 2px;">
-                  Collection Day: <strong style="color: #facc15;">${{p.days}}</strong> (${{p.runs}} run/week)
+                  Collection Day: <strong style="color: #ffffff;">${{p.days}}</strong> (${{p.runs}} run/week)
                 </div>
                 <div style="font-size: 11px; color: #94a3b8;">
-                  Service Area: ${{p.service_area || 'District-Wide'}} • Status: ${{p.status || 'Active'}}
+                  Service Model: ${{p.service_area || 'Outer Ring'}} • Status: ${{p.status || 'Active'}}
                 </div>
               `);
               smdTooltip.setLatLng(e.latlng);
@@ -2423,11 +2426,12 @@ html_page += f'''
                 <div style="font-weight: 800; font-size: 13px; color: #ffffff; margin-bottom: 2px;">
                   DPW Recycling Route: <span style="color: #34d399;">${{p.route}}</span>
                 </div>
+                ${{p.area_desc ? `<div style="font-size: 11px; color: #facc15; font-weight: 600; margin-bottom: 3px;">${{p.area_desc}}</div>` : ''}}
                 <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 2px;">
-                  Collection Day: <strong style="color: #facc15;">${{p.day}}</strong> (${{p.runs}} run/week)
+                  Collection Day: <strong style="color: #ffffff;">${{p.day}}</strong> (${{p.runs}} run/week)
                 </div>
                 <div style="font-size: 11px; color: #94a3b8;">
-                  Area: ${{p.route_area || 'District-Wide'}} • Status: ${{p.status || 'Active'}}
+                  Status: ${{p.status || 'Active'}}
                 </div>
               `);
               smdTooltip.setLatLng(e.latlng);
