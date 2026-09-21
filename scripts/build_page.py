@@ -1960,9 +1960,15 @@ html_page += f'''
       selectedAncId = ancId;
       selectedSmdId = null;
 
-      const smdInAnc = MAP_DATA.smds.features.find(f => f.properties.anc_id === ancId);
-      if (smdInAnc) {{
-        selectedWardNum = smdInAnc.properties.ward;
+      if (ancId === '3/4G') {{
+        if (selectedWardNum !== 3 && selectedWardNum !== 4) {{
+          selectedWardNum = 3;
+        }}
+      }} else {{
+        const smdInAnc = MAP_DATA.smds.features.find(f => f.properties.anc_id === ancId);
+        if (smdInAnc) {{
+          selectedWardNum = smdInAnc.properties.ward;
+        }}
       }}
 
       updateDropdowns(selectedWardNum, selectedAncId, null);

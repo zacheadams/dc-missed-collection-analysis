@@ -18,12 +18,12 @@
       "requests_per_address": 1.48
     },
     "1": {
-      "total": 912,
-      "trash": 617,
-      "recycling": 295,
-      "unique_addresses": 626,
-      "repeat_addresses": 140,
-      "repeat_rate": 22.4,
+      "total": 878,
+      "trash": 591,
+      "recycling": 287,
+      "unique_addresses": 603,
+      "repeat_addresses": 136,
+      "repeat_rate": 22.6,
       "requests_per_address": 1.46
     },
     "7": {
@@ -45,13 +45,13 @@
       "requests_per_address": 1.47
     },
     "2": {
-      "total": 638,
-      "trash": 468,
-      "recycling": 170,
-      "unique_addresses": 401,
-      "repeat_addresses": 104,
-      "repeat_rate": 25.9,
-      "requests_per_address": 1.59
+      "total": 672,
+      "trash": 494,
+      "recycling": 178,
+      "unique_addresses": 424,
+      "repeat_addresses": 108,
+      "repeat_rate": 25.5,
+      "requests_per_address": 1.58
     },
     "8": {
       "total": 705,
@@ -1457,7 +1457,7 @@
     {
       "smd_id": "8F04",
       "anc_id": "8F",
-      "ward": 6,
+      "ward": 8,
       "total": 0,
       "trash": 0,
       "recycling": 0,
@@ -2465,7 +2465,7 @@
     {
       "smd_id": "2F01",
       "anc_id": "2F",
-      "ward": 1,
+      "ward": 2,
       "total": 34,
       "trash": 26,
       "recycling": 8,
@@ -4845,7 +4845,7 @@
     {
       "smd_id": "8F05",
       "anc_id": "8F",
-      "ward": 6,
+      "ward": 8,
       "total": 0,
       "trash": 0,
       "recycling": 0,
