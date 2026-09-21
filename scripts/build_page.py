@@ -1,14 +1,31 @@
 import json
 import os
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+map_data_path = os.path.join(BASE_DIR, 'data/dc_map_data_v2.json')
+if not os.path.exists(map_data_path):
+    map_data_path = '/tmp/dc_map_data_v2.json'
+
+addr_stats_path = os.path.join(BASE_DIR, 'data/smd_180d_address_stats.json')
+if not os.path.exists(addr_stats_path):
+    addr_stats_path = '/tmp/smd_180d_address_stats.json'
+
 # 1. Load 30-day map data (for the mapping app)
-with open('/tmp/dc_map_data_v2.json') as f:
+with open(map_data_path) as f:
     map_data = json.load(f)
+
+# Ensure each SMD has ward_share_pct precalculated
+wards_dict = {f['properties']['ward']: f['properties']['total'] for f in map_data['wards']['features']}
+for f in map_data['smds']['features']:
+    w = f['properties'].get('ward')
+    tot = f['properties'].get('total', 0)
+    wtot = wards_dict.get(w, 0)
+    f['properties']['ward_share_pct'] = round((tot / wtot * 100), 1) if wtot > 0 else 0.0
 
 json_str = json.dumps(map_data, separators=(',', ':'))
 
 # 2. Load 180-day address-level stats (for deduplication and repeat analysis)
-with open('/tmp/smd_180d_address_stats.json') as f:
+with open(addr_stats_path) as f:
     addr_data_180d = json.load(f)
 
 city_180d = addr_data_180d['citywide']
@@ -2005,10 +2022,19 @@ html_page += f'''
       document.getElementById('insp-trash').innerText = p.trash;
       document.getElementById('insp-recycling').innerText = p.recycling;
 
+      let wardShare = p.ward_share_pct;
+      if (wardShare === undefined || wardShare === null) {{
+        const wf = MAP_DATA && MAP_DATA.wards && MAP_DATA.wards.features
+          ? MAP_DATA.wards.features.find(f => String(f.properties.ward) === String(p.ward))
+          : null;
+        const wardTotal = wf && wf.properties ? wf.properties.total : 0;
+        wardShare = (wardTotal > 0 && p.total) ? ((p.total / wardTotal) * 100).toFixed(1) : '0.0';
+      }}
+
       const rankEl = document.getElementById('insp-rank-bar');
       rankEl.innerHTML = `
         <span>City Rank: <strong style="color: #fff;">#${{p.city_rank}}</strong> of 345</span>
-        <span>Share of Ward: <strong>${{p.ward_share_pct}}%</strong></span>
+        <span>Share of Ward: <strong>${{wardShare}}%</strong></span>
       `;
 
       const note = document.getElementById('insp-route-note');
@@ -2046,17 +2072,18 @@ html_page += f'''
     function updateInspectorWard(p) {{
       document.getElementById('insp-smd-id').innerText = `Ward ${{p.ward}}`;
       document.getElementById('insp-anc-tag').innerText = `${{p.smd_count}} SMDs`;
-      document.getElementById('insp-rep-name').innerText = `Councilmember ${{p.rep_name || ''}}`;
+      document.getElementById('insp-rep-name').innerText = `Councilmember ${{p.councilmember || p.rep_name || ''}}`;
 
       document.getElementById('insp-total').innerText = p.total;
       document.getElementById('insp-total-label').innerText = 'Ward Total Requests (30d)';
       document.getElementById('insp-trash').innerText = p.trash;
       document.getElementById('insp-recycling').innerText = p.recycling;
 
+      const shareOfCity = ((p.total / 3301) * 100).toFixed(1);
       const rankEl = document.getElementById('insp-rank-bar');
       rankEl.innerHTML = `
         <span>Top SMD: <strong style="color: #facc15;">${{p.top_smd_id}}</strong> (${{p.top_smd_total}} reqs)</span>
-        <span>Citywide Rank: <strong>#${{p.ward}}</strong></span>
+        <span>Share of City: <strong>${{shareOfCity}}%</strong></span>
       `;
 
       const note = document.getElementById('insp-route-note');
@@ -2482,8 +2509,19 @@ html_page += f'''
 </html>
 '''
 
-# Write to final target file
-with open('/Users/zacheadams/dc_missed_collection_map.html', 'w', encoding='utf-8') as f:
+# Write to repository index.html and dc_missed_collection_map.html
+out_index = os.path.join(BASE_DIR, 'index.html')
+out_map = os.path.join(BASE_DIR, 'dc_missed_collection_map.html')
+
+with open(out_index, 'w', encoding='utf-8') as f:
     f.write(html_page)
 
-print("Successfully compiled /Users/zacheadams/dc_missed_collection_map.html with address deduplication and repeat failure metrics!")
+with open(out_map, 'w', encoding='utf-8') as f:
+    f.write(html_page)
+
+home_map = '/Users/zacheadams/dc_missed_collection_map.html'
+if os.path.exists(home_map):
+    with open(home_map, 'w', encoding='utf-8') as f:
+        f.write(html_page)
+
+print(f"Successfully compiled:\n - {out_index}\n - {out_map}")
