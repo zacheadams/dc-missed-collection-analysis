@@ -2135,6 +2135,143 @@ html_page += f'''
       smdTooltip.close();
     }}
 
+    // Spatial indexing for rapid route lookup (<0.02ms)
+    let trashRouteIndex = [];
+    let recycleRouteIndex = [];
+
+    function buildRouteSpatialIndex() {{
+      if (MAP_DATA.trash_routes && MAP_DATA.trash_routes.features) {{
+        trashRouteIndex = MAP_DATA.trash_routes.features.map(f => {{
+          const g = f.geometry;
+          const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          for (let p = 0; p < polys.length; p++) {{
+            const rings = polys[p];
+            for (let r = 0; r < rings.length; r++) {{
+              const ring = rings[r];
+              for (let i = 0; i < ring.length; i++) {{
+                const x = ring[i][0], y = ring[i][1];
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+              }}
+            }}
+          }}
+          return {{ props: f.properties, bbox: [minX, minY, maxX, maxY], polys: polys }};
+        }});
+      }}
+
+      if (MAP_DATA.recycle_routes && MAP_DATA.recycle_routes.features) {{
+        recycleRouteIndex = MAP_DATA.recycle_routes.features.map(f => {{
+          const g = f.geometry;
+          const polys = g.type === 'Polygon' ? [g.coordinates] : g.coordinates;
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          for (let p = 0; p < polys.length; p++) {{
+            const rings = polys[p];
+            for (let r = 0; r < rings.length; r++) {{
+              const ring = rings[r];
+              for (let i = 0; i < ring.length; i++) {{
+                const x = ring[i][0], y = ring[i][1];
+                if (x < minX) minX = x;
+                if (x > maxX) maxX = x;
+                if (y < minY) minY = y;
+                if (y > maxY) maxY = y;
+              }}
+            }}
+          }}
+          return {{ props: f.properties, bbox: [minX, minY, maxX, maxY], polys: polys }};
+        }});
+      }}
+    }}
+
+    function isPointInRing(x, y, ring) {{
+      let inside = false;
+      const n = ring.length;
+      for (let i = 0; i < n; i++) {{
+        const j = (i - 1 + n) % n;
+        const xi = ring[i][0], yi = ring[i][1];
+        const xj = ring[j][0], yj = ring[j][1];
+        if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) {{
+          inside = !inside;
+        }}
+      }}
+      return inside;
+    }}
+
+    function isPointInPoly(x, y, polyRings) {{
+      if (!isPointInRing(x, y, polyRings[0])) return false;
+      for (let h = 1; h < polyRings.length; h++) {{
+        if (isPointInRing(x, y, polyRings[h])) return false;
+      }}
+      return true;
+    }}
+
+    function findRouteAtLatLng(routes, latlng) {{
+      if (!routes || !latlng) return null;
+      const x = latlng.lng;
+      const y = latlng.lat;
+      for (let i = 0; i < routes.length; i++) {{
+        const r = routes[i];
+        if (x < r.bbox[0] || x > r.bbox[2] || y < r.bbox[1] || y > r.bbox[3]) continue;
+        for (let p = 0; p < r.polys.length; p++) {{
+          if (isPointInPoly(x, y, r.polys[p])) {{
+            return r.props;
+          }}
+        }}
+      }}
+      return null;
+    }}
+
+    function getSmdTooltipHtml(p, latlng) {{
+      let html = `
+        <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 3px;">
+          SMD ${{p.smd_id}}
+        </div>
+        <div style="color: #38bdf8; font-size: 11px; font-weight: 700; margin-bottom: 6px;">
+          Ward ${{p.ward}} • ANC ${{p.anc_id}} • Comm. ${{p.rep_name || 'Vacant'}}
+        </div>
+        <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 3px;">
+          Total Missed: <strong style="color: #facc15; font-size: 14px;">${{p.total}}</strong>
+          <span style="color: #94a3b8; font-size: 11px; margin-left: 4px;">
+            (Trash: <strong style="color: #f87171;">${{p.trash}}</strong>, Rec: <strong style="color: #34d399;">${{p.recycling}}</strong>)
+          </span>
+        </div>
+        <div style="color: #94a3b8; font-size: 11px;">
+          Citywide Rank: <strong style="color: #ffffff;">#${{p.city_rank}}</strong> of 345 in DC
+        </div>
+      `;
+
+      const isTrashActive = document.getElementById('chk-trash-routes')?.checked;
+      const isRecycleActive = document.getElementById('chk-recycle-routes')?.checked;
+
+      if (isTrashActive && latlng) {{
+        const tr = findRouteAtLatLng(trashRouteIndex, latlng);
+        if (tr) {{
+          html += `
+            <div style="margin-top: 6px; padding-top: 5px; border-top: 1px solid rgba(56, 189, 248, 0.25); font-size: 11px; color: #93c5fd;">
+              DPW Trash Route: <strong style="color: #ffffff;">${{tr.route_area}}</strong>
+              <span style="color: #cbd5e1; font-size: 10px; margin-left: 4px;">(${{tr.days}})</span>
+            </div>
+          `;
+        }}
+      }}
+
+      if (isRecycleActive && latlng) {{
+        const rr = findRouteAtLatLng(recycleRouteIndex, latlng);
+        if (rr) {{
+          html += `
+            <div style="margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(52, 211, 153, 0.25); font-size: 11px; color: #6ee7b7;">
+              DPW Recycling Route: <strong style="color: #ffffff;">${{rr.route}}</strong>
+              <span style="color: #cbd5e1; font-size: 10px; margin-left: 4px;">(${{rr.day}})</span>
+            </div>
+          `;
+        }}
+      }}
+
+      return html;
+    }}
+
     // Initialize SMD Layer with ULTRA-HIGH CONTRAST TOOLTIPS (NO EMOJIS)
     function initSMDLayer() {{
       if (smdLayer) map.removeLayer(smdLayer);
@@ -2157,23 +2294,7 @@ html_page += f'''
                 layer.bringToFront();
               }}
 
-              smdTooltip.setContent(`
-                <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 3px;">
-                  SMD ${{p.smd_id}}
-                </div>
-                <div style="color: #38bdf8; font-size: 11px; font-weight: 700; margin-bottom: 6px;">
-                  Ward ${{p.ward}} • ANC ${{p.anc_id}} • Comm. ${{p.rep_name || 'Vacant'}}
-                </div>
-                <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 3px;">
-                  Total Missed: <strong style="color: #facc15; font-size: 14px;">${{p.total}}</strong>
-                  <span style="color: #94a3b8; font-size: 11px; margin-left: 4px;">
-                    (Trash: <strong style="color: #f87171;">${{p.trash}}</strong>, Rec: <strong style="color: #34d399;">${{p.recycling}}</strong>)
-                  </span>
-                </div>
-                <div style="color: #94a3b8; font-size: 11px;">
-                  Citywide Rank: <strong style="color: #ffffff;">#${{p.city_rank}}</strong> of 345 in DC
-                </div>
-              `);
+              smdTooltip.setContent(getSmdTooltipHtml(p, e.latlng));
               smdTooltip.setLatLng(e.latlng);
               if (!map.hasLayer(smdTooltip)) {{
                 smdTooltip.openOn(map);
@@ -2184,6 +2305,11 @@ html_page += f'''
               }}
             }},
             mousemove: function (e) {{
+              const isTrashActive = document.getElementById('chk-trash-routes')?.checked;
+              const isRecycleActive = document.getElementById('chk-recycle-routes')?.checked;
+              if (isTrashActive || isRecycleActive) {{
+                smdTooltip.setContent(getSmdTooltipHtml(p, e.latlng));
+              }}
               smdTooltip.setLatLng(e.latlng);
             }},
             mouseout: function () {{
@@ -2228,13 +2354,48 @@ html_page += f'''
       trashRoutesLayer = L.geoJSON(MAP_DATA.trash_routes, {{
         pane: 'routePane',
         style: {{
-          color: '#1d4ed8',
-          weight: 2.2,
+          color: '#2563eb',
+          weight: 2.4,
           dashArray: '6, 6',
           fillColor: '#3b82f6',
-          fillOpacity: 0.06
+          fillOpacity: 0.12
         }},
-        interactive: false
+        onEachFeature: function (feature, layer) {{
+          const p = feature.properties;
+          layer.on({{
+            mouseover: function (e) {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              layer.setStyle({{ weight: 3.8, color: '#60a5fa', fillOpacity: 0.28 }});
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {{
+                layer.bringToFront();
+              }}
+              smdTooltip.setContent(`
+                <div style="font-weight: 800; font-size: 13px; color: #ffffff; margin-bottom: 2px;">
+                  DPW Trash Route: <span style="color: #60a5fa;">${{p.route_area}}</span>
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 2px;">
+                  Collection Day: <strong style="color: #facc15;">${{p.days}}</strong> (${{p.runs}} run/week)
+                </div>
+                <div style="font-size: 11px; color: #94a3b8;">
+                  Service Area: ${{p.service_area || 'District-Wide'}} • Status: ${{p.status || 'Active'}}
+                </div>
+              `);
+              smdTooltip.setLatLng(e.latlng);
+              if (!map.hasLayer(smdTooltip)) {{
+                smdTooltip.openOn(map);
+              }}
+            }},
+            mousemove: function (e) {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              smdTooltip.setLatLng(e.latlng);
+            }},
+            mouseout: function () {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              trashRoutesLayer.resetStyle(layer);
+              smdTooltip.close();
+            }}
+          }});
+        }}
       }});
     }}
 
@@ -2242,13 +2403,48 @@ html_page += f'''
       recycleRoutesLayer = L.geoJSON(MAP_DATA.recycle_routes, {{
         pane: 'routePane',
         style: {{
-          color: '#047857',
-          weight: 2.2,
+          color: '#059669',
+          weight: 2.4,
           dashArray: '4, 5',
           fillColor: '#10b981',
-          fillOpacity: 0.06
+          fillOpacity: 0.12
         }},
-        interactive: false
+        onEachFeature: function (feature, layer) {{
+          const p = feature.properties;
+          layer.on({{
+            mouseover: function (e) {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              layer.setStyle({{ weight: 3.8, color: '#34d399', fillOpacity: 0.28 }});
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {{
+                layer.bringToFront();
+              }}
+              smdTooltip.setContent(`
+                <div style="font-weight: 800; font-size: 13px; color: #ffffff; margin-bottom: 2px;">
+                  DPW Recycling Route: <span style="color: #34d399;">${{p.route}}</span>
+                </div>
+                <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 2px;">
+                  Collection Day: <strong style="color: #facc15;">${{p.day}}</strong> (${{p.runs}} run/week)
+                </div>
+                <div style="font-size: 11px; color: #94a3b8;">
+                  Area: ${{p.route_area || 'District-Wide'}} • Status: ${{p.status || 'Active'}}
+                </div>
+              `);
+              smdTooltip.setLatLng(e.latlng);
+              if (!map.hasLayer(smdTooltip)) {{
+                smdTooltip.openOn(map);
+              }}
+            }},
+            mousemove: function (e) {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              smdTooltip.setLatLng(e.latlng);
+            }},
+            mouseout: function () {{
+              if (document.getElementById('chk-smd')?.checked) return;
+              recycleRoutesLayer.resetStyle(layer);
+              smdTooltip.close();
+            }}
+          }});
+        }}
       }});
     }}
 
@@ -2273,11 +2469,13 @@ html_page += f'''
     }}
 
     function toggleTrashRoutes(show) {{
+      hideSmdTooltip();
       if (show) map.addLayer(trashRoutesLayer);
       else map.removeLayer(trashRoutesLayer);
     }}
 
     function toggleRecycleRoutes(show) {{
+      hideSmdTooltip();
       if (show) map.addLayer(recycleRoutesLayer);
       else map.removeLayer(recycleRoutesLayer);
     }}
@@ -2533,6 +2731,7 @@ html_page += f'''
     }}
 
     // Initial Setup
+    buildRouteSpatialIndex();
     initSMDLayer();
     initWardLayer();
     initTrashRoutesLayer();
