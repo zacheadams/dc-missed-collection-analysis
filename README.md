@@ -79,6 +79,7 @@ In certain dense historic rowhouse districts, over 45% to 58% of all complaining
 - **WCAG AAA Tooltips**: High-contrast tooltip styling (`#090d16` background, `#38bdf8` border, and bright `#ffffff`/`#facc15` typography) ensuring readability across all basemap contrast levels.
 - **Self-Contained Export Capability**: Each visualization contains an explicit time period subtitle and an inline footnote documenting the data source and temporal scope, enabling clean standalone screenshots for policy memos and community communications.
 - **Full Smooth Scroll-to-Zoom**: Enabled directly on the map viewport (`scrollWheelZoom: true`).
+- **Interactive Route Overlays**: When toggling DPW Trash Routes (140) or DPW Recycling Routes (173), hovering over the map displays route names, collection schedules, and service areas directly within the high-contrast tooltip.
 
 ---
 
