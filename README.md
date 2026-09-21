@@ -83,17 +83,17 @@ In certain dense historic rowhouse districts, over 45% to 58% of all complaining
 
 | Ward | Councilmember | Total Requests | Unique Addrs (Skipped Areas) | Repeat Addrs (&ge;2 Days) | Repeat Rate % | Trash % | Top Volume SMD |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Ward 1** | Brianne Nadeau | 965 | 665 | 150 | 22.6% | 66.7% | SMD 1E01 (51 addrs / 74 reqs) |
-| **Ward 2** | Brooke Pinto | 638 | 401 | 104 | 25.9% | 73.4% | SMD 2B08 (64 addrs / 89 reqs) |
+| **Ward 1** | Brianne Nadeau | 878 | 603 | 136 | 22.6% | 67.3% | SMD 1E01 (49 addrs / 74 reqs) |
+| **Ward 2** | Brooke Pinto | 672 | 424 | 108 | 25.5% | 73.5% | SMD 2B08 (35 addrs / 89 reqs) |
 | **Ward 3** | Matthew Frumin | 1,268 | 837 | 219 | **26.2%** | 59.1% | SMD 3F06 (67 addrs / 103 reqs) |
 | **Ward 4** | Janeese Lewis George | **1,666** | **1,134** | **266** | 23.5% | 72.4% | SMD 3/4G04 (81 addrs / 146 reqs) |
-| **Ward 5** | Zachary Parker | 1,354 | 911 | 220 | 24.1% | 69.3% | SMD 5E03 (90 addrs / 136 reqs) |
-| **Ward 6** | Charles Allen | 821 | 586 | 125 | 21.3% | 71.0% | SMD 6A01 (32 addrs / 45 reqs) |
-| **Ward 7** | Wendell Felder | 1,406 | 979 | 208 | **21.2%** | 81.9% | SMD 7F04 (43 addrs / 75 reqs) |
-| **Ward 8** | Trayon White, Sr. | 705 | 461 | 112 | 24.3% | 72.1% | SMD 8B03 (29 addrs / 47 reqs) |
+| **Ward 5** | Zachary Parker | 1,408 | 951 | 230 | 24.2% | 68.6% | SMD 5E03 (90 addrs / 136 reqs) |
+| **Ward 6** | Charles Allen | 821 | 586 | 125 | 21.3% | 71.0% | SMD 6A01 (51 addrs / 71 reqs) |
+| **Ward 7** | Wendell Felder | 1,407 | 979 | 209 | **21.3%** | 81.9% | SMD 7F04 (43 addrs / 75 reqs) |
+| **Ward 8** | Trayon White, Sr. | 705 | 461 | 112 | 24.3% | 72.1% | SMD 8A06 (30 addrs / 53 reqs) |
 
 - **Ward 4**: Leads the District in cumulative service requests (1,666), unique skipped properties (1,134), and repeat properties (266).
-- **Ward 7**: Has the second-highest unique address count (979), but the lowest repeat rate in DC (21.2%), demonstrating that late-summer volume was broadly dispersed across hundreds of detached single-family blocks rather than recurring repeat callers.
+- **Ward 7**: Has the second-highest unique address count (979), but the lowest repeat rate in DC (21.3%), demonstrating that late-summer volume was broadly dispersed across hundreds of detached single-family blocks rather than recurring repeat callers.
 - **Ward 3**: Exhibits the highest ward-wide repeat rate (26.2%), indicating stubborn localized recurrence in Upper Northwest.
 
 ---
