@@ -676,8 +676,9 @@ html_page = f'''<!DOCTYPE html>
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(56, 189, 248, 0.3) !important;
       font-family: var(--font-sans) !important;
       font-size: 12px !important;
-      opacity: 1 !important;
       pointer-events: none !important;
+      white-space: nowrap !important;
+      transition: none !important;
     }}
 
     .leaflet-tooltip-top:before,
@@ -1900,6 +1901,7 @@ html_page += f'''
     }}
 
     function selectHierarchy(smdId) {{
+      hideSmdTooltip();
       let targetLayer = null;
       smdLayer.eachLayer(function(l) {{
         if (l.feature.properties.smd_id === smdId) {{
@@ -1927,6 +1929,7 @@ html_page += f'''
     }}
 
     function selectWard(wNum) {{
+      hideSmdTooltip();
       selectedWardNum = wNum ? parseInt(wNum) : null;
       selectedSmdId = null;
       selectedAncId = null;
@@ -1952,6 +1955,7 @@ html_page += f'''
     }}
 
     function selectANC(ancId) {{
+      hideSmdTooltip();
       selectedAncId = ancId;
       selectedSmdId = null;
 
@@ -1977,6 +1981,7 @@ html_page += f'''
     }}
 
     function resetToCitywide() {{
+      hideSmdTooltip();
       selectedWardNum = null;
       selectedAncId = null;
       selectedSmdId = null;
@@ -2110,6 +2115,26 @@ html_page += f'''
       note.innerHTML = `Street names are hidden in district-wide view to maintain visual clarity. Select any Ward or SMD to display streets in that area.`;
     }}
 
+    // Single shared tooltip instance to prevent trailing / duplicate tooltips ("solitaire" effect)
+    const smdTooltip = L.tooltip({{
+      className: 'custom-tooltip',
+      direction: 'top',
+      offset: [0, -10],
+      opacity: 1
+    }});
+
+    let activeHoverLayer = null;
+
+    function hideSmdTooltip() {{
+      if (activeHoverLayer) {{
+        if (!selectedSmdId || selectedSmdId !== activeHoverLayer.feature?.properties?.smd_id) {{
+          smdLayer.resetStyle(activeHoverLayer);
+        }}
+        activeHoverLayer = null;
+      }}
+      smdTooltip.close();
+    }}
+
     // Initialize SMD Layer with ULTRA-HIGH CONTRAST TOOLTIPS (NO EMOJIS)
     function initSMDLayer() {{
       if (smdLayer) map.removeLayer(smdLayer);
@@ -2118,41 +2143,56 @@ html_page += f'''
         style: smdStyle,
         onEachFeature: function (feature, layer) {{
           const p = feature.properties;
-          
-          layer.bindTooltip(`
-            <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 3px;">
-              SMD ${{p.smd_id}}
-            </div>
-            <div style="color: #38bdf8; font-size: 11px; font-weight: 700; margin-bottom: 6px;">
-              Ward ${{p.ward}} • ANC ${{p.anc_id}} • Comm. ${{p.rep_name || 'Vacant'}}
-            </div>
-            <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 3px;">
-              Total Missed: <strong style="color: #facc15; font-size: 14px;">${{p.total}}</strong>
-              <span style="color: #94a3b8; font-size: 11px; margin-left: 4px;">
-                (Trash: <strong style="color: #f87171;">${{p.trash}}</strong>, Rec: <strong style="color: #34d399;">${{p.recycling}}</strong>)
-              </span>
-            </div>
-            <div style="color: #94a3b8; font-size: 11px;">
-              Citywide Rank: <strong style="color: #ffffff;">#${{p.city_rank}}</strong> of 345 in DC
-            </div>
-          `, {{
-            className: 'custom-tooltip',
-            sticky: true,
-            direction: 'top',
-            offset: [0, -8]
-          }});
 
           layer.on({{
-            mouseover: function () {{
+            mouseover: function (e) {{
+              if (activeHoverLayer && activeHoverLayer !== layer) {{
+                if (!selectedSmdId || selectedSmdId !== activeHoverLayer.feature?.properties?.smd_id) {{
+                  smdLayer.resetStyle(activeHoverLayer);
+                }}
+              }}
+              activeHoverLayer = layer;
               layer.setStyle({{ weight: 3.5, color: '#38bdf8', fillOpacity: 0.88 }});
-              layer.bringToFront();
+              if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {{
+                layer.bringToFront();
+              }}
+
+              smdTooltip.setContent(`
+                <div style="font-weight: 800; font-size: 14px; color: #ffffff; letter-spacing: -0.01em; margin-bottom: 3px;">
+                  SMD ${{p.smd_id}}
+                </div>
+                <div style="color: #38bdf8; font-size: 11px; font-weight: 700; margin-bottom: 6px;">
+                  Ward ${{p.ward}} • ANC ${{p.anc_id}} • Comm. ${{p.rep_name || 'Vacant'}}
+                </div>
+                <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 3px;">
+                  Total Missed: <strong style="color: #facc15; font-size: 14px;">${{p.total}}</strong>
+                  <span style="color: #94a3b8; font-size: 11px; margin-left: 4px;">
+                    (Trash: <strong style="color: #f87171;">${{p.trash}}</strong>, Rec: <strong style="color: #34d399;">${{p.recycling}}</strong>)
+                  </span>
+                </div>
+                <div style="color: #94a3b8; font-size: 11px;">
+                  Citywide Rank: <strong style="color: #ffffff;">#${{p.city_rank}}</strong> of 345 in DC
+                </div>
+              `);
+              smdTooltip.setLatLng(e.latlng);
+              if (!map.hasLayer(smdTooltip)) {{
+                smdTooltip.openOn(map);
+              }}
+
               if (!selectedSmdId) {{
                 updateInspectorSMD(p);
               }}
             }},
+            mousemove: function (e) {{
+              smdTooltip.setLatLng(e.latlng);
+            }},
             mouseout: function () {{
               if (!selectedSmdId || selectedSmdId !== p.smd_id) {{
                 smdLayer.resetStyle(layer);
+              }}
+              if (activeHoverLayer === layer) {{
+                activeHoverLayer = null;
+                smdTooltip.close();
               }}
               if (!selectedSmdId) {{
                 if (selectedAncId) {{
@@ -2167,6 +2207,7 @@ html_page += f'''
             }},
             click: function (e) {{
               L.DomEvent.stopPropagation(e);
+              hideSmdTooltip();
               selectHierarchy(p.smd_id);
             }}
           }});
@@ -2498,6 +2539,8 @@ html_page += f'''
     initRecycleRoutesLayer();
     updateLegend();
     resetToCitywide();
+
+    map.on('mouseout movestart zoomstart', hideSmdTooltip);
 
     // Load Charts on page load
     window.addEventListener('DOMContentLoaded', () => {{
