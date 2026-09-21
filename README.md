@@ -26,15 +26,38 @@ open routes.html
 
 ---
 
+## Automated Data Refresh & Pipeline
+
+This repository includes a fully automated, incremental data pipeline that keeps the application up to date:
+
+- **Weekly GitHub Actions Automation**: A scheduled GitHub Actions workflow (`.github/workflows/update_data.yml`) runs every **Monday at 10:00 AM UTC (6:00 AM EDT)**, as well as on-demand via manual `workflow_dispatch`.
+- **Incremental Data Ingestion**: Rather than redownloading the entire 180-day archive, `scripts/fetch_311_data.py` reads existing records to identify the latest submission timestamp (`max(ADDDATE)`). It queries Open Data DC strictly for records added or updated within a 48-hour buffer, merges new tickets by unique `OBJECTID`, and prunes records older than 180 days to maintain a clean rolling window.
+- **Zero External Dependencies**: All scripts rely solely on the Python standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`), requiring no external packages or third-party paid infrastructure.
+- **Automatic GitHub Pages Deployment**: Any detected data or application changes are automatically committed by `github-actions[bot]` and pushed to `main`, triggering instantaneous GitHub Pages redeployment.
+
+### Running the Pipeline Locally
+```bash
+# Run the complete automated pipeline (incremental fetch + calculations + HTML build)
+python3 scripts/update_pipeline.py
+
+# Recompute metrics and rebuild HTML applications from existing local data
+python3 scripts/update_pipeline.py --skip-fetch
+
+# Force a full 180-day re-fetch
+python3 scripts/update_pipeline.py --full-fetch
+```
+
+---
+
 ## Key Analytical Findings: Ward & SMD Level
 
 The primary application integrates two complementary evaluation windows:
 1. **Interactive Map Explorer (Top Canvas)**: Evaluates recent operations over the **past 30 days** (3,301 service requests).
-2. **Municipal Performance Report & Charts (Bottom Section)**: Evaluates long-term operational trends over the **past 180 days** (March 24 – September 20, 2026 • 8,823 service requests).
+2. **Municipal Performance Report & Charts (Bottom Section)**: Evaluates long-term operational trends over the **past 180 days** (March 24 – September 20, 2026 • 8,825 service requests).
 
 ### 1. Address Deduplication & Repeat Incident Analysis
 Evaluating raw ticket volumes alone can obscure whether collection failures represent broad neighborhood bypasses or chronic issues at isolated properties. Deduplicating records reveals:
-- **Total Requests (180 Days)**: 8,823 service requests.
+- **Total Requests (180 Days)**: 8,825 service requests.
 - **Unique Complaining Properties**: **5,974 distinct physical addresses** (average of **1.48 requests per complaining address**).
 - **Single-Incident Properties**: **4,570 addresses (76.5%)** filed only once during the 6 months, representing isolated one-time collection delays.
 - **Multi-Day Repeat Properties**: **1,404 addresses (23.5%)** submitted service requests across **two or more distinct collection days**. Because DPW routinely closes 311 tickets following route completion, re-filings across different days indicate that **previous ticket resolutions failed to permanently fix the underlying collection obstacle**.
@@ -79,10 +102,10 @@ In certain dense historic rowhouse districts, over 45% to 58% of all complaining
 
 While SMD and Ward boundaries represent political representation, DPW trucks operate along designated operational route corridors. Evaluating collection data at the route level matches municipal operations directly to truck dispatch boundaries, isolating structural logistics challenges from political boundaries.
 
-Across the 180-day evaluation window (March 24 – September 20, 2026), spatial join algorithms matched **8,751 out of 8,823 service requests (99.2%)** directly to official DPW route polygons:
+Across the 180-day evaluation window (March 24 – September 20, 2026), spatial join algorithms matched **8,751 out of 8,825 service requests (99.2%)** directly to official DPW route polygons:
 - **Trash Routes**: 6,197 requests matched across **103 distinct DPW Trash Routes**.
 - **Recycling Routes**: 2,554 requests matched across **120 distinct DPW Recycling Routes**.
-- *72 requests (0.8%) fell in commercial, industrial, or federal jurisdictions outside residential DPW collection boundaries.*
+- *74 requests (0.8%) fell in commercial, industrial, or federal jurisdictions outside residential DPW collection boundaries.*
 
 Every route is mapped to its underlying physical DC neighborhoods, Wards, and Advisory Neighborhood Commissions (ANCs) using spatial intersection against official DC GIS boundary layers.
 
@@ -162,13 +185,16 @@ Inner City routes receive twice-weekly collection (`Tuesday/Friday` or `Monday/T
 
 ```
 dc-missed-collection-analysis/
+├── .github/
+│   └── workflows/
+│       └── update_data.yml             # Weekly scheduled & on-demand GitHub Actions workflow
 ├── index.html                         # Primary standalone application (Ward & SMD Leaflet Map + Performance Report)
 ├── routes.html                        # Standalone DPW route-level performance report & interactive matrix
 ├── dc_missed_collection_map.html        # Mirror file for local path compatibility
 ├── README.md                          # Comprehensive analytical report and documentation
 ├── .gitignore                         # Standard version control ignore rules
 ├── data/                              # Aggregated datasets and geospatial boundaries
-│   ├── dc_180d_service_requests.json   # Full 180-day 311 missed collection records (8,823 requests)
+│   ├── dc_180d_service_requests.json   # Rolling 180-day 311 missed collection records
 │   ├── route_180d_stats.json           # Precomputed DPW route-level performance and repeat metrics
 │   ├── route_areas.json                # Precomputed spatial intersections mapping routes to neighborhoods & ANCs
 │   ├── smd_180d_address_stats.json     # 180-day SMD address-level deduplication metrics
@@ -180,7 +206,9 @@ dc-missed-collection-analysis/
 │   ├── dc_trash_routes.geojson        # 140 DPW trash collection routes
 │   └── dc_recycle_routes.geojson      # 173 DPW recycling collection routes
 └── scripts/                           # Reproducible data retrieval and analysis pipelines
-    ├── fetch_311_data.py              # Queries DC GIS FeatureServer 13 for 311 tickets
+    ├── update_pipeline.py             # Master pipeline orchestrator (fetch -> calculate -> compile)
+    ├── fetch_311_data.py              # Incremental query to DC GIS FeatureServer 13 with retry logic
+    ├── update_map_data.py             # Computes 30-day SMD & Ward metrics for interactive map
     ├── analyze_repeat_addresses.py    # Computes address deduplication and repeat metrics for SMDs
     ├── compute_route_areas.py         # Performs spatial intersection to map routes to neighborhoods/ANCs
     ├── generate_route_report.py       # Aggregates DPW route statistics and builds routes.html
