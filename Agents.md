@@ -1,0 +1,67 @@
+# Repository Standards & Agent Instructions
+
+This document codifies development standards, operational conventions, and architectural guidelines for automated agents and developers contributing to `dc-missed-collection-analysis`.
+
+---
+
+## 1. Strict No-Emoji Standard
+
+- **No Emojis Anywhere**: Absolutely no emojis may be used anywhere in the codebase or application.
+  - No emojis in HTML markup, navigation bars, buttons, page titles, section headings, or tooltips.
+  - No emojis in Chart.js legends, axis titles, or tooltips.
+  - No emojis in Python script strings, log outputs, or error messages.
+  - No emojis in documentation (`README.md`, `Agents.md`, markdown artifacts), commit messages, or PR descriptions.
+- **Iconography**: Use clean, semantic text labels, standard typography, or inline SVG icons when visual indicators are needed.
+
+---
+
+## 2. Vendored Third-Party Dependencies
+
+- **Local Storage (`assets/vendor/`)**: To ensure complete offline capability and prevent runtime external CDN failures or tracking dependencies, all client-side JavaScript and CSS libraries must be stored locally in `assets/vendor/`.
+- **Footprint Budget**: Total vendored script and style payload must remain strictly below 5 MB.
+- **Current Vendored Libraries**:
+  - `Leaflet` (v1.9.4): Mapping engine (`assets/vendor/leaflet/`)
+  - `Chart.js` (v4.4.1): Charting library (`assets/vendor/chartjs/`)
+  - `jsPDF` (v2.5.1): Client-side PDF generation (`assets/vendor/jspdf/`)
+  - `html2canvas` (v1.4.1): Canvas capture for static exports (`assets/vendor/html2canvas/`)
+  - `jsPDF-AutoTable` (v3.8.2): Table formatting for PDF exports (`assets/vendor/jspdf-autotable/`)
+- **Maintenance**: Automated agents or maintainers updating these libraries in future revisions must verify compatibility, test offline loading, and record version bumps in this document.
+
+---
+
+## 3. American Paper Standards (US Letter)
+
+- **US Letter Only**: All exportable reports, printable views, and generated PDFs must conform to standard American paper dimensions:
+  - **US Letter**: 8.5 in x 11.0 in (215.9 mm x 279.4 mm).
+  - Do NOT use international A4 (8.27 in x 11.69 in).
+- **Print CSS**: `@media print` stylesheets must explicitly specify `@page { size: letter portrait; margin: 0.5in; }` or `letter landscape`.
+
+---
+
+## 4. Map & Tile Asset Management
+
+- **Local Basemap Tiles (`tiles/{z}/{x}/{y}.png`)**:
+  - Basemap tiles are Stamen Toner, hosted on Stadia Maps, downloaded and stored locally.
+  - Tiles are strictly subsetted to the District of Columbia boundary polygon for Zooms 11 through 15.
+  - Maryland and Virginia outer bounding box tiles are excluded to minimize repository footprint.
+  - Total tile payload across Zooms 11–15 must remain under 10 MB.
+- **Census TIGERweb Fallback**:
+  - A commented-out configuration block for U.S. Census Bureau TIGERweb transportation and hydrography tile layers must be preserved in `map.html` and `scripts/build_page.py` for contingency use.
+
+---
+
+## 5. Application Architecture
+
+The repository serves three dedicated applications without backward-compatibility bloat:
+1. `index.html`: Central portal and executive hub displaying citywide KPIs and directing users to the map and operational report.
+2. `map.html`: Dedicated, full-viewport interactive map explorer with cascading Ward/ANC/SMD filters and contextual SMD export.
+3. `report.html`: Dedicated operational report with hierarchical Ward, ANC, and SMD sections plus DPW route performance analysis and searchable matrix.
+
+Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are deprecated and deleted.
+
+---
+
+## 6. Data Pipeline & Zero External Infrastructure
+
+- All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
+- Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.

@@ -6,10 +6,11 @@ This resource provides public, aggregated municipal performance insights across 
 
 ---
 
-## Live Applications
+## Applications
 
-- **Ward & SMD Analysis ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Interactive Census TIGER basemap with cascading Ward/ANC/SMD selectors, street-level labeling, 30-day spatial hot spots, and 180-day district deduplication metrics. Hovering over Single Member Districts or DPW routes displays route IDs, collection days, and physical neighborhood coverage.
-- **DPW Route-Level Report ([`routes.html`](https://zacheadams.github.io/dc-missed-collection-analysis/routes.html))**: Dedicated operational route analysis evaluating 103 Trash Routes and 120 Recycling Routes, featuring Chart.js visual breakdowns, schedule bottleneck comparisons, and a searchable 223-route performance matrix identifying neighborhoods and ANCs.
+- **Project Hub ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Central portal displaying 180-day executive performance metrics, project methodology, and entry points to the interactive map and operational report.
+- **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 15), cascading Ward/ANC/SMD filters, DPW collection route overlays, and contextual US Letter (8.5" x 11") PDF and PNG map exports.
+- **Unified Operational Report ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))**: Consolidated municipal performance report featuring hierarchical Ward, ANC, and SMD deduplication benchmarks, collection day fleet bottleneck analysis, Chart.js visualizations with PNG/PDF exports, and a searchable 223-route performance matrix with CSV/PDF exports.
 
 ### Viewing Locally
 ```bash
@@ -17,11 +18,14 @@ This resource provides public, aggregated municipal performance insights across 
 git clone https://github.com/zacheadams/dc-missed-collection-analysis.git
 cd dc-missed-collection-analysis
 
-# Open the primary map application
+# Open the project hub
 open index.html
 
-# Open the DPW route-level report
-open routes.html
+# Open the dedicated interactive map
+open map.html
+
+# Open the unified operational report
+open report.html
 ```
 
 ---
@@ -98,7 +102,7 @@ In certain dense historic rowhouse districts, over 45% to 58% of all complaining
 
 ---
 
-## DPW Route-Level Analysis ([`routes.html`](https://zacheadams.github.io/dc-missed-collection-analysis/routes.html))
+## DPW Route-Level Analysis ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))
 
 While SMD and Ward boundaries represent political representation, DPW trucks operate along designated operational route corridors. Evaluating collection data at the route level matches municipal operations directly to truck dispatch boundaries, isolating structural logistics challenges from political boundaries.
 
@@ -188,11 +192,20 @@ dc-missed-collection-analysis/
 ├── .github/
 │   └── workflows/
 │       └── update_data.yml             # Weekly scheduled & on-demand GitHub Actions workflow
-├── index.html                         # Primary standalone application (Ward & SMD Leaflet Map + Performance Report)
-├── routes.html                        # Standalone DPW route-level performance report & interactive matrix
-├── dc_missed_collection_map.html        # Mirror file for local path compatibility
+├── Agents.md                          # Repository engineering standards and agent instructions
+├── index.html                         # Central project hub and summary portal
+├── map.html                           # Dedicated interactive map explorer (Stamen Toner)
+├── report.html                        # Unified operational report & 223-route performance matrix
 ├── README.md                          # Comprehensive analytical report and documentation
 ├── .gitignore                         # Standard version control ignore rules
+├── assets/
+│   └── vendor/                        # Offline third-party client libraries (sub-5MB)
+│       ├── leaflet/                   # Leaflet 1.9.4 engine and styles
+│       ├── chartjs/                   # Chart.js 4.4.1
+│       ├── jspdf/                     # jsPDF 2.5.1
+│       ├── html2canvas/               # html2canvas 1.4.1
+│       └── jspdf-autotable/           # jsPDF-AutoTable 3.8.2
+├── tiles/                             # Offline Stamen Toner tiles for DC (zooms 11 to 15)
 ├── data/                              # Aggregated datasets and geospatial boundaries
 │   ├── dc_180d_service_requests.json   # Rolling 180-day 311 missed collection records
 │   ├── route_180d_stats.json           # Precomputed DPW route-level performance and repeat metrics
@@ -210,9 +223,13 @@ dc-missed-collection-analysis/
     ├── fetch_311_data.py              # Incremental query to DC GIS FeatureServer 13 with retry logic
     ├── update_map_data.py             # Computes 30-day SMD & Ward metrics for interactive map
     ├── analyze_repeat_addresses.py    # Computes address deduplication and repeat metrics for SMDs
+    ├── compute_route_stats.py         # Performs spatial ray-casting to compute DPW route metrics
     ├── compute_route_areas.py         # Performs spatial intersection to map routes to neighborhoods/ANCs
-    ├── generate_route_report.py       # Aggregates DPW route statistics and builds routes.html
-    └── build_page.py                  # Compiles complete standalone HTML application
+    ├── download_toner_tiles.py        # Subsets and downloads Stamen Toner tiles for DC
+    ├── download_vendor_assets.py      # Downloads client-side libraries into assets/vendor/
+    ├── build_index_page.py            # Compiles index.html (Central Project Hub)
+    ├── build_page.py                  # Compiles map.html (Dedicated Interactive Map)
+    └── build_report_page.py           # Compiles report.html (Unified Operational Report)
 ```
 
 ---
@@ -222,7 +239,7 @@ dc-missed-collection-analysis/
 - **311 Service Requests**: [Open Data DC](https://opendata.dc.gov/) • DC Department of Public Works (DPW) Service Requests FeatureServer (`S0441`: Missed Trash, `S0321`: Missed Recycling).
 - **Geographic Boundaries**: [DC Office of Planning / DC GIS](https://opendata.dc.gov/) • 2023 Single Member District (SMD), Ward, and Neighborhood Cluster Boundaries.
 - **DPW Collection Routes**: [Open Data DC](https://opendata.dc.gov/) • Department of Public Works Trash and Recycling Routes.
-- **Basemap Imagery**: [U.S. Census Bureau TIGERweb](https://tigerweb.geo.census.gov/) • Transportation and Hydrography Tile Services.
+- **Basemap Cartography**: Stamen Toner by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL (hosted on Stadia Maps). Backup support for U.S. Census Bureau TIGERweb.
 
 ---
 

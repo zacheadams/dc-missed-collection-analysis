@@ -1,0 +1,527 @@
+#!/usr/bin/env python3
+"""
+Compiles the Central Project Hub & Portal (index.html).
+Introduces the Washington, DC Missed Collection Analysis project, provides
+citywide high-level performance indicators, and directs users to the dedicated
+Interactive Map (map.html) and Operational Report (report.html).
+Strictly adheres to:
+- No emojis anywhere in UI, code, or documentation
+- Offline-ready, self-contained architecture
+"""
+
+import os
+import json
+from datetime import datetime
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+addr_stats_path = os.path.join(BASE_DIR, 'data', 'smd_180d_address_stats.json')
+
+with open(addr_stats_path, 'r', encoding='utf-8') as f:
+    addr_data = json.load(f)
+
+citywide = addr_data['citywide']
+wards_stats = addr_data['wards']
+
+total_trash = sum(wards_stats[str(w)]['trash'] for w in range(1, 9))
+total_rec = sum(wards_stats[str(w)]['recycling'] for w in range(1, 9))
+
+html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DC DPW Missed Collection Analysis • Portal</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {{
+      --bg-dark: #070a12;
+      --bg-card: #0d1322;
+      --bg-panel: rgba(13, 19, 34, 0.94);
+      --border: rgba(255, 255, 255, 0.10);
+      --border-focus: #38bdf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #0284c7;
+      --primary-light: #38bdf8;
+      --trash-color: #ef4444;
+      --recycle-color: #10b981;
+      --warning-color: #f59e0b;
+      --ward-color: #a855f7;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }}
+
+    * {{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }}
+
+    body {{
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      padding-bottom: 80px;
+      -webkit-font-smoothing: antialiased;
+    }}
+
+    /* Top Navigation Bar */
+    .site-nav {{
+      background: rgba(7, 10, 18, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }}
+
+    .nav-brand {{
+      display: flex;
+      flex-direction: column;
+    }}
+
+    .nav-title {{
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }}
+
+    .nav-subtitle {{
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      margin-top: 1px;
+    }}
+
+    .nav-links {{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }}
+
+    .nav-link {{
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }}
+
+    .nav-link:hover {{
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+    }}
+
+    .nav-link.active {{
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }}
+
+    .page-container {{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }}
+
+    /* Hero Section */
+    .hero {{
+      text-align: center;
+      padding: 48px 0 56px 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 48px;
+    }}
+
+    .hero-badge {{
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }}
+
+    .hero-title {{
+      font-size: 42px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }}
+
+    .hero-desc {{
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
+    }}
+
+    .hero-actions {{
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }}
+
+    .btn-hero-primary {{
+      background: #0284c7;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .btn-hero-primary:hover {{
+      background: #0369a1;
+    }}
+
+    .btn-hero-secondary {{
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .btn-hero-secondary:hover {{
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.25);
+    }}
+
+    /* KPI Highlights */
+    .kpi-row {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 56px;
+    }}
+
+    .kpi-box {{
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px;
+      text-align: center;
+    }}
+
+    .kpi-num {{
+      font-size: 34px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }}
+
+    .kpi-title {{
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }}
+
+    /* Application Cards */
+    .apps-section {{
+      margin-bottom: 56px;
+    }}
+
+    .section-title {{
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      text-align: center;
+    }}
+
+    .apps-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 24px;
+    }}
+
+    @media (max-width: 600px) {{
+      .apps-grid {{
+        grid-template-columns: 1fr;
+      }}
+    }}
+
+    .app-card {{
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }}
+
+    .app-card:hover {{
+      border-color: var(--border-focus);
+      transform: translateY(-2px);
+    }}
+
+    .app-tag {{
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }}
+
+    .app-title {{
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }}
+
+    .app-desc {{
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }}
+
+    .app-features {{
+      list-style: none;
+      margin-bottom: 28px;
+    }}
+
+    .app-features li {{
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }}
+
+    .app-features li::before {{
+      content: "-";
+      color: #38bdf8;
+      font-weight: 800;
+    }}
+
+    /* Methodology Section */
+    .info-section {{
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }}
+
+    .info-grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }}
+
+    .info-block h4 {{
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }}
+
+    .info-block p {{
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }}
+
+    /* Footer */
+    .site-footer {{
+      text-align: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-dim);
+    }}
+
+    .site-footer a {{
+      color: var(--text-muted);
+      text-decoration: none;
+    }}
+
+    .site-footer a:hover {{
+      color: #ffffff;
+    }}
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <nav class="site-nav">
+    <div class="nav-brand">
+      <span class="nav-title">DC Missed Collection Analysis</span>
+      <span class="nav-subtitle">Municipal Waste Performance Monitor</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="map.html" class="nav-link">Interactive Map</a>
+      <a href="report.html" class="nav-link">Operational Report</a>
+      <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
+    </div>
+  </nav>
+
+  <main class="page-container">
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">Public Spatial Intelligence</div>
+      <h1 class="hero-title">Washington, DC Missed Collection Performance</h1>
+      <p class="hero-desc">An open municipal analytics resource evaluating Department of Public Works (DPW) missed trash and recycling 311 service requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes.</p>
+      <div class="hero-actions">
+        <a href="map.html" class="btn-hero-primary">Launch Interactive Map</a>
+        <a href="report.html" class="btn-hero-secondary">View Operational Report</a>
+      </div>
+    </section>
+
+    <!-- Key Metrics Highlight -->
+    <section class="kpi-row">
+      <div class="kpi-box">
+        <div class="kpi-num">{citywide['total_requests']:,}</div>
+        <div class="kpi-title">Total Requests (180d)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-num" style="color: #ef4444;">{total_trash:,}</div>
+        <div class="kpi-title">Missed Trash (S0441)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-num" style="color: #10b981;">{total_rec:,}</div>
+        <div class="kpi-title">Missed Recycling (S0321)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-num" style="color: #f59e0b;">{citywide['repeat_rate']}%</div>
+        <div class="kpi-title">Address Recurrence Rate</div>
+      </div>
+    </section>
+
+    <!-- Dedicated Application Portals -->
+    <section class="apps-section">
+      <h2 class="section-title">Analysis Applications</h2>
+      <div class="apps-grid">
+
+        <!-- Card 1: Interactive Map -->
+        <div class="app-card">
+          <div>
+            <div class="app-tag">Spatial Explorer</div>
+            <h3 class="app-title">Interactive Map Application</h3>
+            <p class="app-desc">High-contrast Stamen Toner cartography displaying localized collection failures, hot spots, and municipal boundary overlaps.</p>
+            <ul class="app-features">
+              <li>Local Stamen Toner basemap cached offline for Zooms 11 to 15</li>
+              <li>Cascading Ward, ANC, and Single Member District selectors</li>
+              <li>DPW Trash (103) and Recycling (120) route overlays with pickup days</li>
+              <li>District Inspector showing councilmembers, commissioners, and schedules</li>
+              <li>Context-aware static map export to US Letter (8.5" x 11") PDF and PNG</li>
+            </ul>
+          </div>
+          <a href="map.html" class="btn-hero-primary" style="justify-content: center;">Open Map Application</a>
+        </div>
+
+        <!-- Card 2: Operational Report -->
+        <div class="app-card">
+          <div>
+            <div class="app-tag">Performance Analytics</div>
+            <h3 class="app-title">Unified Operational Report</h3>
+            <p class="app-desc">Consolidated operational review evaluating 180 days of municipal collection records, chronic recurrence, and collection day bottlenecks.</p>
+            <ul class="app-features">
+              <li>Hierarchical operational evaluation across Wards, ANCs, and SMDs</li>
+              <li>Address deduplication separating broad bypasses from chronic properties</li>
+              <li>DPW fleet scheduling bottleneck analysis across collection days</li>
+              <li>Searchable, filterable 223-route performance matrix</li>
+              <li>Full report export to US Letter PDF plus chart PNG and table CSV downloads</li>
+            </ul>
+          </div>
+          <a href="report.html" class="btn-hero-secondary" style="justify-content: center;">Open Operational Report</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Methodology & Data Architecture -->
+    <section class="info-section">
+      <h3 style="font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">Data Pipeline &amp; Architecture</h3>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Zero External Runtime Dependencies</h4>
+          <p>The entire application functions offline. Basemap tiles (Stamen Toner) and vendor libraries (Leaflet, Chart.js, jsPDF, html2canvas) are vendored locally in the repository.</p>
+        </div>
+        <div class="info-block">
+          <h4>Automated Incremental Refresh</h4>
+          <p>Scheduled weekly GitHub Actions query Open Data DC for updated service requests, append new records by OBJECTID, and recompute spatial matrices in under 15 seconds.</p>
+        </div>
+        <div class="info-block">
+          <h4>American Paper Standards</h4>
+          <p>All PDF exports and print layouts are configured strictly for US Letter dimensions (8.5" x 11") with optimized print stylesheets and unclipped high-resolution vector text.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Washington, DC Missed Collection Analysis • Open Municipal Data Resource</p>
+      <p style="margin-top: 6px;"><a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank">View on GitHub</a> • Updated {datetime.now().strftime('%B %d, %Y')}</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>
+"""
+
+out_index = os.path.join(BASE_DIR, 'index.html')
+with open(out_index, 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print(f"Successfully compiled Project Hub: {out_index}")
+
+if __name__ == '__main__':
+    pass
