@@ -66,16 +66,26 @@ This document codifies development standards, operational conventions, and archi
 
 ---
 
-## 5. American Paper Standards (US Letter)
+## 5. Paper Standards & Clean UI
 
-- **US Letter Only**: All exportable reports, printable views, and generated PDFs must conform to standard American paper dimensions:
+- **US Letter Under the Hood**: All exportable reports, printable views, and generated PDFs must conform strictly to standard American paper dimensions:
   - **US Letter**: 8.5 in x 11.0 in (215.9 mm x 279.4 mm).
   - Do NOT use international A4 (8.27 in x 11.69 in).
-- **Print CSS**: `@media print` stylesheets must explicitly specify `@page { size: letter portrait; margin: 0.5in; }` or `letter landscape`.
+  - `@media print` stylesheets must explicitly specify `@page { size: letter portrait; margin: 0.5in; }` or `letter landscape`.
+- **Silent Defaults (No UI Sizing Mentions)**:
+  - Do not clutter user-facing UI elements, button labels, badges, or headers with paper size mentions (e.g., use "Print Report" rather than "Print (US Letter)"). US Letter is the default standard and operates silently.
 
 ---
 
-## 6. Application Architecture
+## 6. Target Audience & Operational Grounding
+
+- **Primary Audience**: DC Department of Public Works (DPW), specifically the Solid Waste Management Administration (SWMA), route supervisors, and data analytics teams.
+- **Operational Proof of Concept**: The application acts as a technical proof-of-concept for route optimization and recurrence tracking, ready for manual review and operational extension.
+- **Oversight Grounding**: Analysis integrates DPW's official definition of chronic misses (4 misses in 5 consecutive weeks), route workload balancing (Phase 2 Route Re-Optimization), alley obstruction factors, and the active Office of the District of Columbia Auditor (ODCA) timeliness audit.
+
+---
+
+## 7. Application Architecture
 
 The repository serves three dedicated applications without backward-compatibility bloat:
 1. `index.html`: Central portal and executive hub displaying citywide KPIs and directing users to the map and operational report.
@@ -86,7 +96,7 @@ Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are d
 
 ---
 
-## 7. Data Pipeline & Zero External Infrastructure
+## 8. Data Pipeline & Zero External Infrastructure
 
 - All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
 - Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.

@@ -214,6 +214,15 @@
       margin-right: auto;
     }
 
+    .hero-subhed {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: -6px;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
     .hero-desc {
       font-size: 13px;
       color: var(--text-muted);
@@ -417,6 +426,11 @@
       line-height: 1.6;
     }
 
+    .info-block p a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
     /* Footer */
     .site-footer {
       text-align: center;
@@ -442,7 +456,7 @@
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">Municipal Waste Performance Monitor</span>
+      <span class="nav-subtitle">Operational Analysis • Solid Waste Management</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link active">Home</a>
@@ -457,9 +471,10 @@
 
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-badge">Public Spatial Intelligence</div>
-      <h1 class="hero-title">Washington, DC Missed Collection Performance</h1>
-      <p class="hero-desc">An open municipal analytics resource evaluating Department of Public Works (DPW) missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> 311 service requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes.</p>
+      <div class="hero-badge">Operational Proof of Concept</div>
+      <h1 class="hero-title">Missed Collections</h1>
+      <div class="hero-subhed">Where—and why—are trash and recycling pickups missed in DC?</div>
+      <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW) Solid Waste Management Administration (SWMA), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
       <div class="hero-actions">
         <a href="map.html" class="btn-hero-primary">Launch Interactive Map</a>
         <a href="report.html" class="btn-hero-secondary">View Operational Report</a>
@@ -503,7 +518,7 @@
               <li>Single-hue relative intensity color ramps for Trash (Red), Recycling (Green), and Combined (Blue)</li>
               <li>Cascading Ward, ANC, and Single Member District selectors with permanent Ward boundaries</li>
               <li>DPW Trash (103) and Recycling (120) route overlays with pickup days</li>
-              <li>Context-aware static map export to US Letter (8.5" x 11") PDF and PNG</li>
+              <li>Context-aware static map export to PDF and PNG</li>
             </ul>
           </div>
           <a href="map.html" class="btn-hero-primary" style="justify-content: center;">Open Map Application</a>
@@ -520,7 +535,7 @@
               <li>Address deduplication separating broad bypasses from chronic properties</li>
               <li>DPW fleet scheduling bottleneck analysis across collection days</li>
               <li>Searchable, filterable 223-route performance matrix</li>
-              <li>Full report export to US Letter PDF plus chart PNG and table CSV downloads</li>
+              <li>Full report print and export, plus chart PNG and table CSV downloads</li>
             </ul>
           </div>
           <a href="report.html" class="btn-hero-secondary" style="justify-content: center;">Open Operational Report</a>
@@ -531,7 +546,7 @@
 
     <!-- Methodology & Data Architecture -->
     <section class="info-section">
-      <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">Data Pipeline &amp; Architecture</h3>
+      <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">Data Pipeline &amp; Operational Context</h3>
       <div class="info-grid">
         <div class="info-block">
           <h4>Zero External Runtime Dependencies</h4>
@@ -542,8 +557,12 @@
           <p>Scheduled weekly GitHub Actions query Open Data DC for updated service requests, append new records by OBJECTID, and recompute spatial matrices in under 15 seconds.</p>
         </div>
         <div class="info-block">
-          <h4>American Paper Standards</h4>
-          <p>All PDF exports and print layouts are configured strictly for US Letter dimensions (8.5" x 11") with optimized print stylesheets and unclipped high-resolution vector text.</p>
+          <h4>Print &amp; Export Ready</h4>
+          <p>All PDF exports and printable layouts feature optimized stylesheets, clean vector typography, and multi-page table formatting.</p>
+        </div>
+        <div class="info-block">
+          <h4>Performance Oversight Context</h4>
+          <p>Grounded in the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a>, DPW's <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Responses</a>, and the active ODCA timeliness audit.</p>
         </div>
       </div>
     </section>

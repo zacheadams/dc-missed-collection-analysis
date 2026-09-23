@@ -10,7 +10,7 @@ Features:
 - Renamed '311 Requests' layer and streamlined controls
 - Primary monospace font (JetBrains Mono)
 - Strictly zero emojis across UI and code
-- American US Letter (8.5" x 11") PDF and PNG map exports
+- Context-aware PDF and PNG map exports
 """
 
 import os
@@ -644,7 +644,7 @@ html_page = f'''<!DOCTYPE html>
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">Interactive Map • Stamen Toner</span>
+      <span class="nav-subtitle">Spatial Intelligence • Solid Waste Management</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -1625,7 +1625,7 @@ html_page = f'''<!DOCTYPE html>
       else map.removeLayer(recycleRoutesLayer);
     }}
 
-    // Static Contextual Exports (US Letter: 8.5in x 11in)
+    // Static Contextual Exports
     function getExportMetadata() {{
       const periodLabel = currentPeriod === '30d' ? '30-Day' : '180-Day';
       const streamLabel = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
@@ -1697,7 +1697,7 @@ html_page = f'''<!DOCTYPE html>
       doc.setFontSize(9);
       doc.setTextColor(100, 116, 139);
       doc.text(meta.metrics, 0.5, 1.02);
-      doc.text(`Generated: ${{new Date().toLocaleDateString()}} • Stamen Toner Basemap (US Letter)`, 10.5, 1.02, {{ align: 'right' }});
+      doc.text(`Generated: ${{new Date().toLocaleDateString()}} • Stamen Toner Basemap`, 10.5, 1.02, {{ align: 'right' }});
 
       doc.addImage(imgData, 'PNG', 0.5, 1.15, 10.0, 6.75);
       doc.save(`${{meta.filename}}.pdf`);
