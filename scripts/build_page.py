@@ -252,7 +252,7 @@ html_page = f'''<!DOCTYPE html>
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 14px;
       z-index: 500;
       box-shadow: var(--card-shadow);
@@ -281,7 +281,7 @@ html_page = f'''<!DOCTYPE html>
       color: var(--text-main);
       border: 1px solid var(--badge-border);
       padding: 2px 6px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 10px;
       font-weight: 700;
     }}
@@ -467,7 +467,7 @@ html_page = f'''<!DOCTYPE html>
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 6px 12px;
       z-index: 500;
       display: flex;
@@ -504,7 +504,7 @@ html_page = f'''<!DOCTYPE html>
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 14px;
       z-index: 500;
       box-shadow: var(--card-shadow);
@@ -542,7 +542,7 @@ html_page = f'''<!DOCTYPE html>
     .stat-tile {{
       background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 4px;
+      border-radius: 2px;
       padding: 6px 8px;
     }}
 
@@ -579,7 +579,7 @@ html_page = f'''<!DOCTYPE html>
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 8px 12px;
       z-index: 500;
       font-size: 10px;
@@ -621,7 +621,7 @@ html_page = f'''<!DOCTYPE html>
       background: var(--bg-panel) !important;
       border: 1px solid var(--border-dark) !important;
       color: var(--text-main) !important;
-      border-radius: 4px !important;
+      border-radius: 2px !important;
       padding: 6px 10px !important;
       font-family: var(--font-mono) !important;
       box-shadow: var(--card-shadow) !important;
@@ -671,7 +671,7 @@ html_page = f'''<!DOCTYPE html>
         right: 8px;
         width: auto;
         padding: 10px 12px;
-        border-radius: 8px;
+        border-radius: 2px;
         max-height: calc(100vh - 160px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -699,7 +699,7 @@ html_page = f'''<!DOCTYPE html>
         left: 0;
         right: 0;
         width: 100%;
-        border-radius: 14px 14px 0 0;
+        border-radius: 2px 2px 0 0;
         padding: 10px 14px 16px 14px;
         box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
         max-height: 48vh;
@@ -1368,15 +1368,21 @@ html_page = f'''<!DOCTYPE html>
     function ensureSvgPatterns() {{
       const template = document.getElementById('route-hatch-defs-svg');
       if (!template) return;
-      const defsMarkup = template.querySelector('defs').innerHTML;
+      const defsTemplate = template.querySelector('defs');
+      if (!defsTemplate) return;
       document.querySelectorAll('#map svg').forEach(svg => {{
         if (!svg.querySelector('#hatch-trash')) {{
           let defs = svg.querySelector('defs');
           if (!defs) {{
-            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            defs = defsTemplate.cloneNode(true);
             svg.insertBefore(defs, svg.firstChild);
+          }} else {{
+            Array.from(defsTemplate.children).forEach(child => {{
+              if (!defs.querySelector('#' + child.id)) {{
+                defs.appendChild(child.cloneNode(true));
+              }}
+            }});
           }}
-          defs.innerHTML += defsMarkup;
         }}
       }});
     }}
