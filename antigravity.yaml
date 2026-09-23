@@ -1,0 +1,31 @@
+# Antigravity Automation Configuration
+# Project: Washington, DC Missed Collection Analysis (DPW)
+# Repository Standards: Agents.md
+
+version: "1"
+
+# Execution mode: Serverless via native GitHub Actions workflow (.github/workflows/antigravity.yml)
+execution:
+  mode: serverless
+  environment: github_actions
+
+# Trigger events: automated execution on issue creation and issue comments
+trigger:
+  - issue: open
+  - issue_comment: created
+
+triggers:
+  - issue:
+      types:
+        - opened
+  - issue_comment:
+      types:
+        - created
+
+# Agent configuration: issue comment approval workflow and plan comments
+agent:
+  approval_mode: issue_comment
+  plan_action: comment
+  sync_agent_state_with_issue_comments: false  # Serverless push via GitHub Actions; local polling deactivated
+  rules:
+    - "When an issue is picked up, analyze the requirements, draft an implementation plan, and post it as a comment on that specific GitHub issue. Then, pause execution and wait for a reply."

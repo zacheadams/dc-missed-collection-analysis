@@ -115,3 +115,10 @@ Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are d
 
 - All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
 - Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.
+
+---
+
+## 10. Automated Issue Triage & Planning Protocol
+
+- **Issue Pickup Rule**: When an issue is picked up, analyze the requirements, draft an implementation plan, and post it as a comment on that specific GitHub issue. Then, pause execution and wait for a reply.
+- **Approval Gate**: Do not begin code implementation until an explicit approval comment is posted on the issue thread.
