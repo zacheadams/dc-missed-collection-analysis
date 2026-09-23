@@ -725,7 +725,7 @@ html_content = f"""<!DOCTYPE html>
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">Missed Collections</span>
-      <span class="nav-subtitle">Where—and why—are trash and recycling pickups missed in DC?</span>
+      <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -804,12 +804,12 @@ html_content = f"""<!DOCTYPE html>
         <div class="kpi-subtext">{citywide['repeat_rate']}% Recurrence Rate (2+ Misses)</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Trash Stream (S0441)</div>
+        <div class="kpi-label"><span class="kw-trash">Trash</span> Stream (S0441)</div>
         <div class="kpi-value kw-trash">{sum(wards_stats[str(w)]['trash'] for w in range(1, 9)):,}</div>
         <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['trash'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Recycling Stream (S0321)</div>
+        <div class="kpi-label"><span class="kw-recycle">Recycling</span> Stream (S0321)</div>
         <div class="kpi-value kw-recycle">{sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)):,}</div>
         <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
       </div>

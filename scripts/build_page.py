@@ -791,7 +791,7 @@ html_page = f'''<!DOCTYPE html>
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">Missed Collections</span>
-      <span class="nav-subtitle">Where—and why—are trash and recycling pickups missed in DC?</span>
+      <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -900,8 +900,8 @@ html_page = f'''<!DOCTYPE html>
 
         <div class="metric-toggle-group">
           <button class="metric-btn active" id="btn-total" onclick="setMetric('total')">All 311</button>
-          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')">Trash Only</button>
-          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')">Recycling Only</button>
+          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span> Only</button>
+          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span> Only</button>
         </div>
 
         <div class="layer-controls">
@@ -910,11 +910,11 @@ html_page = f'''<!DOCTYPE html>
             <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW <span class="kw-trash">Trash</span> Routes</span>
             <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW <span class="kw-recycle">Recycling</span> Routes</span>
             <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
           </label>
         </div>
@@ -947,11 +947,11 @@ html_page = f'''<!DOCTYPE html>
             <div class="stat-tile-val" id="insp-stat-share">100%</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-lbl" id="insp-lbl-3">Trash (S0441)</div>
+            <div class="stat-tile-lbl" id="insp-lbl-3"><span class="kw-trash">Trash</span> (S0441)</div>
             <div class="stat-tile-val kw-trash" id="insp-stat-trash">0</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-lbl" id="insp-lbl-4">Recycling (S0321)</div>
+            <div class="stat-tile-lbl" id="insp-lbl-4"><span class="kw-recycle">Recycling</span> (S0321)</div>
             <div class="stat-tile-val kw-recycle" id="insp-stat-rec">0</div>
           </div>
         </div>
@@ -968,7 +968,7 @@ html_page = f'''<!DOCTYPE html>
 
     <!-- Floating Legend Panel -->
     <div class="legend-panel">
-      <div class="legend-title" id="legend-title">Combined Requests (180 Days)</div>
+      <div class="legend-title" id="legend-title"><span class="kw-combined">Combined</span> Requests (180 Days)</div>
       <div class="legend-scale" id="legend-scale">
         <!-- Scale boxes injected dynamically -->
       </div>
@@ -1576,7 +1576,7 @@ html_page = f'''<!DOCTYPE html>
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
           const tTot = tStats.total || 0;
           html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
+            <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}}</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
@@ -1590,7 +1590,7 @@ html_page = f'''<!DOCTYPE html>
           const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
           const rTot = rStats.total || 0;
           html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
+            <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}}</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
@@ -1605,7 +1605,7 @@ html_page = f'''<!DOCTYPE html>
         const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
         const tTot = tStats.total || 0;
         html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
+          <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}}</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
           <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
@@ -1619,7 +1619,7 @@ html_page = f'''<!DOCTYPE html>
         const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
         const rTot = rStats.total || 0;
         html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
+          <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}}</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
           <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
@@ -1906,9 +1906,9 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-total').innerText = stats.total.toLocaleString();
       document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = '100%';
-      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
+      document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = stats.trash.toLocaleString();
-      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
+      document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = stats.rec.toLocaleString();
       document.getElementById('insp-details').innerText = `Evaluating ${{stats.total.toLocaleString()}} 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1929,9 +1929,9 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
       document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
-      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
+      document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
-      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
+      document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1958,9 +1958,9 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
       document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
-      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
+      document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
-      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
+      document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1981,9 +1981,9 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
       document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{wardShare}}%`;
-      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
+      document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
-      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
+      document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{wardShare}}% of Ward ${{p.ward}}'s total missed collections over the ${{periodLabel.toLowerCase()}}.`;
 
@@ -2021,7 +2021,7 @@ html_page = f'''<!DOCTYPE html>
       const density = stats.density != null ? stats.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0);
       const areaSqMi = stats.area_sq_mi || p.area_sq_mi || 0;
 
-      document.getElementById('insp-title').innerText = `${{stream}} Route ${{rId}}`;
+      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}}`;
       document.getElementById('insp-sub').innerText = `Collection day: ${{sched}} • ${{ward}}`;
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
@@ -2038,7 +2038,7 @@ html_page = f'''<!DOCTYPE html>
 
       const nbhDesc = stats.neighborhoods || p.neighborhoods || 'Residential Corridor';
       const ancsDesc = stats.ancs || p.ancs || '';
-      document.getElementById('insp-details').innerText = `${{stream}} Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days.`;
+      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days.`;
 
       const rBox = document.getElementById('insp-route-box');
       rBox.innerHTML = `
@@ -2094,9 +2094,9 @@ html_page = f'''<!DOCTYPE html>
       const th = THRESHOLDS[currentPeriod][currentMetric];
       const scaleEl = document.getElementById('legend-scale');
       scaleEl.innerHTML = pal.map(c => `<div class="scale-box" style="background: ${{c}};"></div>`).join('');
-      const streamName = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
+      const streamName = currentMetric === 'total' ? '<span class="kw-combined">Combined</span>' : (currentMetric === 'trash' ? '<span class="kw-trash">Trash</span>' : '<span class="kw-recycle">Recycling</span>');
       const periodLabel = currentPeriod === '30d' ? '30 Days' : '180 Days';
-      document.getElementById('legend-title').innerText = `${{streamName}} Requests (${{periodLabel}})`;
+      document.getElementById('legend-title').innerHTML = `${{streamName}} Requests (${{periodLabel}})`;
       document.getElementById('legend-labels').innerHTML = `
         <span>0</span>
         <span>${{th[1]}}</span>
