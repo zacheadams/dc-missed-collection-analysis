@@ -626,6 +626,124 @@ html_page = f'''<!DOCTYPE html>
       font-family: var(--font-mono) !important;
       box-shadow: var(--card-shadow) !important;
     }}
+
+    /* Mobile Responsive Layout and Touch Handling */
+    .sheet-handle {{
+      display: none;
+    }}
+
+    .mobile-toggle-indicator,
+    .mobile-inspector-toggle {{
+      display: none;
+    }}
+
+    @media (max-width: 768px) {{
+      .site-nav {{
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 6px;
+      }}
+      .nav-subtitle {{
+        display: none;
+      }}
+      .nav-links {{
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        gap: 6px;
+        -webkit-overflow-scrolling: touch;
+      }}
+      .nav-link, .btn-action {{
+        font-size: 11px;
+        padding: 5px 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }}
+      .map-workspace {{
+        height: calc(100vh - 84px);
+      }}
+      .breadcrumb-bar {{
+        display: none;
+      }}
+      .control-panel {{
+        top: 8px;
+        left: 8px;
+        right: 8px;
+        width: auto;
+        padding: 10px 12px;
+        border-radius: 8px;
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }}
+      .panel-header {{
+        cursor: pointer;
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }}
+      .control-panel.is-expanded .panel-header {{
+        margin-bottom: 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border);
+      }}
+      .mobile-toggle-indicator {{
+        display: inline-block;
+        font-size: 13px;
+        color: var(--accent);
+        font-weight: 800;
+      }}
+      .inspector-panel {{
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 14px 14px 0 0;
+        padding: 10px 14px 16px 14px;
+        box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
+        max-height: 48vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: 600;
+      }}
+      .sheet-handle {{
+        display: block;
+        width: 40px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--border-dark);
+        margin: 0 auto 8px auto;
+        cursor: pointer;
+      }}
+      .inspector-header {{
+        cursor: pointer;
+      }}
+      .mobile-inspector-toggle {{
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--accent);
+      }}
+      .legend-panel {{
+        bottom: 64px;
+        left: 8px;
+        padding: 6px 10px;
+        max-width: calc(100vw - 80px);
+      }}
+      .leaflet-bottom.leaflet-right {{
+        bottom: 64px;
+        right: 8px;
+      }}
+      .hierarchy-select, .period-btn, .metric-btn, #smd-search {{
+        min-height: 38px;
+        font-size: 12px;
+      }}
+      .checkbox-row {{
+        padding: 6px 0;
+        font-size: 12px;
+      }}
+    }}
   </style>
 </head>
 <body>
@@ -696,112 +814,121 @@ html_page = f'''<!DOCTYPE html>
     </div>
 
     <!-- Floating Left Control Panel -->
-    <div class="control-panel">
-      <div class="panel-header">
-        <span class="panel-title">District Hierarchy</span>
+    <div class="control-panel" id="control-panel">
+      <div class="panel-header" onclick="toggleMobilePanel('control')">
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <span class="panel-title">District Hierarchy</span>
+          <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
+        </div>
         <span class="panel-tag" id="panel-period-tag">Past 180 Days</span>
       </div>
 
-      <!-- Analytic Period Switcher -->
-      <div class="period-section">
-        <span class="period-label">Analytic Period</span>
-        <div class="period-toggle-group">
-          <button class="period-btn active" id="btn-period-180d" onclick="setPeriod('180d')">180 Days (Default)</button>
-          <button class="period-btn" id="btn-period-30d" onclick="setPeriod('30d')">30 Days</button>
-        </div>
-      </div>
-
-      <div class="hierarchy-container">
-        <div class="hierarchy-row">
-          <span class="hierarchy-label">Ward</span>
-          <select class="hierarchy-select" id="ward-select" onchange="handleWardDropdown(this.value)">
-            <option value="all">All Wards (Citywide)</option>
-            <option value="1">Ward 1 • Brianne Nadeau</option>
-            <option value="2">Ward 2 • Brooke Pinto</option>
-            <option value="3">Ward 3 • Matthew Frumin</option>
-            <option value="4">Ward 4 • Janeese Lewis George</option>
-            <option value="5">Ward 5 • Zachary Parker</option>
-            <option value="6">Ward 6 • Charles Allen</option>
-            <option value="7">Ward 7 • Wendell Felder</option>
-            <option value="8">Ward 8 • Trayon White, Sr.</option>
-          </select>
+      <div class="panel-collapsible-body" id="ctrl-panel-body">
+        <!-- Analytic Period Switcher -->
+        <div class="period-section">
+          <span class="period-label">Analytic Period</span>
+          <div class="period-toggle-group">
+            <button class="period-btn active" id="btn-period-180d" onclick="setPeriod('180d')">180 Days (Default)</button>
+            <button class="period-btn" id="btn-period-30d" onclick="setPeriod('30d')">30 Days</button>
+          </div>
         </div>
 
-        <div class="hierarchy-row">
-          <span class="hierarchy-label">ANC</span>
-          <select class="hierarchy-select" id="anc-select" onchange="handleAncDropdown(this.value)" disabled>
-            <option value="all">— Select Ward First —</option>
-          </select>
+        <div class="hierarchy-container">
+          <div class="hierarchy-row">
+            <span class="hierarchy-label">Ward</span>
+            <select class="hierarchy-select" id="ward-select" onchange="handleWardDropdown(this.value)">
+              <option value="all">All Wards (Citywide)</option>
+              <option value="1">Ward 1 • Brianne Nadeau</option>
+              <option value="2">Ward 2 • Brooke Pinto</option>
+              <option value="3">Ward 3 • Matthew Frumin</option>
+              <option value="4">Ward 4 • Janeese Lewis George</option>
+              <option value="5">Ward 5 • Zachary Parker</option>
+              <option value="6">Ward 6 • Charles Allen</option>
+              <option value="7">Ward 7 • Wendell Felder</option>
+              <option value="8">Ward 8 • Trayon White, Sr.</option>
+            </select>
+          </div>
+
+          <div class="hierarchy-row">
+            <span class="hierarchy-label">ANC</span>
+            <select class="hierarchy-select" id="anc-select" onchange="handleAncDropdown(this.value)" disabled>
+              <option value="all">— Select Ward First —</option>
+            </select>
+          </div>
+
+          <div class="hierarchy-row">
+            <span class="hierarchy-label">SMD</span>
+            <select class="hierarchy-select" id="smd-select" onchange="handleSmdDropdown(this.value)" disabled>
+              <option value="all">— Select ANC First —</option>
+            </select>
+          </div>
         </div>
 
-        <div class="hierarchy-row">
-          <span class="hierarchy-label">SMD</span>
-          <select class="hierarchy-select" id="smd-select" onchange="handleSmdDropdown(this.value)" disabled>
-            <option value="all">— Select ANC First —</option>
-          </select>
+        <div class="search-box">
+          <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
         </div>
-      </div>
 
-      <div class="search-box">
-        <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
-      </div>
+        <div class="metric-toggle-group">
+          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')">All 311</button>
+          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')">Trash Only</button>
+          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')">Recycling Only</button>
+        </div>
 
-      <div class="metric-toggle-group">
-        <button class="metric-btn active" id="btn-total" onclick="setMetric('total')">All 311</button>
-        <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')">Trash Only</button>
-        <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')">Recycling Only</button>
-      </div>
-
-      <div class="layer-controls">
-        <label class="checkbox-row">
-          <span><span class="badge-route" style="background: var(--combined-color);"></span>311 Requests</span>
-          <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
-        </label>
-        <label class="checkbox-row">
-          <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes (103)</span>
-          <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
-        </label>
-        <label class="checkbox-row">
-          <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
-          <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
-        </label>
+        <div class="layer-controls">
+          <label class="checkbox-row">
+            <span><span class="badge-route" style="background: var(--combined-color);"></span>311 Requests</span>
+            <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
+          </label>
+          <label class="checkbox-row">
+            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes (103)</span>
+            <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
+          </label>
+          <label class="checkbox-row">
+            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
+            <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
+          </label>
+        </div>
       </div>
     </div>
 
     <!-- Floating Right Inspector Panel -->
     <div class="inspector-panel" id="inspector-panel">
-      <div class="inspector-header">
+      <div class="sheet-handle" onclick="toggleMobilePanel('inspector')"></div>
+      <div class="inspector-header" onclick="toggleMobilePanel('inspector')">
         <div>
           <div class="inspector-title" id="insp-title">District of Columbia</div>
           <div class="inspector-sub" id="insp-sub">Citywide Performance Summary</div>
         </div>
+        <div class="mobile-inspector-toggle" id="insp-toggle-icon">▴</div>
       </div>
 
-      <div class="inspector-stat-grid">
-        <div class="stat-tile">
-          <div class="stat-tile-lbl">Selected Requests</div>
-          <div class="stat-tile-val" id="insp-stat-total">0</div>
+      <div class="inspector-collapsible-body" id="insp-panel-body">
+        <div class="inspector-stat-grid">
+          <div class="stat-tile">
+            <div class="stat-tile-lbl">Selected Requests</div>
+            <div class="stat-tile-val" id="insp-stat-total">0</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-tile-lbl">Share of Volume</div>
+            <div class="stat-tile-val" id="insp-stat-share">100%</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-tile-lbl">Trash (S0441)</div>
+            <div class="stat-tile-val kw-trash" id="insp-stat-trash">0</div>
+          </div>
+          <div class="stat-tile">
+            <div class="stat-tile-lbl">Recycling (S0321)</div>
+            <div class="stat-tile-val kw-recycle" id="insp-stat-rec">0</div>
+          </div>
         </div>
-        <div class="stat-tile">
-          <div class="stat-tile-lbl">Share of Volume</div>
-          <div class="stat-tile-val" id="insp-stat-share">100%</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile-lbl">Trash (S0441)</div>
-          <div class="stat-tile-val kw-trash" id="insp-stat-trash">0</div>
-        </div>
-        <div class="stat-tile">
-          <div class="stat-tile-lbl">Recycling (S0321)</div>
-          <div class="stat-tile-val kw-recycle" id="insp-stat-rec">0</div>
-        </div>
-      </div>
 
-      <div class="inspector-details" id="insp-details">
-        Select any Single Member District or Ward on the map or use the dropdowns on the left to inspect localized performance, repeat rates, and DPW collection schedules.
-      </div>
+        <div class="inspector-details" id="insp-details">
+          Select any Single Member District or Ward on the map or use the dropdowns on the left to inspect localized performance, repeat rates, and DPW collection schedules.
+        </div>
 
-      <div class="inspector-route-box" id="insp-route-box" style="display: none;">
-        <!-- Filled dynamically -->
+        <div class="inspector-route-box" id="insp-route-box" style="display: none;">
+          <!-- Filled dynamically -->
+        </div>
       </div>
     </div>
 
@@ -1715,6 +1842,7 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
+      ensureMobileInspectorOpen();
     }}
 
     function updateInspectorANC(ancId) {{
@@ -1739,6 +1867,7 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
+      ensureMobileInspectorOpen();
     }}
 
     function updateInspectorSMD(p, centerLatLng) {{
@@ -1775,6 +1904,7 @@ html_page = f'''<!DOCTYPE html>
           document.getElementById('insp-route-box').style.display = 'none';
         }}
       }}
+      ensureMobileInspectorOpen();
     }}
 
     function setMetric(metric) {{
@@ -1980,6 +2110,56 @@ html_page = f'''<!DOCTYPE html>
       a.click();
     }}
 
+    // Mobile Drawer & Filter Toggles
+    function toggleMobilePanel(type) {{
+      if (window.innerWidth > 768) return;
+      if (type === 'control') {{
+        const cp = document.getElementById('control-panel');
+        const body = document.getElementById('ctrl-panel-body');
+        const icon = document.getElementById('ctrl-toggle-icon');
+        const isHidden = body.style.display === 'none';
+        body.style.display = isHidden ? 'block' : 'none';
+        if (cp) cp.classList.toggle('is-expanded', isHidden);
+        if (icon) icon.innerText = isHidden ? '▴' : '▾';
+      }} else if (type === 'inspector') {{
+        const body = document.getElementById('insp-panel-body');
+        const icon = document.getElementById('insp-toggle-icon');
+        const isHidden = body.style.display === 'none';
+        body.style.display = isHidden ? 'block' : 'none';
+        if (icon) icon.innerText = isHidden ? '▾' : '▴';
+      }}
+    }}
+
+    function ensureMobileInspectorOpen() {{
+      if (window.innerWidth <= 768) {{
+        const body = document.getElementById('insp-panel-body');
+        const icon = document.getElementById('insp-toggle-icon');
+        if (body) body.style.display = 'block';
+        if (icon) icon.innerText = '▾';
+      }}
+    }}
+
+    function initMobileHandling() {{
+      const cp = document.getElementById('control-panel');
+      const insp = document.getElementById('inspector-panel');
+      if (cp) {{
+        L.DomEvent.disableClickPropagation(cp);
+        L.DomEvent.disableScrollPropagation(cp);
+      }}
+      if (insp) {{
+        L.DomEvent.disableClickPropagation(insp);
+        L.DomEvent.disableScrollPropagation(insp);
+      }}
+
+      // Initial state on mobile: collapse controls so map is prominent
+      if (window.innerWidth <= 768) {{
+        const ctrlBody = document.getElementById('ctrl-panel-body');
+        if (ctrlBody) ctrlBody.style.display = 'none';
+        const ctrlIcon = document.getElementById('ctrl-toggle-icon');
+        if (ctrlIcon) ctrlIcon.innerText = '▾';
+      }}
+    }}
+
     // Initialization
     buildRouteSpatialIndex();
     initSMDLayer();
@@ -1988,6 +2168,7 @@ html_page = f'''<!DOCTYPE html>
     initRecycleRoutesLayer();
     ensureSvgPatterns();
     map.on('layeradd', ensureSvgPatterns);
+    initMobileHandling();
     setTheme(currentTheme);
     updateLegend();
     resetToCitywide();

@@ -122,3 +122,13 @@ Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are d
 
 - **Issue Pickup Rule**: When an issue is picked up, analyze the requirements, draft an implementation plan, and post it as a comment on that specific GitHub issue. Then, pause execution and wait for a reply.
 - **Approval Gate**: Do not begin code implementation until an explicit approval comment is posted on the issue thread.
+
+---
+
+## 11. Mobile Responsive Architecture
+
+- **Adaptive Responsive Design**: Do not use a manual mobile toggle; render responsive layouts adaptively via CSS media queries (`@media (max-width: 768px)`) and viewport identification.
+- **Mobile Map Control Drawer**: On mobile screens, the top control panel collapses into a slim header bar to maximize cartographic visibility, expanding when tapped.
+- **Inspector Bottom Sheet**: The floating inspector transforms into a mobile bottom sheet with an intuitive drag handle (`.sheet-handle`), expanding automatically when geographic entities (SMD, ANC, Ward) are selected.
+- **Touch Event Isolation**: Always isolate touch and scroll events on floating panels using `L.DomEvent.disableClickPropagation` and `L.DomEvent.disableScrollPropagation` to prevent accidental map pan or zoom when interacting with panel controls.
+- **Touch Target Dimensions**: Maintain a minimum 38px to 44px tap target height for all interactive mobile controls, dropdowns, and layer selection checkboxes.
