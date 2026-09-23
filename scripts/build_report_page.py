@@ -875,10 +875,10 @@ html_content += f"""
           <thead>
             <tr>
               <th>Rank</th>
-              <th>SMD</th>
-              <th>ANC</th>
               <th>Ward</th>
               <th>Councilmember</th>
+              <th>ANC</th>
+              <th>SMD</th>
               <th style="text-align: right;">Total Requests</th>
               <th style="text-align: right;" class="kw-trash">Trash</th>
               <th style="text-align: right;" class="kw-recycle">Recycling</th>
@@ -895,10 +895,10 @@ for rank, s in enumerate(top10_smds, 1):
     html_content += f"""
             <tr>
               <td><strong>#{rank}</strong></td>
-              <td><strong>SMD {s['smd_id']}</strong></td>
-              <td>ANC {s['anc_id']}</td>
               <td>Ward {w}</td>
               <td>{ward_council[w]}</td>
+              <td>ANC {s['anc_id']}</td>
+              <td><strong>SMD {s['smd_id']}</strong></td>
               <td style="text-align: right;" class="kw-combined"><strong>{s['total']:,}</strong></td>
               <td style="text-align: right;" class="kw-trash">{s['trash']:,}</td>
               <td style="text-align: right;" class="kw-recycle">{s['recycling']:,}</td>
@@ -949,8 +949,8 @@ html_content += f"""
         <table class="data-table" id="anc-table">
           <thead>
             <tr>
-              <th>ANC</th>
               <th>Ward</th>
+              <th>ANC</th>
               <th>SMD Count</th>
               <th style="text-align: right;">Total Requests</th>
               <th style="text-align: right;" class="kw-trash">Trash</th>
@@ -966,8 +966,8 @@ html_content += f"""
 for a in ancs_list:
     html_content += f"""
             <tr data-anc="{a['anc_id']}" data-ward="{a['ward']}">
-              <td><strong>ANC {a['anc_id']}</strong></td>
               <td>Ward {a['ward']}</td>
+              <td><strong>ANC {a['anc_id']}</strong></td>
               <td>{a['smd_count']} SMDs</td>
               <td style="text-align: right;" class="kw-combined"><strong>{a['total']:,}</strong></td>
               <td style="text-align: right;" class="kw-trash">{a['trash']:,}</td>
