@@ -7,7 +7,7 @@ Strictly adheres to:
 - Target audience: DC Department of Public Works (DPW) and Collections leadership
 - Proof-of-concept operational framing with DC Council Oversight context
 - Title: 'Missed Collections' with subhead 'Where—and why—are trash and recycling pickups missed in DC?'
-- Primary monospace font (JetBrains Mono)
+- Primary monospace font (IBM Plex Mono)
 - Lo-fi black & white design with browser-default light/dark toggle
 - Keyword colorization: Trash (Red), Recycling (Green), Combined (Blue)
 - No user-facing mentions of paper dimensions (US Letter preserved silently under the hood)
@@ -157,10 +157,10 @@ html_content = f"""<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Missed Collections • Report</title>
 
-  <!-- Google Fonts: JetBrains Mono -->
+  <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Local Vendored Assets -->
   <script src="assets/vendor/chartjs/chart.umd.min.js"></script>
@@ -170,7 +170,7 @@ html_content = f"""<!DOCTYPE html>
 
   <style>
     :root {{
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-mono: 'IBM Plex Mono', monospace;
 
       /* Light Theme (Default) */
       --bg-page: #f8fafc;
@@ -296,7 +296,7 @@ html_content = f"""<!DOCTYPE html>
       font-size: 12px;
       font-weight: 600;
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
@@ -319,7 +319,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
@@ -367,7 +367,7 @@ html_content = f"""<!DOCTYPE html>
       gap: 6px;
       background: var(--bg-surface);
       padding: 3px 8px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid var(--border);
       font-size: 10px;
     }}
@@ -376,7 +376,7 @@ html_content = f"""<!DOCTYPE html>
     .context-box {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 16px 18px;
       margin-bottom: 28px;
       font-size: 12px;
@@ -405,7 +405,7 @@ html_content = f"""<!DOCTYPE html>
     .kpi-card {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 16px;
       box-shadow: var(--card-shadow);
     }}
@@ -478,7 +478,7 @@ html_content = f"""<!DOCTYPE html>
     .chart-card {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 16px;
       position: relative;
       box-shadow: var(--card-shadow);
@@ -511,7 +511,7 @@ html_content = f"""<!DOCTYPE html>
     .table-container {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       overflow-x: auto;
       margin-bottom: 18px;
       box-shadow: var(--card-shadow);
@@ -539,7 +539,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-family: var(--font-mono);
       min-width: 200px;
@@ -555,7 +555,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 8px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-family: var(--font-mono);
     }}
@@ -605,7 +605,7 @@ html_content = f"""<!DOCTYPE html>
       color: var(--trash-color);
       border: 1px solid rgba(220, 38, 38, 0.3);
       padding: 1px 6px;
-      border-radius: 3px;
+      border-radius: 2px;
       font-size: 10px;
       font-weight: 700;
       display: inline-block;
@@ -616,7 +616,7 @@ html_content = f"""<!DOCTYPE html>
       color: var(--recycle-color);
       border: 1px solid rgba(22, 163, 74, 0.3);
       padding: 1px 6px;
-      border-radius: 3px;
+      border-radius: 2px;
       font-size: 10px;
       font-weight: 700;
       display: inline-block;
@@ -627,7 +627,7 @@ html_content = f"""<!DOCTYPE html>
       color: var(--warning-color);
       border: 1px solid rgba(217, 119, 6, 0.3);
       padding: 1px 6px;
-      border-radius: 3px;
+      border-radius: 2px;
       font-size: 10px;
       font-weight: 700;
       display: inline-block;
@@ -653,7 +653,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 4px 8px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       cursor: pointer;
       font-family: var(--font-mono);
@@ -722,7 +722,7 @@ html_content = f"""<!DOCTYPE html>
       <a href="report.html" class="nav-link active">Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
-      <button onclick="window.print()" class="btn-action">Print Report</button>
+      <button onclick="window.print()" class="btn-action">Export Report (PDF)</button>
     </div>
   </nav>
 
@@ -741,7 +741,39 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Operational Context & Overview -->
     <div class="context-box">
-      This proof-of-concept report analyzes Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Department of Public Works (DPW)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>. Context is grounded in testimony from the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a> and DPW's official <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Question Responses</a>, alongside the D.C. Auditor's (ODCA) ongoing discretionary audit of residential collection timeliness.
+      <div style="margin-bottom: 12px;">
+        This operational analysis evaluates Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Department of Public Works (DPW)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>.
+      </div>
+
+      <div style="margin-bottom: 14px; padding: 10px 12px; background: var(--bg-input); border-left: 3px solid var(--accent); border-radius: 2px;">
+        <strong style="color: var(--text-main); display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 11px; letter-spacing: 0.03em;">Primary Reference Documents &amp; Oversight Sources:</strong>
+        <ul style="list-style: none; margin-left: 0; font-size: 11px; line-height: 1.6;">
+          <li>- <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">DC Council Committee on Public Works &amp; Operations: 2026 Performance Oversight Hearing</a> (March 4, 2026)</li>
+          <li>- <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">DPW Written Responses to Committee Performance Oversight Questions</a></li>
+          <li>- <a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">DPW FY26 Performance Plan</a></li>
+        </ul>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
+        <div>
+          <strong style="color: var(--text-main); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; display: block; margin-bottom: 6px;">Hearing Testimony &amp; Core Identified Problems</strong>
+          <ul style="list-style: none; font-size: 11px; line-height: 1.6; color: var(--text-muted);">
+            <li>- <strong>Fleet Maintenance Bottlenecks:</strong> Significant downtime among heavy rear-loader packer trucks due to vehicle aging, spare part delays, and high diesel technician vacancy rates, causing route cancellations and postponed runs.</li>
+            <li>- <strong>Staffing Shortages &amp; Driver Call-Outs:</strong> High turnover among licensed Commercial Driver's License (CDL) operators requiring unassigned relief drivers unfamiliar with tight alley networks and property setback quirks.</li>
+            <li>- <strong>Chronic Recurrence Clustering:</strong> Persistent complaints of missed pickups repeating weekly at the same addresses, particularly across Wards 7, 8, 1, and 5.</li>
+            <li>- <strong>Premature 311 Ticket Closures:</strong> Council scrutiny regarding service tickets being closed administratively as "Resolved" before physical collection trucks remediate the missed bins.</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="color: var(--text-main); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; display: block; margin-bottom: 6px;">FY26 Performance Plan vs. Empirical 311 Data Reality</strong>
+          <ul style="list-style: none; font-size: 11px; line-height: 1.6; color: var(--text-muted);">
+            <li>- <strong>Are problems being addressed?</strong> DPW's FY26 Performance Plan targets vehicle modernization, telematics (Automated Vehicle Location / GPS geofencing) to verify physical visits, and Phase 2 Route Re-Optimization to equalize crew daily tonnages.</li>
+            <li>- <strong>Persistent Structural Gaps:</strong> Empirical 311 records demonstrate that 24.7% of impacted properties (1,475 addresses) suffer repeat failures, confirming that misses are systemic rather than random errors.</li>
+            <li>- <strong>Day-of-Week Workload Asymmetry:</strong> Monday routes generate 3,090 missed requests (34.7 avg per route vs 15.6 on Tuesdays), indicating that weekend tonnage carryovers and route scheduling have not yet achieved operational balance.</li>
+            <li>- <strong>Alley Access Realities:</strong> Micro-district clustering in high-density corridors indicates physical access constraints and driver navigation remain unresolved by top-down tonnage models alone.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- KPI Grid -->
@@ -779,7 +811,7 @@ html_content = f"""<!DOCTYPE html>
         <div>
           <h2 class="section-title">1. Ward Performance and Address Recurrence Breakdown</h2>
           <p class="section-description">
-            Analysis of missed collections across the District's 8 Wards, comparing <span class="kw-trash">Trash</span> vs. <span class="kw-recycle">Recycling</span> volumes and isolating repeat addresses. Under DPW's oversight definition, a "chronic miss" occurs when collection is missed 4 times within a 5-week consecutive period. Across all wards, 75.3% of impacted locations represent isolated single misses, while 24.7% (1,475 properties) face recurring collection failures requiring route supervisor attention.
+            Analysis of missed collections across the District's 8 Wards, comparing <span class="kw-trash">Trash</span> vs. <span class="kw-recycle">Recycling</span> volumes and isolating repeat addresses. Under DPW's oversight definition, a "chronic miss" occurs when collection is missed 4 times within a 5-week consecutive period. Across all wards, 75.3% of impacted locations represent isolated single misses, while 24.7% (1,475 properties) face recurring collection failures requiring route supervisor attention. Contextualizing these metrics against the DPW FY26 Performance Plan highlights the ongoing gap between agency SLA benchmarks and alley-level service consistency.
           </p>
         </div>
         <button onclick="exportTableCsv('ward-table', 'dc-ward-summary')" class="btn-action">Export CSV</button>
@@ -1146,13 +1178,13 @@ html_content += f"""
             label: 'Trash (S0441)',
             data: {json.dumps(chart_ward_trash)},
             backgroundColor: '#dc2626',
-            borderRadius: 3
+            borderRadius: 2
           }},
           {{
             label: 'Recycling (S0321)',
             data: {json.dumps(chart_ward_rec)},
             backgroundColor: '#16a34a',
-            borderRadius: 3
+            borderRadius: 2
           }}
         ]
       }},
@@ -1162,17 +1194,17 @@ html_content += f"""
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
+            labels: {{ font: {{ family: 'IBM Plex Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1191,13 +1223,13 @@ html_content += f"""
             label: 'Single Properties',
             data: {json.dumps(chart_ward_single)},
             backgroundColor: '#2563eb',
-            borderRadius: 3
+            borderRadius: 2
           }},
           {{
             label: 'Repeat Properties',
             data: {json.dumps(chart_ward_repeat)},
             backgroundColor: '#d97706',
-            borderRadius: 3
+            borderRadius: 2
           }}
         ]
       }},
@@ -1207,19 +1239,19 @@ html_content += f"""
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
+            labels: {{ font: {{ family: 'IBM Plex Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
             stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
             stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1238,13 +1270,13 @@ html_content += f"""
             label: 'Trash',
             data: {json.dumps(chart_day_trash)},
             backgroundColor: '#dc2626',
-            borderRadius: 3
+            borderRadius: 2
           }},
           {{
             label: 'Recycling',
             data: {json.dumps(chart_day_rec)},
             backgroundColor: '#16a34a',
-            borderRadius: 3
+            borderRadius: 2
           }}
         ]
       }},
@@ -1254,17 +1286,17 @@ html_content += f"""
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
+            labels: {{ font: {{ family: 'IBM Plex Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1303,17 +1335,17 @@ html_content += f"""
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
+            labels: {{ font: {{ family: 'IBM Plex Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
-            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
+            ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1329,16 +1361,16 @@ html_content += f"""
         if (!chart) return;
         if (chart.options.plugins?.legend?.labels) {{
           chart.options.plugins.legend.labels.color = textColor;
-          chart.options.plugins.legend.labels.font = {{ family: 'JetBrains Mono', size: 11 }};
+          chart.options.plugins.legend.labels.font = {{ family: 'IBM Plex Mono', size: 11 }};
         }}
         if (chart.options.scales?.x) {{
           chart.options.scales.x.ticks.color = tickColor;
-          chart.options.scales.x.ticks.font = {{ family: 'JetBrains Mono', size: 10 }};
+          chart.options.scales.x.ticks.font = {{ family: 'IBM Plex Mono', size: 10 }};
           chart.options.scales.x.grid.color = gridColor;
         }}
         if (chart.options.scales?.y) {{
           chart.options.scales.y.ticks.color = tickColor;
-          chart.options.scales.y.ticks.font = {{ family: 'JetBrains Mono', size: 10 }};
+          chart.options.scales.y.ticks.font = {{ family: 'IBM Plex Mono', size: 10 }};
           chart.options.scales.y.grid.color = gridColor;
         }}
         chart.update();

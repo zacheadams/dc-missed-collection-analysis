@@ -18,11 +18,13 @@ This document codifies development standards, operational conventions, and archi
 ## 2. Typography & Lo-Fi Monochrome Design
 
 - **Primary Monospace Font**:
-  - The primary typeface for all applications (`index.html`, `map.html`, `report.html`) must be `JetBrains Mono`.
+  - The primary typeface for all applications (`index.html`, `map.html`, `report.html`) must be `IBM Plex Mono`.
   - Body text, navigation elements, KPI cards, buttons, dropdowns, inputs, data tables, and chart labels must use monospace typography.
 - **Lo-Fi Black & White Aesthetic**:
   - A clean, technical, lo-fi aesthetic with 1px borders and high contrast.
   - Browser-default light/dark mode detected via `prefers-color-scheme` with manual toggle button in navigation (`[Theme: Light]` / `[Theme: Dark]`) persisted in `localStorage`.
+- **Button & Control Border Radius**:
+  - Buttons, inputs, badges, cards, table containers, and interactive toggles must use slightly beveled 2px border radius (`border-radius: 2px;`) to avoid excessively rounded or vibecoded aesthetics while maintaining crisp technical styling.
 - **Keyword Colorization**:
   - Stream names in body text, metrics, badges, and tables must be color-coded consistently:
     - **Trash**: Red (`#dc2626` / `#ef4444`, CSS class `.kw-trash`)
@@ -75,7 +77,7 @@ This document codifies development standards, operational conventions, and archi
   - Do NOT use international A4 (8.27 in x 11.69 in).
   - `@media print` stylesheets must explicitly specify `@page { size: letter portrait; margin: 0.5in; }` or `letter landscape`.
 - **Silent Defaults (No UI Sizing Mentions)**:
-  - Do not clutter user-facing UI elements, button labels, badges, or headers with paper size mentions (e.g., use "Print Report" rather than "Print (US Letter)"). US Letter is the default standard and operates silently.
+  - Do not clutter user-facing UI elements, button labels, badges, or headers with paper size mentions (e.g., use "Export Report (PDF)" rather than "Print (US Letter)"). US Letter is the default standard and operates silently.
 
 ---
 
@@ -94,7 +96,7 @@ This document codifies development standards, operational conventions, and archi
   - Subheader (`.nav-subtitle`): **Where—and why—are trash and recycling pickups missed in DC?**
   - Do NOT use the legacy header "DC Missed Collection Analysis" or subheader "Operational Analysis and Solid Waste Management".
 - **Page-Level Headers**:
-  - `index.html`: Hero header is **Overview** (with no duplicate subheader).
+  - `index.html`: Hero header is **Intro** (with no duplicate subheader).
   - `report.html`: Page header (`.report-title`) is **Report** with **no subheader**.
   - `map.html`: Full-screen map explorer inheriting the overall header.
 
