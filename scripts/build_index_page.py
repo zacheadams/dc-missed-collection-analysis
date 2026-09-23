@@ -93,10 +93,15 @@ html_content = f"""<!DOCTYPE html>
       --badge-border: rgba(56, 189, 248, 0.3);
     }}
 
-    * {{
+    *, *::before, *::after {{
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: inherit;
+    }}
+
+    input, button, select, textarea, optgroup {{
+      font-family: var(--font-mono) !important;
     }}
 
     body {{

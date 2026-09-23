@@ -1,8 +1,39 @@
 import json
+import math
 import os
 from collections import defaultdict, Counter
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def ring_area_sq_mi(coords):
+    if len(coords) < 3:
+        return 0.0
+    lat_rad = math.radians(38.9)
+    kx = 69.0 * math.cos(lat_rad)
+    ky = 69.0
+    area = 0.0
+    for i in range(len(coords) - 1):
+        x1, y1 = coords[i][0] * kx, coords[i][1] * ky
+        x2, y2 = coords[i+1][0] * kx, coords[i+1][1] * ky
+        area += (x1 * y2 - x2 * y1)
+    return abs(area) * 0.5
+
+def feat_list_area_sq_mi(feat_list):
+    total = 0.0
+    for f in feat_list:
+        geom = f.get('geometry', {})
+        t = geom.get('type')
+        coords = geom.get('coordinates', [])
+        if t == 'Polygon':
+            total += ring_area_sq_mi(coords[0])
+            for hole in coords[1:]:
+                total -= ring_area_sq_mi(hole)
+        elif t == 'MultiPolygon':
+            for poly in coords:
+                total += ring_area_sq_mi(poly[0])
+                for hole in poly[1:]:
+                    total -= ring_area_sq_mi(hole)
+    return round(max(0.001, total), 3)
 
 def is_point_in_ring(x, y, ring):
     inside = False
@@ -150,7 +181,8 @@ def analyze_route(feat_list):
         'ward': top_ward,
         'neighborhoods': area_str,
         'ancs': ancs_str,
-        'area_desc': f"{top_ward} • {area_str}" + (f" ({ancs_str})" if ancs_str else "")
+        'area_desc': f"{top_ward} • {area_str}" + (f" ({ancs_str})" if ancs_str else ""),
+        'area_sq_mi': feat_list_area_sq_mi(feat_list)
     }
 
 trash_groups = defaultdict(list)
@@ -171,7 +203,9 @@ for rid, feats in recycle_groups.items():
 
 output = {
     'trash_routes': trash_areas,
-    'recycle_routes': recycle_areas
+    'recycle_routes': recycle_areas,
+    'trash': trash_areas,
+    'recycle': recycle_areas
 }
 
 with open(os.path.join(BASE_DIR, 'data/route_areas.json'), 'w') as f:
