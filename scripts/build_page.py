@@ -42,7 +42,7 @@ html_page = f'''<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Map | DC DPW Missed Collection Analysis</title>
+  <title>Missed Collections • Interactive Map</title>
 
   <!-- Local Vendored Leaflet CSS -->
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
@@ -643,13 +643,13 @@ html_page = f'''<!DOCTYPE html>
   <!-- Top Navigation Bar -->
   <nav class="site-nav">
     <div class="nav-brand">
-      <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">Spatial Intelligence • Solid Waste Management</span>
+      <span class="nav-title">Missed Collections</span>
+      <span class="nav-subtitle">Where—and why—are trash and recycling pickups missed in DC?</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link active">Interactive Map</a>
-      <a href="report.html" class="nav-link">Operational Report</a>
+      <a href="report.html" class="nav-link">Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="exportMapPdf()" class="btn-action">Export Map (PDF)</button>
@@ -1660,7 +1660,7 @@ html_page = f'''<!DOCTYPE html>
         }};
       }} else {{
         return {{
-          title: 'Washington, DC Missed Collection Analysis',
+          title: 'Missed Collections',
           subtitle: `Citywide Spatial Explorer • ${{periodLabel}} Window`,
           metrics: `Active Metric: ${{streamLabel}} Requests across all 8 Wards and 345 SMDs`,
           filename: `dc-map-citywide-${{currentPeriod}}`
