@@ -13,6 +13,7 @@ Strictly adheres to:
 
 import os
 import sys
+import subprocess
 import time
 from datetime import datetime
 
@@ -68,7 +69,7 @@ def main():
         5,
         total_steps,
         "Compiling Unified Operational Report (report.html)",
-        lambda: os.system(f"python3 {os.path.join(BASE_DIR, 'scripts', 'build_report_page.py')}")
+        lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_report_page.py')])
     )
 
     # Step 6: Build map.html
@@ -76,7 +77,7 @@ def main():
         6,
         total_steps,
         "Compiling Dedicated Interactive Map (map.html)",
-        lambda: os.system(f"python3 {os.path.join(BASE_DIR, 'scripts', 'build_page.py')}")
+        lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_page.py')])
     )
 
     # Step 7: Build index.html
@@ -84,7 +85,7 @@ def main():
         7,
         total_steps,
         "Compiling Central Project Hub (index.html)",
-        lambda: os.system(f"python3 {os.path.join(BASE_DIR, 'scripts', 'build_index_page.py')}")
+        lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_index_page.py')])
     )
 
     total_elapsed = time.time() - t_start
