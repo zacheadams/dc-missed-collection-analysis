@@ -5,6 +5,9 @@ Introduces the Washington, DC Missed Collection Analysis project, provides
 citywide high-level performance indicators, and directs users to the dedicated
 Interactive Map (map.html) and Operational Report (report.html).
 Strictly adheres to:
+- Primary monospace font (JetBrains Mono)
+- Lo-fi black & white design with browser-default light/dark toggle
+- Keyword colorization: Trash (Red), Recycling (Green), Combined (Blue)
 - No emojis anywhere in UI, code, or documentation
 - Offline-ready, self-contained architecture
 """
@@ -32,29 +35,62 @@ html_content = f"""<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DC DPW Missed Collection Analysis • Portal</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {{
-      --bg-dark: #070a12;
-      --bg-card: #0d1322;
-      --bg-panel: rgba(13, 19, 34, 0.94);
-      --border: rgba(255, 255, 255, 0.10);
-      --border-focus: #38bdf8;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --primary: #0284c7;
-      --primary-light: #38bdf8;
-      --trash-color: #ef4444;
-      --recycle-color: #10b981;
-      --warning-color: #f59e0b;
-      --ward-color: #a855f7;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      /* Light Theme (Default) */
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-panel: rgba(255, 255, 255, 0.95);
+      --bg-input: #f1f5f9;
+      --border: #d4d4d8;
+      --border-dark: #18181b;
+      --border-focus: #09090b;
+      --text-main: #09090b;
+      --text-muted: #52525b;
+      --text-dim: #71717a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --trash-color: #dc2626;
+      --recycle-color: #16a34a;
+      --combined-color: #2563eb;
+      --warning-color: #d97706;
+      --ward-boundary: #7c3aed;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --badge-bg: rgba(37, 99, 235, 0.08);
+      --badge-border: rgba(37, 99, 235, 0.25);
+    }}
+
+    [data-theme="dark"] {{
+      /* Dark Theme */
+      --bg-page: #09090b;
+      --bg-surface: #121215;
+      --bg-card: #121215;
+      --bg-panel: rgba(18, 18, 21, 0.95);
+      --bg-input: #18181b;
+      --border: #27272a;
+      --border-dark: #3f3f46;
+      --border-focus: #f4f4f5;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --trash-color: #ef4444;
+      --recycle-color: #22c55e;
+      --combined-color: #38bdf8;
+      --warning-color: #f59e0b;
+      --ward-boundary: #c084fc;
+      --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --badge-border: rgba(56, 189, 248, 0.3);
     }}
 
     * {{
@@ -64,26 +100,43 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     body {{
-      background-color: var(--bg-dark);
+      background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: var(--font-sans);
-      line-height: 1.6;
+      font-family: var(--font-mono);
+      line-height: 1.5;
       padding-bottom: 80px;
       -webkit-font-smoothing: antialiased;
     }}
 
+    /* Keyword Color Classes */
+    .kw-trash {{
+      color: var(--trash-color);
+      font-weight: 700;
+    }}
+
+    .kw-recycle {{
+      color: var(--recycle-color);
+      font-weight: 700;
+    }}
+
+    .kw-combined {{
+      color: var(--combined-color);
+      font-weight: 700;
+    }}
+
     /* Top Navigation Bar */
     .site-nav {{
-      background: rgba(7, 10, 18, 0.96);
+      background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 1000;
-      padding: 14px 24px;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background 0.2s, border-color 0.2s;
     }}
 
     .nav-brand {{
@@ -92,191 +145,209 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .nav-title {{
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }}
 
     .nav-subtitle {{
       font-size: 11px;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-      margin-top: 1px;
+      color: var(--text-muted);
     }}
 
     .nav-links {{
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
     }}
 
     .nav-link {{
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
 
     .nav-link:hover {{
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: var(--border);
+      background: var(--bg-input);
     }}
 
     .nav-link.active {{
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      font-weight: 700;
+    }}
+
+    .btn-action {{
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all 0.15s ease;
+    }}
+
+    .btn-action:hover {{
+      border-color: var(--text-main);
+      background: var(--bg-input);
     }}
 
     .page-container {{
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 40px 24px;
+      padding: 32px 20px;
     }}
 
     /* Hero Section */
     .hero {{
       text-align: center;
-      padding: 48px 0 56px 0;
+      padding: 40px 0 44px 0;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }}
 
     .hero-badge {{
       display: inline-block;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: #38bdf8;
-      font-size: 12px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      color: var(--text-main);
+      font-size: 11px;
       font-weight: 700;
-      font-family: var(--font-mono);
-      padding: 4px 14px;
-      border-radius: 9999px;
-      margin-bottom: 18px;
+      padding: 3px 12px;
+      border-radius: 4px;
+      margin-bottom: 14px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
     }}
 
     .hero-title {{
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      margin-bottom: 16px;
-      max-width: 900px;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      max-width: 820px;
       margin-left: auto;
       margin-right: auto;
     }}
 
     .hero-desc {{
-      font-size: 17px;
+      font-size: 13px;
       color: var(--text-muted);
-      max-width: 780px;
-      margin: 0 auto 32px auto;
+      max-width: 720px;
+      margin: 0 auto 28px auto;
       line-height: 1.6;
     }}
 
     .hero-actions {{
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }}
 
     .btn-hero-primary {{
-      background: #0284c7;
+      background: var(--accent);
       color: #ffffff;
       text-decoration: none;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 4px;
       transition: background 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }}
 
     .btn-hero-primary:hover {{
-      background: #0369a1;
+      background: var(--accent-hover);
     }}
 
     .btn-hero-secondary {{
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
       text-decoration: none;
-      font-size: 15px;
+      font-size: 12px;
       font-weight: 700;
-      padding: 12px 28px;
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 4px;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }}
 
     .btn-hero-secondary:hover {{
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.25);
+      border-color: var(--text-main);
+      background: var(--bg-input);
     }}
 
     /* KPI Highlights */
     .kpi-row {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 56px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 44px;
     }}
 
     .kpi-box {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
+      border-radius: 6px;
+      padding: 18px;
       text-align: center;
+      box-shadow: var(--card-shadow);
     }}
 
     .kpi-num {{
-      font-size: 34px;
+      font-size: 28px;
       font-weight: 800;
-      font-family: var(--font-mono);
-      color: #ffffff;
+      color: var(--text-main);
       line-height: 1.1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }}
 
     .kpi-title {{
-      font-size: 12px;
+      font-size: 10px;
       font-weight: 700;
-      color: var(--text-muted);
+      color: var(--text-dim);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }}
 
     /* Application Cards */
     .apps-section {{
-      margin-bottom: 56px;
+      margin-bottom: 44px;
     }}
 
     .section-title {{
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
       text-align: center;
     }}
 
     .apps-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      gap: 20px;
     }}
 
     @media (max-width: 600px) {{
@@ -288,54 +359,53 @@ html_content = f"""<!DOCTYPE html>
     .app-card {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
+      border-radius: 8px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.15s ease, border-color 0.15s ease;
+      transition: border-color 0.15s ease;
+      box-shadow: var(--card-shadow);
     }}
 
     .app-card:hover {{
-      border-color: var(--border-focus);
-      transform: translateY(-2px);
+      border-color: var(--border-dark);
     }}
 
     .app-tag {{
-      font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      color: #38bdf8;
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
     }}
 
     .app-title {{
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
     }}
 
     .app-desc {{
-      font-size: 14px;
+      font-size: 12px;
       color: var(--text-muted);
       line-height: 1.6;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       flex-grow: 1;
     }}
 
     .app-features {{
       list-style: none;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }}
 
     .app-features li {{
-      font-size: 13px;
-      color: #cbd5e1;
-      margin-bottom: 8px;
+      font-size: 11px;
+      color: var(--text-main);
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -343,7 +413,7 @@ html_content = f"""<!DOCTYPE html>
 
     .app-features li::before {{
       content: "-";
-      color: #38bdf8;
+      color: var(--accent);
       font-weight: 800;
     }}
 
@@ -351,27 +421,28 @@ html_content = f"""<!DOCTYPE html>
     .info-section {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      margin-bottom: 48px;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 40px;
+      box-shadow: var(--card-shadow);
     }}
 
     .info-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-top: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 16px;
     }}
 
     .info-block h4 {{
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 8px;
+      color: var(--text-main);
+      margin-bottom: 6px;
     }}
 
     .info-block p {{
-      font-size: 13px;
+      font-size: 11px;
       color: var(--text-muted);
       line-height: 1.6;
     }}
@@ -379,9 +450,9 @@ html_content = f"""<!DOCTYPE html>
     /* Footer */
     .site-footer {{
       text-align: center;
-      padding-top: 32px;
+      padding-top: 24px;
       border-top: 1px solid var(--border);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-dim);
     }}
 
@@ -391,7 +462,7 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .site-footer a:hover {{
-      color: #ffffff;
+      color: var(--text-main);
     }}
   </style>
 </head>
@@ -408,6 +479,7 @@ html_content = f"""<!DOCTYPE html>
       <a href="map.html" class="nav-link">Interactive Map</a>
       <a href="report.html" class="nav-link">Operational Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
+      <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
     </div>
   </nav>
 
@@ -417,7 +489,7 @@ html_content = f"""<!DOCTYPE html>
     <section class="hero">
       <div class="hero-badge">Public Spatial Intelligence</div>
       <h1 class="hero-title">Washington, DC Missed Collection Performance</h1>
-      <p class="hero-desc">An open municipal analytics resource evaluating Department of Public Works (DPW) missed trash and recycling 311 service requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes.</p>
+      <p class="hero-desc">An open municipal analytics resource evaluating Department of Public Works (DPW) missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> 311 service requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes.</p>
       <div class="hero-actions">
         <a href="map.html" class="btn-hero-primary">Launch Interactive Map</a>
         <a href="report.html" class="btn-hero-secondary">View Operational Report</a>
@@ -427,19 +499,19 @@ html_content = f"""<!DOCTYPE html>
     <!-- Key Metrics Highlight -->
     <section class="kpi-row">
       <div class="kpi-box">
-        <div class="kpi-num">{citywide['total_requests']:,}</div>
+        <div class="kpi-num kw-combined">{citywide['total_requests']:,}</div>
         <div class="kpi-title">Total Requests (180d)</div>
       </div>
       <div class="kpi-box">
-        <div class="kpi-num" style="color: #ef4444;">{total_trash:,}</div>
+        <div class="kpi-num kw-trash">{total_trash:,}</div>
         <div class="kpi-title">Missed Trash (S0441)</div>
       </div>
       <div class="kpi-box">
-        <div class="kpi-num" style="color: #10b981;">{total_rec:,}</div>
+        <div class="kpi-num kw-recycle">{total_rec:,}</div>
         <div class="kpi-title">Missed Recycling (S0321)</div>
       </div>
       <div class="kpi-box">
-        <div class="kpi-num" style="color: #f59e0b;">{citywide['repeat_rate']}%</div>
+        <div class="kpi-num" style="color: var(--warning-color);">{citywide['repeat_rate']}%</div>
         <div class="kpi-title">Address Recurrence Rate</div>
       </div>
     </section>
@@ -456,10 +528,11 @@ html_content = f"""<!DOCTYPE html>
             <h3 class="app-title">Interactive Map Application</h3>
             <p class="app-desc">High-contrast Stamen Toner cartography displaying localized collection failures, hot spots, and municipal boundary overlaps.</p>
             <ul class="app-features">
-              <li>Local Stamen Toner basemap cached offline for Zooms 11 to 15</li>
-              <li>Cascading Ward, ANC, and Single Member District selectors</li>
+              <li>Local Stamen Toner (Light) and Stamen Toner Blacklite (Dark) basemaps cached offline</li>
+              <li>Dual analytic period switcher: 180-Day (Default) vs 30-Day windows</li>
+              <li>Single-hue relative intensity color ramps for Trash (Red), Recycling (Green), and Combined (Blue)</li>
+              <li>Cascading Ward, ANC, and Single Member District selectors with permanent Ward boundaries</li>
               <li>DPW Trash (103) and Recycling (120) route overlays with pickup days</li>
-              <li>District Inspector showing councilmembers, commissioners, and schedules</li>
               <li>Context-aware static map export to US Letter (8.5" x 11") PDF and PNG</li>
             </ul>
           </div>
@@ -488,11 +561,11 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Methodology & Data Architecture -->
     <section class="info-section">
-      <h3 style="font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">Data Pipeline &amp; Architecture</h3>
+      <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">Data Pipeline &amp; Architecture</h3>
       <div class="info-grid">
         <div class="info-block">
           <h4>Zero External Runtime Dependencies</h4>
-          <p>The entire application functions offline. Basemap tiles (Stamen Toner) and vendor libraries (Leaflet, Chart.js, jsPDF, html2canvas) are vendored locally in the repository.</p>
+          <p>The entire application functions offline. Basemap tiles (Stamen Toner &amp; Blacklite) and vendor libraries (Leaflet, Chart.js, jsPDF, html2canvas) are vendored locally in the repository.</p>
         </div>
         <div class="info-block">
           <h4>Automated Incremental Refresh</h4>
@@ -513,6 +586,32 @@ html_content = f"""<!DOCTYPE html>
 
   </main>
 
+  <script>
+    // Theme Management
+    let currentTheme = 'light';
+    const savedTheme = localStorage.getItem('dc_map_theme');
+    if (savedTheme) {{
+      currentTheme = savedTheme;
+    }} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {{
+      currentTheme = 'dark';
+    }}
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) themeBtn.innerText = currentTheme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+
+    function toggleTheme() {{
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    }}
+
+    function setTheme(theme) {{
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('dc_map_theme', theme);
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) btn.innerText = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+    }}
+  </script>
 </body>
 </html>
 """
