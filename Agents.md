@@ -85,10 +85,23 @@ This document codifies development standards, operational conventions, and archi
 
 ---
 
-## 7. Application Architecture
+## 7. Header Hierarchy & Brand Standards
+
+- **Overall Site Header (`.nav-brand`)**: Across all pages (`index.html`, `map.html`, `report.html`), the sticky top navigation header must display:
+  - Header (`.nav-title`): **Missed Collections**
+  - Subheader (`.nav-subtitle`): **Where—and why—are trash and recycling pickups missed in DC?**
+  - Do NOT use the legacy header "DC Missed Collection Analysis" or subheader "Operational Analysis and Solid Waste Management".
+- **Page-Level Headers**:
+  - `index.html`: Hero header is **Overview** (with no duplicate subheader).
+  - `report.html`: Page header (`.report-title`) is **Report** with **no subheader**.
+  - `map.html`: Full-screen map explorer inheriting the overall header.
+
+---
+
+## 8. Application Architecture
 
 The repository serves three dedicated applications without backward-compatibility bloat:
-1. `index.html`: Central portal and executive hub displaying citywide KPIs and directing users to the map and operational report.
+1. `index.html`: Central portal and executive hub displaying citywide KPIs and directing users to the map and report.
 2. `map.html`: Dedicated, full-viewport interactive map explorer with cascading Ward/ANC/SMD filters, period toggle, and contextual SMD export.
 3. `report.html`: Dedicated operational report with hierarchical Ward, ANC, and SMD sections plus DPW route performance analysis and searchable matrix.
 
@@ -96,7 +109,7 @@ Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are d
 
 ---
 
-## 8. Data Pipeline & Zero External Infrastructure
+## 9. Data Pipeline & Zero External Infrastructure
 
 - All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
 - Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.
