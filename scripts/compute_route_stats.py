@@ -160,7 +160,7 @@ def compute_route_stats():
         repeat_rate = round(repeat_addrs / unique_addrs * 100, 1) if unique_addrs > 0 else 0.0
         req_per_addr = round(total / unique_addrs, 2) if unique_addrs > 0 else 0.0
 
-        sched = props.get('Day' if not is_trash else 'DayWeb', 'Unassigned')
+        sched = props.get('CollectionDays') or props.get('CollectionDay') or props.get('Day' if not is_trash else 'DayWeb') or 'Unassigned'
         runs = props.get('RunsWeb', 1) if is_trash else 1
         service_area = props.get('ServiceAre', 'Outer Ring') if is_trash else 'Standard'
         status = props.get('Status', 'Active')

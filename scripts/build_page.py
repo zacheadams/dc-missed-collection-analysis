@@ -35,6 +35,9 @@ if os.path.exists(route_areas_path):
     with open(route_areas_path, 'r', encoding='utf-8') as f:
         route_areas = json.load(f)
 
+trash_days_map = {f['properties']['route_area']: f['properties'].get('days') for f in map_data.get('trash_routes', {}).get('features', []) if f.get('properties', {}).get('route_area')}
+recycle_days_map = {f['properties']['route']: f['properties'].get('day') for f in map_data.get('recycle_routes', {}).get('features', []) if f.get('properties', {}).get('route')}
+
 route_stats_lookup = {}
 for r in route_stats_raw.get('trash_routes', []):
     r_copy = dict(r)
@@ -51,6 +54,10 @@ for r in route_stats_raw.get('trash_routes', []):
         r_copy['ancs'] = ra.get('ancs')
     if not r_copy.get('area_desc') and ra.get('area_desc'):
         r_copy['area_desc'] = ra.get('area_desc')
+    col_day = trash_days_map.get(aid) or (r_copy.get('schedule') if r_copy.get('schedule') != 'Unassigned' else None)
+    if col_day:
+        r_copy['schedule'] = col_day
+        r_copy['day'] = col_day
     route_stats_lookup['trash_' + str(aid)] = r_copy
 
 for r in route_stats_raw.get('recycle_routes', []):
@@ -68,6 +75,10 @@ for r in route_stats_raw.get('recycle_routes', []):
         r_copy['ancs'] = ra.get('ancs')
     if not r_copy.get('area_desc') and ra.get('area_desc'):
         r_copy['area_desc'] = ra.get('area_desc')
+    col_day = recycle_days_map.get(aid) or (r_copy.get('schedule') if r_copy.get('schedule') != 'Unassigned' else None)
+    if col_day:
+        r_copy['schedule'] = col_day
+        r_copy['day'] = col_day
     route_stats_lookup['recycle_' + str(aid)] = r_copy
 
 route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
@@ -503,41 +514,6 @@ html_page = f'''<!DOCTYPE html>
       display: inline-block;
     }}
 
-    /* Floating Breadcrumbs */
-    .breadcrumb-bar {{
-      position: absolute;
-      top: 14px;
-      left: 348px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 6px 12px;
-      z-index: 500;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-      box-shadow: var(--card-shadow);
-    }}
-
-    .breadcrumb-item {{
-      cursor: pointer;
-      color: var(--accent);
-      font-weight: 600;
-    }}
-
-    .breadcrumb-item:hover {{
-      text-decoration: underline;
-    }}
-
-    .breadcrumb-item.active {{
-      color: var(--text-main);
-      font-weight: 700;
-      cursor: default;
-      text-decoration: none;
-    }}
 
     /* Floating District Inspector (Right Side) */
     .inspector-panel {{
@@ -671,6 +647,28 @@ html_page = f'''<!DOCTYPE html>
       box-shadow: var(--card-shadow) !important;
     }}
 
+    .leaflet-control-attribution {{
+      background: var(--bg-panel) !important;
+      backdrop-filter: blur(8px);
+      color: var(--text-dim) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 2px !important;
+      padding: 3px 8px !important;
+      font-size: 10px !important;
+      font-family: var(--font-mono) !important;
+      margin: 0 10px 10px 0 !important;
+      box-shadow: var(--card-shadow) !important;
+    }}
+
+    .leaflet-control-attribution a {{
+      color: var(--accent) !important;
+      text-decoration: none !important;
+    }}
+
+    .leaflet-control-attribution a:hover {{
+      text-decoration: underline !important;
+    }}
+
     /* Mobile Responsive Layout and Touch Handling */
     .sheet-handle {{
       display: none;
@@ -705,9 +703,6 @@ html_page = f'''<!DOCTYPE html>
       }}
       .map-workspace {{
         height: calc(100vh - 84px);
-      }}
-      .breadcrumb-bar {{
-        display: none;
       }}
       .control-panel {{
         top: 8px;
@@ -850,21 +845,13 @@ html_page = f'''<!DOCTYPE html>
   <div class="map-workspace" id="map-interactive">
     <div id="map"></div>
 
-    <!-- Floating Breadcrumbs -->
-    <div class="breadcrumb-bar" id="breadcrumb-bar">
-      <span>Context:</span>
-      <span class="breadcrumb-item active" id="breadcrumb-citywide" onclick="resetToCitywide()">Citywide (District)</span>
-      <span id="breadcrumb-crumbs"></span>
-    </div>
-
     <!-- Floating Left Control Panel -->
     <div class="control-panel" id="control-panel">
       <div class="panel-header" onclick="toggleMobilePanel('control')">
         <div style="display: flex; align-items: center; gap: 6px;">
-          <span class="panel-title">District Hierarchy</span>
+          <span class="panel-title">Geographic Subset</span>
           <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
         </div>
-        <span class="panel-tag" id="panel-period-tag">Past 180 Days</span>
       </div>
 
       <div class="panel-collapsible-body" id="ctrl-panel-body">
@@ -924,11 +911,11 @@ html_page = f'''<!DOCTYPE html>
             <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes (103)</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes</span>
             <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes</span>
             <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
           </label>
         </div>
@@ -1053,15 +1040,17 @@ html_page = f'''<!DOCTYPE html>
       return theme === 'dark' ? 'tiles/blacklite/{{z}}/{{x}}/{{y}}.png' : 'tiles/light/{{z}}/{{x}}/{{y}}.png';
     }}
 
-    // Basemap: Local Stamen Toner (Zooms 11 to 15)
+    // Basemap: Local Stamen Toner (Zooms 11 to 16)
     let baseTileLayer = L.tileLayer(getTileUrl(currentTheme), {{
       pane: 'tonerBasePane',
       minZoom: 11,
-      maxNativeZoom: 15,
+      maxNativeZoom: 16,
       maxZoom: 18,
       bounds: [[38.7916, -77.1198], [38.9960, -76.9091]],
-      attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+      attribution: 'Tiles: Stamen Design (CC BY 3.0) • Data: OpenStreetMap (ODbL)'
     }}).addTo(map);
+
+    map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
 
     /*
      * CENSUS TIGERWEB ALTERNATIVE BASEMAP:
@@ -1590,7 +1579,7 @@ html_page = f'''<!DOCTYPE html>
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{tr.day || 'Scheduled'}}</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
               ${{tTot.toLocaleString()}} Trash Requests (180d)
             </div>
@@ -1604,7 +1593,7 @@ html_page = f'''<!DOCTYPE html>
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{rr.day || 'Scheduled'}}</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
               ${{rTot.toLocaleString()}} Recycling Requests (180d)
             </div>
@@ -1619,7 +1608,7 @@ html_page = f'''<!DOCTYPE html>
         html = `
           <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{tr.day || 'Scheduled'}}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
             ${{tTot.toLocaleString()}} Trash Requests (180d)
           </div>
@@ -1633,7 +1622,7 @@ html_page = f'''<!DOCTYPE html>
         html = `
           <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{rr.day || 'Scheduled'}}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
             ${{rTot.toLocaleString()}} Recycling Requests (180d)
           </div>
@@ -1883,6 +1872,7 @@ html_page = f'''<!DOCTYPE html>
 
     function updateBreadcrumbs() {{
       const bar = document.getElementById('breadcrumb-crumbs');
+      if (!bar) return;
       if (selectedRouteId) {{
         bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{selectedRouteStream}} Route ${{selectedRouteId}}</span>`;
         return;
@@ -1902,6 +1892,7 @@ html_page = f'''<!DOCTYPE html>
 
     function updateBreadcrumbsRoute(p, stream) {{
       const bar = document.getElementById('breadcrumb-crumbs');
+      if (!bar) return;
       const rId = stream === 'Trash' ? p.route_area : p.route;
       bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{stream}} Route ${{rId}}</span>`;
     }}
@@ -2023,7 +2014,7 @@ html_page = f'''<!DOCTYPE html>
       const key = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
       const stats = ROUTE_STATS[key] || {{}};
 
-      const sched = stats.schedule || p.days || p.day || 'Scheduled';
+      const sched = (stats.schedule && stats.schedule !== 'Unassigned' ? stats.schedule : '') || p.days || p.day || stats.day || 'Scheduled';
       const ward = stats.ward || p.ward || 'Citywide';
       const total = stats.total || 0;
       const repRate = stats.repeat_rate != null ? stats.repeat_rate : 0;
@@ -2032,7 +2023,7 @@ html_page = f'''<!DOCTYPE html>
       const areaSqMi = stats.area_sq_mi || p.area_sq_mi || 0;
 
       document.getElementById('insp-title').innerText = `${{stream}} Route ${{rId}}`;
-      document.getElementById('insp-sub').innerText = `Scheduled Day: ${{sched}} • ${{ward}}`;
+      document.getElementById('insp-sub').innerText = `Collection day: ${{sched}} • ${{ward}}`;
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
@@ -2075,7 +2066,6 @@ html_page = f'''<!DOCTYPE html>
       currentPeriod = period;
       document.getElementById('btn-period-180d').classList.toggle('active', period === '180d');
       document.getElementById('btn-period-30d').classList.toggle('active', period === '30d');
-      document.getElementById('panel-period-tag').innerText = period === '180d' ? 'Past 180 Days' : 'Past 30 Days';
 
       updateLegend();
       if (smdLayer) smdLayer.setStyle(smdStyle);
@@ -2229,7 +2219,6 @@ html_page = f'''<!DOCTYPE html>
       currentPeriod = '180d';
       document.getElementById('btn-period-180d').classList.add('active');
       document.getElementById('btn-period-30d').classList.remove('active');
-      document.getElementById('panel-period-tag').innerText = 'Past 180 Days';
 
       document.getElementById('chk-smd').checked = true;
       if (!map.hasLayer(smdLayer)) map.addLayer(smdLayer);
