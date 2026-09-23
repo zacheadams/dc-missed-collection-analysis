@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Downloads and packages Stamen Toner tiles for Washington, DC locally.
+Downloads and packages Stamen Toner (Light) and Stamen Toner Blacklite (Dark)
+tiles for Washington, DC locally.
 Tiles are strictly subsetted to the District of Columbia boundary polygon
 for Zooms 11 through 15, eliminating runtime external dependencies and Stadia API keys.
 """
@@ -10,10 +11,13 @@ import sys
 import json
 import math
 import time
+import shutil
 import urllib.request
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TILES_DIR = os.path.join(BASE_DIR, 'tiles')
+LIGHT_DIR = os.path.join(TILES_DIR, 'light')
+BLACKLITE_DIR = os.path.join(TILES_DIR, 'blacklite')
 WARDS_PATH = os.path.join(BASE_DIR, 'data', 'dc_wards.geojson')
 
 PNG_HEADER = b'\x89PNG\r\n\x1a\n'
@@ -80,12 +84,10 @@ def tile_intersects_dc(x, y, z, rings, all_pts):
     tile_min_lon = nw_lon
     tile_max_lon = se_lon
 
-    # Check if any DC boundary point is inside the tile
     for px, py in all_pts:
         if tile_min_lon <= px <= tile_max_lon and tile_min_lat <= py <= tile_max_lat:
             return True
 
-    # 4x4 grid sampling across tile
     for sx in range(4):
         for sy in range(4):
             tx = tile_min_lon + sx * (tile_max_lon - tile_min_lon) / 3.0
@@ -120,16 +122,26 @@ def verify_tile(path):
     except Exception:
         return False
 
-def download_tiles(verify_only=False):
-    tiles = get_tiles_to_download()
-    print(f"Total Washington, DC Stamen Toner tiles: {len(tiles)} (Zooms 11 to 15)")
+def migrate_existing_light_tiles():
+    # If tiles were stored directly in tiles/{z}/{x}/{y}.png, migrate them to tiles/light/{z}/{x}/{y}.png
+    for z in range(11, 16):
+        src_z = os.path.join(TILES_DIR, str(z))
+        if os.path.exists(src_z) and os.path.isdir(src_z):
+            dst_z = os.path.join(LIGHT_DIR, str(z))
+            os.makedirs(os.path.dirname(dst_z), exist_ok=True)
+            if not os.path.exists(dst_z):
+                shutil.move(src_z, dst_z)
+            else:
+                shutil.rmtree(src_z)
 
+def download_set(style_name, target_dir, tiles, verify_only=False):
+    print(f"\nProcessing {style_name} tiles in {target_dir} ({len(tiles)} tiles)...")
     if verify_only:
         missing = []
         corrupted = []
         total_size = 0
         for z, x, y in tiles:
-            tile_path = os.path.join(TILES_DIR, str(z), str(x), f"{y}.png")
+            tile_path = os.path.join(target_dir, str(z), str(x), f"{y}.png")
             if not os.path.exists(tile_path):
                 missing.append((z, x, y))
             elif not verify_tile(tile_path):
@@ -138,11 +150,11 @@ def download_tiles(verify_only=False):
                 total_size += os.path.getsize(tile_path)
 
         if missing or corrupted:
-            print(f"Verification FAILED: {len(missing)} missing, {len(corrupted)} corrupted")
-            sys.exit(1)
+            print(f" - Verification FAILED: {len(missing)} missing, {len(corrupted)} corrupted")
+            return False
         else:
-            print(f"Verification PASSED: All {len(tiles)} tiles present and valid ({total_size / (1024*1024):.2f} MB)")
-            return
+            print(f" - Verification PASSED: All {len(tiles)} tiles present and valid ({total_size / (1024*1024):.2f} MB)")
+            return True
 
     headers = {
         'User-Agent': 'DCMissedCollectionAnalysis/1.0',
@@ -154,7 +166,7 @@ def download_tiles(verify_only=False):
     total_size = 0
 
     for idx, (z, x, y) in enumerate(tiles, start=1):
-        tile_dir = os.path.join(TILES_DIR, str(z), str(x))
+        tile_dir = os.path.join(target_dir, str(z), str(x))
         os.makedirs(tile_dir, exist_ok=True)
         tile_path = os.path.join(tile_dir, f"{y}.png")
 
@@ -163,7 +175,7 @@ def download_tiles(verify_only=False):
             total_size += os.path.getsize(tile_path)
             continue
 
-        url = f"https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}.png"
+        url = f"https://tiles.stadiamaps.com/tiles/{style_name}/{z}/{x}/{y}.png"
         req = urllib.request.Request(url, headers=headers)
         success = False
         for attempt in range(3):
@@ -179,18 +191,30 @@ def download_tiles(verify_only=False):
                         break
                     else:
                         time.sleep(0.5)
-            except Exception as e:
+            except Exception:
                 time.sleep(1.0 * (attempt + 1))
 
         if not success:
-            print(f"Warning: Failed to download tile {z}/{x}/{y}")
+            print(f"Warning: Failed to download {style_name} tile {z}/{x}/{y}")
 
-        if downloaded % 25 == 0 and downloaded > 0:
-            print(f"Progress: {idx}/{len(tiles)} tiles processed ({downloaded} new, {skipped} cached)...")
+        if downloaded % 50 == 0 and downloaded > 0:
+            print(f"Progress: {idx}/{len(tiles)} processed ({downloaded} new, {skipped} cached)...")
         time.sleep(0.04)
 
-    print(f"Complete: {downloaded} downloaded, {skipped} cached. Total tile size: {total_size / (1024*1024):.2f} MB")
+    print(f"Complete: {downloaded} downloaded, {skipped} cached. Total size: {total_size / (1024*1024):.2f} MB")
+    return True
+
+def main():
+    verify_flag = '--verify-only' in sys.argv
+    migrate_existing_light_tiles()
+    tiles = get_tiles_to_download()
+    print(f"Washington, DC tile set: {len(tiles)} tiles (Zooms 11 to 15)")
+
+    ok_light = download_set('stamen_toner', LIGHT_DIR, tiles, verify_only=verify_flag)
+    ok_blacklite = download_set('stamen_toner_blacklite', BLACKLITE_DIR, tiles, verify_only=verify_flag)
+
+    if verify_flag and (not ok_light or not ok_blacklite):
+        sys.exit(1)
 
 if __name__ == '__main__':
-    verify_flag = '--verify-only' in sys.argv
-    download_tiles(verify_only=verify_flag)
+    main()

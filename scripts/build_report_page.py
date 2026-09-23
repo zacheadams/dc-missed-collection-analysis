@@ -4,6 +4,9 @@ Compiles the Unified Operational Report (report.html).
 Consolidates 180-day Ward, ANC, and SMD address deduplication analysis
 with DPW collection route operational analysis and the 223-route performance matrix.
 Strictly adheres to:
+- Primary monospace font (JetBrains Mono)
+- Lo-fi black & white design with browser-default light/dark toggle
+- Keyword colorization: Trash (Red), Recycling (Green), Combined (Blue)
 - No emojis anywhere in UI or code
 - American paper standard (US Letter: 8.5" x 11") for print and PDF exports
 - Offline operation via local vendored assets in assets/vendor/
@@ -151,10 +154,10 @@ html_content = f"""<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Operational Report | DC DPW Missed Collection Analysis</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Local Vendored Assets -->
   <script src="assets/vendor/chartjs/chart.umd.min.js"></script>
@@ -164,22 +167,55 @@ html_content = f"""<!DOCTYPE html>
 
   <style>
     :root {{
-      --bg-dark: #070a12;
-      --bg-card: #0d1322;
-      --bg-panel: rgba(13, 19, 34, 0.94);
-      --border: rgba(255, 255, 255, 0.10);
-      --border-focus: #38bdf8;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --primary: #0284c7;
-      --primary-light: #38bdf8;
-      --trash-color: #ef4444;
-      --recycle-color: #10b981;
-      --warning-color: #f59e0b;
-      --ward-color: #a855f7;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      /* Light Theme (Default) */
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-panel: rgba(255, 255, 255, 0.95);
+      --bg-input: #f1f5f9;
+      --border: #d4d4d8;
+      --border-dark: #18181b;
+      --border-focus: #09090b;
+      --text-main: #09090b;
+      --text-muted: #52525b;
+      --text-dim: #71717a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --trash-color: #dc2626;
+      --recycle-color: #16a34a;
+      --combined-color: #2563eb;
+      --warning-color: #d97706;
+      --ward-boundary: #7c3aed;
+      --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --badge-bg: rgba(37, 99, 235, 0.08);
+      --badge-border: rgba(37, 99, 235, 0.25);
+    }}
+
+    [data-theme="dark"] {{
+      /* Dark Theme */
+      --bg-page: #09090b;
+      --bg-surface: #121215;
+      --bg-card: #121215;
+      --bg-panel: rgba(18, 18, 21, 0.95);
+      --bg-input: #18181b;
+      --border: #27272a;
+      --border-dark: #3f3f46;
+      --border-focus: #f4f4f5;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --trash-color: #ef4444;
+      --recycle-color: #22c55e;
+      --combined-color: #38bdf8;
+      --warning-color: #f59e0b;
+      --ward-boundary: #c084fc;
+      --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --badge-border: rgba(56, 189, 248, 0.3);
     }}
 
     * {{
@@ -189,26 +225,43 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     body {{
-      background-color: var(--bg-dark);
+      background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: var(--font-sans);
+      font-family: var(--font-mono);
       line-height: 1.5;
       padding-bottom: 80px;
       -webkit-font-smoothing: antialiased;
     }}
 
+    /* Keyword Color Classes */
+    .kw-trash {{
+      color: var(--trash-color);
+      font-weight: 700;
+    }}
+
+    .kw-recycle {{
+      color: var(--recycle-color);
+      font-weight: 700;
+    }}
+
+    .kw-combined {{
+      color: var(--combined-color);
+      font-weight: 700;
+    }}
+
     /* Top Navigation Bar */
     .site-nav {{
-      background: rgba(7, 10, 18, 0.96);
+      background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 1000;
-      padding: 14px 24px;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background 0.2s, border-color 0.2s;
     }}
 
     .nav-brand {{
@@ -217,179 +270,177 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .nav-title {{
-      font-size: 17px;
+      font-size: 14px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }}
 
     .nav-subtitle {{
       font-size: 11px;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
-      margin-top: 1px;
+      color: var(--text-muted);
     }}
 
     .nav-links {{
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 10px;
     }}
 
     .nav-link {{
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
 
     .nav-link:hover {{
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: var(--border);
+      background: var(--bg-input);
     }}
 
     .nav-link.active {{
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      font-weight: 700;
     }}
 
-    .btn-export-global {{
-      background: #0284c7;
-      color: #ffffff;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 13px;
+    .btn-action {{
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
-      font-family: var(--font-sans);
-      transition: background 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      font-family: var(--font-mono);
+      transition: all 0.15s ease;
     }}
 
-    .btn-export-global:hover {{
-      background: #0369a1;
+    .btn-action:hover {{
+      border-color: var(--text-main);
+      background: var(--bg-input);
     }}
 
     .page-container {{
-      max-width: 1400px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 30px 24px;
+      padding: 24px 20px;
     }}
 
     /* Header Section */
     .report-header {{
-      margin-bottom: 32px;
-      padding-bottom: 24px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
     }}
 
     .report-title {{
-      font-size: 28px;
+      font-size: 22px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.03em;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
       margin-bottom: 8px;
     }}
 
     .report-meta {{
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-muted);
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 12px;
     }}
 
     .meta-badge {{
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255, 255, 255, 0.04);
-      padding: 4px 10px;
+      background: var(--bg-surface);
+      padding: 3px 8px;
       border-radius: 4px;
       border: 1px solid var(--border);
-      font-family: var(--font-mono);
       font-size: 11px;
     }}
 
     /* KPI Grid */
     .kpi-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 36px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
     }}
 
     .kpi-card {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 6px;
+      padding: 16px;
+      box-shadow: var(--card-shadow);
     }}
 
     .kpi-label {{
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
     }}
 
     .kpi-value {{
-      font-size: 32px;
+      font-size: 26px;
       font-weight: 800;
-      font-family: var(--font-mono);
-      color: #ffffff;
+      color: var(--text-main);
       line-height: 1.1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }}
 
     .kpi-subtext {{
-      font-size: 12px;
-      color: var(--text-dim);
+      font-size: 11px;
+      color: var(--text-muted);
     }}
 
     /* Section Styling */
     .report-section {{
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }}
 
     .section-header {{
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
     }}
 
     .section-title {{
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }}
 
     .section-description {{
-      font-size: 13px;
+      font-size: 11px;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 3px;
       max-width: 900px;
     }}
 
     /* Chart Cards */
     .chart-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-      gap: 20px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(560px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
     }}
 
     @media (max-width: 900px) {{
@@ -401,22 +452,23 @@ html_content = f"""<!DOCTYPE html>
     .chart-card {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 6px;
+      padding: 16px;
       position: relative;
+      box-shadow: var(--card-shadow);
     }}
 
     .chart-header {{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }}
 
     .chart-title {{
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 700;
-      color: #ffffff;
+      color: var(--text-main);
     }}
 
     .chart-actions {{
@@ -424,27 +476,8 @@ html_content = f"""<!DOCTYPE html>
       gap: 6px;
     }}
 
-    .btn-export-sm {{
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: var(--font-mono);
-      transition: all 0.15s ease;
-    }}
-
-    .btn-export-sm:hover {{
-      color: #ffffff;
-      border-color: var(--primary-light);
-      background: rgba(56, 189, 248, 0.1);
-    }}
-
     .chart-container {{
-      height: 320px;
+      height: 280px;
       position: relative;
     }}
 
@@ -452,37 +485,38 @@ html_content = f"""<!DOCTYPE html>
     .table-container {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 6px;
       overflow-x: auto;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--card-shadow);
     }}
 
     .table-toolbar {{
-      padding: 14px 18px;
+      padding: 10px 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }}
 
     .toolbar-filters {{
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
     }}
 
     .input-search {{
-      background: rgba(7, 10, 18, 0.7);
+      background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: var(--font-sans);
-      min-width: 220px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      min-width: 200px;
     }}
 
     .input-search:focus {{
@@ -491,13 +525,13 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .select-filter {{
-      background: rgba(7, 10, 18, 0.7);
+      background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-family: var(--font-sans);
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
     }}
 
     .select-filter:focus {{
@@ -508,18 +542,18 @@ html_content = f"""<!DOCTYPE html>
     .data-table {{
       width: 100%;
       border-collapse: collapse;
-      font-size: 13px;
+      font-size: 11px;
       text-align: left;
     }}
 
     .data-table th {{
-      background: rgba(255, 255, 255, 0.02);
-      color: var(--text-muted);
+      background: var(--bg-input);
+      color: var(--text-dim);
       font-weight: 700;
-      font-size: 11px;
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 12px 16px;
+      letter-spacing: 0.04em;
+      padding: 9px 12px;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
       user-select: none;
@@ -527,57 +561,49 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .data-table th:hover {{
-      color: #ffffff;
+      color: var(--text-main);
     }}
 
     .data-table td {{
-      padding: 11px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
       color: var(--text-main);
-      font-family: var(--font-sans);
     }}
 
     .data-table tr:hover td {{
-      background: rgba(255, 255, 255, 0.02);
-    }}
-
-    .font-num {{
-      font-family: var(--font-mono);
+      background: var(--bg-input);
     }}
 
     .badge-trash {{
-      background: rgba(239, 68, 68, 0.15);
-      color: #fca5a5;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 11px;
+      background: rgba(220, 38, 38, 0.1);
+      color: var(--trash-color);
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-mono);
       display: inline-block;
     }}
 
     .badge-recycle {{
-      background: rgba(16, 185, 129, 0.15);
-      color: #6ee7b7;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 11px;
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--recycle-color);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-mono);
       display: inline-block;
     }}
 
     .badge-hotspot {{
-      background: rgba(245, 158, 11, 0.15);
-      color: #fcd34d;
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-size: 11px;
+      background: rgba(217, 119, 6, 0.12);
+      color: var(--warning-color);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-mono);
       display: inline-block;
     }}
 
@@ -585,9 +611,9 @@ html_content = f"""<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 18px;
+      padding: 10px 14px;
       border-top: 1px solid var(--border);
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-dim);
     }}
 
@@ -597,26 +623,26 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .btn-page {{
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 4px 10px;
+      color: var(--text-main);
+      padding: 4px 8px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 11px;
       cursor: pointer;
+      font-family: var(--font-mono);
     }}
 
     .btn-page:hover:not(:disabled) {{
-      color: #ffffff;
-      border-color: var(--border-focus);
+      border-color: var(--text-main);
     }}
 
     .btn-page:disabled {{
-      opacity: 0.35;
+      opacity: 0.4;
       cursor: not-allowed;
     }}
 
-    /* Print Stylesheet: US Letter (8.5in x 11in) */
+    /* Print Formatting (US Letter: 8.5in x 11in) */
     @media print {{
       @page {{
         size: letter portrait;
@@ -625,81 +651,32 @@ html_content = f"""<!DOCTYPE html>
 
       body {{
         background: #ffffff !important;
-        color: #0f172a !important;
-        font-size: 10pt;
-        padding-bottom: 0;
+        color: #000000 !important;
+        padding-bottom: 0 !important;
       }}
 
       .site-nav,
-      .table-toolbar,
-      .table-pagination,
       .chart-actions,
-      .btn-export-global {{
+      .table-toolbar,
+      .table-pagination {{
         display: none !important;
       }}
 
-      .page-container {{
-        max-width: 100% !important;
-        padding: 0 !important;
-      }}
-
-      .report-title {{
-        color: #0f172a !important;
-        font-size: 20pt !important;
-      }}
-
-      .report-header {{
-        border-bottom: 2px solid #0f172a !important;
-        margin-bottom: 16pt !important;
-      }}
-
-      .kpi-card,
       .chart-card,
-      .table-container {{
-        background: #ffffff !important;
-        border: 1px solid #cbd5e1 !important;
-        color: #0f172a !important;
+      .table-container,
+      .kpi-card {{
+        border: 1px solid #cccccc !important;
         box-shadow: none !important;
+        break-inside: avoid;
         page-break-inside: avoid;
-        margin-bottom: 14pt !important;
-      }}
-
-      .kpi-value,
-      .section-title,
-      .chart-title {{
-        color: #0f172a !important;
-      }}
-
-      .data-table th {{
-        background: #f1f5f9 !important;
-        color: #0f172a !important;
-        border-bottom: 1.5pt solid #0f172a !important;
-      }}
-
-      .data-table td {{
-        color: #0f172a !important;
-        border-bottom: 0.5pt solid #cbd5e1 !important;
-      }}
-
-      .data-table thead {{
-        display: table-header-group;
       }}
 
       .chart-grid {{
         grid-template-columns: 1fr 1fr !important;
-        gap: 12pt !important;
       }}
 
       .chart-container {{
-        height: 220pt !important;
-      }}
-
-      .badge-trash,
-      .badge-recycle,
-      .badge-hotspot {{
-        border: 1px solid #64748b !important;
-        color: #0f172a !important;
-        background: transparent !important;
+        height: 240px !important;
       }}
     }}
   </style>
@@ -710,152 +687,220 @@ html_content = f"""<!DOCTYPE html>
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">DPW 311 Performance Monitoring</span>
+      <span class="nav-subtitle">Unified Operational Report</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link">Interactive Map</a>
       <a href="report.html" class="nav-link active">Operational Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
-      <button onclick="window.print()" class="btn-export-global">Export Report (PDF)</button>
+      <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
+      <button onclick="window.print()" class="btn-action">Print (US Letter)</button>
     </div>
   </nav>
 
-  <main class="page-container">
+  <div class="page-container">
 
     <!-- Report Header -->
     <header class="report-header">
-      <h1 class="report-title">DPW Missed Collection Operational Report</h1>
+      <h1 class="report-title">Washington, DC Missed Collection Operational Report</h1>
       <div class="report-meta">
-        <span class="meta-badge">Period: 180-Day Rolling Window</span>
-        <span class="meta-badge">Data Sources: Open Data DC 311 (S0441, S0321)</span>
-        <span class="meta-badge">Geography: All 8 Wards • 46 ANCs • 345 SMDs • 223 DPW Routes</span>
-        <span class="meta-badge">Updated: {datetime.now().strftime('%B %d, %Y')}</span>
+        <span class="meta-badge">Period: Past 180 Days (March 25, 2026 - September 21, 2026)</span>
+        <span class="meta-badge">Source: DC 311 Open Data</span>
+        <span class="meta-badge">Scope: 8 Wards • 46 ANCs • 345 SMDs • 223 DPW Routes</span>
+        <span class="meta-badge">Standard: US Letter (8.5" x 11")</span>
       </div>
     </header>
 
-    <!-- Executive Summary KPIs -->
-    <div class="kpi-grid">
+    <!-- KPI Grid -->
+    <section class="kpi-grid">
       <div class="kpi-card">
-        <div class="kpi-label">Total Service Requests (180d)</div>
-        <div class="kpi-value">{citywide['total_requests']:,}</div>
-        <div class="kpi-subtext">{wards_stats['1']['total'] + wards_stats['2']['total'] + wards_stats['3']['total'] + wards_stats['4']['total'] + wards_stats['5']['total'] + wards_stats['6']['total'] + wards_stats['7']['total'] + wards_stats['8']['total']:,} cataloged across 8 wards</div>
+        <div class="kpi-label">Total Missed Collections</div>
+        <div class="kpi-value kw-combined">{citywide['total_requests']:,}</div>
+        <div class="kpi-subtext">Verified 311 Service Requests</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Unique Properties Impacted</div>
+        <div class="kpi-label">Unique Properties</div>
         <div class="kpi-value">{citywide['unique_addresses']:,}</div>
-        <div class="kpi-subtext">{round(citywide['unique_addresses'] / citywide['total_requests'] * 100, 1)}% unique address ratio</div>
+        <div class="kpi-subtext">Distinct Street Addresses</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Chronic Repeat Properties</div>
-        <div class="kpi-value" style="color: #f59e0b;">{citywide['repeat_addresses']:,}</div>
-        <div class="kpi-subtext">Addresses with multiple missed collections</div>
+        <div class="kpi-label">Repeat Properties</div>
+        <div class="kpi-value" style="color: var(--warning-color);">{citywide['repeat_addresses']:,}</div>
+        <div class="kpi-subtext">{citywide['repeat_rate']}% Recurrence Rate (2+ Tickets)</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-label">Citywide Recurrence Rate</div>
-        <div class="kpi-value" style="color: #ef4444;">{citywide['repeat_rate']}%</div>
-        <div class="kpi-subtext">{round(citywide['requests_per_address'], 2)} avg requests per address</div>
+        <div class="kpi-label">Trash Stream (S0441)</div>
+        <div class="kpi-value kw-trash">{sum(wards_stats[str(w)]['trash'] for w in range(1, 9)):,}</div>
+        <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['trash'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
       </div>
-    </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Recycling Stream (S0321)</div>
+        <div class="kpi-value kw-recycle">{sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)):,}</div>
+        <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
+      </div>
+    </section>
 
-    <!-- Section 1: Ward Analysis -->
-    <section class="report-section" id="section-wards">
+    <!-- SECTION 1: WARD BREAKDOWN -->
+    <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Ward-Level Operational Analysis</h2>
-          <p class="section-description">Comparative evaluation of missed trash versus missed recycling across all 8 Wards, evaluating address deduplication and chronic recurrence rates.</p>
+          <h2 class="section-title">1. Ward Performance and Address Recurrence Breakdown</h2>
+          <p class="section-description">
+            Analysis of missed collections across the District's 8 Wards, highlighting the division between
+            <span class="kw-trash">Trash</span> and <span class="kw-recycle">Recycling</span>, alongside chronic repeat rates at specific street addresses.
+          </p>
         </div>
+        <button onclick="exportTableCsv('ward-table', 'dc-ward-summary')" class="btn-action">Export CSV</button>
       </div>
 
-      <!-- Ward Charts -->
       <div class="chart-grid">
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Missed Collections by Ward (Trash vs Recycling)</span>
+            <span class="chart-title">Ward Volume by Stream (<span class="kw-trash">Trash</span> vs <span class="kw-recycle">Recycling</span>)</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartWardVol', 'ward-collection-volume')" class="btn-export-sm">PNG</button>
-              <button onclick="exportChartPdf('chartWardVol', 'Ward Collection Volume', 'ward-collection-volume')" class="btn-export-sm">PDF</button>
+              <button onclick="exportChartPng('chartWardReq', 'dc-ward-volume')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartWardReq', 'Ward Missed Collections by Stream', 'dc-ward-volume')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
-            <canvas id="chartWardVol"></canvas>
+            <canvas id="chartWardReq"></canvas>
           </div>
         </div>
 
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Address Recurrence by Ward (Single vs Repeat Properties)</span>
+            <span class="chart-title">Single vs. Repeat Addresses by Ward</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartWardRepeat', 'ward-repeat-recurrence')" class="btn-export-sm">PNG</button>
-              <button onclick="exportChartPdf('chartWardRepeat', 'Ward Repeat Recurrence', 'ward-repeat-recurrence')" class="btn-export-sm">PDF</button>
+              <button onclick="exportChartPng('chartWardRep', 'dc-ward-repeat-addrs')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartWardRep', 'Ward Single vs Repeat Address Volume', 'dc-ward-repeat-addrs')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
-            <canvas id="chartWardRepeat"></canvas>
+            <canvas id="chartWardRep"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- Ward Summary Table -->
       <div class="table-container">
-        <div class="table-toolbar">
-          <span style="font-weight: 700; font-size: 14px; color: #ffffff;">Ward Performance Matrix</span>
-          <div>
-            <button onclick="exportTableCsv('table-wards', 'dc-wards-performance')" class="btn-export-sm">CSV</button>
-            <button onclick="exportTablePdf('table-wards', 'DC Ward Performance Summary', 'dc-wards-performance')" class="btn-export-sm">PDF</button>
-          </div>
-        </div>
-        <table class="data-table" id="table-wards">
+        <table class="data-table" id="ward-table">
           <thead>
             <tr>
               <th>Ward</th>
               <th>Councilmember</th>
-              <th>Total Requests</th>
-              <th>Missed Trash</th>
-              <th>Missed Recycling</th>
-              <th>Unique Addrs</th>
-              <th>Repeat Addrs</th>
-              <th>Repeat Rate</th>
-              <th>Req / Addr</th>
+              <th style="text-align: right;">Total Requests</th>
+              <th style="text-align: right;" class="kw-trash">Trash (S0441)</th>
+              <th style="text-align: right;" class="kw-recycle">Recycling (S0321)</th>
+              <th style="text-align: right;">Unique Addrs</th>
+              <th style="text-align: right;">Repeat Addrs</th>
+              <th style="text-align: right;">Repeat Rate</th>
+              <th style="text-align: right;">Ward Share</th>
             </tr>
           </thead>
           <tbody>
 """
 
 for w in range(1, 9):
-    ws = wards_stats[str(w)]
-    cm = ward_council[w]
-    html_content += f"""            <tr>
-              <td><strong style="color: #ffffff;">Ward {w}</strong></td>
-              <td style="color: #cbd5e1;">{cm}</td>
-              <td class="font-num" style="font-weight: 700; color: #ffffff;">{ws['total']:,}</td>
-              <td class="font-num" style="color: #fca5a5;">{ws['trash']:,}</td>
-              <td class="font-num" style="color: #6ee7b7;">{ws['recycling']:,}</td>
-              <td class="font-num">{ws['unique_addresses']:,}</td>
-              <td class="font-num" style="color: #fcd34d;">{ws['repeat_addresses']:,}</td>
-              <td class="font-num"><span class="badge-hotspot">{ws['repeat_rate']}%</span></td>
-              <td class="font-num">{ws['requests_per_address']}</td>
+    st = wards_stats[str(w)]
+    tot = st['total']
+    share = round(tot / citywide['total_requests'] * 100, 1)
+    rep_rate = st['repeat_rate']
+    html_content += f"""
+            <tr>
+              <td><strong>Ward {w}</strong></td>
+              <td>{ward_council[w]}</td>
+              <td style="text-align: right;" class="kw-combined"><strong>{tot:,}</strong></td>
+              <td style="text-align: right;" class="kw-trash">{st['trash']:,}</td>
+              <td style="text-align: right;" class="kw-recycle">{st['recycling']:,}</td>
+              <td style="text-align: right;">{st['unique_addresses']:,}</td>
+              <td style="text-align: right;">{st['repeat_addresses']:,}</td>
+              <td style="text-align: right;">
+                <span class="{ 'badge-hotspot' if rep_rate >= 24 else '' }">{rep_rate}%</span>
+              </td>
+              <td style="text-align: right;">{share}%</td>
             </tr>
 """
 
-html_content += f"""          </tbody>
+html_content += f"""
+          </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Section 2: ANC Analysis -->
-    <section class="report-section" id="section-ancs">
+    <!-- SECTION 2: TOP 10 SMDs -->
+    <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Advisory Neighborhood Commission (ANC) Breakdown</h2>
-          <p class="section-description">Hierarchical aggregation across all 46 ANCs. Filter by Ward or search by ANC code to evaluate localized collection reliability.</p>
+          <h2 class="section-title">2. Top 10 High-Incident Single Member Districts (SMDs)</h2>
+          <p class="section-description">
+            Micro-districts experiencing disproportionate missed collection frequency and recurring service failures.
+          </p>
         </div>
+        <button onclick="exportTableCsv('top10-smd-table', 'dc-top10-smds')" class="btn-action">Export CSV</button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table" id="top10-smd-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>SMD</th>
+              <th>ANC</th>
+              <th>Ward</th>
+              <th>Councilmember</th>
+              <th style="text-align: right;">Total Requests</th>
+              <th style="text-align: right;" class="kw-trash">Trash</th>
+              <th style="text-align: right;" class="kw-recycle">Recycling</th>
+              <th style="text-align: right;">Unique Addrs</th>
+              <th style="text-align: right;">Repeat Addrs</th>
+              <th style="text-align: right;">Repeat Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+"""
+
+for rank, s in enumerate(top10_smds, 1):
+    w = s['ward']
+    html_content += f"""
+            <tr>
+              <td><strong>#{rank}</strong></td>
+              <td><strong>SMD {s['smd_id']}</strong></td>
+              <td>ANC {s['anc_id']}</td>
+              <td>Ward {w}</td>
+              <td>{ward_council[w]}</td>
+              <td style="text-align: right;" class="kw-combined"><strong>{s['total']:,}</strong></td>
+              <td style="text-align: right;" class="kw-trash">{s['trash']:,}</td>
+              <td style="text-align: right;" class="kw-recycle">{s['recycling']:,}</td>
+              <td style="text-align: right;">{s['unique_addrs']:,}</td>
+              <td style="text-align: right;">{s['repeat_addrs']:,}</td>
+              <td style="text-align: right;">
+                <span class="badge-hotspot">{s['repeat_rate']}%</span>
+              </td>
+            </tr>
+"""
+
+html_content += f"""
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ANC PERFORMANCE TABLE -->
+    <section class="report-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">3. Advisory Neighborhood Commission (ANC) Operational Summary</h2>
+          <p class="section-description">
+            Full breakdown across all 46 ANCs. Filter by Ward or search by ANC identifier.
+          </p>
+        </div>
+        <button onclick="exportTableCsv('anc-table', 'dc-anc-summary')" class="btn-action">Export CSV</button>
       </div>
 
       <div class="table-container">
         <div class="table-toolbar">
           <div class="toolbar-filters">
-            <input type="text" id="anc-search" class="input-search" placeholder="Search ANC (e.g. 1A, 7B)..." oninput="filterAncTable()">
+            <input type="text" id="anc-search" class="input-search" placeholder="Search ANC (e.g. 5E, 7B)..." oninput="filterAncTable()">
             <select id="anc-ward-filter" class="select-filter" onchange="filterAncTable()">
               <option value="">All Wards</option>
               <option value="1">Ward 1</option>
@@ -868,122 +913,68 @@ html_content += f"""          </tbody>
               <option value="8">Ward 8</option>
             </select>
           </div>
-          <div>
-            <button onclick="exportTableCsv('table-ancs', 'dc-anc-performance')" class="btn-export-sm">CSV</button>
-            <button onclick="exportTablePdf('table-ancs', 'DC ANC Performance Breakdown', 'dc-anc-performance')" class="btn-export-sm">PDF</button>
-          </div>
         </div>
-        <table class="data-table" id="table-ancs">
+
+        <table class="data-table" id="anc-table">
           <thead>
             <tr>
-              <th onclick="sortAncTable(0)">ANC</th>
-              <th onclick="sortAncTable(1)">Ward</th>
-              <th onclick="sortAncTable(2)">SMDs</th>
-              <th onclick="sortAncTable(3)">Total Requests</th>
-              <th onclick="sortAncTable(4)">Missed Trash</th>
-              <th onclick="sortAncTable(5)">Missed Recycling</th>
-              <th onclick="sortAncTable(6)">Unique Addrs</th>
-              <th onclick="sortAncTable(7)">Repeat Addrs</th>
-              <th onclick="sortAncTable(8)">Repeat Rate</th>
+              <th>ANC</th>
+              <th>Ward</th>
+              <th>SMD Count</th>
+              <th style="text-align: right;">Total Requests</th>
+              <th style="text-align: right;" class="kw-trash">Trash</th>
+              <th style="text-align: right;" class="kw-recycle">Recycling</th>
+              <th style="text-align: right;">Unique Addrs</th>
+              <th style="text-align: right;">Repeat Addrs</th>
+              <th style="text-align: right;">Repeat Rate</th>
             </tr>
           </thead>
           <tbody id="anc-table-body">
 """
 
 for a in ancs_list:
-    html_content += f"""            <tr data-anc="{a['anc_id']}" data-ward="{a['ward']}">
-              <td><strong style="color: #38bdf8;">ANC {a['anc_id']}</strong></td>
+    html_content += f"""
+            <tr data-anc="{a['anc_id']}" data-ward="{a['ward']}">
+              <td><strong>ANC {a['anc_id']}</strong></td>
               <td>Ward {a['ward']}</td>
-              <td class="font-num">{a['smd_count']}</td>
-              <td class="font-num" style="font-weight: 700; color: #ffffff;">{a['total']:,}</td>
-              <td class="font-num" style="color: #fca5a5;">{a['trash']:,}</td>
-              <td class="font-num" style="color: #6ee7b7;">{a['recycling']:,}</td>
-              <td class="font-num">{a['unique_addrs']:,}</td>
-              <td class="font-num" style="color: #fcd34d;">{a['repeat_addrs']:,}</td>
-              <td class="font-num"><span class="badge-hotspot">{a['repeat_rate']}%</span></td>
+              <td>{a['smd_count']} SMDs</td>
+              <td style="text-align: right;" class="kw-combined"><strong>{a['total']:,}</strong></td>
+              <td style="text-align: right;" class="kw-trash">{a['trash']:,}</td>
+              <td style="text-align: right;" class="kw-recycle">{a['recycling']:,}</td>
+              <td style="text-align: right;">{a['unique_addrs']:,}</td>
+              <td style="text-align: right;">{a['repeat_addrs']:,}</td>
+              <td style="text-align: right;">
+                <span class="{ 'badge-hotspot' if a['repeat_rate'] >= 25 else '' }">{a['repeat_rate']}%</span>
+              </td>
             </tr>
 """
 
-html_content += f"""          </tbody>
+html_content += f"""
+          </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Section 3: SMD Analysis -->
-    <section class="report-section" id="section-smds">
+    <!-- SECTION 4: ROUTE ANALYSIS & MATRIX -->
+    <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">Single Member District (SMD) Rankings & Hot Spots</h2>
-          <p class="section-description">High-volume Single Member Districts experiencing severe missed collections and address recurrence over the 180-day evaluation period.</p>
+          <h2 class="section-title">4. DPW Collection Route Operational Performance Matrix</h2>
+          <p class="section-description">
+            Analysis of all 223 DPW collection routes (103 <span class="kw-trash">Trash</span>, 120 <span class="kw-recycle">Recycling</span>)
+            evaluating total missed requests, day-of-week collection schedules, geographic area, and request density.
+          </p>
         </div>
+        <button onclick="exportTableCsv('route-table', 'dc-dpw-routes-matrix')" class="btn-action">Export All Routes (CSV)</button>
       </div>
 
-      <!-- Top 10 SMDs Table -->
-      <div class="table-container" style="margin-bottom: 24px;">
-        <div class="table-toolbar">
-          <span style="font-weight: 700; font-size: 14px; color: #ffffff;">Top 10 High-Volume Single Member Districts</span>
-          <div>
-            <button onclick="exportTableCsv('table-top-smds', 'dc-top10-smds')" class="btn-export-sm">CSV</button>
-            <button onclick="exportTablePdf('table-top-smds', 'Top 10 High-Volume SMDs', 'dc-top10-smds')" class="btn-export-sm">PDF</button>
-          </div>
-        </div>
-        <table class="data-table" id="table-top-smds">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>SMD</th>
-              <th>ANC</th>
-              <th>Ward</th>
-              <th>Total Requests</th>
-              <th>Missed Trash</th>
-              <th>Missed Recycling</th>
-              <th>Unique Addrs</th>
-              <th>Repeat Addrs</th>
-              <th>Repeat Rate</th>
-              <th>Max Incident Days</th>
-            </tr>
-          </thead>
-          <tbody>
-"""
-
-for idx, smd in enumerate(top10_smds, start=1):
-    html_content += f"""            <tr>
-              <td class="font-num" style="font-weight: 800; color: #ffffff;">#{idx}</td>
-              <td><strong style="color: #facc15;">SMD {smd['smd_id']}</strong></td>
-              <td>ANC {smd['anc_id']}</td>
-              <td>Ward {smd['ward']}</td>
-              <td class="font-num" style="font-weight: 700; color: #ffffff;">{smd['total']}</td>
-              <td class="font-num" style="color: #fca5a5;">{smd['trash']}</td>
-              <td class="font-num" style="color: #6ee7b7;">{smd['recycling']}</td>
-              <td class="font-num">{smd['unique_addrs']}</td>
-              <td class="font-num" style="color: #fcd34d;">{smd['repeat_addrs']}</td>
-              <td class="font-num"><span class="badge-hotspot">{smd['repeat_rate']}%</span></td>
-              <td class="font-num">{smd['max_repeat_days']} days</td>
-            </tr>
-"""
-
-html_content += f"""          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Section 4: DPW Route Operational Bottlenecks -->
-    <section class="report-section" id="section-routes-ops">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">DPW Route Operations &amp; Bottlenecks</h2>
-          <p class="section-description">Evaluating collection performance across 103 Trash Routes and 120 Recycling Routes by day of week, route geographic scale, and fleet load distribution.</p>
-        </div>
-      </div>
-
-      <!-- Route Operational Charts -->
       <div class="chart-grid">
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Missed Collections by Scheduled Day of Week</span>
+            <span class="chart-title">Requests by Scheduled Collection Day (<span class="kw-trash">Trash</span> vs <span class="kw-recycle">Recycling</span>)</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartDayVol', 'day-collection-volume')" class="btn-export-sm">PNG</button>
-              <button onclick="exportChartPdf('chartDayVol', 'Day Collection Volume', 'day-collection-volume')" class="btn-export-sm">PDF</button>
+              <button onclick="exportChartPng('chartDayVol', 'dc-routes-by-day')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartDayVol', 'Requests by Scheduled Collection Day', 'dc-routes-by-day')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -993,10 +984,10 @@ html_content += f"""          </tbody>
 
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Average Requests per Route by Day (Operational Density)</span>
+            <span class="chart-title">Average Requests per Route by Day</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartDayAvg', 'day-route-density')" class="btn-export-sm">PNG</button>
-              <button onclick="exportChartPdf('chartDayAvg', 'Day Route Density', 'day-route-density')" class="btn-export-sm">PDF</button>
+              <button onclick="exportChartPng('chartDayAvg', 'dc-routes-avg-density')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartDayAvg', 'Average Requests per Route by Day', 'dc-routes-avg-density')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -1004,28 +995,18 @@ html_content += f"""          </tbody>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Section 5: Comprehensive Route Performance Matrix -->
-    <section class="report-section" id="section-matrix">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Route Performance Matrix (223 Routes)</h2>
-          <p class="section-description">Interactive, searchable matrix evaluating all 103 Trash Routes and 120 Recycling Routes. Filter by day of week, stream type, or geographic coverage.</p>
-        </div>
-      </div>
 
       <div class="table-container">
         <div class="table-toolbar">
           <div class="toolbar-filters">
-            <input type="text" id="route-search" class="input-search" placeholder="Search route, neighborhood, or ANC..." oninput="filterRouteTable()">
+            <input type="text" id="route-search" class="input-search" placeholder="Search route, area, or ANC..." oninput="filterRouteTable()">
             <select id="route-type-filter" class="select-filter" onchange="filterRouteTable()">
               <option value="">All Streams</option>
-              <option value="Trash">Trash</option>
-              <option value="Recycling">Recycling</option>
+              <option value="Trash">Trash (103)</option>
+              <option value="Recycling">Recycling (120)</option>
             </select>
             <select id="route-day-filter" class="select-filter" onchange="filterRouteTable()">
-              <option value="">All Days</option>
+              <option value="">All Schedule Days</option>
               <option value="Monday">Monday</option>
               <option value="Tuesday">Tuesday</option>
               <option value="Wednesday">Wednesday</option>
@@ -1033,80 +1014,113 @@ html_content += f"""          </tbody>
               <option value="Friday">Friday</option>
             </select>
           </div>
-          <div>
-            <button onclick="exportTableCsv('table-routes', 'dc-route-performance-matrix')" class="btn-export-sm">CSV</button>
-            <button onclick="exportTablePdf('table-routes', 'DPW Route Performance Matrix', 'dc-route-performance-matrix')" class="btn-export-sm">PDF</button>
+          <div class="font-num" style="font-size: 11px; color: var(--text-dim);" id="route-page-info">
+            Showing 1 to 25 of 223 routes
           </div>
         </div>
-        <table class="data-table" id="table-routes">
+
+        <table class="data-table" id="route-table">
           <thead>
             <tr>
-              <th onclick="sortRouteTable(0)">Route ID</th>
-              <th onclick="sortRouteTable(1)">Stream</th>
-              <th onclick="sortRouteTable(2)">Scheduled Day</th>
-              <th onclick="sortRouteTable(3)">Total Requests</th>
-              <th onclick="sortRouteTable(4)">Unique Addrs</th>
-              <th onclick="sortRouteTable(5)">Repeat Addrs</th>
-              <th onclick="sortRouteTable(6)">Repeat Rate</th>
-              <th onclick="sortRouteTable(7)">Area (sq mi)</th>
-              <th onclick="sortRouteTable(8)">Density (req/mi²)</th>
-              <th>Coverage (Neighborhoods &amp; ANCs)</th>
+              <th>Rank</th>
+              <th>Route ID</th>
+              <th>Stream</th>
+              <th>Day</th>
+              <th>Primary Ward</th>
+              <th>Covered Area / ANCs</th>
+              <th style="text-align: right;">Area (sq mi)</th>
+              <th style="text-align: right;">Total Requests</th>
+              <th style="text-align: right;">Density (req/sq mi)</th>
             </tr>
           </thead>
           <tbody id="route-table-body">
 """
 
-for r in all_routes:
-    stream_badge = f'<span class="badge-trash">Trash</span>' if r['stream'] == 'Trash' else f'<span class="badge-recycle">Recycling</span>'
-    html_content += f"""            <tr data-stream="{r['stream']}" data-day="{r['schedule']}" data-search="{r['route_id'].lower()} {r['area_desc'].lower()}">
-              <td><strong style="color: #ffffff;">{r['route_id']}</strong></td>
-              <td>{stream_badge}</td>
-              <td style="color: #cbd5e1;">{r['schedule']}</td>
-              <td class="font-num" style="font-weight: 700; color: #ffffff;">{r['total']:,}</td>
-              <td class="font-num">{r['unique_addrs']:,}</td>
-              <td class="font-num" style="color: #fcd34d;">{r['repeat_addrs']:,}</td>
-              <td class="font-num"><span class="badge-hotspot">{r['repeat_rate']}%</span></td>
-              <td class="font-num">{r['area_sq_mi']}</td>
-              <td class="font-num" style="font-weight: 600;">{r['density']}</td>
-              <td style="font-size: 12px; color: #94a3b8; max-width: 320px;">{r['area_desc']}</td>
+for rank, r in enumerate(all_routes, 1):
+    stream = r['stream']
+    badge_cls = 'badge-trash' if stream == 'Trash' else 'badge-recycle'
+    search_text = f"{r['route_id']} {stream} {r['schedule']} {r.get('ward', '')} {r.get('area_desc', '')}".lower()
+    html_content += f"""
+            <tr data-stream="{stream}" data-day="{r['schedule']}" data-search="{search_text}">
+              <td><strong>#{rank}</strong></td>
+              <td><strong>{r['route_id']}</strong></td>
+              <td><span class="{badge_cls}">{stream}</span></td>
+              <td>{r['schedule']}</td>
+              <td>{r.get('ward', 'N/A')}</td>
+              <td style="max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{r.get('area_desc', '')}">
+                {r.get('area_desc', 'Citywide DPW service route')}
+              </td>
+              <td style="text-align: right;">{r['area_sq_mi']}</td>
+              <td style="text-align: right;" class="{ 'kw-trash' if stream == 'Trash' else 'kw-recycle' }"><strong>{r['total']:,}</strong></td>
+              <td style="text-align: right;">
+                <span class="{ 'badge-hotspot' if r['density'] >= 75 else '' }">{r['density']}</span>
+              </td>
             </tr>
 """
 
-html_content += f"""          </tbody>
+html_content += f"""
+          </tbody>
         </table>
+
         <div class="table-pagination">
-          <span id="route-page-info">Showing 1 to 25 of {len(all_routes)} routes</span>
+          <span>25 routes per page</span>
           <div class="pagination-controls">
-            <button id="btn-prev-route" onclick="prevRoutePage()" class="btn-page" disabled>Previous</button>
-            <button id="btn-next-route" onclick="nextRoutePage()" class="btn-page">Next</button>
+            <button class="btn-page" id="btn-prev-route" onclick="prevRoutePage()" disabled>Previous</button>
+            <button class="btn-page" id="btn-next-route" onclick="nextRoutePage()">Next</button>
           </div>
         </div>
       </div>
     </section>
 
-  </main>
+  </div>
 
   <script>
+    // Theme Management
+    let currentTheme = 'light';
+    const savedTheme = localStorage.getItem('dc_map_theme');
+    if (savedTheme) {{
+      currentTheme = savedTheme;
+    }} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {{
+      currentTheme = 'dark';
+    }}
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    const themeBtn = document.getElementById('theme-toggle-btn');
+    if (themeBtn) themeBtn.innerText = currentTheme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+
+    function toggleTheme() {{
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    }}
+
+    function setTheme(theme) {{
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('dc_map_theme', theme);
+      const btn = document.getElementById('theme-toggle-btn');
+      if (btn) btn.innerText = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+      updateChartsTheme(theme);
+    }}
+
     // ----------------------------------------------------
-    // Chart 1: Missed Collections by Ward (Trash vs Recycling)
+    // Chart 1: Ward Volume by Stream
     // ----------------------------------------------------
-    const ctxWardVol = document.getElementById('chartWardVol').getContext('2d');
-    const chartWardVol = new Chart(ctxWardVol, {{
+    const ctxWardReq = document.getElementById('chartWardReq').getContext('2d');
+    const chartWardReq = new Chart(ctxWardReq, {{
       type: 'bar',
       data: {{
         labels: {json.dumps(chart_ward_labels)},
         datasets: [
           {{
-            label: 'Missed Trash',
+            label: 'Trash (S0441)',
             data: {json.dumps(chart_ward_trash)},
-            backgroundColor: '#ef4444',
-            borderRadius: 4
+            backgroundColor: '#dc2626',
+            borderRadius: 3
           }},
           {{
-            label: 'Missed Recycling',
+            label: 'Recycling (S0321)',
             data: {json.dumps(chart_ward_rec)},
-            backgroundColor: '#10b981',
-            borderRadius: 4
+            backgroundColor: '#16a34a',
+            borderRadius: 3
           }}
         ]
       }},
@@ -1116,44 +1130,42 @@ html_content += f"""          </tbody>
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ color: '#cbd5e1', font: {{ family: 'Plus Jakarta Sans', size: 12 }} }}
+            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
-            stacked: true,
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }},
           y: {{
-            stacked: true,
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }}
         }}
       }}
     }});
 
     // ----------------------------------------------------
-    // Chart 2: Address Recurrence by Ward
+    // Chart 2: Ward Address Recurrence
     // ----------------------------------------------------
-    const ctxWardRepeat = document.getElementById('chartWardRepeat').getContext('2d');
-    const chartWardRepeat = new Chart(ctxWardRepeat, {{
+    const ctxWardRep = document.getElementById('chartWardRep').getContext('2d');
+    const chartWardRep = new Chart(ctxWardRep, {{
       type: 'bar',
       data: {{
         labels: {json.dumps(chart_ward_labels)},
         datasets: [
           {{
-            label: 'Single-Incident Properties',
+            label: 'Single Properties',
             data: {json.dumps(chart_ward_single)},
-            backgroundColor: '#0284c7',
-            borderRadius: 4
+            backgroundColor: '#2563eb',
+            borderRadius: 3
           }},
           {{
             label: 'Repeat Properties',
             data: {json.dumps(chart_ward_repeat)},
-            backgroundColor: '#f59e0b',
-            borderRadius: 4
+            backgroundColor: '#d97706',
+            borderRadius: 3
           }}
         ]
       }},
@@ -1163,19 +1175,19 @@ html_content += f"""          </tbody>
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ color: '#cbd5e1', font: {{ family: 'Plus Jakarta Sans', size: 12 }} }}
+            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
             stacked: true,
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }},
           y: {{
             stacked: true,
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1193,14 +1205,14 @@ html_content += f"""          </tbody>
           {{
             label: 'Trash',
             data: {json.dumps(chart_day_trash)},
-            backgroundColor: '#ef4444',
-            borderRadius: 4
+            backgroundColor: '#dc2626',
+            borderRadius: 3
           }},
           {{
             label: 'Recycling',
             data: {json.dumps(chart_day_rec)},
-            backgroundColor: '#10b981',
-            borderRadius: 4
+            backgroundColor: '#16a34a',
+            borderRadius: 3
           }}
         ]
       }},
@@ -1210,17 +1222,17 @@ html_content += f"""          </tbody>
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ color: '#cbd5e1', font: {{ family: 'Plus Jakarta Sans', size: 12 }} }}
+            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }},
           y: {{
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }}
         }}
       }}
@@ -1238,16 +1250,16 @@ html_content += f"""          </tbody>
           {{
             label: 'Trash Avg Req/Route',
             data: {json.dumps(chart_day_avg_trash)},
-            borderColor: '#ef4444',
-            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+            borderColor: '#dc2626',
+            backgroundColor: 'rgba(220, 38, 38, 0.1)',
             fill: true,
             tension: 0.3
           }},
           {{
             label: 'Recycling Avg Req/Route',
             data: {json.dumps(chart_day_avg_rec)},
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+            borderColor: '#16a34a',
+            backgroundColor: 'rgba(22, 163, 74, 0.1)',
             fill: true,
             tension: 0.3
           }}
@@ -1259,21 +1271,50 @@ html_content += f"""          </tbody>
         plugins: {{
           legend: {{
             position: 'top',
-            labels: {{ color: '#cbd5e1', font: {{ family: 'Plus Jakarta Sans', size: 12 }} }}
+            labels: {{ font: {{ family: 'JetBrains Mono', size: 11 }} }}
           }}
         }},
         scales: {{
           x: {{
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }},
           y: {{
-            ticks: {{ color: '#94a3b8' }},
-            grid: {{ color: 'rgba(255, 255, 255, 0.05)' }}
+            grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
+            ticks: {{ font: {{ family: 'JetBrains Mono', size: 10 }} }}
           }}
         }}
       }}
     }});
+
+    function updateChartsTheme(theme) {{
+      const isDark = theme === 'dark';
+      const textColor = isDark ? '#f4f4f5' : '#09090b';
+      const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+      const tickColor = isDark ? '#a1a1aa' : '#52525b';
+
+      [chartWardReq, chartWardRep, chartDayVol, chartDayAvg].forEach(chart => {{
+        if (!chart) return;
+        if (chart.options.plugins?.legend?.labels) {{
+          chart.options.plugins.legend.labels.color = textColor;
+          chart.options.plugins.legend.labels.font = {{ family: 'JetBrains Mono', size: 11 }};
+        }}
+        if (chart.options.scales?.x) {{
+          chart.options.scales.x.ticks.color = tickColor;
+          chart.options.scales.x.ticks.font = {{ family: 'JetBrains Mono', size: 10 }};
+          chart.options.scales.x.grid.color = gridColor;
+        }}
+        if (chart.options.scales?.y) {{
+          chart.options.scales.y.ticks.color = tickColor;
+          chart.options.scales.y.ticks.font = {{ family: 'JetBrains Mono', size: 10 }};
+          chart.options.scales.y.grid.color = gridColor;
+        }}
+        chart.update();
+      }});
+    }}
+
+    // Apply initial chart theme
+    updateChartsTheme(currentTheme);
 
     // ----------------------------------------------------
     // Static Export Handlers (US Letter: 8.5in x 11in)
@@ -1294,12 +1335,12 @@ html_content += f"""          </tbody>
       const imgData = canvas.toDataURL('image/png', 2.0);
 
       // Title Banner
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(16);
+      doc.setFont('Courier', 'bold');
+      doc.setFontSize(15);
       doc.setTextColor(15, 23, 42);
       doc.text(title, 0.75, 0.75);
 
-      doc.setFont('Helvetica', 'normal');
+      doc.setFont('Courier', 'normal');
       doc.setFontSize(10);
       doc.setTextColor(100, 116, 139);
       doc.text('District of Columbia DPW Missed Collection Analysis', 0.75, 1.0);
@@ -1325,33 +1366,6 @@ html_content += f"""          </tbody>
       a.download = `${{filename}}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-    }}
-
-    function exportTablePdf(tableId, title, filename) {{
-      const {{ jsPDF }} = window.jspdf;
-      const doc = new jsPDF({{ orientation: 'portrait', format: 'letter', unit: 'in' }});
-
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(14);
-      doc.setTextColor(15, 23, 42);
-      doc.text(title, 0.5, 0.6);
-
-      doc.setFont('Helvetica', 'normal');
-      doc.setFontSize(9);
-      doc.setTextColor(100, 116, 139);
-      doc.text(`District of Columbia DPW Missed Collection Analysis • ${{new Date().toLocaleDateString()}}`, 0.5, 0.8);
-
-      doc.autoTable({{
-        html: `#${{tableId}}`,
-        startY: 0.95,
-        margin: {{ top: 0.5, bottom: 0.5, left: 0.5, right: 0.5 }},
-        theme: 'striped',
-        styles: {{ fontSize: 8, cellPadding: 0.05, font: 'Helvetica' }},
-        headStyles: {{ fillColor: [15, 23, 42], textColor: [255, 255, 255], fontStyle: 'bold' }},
-        alternateRowStyles: {{ fillColor: [248, 250, 252] }}
-      }});
-
-      doc.save(`${{filename}}.pdf`);
     }}
 
     // ----------------------------------------------------

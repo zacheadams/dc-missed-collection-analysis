@@ -15,7 +15,44 @@ This document codifies development standards, operational conventions, and archi
 
 ---
 
-## 2. Vendored Third-Party Dependencies
+## 2. Typography & Lo-Fi Monochrome Design
+
+- **Primary Monospace Font**:
+  - The primary typeface for all applications (`index.html`, `map.html`, `report.html`) must be `JetBrains Mono`.
+  - Body text, navigation elements, KPI cards, buttons, dropdowns, inputs, data tables, and chart labels must use monospace typography.
+- **Lo-Fi Black & White Aesthetic**:
+  - A clean, technical, lo-fi aesthetic with 1px borders and high contrast.
+  - Browser-default light/dark mode detected via `prefers-color-scheme` with manual toggle button in navigation (`[Theme: Light]` / `[Theme: Dark]`) persisted in `localStorage`.
+- **Keyword Colorization**:
+  - Stream names in body text, metrics, badges, and tables must be color-coded consistently:
+    - **Trash**: Red (`#dc2626` / `#ef4444`, CSS class `.kw-trash`)
+    - **Recycling**: Green (`#16a34a` / `#22c55e`, CSS class `.kw-recycle`)
+    - **Combined / All 311**: Blue (`#2563eb` / `#38bdf8`, CSS class `.kw-combined`)
+
+---
+
+## 3. Map Cartography & Single-Hue Choropleths
+
+- **Local Basemap Tiles (`tiles/light/` & `tiles/blacklite/`)**:
+  - Basemap tiles are Stamen Toner, hosted on Stadia Maps, downloaded and stored locally.
+  - **Light Mode**: Uses native `stamen_toner` tiles (`tiles/light/{z}/{x}/{y}.png`).
+  - **Dark Mode**: Uses native `stamen_toner_blacklite` tiles (`tiles/blacklite/{z}/{x}/{y}.png`).
+  - Tiles are strictly subsetted to the District of Columbia boundary polygon for Zooms 11 through 15 (351 tiles per variant, ~8 MB each).
+- **Single-Hue Relative Intensity Color Ramps**:
+  - Choropleth fills must use single-hue intensity gradients (light tint to deep dark shade) rather than multi-hue spectral scales:
+    - **Trash Stream**: Light red (`#fecaca`) to deep crimson (`#7f1d1d`).
+    - **Recycling Stream**: Light green (`#bbf7d0`) to deep forest green (`#14532d`).
+    - **Combined Stream**: Light blue (`#bfdbfe`) to deep navy blue (`#172554`).
+- **Permanent Ward Boundaries**:
+  - Ward boundaries must remain permanently visible on the map with crisp contrast and dashed outlines (`#7c3aed` / `#c084fc`) at all times.
+- **Dual Analytic Period Toggle**:
+  - The map supports switching between **180-Day** (default) and **30-Day** analysis windows with instantaneous choropleth and inspector metric updates.
+- **Census TIGERweb Fallback**:
+  - A commented-out configuration block for U.S. Census Bureau TIGERweb transportation and hydrography tile layers must be preserved in `map.html` and `scripts/build_page.py` for contingency use.
+
+---
+
+## 4. Vendored Third-Party Dependencies
 
 - **Local Storage (`assets/vendor/`)**: To ensure complete offline capability and prevent runtime external CDN failures or tracking dependencies, all client-side JavaScript and CSS libraries must be stored locally in `assets/vendor/`.
 - **Footprint Budget**: Total vendored script and style payload must remain strictly below 5 MB.
@@ -29,7 +66,7 @@ This document codifies development standards, operational conventions, and archi
 
 ---
 
-## 3. American Paper Standards (US Letter)
+## 5. American Paper Standards (US Letter)
 
 - **US Letter Only**: All exportable reports, printable views, and generated PDFs must conform to standard American paper dimensions:
   - **US Letter**: 8.5 in x 11.0 in (215.9 mm x 279.4 mm).
@@ -38,30 +75,18 @@ This document codifies development standards, operational conventions, and archi
 
 ---
 
-## 4. Map & Tile Asset Management
-
-- **Local Basemap Tiles (`tiles/{z}/{x}/{y}.png`)**:
-  - Basemap tiles are Stamen Toner, hosted on Stadia Maps, downloaded and stored locally.
-  - Tiles are strictly subsetted to the District of Columbia boundary polygon for Zooms 11 through 15.
-  - Maryland and Virginia outer bounding box tiles are excluded to minimize repository footprint.
-  - Total tile payload across Zooms 11–15 must remain under 10 MB.
-- **Census TIGERweb Fallback**:
-  - A commented-out configuration block for U.S. Census Bureau TIGERweb transportation and hydrography tile layers must be preserved in `map.html` and `scripts/build_page.py` for contingency use.
-
----
-
-## 5. Application Architecture
+## 6. Application Architecture
 
 The repository serves three dedicated applications without backward-compatibility bloat:
 1. `index.html`: Central portal and executive hub displaying citywide KPIs and directing users to the map and operational report.
-2. `map.html`: Dedicated, full-viewport interactive map explorer with cascading Ward/ANC/SMD filters and contextual SMD export.
+2. `map.html`: Dedicated, full-viewport interactive map explorer with cascading Ward/ANC/SMD filters, period toggle, and contextual SMD export.
 3. `report.html`: Dedicated operational report with hierarchical Ward, ANC, and SMD sections plus DPW route performance analysis and searchable matrix.
 
 Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are deprecated and deleted.
 
 ---
 
-## 6. Data Pipeline & Zero External Infrastructure
+## 7. Data Pipeline & Zero External Infrastructure
 
 - All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
 - Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.

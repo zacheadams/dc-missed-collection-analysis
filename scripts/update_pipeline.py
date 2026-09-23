@@ -51,9 +51,9 @@ def main():
             lambda: update_service_requests(full_fetch=full_fetch)
         )
 
-    # Step 2: Update 30-day map data
+    # Step 2: Update map data (180-day default and 30-day windows)
     from update_map_data import update_map_data
-    run_step(2, total_steps, "Updating 30-Day SMD & Ward Map Metrics", update_map_data)
+    run_step(2, total_steps, "Updating SMD & Ward Map Metrics (180d & 30d Windows)", update_map_data)
 
     # Step 3: Compute 180-day address deduplication & repeat stats
     from analyze_repeat_addresses import analyze_repeat_addresses

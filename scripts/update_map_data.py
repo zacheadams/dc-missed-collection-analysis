@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Recompute 30-day Single Member District (SMD) and Ward metrics from 311 service requests,
-preserve DPW route overlays and precomputed area descriptions, and update data/dc_map_data_v2.json.
+Recompute 180-day (default) and 30-day Single Member District (SMD) and Ward metrics
+from 311 service requests, preserve DPW route overlays and precomputed area descriptions,
+and update data/dc_map_data_v2.json.
 """
 
 import json
@@ -77,6 +78,57 @@ def get_smd_ward(smd_id, anc_id):
             return 3
     return int(anc_id[0])
 
+def compute_window_ranks(smd_index, ward_index, prefix):
+    """
+    Compute ranks, ANC sums, and Ward totals/shares for a given window prefix ('180d' or '30d').
+    """
+    tot_key = f"total_{prefix}"
+    trash_key = f"trash_{prefix}"
+    rec_key = f"recycling_{prefix}"
+    city_rank_key = f"city_rank_{prefix}"
+    anc_rank_key = f"anc_rank_{prefix}"
+    anc_tot_key = f"anc_total_{prefix}"
+    anc_count_key = f"anc_count_{prefix}"
+    ward_share_key = f"ward_share_pct_{prefix}"
+
+    # Citywide ranks
+    smd_by_total = sorted(smd_index, key=lambda s: s[tot_key], reverse=True)
+    for rank, s in enumerate(smd_by_total, 1):
+        s[city_rank_key] = rank
+
+    # ANC totals and ranks
+    anc_groups = defaultdict(list)
+    for s in smd_index:
+        anc_groups[s["anc_id"]].append(s)
+
+    for anc_id, smds_in_anc in anc_groups.items():
+        anc_tot = sum(s[tot_key] for s in smds_in_anc)
+        smds_in_anc.sort(key=lambda s: s[tot_key], reverse=True)
+        for rank, s in enumerate(smds_in_anc, 1):
+            s[anc_rank_key] = rank
+            s[anc_tot_key] = anc_tot
+            s[anc_count_key] = len(smds_in_anc)
+
+    # Ward totals
+    ward_stats = {w["ward"]: {"total": 0, "trash": 0, "recycling": 0, "smd_count": 0, "top_smd_id": None, "top_smd_total": -1} for w in ward_index}
+    for s in smd_index:
+        w = s["ward"]
+        ward_stats[w]["total"] += s[tot_key]
+        ward_stats[w]["trash"] += s[trash_key]
+        ward_stats[w]["recycling"] += s[rec_key]
+        ward_stats[w]["smd_count"] += 1
+        if s[tot_key] > ward_stats[w]["top_smd_total"]:
+            ward_stats[w]["top_smd_total"] = s[tot_key]
+            ward_stats[w]["top_smd_id"] = s["smd_id"]
+
+    # Calculate ward_share_pct
+    for s in smd_index:
+        w = s["ward"]
+        wtot = ward_stats[w]["total"]
+        s[ward_share_key] = round((s[tot_key] / wtot * 100), 1) if wtot > 0 else 0.0
+
+    return ward_stats
+
 def update_map_data():
     sr_path = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
@@ -96,7 +148,7 @@ def update_map_data():
     with open(route_areas_path, "r", encoding="utf-8") as f:
         route_areas = json.load(f)
 
-    # Filter 30-day requests
+    # Determine date windows
     valid_dates = [
         sr["attributes"]["ADDDATE"]
         for sr in srs
@@ -104,14 +156,15 @@ def update_map_data():
     ]
     max_dt_ms = max(valid_dates)
     max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0)
-    cutoff_dt = max_dt - timedelta(days=30)
-    cutoff_ms = int(cutoff_dt.timestamp() * 1000)
 
-    srs_30d = [
-        sr for sr in srs
-        if sr.get("attributes", {}).get("ADDDATE", 0) >= cutoff_ms
-    ]
-    print(f"Analyzing 30-day window: {cutoff_dt.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')} ({len(srs_30d)} requests)")
+    cutoff_30d = max_dt - timedelta(days=30)
+    cutoff_30d_ms = int(cutoff_30d.timestamp() * 1000)
+
+    cutoff_180d = max_dt - timedelta(days=180)
+    cutoff_180d_ms = int(cutoff_180d.timestamp() * 1000)
+
+    print(f"180-day window: {cutoff_180d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}")
+    print(f"30-day window:  {cutoff_30d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}")
 
     # Build spatial index for SMDs
     smd_index = []
@@ -129,9 +182,12 @@ def update_map_data():
             "geometry": f["geometry"],
             "polys": polys,
             "bbox": bbox,
-            "trash": 0,
-            "recycling": 0,
-            "total": 0,
+            "trash_180d": 0,
+            "recycling_180d": 0,
+            "total_180d": 0,
+            "trash_30d": 0,
+            "recycling_30d": 0,
+            "total_30d": 0,
             "ward": None
         })
 
@@ -146,20 +202,23 @@ def update_map_data():
             "ward": ward_num,
             "geometry": f["geometry"],
             "polys": polys,
-            "bbox": bbox,
-            "trash": 0,
-            "recycling": 0,
-            "total": 0
+            "bbox": bbox
         })
 
     # Assign official Ward to each SMD pursuant to DC Law 24-148
     for smd in smd_index:
         smd["ward"] = get_smd_ward(smd["smd_id"], smd["anc_id"])
 
-    # Match 30-day tickets to SMDs
-    matched_count = 0
-    for sr in srs_30d:
+    # Match service requests to SMDs in single pass
+    matched_180d = 0
+    matched_30d = 0
+
+    for sr in srs:
         attrs = sr.get("attributes", {})
+        add_date = attrs.get("ADDDATE", 0)
+        if add_date < cutoff_180d_ms:
+            continue
+
         x = attrs.get("LONGITUDE")
         y = attrs.get("LATITUDE")
         code = attrs.get("SERVICECODE")
@@ -174,52 +233,28 @@ def update_map_data():
                     break
 
         if matched_smd:
-            matched_count += 1
-            matched_smd["total"] += 1
+            matched_180d += 1
+            matched_smd["total_180d"] += 1
             if code == "S0441":
-                matched_smd["trash"] += 1
+                matched_smd["trash_180d"] += 1
             elif code == "S0321":
-                matched_smd["recycling"] += 1
+                matched_smd["recycling_180d"] += 1
 
-    print(f"Matched {matched_count} of {len(srs_30d)} 30-day service requests to SMDs")
+            if add_date >= cutoff_30d_ms:
+                matched_30d += 1
+                matched_smd["total_30d"] += 1
+                if code == "S0441":
+                    matched_smd["trash_30d"] += 1
+                elif code == "S0321":
+                    matched_smd["recycling_30d"] += 1
 
-    # Citywide ranks
-    smd_by_total = sorted(smd_index, key=lambda s: s["total"], reverse=True)
-    for rank, s in enumerate(smd_by_total, 1):
-        s["city_rank"] = rank
+    print(f"Matched {matched_180d} 180-day requests and {matched_30d} 30-day requests to SMDs")
 
-    # ANC totals and ranks
-    anc_groups = defaultdict(list)
-    for s in smd_index:
-        anc_groups[s["anc_id"]].append(s)
+    # Compute ranks and ward stats for both windows
+    ward_stats_180d = compute_window_ranks(smd_index, ward_index, "180d")
+    ward_stats_30d = compute_window_ranks(smd_index, ward_index, "30d")
 
-    for anc_id, smds_in_anc in anc_groups.items():
-        anc_tot = sum(s["total"] for s in smds_in_anc)
-        smds_in_anc.sort(key=lambda s: s["total"], reverse=True)
-        for rank, s in enumerate(smds_in_anc, 1):
-            s["anc_rank"] = rank
-            s["anc_total"] = anc_tot
-            s["anc_count"] = len(smds_in_anc)
-
-    # Ward totals
-    ward_stats = {w["ward"]: {"total": 0, "trash": 0, "recycling": 0, "smd_count": 0, "top_smd_id": None, "top_smd_total": -1} for w in ward_index}
-    for s in smd_index:
-        w = s["ward"]
-        ward_stats[w]["total"] += s["total"]
-        ward_stats[w]["trash"] += s["trash"]
-        ward_stats[w]["recycling"] += s["recycling"]
-        ward_stats[w]["smd_count"] += 1
-        if s["total"] > ward_stats[w]["top_smd_total"]:
-            ward_stats[w]["top_smd_total"] = s["total"]
-            ward_stats[w]["top_smd_id"] = s["smd_id"]
-
-    # Calculate ward_share_pct
-    for s in smd_index:
-        w = s["ward"]
-        wtot = ward_stats[w]["total"]
-        s["ward_share_pct"] = round((s["total"] / wtot * 100), 1) if wtot > 0 else 0.0
-
-    # Build GeoJSON feature collections
+    # Build SMD GeoJSON feature collections with 180d as default root properties
     smd_features = []
     for s in smd_index:
         smd_features.append({
@@ -229,22 +264,46 @@ def update_map_data():
                 "smd_id": s["smd_id"],
                 "anc_id": s["anc_id"],
                 "rep_name": s["rep_name"],
-                "trash": s["trash"],
-                "recycling": s["recycling"],
-                "total": s["total"],
-                "city_rank": s["city_rank"],
-                "anc_rank": s["anc_rank"],
-                "anc_total": s["anc_total"],
-                "anc_count": s["anc_count"],
                 "ward": s["ward"],
-                "ward_share_pct": s["ward_share_pct"]
+                # Default (180-day) root properties for backward-compatibility
+                "trash": s["trash_180d"],
+                "recycling": s["recycling_180d"],
+                "total": s["total_180d"],
+                "city_rank": s["city_rank_180d"],
+                "anc_rank": s["anc_rank_180d"],
+                "anc_total": s["anc_total_180d"],
+                "anc_count": s["anc_count_180d"],
+                "ward_share_pct": s["ward_share_pct_180d"],
+                # Explicit window metrics
+                "metrics_180d": {
+                    "trash": s["trash_180d"],
+                    "recycling": s["recycling_180d"],
+                    "total": s["total_180d"],
+                    "city_rank": s["city_rank_180d"],
+                    "anc_rank": s["anc_rank_180d"],
+                    "anc_total": s["anc_total_180d"],
+                    "anc_count": s["anc_count_180d"],
+                    "ward_share_pct": s["ward_share_pct_180d"]
+                },
+                "metrics_30d": {
+                    "trash": s["trash_30d"],
+                    "recycling": s["recycling_30d"],
+                    "total": s["total_30d"],
+                    "city_rank": s["city_rank_30d"],
+                    "anc_rank": s["anc_rank_30d"],
+                    "anc_total": s["anc_total_30d"],
+                    "anc_count": s["anc_count_30d"],
+                    "ward_share_pct": s["ward_share_pct_30d"]
+                }
             }
         })
 
+    # Build Ward GeoJSON feature collections
     ward_features = []
     for w in sorted(ward_index, key=lambda x: x["ward"]):
         wnum = w["ward"]
-        st = ward_stats[wnum]
+        st180 = ward_stats_180d[wnum]
+        st30 = ward_stats_30d[wnum]
         ward_features.append({
             "type": "Feature",
             "geometry": w["geometry"],
@@ -252,12 +311,30 @@ def update_map_data():
                 "ward": wnum,
                 "name": f"Ward {wnum}",
                 "councilmember": WARD_COUNCILMEMBERS.get(wnum, "DC Council"),
-                "total": st["total"],
-                "trash": st["trash"],
-                "recycling": st["recycling"],
-                "smd_count": st["smd_count"],
-                "top_smd_id": st["top_smd_id"],
-                "top_smd_total": st["top_smd_total"]
+                # Default (180-day) root properties
+                "total": st180["total"],
+                "trash": st180["trash"],
+                "recycling": st180["recycling"],
+                "smd_count": st180["smd_count"],
+                "top_smd_id": st180["top_smd_id"],
+                "top_smd_total": st180["top_smd_total"],
+                # Explicit window metrics
+                "metrics_180d": {
+                    "total": st180["total"],
+                    "trash": st180["trash"],
+                    "recycling": st180["recycling"],
+                    "smd_count": st180["smd_count"],
+                    "top_smd_id": st180["top_smd_id"],
+                    "top_smd_total": st180["top_smd_total"]
+                },
+                "metrics_30d": {
+                    "total": st30["total"],
+                    "trash": st30["trash"],
+                    "recycling": st30["recycling"],
+                    "smd_count": st30["smd_count"],
+                    "top_smd_id": st30["top_smd_id"],
+                    "top_smd_total": st30["top_smd_total"]
+                }
             }
         })
 
@@ -287,13 +364,25 @@ def update_map_data():
             feat["properties"]["ancs"] = ra["ancs"]
             feat["properties"]["area_desc"] = ra["area_desc"]
 
+    date_range_180d = f"{cutoff_180d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}"
+    date_range_30d = f"{cutoff_30d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}"
+
     metadata = {
-        "title": "DC Trash and Recycling Missed Collection Map (Last 30 Days)",
-        "date_range": f"{cutoff_dt.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}",
-        "total_city_tickets": matched_count,
+        "title": "DC Trash and Recycling Missed Collection Map",
+        "default_period": "180d",
+        "date_range": date_range_180d,
+        "date_range_180d": date_range_180d,
+        "date_range_30d": date_range_30d,
+        "total_city_tickets": matched_180d,
+        "total_city_tickets_180d": matched_180d,
+        "total_city_tickets_30d": matched_30d,
         "total_smds": len(smd_features),
-        "max_tickets": max(s["total"] for s in smd_index) if smd_index else 0,
-        "avg_tickets": round(matched_count / len(smd_features), 1) if smd_features else 0.0
+        "max_tickets_180d": max(s["total_180d"] for s in smd_index) if smd_index else 0,
+        "max_tickets_30d": max(s["total_30d"] for s in smd_index) if smd_index else 0,
+        "max_tickets": max(s["total_180d"] for s in smd_index) if smd_index else 0,
+        "avg_tickets_180d": round(matched_180d / len(smd_features), 1) if smd_features else 0.0,
+        "avg_tickets_30d": round(matched_30d / len(smd_features), 1) if smd_features else 0.0,
+        "avg_tickets": round(matched_180d / len(smd_features), 1) if smd_features else 0.0
     }
 
     final_payload = {
@@ -307,7 +396,8 @@ def update_map_data():
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(final_payload, f)
 
-    print(f"Successfully updated {output_path} with 30-day metrics ({metadata['date_range']})")
+    print(f"Successfully updated {output_path} with 180-day and 30-day metrics.")
+    print(f"180-day tickets: {matched_180d}, 30-day tickets: {matched_30d}")
 
 if __name__ == "__main__":
     update_map_data()

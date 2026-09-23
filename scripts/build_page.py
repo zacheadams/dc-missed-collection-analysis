@@ -2,13 +2,15 @@
 """
 Compiles the Dedicated Interactive Map Application (map.html).
 Features:
-- Local Stamen Toner basemap cached offline for Zooms 11 through 15
-- Commented-out U.S. Census TIGERweb basemap layers for contingency reactivation
-- High-contrast choropleth and boundary styling optimized for black-and-white Toner cartography
-- Cascading Ward, ANC, and SMD selectors plus DPW route overlays
-- Context-aware static map export to US Letter (8.5" x 11") PDF and PNG
-- Strict No-Emoji policy across UI, code, and comments
-- Fully offline operation via assets/vendor/
+- Local Stamen Toner (Light) and Stamen Toner Blacklite (Dark) basemaps cached offline
+- Browser-default light/dark theme with manual switcher and local persistence
+- Single-hue relative intensity color ramps for Trash (Red), Recycling (Green), Combined (Blue)
+- Dual analytic period toggle: 180-Day (Default) vs 30-Day
+- Permanent Ward boundary overlays
+- Renamed '311 Requests' layer and streamlined controls
+- Primary monospace font (JetBrains Mono)
+- Strictly zero emojis across UI and code
+- American US Letter (8.5" x 11") PDF and PNG map exports
 """
 
 import os
@@ -17,31 +19,12 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 map_data_path = os.path.join(BASE_DIR, 'data', 'dc_map_data_v2.json')
-addr_stats_path = os.path.join(BASE_DIR, 'data', 'smd_180d_address_stats.json')
 
-# 1. Load 30-day map data (for the mapping app)
 with open(map_data_path, 'r', encoding='utf-8') as f:
     map_data = json.load(f)
 
-# Ensure each SMD has ward_share_pct precalculated
-wards_dict = {f['properties']['ward']: f['properties']['total'] for f in map_data['wards']['features']}
-for f in map_data['smds']['features']:
-    w = f['properties'].get('ward')
-    tot = f['properties'].get('total', 0)
-    wtot = wards_dict.get(w, 0)
-    f['properties']['ward_share_pct'] = round((tot / wtot * 100), 1) if wtot > 0 else 0.0
-
 json_str = json.dumps(map_data, separators=(',', ':'))
 
-# 2. Load 180-day address-level stats (for deduplication and repeat analysis in inspector)
-with open(addr_stats_path, 'r', encoding='utf-8') as f:
-    addr_data_180d = json.load(f)
-
-city_180d = addr_data_180d['citywide']
-ward_180d_stats = addr_data_180d['wards']
-smds_180d = addr_data_180d['smds']
-
-# Ward Councilmembers
 ward_council = {
     1: "Brianne Nadeau",
     2: "Brooke Pinto",
@@ -52,6 +35,7 @@ ward_council = {
     7: "Wendell Felder",
     8: "Trayon White, Sr."
 }
+ward_council_json = json.dumps(ward_council)
 
 html_page = f'''<!DOCTYPE html>
 <html lang="en">
@@ -63,10 +47,10 @@ html_page = f'''<!DOCTYPE html>
   <!-- Local Vendored Leaflet CSS -->
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Local Vendored Export Libraries -->
   <script src="assets/vendor/jspdf/jspdf.umd.min.js"></script>
@@ -74,22 +58,51 @@ html_page = f'''<!DOCTYPE html>
 
   <style>
     :root {{
-      --bg-dark: #070a12;
-      --bg-card: #0d1322;
-      --bg-panel: rgba(13, 19, 34, 0.94);
-      --border: rgba(255, 255, 255, 0.11);
-      --border-focus: #38bdf8;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --primary: #0284c7;
-      --primary-light: #38bdf8;
-      --trash-color: #ef4444;
-      --recycle-color: #10b981;
-      --warning-color: #f59e0b;
-      --ward-color: #a855f7;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
+
+      /* Light Theme (Default) */
+      --bg-page: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-panel: rgba(255, 255, 255, 0.95);
+      --bg-input: #f1f5f9;
+      --border: #d4d4d8;
+      --border-dark: #18181b;
+      --border-focus: #09090b;
+      --text-main: #09090b;
+      --text-muted: #52525b;
+      --text-dim: #71717a;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --trash-color: #dc2626;
+      --recycle-color: #16a34a;
+      --combined-color: #2563eb;
+      --ward-boundary: #7c3aed;
+      --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --badge-bg: rgba(37, 99, 235, 0.08);
+      --badge-border: rgba(37, 99, 235, 0.25);
+    }}
+
+    [data-theme="dark"] {{
+      /* Dark Theme (Stamen Toner Blacklite) */
+      --bg-page: #09090b;
+      --bg-surface: #121215;
+      --bg-panel: rgba(18, 18, 21, 0.95);
+      --bg-input: #18181b;
+      --border: #27272a;
+      --border-dark: #3f3f46;
+      --border-focus: #f4f4f5;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --trash-color: #ef4444;
+      --recycle-color: #22c55e;
+      --combined-color: #38bdf8;
+      --ward-boundary: #c084fc;
+      --card-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --badge-border: rgba(56, 189, 248, 0.3);
     }}
 
     * {{
@@ -99,26 +112,43 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     body {{
-      background-color: var(--bg-dark);
+      background-color: var(--bg-page);
       color: var(--text-main);
-      font-family: var(--font-sans);
+      font-family: var(--font-mono);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }}
 
+    /* Keyword Color Classes */
+    .kw-trash {{
+      color: var(--trash-color);
+      font-weight: 700;
+    }}
+
+    .kw-recycle {{
+      color: var(--recycle-color);
+      font-weight: 700;
+    }}
+
+    .kw-combined {{
+      color: var(--combined-color);
+      font-weight: 700;
+    }}
+
     /* Top Navigation Bar */
     .site-nav {{
-      background: rgba(7, 10, 18, 0.96);
+      background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 1000;
-      padding: 12px 24px;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background 0.2s, border-color 0.2s;
     }}
 
     .nav-brand {{
@@ -127,126 +157,173 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     .nav-title {{
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }}
 
     .nav-subtitle {{
       font-size: 11px;
-      color: var(--text-dim);
-      font-family: var(--font-mono);
+      color: var(--text-muted);
     }}
 
     .nav-links {{
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
     }}
 
     .nav-link {{
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 5px 10px;
+      border-radius: 4px;
+      border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
 
     .nav-link:hover {{
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: var(--border);
+      background: var(--bg-input);
     }}
 
     .nav-link.active {{
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--text-main);
+      background: var(--badge-bg);
+      border-color: var(--badge-border);
+      font-weight: 700;
     }}
 
-    .btn-export {{
-      background: rgba(255, 255, 255, 0.06);
+    .btn-action {{
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      color: #ffffff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12px;
+      color: var(--text-main);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       font-family: var(--font-mono);
       transition: all 0.15s ease;
     }}
 
-    .btn-export:hover {{
-      background: #0284c7;
-      border-color: #38bdf8;
+    .btn-action:hover {{
+      border-color: var(--text-main);
+      background: var(--bg-input);
     }}
 
     /* Main Full-Viewport Workspace */
     .map-workspace {{
       position: relative;
       width: 100vw;
-      height: calc(100vh - 58px);
+      height: calc(100vh - 54px);
       overflow: hidden;
     }}
 
     #map {{
       width: 100%;
       height: 100%;
-      background: #ffffff;
+      background: var(--bg-page);
     }}
 
     /* Floating Left Control Panel */
     .control-panel {{
       position: absolute;
-      top: 16px;
-      left: 16px;
+      top: 14px;
+      left: 14px;
       width: 320px;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 8px;
+      padding: 14px;
       z-index: 500;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--card-shadow);
+      transition: background 0.2s, border-color 0.2s;
     }}
 
     .panel-header {{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
       border-bottom: 1px solid var(--border);
     }}
 
     .panel-title {{
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #ffffff;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
     }}
 
     .panel-tag {{
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: var(--badge-bg);
+      color: var(--text-main);
+      border: 1px solid var(--badge-border);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 10px;
-      font-family: var(--font-mono);
       font-weight: 700;
+    }}
+
+    /* Period Toggle Group */
+    .period-section {{
+      margin-bottom: 10px;
+    }}
+
+    .period-label {{
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+      display: block;
+    }}
+
+    .period-toggle-group {{
+      display: flex;
+      gap: 4px;
+      background: var(--bg-input);
+      padding: 3px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }}
+
+    .period-btn {{
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 5px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 3px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all 0.15s ease;
+      text-align: center;
+    }}
+
+    .period-btn.active {{
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }}
 
     /* Hierarchy Dropdowns */
     .hierarchy-container {{
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 10px;
     }}
 
     .hierarchy-row {{
@@ -257,22 +334,21 @@ html_page = f'''<!DOCTYPE html>
 
     .hierarchy-label {{
       width: 44px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 700;
-      font-family: var(--font-mono);
-      color: var(--text-muted);
+      color: var(--text-dim);
       text-transform: uppercase;
     }}
 
     .hierarchy-select {{
       flex: 1;
-      background: rgba(7, 10, 18, 0.8);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: var(--font-sans);
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
     }}
 
     .hierarchy-select:focus {{
@@ -287,18 +363,18 @@ html_page = f'''<!DOCTYPE html>
 
     /* Search Box */
     .search-box {{
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }}
 
     .search-box input {{
       width: 100%;
-      background: rgba(7, 10, 18, 0.8);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       color: var(--text-main);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-family: var(--font-sans);
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: var(--font-mono);
     }}
 
     .search-box input:focus {{
@@ -310,11 +386,11 @@ html_page = f'''<!DOCTYPE html>
     .metric-toggle-group {{
       display: flex;
       gap: 4px;
-      background: rgba(7, 10, 18, 0.6);
+      background: var(--bg-input);
       padding: 3px;
-      border-radius: 6px;
+      border-radius: 4px;
       border: 1px solid var(--border);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }}
 
     .metric-btn {{
@@ -322,19 +398,21 @@ html_page = f'''<!DOCTYPE html>
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 6px 4px;
-      font-size: 11px;
+      padding: 5px 4px;
+      font-size: 10px;
       font-weight: 700;
-      border-radius: 4px;
+      border-radius: 3px;
       cursor: pointer;
-      font-family: var(--font-sans);
+      font-family: var(--font-mono);
       transition: all 0.15s ease;
       text-align: center;
     }}
 
     .metric-btn.active {{
-      background: #0284c7;
-      color: #ffffff;
+      background: var(--bg-surface);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }}
 
     /* Layer Controls */
@@ -361,6 +439,29 @@ html_page = f'''<!DOCTYPE html>
       gap: 6px;
     }}
 
+    .layer-permanent-row {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }}
+
+    .layer-permanent-row span {{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }}
+
+    .badge-status {{
+      font-size: 9px;
+      padding: 1px 4px;
+      border-radius: 3px;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }}
+
     .badge-route {{
       width: 8px;
       height: 8px;
@@ -368,28 +469,28 @@ html_page = f'''<!DOCTYPE html>
       display: inline-block;
     }}
 
-    /* Floating Breadcrumbs & Quick Reset */
+    /* Floating Breadcrumbs */
     .breadcrumb-bar {{
       position: absolute;
-      top: 16px;
-      left: 352px;
+      top: 14px;
+      left: 348px;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 14px;
+      border-radius: 6px;
+      padding: 6px 12px;
       z-index: 500;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-family: var(--font-mono);
+      gap: 6px;
+      font-size: 11px;
       color: var(--text-muted);
+      box-shadow: var(--card-shadow);
     }}
 
     .breadcrumb-item {{
       cursor: pointer;
-      color: #38bdf8;
+      color: var(--accent);
       font-weight: 600;
     }}
 
@@ -398,7 +499,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     .breadcrumb-item.active {{
-      color: #ffffff;
+      color: var(--text-main);
       font-weight: 700;
       cursor: default;
       text-decoration: none;
@@ -407,102 +508,101 @@ html_page = f'''<!DOCTYPE html>
     /* Floating District Inspector (Right Side) */
     .inspector-panel {{
       position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 330px;
+      top: 14px;
+      right: 14px;
+      width: 320px;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 8px;
+      padding: 14px;
       z-index: 500;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--card-shadow);
+      transition: background 0.2s, border-color 0.2s;
     }}
 
     .inspector-header {{
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
       border-bottom: 1px solid var(--border);
     }}
 
     .inspector-title {{
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.02em;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
     }}
 
     .inspector-sub {{
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-dim);
-      font-family: var(--font-mono);
     }}
 
     .inspector-stat-grid {{
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 12px;
+      gap: 6px;
+      margin-bottom: 10px;
     }}
 
     .stat-tile {{
-      background: rgba(7, 10, 18, 0.6);
+      background: var(--bg-surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 8px 10px;
+      border-radius: 4px;
+      padding: 6px 8px;
     }}
 
     .stat-tile-lbl {{
-      font-size: 10px;
-      color: var(--text-muted);
+      font-size: 9px;
+      color: var(--text-dim);
       text-transform: uppercase;
-      font-family: var(--font-mono);
+      font-weight: 700;
     }}
 
     .stat-tile-val {{
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
-      font-family: var(--font-mono);
-      color: #ffffff;
+      color: var(--text-main);
     }}
 
     .inspector-details {{
       font-size: 11px;
       color: var(--text-muted);
-      line-height: 1.5;
+      line-height: 1.45;
     }}
 
     .inspector-route-box {{
-      margin-top: 10px;
-      padding-top: 8px;
+      margin-top: 8px;
+      padding-top: 6px;
       border-top: 1px solid var(--border);
     }}
 
     /* Floating Legend */
     .legend-panel {{
       position: absolute;
-      bottom: 24px;
-      left: 16px;
+      bottom: 20px;
+      left: 14px;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
+      border-radius: 6px;
+      padding: 8px 12px;
       z-index: 500;
-      font-size: 11px;
+      font-size: 10px;
+      box-shadow: var(--card-shadow);
     }}
 
     .legend-title {{
       font-weight: 700;
-      color: #ffffff;
-      font-family: var(--font-mono);
+      color: var(--text-main);
       font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      margin-bottom: 5px;
     }}
 
     .legend-scale {{
@@ -515,26 +615,26 @@ html_page = f'''<!DOCTYPE html>
       width: 24px;
       height: 10px;
       border-radius: 2px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
     }}
 
     .scale-labels {{
       display: flex;
       justify-content: space-between;
       color: var(--text-dim);
-      font-family: var(--font-mono);
       font-size: 9px;
-      margin-top: 4px;
+      margin-top: 3px;
     }}
 
     /* Leaflet Tooltips */
     .leaflet-tooltip-smd {{
-      background: rgba(13, 19, 34, 0.96) !important;
-      border: 1px solid #38bdf8 !important;
-      color: #f8fafc !important;
-      border-radius: 6px !important;
-      padding: 8px 12px !important;
-      font-family: var(--font-sans) !important;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+      background: var(--bg-panel) !important;
+      border: 1px solid var(--border-dark) !important;
+      color: var(--text-main) !important;
+      border-radius: 4px !important;
+      padding: 6px 10px !important;
+      font-family: var(--font-mono) !important;
+      box-shadow: var(--card-shadow) !important;
     }}
   </style>
 </head>
@@ -544,15 +644,16 @@ html_page = f'''<!DOCTYPE html>
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">Interactive Map Application • Stamen Toner</span>
+      <span class="nav-subtitle">Interactive Map • Stamen Toner</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
       <a href="map.html" class="nav-link active">Interactive Map</a>
       <a href="report.html" class="nav-link">Operational Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
-      <button onclick="exportMapPdf()" class="btn-export">Export Map (PDF)</button>
-      <button onclick="exportMapPng()" class="btn-export">Export Map (PNG)</button>
+      <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
+      <button onclick="exportMapPdf()" class="btn-action">Export Map (PDF)</button>
+      <button onclick="exportMapPng()" class="btn-action">Export Map (PNG)</button>
     </div>
   </nav>
 
@@ -571,7 +672,16 @@ html_page = f'''<!DOCTYPE html>
     <div class="control-panel">
       <div class="panel-header">
         <span class="panel-title">District Hierarchy</span>
-        <span class="panel-tag">Past 30 Days</span>
+        <span class="panel-tag" id="panel-period-tag">Past 180 Days</span>
+      </div>
+
+      <!-- Analytic Period Switcher -->
+      <div class="period-section">
+        <span class="period-label">Analytic Period</span>
+        <div class="period-toggle-group">
+          <button class="period-btn active" id="btn-period-180d" onclick="setPeriod('180d')">180 Days (Default)</button>
+          <button class="period-btn" id="btn-period-30d" onclick="setPeriod('30d')">30 Days</button>
+        </div>
       </div>
 
       <div class="hierarchy-container">
@@ -617,19 +727,19 @@ html_page = f'''<!DOCTYPE html>
 
       <div class="layer-controls">
         <label class="checkbox-row">
-          <span><span class="badge-route" style="background: #0284c7;"></span>SMD Request Layer (345)</span>
+          <span><span class="badge-route" style="background: var(--combined-color);"></span>311 Requests</span>
           <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
         </label>
+        <div class="layer-permanent-row">
+          <span><span class="badge-route" style="background: var(--ward-boundary); border: 1px dashed var(--ward-boundary);"></span>Ward Boundaries (Permanent)</span>
+          <span class="badge-status">Locked</span>
+        </div>
         <label class="checkbox-row">
-          <span><span class="badge-route" style="background: #a855f7;"></span>Ward Boundaries (8)</span>
-          <input type="checkbox" id="chk-wards" checked onchange="toggleWardLayer(this.checked)">
-        </label>
-        <label class="checkbox-row">
-          <span><span class="badge-route" style="background: #dc2626; border: 1px dashed #ef4444;"></span>DPW Trash Routes (103)</span>
+          <span><span class="badge-route" style="background: var(--trash-color); border: 1px dashed var(--trash-color);"></span>DPW Trash Routes (103)</span>
           <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
         </label>
         <label class="checkbox-row">
-          <span><span class="badge-route" style="background: #059669; border: 1px dashed #10b981;"></span>DPW Recycling Routes (120)</span>
+          <span><span class="badge-route" style="background: var(--recycle-color); border: 1px dashed var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
           <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
         </label>
       </div>
@@ -647,7 +757,7 @@ html_page = f'''<!DOCTYPE html>
       <div class="inspector-stat-grid">
         <div class="stat-tile">
           <div class="stat-tile-lbl">Selected Requests</div>
-          <div class="stat-tile-val" id="insp-stat-total">3,301</div>
+          <div class="stat-tile-val" id="insp-stat-total">0</div>
         </div>
         <div class="stat-tile">
           <div class="stat-tile-lbl">Share of Volume</div>
@@ -655,11 +765,11 @@ html_page = f'''<!DOCTYPE html>
         </div>
         <div class="stat-tile">
           <div class="stat-tile-lbl">Trash (S0441)</div>
-          <div class="stat-tile-val" style="color: #fca5a5;" id="insp-stat-trash">2,284</div>
+          <div class="stat-tile-val kw-trash" id="insp-stat-trash">0</div>
         </div>
         <div class="stat-tile">
           <div class="stat-tile-lbl">Recycling (S0321)</div>
-          <div class="stat-tile-val" style="color: #6ee7b7;" id="insp-stat-rec">1,017</div>
+          <div class="stat-tile-val kw-recycle" id="insp-stat-rec">0</div>
         </div>
       </div>
 
@@ -674,7 +784,7 @@ html_page = f'''<!DOCTYPE html>
 
     <!-- Floating Legend Panel -->
     <div class="legend-panel">
-      <div class="legend-title" id="legend-title">Total Requests (30 Days)</div>
+      <div class="legend-title" id="legend-title">Combined Requests (180 Days)</div>
       <div class="legend-scale" id="legend-scale">
         <!-- Scale boxes injected dynamically -->
       </div>
@@ -693,12 +803,24 @@ html_page = f'''<!DOCTYPE html>
 
   <script>
     const MAP_DATA = {json_str};
+    const WARD_COUNCIL = {ward_council_json};
 
     // State
     let selectedWardNum = null;
     let selectedAncId = null;
     let selectedSmdId = null;
     let currentMetric = 'total';
+    let currentPeriod = '180d';
+    let currentTheme = 'light';
+
+    // Determine default theme from localStorage or system prefers-color-scheme
+    const savedTheme = localStorage.getItem('dc_map_theme');
+    if (savedTheme) {{
+      currentTheme = savedTheme;
+    }} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {{
+      currentTheme = 'dark';
+    }}
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
     // Initialize Map
     const map = L.map('map', {{
@@ -728,8 +850,12 @@ html_page = f'''<!DOCTYPE html>
     map.createPane('smdPane');
     map.getPane('smdPane').style.zIndex = 400;
 
+    function getTileUrl(theme) {{
+      return theme === 'dark' ? 'tiles/blacklite/{{z}}/{{x}}/{{y}}.png' : 'tiles/light/{{z}}/{{x}}/{{y}}.png';
+    }}
+
     // Basemap: Local Stamen Toner (Zooms 11 to 15)
-    L.tileLayer('tiles/{{z}}/{{x}}/{{y}}.png', {{
+    let baseTileLayer = L.tileLayer(getTileUrl(currentTheme), {{
       pane: 'tonerBasePane',
       minZoom: 11,
       maxNativeZoom: 15,
@@ -772,22 +898,60 @@ html_page = f'''<!DOCTYPE html>
       offset: [0, -10]
     }});
 
-    // Choropleth Scales (Optimized for black-and-white Toner)
+    // Thresholds for dual periods
     const THRESHOLDS = {{
-      total:     [0, 3, 7, 12, 18, 26, 36],
-      trash:     [0, 2, 5,  9, 14, 20, 28],
-      recycling: [0, 1, 3,  6,  9, 13, 18]
+      '180d': {{
+        total:     [0, 10, 25, 50, 80, 120, 160],
+        trash:     [0,  8, 18, 35, 60,  90, 120],
+        recycling: [0,  4, 10, 20, 35,  50,  70]
+      }},
+      '30d': {{
+        total:     [0, 3, 7, 12, 18, 26, 36],
+        trash:     [0, 2, 5,  9, 14, 20, 28],
+        recycling: [0, 1, 3,  6,  9, 13, 18]
+      }}
     }};
 
+    // Single-hue relative intensity color ramps (Light to Dark / Deep)
     const PALETTES = {{
-      total:     ['rgba(241, 245, 249, 0.45)', '#38bdf8', '#0284c7', '#eab308', '#f97316', '#ef4444', '#991b1b'],
-      trash:     ['rgba(241, 245, 249, 0.45)', '#fef08a', '#fb923c', '#f97316', '#ea580c', '#dc2626', '#7f1d1d'],
-      recycling: ['rgba(241, 245, 249, 0.45)', '#a7f3d0', '#34d399', '#10b981', '#059669', '#0d9488', '#0f766e']
+      total: [
+        'rgba(191, 219, 254, 0.45)', // 0: tint
+        '#bfdbfe',                    // low
+        '#93c5fd',
+        '#60a5fa',
+        '#3b82f6',
+        '#1d4ed8',
+        '#172554'                     // deep navy blue
+      ],
+      trash: [
+        'rgba(254, 202, 202, 0.45)', // 0: tint
+        '#fecaca',                    // low
+        '#f87171',
+        '#ef4444',
+        '#dc2626',
+        '#b91c1c',
+        '#7f1d1d'                     // deep dark crimson
+      ],
+      recycling: [
+        'rgba(187, 247, 208, 0.45)', // 0: tint
+        '#bbf7d0',                    // low
+        '#86efac',
+        '#4ade80',
+        '#22c55e',
+        '#16a34a',
+        '#14532d'                     // deep dark forest green
+      ]
     }};
+
+    function getSmdMetric(p, metric, period) {{
+      const mObj = period === '30d' ? p.metrics_30d : p.metrics_180d;
+      if (mObj && mObj[metric] !== undefined) return mObj[metric];
+      return p[metric] || 0;
+    }}
 
     function getColor(val, metric) {{
-      if (val === 0) return 'rgba(241, 245, 249, 0.45)';
-      const th = THRESHOLDS[metric];
+      if (val <= 0) return currentTheme === 'dark' ? 'rgba(39, 39, 42, 0.3)' : 'rgba(241, 245, 249, 0.45)';
+      const th = THRESHOLDS[currentPeriod][metric];
       const pal = PALETTES[metric];
       for (let i = th.length - 1; i >= 0; i--) {{
         if (val >= th[i]) return pal[i];
@@ -797,10 +961,12 @@ html_page = f'''<!DOCTYPE html>
 
     function smdStyle(feature) {{
       const p = feature.properties;
-      const val = p[currentMetric] || 0;
+      const val = getSmdMetric(p, currentMetric, currentPeriod);
       const isSelected = selectedSmdId === p.smd_id;
       const inAnc = selectedAncId === p.anc_id;
       const inWard = selectedWardNum === p.ward;
+
+      const outlineColor = currentTheme === 'dark' ? '#27272a' : '#71717a';
 
       if (selectedSmdId) {{
         if (isSelected) {{
@@ -815,16 +981,16 @@ html_page = f'''<!DOCTYPE html>
           return {{
             fillColor: getColor(val, currentMetric),
             weight: 0.8,
-            opacity: 0.5,
-            color: '#38bdf8',
-            fillOpacity: 0.35
+            opacity: 0.6,
+            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            fillOpacity: 0.38
           }};
         }} else {{
           return {{
             fillColor: getColor(val, currentMetric),
             weight: 0.4,
             opacity: 0.15,
-            color: 'rgba(100, 116, 139, 0.2)',
+            color: outlineColor,
             fillOpacity: 0.08
           }};
         }}
@@ -836,15 +1002,15 @@ html_page = f'''<!DOCTYPE html>
             fillColor: getColor(val, currentMetric),
             weight: 2.2,
             opacity: 0.95,
-            color: '#0284c7',
-            fillOpacity: val === 0 ? 0.35 : 0.78
+            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            fillOpacity: val === 0 ? 0.35 : 0.80
           }};
         }} else {{
           return {{
             fillColor: getColor(val, currentMetric),
             weight: 0.4,
             opacity: 0.2,
-            color: 'rgba(100, 116, 139, 0.2)',
+            color: outlineColor,
             fillOpacity: 0.10
           }};
         }}
@@ -856,15 +1022,15 @@ html_page = f'''<!DOCTYPE html>
             fillColor: getColor(val, currentMetric),
             weight: 1.2,
             opacity: 0.95,
-            color: '#38bdf8',
-            fillOpacity: val === 0 ? 0.35 : 0.78
+            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            fillOpacity: val === 0 ? 0.35 : 0.80
           }};
         }} else {{
           return {{
             fillColor: getColor(val, currentMetric),
             weight: 0.4,
             opacity: 0.2,
-            color: 'rgba(100, 116, 139, 0.2)',
+            color: outlineColor,
             fillOpacity: 0.08
           }};
         }}
@@ -872,19 +1038,19 @@ html_page = f'''<!DOCTYPE html>
 
       return {{
         fillColor: getColor(val, currentMetric),
-        weight: 0.9,
+        weight: 0.8,
         opacity: 0.85,
-        color: 'rgba(30, 41, 59, 0.65)',
-        fillOpacity: val === 0 ? 0.35 : 0.72
+        color: currentTheme === 'dark' ? '#3f3f46' : '#52525b',
+        fillOpacity: val === 0 ? 0.25 : 0.72
       }};
     }}
 
     function wardStyle(feature) {{
       const isSelected = selectedWardNum === feature.properties.ward;
       return {{
-        color: isSelected ? '#a855f7' : '#9333ea',
-        weight: isSelected ? 3.5 : 1.8,
-        dashArray: isSelected ? null : '4, 6',
+        color: isSelected ? (currentTheme === 'dark' ? '#ffffff' : '#09090b') : (currentTheme === 'dark' ? '#c084fc' : '#7c3aed'),
+        weight: isSelected ? 3.5 : 2.0,
+        dashArray: isSelected ? null : '4, 4',
         fill: false,
         interactive: false
       }};
@@ -921,7 +1087,7 @@ html_page = f'''<!DOCTYPE html>
 
       wardMaskLayer = L.polygon(polygonCoords, {{
         pane: 'maskPane',
-        fillColor: '#070a13',
+        fillColor: currentTheme === 'dark' ? '#09090b' : '#f8fafc',
         fillOpacity: 0.85,
         stroke: false,
         interactive: false
@@ -1033,11 +1199,13 @@ html_page = f'''<!DOCTYPE html>
               }}
               activeHoverLayer = layer;
               layer.setStyle({{ weight: 3.5, color: '#38bdf8', fillOpacity: 0.88 }});
+              const val = getSmdMetric(p, currentMetric, currentPeriod);
+              const streamName = currentMetric === 'total' ? 'All 311' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
               smdTooltip.setContent(`
-                <div style="font-weight: 800; font-size: 13px; color: #ffffff;">SMD ${{p.smd_id}}</div>
-                <div style="font-size: 11px; color: #94a3b8;">ANC ${{p.anc_id}} • Ward ${{p.ward}}</div>
-                <div style="margin-top: 4px; font-size: 12px; font-weight: 700; color: #38bdf8;">
-                  ${{p[currentMetric] || 0}} ${{currentMetric.toUpperCase()}} Requests
+                <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">SMD ${{p.smd_id}}</div>
+                <div style="font-size: 11px; color: var(--text-dim);">ANC ${{p.anc_id}} • Ward ${{p.ward}}</div>
+                <div style="margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--accent);">
+                  ${{val}} ${{streamName}} Requests (${{currentPeriod === '30d' ? '30d' : '180d'}})
                 </div>
               `);
               smdTooltip.setLatLng(e.latlng);
@@ -1078,8 +1246,20 @@ html_page = f'''<!DOCTYPE html>
     function initRecycleRoutesLayer() {{
       recycleRoutesLayer = L.geoJSON(MAP_DATA.recycle_routes, {{
         pane: 'routePane',
-        style: {{ color: '#059669', weight: 2.2, dashArray: '4, 5', fillColor: '#10b981', fillOpacity: 0.12 }}
+        style: {{ color: '#16a34a', weight: 2.2, dashArray: '4, 5', fillColor: '#22c55e', fillOpacity: 0.12 }}
       }});
+    }}
+
+    // Citywide Stats Helper
+    function getCitywideStats(period) {{
+      let total = 0, trash = 0, rec = 0;
+      MAP_DATA.wards.features.forEach(f => {{
+        const m = period === '30d' ? f.properties.metrics_30d : f.properties.metrics_180d;
+        total += (m ? m.total : f.properties.total) || 0;
+        trash += (m ? m.trash : f.properties.trash) || 0;
+        rec += (m ? m.recycling : f.properties.recycling) || 0;
+      }});
+      return {{ total, trash, rec }};
     }}
 
     // Selection Handling
@@ -1265,67 +1445,95 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function updateInspectorCitywide() {{
+      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const stats = getCitywideStats(currentPeriod);
+
       document.getElementById('insp-title').innerText = 'District of Columbia';
-      document.getElementById('insp-sub').innerText = 'Citywide Performance Summary (Past 30 Days)';
-      document.getElementById('insp-stat-total').innerText = '3,301';
+      document.getElementById('insp-sub').innerText = `Citywide Performance Summary (${{periodLabel}})`;
+      document.getElementById('insp-stat-total').innerText = stats.total.toLocaleString();
       document.getElementById('insp-stat-share').innerText = '100%';
-      document.getElementById('insp-stat-trash').innerText = '2,284';
-      document.getElementById('insp-stat-rec').innerText = '1,017';
-      document.getElementById('insp-details').innerText = 'Evaluating 3,301 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts.';
+      document.getElementById('insp-stat-trash').innerText = stats.trash.toLocaleString();
+      document.getElementById('insp-stat-rec').innerText = stats.rec.toLocaleString();
+      document.getElementById('insp-details').innerText = `Evaluating ${{stats.total.toLocaleString()}} 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
     }}
 
     function updateInspectorWard(p) {{
+      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;
+      const total = m ? m.total : p.total;
+      const trash = m ? m.trash : p.trash;
+      const rec = m ? m.recycling : p.recycling;
+      const cityTot = getCitywideStats(currentPeriod).total;
+      const share = cityTot > 0 ? (total / cityTot * 100).toFixed(1) : '0.0';
+
       document.getElementById('insp-title').innerText = `Ward ${{p.ward}}`;
-      document.getElementById('insp-sub').innerText = `Councilmember: ${{p.rep || ''}}`;
-      document.getElementById('insp-stat-total').innerText = p.total.toLocaleString();
-      document.getElementById('insp-stat-share').innerText = `${{p.share_pct}}%`;
-      document.getElementById('insp-stat-trash').innerText = p.trash.toLocaleString();
-      document.getElementById('insp-stat-rec').innerText = p.recycling.toLocaleString();
-      document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{p.total}} missed collections (${{p.share_pct}}% of citywide volume) over the past 30 days.`;
+      document.getElementById('insp-sub').innerText = `Councilmember: ${{p.councilmember || WARD_COUNCIL[p.ward] || 'DC Council'}}`;
+      document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+      document.getElementById('insp-stat-share').innerText = `${{share}}%`;
+      document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
+      document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
+      document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
     }}
 
     function updateInspectorANC(ancId) {{
+      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
       const smdsInAnc = MAP_DATA.smds.features.filter(f => f.properties.anc_id === ancId);
-      const total = smdsInAnc.reduce((sum, f) => sum + (f.properties.total || 0), 0);
-      const trash = smdsInAnc.reduce((sum, f) => sum + (f.properties.trash || 0), 0);
-      const rec = smdsInAnc.reduce((sum, f) => sum + (f.properties.recycling || 0), 0);
+      let total = 0, trash = 0, rec = 0;
+      smdsInAnc.forEach(f => {{
+        const m = currentPeriod === '30d' ? f.properties.metrics_30d : f.properties.metrics_180d;
+        total += (m ? m.total : f.properties.total) || 0;
+        trash += (m ? m.trash : f.properties.trash) || 0;
+        rec += (m ? m.recycling : f.properties.recycling) || 0;
+      }});
       const ward = smdsInAnc[0]?.properties.ward;
+      const cityTot = getCitywideStats(currentPeriod).total;
+      const share = cityTot > 0 ? (total / cityTot * 100).toFixed(1) : '0.0';
 
       document.getElementById('insp-title').innerText = `ANC ${{ancId}}`;
       document.getElementById('insp-sub').innerText = `Ward ${{ward}} • ${{smdsInAnc.length}} Single Member Districts`;
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
-      document.getElementById('insp-stat-share').innerText = `${{round((total / 3301 * 100), 1)}}%`;
+      document.getElementById('insp-stat-share').innerText = `${{share}}%`;
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
-      document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total}} missed requests over the past 30 days.`;
+      document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
     }}
 
     function updateInspectorSMD(p, centerLatLng) {{
-      document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
-      document.getElementById('insp-sub').innerText = `ANC ${{p.anc_id}} • Ward ${{p.ward}} (Councilmember: ${{ward_council[p.ward]}})`;
-      document.getElementById('insp-stat-total').innerText = p.total || 0;
-      document.getElementById('insp-stat-share').innerText = `${{p.ward_share_pct || 0}}%`;
-      document.getElementById('insp-stat-trash').innerText = p.trash || 0;
-      document.getElementById('insp-stat-rec').innerText = p.recycling || 0;
-      document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{p.ward_share_pct}}% of Ward ${{p.ward}}'s total missed collections over the past 30 days.`;
+      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;
+      const total = m ? m.total : p.total;
+      const trash = m ? m.trash : p.trash;
+      const rec = m ? m.recycling : p.recycling;
+      const wardShare = m ? m.ward_share_pct : (p.ward_share_pct || 0);
 
-      // Find route overlaps
-      const tr = findRouteAtLatLng(trashRouteIndex, centerLatLng);
-      const rr = findRouteAtLatLng(recycleRouteIndex, centerLatLng);
-      let rHtml = '';
-      if (tr) {{
-        rHtml += `<div style="color: #fca5a5; font-size: 11px;">Trash Route: <strong>${{tr.route}}</strong> (${{tr.day}})</div>`;
-      }}
-      if (rr) {{
-        rHtml += `<div style="color: #6ee7b7; font-size: 11px; margin-top: 2px;">Recycling Route: <strong>${{rr.route}}</strong> (${{rr.day}})</div>`;
-      }}
-      if (rHtml) {{
-        const rBox = document.getElementById('insp-route-box');
-        rBox.innerHTML = '<div style="font-weight: 700; color: #ffffff; font-size: 11px; margin-bottom: 4px;">Assigned DPW Routes:</div>' + rHtml;
-        rBox.style.display = 'block';
+      document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
+      document.getElementById('insp-sub').innerText = `ANC ${{p.anc_id}} • Ward ${{p.ward}} (Councilmember: ${{WARD_COUNCIL[p.ward] || 'DC Council'}})`;
+      document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+      document.getElementById('insp-stat-share').innerText = `${{wardShare}}%`;
+      document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
+      document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
+      document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{wardShare}}% of Ward ${{p.ward}}'s total missed collections over the ${{periodLabel.toLowerCase()}}.`;
+
+      if (centerLatLng) {{
+        const tr = findRouteAtLatLng(trashRouteIndex, centerLatLng);
+        const rr = findRouteAtLatLng(recycleRouteIndex, centerLatLng);
+        let rHtml = '';
+        if (tr) {{
+          rHtml += `<div class="kw-trash" style="font-size: 11px;">Trash Route: <strong>${{tr.route}}</strong> (${{tr.day}})</div>`;
+        }}
+        if (rr) {{
+          rHtml += `<div class="kw-recycle" style="font-size: 11px; margin-top: 2px;">Recycling Route: <strong>${{rr.route}}</strong> (${{rr.day}})</div>`;
+        }}
+        if (rHtml) {{
+          const rBox = document.getElementById('insp-route-box');
+          rBox.innerHTML = '<div style="font-weight: 700; font-size: 11px; margin-bottom: 4px; text-transform: uppercase;">Assigned DPW Routes:</div>' + rHtml;
+          rBox.style.display = 'block';
+        }} else {{
+          document.getElementById('insp-route-box').style.display = 'none';
+        }}
       }}
     }}
 
@@ -1338,12 +1546,41 @@ html_page = f'''<!DOCTYPE html>
       if (smdLayer) smdLayer.setStyle(smdStyle);
     }}
 
+    function setPeriod(period) {{
+      currentPeriod = period;
+      document.getElementById('btn-period-180d').classList.toggle('active', period === '180d');
+      document.getElementById('btn-period-30d').classList.toggle('active', period === '30d');
+      document.getElementById('panel-period-tag').innerText = period === '180d' ? 'Past 180 Days' : 'Past 30 Days';
+
+      updateLegend();
+      if (smdLayer) smdLayer.setStyle(smdStyle);
+
+      // Refresh currently active inspector
+      if (selectedSmdId) {{
+        const feat = MAP_DATA.smds.features.find(f => f.properties.smd_id === selectedSmdId);
+        let centerLatLng = null;
+        smdLayer.eachLayer(l => {{
+          if (l.feature.properties.smd_id === selectedSmdId) centerLatLng = l.getBounds().getCenter();
+        }});
+        if (feat) updateInspectorSMD(feat.properties, centerLatLng);
+      }} else if (selectedAncId) {{
+        updateInspectorANC(selectedAncId);
+      }} else if (selectedWardNum) {{
+        const wFeat = MAP_DATA.wards.features.find(f => f.properties.ward === selectedWardNum);
+        if (wFeat) updateInspectorWard(wFeat.properties);
+      }} else {{
+        updateInspectorCitywide();
+      }}
+    }}
+
     function updateLegend() {{
       const pal = PALETTES[currentMetric];
-      const th = THRESHOLDS[currentMetric];
+      const th = THRESHOLDS[currentPeriod][currentMetric];
       const scaleEl = document.getElementById('legend-scale');
       scaleEl.innerHTML = pal.map(c => `<div class="scale-box" style="background: ${{c}};"></div>`).join('');
-      document.getElementById('legend-title').innerText = `${{currentMetric.toUpperCase()}} Requests (30 Days)`;
+      const streamName = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
+      const periodLabel = currentPeriod === '30d' ? '30 Days' : '180 Days';
+      document.getElementById('legend-title').innerText = `${{streamName}} Requests (${{periodLabel}})`;
       document.getElementById('legend-labels').innerHTML = `
         <span>0</span>
         <span>${{th[1]}}</span>
@@ -1352,14 +1589,30 @@ html_page = f'''<!DOCTYPE html>
       `;
     }}
 
+    function toggleTheme() {{
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(nextTheme);
+    }}
+
+    function setTheme(theme) {{
+      currentTheme = theme;
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('dc_map_theme', theme);
+      document.getElementById('theme-toggle-btn').innerText = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
+
+      if (baseTileLayer) {{
+        baseTileLayer.setUrl(getTileUrl(theme));
+      }}
+      if (wardMaskLayer) {{
+        wardMaskLayer.setStyle({{ fillColor: theme === 'dark' ? '#09090b' : '#f8fafc' }});
+      }}
+      if (smdLayer) smdLayer.setStyle(smdStyle);
+      if (wardLayer) wardLayer.setStyle(wardStyle);
+    }}
+
     function toggleSMDLayer(show) {{
       if (show) map.addLayer(smdLayer);
       else map.removeLayer(smdLayer);
-    }}
-
-    function toggleWardLayer(show) {{
-      if (show) map.addLayer(wardLayer);
-      else map.removeLayer(wardLayer);
     }}
 
     function toggleTrashRoutes(show) {{
@@ -1374,35 +1627,43 @@ html_page = f'''<!DOCTYPE html>
 
     // Static Contextual Exports (US Letter: 8.5in x 11in)
     function getExportMetadata() {{
+      const periodLabel = currentPeriod === '30d' ? '30-Day' : '180-Day';
+      const streamLabel = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
+
       if (selectedSmdId) {{
         const feat = MAP_DATA.smds.features.find(f => f.properties.smd_id === selectedSmdId);
         const p = feat ? feat.properties : {{}};
+        const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;
+        const tot = m ? m.total : p.total;
+        const tr = m ? m.trash : p.trash;
+        const rec = m ? m.recycling : p.recycling;
+        const ws = m ? m.ward_share_pct : (p.ward_share_pct || 0);
         return {{
           title: `Single Member District Report: SMD ${{selectedSmdId}}`,
-          subtitle: `ANC ${{p.anc_id || selectedAncId}} • Ward ${{p.ward || selectedWardNum}} • Councilmember: ${{ward_council[p.ward] || ''}}`,
-          metrics: `30-Day Missed Requests: Total: ${{p.total || 0}} | Trash: ${{p.trash || 0}} | Recycling: ${{p.recycling || 0}} (Ward Share: ${{p.ward_share_pct || 0}}%)`,
-          filename: `dc-map-smd-${{selectedSmdId}}`
+          subtitle: `ANC ${{p.anc_id || selectedAncId}} • Ward ${{p.ward || selectedWardNum}} • Councilmember: ${{WARD_COUNCIL[p.ward] || ''}}`,
+          metrics: `${{periodLabel}} Missed Requests: Total: ${{tot}} | Trash: ${{tr}} | Recycling: ${{rec}} (Ward Share: ${{ws}}%)`,
+          filename: `dc-map-smd-${{selectedSmdId}}-${{currentPeriod}}`
         }};
       }} else if (selectedAncId) {{
         return {{
           title: `Advisory Neighborhood Commission Report: ANC ${{selectedAncId}}`,
           subtitle: `Ward ${{selectedWardNum || ''}}`,
-          metrics: `Active Metric: ${{currentMetric.toUpperCase()}} Missed Collection Requests (Past 30 Days)`,
-          filename: `dc-map-anc-${{selectedAncId}}`
+          metrics: `Active Metric: ${{streamLabel}} Missed Collection Requests (${{periodLabel}})`,
+          filename: `dc-map-anc-${{selectedAncId}}-${{currentPeriod}}`
         }};
       }} else if (selectedWardNum) {{
         return {{
           title: `Ward Operational Report: Ward ${{selectedWardNum}}`,
-          subtitle: `Councilmember: ${{ward_council[selectedWardNum] || ''}}`,
-          metrics: `Active Metric: ${{currentMetric.toUpperCase()}} Missed Collection Requests (Past 30 Days)`,
-          filename: `dc-map-ward-${{selectedWardNum}}`
+          subtitle: `Councilmember: ${{WARD_COUNCIL[selectedWardNum] || ''}}`,
+          metrics: `Active Metric: ${{streamLabel}} Missed Collection Requests (${{periodLabel}})`,
+          filename: `dc-map-ward-${{selectedWardNum}}-${{currentPeriod}}`
         }};
       }} else {{
         return {{
           title: 'Washington, DC Missed Collection Analysis',
-          subtitle: 'Citywide Spatial Explorer • Past 30 Days',
-          metrics: `Active Metric: ${{currentMetric.toUpperCase()}} Requests across all 8 Wards and 345 SMDs`,
-          filename: 'dc-map-citywide'
+          subtitle: `Citywide Spatial Explorer • ${{periodLabel}} Window`,
+          metrics: `Active Metric: ${{streamLabel}} Requests across all 8 Wards and 345 SMDs`,
+          filename: `dc-map-citywide-${{currentPeriod}}`
         }};
       }}
     }}
@@ -1423,12 +1684,12 @@ html_page = f'''<!DOCTYPE html>
       const imgData = canvas.toDataURL('image/png');
 
       // Title & Context Header
-      doc.setFont('Helvetica', 'bold');
-      doc.setFontSize(16);
+      doc.setFont('Courier', 'bold');
+      doc.setFontSize(15);
       doc.setTextColor(15, 23, 42);
       doc.text(meta.title, 0.5, 0.6);
 
-      doc.setFont('Helvetica', 'normal');
+      doc.setFont('Courier', 'normal');
       doc.setFontSize(10);
       doc.setTextColor(51, 65, 85);
       doc.text(meta.subtitle, 0.5, 0.82);
@@ -1463,6 +1724,7 @@ html_page = f'''<!DOCTYPE html>
     initWardLayer();
     initTrashRoutesLayer();
     initRecycleRoutesLayer();
+    setTheme(currentTheme);
     updateLegend();
     resetToCitywide();
 
