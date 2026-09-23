@@ -5,7 +5,7 @@ Introduces the Washington, DC Missed Collection Analysis project, provides
 citywide high-level performance indicators, and directs users to the dedicated
 Interactive Map (map.html) and Operational Report (report.html).
 Strictly adheres to:
-- Primary monospace font (JetBrains Mono)
+- Primary monospace font (IBM Plex Mono)
 - Lo-fi black & white design with browser-default light/dark toggle
 - Keyword colorization: Trash (Red), Recycling (Green), Combined (Blue)
 - No emojis anywhere in UI, code, or documentation
@@ -33,16 +33,16 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • Overview</title>
+  <title>Missed Collections • Intro</title>
 
-  <!-- Google Fonts: JetBrains Mono -->
+  <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {{
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-mono: 'IBM Plex Mono', monospace;
 
       /* Light Theme (Default) */
       --bg-page: #f8fafc;
@@ -168,7 +168,7 @@ html_content = f"""<!DOCTYPE html>
       font-size: 12px;
       font-weight: 600;
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
@@ -191,7 +191,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
@@ -210,7 +210,7 @@ html_content = f"""<!DOCTYPE html>
       padding: 32px 20px;
     }}
 
-    /* Hero Section */
+    /* Hero Section: Intro */
     .hero {{
       text-align: center;
       padding: 40px 0 44px 0;
@@ -226,7 +226,7 @@ html_content = f"""<!DOCTYPE html>
       font-size: 11px;
       font-weight: 700;
       padding: 3px 12px;
-      border-radius: 4px;
+      border-radius: 2px;
       margin-bottom: 14px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -242,15 +242,6 @@ html_content = f"""<!DOCTYPE html>
       max-width: 820px;
       margin-left: auto;
       margin-right: auto;
-    }}
-
-    .hero-subhed {{
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-top: -6px;
-      margin-bottom: 16px;
-      letter-spacing: -0.01em;
     }}
 
     .hero-desc {{
@@ -275,7 +266,7 @@ html_content = f"""<!DOCTYPE html>
       font-size: 12px;
       font-weight: 700;
       padding: 10px 22px;
-      border-radius: 4px;
+      border-radius: 2px;
       transition: background 0.15s ease;
       display: inline-flex;
       align-items: center;
@@ -294,7 +285,7 @@ html_content = f"""<!DOCTYPE html>
       font-size: 12px;
       font-weight: 700;
       padding: 10px 22px;
-      border-radius: 4px;
+      border-radius: 2px;
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
@@ -317,7 +308,7 @@ html_content = f"""<!DOCTYPE html>
     .kpi-box {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 2px;
       padding: 18px;
       text-align: center;
       box-shadow: var(--card-shadow);
@@ -339,126 +330,87 @@ html_content = f"""<!DOCTYPE html>
       letter-spacing: 0.04em;
     }}
 
-    /* Application Cards */
-    .apps-section {{
-      margin-bottom: 44px;
-    }}
-
-    .section-title {{
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
-      text-align: center;
-    }}
-
-    .apps-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
-      gap: 20px;
-    }}
-
-    @media (max-width: 600px) {{
-      .apps-grid {{
-        grid-template-columns: 1fr;
-      }}
-    }}
-
-    .app-card {{
+    /* References & Acknowledgments Section */
+    .references-section {{
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 2px;
       padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: border-color 0.15s ease;
-      box-shadow: var(--card-shadow);
-    }}
-
-    .app-card:hover {{
-      border-color: var(--border-dark);
-    }}
-
-    .app-tag {{
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 8px;
-    }}
-
-    .app-title {{
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--text-main);
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }}
-
-    .app-desc {{
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      flex-grow: 1;
-    }}
-
-    .app-features {{
-      list-style: none;
-      margin-bottom: 24px;
-    }}
-
-    .app-features li {{
-      font-size: 11px;
-      color: var(--text-main);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }}
-
-    .app-features li::before {{
-      content: "-";
-      color: var(--accent);
-      font-weight: 800;
-    }}
-
-    /* Methodology Section */
-    .info-section {{
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
+      margin-top: 10px;
       margin-bottom: 40px;
       box-shadow: var(--card-shadow);
     }}
 
-    .info-grid {{
+    .references-title {{
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }}
+
+    .ref-narrative {{
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      background: var(--bg-input);
+      border-left: 3px solid var(--accent);
+      border-radius: 2px;
+    }}
+
+    .ref-narrative a {{
+      color: var(--text-main);
+      text-decoration: underline;
+      font-weight: 600;
+    }}
+
+    .ref-narrative a:hover {{
+      color: var(--accent);
+    }}
+
+    .ref-grid {{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-      margin-top: 16px;
     }}
 
-    .info-block h4 {{
-      font-size: 13px;
+    .ref-heading {{
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }}
 
-    .info-block p {{
+    .ref-list {{
+      list-style: none;
+    }}
+
+    .ref-list li {{
       font-size: 11px;
       color: var(--text-muted);
-      line-height: 1.6;
+      margin-bottom: 6px;
+      line-height: 1.5;
     }}
 
-    .info-block p a {{
+    .ref-list li::before {{
+      content: "- ";
+      color: var(--accent);
+      font-weight: 700;
+    }}
+
+    .ref-list a {{
       color: var(--accent);
       text-decoration: underline;
+    }}
+
+    .ref-list a:hover {{
+      color: var(--accent-hover);
     }}
 
     /* Footer */
@@ -499,14 +451,14 @@ html_content = f"""<!DOCTYPE html>
 
   <main class="page-container">
 
-    <!-- Hero Section -->
+    <!-- Hero Section: Intro -->
     <section class="hero">
       <div class="hero-badge">Operational Proof of Concept</div>
-      <h1 class="hero-title">Overview</h1>
+      <h1 class="hero-title">Intro</h1>
       <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
       <div class="hero-actions">
-        <a href="map.html" class="btn-hero-primary">Launch Interactive Map</a>
-        <a href="report.html" class="btn-hero-secondary">View Report</a>
+        <a href="map.html" class="btn-hero-primary">The Map</a>
+        <a href="report.html" class="btn-hero-secondary">The Report</a>
       </div>
     </section>
 
@@ -514,7 +466,7 @@ html_content = f"""<!DOCTYPE html>
     <section class="kpi-row">
       <div class="kpi-box">
         <div class="kpi-num kw-combined">{citywide['total_requests']:,}</div>
-        <div class="kpi-title">Total Requests (180d)</div>
+        <div class="kpi-title">Total Requests</div>
       </div>
       <div class="kpi-box">
         <div class="kpi-num kw-trash">{total_trash:,}</div>
@@ -530,68 +482,37 @@ html_content = f"""<!DOCTYPE html>
       </div>
     </section>
 
-    <!-- Dedicated Application Portals -->
-    <section class="apps-section">
-      <h2 class="section-title">Analysis Applications</h2>
-      <div class="apps-grid">
+    <!-- References & Acknowledgments Section -->
+    <section class="references-section">
+      <h2 class="references-title">References &amp; Acknowledgments</h2>
 
-        <!-- Card 1: Interactive Map -->
-        <div class="app-card">
-          <div>
-            <div class="app-tag">Spatial Explorer</div>
-            <h3 class="app-title">Interactive Map Application</h3>
-            <p class="app-desc">High-contrast Stamen Toner cartography displaying localized collection failures, hot spots, and municipal boundary overlaps.</p>
-            <ul class="app-features">
-              <li>Local Stamen Toner (Light) and Stamen Toner Blacklite (Dark) basemaps cached offline</li>
-              <li>Dual analytic period switcher: 180-Day (Default) vs 30-Day windows</li>
-              <li>Single-hue relative intensity color ramps for Trash (Red), Recycling (Green), and Combined (Blue)</li>
-              <li>Cascading Ward, ANC, and Single Member District selectors with permanent Ward boundaries</li>
-              <li>DPW Trash (103) and Recycling (120) route overlays with pickup days</li>
-              <li>Context-aware static map export to PDF and PNG</li>
-            </ul>
-          </div>
-          <a href="map.html" class="btn-hero-primary" style="justify-content: center;">Open Map Application</a>
-        </div>
-
-        <!-- Card 2: Operational Report -->
-        <div class="app-card">
-          <div>
-            <div class="app-tag">Performance Analytics</div>
-            <h3 class="app-title">Unified Operational Report</h3>
-            <p class="app-desc">Consolidated operational review evaluating 180 days of municipal collection records, chronic recurrence, and collection day bottlenecks.</p>
-            <ul class="app-features">
-              <li>Hierarchical operational evaluation across Wards, ANCs, and SMDs</li>
-              <li>Address deduplication separating broad bypasses from chronic properties</li>
-              <li>DPW fleet scheduling bottleneck analysis across collection days</li>
-              <li>Searchable, filterable 223-route performance matrix</li>
-              <li>Full report print and export, plus chart PNG and table CSV downloads</li>
-            </ul>
-          </div>
-          <a href="report.html" class="btn-hero-secondary" style="justify-content: center;">Open Report</a>
-        </div>
-
+      <div class="ref-narrative">
+        <p>This project was built in <a href="https://antigravity.google.com" target="_blank" rel="noopener">Antigravity</a>, from <a href="https://ghostty.org" target="_blank" rel="noopener">Ghostty</a>, on <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>, using <a href="https://ai.google.dev" target="_blank" rel="noopener">Gemini Flash 3.8</a>, as a proof of concept for civic coding, inspired by <a href="https://x.com/joshjacobson" target="_blank" rel="noopener">Josh Jacobson</a>. It is both a product of frustration (why is it so hard for my neighbors to get trash and recycling picked up) and hope (how can we understand and solve citywide problems to improve our community).</p>
       </div>
-    </section>
 
-    <!-- Methodology & Data Architecture -->
-    <section class="info-section">
-      <h3 style="font-size: 15px; font-weight: 800; color: var(--text-main); letter-spacing: -0.01em;">Data Pipeline &amp; Operational Context</h3>
-      <div class="info-grid">
-        <div class="info-block">
-          <h4>Zero External Runtime Dependencies</h4>
-          <p>The entire application functions offline. Basemap tiles (Stamen Toner &amp; Blacklite) and vendor libraries (Leaflet, Chart.js, jsPDF, html2canvas) are vendored locally in the repository.</p>
+      <div class="ref-grid">
+        <div class="ref-block">
+          <div class="ref-heading">Public Oversight &amp; Hearings</div>
+          <ul class="ref-list">
+            <li><a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">DC Council Committee on Public Works &amp; Operations: 2026 Performance Oversight Hearing</a></li>
+            <li><a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">DPW Written Responses to Performance Oversight Questions</a></li>
+            <li><a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">DPW FY26 Performance Plan</a></li>
+          </ul>
         </div>
-        <div class="info-block">
-          <h4>Automated Incremental Refresh</h4>
-          <p>Scheduled weekly GitHub Actions query Open Data DC for updated service requests, append new records by OBJECTID, and recompute spatial matrices in under 15 seconds.</p>
+        <div class="ref-block">
+          <div class="ref-heading">Open Data &amp; GIS Sources</div>
+          <ul class="ref-list">
+            <li><a href="https://opendata.dc.gov/datasets/311-city-service-requests-in-2024" target="_blank" rel="noopener">Open Data DC: 311 City Service Requests</a></li>
+            <li><a href="https://opendata.dc.gov" target="_blank" rel="noopener">DC GIS: DPW Trash &amp; Recycling Collection Routes</a></li>
+          </ul>
         </div>
-        <div class="info-block">
-          <h4>Print &amp; Export Ready</h4>
-          <p>All PDF exports and printable layouts feature optimized stylesheets, clean vector typography, and multi-page table formatting.</p>
-        </div>
-        <div class="info-block">
-          <h4>Performance Oversight Context</h4>
-          <p>Grounded in the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a>, DPW's <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Responses</a>, and the active ODCA timeliness audit.</p>
+        <div class="ref-block">
+          <div class="ref-heading">Libraries &amp; Cartography</div>
+          <ul class="ref-list">
+            <li><a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet.js</a></li>
+            <li><a href="https://stadiamaps.com" target="_blank" rel="noopener">Stamen Toner Basemaps / Stadia Maps</a></li>
+            <li><a href="https://www.chartjs.org" target="_blank" rel="noopener">Chart.js</a> &amp; <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a></li>
+          </ul>
         </div>
       </div>
     </section>

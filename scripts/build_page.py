@@ -8,7 +8,7 @@ Features:
 - Dual analytic period toggle: 180-Day (Default) vs 30-Day
 - Permanent Ward boundary overlays
 - Renamed '311 Requests' layer and streamlined controls
-- Primary monospace font (JetBrains Mono)
+- Primary monospace font (IBM Plex Mono)
 - Strictly zero emojis across UI and code
 - Context-aware PDF and PNG map exports
 """
@@ -60,10 +60,10 @@ html_page = f'''<!DOCTYPE html>
   <!-- Local Vendored Leaflet CSS -->
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
 
-  <!-- Google Fonts: JetBrains Mono -->
+  <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Local Vendored Export Libraries -->
   <script src="assets/vendor/jspdf/jspdf.umd.min.js"></script>
@@ -71,7 +71,7 @@ html_page = f'''<!DOCTYPE html>
 
   <style>
     :root {{
-      --font-mono: 'JetBrains Mono', monospace;
+      --font-mono: 'IBM Plex Mono', monospace;
 
       /* Light Theme (Default) */
       --bg-page: #f8fafc;
@@ -193,7 +193,7 @@ html_page = f'''<!DOCTYPE html>
       font-size: 12px;
       font-weight: 600;
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid transparent;
       transition: all 0.15s ease;
     }}
@@ -216,7 +216,7 @@ html_page = f'''<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 10px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
@@ -305,7 +305,7 @@ html_page = f'''<!DOCTYPE html>
       gap: 4px;
       background: var(--bg-input);
       padding: 3px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid var(--border);
     }}
 
@@ -317,7 +317,7 @@ html_page = f'''<!DOCTYPE html>
       padding: 5px 4px;
       font-size: 11px;
       font-weight: 700;
-      border-radius: 3px;
+      border-radius: 2px;
       cursor: pointer;
       font-family: var(--font-mono);
       transition: all 0.15s ease;
@@ -359,7 +359,7 @@ html_page = f'''<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 5px 8px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-family: var(--font-mono);
     }}
@@ -385,7 +385,7 @@ html_page = f'''<!DOCTYPE html>
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 6px 8px;
-      border-radius: 4px;
+      border-radius: 2px;
       font-size: 11px;
       font-family: var(--font-mono);
     }}
@@ -401,7 +401,7 @@ html_page = f'''<!DOCTYPE html>
       gap: 4px;
       background: var(--bg-input);
       padding: 3px;
-      border-radius: 4px;
+      border-radius: 2px;
       border: 1px solid var(--border);
       margin-bottom: 10px;
     }}
@@ -414,7 +414,7 @@ html_page = f'''<!DOCTYPE html>
       padding: 5px 4px;
       font-size: 10px;
       font-weight: 700;
-      border-radius: 3px;
+      border-radius: 2px;
       cursor: pointer;
       font-family: var(--font-mono);
       transition: all 0.15s ease;
@@ -1186,10 +1186,10 @@ html_page = f'''<!DOCTYPE html>
         }} else {{
           return {{
             fillColor: getColor(val, currentMetric),
-            weight: 0.4,
-            opacity: 0.2,
-            color: outlineColor,
-            fillOpacity: 0.08
+            weight: 0.8,
+            opacity: 0.85,
+            color: currentTheme === 'dark' ? '#3f3f46' : '#52525b',
+            fillOpacity: val === 0 ? 0.25 : 0.72
           }};
         }}
       }}
@@ -1220,37 +1220,6 @@ html_page = f'''<!DOCTYPE html>
         map.removeLayer(wardMaskLayer);
         wardMaskLayer = null;
       }}
-      if (!selectedWardNum) return;
-
-      const wardFeat = MAP_DATA.wards.features.find(f => f.properties.ward === selectedWardNum);
-      if (!wardFeat) return;
-
-      const outerRing = [[-85, -180], [-85, 180], [85, 180], [85, -180]];
-      function convertCoords(coords) {{
-        return coords.map(pt => [pt[1], pt[0]]);
-      }}
-
-      let polygonCoords = [outerRing];
-      const g = wardFeat.geometry;
-      if (g.type === 'Polygon') {{
-        for (const ring of g.coordinates) {{
-          polygonCoords.push(convertCoords(ring));
-        }}
-      }} else if (g.type === 'MultiPolygon') {{
-        for (const poly of g.coordinates) {{
-          for (const ring of poly) {{
-            polygonCoords.push(convertCoords(ring));
-          }}
-        }}
-      }}
-
-      wardMaskLayer = L.polygon(polygonCoords, {{
-        pane: 'maskPane',
-        fillColor: currentTheme === 'dark' ? '#09090b' : '#f8fafc',
-        fillOpacity: 0.85,
-        stroke: false,
-        interactive: false
-      }}).addTo(map);
     }}
 
     // Spatial Index for Route Overlaps
@@ -1972,9 +1941,6 @@ html_page = f'''<!DOCTYPE html>
 
       if (baseTileLayer) {{
         baseTileLayer.setUrl(getTileUrl(theme));
-      }}
-      if (wardMaskLayer) {{
-        wardMaskLayer.setStyle({{ fillColor: theme === 'dark' ? '#09090b' : '#f8fafc' }});
       }}
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
