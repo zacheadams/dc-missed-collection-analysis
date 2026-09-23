@@ -101,7 +101,7 @@ html_page = f'''<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • Interactive Map</title>
+  <title>Missed Collections • The Map</title>
 
   <!-- Local Vendored Leaflet CSS -->
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
@@ -795,9 +795,8 @@ html_page = f'''<!DOCTYPE html>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="map.html" class="nav-link active">Interactive Map</a>
-      <a href="report.html" class="nav-link">Report</a>
-      <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
+      <a href="map.html" class="nav-link active">The Map</a>
+      <a href="report.html" class="nav-link">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="exportMapPdf()" class="btn-action">Export Map (PDF)</button>
       <button onclick="exportMapPng()" class="btn-action">Export Map (PNG)</button>
