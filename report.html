@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Operational Report | DC DPW Missed Collection Analysis</title>
+  <title>Missed Collections | DC DPW Operational Analysis</title>
 
   <!-- Google Fonts: JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -194,19 +194,26 @@
     }
 
     .report-title {
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.02em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .report-subhed {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 12px;
     }
 
     .report-meta {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
 
     .meta-badge {
@@ -217,7 +224,29 @@
       padding: 3px 8px;
       border-radius: 4px;
       border: 1px solid var(--border);
-      font-size: 11px;
+      font-size: 10px;
+    }
+
+    /* Operational Context Box */
+    .context-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      box-shadow: var(--card-shadow);
+    }
+
+    .context-box a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .context-box a:hover {
+      color: var(--accent-hover);
     }
 
     /* KPI Grid */
@@ -283,7 +312,8 @@
       font-size: 11px;
       color: var(--text-muted);
       margin-top: 3px;
-      max-width: 900px;
+      max-width: 960px;
+      line-height: 1.5;
     }
 
     /* Chart Cards */
@@ -493,7 +523,7 @@
       cursor: not-allowed;
     }
 
-    /* Print Formatting (US Letter: 8.5in x 11in) */
+    /* Print Formatting */
     @media print {
       @page {
         size: letter portrait;
@@ -515,7 +545,8 @@
 
       .chart-card,
       .table-container,
-      .kpi-card {
+      .kpi-card,
+      .context-box {
         border: 1px solid #cccccc !important;
         box-shadow: none !important;
         break-inside: avoid;
@@ -538,7 +569,7 @@
   <nav class="site-nav">
     <div class="nav-brand">
       <span class="nav-title">DC Missed Collection Analysis</span>
-      <span class="nav-subtitle">Unified Operational Report</span>
+      <span class="nav-subtitle">Operational Analysis • Solid Waste Management</span>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
@@ -546,7 +577,7 @@
       <a href="report.html" class="nav-link active">Operational Report</a>
       <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
-      <button onclick="window.print()" class="btn-action">Print (US Letter)</button>
+      <button onclick="window.print()" class="btn-action">Print Report</button>
     </div>
   </nav>
 
@@ -554,14 +585,20 @@
 
     <!-- Report Header -->
     <header class="report-header">
-      <h1 class="report-title">Washington, DC Missed Collection Operational Report</h1>
+      <h1 class="report-title">Missed Collections</h1>
+      <div class="report-subhed">Where—and why—are trash and recycling pickups missed in DC?</div>
       <div class="report-meta">
         <span class="meta-badge">Period: Past 180 Days (March 25, 2026 - September 21, 2026)</span>
         <span class="meta-badge">Source: DC 311 Open Data</span>
         <span class="meta-badge">Scope: 8 Wards • 46 ANCs • 345 SMDs • 223 DPW Routes</span>
-        <span class="meta-badge">Standard: US Letter (8.5" x 11")</span>
+        <span class="meta-badge">Audience: DC Department of Public Works (SWMA)</span>
       </div>
     </header>
+
+    <!-- Operational Context & Overview -->
+    <div class="context-box">
+      This proof-of-concept report analyzes Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Solid Waste Management Administration (SWMA)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>. Context is grounded in testimony from the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a> and DPW's official <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Question Responses</a>, alongside the D.C. Auditor's (ODCA) ongoing discretionary audit of residential collection timeliness.
+    </div>
 
     <!-- KPI Grid -->
     <section class="kpi-grid">
@@ -573,12 +610,12 @@
       <div class="kpi-card">
         <div class="kpi-label">Unique Properties</div>
         <div class="kpi-value">5,993</div>
-        <div class="kpi-subtext">Distinct Street Addresses</div>
+        <div class="kpi-subtext">Distinct Serviced Street Addresses</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Repeat Properties</div>
         <div class="kpi-value" style="color: var(--warning-color);">1,408</div>
-        <div class="kpi-subtext">23.5% Recurrence Rate (2+ Tickets)</div>
+        <div class="kpi-subtext">23.5% Recurrence Rate (2+ Misses)</div>
       </div>
       <div class="kpi-card">
         <div class="kpi-label">Trash Stream (S0441)</div>
@@ -598,8 +635,7 @@
         <div>
           <h2 class="section-title">1. Ward Performance and Address Recurrence Breakdown</h2>
           <p class="section-description">
-            Analysis of missed collections across the District's 8 Wards, highlighting the division between
-            <span class="kw-trash">Trash</span> and <span class="kw-recycle">Recycling</span>, alongside chronic repeat rates at specific street addresses.
+            Analysis of missed collections across the District's 8 Wards, comparing <span class="kw-trash">Trash</span> vs. <span class="kw-recycle">Recycling</span> volumes and isolating repeat addresses. Under DPW's oversight definition, a "chronic miss" occurs when collection is missed 4 times within a 5-week consecutive period. Across all wards, 75.3% of impacted locations represent isolated single misses, while 24.7% (1,475 properties) face recurring collection failures requiring route supervisor attention.
           </p>
         </div>
         <button onclick="exportTableCsv('ward-table', 'dc-ward-summary')" class="btn-action">Export CSV</button>
@@ -773,7 +809,7 @@
         <div>
           <h2 class="section-title">2. Top 10 High-Incident Single Member Districts (SMDs)</h2>
           <p class="section-description">
-            Micro-districts experiencing disproportionate missed collection frequency and recurring service failures.
+            Micro-districts experiencing disproportionate missed collection frequency. In oversight testimony, DPW noted that physical alley obstructions (construction, parked vehicles), route complexity, and crew unfamiliarity cluster in specific dense corridors.
           </p>
         </div>
         <button onclick="exportTableCsv('top10-smd-table', 'dc-top10-smds')" class="btn-action">Export CSV</button>
@@ -969,7 +1005,7 @@
         <div>
           <h2 class="section-title">3. Advisory Neighborhood Commission (ANC) Operational Summary</h2>
           <p class="section-description">
-            Full breakdown across all 46 ANCs. Filter by Ward or search by ANC identifier.
+            Full breakdown across all 46 ANCs. Filter by Ward or search by ANC identifier to evaluate local service trends.
           </p>
         </div>
         <button onclick="exportTableCsv('anc-table', 'dc-anc-summary')" class="btn-action">Export CSV</button>
@@ -1666,6 +1702,7 @@
           <p class="section-description">
             Analysis of all 223 DPW collection routes (103 <span class="kw-trash">Trash</span>, 120 <span class="kw-recycle">Recycling</span>)
             evaluating total missed requests, day-of-week collection schedules, geographic area, and request density.
+            This matrix directly informs DPW's Phase 2 Route Re-Optimization project, which focuses on realigning route workloads and balancing heavy Monday and Tuesday volume surges across the fleet.
           </p>
         </div>
         <button onclick="exportTableCsv('route-table', 'dc-dpw-routes-matrix')" class="btn-action">Export All Routes (CSV)</button>
@@ -5564,7 +5601,7 @@
     updateChartsTheme(currentTheme);
 
     // ----------------------------------------------------
-    // Static Export Handlers (US Letter: 8.5in x 11in)
+    // Static Export Handlers
     // ----------------------------------------------------
     function exportChartPng(canvasId, filename) {
       const canvas = document.getElementById(canvasId);
@@ -5591,7 +5628,7 @@
       doc.setFontSize(10);
       doc.setTextColor(100, 116, 139);
       doc.text('District of Columbia DPW Missed Collection Analysis', 0.75, 1.0);
-      doc.text(`Generated: ${new Date().toLocaleDateString()} • US Letter Format`, 0.75, 1.2);
+      doc.text(`Generated: ${new Date().toLocaleDateString()}`, 0.75, 1.2);
 
       // Insert Chart Image
       doc.addImage(imgData, 'PNG', 0.75, 1.4, 9.5, 5.5);

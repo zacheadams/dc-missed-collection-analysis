@@ -2,14 +2,14 @@
 
 An open spatial analysis and interactive mapping application evaluating Washington, DC Department of Public Works (DPW) missed trash (`S0441`) and missed recycling (`S0321`) 311 service requests.
 
-This resource provides public, aggregated municipal performance insights across all 8 Wards, 345 Single Member Districts (SMDs), and DPW collection routes to assist Advisory Neighborhood Commissioners (ANCs), Councilmembers, policy analysts, and residents in understanding waste collection reliability, routing bottlenecks, and service recurrence.
+This resource provides an operational proof of concept for the DC Department of Public Works (DPW) Solid Waste Management Administration (SWMA), route supervisors, and data analytics teams, while providing accessible spatial intelligence for Advisory Neighborhood Commissioners (ANCs), Councilmembers, policy analysts, and residents to understand waste collection reliability, routing bottlenecks, and service recurrence.
 
 ---
 
 ## Applications
 
 - **Project Hub ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Central portal displaying 180-day executive performance metrics, project methodology, and entry points to the interactive map and operational report.
-- **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 15), cascading Ward/ANC/SMD filters, DPW collection route overlays, and contextual US Letter (8.5" x 11") PDF and PNG map exports.
+- **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 15), cascading Ward/ANC/SMD filters, DPW collection route overlays, and contextual PDF and PNG map exports.
 - **Unified Operational Report ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))**: Consolidated municipal performance report featuring hierarchical Ward, ANC, and SMD deduplication benchmarks, collection day fleet bottleneck analysis, Chart.js visualizations with PNG/PDF exports, and a searchable 223-route performance matrix with CSV/PDF exports.
 
 ### Viewing Locally
