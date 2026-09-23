@@ -405,6 +405,29 @@
     .site-footer a:hover {
       color: var(--text-main);
     }
+
+    /* Print Formatting */
+    @media print {
+      @page {
+        size: letter portrait;
+        margin: 0.5in;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .site-nav,
+      .hero-actions {
+        display: none !important;
+      }
+      .hero,
+      .kpi-row,
+      .references-section {
+        border: 1px solid #cccccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
+    }
   </style>
 </head>
 <body>
@@ -417,10 +440,10 @@
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link active">Home</a>
-      <a href="map.html" class="nav-link">Interactive Map</a>
-      <a href="report.html" class="nav-link">Report</a>
-      <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
+      <a href="map.html" class="nav-link">The Map</a>
+      <a href="report.html" class="nav-link">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
+      <button onclick="window.print()" class="btn-action">Export (PDF)</button>
     </div>
   </nav>
 
@@ -428,7 +451,6 @@
 
     <!-- Hero Section: Intro -->
     <section class="hero">
-      <div class="hero-badge">Operational Proof of Concept</div>
       <h1 class="hero-title">Intro</h1>
       <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
       <div class="hero-actions">
@@ -457,45 +479,18 @@
       </div>
     </section>
 
-    <!-- References & Acknowledgments Section -->
+    <!-- References & Acknowledgements Section -->
     <section class="references-section">
-      <h2 class="references-title">References &amp; Acknowledgments</h2>
+      <h2 class="references-title">References &amp; Acknowledgements</h2>
 
-      <div class="ref-narrative">
-        <p>This project was built in <a href="https://antigravity.google.com" target="_blank" rel="noopener">Antigravity</a>, from <a href="https://ghostty.org" target="_blank" rel="noopener">Ghostty</a>, on <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>, using <a href="https://ai.google.dev" target="_blank" rel="noopener">Gemini Flash 3.8</a>, as a proof of concept for civic coding, inspired by <a href="https://x.com/joshjacobson" target="_blank" rel="noopener">Josh Jacobson</a>. It is both a product of frustration (why is it so hard for my neighbors to get trash and recycling picked up) and hope (how can we understand and solve citywide problems to improve our community).</p>
-      </div>
-
-      <div class="ref-grid">
-        <div class="ref-block">
-          <div class="ref-heading">Public Oversight &amp; Hearings</div>
-          <ul class="ref-list">
-            <li><a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">DC Council Committee on Public Works &amp; Operations: 2026 Performance Oversight Hearing</a></li>
-            <li><a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">DPW Written Responses to Performance Oversight Questions</a></li>
-            <li><a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">DPW FY26 Performance Plan</a></li>
-          </ul>
-        </div>
-        <div class="ref-block">
-          <div class="ref-heading">Open Data &amp; GIS Sources</div>
-          <ul class="ref-list">
-            <li><a href="https://opendata.dc.gov/datasets/311-city-service-requests-in-2024" target="_blank" rel="noopener">Open Data DC: 311 City Service Requests</a></li>
-            <li><a href="https://opendata.dc.gov" target="_blank" rel="noopener">DC GIS: DPW Trash &amp; Recycling Collection Routes</a></li>
-          </ul>
-        </div>
-        <div class="ref-block">
-          <div class="ref-heading">Libraries &amp; Cartography</div>
-          <ul class="ref-list">
-            <li><a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet.js</a></li>
-            <li><a href="https://stadiamaps.com" target="_blank" rel="noopener">Stamen Toner Basemaps / Stadia Maps</a></li>
-            <li><a href="https://www.chartjs.org" target="_blank" rel="noopener">Chart.js</a> &amp; <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a></li>
-          </ul>
-        </div>
+      <div class="ref-narrative" style="margin-bottom: 0;">
+        <p>This project was built in a <a href="https://ghostty.org/" target="_blank" rel="noopener">Ghostty</a> terminal using <a href="https://antigravity.google/product/antigravity-cli/" target="_blank" rel="noopener">Antigravity-CLI</a> running <a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" target="_blank" rel="noopener">Gemini Flash 3.8</a>, and is hosted on <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>. The basemaps are <a href="https://maps.stamen.com/toner/" target="_blank" rel="noopener">Stamen Toner</a>, rendered in <a href="https://leafletjs.com/" target="_blank" rel="noopener">Leaflet.js</a>, with other graphics using <a href="https://www.chartjs.org/" target="_blank" rel="noopener">Chart.js</a> and exports facilitated using <a href="https://github.com/parallax/jsPDF" target="_blank" rel="noopener">jsPDF</a>. The data used are publicly available thanks to <a href="https://opendata.dc.gov/" target="_blank" rel="noopener">Open Data DC</a>. It was most directly inspired by <a href="https://districtjosh.com/" target="_blank" rel="noopener">Josh Jacobson</a>. Civic coding projects like these are products of frustration (why is it so hard for my neighbors to get trash and recycling picked up) and hope (how can we understand and solve citywide problems to improve our community).</p>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>Missed Collections • DC Department of Public Works (DPW) Operational Proof of Concept</p>
-      <p style="margin-top: 6px;"><a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank">View on GitHub</a> • Updated September 23, 2026</p>
+      <p>Last Updated September 23, 2026</p>
     </footer>
 
   </main>

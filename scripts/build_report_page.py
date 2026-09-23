@@ -155,7 +155,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • Report</title>
+  <title>Missed Collections • A Short Report</title>
 
   <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -668,9 +668,15 @@ html_content = f"""<!DOCTYPE html>
       border-color: var(--text-main);
     }}
 
-    .btn-page:disabled {{
-      opacity: 0.4;
-      cursor: not-allowed;
+    /* Footer */
+    .site-footer {{
+      text-align: center;
+      padding-top: 24px;
+      margin-top: 32px;
+      margin-bottom: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-dim);
     }}
 
     /* Print Formatting */
@@ -723,9 +729,8 @@ html_content = f"""<!DOCTYPE html>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Home</a>
-      <a href="map.html" class="nav-link">Interactive Map</a>
-      <a href="report.html" class="nav-link active">Report</a>
-      <a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank" class="nav-link">GitHub</a>
+      <a href="map.html" class="nav-link">The Map</a>
+      <a href="report.html" class="nav-link active">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="window.print()" class="btn-action">Export Report (PDF)</button>
     </div>
@@ -735,7 +740,7 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Report Header -->
     <header class="report-header">
-      <h1 class="report-title">Report</h1>
+      <h1 class="report-title">A Short Report</h1>
       <div class="report-meta">
         <span class="meta-badge">Period: Past 180 Days (March 25, 2026 - September 21, 2026)</span>
         <span class="meta-badge">Source: DC 311 Open Data</span>
@@ -1140,6 +1145,11 @@ html_content += f"""
         </div>
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Last Updated {datetime.now().strftime('%B %d, %Y')}</p>
+    </footer>
 
   </div>
 
