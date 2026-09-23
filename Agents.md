@@ -28,6 +28,8 @@ This document codifies development standards, operational conventions, and archi
     - **Trash**: Red (`#dc2626` / `#ef4444`, CSS class `.kw-trash`)
     - **Recycling**: Green (`#16a34a` / `#22c55e`, CSS class `.kw-recycle`)
     - **Combined / All 311**: Blue (`#2563eb` / `#38bdf8`, CSS class `.kw-combined`)
+- **Geographic Column Hierarchy in Tables**:
+  - Across all data tables and exports, columns representing geographic jurisdictions must strictly follow: **Ward goes before ANC goes before SMD** (e.g. `Ward` -> `Councilmember` -> `ANC` -> `SMD`).
 
 ---
 
