@@ -20,6 +20,7 @@ import json
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 map_data_path = os.path.join(BASE_DIR, 'data', 'dc_map_data_v2.json')
 route_stats_path = os.path.join(BASE_DIR, 'data', 'route_180d_stats.json')
+route_areas_path = os.path.join(BASE_DIR, 'data', 'route_areas.json')
 
 with open(map_data_path, 'r', encoding='utf-8') as f:
     map_data = json.load(f)
@@ -29,11 +30,45 @@ json_str = json.dumps(map_data, separators=(',', ':'))
 with open(route_stats_path, 'r', encoding='utf-8') as f:
     route_stats_raw = json.load(f)
 
+route_areas = {}
+if os.path.exists(route_areas_path):
+    with open(route_areas_path, 'r', encoding='utf-8') as f:
+        route_areas = json.load(f)
+
 route_stats_lookup = {}
 for r in route_stats_raw.get('trash_routes', []):
-    route_stats_lookup['trash_' + str(r['route_id'])] = r
+    r_copy = dict(r)
+    aid = r_copy.get('route_id')
+    ra = route_areas.get('trash_routes', {}).get(aid, {})
+    area_sq_mi = ra.get('area_sq_mi', 0.0)
+    r_copy['area_sq_mi'] = area_sq_mi
+    r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    if not r_copy.get('ward') and ra.get('ward'):
+        r_copy['ward'] = ra.get('ward')
+    if not r_copy.get('neighborhoods') and ra.get('neighborhoods'):
+        r_copy['neighborhoods'] = ra.get('neighborhoods')
+    if not r_copy.get('ancs') and ra.get('ancs'):
+        r_copy['ancs'] = ra.get('ancs')
+    if not r_copy.get('area_desc') and ra.get('area_desc'):
+        r_copy['area_desc'] = ra.get('area_desc')
+    route_stats_lookup['trash_' + str(aid)] = r_copy
+
 for r in route_stats_raw.get('recycle_routes', []):
-    route_stats_lookup['recycle_' + str(r['route_id'])] = r
+    r_copy = dict(r)
+    aid = r_copy.get('route_id')
+    ra = route_areas.get('recycle_routes', {}).get(aid, {})
+    area_sq_mi = ra.get('area_sq_mi', 0.0)
+    r_copy['area_sq_mi'] = area_sq_mi
+    r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    if not r_copy.get('ward') and ra.get('ward'):
+        r_copy['ward'] = ra.get('ward')
+    if not r_copy.get('neighborhoods') and ra.get('neighborhoods'):
+        r_copy['neighborhoods'] = ra.get('neighborhoods')
+    if not r_copy.get('ancs') and ra.get('ancs'):
+        r_copy['ancs'] = ra.get('ancs')
+    if not r_copy.get('area_desc') and ra.get('area_desc'):
+        r_copy['area_desc'] = ra.get('area_desc')
+    route_stats_lookup['recycle_' + str(aid)] = r_copy
 
 route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
 
@@ -118,10 +153,19 @@ html_page = f'''<!DOCTYPE html>
       --badge-border: rgba(56, 189, 248, 0.3);
     }}
 
-    * {{
+    *, *::before, *::after {{
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: inherit;
+    }}
+
+    input, button, select, textarea, optgroup {{
+      font-family: var(--font-mono) !important;
+    }}
+
+    .leaflet-container, .leaflet-popup, .leaflet-control, .leaflet-tooltip {{
+      font-family: var(--font-mono) !important;
     }}
 
     body {{
@@ -888,6 +932,10 @@ html_page = f'''<!DOCTYPE html>
             <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
           </label>
         </div>
+
+        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+          <button id="btn-reset-default" class="btn-action" style="width: 100%; text-align: center; padding: 7px 10px; font-weight: 700; border-radius: 2px;" onclick="resetToDefault()">Reset to Default</button>
+        </div>
       </div>
     </div>
 
@@ -905,19 +953,19 @@ html_page = f'''<!DOCTYPE html>
       <div class="inspector-collapsible-body" id="insp-panel-body">
         <div class="inspector-stat-grid">
           <div class="stat-tile">
-            <div class="stat-tile-lbl">Selected Requests</div>
+            <div class="stat-tile-lbl" id="insp-lbl-1">Selected Requests</div>
             <div class="stat-tile-val" id="insp-stat-total">0</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-lbl">Share of Volume</div>
+            <div class="stat-tile-lbl" id="insp-lbl-2">Share of Volume</div>
             <div class="stat-tile-val" id="insp-stat-share">100%</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-lbl">Trash (S0441)</div>
+            <div class="stat-tile-lbl" id="insp-lbl-3">Trash (S0441)</div>
             <div class="stat-tile-val kw-trash" id="insp-stat-trash">0</div>
           </div>
           <div class="stat-tile">
-            <div class="stat-tile-lbl">Recycling (S0321)</div>
+            <div class="stat-tile-lbl" id="insp-lbl-4">Recycling (S0321)</div>
             <div class="stat-tile-val kw-recycle" id="insp-stat-rec">0</div>
           </div>
         </div>
@@ -995,11 +1043,11 @@ html_page = f'''<!DOCTYPE html>
     map.createPane('wardPane');
     map.getPane('wardPane').style.zIndex = 320;
 
-    map.createPane('routePane');
-    map.getPane('routePane').style.zIndex = 340;
-
     map.createPane('smdPane');
-    map.getPane('smdPane').style.zIndex = 400;
+    map.getPane('smdPane').style.zIndex = 380;
+
+    map.createPane('routePane');
+    map.getPane('routePane').style.zIndex = 420;
 
     function getTileUrl(theme) {{
       return theme === 'dark' ? 'tiles/blacklite/{{z}}/{{x}}/{{y}}.png' : 'tiles/light/{{z}}/{{x}}/{{y}}.png';
@@ -1440,15 +1488,65 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     let activeHoverRouteLayer = null;
+    let selectedRouteId = null;
+    let selectedRouteStream = null;
+    let selectedRouteLayer = null;
+
+    function clearRouteSelection() {{
+      if (selectedRouteLayer) {{
+        selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        selectedRouteLayer = null;
+      }}
+      selectedRouteId = null;
+      selectedRouteStream = null;
+    }}
+
+    function selectRoute(feature, layer, stream) {{
+      selectedSmdId = null;
+      selectedAncId = null;
+      selectedWardNum = null;
+      updateDropdowns(null, null, null);
+      updateWardMask();
+      if (smdLayer) smdLayer.setStyle(smdStyle);
+
+      if (selectedRouteLayer && selectedRouteLayer !== layer) {{
+        selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+      }}
+
+      selectedRouteId = stream === 'Trash' ? feature.properties.route_area : feature.properties.route;
+      selectedRouteStream = stream;
+      selectedRouteLayer = layer;
+
+      const isDark = currentTheme === 'dark';
+      const selColor = stream === 'Trash'
+        ? (isDark ? '#f87171' : '#b91c1c')
+        : (isDark ? '#4ade80' : '#15803d');
+      const hatchUrl = stream === 'Trash'
+        ? (isDark ? 'url(#hatch-trash-dark-hover)' : 'url(#hatch-trash-hover)')
+        : (isDark ? 'url(#hatch-recycle-dark-hover)' : 'url(#hatch-recycle-hover)');
+
+      layer.setStyle({{
+        color: selColor,
+        weight: 4.5,
+        opacity: 1.0,
+        fill: true,
+        fillColor: hatchUrl,
+        fillOpacity: 1.0
+      }});
+      layer.bringToFront();
+
+      map.fitBounds(layer.getBounds(), {{ padding: [50, 50], maxZoom: 15 }});
+
+      updateInspectorRoute(feature.properties, stream);
+      updateBreadcrumbsRoute(feature.properties, stream);
+    }}
 
     function handleRouteHover(e, layer, isTrash) {{
-      if (map.hasLayer(smdLayer)) return;
-
       const trashActive = map.hasLayer(trashRoutesLayer);
       const recActive = map.hasLayer(recycleRoutesLayer);
       if (!trashActive && !recActive) return;
 
-      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer) {{
+      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer && activeHoverRouteLayer !== selectedRouteLayer) {{
         if (activeHoverRouteLayer._isTrash) {{
           activeHoverRouteLayer.setStyle(getTrashRouteStyle());
         }} else {{
@@ -1457,7 +1555,9 @@ html_page = f'''<!DOCTYPE html>
       }}
       activeHoverRouteLayer = layer;
       layer._isTrash = isTrash;
-      layer.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+      if (layer !== selectedRouteLayer) {{
+        layer.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+      }}
 
       const latlng = e.latlng;
       const tr = trashActive ? findRouteAtLatLng(trashRouteIndex, latlng) : null;
@@ -1553,15 +1653,13 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function handleRouteMouseout(layer, isTrash) {{
-      if (layer) {{
+      if (layer && layer !== selectedRouteLayer) {{
         layer.setStyle(isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
       }}
       if (activeHoverRouteLayer === layer) {{
         activeHoverRouteLayer = null;
       }}
-      if (!map.hasLayer(smdLayer)) {{
-        smdTooltip.close();
-      }}
+      smdTooltip.close();
     }}
 
     function initTrashRoutesLayer() {{
@@ -1572,7 +1670,11 @@ html_page = f'''<!DOCTYPE html>
           layer.on({{
             mouseover: function(e) {{ handleRouteHover(e, layer, true); }},
             mousemove: function(e) {{ handleRouteHover(e, layer, true); }},
-            mouseout: function() {{ handleRouteMouseout(layer, true); }}
+            mouseout: function() {{ handleRouteMouseout(layer, true); }},
+            click: function(e) {{
+              L.DomEvent.stopPropagation(e);
+              selectRoute(feature, layer, 'Trash');
+            }}
           }});
         }}
       }});
@@ -1586,7 +1688,11 @@ html_page = f'''<!DOCTYPE html>
           layer.on({{
             mouseover: function(e) {{ handleRouteHover(e, layer, false); }},
             mousemove: function(e) {{ handleRouteHover(e, layer, false); }},
-            mouseout: function() {{ handleRouteMouseout(layer, false); }}
+            mouseout: function() {{ handleRouteMouseout(layer, false); }},
+            click: function(e) {{
+              L.DomEvent.stopPropagation(e);
+              selectRoute(feature, layer, 'Recycling');
+            }}
           }});
         }}
       }});
@@ -1606,6 +1712,7 @@ html_page = f'''<!DOCTYPE html>
 
     // Selection Handling
     function selectHierarchy(smdId) {{
+      clearRouteSelection();
       let targetLayer = null;
       smdLayer.eachLayer(l => {{
         if (l.feature.properties.smd_id === smdId) targetLayer = l;
@@ -1630,6 +1737,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function selectWard(wNum) {{
+      clearRouteSelection();
       selectedWardNum = wNum ? parseInt(wNum) : null;
       selectedSmdId = null;
       selectedAncId = null;
@@ -1654,6 +1762,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function selectANC(ancId) {{
+      clearRouteSelection();
       selectedAncId = ancId;
       selectedSmdId = null;
 
@@ -1675,6 +1784,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function resetToCitywide() {{
+      clearRouteSelection();
       selectedWardNum = null;
       selectedAncId = null;
       selectedSmdId = null;
@@ -1773,6 +1883,10 @@ html_page = f'''<!DOCTYPE html>
 
     function updateBreadcrumbs() {{
       const bar = document.getElementById('breadcrumb-crumbs');
+      if (selectedRouteId) {{
+        bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{selectedRouteStream}} Route ${{selectedRouteId}}</span>`;
+        return;
+      }}
       let html = '';
       if (selectedWardNum) {{
         html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedAncId ? 'active' : ''}}" onclick="selectWard(${{selectedWardNum}})">Ward ${{selectedWardNum}}</span>`;
@@ -1786,15 +1900,25 @@ html_page = f'''<!DOCTYPE html>
       bar.innerHTML = html;
     }}
 
+    function updateBreadcrumbsRoute(p, stream) {{
+      const bar = document.getElementById('breadcrumb-crumbs');
+      const rId = stream === 'Trash' ? p.route_area : p.route;
+      bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{stream}} Route ${{rId}}</span>`;
+    }}
+
     function updateInspectorCitywide() {{
       const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
       const stats = getCitywideStats(currentPeriod);
 
       document.getElementById('insp-title').innerText = 'District of Columbia';
       document.getElementById('insp-sub').innerText = `Citywide Performance Summary (${{periodLabel}})`;
+      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
       document.getElementById('insp-stat-total').innerText = stats.total.toLocaleString();
+      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = '100%';
+      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
       document.getElementById('insp-stat-trash').innerText = stats.trash.toLocaleString();
+      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
       document.getElementById('insp-stat-rec').innerText = stats.rec.toLocaleString();
       document.getElementById('insp-details').innerText = `Evaluating ${{stats.total.toLocaleString()}} 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1811,9 +1935,13 @@ html_page = f'''<!DOCTYPE html>
 
       document.getElementById('insp-title').innerText = `Ward ${{p.ward}}`;
       document.getElementById('insp-sub').innerText = `Councilmember: ${{p.councilmember || WARD_COUNCIL[p.ward] || 'DC Council'}}`;
+      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
+      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
+      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1836,9 +1964,13 @@ html_page = f'''<!DOCTYPE html>
 
       document.getElementById('insp-title').innerText = `ANC ${{ancId}}`;
       document.getElementById('insp-sub').innerText = `Ward ${{ward}} • ${{smdsInAnc.length}} Single Member Districts`;
+      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
+      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
+      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel.toLowerCase()}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
@@ -1855,9 +1987,13 @@ html_page = f'''<!DOCTYPE html>
 
       document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
       document.getElementById('insp-sub').innerText = `ANC ${{p.anc_id}} • Ward ${{p.ward}} (Councilmember: ${{WARD_COUNCIL[p.ward] || 'DC Council'}})`;
+      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
       document.getElementById('insp-stat-share').innerText = `${{wardShare}}%`;
+      document.getElementById('insp-lbl-3').innerText = 'Trash (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
+      document.getElementById('insp-lbl-4').innerText = 'Recycling (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{wardShare}}% of Ward ${{p.ward}}'s total missed collections over the ${{periodLabel.toLowerCase()}}.`;
 
@@ -1882,6 +2018,50 @@ html_page = f'''<!DOCTYPE html>
       ensureMobileInspectorOpen();
     }}
 
+    function updateInspectorRoute(p, stream) {{
+      const rId = stream === 'Trash' ? p.route_area : p.route;
+      const key = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
+      const stats = ROUTE_STATS[key] || {{}};
+
+      const sched = stats.schedule || p.days || p.day || 'Scheduled';
+      const ward = stats.ward || p.ward || 'Citywide';
+      const total = stats.total || 0;
+      const repRate = stats.repeat_rate != null ? stats.repeat_rate : 0;
+      const uniqAddrs = stats.unique_addrs || 0;
+      const density = stats.density != null ? stats.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0);
+      const areaSqMi = stats.area_sq_mi || p.area_sq_mi || 0;
+
+      document.getElementById('insp-title').innerText = `${{stream}} Route ${{rId}}`;
+      document.getElementById('insp-sub').innerText = `Scheduled Day: ${{sched}} • ${{ward}}`;
+
+      document.getElementById('insp-lbl-1').innerText = 'Total Requests';
+      document.getElementById('insp-stat-total').innerText = total.toLocaleString();
+
+      document.getElementById('insp-lbl-2').innerText = 'Repeat Rate';
+      document.getElementById('insp-stat-share').innerText = `${{repRate}}%`;
+
+      document.getElementById('insp-lbl-3').innerText = 'Unique Addrs';
+      document.getElementById('insp-stat-trash').innerText = uniqAddrs.toLocaleString();
+
+      document.getElementById('insp-lbl-4').innerText = 'Density';
+      document.getElementById('insp-stat-rec').innerText = `${{density}} /sq mi`;
+
+      const nbhDesc = stats.neighborhoods || p.neighborhoods || 'Residential Corridor';
+      const ancsDesc = stats.ancs || p.ancs || '';
+      document.getElementById('insp-details').innerText = `${{stream}} Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days.`;
+
+      const rBox = document.getElementById('insp-route-box');
+      rBox.innerHTML = `
+        <div style="font-weight: 700; font-size: 11px; margin-bottom: 4px; text-transform: uppercase;">Route Geography & Service:</div>
+        <div style="font-size: 11px; color: var(--text-dim);">Neighborhoods: <strong style="color: var(--text-main);">${{nbhDesc}}</strong></div>
+        ${{ancsDesc ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">ANCs: <strong style="color: var(--text-main);">${{ancsDesc}}</strong></div>` : ''}}
+        ${{areaSqMi > 0 ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Area: <strong style="color: var(--text-main);">${{areaSqMi}} sq mi</strong> (${{density}} req/sq mi)</div>` : ''}}
+      `;
+      rBox.style.display = 'block';
+
+      ensureMobileInspectorOpen();
+    }}
+
     function setMetric(metric) {{
       currentMetric = metric;
       document.getElementById('btn-total').classList.toggle('active', metric === 'total');
@@ -1901,7 +2081,9 @@ html_page = f'''<!DOCTYPE html>
       if (smdLayer) smdLayer.setStyle(smdStyle);
 
       // Refresh currently active inspector
-      if (selectedSmdId) {{
+      if (selectedRouteId && selectedRouteLayer) {{
+        updateInspectorRoute(selectedRouteLayer.feature.properties, selectedRouteStream);
+      }} else if (selectedSmdId) {{
         const feat = MAP_DATA.smds.features.find(f => f.properties.smd_id === selectedSmdId);
         let centerLatLng = null;
         smdLayer.eachLayer(l => {{
@@ -1950,8 +2132,39 @@ html_page = f'''<!DOCTYPE html>
       }}
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
-      if (trashRoutesLayer) trashRoutesLayer.setStyle(getTrashRouteStyle());
-      if (recycleRoutesLayer) recycleRoutesLayer.setStyle(getRecycleRouteStyle());
+      const isDark = theme === 'dark';
+      if (trashRoutesLayer) {{
+        trashRoutesLayer.eachLayer(l => {{
+          if (l === selectedRouteLayer) {{
+            l.setStyle({{
+              color: isDark ? '#f87171' : '#b91c1c',
+              weight: 4.5,
+              opacity: 1.0,
+              fill: true,
+              fillColor: isDark ? 'url(#hatch-trash-dark-hover)' : 'url(#hatch-trash-hover)',
+              fillOpacity: 1.0
+            }});
+          }} else {{
+            l.setStyle(getTrashRouteStyle());
+          }}
+        }});
+      }}
+      if (recycleRoutesLayer) {{
+        recycleRoutesLayer.eachLayer(l => {{
+          if (l === selectedRouteLayer) {{
+            l.setStyle({{
+              color: isDark ? '#4ade80' : '#15803d',
+              weight: 4.5,
+              opacity: 1.0,
+              fill: true,
+              fillColor: isDark ? 'url(#hatch-recycle-dark-hover)' : 'url(#hatch-recycle-hover)',
+              fillOpacity: 1.0
+            }});
+          }} else {{
+            l.setStyle(getRecycleRouteStyle());
+          }}
+        }});
+      }}
     }}
 
     function toggleSMDLayer(show) {{
@@ -1969,6 +2182,11 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         trashRoutesLayer.setStyle(getTrashRouteStyle());
       }} else {{
+        if (selectedRouteStream === 'Trash') {{
+          clearRouteSelection();
+          updateInspectorCitywide();
+          updateBreadcrumbs();
+        }}
         map.removeLayer(trashRoutesLayer);
         if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash) {{
           activeHoverRouteLayer = null;
@@ -1982,11 +2200,57 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         recycleRoutesLayer.setStyle(getRecycleRouteStyle());
       }} else {{
+        if (selectedRouteStream === 'Recycling') {{
+          clearRouteSelection();
+          updateInspectorCitywide();
+          updateBreadcrumbs();
+        }}
         map.removeLayer(recycleRoutesLayer);
         if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash) {{
           activeHoverRouteLayer = null;
         }}
       }}
+    }}
+
+    function resetToDefault() {{
+      selectedWardNum = null;
+      selectedAncId = null;
+      selectedSmdId = null;
+      clearRouteSelection();
+
+      updateDropdowns(null, null, null);
+      document.getElementById('smd-search').value = '';
+
+      currentMetric = 'total';
+      document.getElementById('btn-total').classList.add('active');
+      document.getElementById('btn-trash').classList.remove('active');
+      document.getElementById('btn-recycling').classList.remove('active');
+
+      currentPeriod = '180d';
+      document.getElementById('btn-period-180d').classList.add('active');
+      document.getElementById('btn-period-30d').classList.remove('active');
+      document.getElementById('panel-period-tag').innerText = 'Past 180 Days';
+
+      document.getElementById('chk-smd').checked = true;
+      if (!map.hasLayer(smdLayer)) map.addLayer(smdLayer);
+
+      document.getElementById('chk-trash-routes').checked = false;
+      if (trashRoutesLayer && map.hasLayer(trashRoutesLayer)) map.removeLayer(trashRoutesLayer);
+
+      document.getElementById('chk-recycle-routes').checked = false;
+      if (recycleRoutesLayer && map.hasLayer(recycleRoutesLayer)) map.removeLayer(recycleRoutesLayer);
+
+      map.setView([38.9072, -77.01], 12);
+      updateWardMask();
+      if (smdLayer) smdLayer.setStyle(smdStyle);
+      if (wardLayer) wardLayer.setStyle(wardStyle);
+
+      smdTooltip.close();
+      map.closePopup();
+
+      updateLegend();
+      updateInspectorCitywide();
+      updateBreadcrumbs();
     }}
 
     // Static Contextual Exports
