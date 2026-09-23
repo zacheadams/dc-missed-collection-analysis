@@ -503,7 +503,7 @@ html_content = f"""<!DOCTYPE html>
     <section class="hero">
       <div class="hero-badge">Operational Proof of Concept</div>
       <h1 class="hero-title">Overview</h1>
-      <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW) Solid Waste Management Administration (SWMA), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
+      <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
       <div class="hero-actions">
         <a href="map.html" class="btn-hero-primary">Launch Interactive Map</a>
         <a href="report.html" class="btn-hero-secondary">View Report</a>
@@ -598,7 +598,7 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>Missed Collections • DC Department of Public Works (SWMA) Operational Proof of Concept</p>
+      <p>Missed Collections • DC Department of Public Works (DPW) Operational Proof of Concept</p>
       <p style="margin-top: 6px;"><a href="https://github.com/zacheadams/dc-missed-collection-analysis" target="_blank">View on GitHub</a> • Updated {datetime.now().strftime('%B %d, %Y')}</p>
     </footer>
 

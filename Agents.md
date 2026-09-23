@@ -79,7 +79,7 @@ This document codifies development standards, operational conventions, and archi
 
 ## 6. Target Audience & Operational Grounding
 
-- **Primary Audience**: DC Department of Public Works (DPW), specifically the Solid Waste Management Administration (SWMA), route supervisors, and data analytics teams.
+- **Primary Audience**: DC Department of Public Works (DPW), collection route supervisors, and data analytics teams.
 - **Operational Proof of Concept**: The application acts as a technical proof-of-concept for route optimization and recurrence tracking, ready for manual review and operational extension.
 - **Oversight Grounding**: Analysis integrates DPW's official definition of chronic misses (4 misses in 5 consecutive weeks), route workload balancing (Phase 2 Route Re-Optimization), alley obstruction factors, and the active Office of the District of Columbia Auditor (ODCA) timeliness audit.
 

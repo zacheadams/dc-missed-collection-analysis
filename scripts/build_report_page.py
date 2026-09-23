@@ -4,7 +4,7 @@ Compiles the Unified Operational Report (report.html).
 Consolidates 180-day Ward, ANC, and SMD address deduplication analysis
 with DPW collection route operational analysis and the 223-route performance matrix.
 Strictly adheres to:
-- Target audience: DC Department of Public Works (DPW) SWMA and Collections leadership
+- Target audience: DC Department of Public Works (DPW) and Collections leadership
 - Proof-of-concept operational framing with DC Council Oversight context
 - Title: 'Missed Collections' with subhead 'Where—and why—are trash and recycling pickups missed in DC?'
 - Primary monospace font (JetBrains Mono)
@@ -735,13 +735,13 @@ html_content = f"""<!DOCTYPE html>
         <span class="meta-badge">Period: Past 180 Days (March 25, 2026 - September 21, 2026)</span>
         <span class="meta-badge">Source: DC 311 Open Data</span>
         <span class="meta-badge">Scope: 8 Wards • 46 ANCs • 345 SMDs • 223 DPW Routes</span>
-        <span class="meta-badge">Audience: DC Department of Public Works (SWMA)</span>
+        <span class="meta-badge">Audience: DC Department of Public Works</span>
       </div>
     </header>
 
     <!-- Operational Context & Overview -->
     <div class="context-box">
-      This proof-of-concept report analyzes Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Solid Waste Management Administration (SWMA)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>. Context is grounded in testimony from the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a> and DPW's official <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Question Responses</a>, alongside the D.C. Auditor's (ODCA) ongoing discretionary audit of residential collection timeliness.
+      This proof-of-concept report analyzes Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Department of Public Works (DPW)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>. Context is grounded in testimony from the DC Council Committee on Public Works and Operations <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank">2026 Performance Oversight Hearing</a> and DPW's official <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank">Written Question Responses</a>, alongside the D.C. Auditor's (ODCA) ongoing discretionary audit of residential collection timeliness.
     </div>
 
     <!-- KPI Grid -->
