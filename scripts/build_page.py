@@ -19,11 +19,23 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 map_data_path = os.path.join(BASE_DIR, 'data', 'dc_map_data_v2.json')
+route_stats_path = os.path.join(BASE_DIR, 'data', 'route_180d_stats.json')
 
 with open(map_data_path, 'r', encoding='utf-8') as f:
     map_data = json.load(f)
 
 json_str = json.dumps(map_data, separators=(',', ':'))
+
+with open(route_stats_path, 'r', encoding='utf-8') as f:
+    route_stats_raw = json.load(f)
+
+route_stats_lookup = {}
+for r in route_stats_raw.get('trash_routes', []):
+    route_stats_lookup['trash_' + str(r['route_id'])] = r
+for r in route_stats_raw.get('recycle_routes', []):
+    route_stats_lookup['recycle_' + str(r['route_id'])] = r
+
+route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
 
 ward_council = {
     1: "Brianne Nadeau",
@@ -36,6 +48,7 @@ ward_council = {
     8: "Trayon White, Sr."
 }
 ward_council_json = json.dumps(ward_council)
+
 
 html_page = f'''<!DOCTYPE html>
 <html lang="en">
@@ -439,29 +452,6 @@ html_page = f'''<!DOCTYPE html>
       gap: 6px;
     }}
 
-    .layer-permanent-row {{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-    }}
-
-    .layer-permanent-row span {{
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }}
-
-    .badge-status {{
-      font-size: 9px;
-      padding: 1px 4px;
-      border-radius: 3px;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-    }}
-
     .badge-route {{
       width: 8px;
       height: 8px;
@@ -657,6 +647,43 @@ html_page = f'''<!DOCTYPE html>
     </div>
   </nav>
 
+  <!-- SVG Hatch Patterns for Catchment Routes -->
+  <svg id="route-hatch-defs-svg" style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <!-- Trash Pattern (45 deg) -->
+      <pattern id="hatch-trash" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#dc2626" stroke-width="1.8" />
+      </pattern>
+      <pattern id="hatch-trash-hover" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <rect width="8" height="8" fill="#dc2626" fill-opacity="0.18" />
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#dc2626" stroke-width="2.6" />
+      </pattern>
+      <pattern id="hatch-trash-dark" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#ef4444" stroke-width="1.8" />
+      </pattern>
+      <pattern id="hatch-trash-dark-hover" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+        <rect width="8" height="8" fill="#ef4444" fill-opacity="0.22" />
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#ef4444" stroke-width="2.6" />
+      </pattern>
+
+      <!-- Recycling Pattern (-45 deg) -->
+      <pattern id="hatch-recycle" width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#16a34a" stroke-width="1.8" />
+      </pattern>
+      <pattern id="hatch-recycle-hover" width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <rect width="8" height="8" fill="#16a34a" fill-opacity="0.18" />
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#16a34a" stroke-width="2.6" />
+      </pattern>
+      <pattern id="hatch-recycle-dark" width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#22c55e" stroke-width="1.8" />
+      </pattern>
+      <pattern id="hatch-recycle-dark-hover" width="8" height="8" patternTransform="rotate(-45 0 0)" patternUnits="userSpaceOnUse">
+        <rect width="8" height="8" fill="#22c55e" fill-opacity="0.22" />
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#22c55e" stroke-width="2.6" />
+      </pattern>
+    </defs>
+  </svg>
+
   <!-- Full Viewport Map Workspace -->
   <div class="map-workspace" id="map-interactive">
     <div id="map"></div>
@@ -730,16 +757,12 @@ html_page = f'''<!DOCTYPE html>
           <span><span class="badge-route" style="background: var(--combined-color);"></span>311 Requests</span>
           <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
         </label>
-        <div class="layer-permanent-row">
-          <span><span class="badge-route" style="background: var(--ward-boundary); border: 1px dashed var(--ward-boundary);"></span>Ward Boundaries (Permanent)</span>
-          <span class="badge-status">Locked</span>
-        </div>
         <label class="checkbox-row">
-          <span><span class="badge-route" style="background: var(--trash-color); border: 1px dashed var(--trash-color);"></span>DPW Trash Routes (103)</span>
+          <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span>DPW Trash Routes (103)</span>
           <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
         </label>
         <label class="checkbox-row">
-          <span><span class="badge-route" style="background: var(--recycle-color); border: 1px dashed var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
+          <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span>DPW Recycling Routes (120)</span>
           <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
         </label>
       </div>
@@ -804,6 +827,7 @@ html_page = f'''<!DOCTYPE html>
   <script>
     const MAP_DATA = {json_str};
     const WARD_COUNCIL = {ward_council_json};
+    const ROUTE_STATS = {route_stats_json};
 
     // State
     let selectedWardNum = null;
@@ -959,6 +983,12 @@ html_page = f'''<!DOCTYPE html>
       return pal[0];
     }}
 
+    function getStreamColor(metric) {{
+      if (metric === 'trash') return currentTheme === 'dark' ? '#ef4444' : '#dc2626';
+      if (metric === 'recycling') return currentTheme === 'dark' ? '#22c55e' : '#16a34a';
+      return currentTheme === 'dark' ? '#38bdf8' : '#2563eb';
+    }}
+
     function smdStyle(feature) {{
       const p = feature.properties;
       const val = getSmdMetric(p, currentMetric, currentPeriod);
@@ -967,22 +997,23 @@ html_page = f'''<!DOCTYPE html>
       const inWard = selectedWardNum === p.ward;
 
       const outlineColor = currentTheme === 'dark' ? '#27272a' : '#71717a';
+      const streamColor = getStreamColor(currentMetric);
 
       if (selectedSmdId) {{
         if (isSelected) {{
           return {{
             fillColor: getColor(val, currentMetric),
-            weight: 3.5,
+            weight: 3.8,
             opacity: 1,
-            color: '#facc15',
-            fillOpacity: 0.92
+            color: streamColor,
+            fillOpacity: 0.95
           }};
         }} else if (inWard) {{
           return {{
             fillColor: getColor(val, currentMetric),
             weight: 0.8,
             opacity: 0.6,
-            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            color: streamColor,
             fillOpacity: 0.38
           }};
         }} else {{
@@ -1002,7 +1033,7 @@ html_page = f'''<!DOCTYPE html>
             fillColor: getColor(val, currentMetric),
             weight: 2.2,
             opacity: 0.95,
-            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            color: streamColor,
             fillOpacity: val === 0 ? 0.35 : 0.80
           }};
         }} else {{
@@ -1022,7 +1053,7 @@ html_page = f'''<!DOCTYPE html>
             fillColor: getColor(val, currentMetric),
             weight: 1.2,
             opacity: 0.95,
-            color: currentTheme === 'dark' ? '#38bdf8' : '#0284c7',
+            color: streamColor,
             fillOpacity: val === 0 ? 0.35 : 0.80
           }};
         }} else {{
@@ -1048,9 +1079,10 @@ html_page = f'''<!DOCTYPE html>
     function wardStyle(feature) {{
       const isSelected = selectedWardNum === feature.properties.ward;
       return {{
-        color: isSelected ? (currentTheme === 'dark' ? '#ffffff' : '#09090b') : (currentTheme === 'dark' ? '#c084fc' : '#7c3aed'),
-        weight: isSelected ? 3.5 : 2.0,
-        dashArray: isSelected ? null : '4, 4',
+        color: currentTheme === 'dark' ? '#ffffff' : '#000000',
+        weight: isSelected ? 4.5 : 3.0,
+        dashArray: '2, 5',
+        lineCap: 'round',
         fill: false,
         interactive: false
       }};
@@ -1198,14 +1230,15 @@ html_page = f'''<!DOCTYPE html>
                 }}
               }}
               activeHoverLayer = layer;
-              layer.setStyle({{ weight: 3.5, color: '#38bdf8', fillOpacity: 0.88 }});
+              const streamColor = getStreamColor(currentMetric);
+              layer.setStyle({{ weight: 3.8, color: streamColor, fillOpacity: 0.88 }});
               const val = getSmdMetric(p, currentMetric, currentPeriod);
               const streamName = currentMetric === 'total' ? 'All 311' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
               smdTooltip.setContent(`
                 <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">SMD ${{p.smd_id}}</div>
                 <div style="font-size: 11px; color: var(--text-dim);">ANC ${{p.anc_id}} • Ward ${{p.ward}}</div>
-                <div style="margin-top: 4px; font-size: 12px; font-weight: 700; color: var(--accent);">
-                  ${{val}} ${{streamName}} Requests (${{currentPeriod === '30d' ? '30d' : '180d'}})
+                <div style="margin-top: 4px; font-size: 12px; font-weight: 700; color: ${{streamColor}};">
+                  ${{val.toLocaleString()}} ${{streamName}} Requests (${{currentPeriod === '30d' ? '30d' : '180d'}})
                 </div>
               `);
               smdTooltip.setLatLng(e.latlng);
@@ -1236,17 +1269,224 @@ html_page = f'''<!DOCTYPE html>
       }}).addTo(map);
     }}
 
+    function ensureSvgPatterns() {{
+      const template = document.getElementById('route-hatch-defs-svg');
+      if (!template) return;
+      const defsMarkup = template.querySelector('defs').innerHTML;
+      document.querySelectorAll('#map svg').forEach(svg => {{
+        if (!svg.querySelector('#hatch-trash')) {{
+          let defs = svg.querySelector('defs');
+          if (!defs) {{
+            defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            svg.insertBefore(defs, svg.firstChild);
+          }}
+          defs.innerHTML += defsMarkup;
+        }}
+      }});
+    }}
+
+    function getTrashRouteStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#ef4444' : '#dc2626',
+        weight: 1.5,
+        opacity: 0.85,
+        fill: true,
+        fillColor: isDark ? 'url(#hatch-trash-dark)' : 'url(#hatch-trash)',
+        fillOpacity: 1.0,
+        dashArray: null
+      }};
+    }}
+
+    function getTrashRouteHoverStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#fca5a5' : '#991b1b',
+        weight: 3.5,
+        opacity: 1.0,
+        fill: true,
+        fillColor: isDark ? 'url(#hatch-trash-dark-hover)' : 'url(#hatch-trash-hover)',
+        fillOpacity: 1.0,
+        dashArray: null
+      }};
+    }}
+
+    function getRecycleRouteStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#22c55e' : '#16a34a',
+        weight: 1.5,
+        opacity: 0.85,
+        fill: true,
+        fillColor: isDark ? 'url(#hatch-recycle-dark)' : 'url(#hatch-recycle)',
+        fillOpacity: 1.0,
+        dashArray: null
+      }};
+    }}
+
+    function getRecycleRouteHoverStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#86efac' : '#166534',
+        weight: 3.5,
+        opacity: 1.0,
+        fill: true,
+        fillColor: isDark ? 'url(#hatch-recycle-dark-hover)' : 'url(#hatch-recycle-hover)',
+        fillOpacity: 1.0,
+        dashArray: null
+      }};
+    }}
+
+    let activeHoverRouteLayer = null;
+
+    function handleRouteHover(e, layer, isTrash) {{
+      if (map.hasLayer(smdLayer)) return;
+
+      const trashActive = map.hasLayer(trashRoutesLayer);
+      const recActive = map.hasLayer(recycleRoutesLayer);
+      if (!trashActive && !recActive) return;
+
+      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer) {{
+        if (activeHoverRouteLayer._isTrash) {{
+          activeHoverRouteLayer.setStyle(getTrashRouteStyle());
+        }} else {{
+          activeHoverRouteLayer.setStyle(getRecycleRouteStyle());
+        }}
+      }}
+      activeHoverRouteLayer = layer;
+      layer._isTrash = isTrash;
+      layer.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+
+      const latlng = e.latlng;
+      const tr = trashActive ? findRouteAtLatLng(trashRouteIndex, latlng) : null;
+      const rr = recActive ? findRouteAtLatLng(recycleRouteIndex, latlng) : null;
+
+      let html = '';
+
+      if (trashActive && recActive) {{
+        if (tr && rr) {{
+          const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
+          const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
+          const tTot = tStats.total || 0;
+          const rTot = rStats.total || 0;
+          const combTot = tTot + rTot;
+
+          html = `
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Route Intersection</div>
+            <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || rr.area_desc || 'DPW Catchment Area'}}</div>
+            <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--combined-color); border-top: 1px solid rgba(37,99,235,0.25); padding-top: 4px;">
+              ${{combTot.toLocaleString()}} Combined Requests (180d)
+            </div>
+            <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 2px; font-size: 11px;">
+              <span style="color: var(--trash-color);">Trash (${{tr.route}}): <strong>${{tTot.toLocaleString()}}</strong> (${{tr.day}})</span>
+              <span style="color: var(--recycle-color);">Recycling (${{rr.route}}): <strong>${{rTot.toLocaleString()}}</strong> (${{rr.day}})</span>
+            </div>
+          `;
+        }} else if (tr) {{
+          const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
+          const tTot = tStats.total || 0;
+          html = `
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
+            <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{tr.day || 'Scheduled'}}</div>
+            <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
+              ${{tTot.toLocaleString()}} Trash Requests (180d)
+            </div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+              Repeat Rate: ${{tStats.repeat_rate != null ? tStats.repeat_rate + '%' : 'N/A'}} • ${{tStats.unique_addrs || 0}} unique addresses
+            </div>
+          `;
+        }} else if (rr) {{
+          const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
+          const rTot = rStats.total || 0;
+          html = `
+            <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
+            <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{rr.day || 'Scheduled'}}</div>
+            <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
+              ${{rTot.toLocaleString()}} Recycling Requests (180d)
+            </div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+              Repeat Rate: ${{rStats.repeat_rate != null ? rStats.repeat_rate + '%' : 'N/A'}} • ${{rStats.unique_addrs || 0}} unique addresses
+            </div>
+          `;
+        }}
+      }} else if (trashActive && tr) {{
+        const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
+        const tTot = tStats.total || 0;
+        html = `
+          <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Trash Route ${{tr.route}}</div>
+          <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{tr.day || 'Scheduled'}}</div>
+          <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
+            ${{tTot.toLocaleString()}} Trash Requests (180d)
+          </div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+            Repeat Rate: ${{tStats.repeat_rate != null ? tStats.repeat_rate + '%' : 'N/A'}} • ${{tStats.unique_addrs || 0}} unique addresses
+          </div>
+        `;
+      }} else if (recActive && rr) {{
+        const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
+        const rTot = rStats.total || 0;
+        html = `
+          <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Recycling Route ${{rr.route}}</div>
+          <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection Day: ${{rr.day || 'Scheduled'}}</div>
+          <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
+            ${{rTot.toLocaleString()}} Recycling Requests (180d)
+          </div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+            Repeat Rate: ${{rStats.repeat_rate != null ? rStats.repeat_rate + '%' : 'N/A'}} • ${{rStats.unique_addrs || 0}} unique addresses
+          </div>
+        `;
+      }}
+
+      if (html) {{
+        smdTooltip.setContent(html);
+        smdTooltip.setLatLng(latlng);
+        if (!map.hasLayer(smdTooltip)) smdTooltip.openOn(map);
+      }} else {{
+        smdTooltip.close();
+      }}
+    }}
+
+    function handleRouteMouseout(layer, isTrash) {{
+      if (layer) {{
+        layer.setStyle(isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
+      }}
+      if (activeHoverRouteLayer === layer) {{
+        activeHoverRouteLayer = null;
+      }}
+      if (!map.hasLayer(smdLayer)) {{
+        smdTooltip.close();
+      }}
+    }}
+
     function initTrashRoutesLayer() {{
       trashRoutesLayer = L.geoJSON(MAP_DATA.trash_routes, {{
         pane: 'routePane',
-        style: {{ color: '#dc2626', weight: 2.2, dashArray: '4, 5', fillColor: '#ef4444', fillOpacity: 0.12 }}
+        style: getTrashRouteStyle,
+        onEachFeature: function(feature, layer) {{
+          layer.on({{
+            mouseover: function(e) {{ handleRouteHover(e, layer, true); }},
+            mousemove: function(e) {{ handleRouteHover(e, layer, true); }},
+            mouseout: function() {{ handleRouteMouseout(layer, true); }}
+          }});
+        }}
       }});
     }}
 
     function initRecycleRoutesLayer() {{
       recycleRoutesLayer = L.geoJSON(MAP_DATA.recycle_routes, {{
         pane: 'routePane',
-        style: {{ color: '#16a34a', weight: 2.2, dashArray: '4, 5', fillColor: '#22c55e', fillOpacity: 0.12 }}
+        style: getRecycleRouteStyle,
+        onEachFeature: function(feature, layer) {{
+          layer.on({{
+            mouseover: function(e) {{ handleRouteHover(e, layer, false); }},
+            mousemove: function(e) {{ handleRouteHover(e, layer, false); }},
+            mouseout: function() {{ handleRouteMouseout(layer, false); }}
+          }});
+        }}
       }});
     }}
 
@@ -1608,21 +1848,43 @@ html_page = f'''<!DOCTYPE html>
       }}
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
+      if (trashRoutesLayer) trashRoutesLayer.setStyle(getTrashRouteStyle());
+      if (recycleRoutesLayer) recycleRoutesLayer.setStyle(getRecycleRouteStyle());
     }}
 
     function toggleSMDLayer(show) {{
-      if (show) map.addLayer(smdLayer);
-      else map.removeLayer(smdLayer);
+      if (show) {{
+        map.addLayer(smdLayer);
+      }} else {{
+        map.removeLayer(smdLayer);
+        smdTooltip.close();
+      }}
     }}
 
     function toggleTrashRoutes(show) {{
-      if (show) map.addLayer(trashRoutesLayer);
-      else map.removeLayer(trashRoutesLayer);
+      if (show) {{
+        map.addLayer(trashRoutesLayer);
+        ensureSvgPatterns();
+        trashRoutesLayer.setStyle(getTrashRouteStyle());
+      }} else {{
+        map.removeLayer(trashRoutesLayer);
+        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash) {{
+          activeHoverRouteLayer = null;
+        }}
+      }}
     }}
 
     function toggleRecycleRoutes(show) {{
-      if (show) map.addLayer(recycleRoutesLayer);
-      else map.removeLayer(recycleRoutesLayer);
+      if (show) {{
+        map.addLayer(recycleRoutesLayer);
+        ensureSvgPatterns();
+        recycleRoutesLayer.setStyle(getRecycleRouteStyle());
+      }} else {{
+        map.removeLayer(recycleRoutesLayer);
+        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash) {{
+          activeHoverRouteLayer = null;
+        }}
+      }}
     }}
 
     // Static Contextual Exports
@@ -1724,6 +1986,8 @@ html_page = f'''<!DOCTYPE html>
     initWardLayer();
     initTrashRoutesLayer();
     initRecycleRoutesLayer();
+    ensureSvgPatterns();
+    map.on('layeradd', ensureSvgPatterns);
     setTheme(currentTheme);
     updateLegend();
     resetToCitywide();
