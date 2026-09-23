@@ -13,6 +13,7 @@ import math
 import time
 import shutil
 import urllib.request
+import concurrent.futures
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TILES_DIR = os.path.join(BASE_DIR, 'tiles')
@@ -100,7 +101,7 @@ def tile_intersects_dc(x, y, z, rings, all_pts):
 def get_tiles_to_download():
     rings, all_pts, (min_lat, max_lat, min_lon, max_lon) = load_dc_geometry()
     tiles = []
-    for z in range(11, 16):
+    for z in range(11, 17):
         x1, y2 = deg2num(min_lat, min_lon, z)
         x2, y1 = deg2num(max_lat, max_lon, z)
         x_min, x_max = min(x1, x2), max(x1, x2)
@@ -124,7 +125,7 @@ def verify_tile(path):
 
 def migrate_existing_light_tiles():
     # If tiles were stored directly in tiles/{z}/{x}/{y}.png, migrate them to tiles/light/{z}/{x}/{y}.png
-    for z in range(11, 16):
+    for z in range(11, 17):
         src_z = os.path.join(TILES_DIR, str(z))
         if os.path.exists(src_z) and os.path.isdir(src_z):
             dst_z = os.path.join(LIGHT_DIR, str(z))
@@ -161,23 +162,17 @@ def download_set(style_name, target_dir, tiles, verify_only=False):
         'Referer': 'http://localhost:8000/'
     }
 
-    downloaded = 0
-    skipped = 0
-    total_size = 0
-
-    for idx, (z, x, y) in enumerate(tiles, start=1):
+    def fetch_tile(item):
+        z, x, y = item
         tile_dir = os.path.join(target_dir, str(z), str(x))
         os.makedirs(tile_dir, exist_ok=True)
         tile_path = os.path.join(tile_dir, f"{y}.png")
 
         if verify_tile(tile_path):
-            skipped += 1
-            total_size += os.path.getsize(tile_path)
-            continue
+            return ('skipped', os.path.getsize(tile_path))
 
         url = f"https://tiles.stadiamaps.com/tiles/{style_name}/{z}/{x}/{y}.png"
         req = urllib.request.Request(url, headers=headers)
-        success = False
         for attempt in range(3):
             try:
                 with urllib.request.urlopen(req, timeout=10) as resp:
@@ -185,21 +180,25 @@ def download_set(style_name, target_dir, tiles, verify_only=False):
                     if data.startswith(PNG_HEADER):
                         with open(tile_path, 'wb') as f:
                             f.write(data)
-                        total_size += len(data)
-                        downloaded += 1
-                        success = True
-                        break
+                        return ('downloaded', len(data))
                     else:
-                        time.sleep(0.5)
+                        time.sleep(0.3)
             except Exception:
-                time.sleep(1.0 * (attempt + 1))
+                time.sleep(0.5 * (attempt + 1))
+        return ('failed', 0)
 
-        if not success:
-            print(f"Warning: Failed to download {style_name} tile {z}/{x}/{y}")
+    downloaded = 0
+    skipped = 0
+    total_size = 0
 
-        if downloaded % 50 == 0 and downloaded > 0:
-            print(f"Progress: {idx}/{len(tiles)} processed ({downloaded} new, {skipped} cached)...")
-        time.sleep(0.04)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        for status, size in executor.map(fetch_tile, tiles):
+            if status == 'downloaded':
+                downloaded += 1
+                total_size += size
+            elif status == 'skipped':
+                skipped += 1
+                total_size += size
 
     print(f"Complete: {downloaded} downloaded, {skipped} cached. Total size: {total_size / (1024*1024):.2f} MB")
     return True
@@ -208,7 +207,7 @@ def main():
     verify_flag = '--verify-only' in sys.argv
     migrate_existing_light_tiles()
     tiles = get_tiles_to_download()
-    print(f"Washington, DC tile set: {len(tiles)} tiles (Zooms 11 to 15)")
+    print(f"Washington, DC tile set: {len(tiles)} tiles (Zooms 11 to 16)")
 
     ok_light = download_set('stamen_toner', LIGHT_DIR, tiles, verify_only=verify_flag)
     ok_blacklite = download_set('stamen_toner_blacklite', BLACKLITE_DIR, tiles, verify_only=verify_flag)
