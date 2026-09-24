@@ -899,7 +899,7 @@ html_page = f'''<!DOCTYPE html>
         </div>
 
         <div class="metric-toggle-group">
-          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')">All 311</button>
+          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span> Requests</button>
           <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span> Only</button>
           <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span> Only</button>
         </div>
@@ -1365,7 +1365,7 @@ html_page = f'''<!DOCTYPE html>
               const streamColor = getStreamColor(currentMetric);
               layer.setStyle({{ weight: 3.8, color: streamColor, fillOpacity: 0.88 }});
               const val = getSmdMetric(p, currentMetric, currentPeriod);
-              const streamName = currentMetric === 'total' ? 'All 311' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
+              const streamName = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
               smdTooltip.setContent(`
                 <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">SMD ${{p.smd_id}}</div>
                 <div style="font-size: 11px; color: var(--text-dim);">ANC ${{p.anc_id}} • Ward ${{p.ward}}</div>
