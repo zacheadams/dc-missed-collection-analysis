@@ -858,7 +858,7 @@ html_page = f'''<!DOCTYPE html>
         <div class="period-section">
           <span class="period-label">Analytic Period</span>
           <div class="period-toggle-group">
-            <button class="period-btn active" id="btn-period-180d" onclick="setPeriod('180d')">180 Days (Default)</button>
+            <button class="period-btn active" id="btn-period-180d" onclick="setPeriod('180d')">180 Days</button>
             <button class="period-btn" id="btn-period-30d" onclick="setPeriod('30d')">30 Days</button>
           </div>
         </div>
