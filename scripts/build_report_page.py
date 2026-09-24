@@ -111,9 +111,6 @@ for anc, d in anc_dict.items():
 # Sort ANCs by Ward, then ANC ID
 ancs_list.sort(key=lambda x: (x['ward'], x['anc_id']))
 
-# Top 10 SMDs by total requests
-top10_smds = sorted(smds_list, key=lambda x: x['total'], reverse=True)[:10]
-
 # Chart 1 Data: Ward Breakdown (Trash vs Recycling)
 chart_ward_labels = [f"Ward {w}" for w in range(1, 9)]
 chart_ward_trash = [wards_stats[str(w)]['trash'] for w in range(1, 9)]
@@ -155,7 +152,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • A Short Report</title>
+  <title>Missed Collections • The Report</title>
 
   <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -355,86 +352,48 @@ html_content = f"""<!DOCTYPE html>
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }}
 
-    .report-meta {{
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }}
-
-    .meta-badge {{
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--bg-surface);
-      padding: 3px 8px;
-      border-radius: 2px;
-      border: 1px solid var(--border);
-      font-size: 10px;
-    }}
-
-    /* Operational Context Box */
-    .context-box {{
+    /* Report Narrative */
+    .report-narrative {{
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 2px;
-      padding: 16px 18px;
-      margin-bottom: 28px;
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.6;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-main);
       box-shadow: var(--card-shadow);
     }}
 
-    .context-box a {{
+    .report-narrative p {{
+      margin: 0 0 16px 0;
+    }}
+
+    .report-narrative p:last-child {{
+      margin-bottom: 0;
+    }}
+
+    .report-narrative ul {{
+      margin: 0 0 16px 24px;
+      padding: 0;
+    }}
+
+    .report-narrative li {{
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }}
+
+    .report-narrative a {{
       color: var(--accent);
       text-decoration: underline;
+      text-underline-offset: 2px;
     }}
 
-    .context-box a:hover {{
+    .report-narrative a:hover {{
       color: var(--accent-hover);
-    }}
-
-    /* KPI Grid */
-    .kpi-grid {{
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 28px;
-    }}
-
-    .kpi-card {{
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 16px;
-      box-shadow: var(--card-shadow);
-    }}
-
-    .kpi-label {{
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
-    }}
-
-    .kpi-value {{
-      font-size: 26px;
-      font-weight: 800;
-      color: var(--text-main);
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }}
-
-    .kpi-subtext {{
-      font-size: 11px;
-      color: var(--text-muted);
     }}
 
     /* Section Styling */
@@ -445,7 +404,7 @@ html_content = f"""<!DOCTYPE html>
     .section-header {{
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
       margin-bottom: 14px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
@@ -456,14 +415,6 @@ html_content = f"""<!DOCTYPE html>
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.01em;
-    }}
-
-    .section-description {{
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 3px;
-      max-width: 960px;
-      line-height: 1.5;
     }}
 
     /* Chart Cards */
@@ -740,89 +691,52 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Report Header -->
     <header class="report-header">
-      <h1 class="report-title">A Short Report</h1>
-      <div class="report-meta">
-        <span class="meta-badge">Period: Past 180 Days (March 25, 2026 - September 21, 2026)</span>
-        <span class="meta-badge">Source: DC 311 Open Data</span>
-        <span class="meta-badge">Scope: 8 Wards • 46 ANCs • 345 SMDs • 223 DPW Routes</span>
-        <span class="meta-badge">Audience: DC Department of Public Works</span>
-      </div>
+      <h1 class="report-title">The Report</h1>
     </header>
 
-    <!-- Operational Context & Overview -->
-    <div class="context-box">
-      <div style="margin-bottom: 12px;">
-        This operational analysis evaluates Department of Public Works (DPW) residential missed collections across Washington, DC. Prepared for the <strong>Department of Public Works (DPW)</strong>, route supervisors, and the Data Analytics &amp; Research Administration, it provides spatial and operational intelligence to isolate chronic address recurrence, evaluate daily fleet workload imbalances, and support DPW's ongoing <strong>Phase 2 Route Re-Optimization</strong>.
+    <!-- Report Narrative -->
+    <div class="report-narrative">
+      <p>If you don’t care about my editorialization, and just care about the charts, you’re wrong (*unless you’ve already read this), but feel free to keep scrolling to the charts below.</p>
+
+      <p>Last Friday, the DC Department of Public Works (DPW) launched a <a href="https://dpw.dc.gov/collection-status-map" target="_blank" rel="noopener">Status Collection Map</a>, so that residents serviced by DPW could see when they could expect their <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> to be picked up.</p>
+
+      <p>Like the actual solid waste service, as of 9 PM on Wednesday, September 23rd, 2026, that website was not working as intended.</p>
+
+      <div style="margin: 20px 0;">
+        <img src="assets/dpw-status-map-error.png" onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/9d52cd97-cd17-40c9-a0fa-72882378bbee'" alt="DPW Status Collection Map Error" style="max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 2px; display: block;" />
       </div>
 
-      <div style="margin-bottom: 14px; padding: 10px 12px; background: var(--bg-input); border-left: 3px solid var(--accent); border-radius: 2px;">
-        <strong style="color: var(--text-main); display: block; margin-bottom: 6px; text-transform: uppercase; font-size: 11px; letter-spacing: 0.03em;">Primary Reference Documents &amp; Oversight Sources:</strong>
-        <ul style="list-style: none; margin-left: 0; font-size: 11px; line-height: 1.6;">
-          <li>- <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">DC Council Committee on Public Works &amp; Operations: 2026 Performance Oversight Hearing</a> (March 4, 2026)</li>
-          <li>- <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">DPW Written Responses to Committee Performance Oversight Questions</a></li>
-          <li>- <a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">DPW FY26 Performance Plan</a></li>
-        </ul>
-      </div>
+      <p>And so, inspired by some of <a href="https://www.axios.com/local/washington-dc/2026/07/31/311-app-alternatives-josh-jacobson-civic-tech-government-tools" target="_blank" rel="noopener">Josh Jacobson’s work</a> creating dashboards to supplant insufficient trackers for kiddie pools and rat treatment, I was motivated to make something better.</p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);">
-        <div>
-          <strong style="color: var(--text-main); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; display: block; margin-bottom: 6px;">Hearing Testimony &amp; Core Identified Problems</strong>
-          <ul style="list-style: none; font-size: 11px; line-height: 1.6; color: var(--text-muted);">
-            <li>- <strong>Fleet Maintenance Bottlenecks:</strong> Significant downtime among heavy rear-loader packer trucks due to vehicle aging, spare part delays, and high diesel technician vacancy rates, causing route cancellations and postponed runs.</li>
-            <li>- <strong>Staffing Shortages &amp; Driver Call-Outs:</strong> High turnover among licensed Commercial Driver's License (CDL) operators requiring unassigned relief drivers unfamiliar with tight alley networks and property setback quirks.</li>
-            <li>- <strong>Chronic Recurrence Clustering:</strong> Persistent complaints of missed pickups repeating weekly at the same addresses, particularly across Wards 7, 8, 1, and 5.</li>
-            <li>- <strong>Premature 311 Ticket Closures:</strong> Council scrutiny regarding service tickets being closed administratively as "Resolved" before physical collection trucks remediate the missed bins.</li>
-          </ul>
-        </div>
-        <div>
-          <strong style="color: var(--text-main); font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em; display: block; margin-bottom: 6px;">FY26 Performance Plan vs. Empirical 311 Data Reality</strong>
-          <ul style="list-style: none; font-size: 11px; line-height: 1.6; color: var(--text-muted);">
-            <li>- <strong>Are problems being addressed?</strong> DPW's FY26 Performance Plan targets vehicle modernization, telematics (Automated Vehicle Location / GPS geofencing) to verify physical visits, and Phase 2 Route Re-Optimization to equalize crew daily tonnages.</li>
-            <li>- <strong>Persistent Structural Gaps:</strong> Empirical 311 records demonstrate that 24.7% of impacted properties (1,475 addresses) suffer repeat failures, confirming that misses are systemic rather than random errors.</li>
-            <li>- <strong>Day-of-Week Workload Asymmetry:</strong> Monday routes generate 3,090 missed requests (34.7 avg per route vs 15.6 on Tuesdays), indicating that weekend tonnage carryovers and route scheduling have not yet achieved operational balance.</li>
-            <li>- <strong>Alley Access Realities:</strong> Micro-district clustering in high-density corridors indicates physical access constraints and driver navigation remain unresolved by top-down tonnage models alone.</li>
-          </ul>
-        </div>
-      </div>
+      <p>What I built (with substantial coding assistance from my robot) is a dashboard of 311 requests for missed <span class="kw-trash">trash</span> and missed <span class="kw-recycle">recycling</span> pickup. It offers two time periods to choose from: the last 30 days and the last 180 days (which, notably, entirely falls after the <a href="https://51st.news/dc-spent-67-million-cleaning-up-after-januarys-snowstorm/" target="_blank" rel="noopener">Snowcrete debacle</a> and the March 4th Performance Oversight Hearing - <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">VOD</a> + <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">written responses</a>). It allows you to look citywide, at your Ward, at your Advisory Neighborhood Commission (ANC), or even at your Single Member District (SMD). You want to see what the actual route the pickup drivers are driving? You betcha, that’s there.</p>
+
+      <p>311 requests are an imperfect measure, but I suspect they underestimate missed pickups, because it’s dependent on the individuals reporting them missed. 311 itself has had a <a href="https://51st.news/311-app-dc-ouc/" target="_blank" rel="noopener">smattering of issues</a> this year, many have started using <a href="https://snap311.app/" target="_blank" rel="noopener">Snap311</a> instead of the official app, but I digress.</p>
+
+      <p>So what does the dashboard show, what stories do the data tell? I can’t figure out all of this, but here are some of my takeaways from a few days of manic panic:</p>
+      <ul>
+        <li>DPW services <a href="https://washingtonian.com/2023/04/21/dcs-new-curbside-composting-program-everything-you-need-to-know/" target="_blank" rel="noopener">over 100,000 households</a> in DC.</li>
+        <li>~6,000 of them in the last 6 months reported missed service, a total of ~9,000 times.</li>
+        <li>~1 in 4 households who reported a missed collection in the last 6 months reported another. Many reported numerous times.</li>
+        <li>Mondays were the least reliable day. Thursday was the most reliable day. Maybe sanitation workers are like Garfield.</li>
+        <li>Wards 5, 7, and especially 4, had the most tickets filed. All Wards, by law, have about the same number of people, though they don’t have the same number of DPW-served addresses, and I suspect that there’s significant association between the number of served addresses and number of tickets (a few quick searches off-hand support that hypothesis).</li>
+      </ul>
+
+      <p>The clearest overall theme is that DPW is ignoring their massive service problem. Service across all 8 Wards, all 46 ANCs, all 345 SMDs, and all 223 (103 <span class="kw-trash">trash</span> and 120 <span class="kw-recycle">recycling</span>) routes deserve scrutiny. Ask DPW and they might tell you that there are frequent call-outs, which were more intense in the <a href="https://grist.org/extreme-heat/yes-this-summer-really-was-as-hot-as-you-think-it-was/" target="_blank" rel="noopener">hottest summer on record</a>, but they have the historical data (or just intuitive knowledge) to predict this, and they could, they should, they must hire more people. Less staff leads to more overtime, which leads to more expenditure, which leads to less staff. It’s a vicious cycle.</p>
+
+      <p>DPW has not had a good year. But it’s hard to look at the <a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">FY2026 Performance Plan</a> and think key performance indicators have been met. Sure, residential <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickup under the Solid Waste Management Administration isn’t <em>all</em> of what DPW does, but it certainly is one of the most salient touchpoints to the District government. If people don’t get routine service—and worse, if people can no longer depend on reporting missed service—faith in basic functions of local government start to erode pretty quickly. My neighbors have had repeat misses and have been frankly gaslit by absurd responses from DPW and their community relations team, and something’s got to give. We need a real plan, and solid, material change, sooner rather than later.</p>
+
+      <p>If you’re reading this and you’re a resident who’s missed service: keep reporting to 311, you’re not alone. Write to your ANC, Councilmember, and DPW.</p>
+
+      <p>If you’re reading this and you’re in Council: demand answers from DPW and budget them accordingly for fixes. Make sure leadership is held accountable.</p>
+
+      <p>If you’re reading this and you’re in DPW leadership: figure out route issues (you can use my tool to find the problems!) and adjust accordingly. Hire more people. Get it right, the city depends on you.</p>
     </div>
-
-    <!-- KPI Grid -->
-    <section class="kpi-grid">
-      <div class="kpi-card">
-        <div class="kpi-label">Total Missed Collections</div>
-        <div class="kpi-value kw-combined">{citywide['total_requests']:,}</div>
-        <div class="kpi-subtext">Verified 311 Service Requests</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Unique Properties</div>
-        <div class="kpi-value">{citywide['unique_addresses']:,}</div>
-        <div class="kpi-subtext">Distinct Serviced Street Addresses</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Repeat Properties</div>
-        <div class="kpi-value" style="color: var(--warning-color);">{citywide['repeat_addresses']:,}</div>
-        <div class="kpi-subtext">{citywide['repeat_rate']}% Recurrence Rate (2+ Misses)</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label"><span class="kw-trash">Trash</span> Stream (S0441)</div>
-        <div class="kpi-value kw-trash">{sum(wards_stats[str(w)]['trash'] for w in range(1, 9)):,}</div>
-        <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['trash'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label"><span class="kw-recycle">Recycling</span> Stream (S0321)</div>
-        <div class="kpi-value kw-recycle">{sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)):,}</div>
-        <div class="kpi-subtext">{round(sum(wards_stats[str(w)]['recycling'] for w in range(1, 9)) / citywide['total_requests'] * 100, 1)}% of Total Volume</div>
-      </div>
-    </section>
 
     <!-- SECTION 1: WARD BREAKDOWN -->
     <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">1. Ward Performance and Address Recurrence Breakdown</h2>
-          <p class="section-description">
-            Analysis of missed collections across the District's 8 Wards, comparing <span class="kw-trash">Trash</span> vs. <span class="kw-recycle">Recycling</span> volumes and isolating repeat addresses. Under DPW's oversight definition, a "chronic miss" occurs when collection is missed 4 times within a 5-week consecutive period. Across all wards, 75.3% of impacted locations represent isolated single misses, while 24.7% (1,475 properties) face recurring collection failures requiring route supervisor attention. Contextualizing these metrics against the DPW FY26 Performance Plan highlights the ongoing gap between agency SLA benchmarks and alley-level service consistency.
-          </p>
+          <h2 class="section-title">Performance by Ward</h2>
         </div>
         <button onclick="exportTableCsv('ward-table', 'dc-ward-summary')" class="btn-action">Export CSV</button>
       </div>
@@ -900,72 +814,11 @@ html_content += f"""
       </div>
     </section>
 
-    <!-- SECTION 2: TOP 10 SMDs -->
+    <!-- SECTION 2: ANC PERFORMANCE TABLE -->
     <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">2. Top 10 High-Incident Single Member Districts (SMDs)</h2>
-          <p class="section-description">
-            Micro-districts experiencing disproportionate missed collection frequency. In oversight testimony, DPW noted that physical alley obstructions (construction, parked vehicles), route complexity, and crew unfamiliarity cluster in specific dense corridors.
-          </p>
-        </div>
-        <button onclick="exportTableCsv('top10-smd-table', 'dc-top10-smds')" class="btn-action">Export CSV</button>
-      </div>
-
-      <div class="table-container">
-        <table class="data-table" id="top10-smd-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Ward</th>
-              <th>Councilmember</th>
-              <th>ANC</th>
-              <th>SMD</th>
-              <th style="text-align: right;">Total Requests</th>
-              <th style="text-align: right;" class="kw-trash">Trash</th>
-              <th style="text-align: right;" class="kw-recycle">Recycling</th>
-              <th style="text-align: right;">Unique Addrs</th>
-              <th style="text-align: right;">Repeat Addrs</th>
-              <th style="text-align: right;">Repeat Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-"""
-
-for rank, s in enumerate(top10_smds, 1):
-    w = s['ward']
-    html_content += f"""
-            <tr>
-              <td><strong>#{rank}</strong></td>
-              <td>Ward {w}</td>
-              <td>{ward_council[w]}</td>
-              <td>ANC {s['anc_id']}</td>
-              <td><strong>SMD {s['smd_id']}</strong></td>
-              <td style="text-align: right;" class="kw-combined"><strong>{s['total']:,}</strong></td>
-              <td style="text-align: right;" class="kw-trash">{s['trash']:,}</td>
-              <td style="text-align: right;" class="kw-recycle">{s['recycling']:,}</td>
-              <td style="text-align: right;">{s['unique_addrs']:,}</td>
-              <td style="text-align: right;">{s['repeat_addrs']:,}</td>
-              <td style="text-align: right;">
-                <span class="badge-hotspot">{s['repeat_rate']}%</span>
-              </td>
-            </tr>
-"""
-
-html_content += f"""
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 3: ANC PERFORMANCE TABLE -->
-    <section class="report-section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">3. Advisory Neighborhood Commission (ANC) Operational Summary</h2>
-          <p class="section-description">
-            Full breakdown across all 46 ANCs. Filter by Ward or search by ANC identifier to evaluate local service trends.
-          </p>
+          <h2 class="section-title">Performance by ANC</h2>
         </div>
         <button onclick="exportTableCsv('anc-table', 'dc-anc-summary')" class="btn-action">Export CSV</button>
       </div>
@@ -1028,16 +881,11 @@ html_content += f"""
       </div>
     </section>
 
-    <!-- SECTION 4: ROUTE ANALYSIS & MATRIX -->
+    <!-- SECTION 3: ROUTE ANALYSIS & MATRIX -->
     <section class="report-section">
       <div class="section-header">
         <div>
-          <h2 class="section-title">4. DPW Collection Route Operational Performance Matrix</h2>
-          <p class="section-description">
-            Analysis of all 223 DPW collection routes (103 <span class="kw-trash">Trash</span>, 120 <span class="kw-recycle">Recycling</span>)
-            evaluating total missed requests, day-of-week collection schedules, geographic area, and request density.
-            This matrix directly informs DPW's Phase 2 Route Re-Optimization project, which focuses on realigning route workloads and balancing heavy Monday and Tuesday volume surges across the fleet.
-          </p>
+          <h2 class="section-title">Performance by Schedule and Route</h2>
         </div>
         <button onclick="exportTableCsv('route-table', 'dc-dpw-routes-matrix')" class="btn-action">Export All Routes (CSV)</button>
       </div>
