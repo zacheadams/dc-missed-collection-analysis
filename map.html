@@ -376,6 +376,7 @@
       font-family: var(--font-mono);
       transition: all 0.15s ease;
       text-align: center;
+      line-height: 1.25;
     }
 
     .metric-btn.active {
@@ -801,14 +802,14 @@
         </div>
 
         <div class="metric-toggle-group">
-          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span> Requests</button>
-          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span> Only</button>
-          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span> Only</button>
+          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span><br>Requests</button>
+          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span><br>Only</button>
+          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span><br>Only</button>
         </div>
 
         <div class="layer-controls">
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: var(--combined-color);"></span>311 Requests</span>
+            <span><span class="badge-route" id="marker-311-requests" style="background: var(--combined-color);"></span>311 Requests</span>
             <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
           </label>
           <label class="checkbox-row">
@@ -2005,6 +2006,17 @@
         <span>${th[3]}</span>
         <span>${th[5]}+</span>
       `;
+
+      const marker311 = document.getElementById('marker-311-requests');
+      if (marker311) {
+        if (currentMetric === 'trash') {
+          marker311.style.background = 'var(--trash-color)';
+        } else if (currentMetric === 'recycling') {
+          marker311.style.background = 'var(--recycle-color)';
+        } else {
+          marker311.style.background = 'var(--combined-color)';
+        }
+      }
     }
 
     function toggleTheme() {

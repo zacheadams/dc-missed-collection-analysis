@@ -396,6 +396,29 @@ html_content = f"""<!DOCTYPE html>
       color: var(--accent-hover);
     }}
 
+    .report-img-zoomable {{
+      max-width: 480px;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: block;
+      cursor: zoom-in;
+      transition: max-width 0.25s ease;
+    }}
+
+    .report-img-zoomable.is-enlarged {{
+      max-width: 100%;
+      cursor: zoom-out;
+    }}
+
+    .report-img-caption {{
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 6px;
+      user-select: none;
+    }}
+
     /* Section Styling */
     .report-section {{
       margin-bottom: 36px;
@@ -703,7 +726,8 @@ html_content = f"""<!DOCTYPE html>
       <p>Like the actual solid waste service, as of 9 PM on Wednesday, September 23rd, 2026, that website was not working as intended.</p>
 
       <div style="margin: 20px 0;">
-        <img src="assets/dpw-status-map-error.png" onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/9d52cd97-cd17-40c9-a0fa-72882378bbee'" alt="DPW Status Collection Map Error" style="max-width: 100%; height: auto; border: 1px solid var(--border); border-radius: 2px; display: block;" />
+        <img id="status-map-img" src="assets/dpw-status-map-error.png" onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/9d52cd97-cd17-40c9-a0fa-72882378bbee'" alt="DPW Status Collection Map Error" class="report-img-zoomable" onclick="toggleImageZoom(this)" tabindex="0" role="button" aria-label="DPW Status Collection Map Error (click to enlarge or contract)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleImageZoom(this)" title="Click to enlarge or contract" />
+        <div class="report-img-caption">(Click image to enlarge / contract)</div>
       </div>
 
       <p>And so, inspired by some of <a href="https://www.axios.com/local/washington-dc/2026/07/31/311-app-alternatives-josh-jacobson-civic-tech-government-tools" target="_blank" rel="noopener">Josh Jacobson’s work</a> creating dashboards to supplant insufficient trackers for kiddie pools and rat treatment, I was motivated to make something better.</p>
@@ -1026,6 +1050,10 @@ html_content += f"""
       const btn = document.getElementById('theme-toggle-btn');
       if (btn) btn.innerText = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
       updateChartsTheme(theme);
+    }}
+
+    function toggleImageZoom(img) {{
+      img.classList.toggle('is-enlarged');
     }}
 
     // ----------------------------------------------------
