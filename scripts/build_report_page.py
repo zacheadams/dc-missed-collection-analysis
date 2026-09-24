@@ -728,7 +728,7 @@ html_content = f"""<!DOCTYPE html>
       <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
-      <a href="index.html" class="nav-link">The Brief</a>
+      <a href="index.html" class="nav-link">Index</a>
       <a href="map.html" class="nav-link">The Map</a>
       <a href="report.html" class="nav-link active">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>

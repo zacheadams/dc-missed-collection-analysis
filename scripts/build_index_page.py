@@ -33,7 +33,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • The Brief</title>
+  <title>Missed Collections • Index</title>
 
   <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -237,6 +237,18 @@ html_content = f"""<!DOCTYPE html>
       letter-spacing: 0.04em;
     }}
 
+    .hero-title {{
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      max-width: 820px;
+      margin-left: auto;
+      margin-right: auto;
+    }}
+
     .hero-desc {{
       font-size: 13px;
       color: var(--text-muted);
@@ -259,21 +271,23 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .btn-hero-primary {{
-      background: var(--accent);
-      color: #ffffff;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
       text-decoration: none;
       font-size: 12px;
       font-weight: 700;
       padding: 10px 22px;
       border-radius: 2px;
-      transition: background 0.15s ease;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }}
 
     .btn-hero-primary:hover {{
-      background: var(--accent-hover);
+      border-color: var(--text-main);
+      background: var(--bg-input);
     }}
 
     .btn-hero-secondary {{
@@ -463,7 +477,7 @@ html_content = f"""<!DOCTYPE html>
       <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
-      <a href="index.html" class="nav-link active">The Brief</a>
+      <a href="index.html" class="nav-link active">Index</a>
       <a href="map.html" class="nav-link">The Map</a>
       <a href="report.html" class="nav-link">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
@@ -473,11 +487,12 @@ html_content = f"""<!DOCTYPE html>
 
   <main class="page-container">
 
-    <!-- Hero Section: The Brief -->
+    <!-- Hero Section: Index -->
     <section class="hero">
+      <h1 class="hero-title">Index</h1>
       <p class="hero-desc">This little site is an interactive map and report on missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across DC. It does not assign blame to any individuals, only identifies a (series of) problem(s) with solid waste pickup across the city. The aim is to present information in an easily digestible manner, so that the responsible organization, the <a href="https://dpw.dc.gov/" target="_blank" rel="noopener">Department of Public Works</a>, and the <a href="https://dccouncil.gov/committees/committee-on-public-works-and-operations/" target="_blank" rel="noopener">DC Council's Committee on Public Works and Operations</a> (which oversees their performance) can act strategically and solve them.</p>
       <div class="hero-actions">
-        <a href="map.html" class="btn-hero-primary">The Map</a>
+        <a href="map.html" class="btn-hero-secondary">The Map</a>
         <a href="report.html" class="btn-hero-secondary">The Report</a>
       </div>
     </section>
