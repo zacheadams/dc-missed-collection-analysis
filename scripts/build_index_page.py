@@ -33,7 +33,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • Intro</title>
+  <title>Missed Collections • The Brief</title>
 
   <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -235,18 +235,6 @@ html_content = f"""<!DOCTYPE html>
       margin-bottom: 14px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-    }}
-
-    .hero-title {{
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--text-main);
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-      margin-bottom: 14px;
-      max-width: 820px;
-      margin-left: auto;
-      margin-right: auto;
     }}
 
     .hero-desc {{
@@ -469,7 +457,7 @@ html_content = f"""<!DOCTYPE html>
       <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
-      <a href="index.html" class="nav-link active">Home</a>
+      <a href="index.html" class="nav-link active">The Brief</a>
       <a href="map.html" class="nav-link">The Map</a>
       <a href="report.html" class="nav-link">The Report</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
@@ -479,10 +467,9 @@ html_content = f"""<!DOCTYPE html>
 
   <main class="page-container">
 
-    <!-- Hero Section: Intro -->
+    <!-- Hero Section: The Brief -->
     <section class="hero">
-      <h1 class="hero-title">Intro</h1>
-      <p class="hero-desc">An operational proof-of-concept for the DC Department of Public Works (DPW), route supervisors, and data analytics teams. Evaluates 311 missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across all 8 Wards, 46 ANCs, 345 Single Member Districts, and 223 collection routes to isolate chronic recurrence and support route re-optimization.</p>
+      <p class="hero-desc">This little site is an interactive map and report on missed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> requests across DC. It does not assign blame to any individuals, only identifies a (series of) problem(s) with solid waste pickup across the city. The aim is to present information in an easily digestible manner, so that the responsible organization, the Department of Public Works, and the Committee on Public Works and Operations (which oversees their performance) can act strategically and solve them.</p>
       <div class="hero-actions">
         <a href="map.html" class="btn-hero-primary">The Map</a>
         <a href="report.html" class="btn-hero-secondary">The Report</a>
