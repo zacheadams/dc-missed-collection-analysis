@@ -28,16 +28,16 @@ def verify():
     with open(ra_path, 'r', encoding='utf-8') as f:
         ra = json.load(f)
 
-    # Verify IC106 polygon entry
+    # Verify IC106 polygon entry (Kalorama Heights / Adams Morgan, ANC 1C, 2D)
     ic106_ra = ra.get('trash_routes', {}).get('IC106')
     assert ic106_ra, "IC106 missing from trash_routes in route_areas.json"
-    assert '2B' in ic106_ra['ancs'], f"ANC 2B missing from IC106 in route_areas: {ic106_ra['ancs']}"
-    assert 'Dupont Circle' in ic106_ra['neighborhoods'], f"Dupont Circle missing from IC106 in route_areas: {ic106_ra['neighborhoods']}"
-    assert 'Ward 2' in ic106_ra['ward'], f"Ward 2 missing from IC106 ward: {ic106_ra['ward']}"
+    assert '1C' in ic106_ra['ancs'] and '2D' in ic106_ra['ancs'], f"ANC 1C, 2D missing from IC106 polygon in route_areas: {ic106_ra['ancs']}"
+    assert 'Kalorama Heights' in ic106_ra['neighborhoods'], f"Kalorama Heights missing from IC106 in route_areas: {ic106_ra['neighborhoods']}"
+    assert 'Ward 1' in ic106_ra['ward'], f"Ward 1 missing from IC106 ward: {ic106_ra['ward']}"
 
-    # Verify 106_2 line entry
-    line_106_ra = ra.get('trash_routes', {}).get('106_2')
-    assert line_106_ra, "106_2 missing from trash_routes in route_areas.json"
+    # Verify 106_2 line entry (Dupont Circle, ANC 2B)
+    line_106_ra = ra.get('trash_lines', {}).get('106_2')
+    assert line_106_ra, "106_2 missing from trash_lines in route_areas.json"
     assert '2B' in line_106_ra['ancs'], f"ANC 2B missing from 106_2 in route_areas: {line_106_ra['ancs']}"
     assert 'Dupont Circle' in line_106_ra['neighborhoods'], f"Dupont Circle missing from 106_2 in route_areas: {line_106_ra['neighborhoods']}"
 
@@ -45,6 +45,20 @@ def verify():
     r107_ra = ra.get('recycle_routes', {}).get('R107_5')
     assert r107_ra, "R107_5 missing from recycle_routes in route_areas.json"
     assert '2B' in r107_ra['ancs'], f"ANC 2B missing from R107_5 in route_areas: {r107_ra['ancs']}"
+
+    # Verify R210_5 polygon entry (Ward 2: 2A, 2B, 2D) vs line entry (Ward 1/2: 1C, 2D)
+    r210_poly_ra = ra.get('recycle_routes', {}).get('R210_5')
+    assert r210_poly_ra, "R210_5 missing from recycle_routes in route_areas.json"
+    assert '2B' in r210_poly_ra['ancs'] and '2A' in r210_poly_ra['ancs'] and '2D' in r210_poly_ra['ancs'], \
+        f"ANC 2A, 2B, 2D missing from R210_5 polygon in route_areas: {r210_poly_ra['ancs']}"
+    assert 'Dupont Circle' in r210_poly_ra['neighborhoods'], f"Dupont Circle missing from R210_5 polygon: {r210_poly_ra['neighborhoods']}"
+
+    r210_line_ra = ra.get('recycle_lines', {}).get('R210_5')
+    assert r210_line_ra, "R210_5 missing from recycle_lines in route_areas.json"
+    assert '1C' in r210_line_ra['ancs'] and '2D' in r210_line_ra['ancs'], \
+        f"ANC 1C, 2D missing from R210_5 line in route_areas: {r210_line_ra['ancs']}"
+    assert 'Kalorama Heights' in r210_line_ra['neighborhoods'] or 'Adams Morgan' in r210_line_ra['neighborhoods'], \
+        f"Kalorama Heights/Adams Morgan missing from R210_5 line: {r210_line_ra['neighborhoods']}"
 
     # Verify IC20 polygon entry and ascending sorting
     ic20_ra = ra.get('trash_routes', {}).get('IC20')
@@ -54,7 +68,7 @@ def verify():
     ancs_in_ic20 = [a.strip() for a in ic20_ra['ancs'].replace('ANC', '').split(',') if a.strip()]
     assert ancs_in_ic20 == ['1B', '1C', '2B', '2D', '2E', '2F'], f"IC20 ANCs incorrect or unsorted: {ancs_in_ic20}"
 
-    print("PASS: data/route_areas.json verified for IC106, 106_2, R107_5, and IC20 (sorted).")
+    print("PASS: data/route_areas.json verified for IC106, 106_2, R107_5, R210_5 (poly & line), and IC20 (sorted).")
 
     # 2. Verify data/route_180d_stats.json
     rs_path = os.path.join(BASE_DIR, 'data/route_180d_stats.json')
@@ -64,9 +78,15 @@ def verify():
 
     ic106_rs = next((r for r in rs.get('trash_routes', []) if r['route_id'] == 'IC106'), None)
     assert ic106_rs, "IC106 missing from route_180d_stats.json"
-    assert '2B' in ic106_rs['ancs'], f"ANC 2B missing from IC106 in route_180d_stats: {ic106_rs['ancs']}"
-    assert 'Dupont Circle' in ic106_rs['neighborhoods'], f"Dupont Circle missing from IC106 in route_180d_stats"
-    print("PASS: data/route_180d_stats.json verified for IC106.")
+    assert '1C' in ic106_rs['ancs'] and '2D' in ic106_rs['ancs'], f"ANC 1C, 2D missing from IC106 in route_180d_stats: {ic106_rs['ancs']}"
+    assert 'Kalorama Heights' in ic106_rs['neighborhoods'], f"Kalorama Heights missing from IC106 in route_180d_stats"
+
+    r210_rs = next((r for r in rs.get('recycle_routes', []) if r['route_id'] == 'R210_5'), None)
+    assert r210_rs, "R210_5 missing from route_180d_stats.json"
+    assert '2B' in r210_rs['ancs'] and '2A' in r210_rs['ancs'] and '2D' in r210_rs['ancs'], \
+        f"ANC 2A, 2B, 2D missing from R210_5 in route_180d_stats: {r210_rs['ancs']}"
+    assert 'Dupont Circle' in r210_rs['neighborhoods'], f"Dupont Circle missing from R210_5 in route_180d_stats"
+    print("PASS: data/route_180d_stats.json verified for IC106 and R210_5.")
 
     # 3. Verify data/dc_map_data_v2.json
     map_data_path = os.path.join(BASE_DIR, 'data/dc_map_data_v2.json')
@@ -77,8 +97,8 @@ def verify():
     # Check polygon feature
     ic106_feat = next((f for f in md['trash_routes']['features'] if f['properties'].get('route_area') == 'IC106'), None)
     assert ic106_feat, "IC106 missing from trash_routes features in map_data"
-    assert '2B' in ic106_feat['properties']['ancs'], f"ANC 2B missing from IC106 polygon properties: {ic106_feat['properties']}"
-    assert 'Dupont Circle' in ic106_feat['properties']['neighborhoods'], "Dupont Circle missing from IC106 polygon properties"
+    assert '1C' in ic106_feat['properties']['ancs'] and '2D' in ic106_feat['properties']['ancs'], f"ANC 1C, 2D missing from IC106 polygon properties: {ic106_feat['properties']}"
+    assert 'Kalorama Heights' in ic106_feat['properties']['neighborhoods'], "Kalorama Heights missing from IC106 polygon properties"
 
     # Check line feature
     line_106_feat = next((f for f in md['trash_routes_lines']['features'] if f['properties'].get('route') == '106_2'), None)
@@ -94,7 +114,22 @@ def verify():
     assert 'Dupont Circle' in ic20_feat['properties']['neighborhoods'], "Dupont Circle missing from IC20 in map_data"
     assert 'Georgetown' in ic20_feat['properties']['neighborhoods'], "Georgetown missing from IC20 in map_data"
 
-    print("PASS: data/dc_map_data_v2.json verified for IC106, 106_2, and IC20.")
+    # Check R210_5 polygon feature in map_data
+    r210_poly_feat = next((f for f in md['recycle_routes']['features'] if f['properties'].get('route') == 'R210_5'), None)
+    assert r210_poly_feat, "R210_5 missing from recycle_routes features in map_data"
+    assert '2B' in r210_poly_feat['properties']['ancs'] and '2A' in r210_poly_feat['properties']['ancs'] and '2D' in r210_poly_feat['properties']['ancs'], \
+        f"ANC 2A, 2B, 2D missing from R210_5 polygon properties: {r210_poly_feat['properties']}"
+    assert 'Dupont Circle' in r210_poly_feat['properties']['neighborhoods'], "Dupont Circle missing from R210_5 polygon properties"
+
+    # Check R210_5 line feature in map_data
+    r210_line_feat = next((f for f in md['recycle_routes_lines']['features'] if f['properties'].get('route') == 'R210_5'), None)
+    assert r210_line_feat, "R210_5 missing from recycle_routes_lines features in map_data"
+    assert '1C' in r210_line_feat['properties']['ancs'] and '2D' in r210_line_feat['properties']['ancs'], \
+        f"ANC 1C, 2D missing from R210_5 line properties: {r210_line_feat['properties']}"
+    assert 'Kalorama Heights' in r210_line_feat['properties']['neighborhoods'] or 'Adams Morgan' in r210_line_feat['properties']['neighborhoods'], \
+        "Kalorama Heights / Adams Morgan missing from R210_5 line properties"
+
+    print("PASS: data/dc_map_data_v2.json verified for IC106, 106_2, IC20, and R210_5 (poly & line).")
 
     # 4. Verify map.html code structure
     map_html_path = os.path.join(BASE_DIR, 'map.html')
@@ -115,16 +150,18 @@ def verify():
     # Check ROUTE_STATS has trash_106_2 and trash_IC106
     assert '"trash_IC106":' in html
     assert '"trash_106_2":' in html
+    assert '"recycle_R210_5":' in html
+    assert '"recycle_line_R210_5":' in html
 
     # Check tooltip templates include dedicated ANCs rows
     assert "ANCs: <strong" in html
 
-    # Check that IC106 properties in embedded map data have ANC 2B
+    # Check that IC106 properties in embedded map data have ANC 1C, 2D
     assert '"route_area":"IC106"' in html
     ic106_matches = [m.group(0) for m in re.finditer(r'\"route_area\":\s*\"IC106\"[^\}]+', html)]
     for m in ic106_matches:
-        assert '2B' in m, f"Embedded IC106 does not have 2B: {m}"
-        assert 'Dupont Circle' in m, f"Embedded IC106 does not have Dupont Circle: {m}"
+        assert '1C' in m and '2D' in m, f"Embedded IC106 does not have 1C/2D: {m}"
+        assert 'Kalorama Heights' in m, f"Embedded IC106 does not have Kalorama Heights: {m}"
 
     # Check that 106_2 properties in embedded map data have ANC 2B
     line_106_matches = [m.group(0) for m in re.finditer(r'\"route\":\s*\"106_2\"[^\}]+', html)]
@@ -153,20 +190,34 @@ def verify():
             
             // Check trashRouteIndex for IC106 and IC20
             const ic106 = trashRouteIndex.find(r => r.route === 'IC106');
-            const ic106Has2B = ic106 && ic106.ancs && ic106.ancs.includes('2B');
+            const ic106Has1C2D = ic106 && ic106.ancs && ic106.ancs.includes('1C') && ic106.ancs.includes('2D');
 
             const ic20 = trashRouteIndex.find(r => r.route === 'IC20');
             const ic20Expected = ['1B', '1C', '2B', '2D', '2E', '2F'];
             const ic20HasAll = ic20 && ic20Expected.every(a => ic20.ancs.includes(a));
             
+            // Check recycleRouteIndex for R210_5 polygon (Ward 2: 2A, 2B, 2D)
+            const r210 = recycleRouteIndex.find(r => r.route === 'R210_5');
+            const r210PolyHas2B = r210 && r210.ancs && r210.ancs.includes('2B') && r210.ancs.includes('2A') && r210.ancs.includes('2D');
+
             // Check trash_routes_lines for 106_2
             const line106 = MAP_DATA.trash_routes_lines.features.find(f => f.properties.route === '106_2');
             const lineHas2B = line106 && line106.properties.ancs && line106.properties.ancs.includes('2B');
+
+            // Check recycle_routes_lines for R210_5 (Ward 1/2: 1C, 2D)
+            const lineR210 = MAP_DATA.recycle_routes_lines.features.find(f => f.properties.route === 'R210_5');
+            const lineR210Has1C = lineR210 && lineR210.properties.ancs && lineR210.properties.ancs.includes('1C') && lineR210.properties.ancs.includes('2D');
             
             // Check ROUTE_STATS
             const stats106 = ROUTE_STATS['trash_106_2'];
             const statsIC106 = ROUTE_STATS['trash_IC106'];
-            const statsHave2B = stats106 && stats106.ancs.includes('2B') && statsIC106 && statsIC106.ancs.includes('2B');
+            const stats106Has2B = stats106 && stats106.ancs.includes('2B');
+            const statsIC106Has1C2D = statsIC106 && statsIC106.ancs.includes('1C') && statsIC106.ancs.includes('2D');
+
+            const statsR210Poly = ROUTE_STATS['recycle_R210_5'];
+            const statsR210Line = ROUTE_STATS['recycle_line_R210_5'];
+            const statsR210PolyHas2B = statsR210Poly && statsR210Poly.ancs && statsR210Poly.ancs.includes('2B') && statsR210Poly.ancs.includes('2A');
+            const statsR210LineHas1C = statsR210Line && statsR210Line.ancs && statsR210Line.ancs.includes('1C');
 
             // Test compareAnc sorting order
             const testAncs = ['2B', '1A', '3/4G', '1B', '3F', '4A'];
@@ -181,16 +232,24 @@ def verify():
             const smdSortCorrect = JSON.stringify(testSmds) === JSON.stringify(expectedSmdOrder);
 
             out.innerText = JSON.stringify({
-              ic106Has2B,
+              ic106Has1C2D,
               ic20HasAll,
+              r210PolyHas2B,
               lineHas2B,
-              statsHave2B,
+              lineR210Has1C,
+              stats106Has2B,
+              statsIC106Has1C2D,
+              statsR210PolyHas2B,
+              statsR210LineHas1C,
               ancSortCorrect,
               smdSortCorrect,
               sortedAncs: testAncs,
               sortedSmds: testSmds,
+              ic106_ancs: ic106 ? ic106.ancs : null,
               ic20_ancs: ic20 ? ic20.ancs : null,
-              line106_ancs: line106 ? line106.properties.ancs : null
+              r210_ancs: r210 ? r210.ancs : null,
+              line106_ancs: line106 ? line106.properties.ancs : null,
+              lineR210_ancs: lineR210 ? lineR210.properties.ancs : null
             });
             document.body.appendChild(out);
           }, 300);
@@ -215,10 +274,15 @@ def verify():
             if m:
                 results = json.loads(m.group(1))
                 print(f"Headless Chrome execution result: {results}")
-                assert results['ic106Has2B'], "Headless Chrome: IC106 missing ANC 2B"
+                assert results['ic106Has1C2D'], f"Headless Chrome: IC106 missing ANC 1C/2D: {results['ic106_ancs']}"
                 assert results['ic20HasAll'], f"Headless Chrome: IC20 missing required ANCs: {results['ic20_ancs']}"
+                assert results['r210PolyHas2B'], f"Headless Chrome: R210_5 polygon missing required ANCs: {results['r210_ancs']}"
                 assert results['lineHas2B'], "Headless Chrome: line 106_2 missing ANC 2B"
-                assert results['statsHave2B'], "Headless Chrome: ROUTE_STATS missing ANC 2B"
+                assert results['lineR210Has1C'], f"Headless Chrome: line R210_5 missing ANC 1C: {results['lineR210_ancs']}"
+                assert results['stats106Has2B'], "Headless Chrome: ROUTE_STATS['trash_106_2'] missing ANC 2B"
+                assert results['statsIC106Has1C2D'], "Headless Chrome: ROUTE_STATS['trash_IC106'] missing ANC 1C/2D"
+                assert results['statsR210PolyHas2B'], "Headless Chrome: ROUTE_STATS['recycle_R210_5'] missing ANC 2B/2A"
+                assert results['statsR210LineHas1C'], "Headless Chrome: ROUTE_STATS['recycle_line_R210_5'] missing ANC 1C"
                 assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
                 assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
                 print("PASS: Headless Chrome verification successful!")
