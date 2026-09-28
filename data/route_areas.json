@@ -10,29 +10,29 @@
     "OR708": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7D, 7B",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7D, 7B)",
+      "ancs": "ANC 7B, 7D",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7D)",
       "area_sq_mi": 0.606
     },
     "OR709": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7E, 8A, 7B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7E, 8A, 7B)",
+      "ancs": "ANC 7B, 7E, 7F, 8A",
+      "area_desc": "Ward 7 / Ward 8 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7E, 7F, 8A)",
       "area_sq_mi": 0.526
     },
     "OR710": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7C, 7B, 8B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7C, 7B, 8B)",
+      "ancs": "ANC 7B, 7C, 7E, 8B",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7C, 7E, 8B)",
       "area_sq_mi": 0.958
     },
     "OR701": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Deanwood",
-      "ancs": "ANC 7D, 7C, 7F, 7B",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7D, 7C, 7F, 7B)",
+      "ancs": "ANC 7B, 7C, 7D, 7F",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7B, 7C, 7D, 7F)",
       "area_sq_mi": 0.779
     },
     "OR702": {
@@ -52,8 +52,8 @@
     "OR706": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C, 7B",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C, 7B)",
+      "ancs": "ANC 7B, 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7B, 7C, 7F)",
       "area_sq_mi": 0.738
     },
     "OR803": {
@@ -66,8 +66,8 @@
     "OR812": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.472
     },
     "OR810": {
@@ -87,8 +87,8 @@
     "OR805": {
       "ward": "Ward 8",
       "neighborhoods": "Douglas, Shipley Terrace",
-      "ancs": "ANC 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8E, 8C)",
+      "ancs": "ANC 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8C, 8E)",
       "area_sq_mi": 0.352
     },
     "OR811": {
@@ -108,43 +108,43 @@
     "OR705": {
       "ward": "Ward 7",
       "neighborhoods": "Deanwood, Burrville, Grant Park",
-      "ancs": "ANC 7C, 7B",
-      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7C, 7B)",
+      "ancs": "ANC 7B, 7C",
+      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7B, 7C)",
       "area_sq_mi": 0.563
     },
     "OR804": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "area_sq_mi": 0.522
     },
     "OR313": {
       "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 2E, 3B",
-      "area_desc": "Ward 2 / Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 2E, 3B)",
+      "ancs": "ANC 2E, 3A, 3B, 3C",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 2E, 3A, 3B, 3C)",
       "area_sq_mi": 0.528
     },
     "OR312": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3A, 3F, 3C, 3E",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3F, 3C, 3E)",
+      "ancs": "ANC 3A, 3C, 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3D, 3E, 3F)",
       "area_sq_mi": 0.972
     },
     "OR310": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3D)",
+      "ancs": "ANC 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3D, 3E, 3F)",
       "area_sq_mi": 1.078
     },
     "OR309": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3/4G, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3/4G, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3D, 3E, 3F)",
       "area_sq_mi": 0.286
     },
     "OR307": {
@@ -157,8 +157,8 @@
     "OR305": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3F, 3E, 3D",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3F, 3E, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E, 3F",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3D, 3E, 3F)",
       "area_sq_mi": 0.43
     },
     "OR303": {
@@ -171,8 +171,8 @@
     "OR304": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3E, 3A",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3E, 3A)",
+      "ancs": "ANC 3/4G, 3A, 3E",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3A, 3E)",
       "area_sq_mi": 0.883
     },
     "OR301": {
@@ -206,8 +206,8 @@
     "OR402": {
       "ward": "Ward 4",
       "neighborhoods": "Colonial Village, Shepherd Park, North Portal Estates",
-      "ancs": "ANC 4A, 4B, 4E, 4C",
-      "area_desc": "Ward 4 \u2022 Colonial Village, Shepherd Park, North Portal Estates (ANC 4A, 4B, 4E, 4C)",
+      "ancs": "ANC 4A, 4B, 4C, 4E",
+      "area_desc": "Ward 4 \u2022 Colonial Village, Shepherd Park, North Portal Estates (ANC 4A, 4B, 4C, 4E)",
       "area_sq_mi": 0.814
     },
     "OR401": {
@@ -227,22 +227,22 @@
     "OR306": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3F, 3D",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3F, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3F",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3D, 3F)",
       "area_sq_mi": 0.491
     },
     "OR311": {
       "ward": "Ward 2 / Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3D, 2E",
-      "area_desc": "Ward 2 / Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3D, 2E)",
+      "ancs": "ANC 2E, 3D, 3F",
+      "area_desc": "Ward 2 / Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 2E, 3D, 3F)",
       "area_sq_mi": 0.108
     },
     "OR101": {
       "ward": "Ward 1",
-      "neighborhoods": "Mount Pleasant, Columbia Heights, Mt. Pleasant",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
       "ancs": "ANC 1D",
-      "area_desc": "Ward 1 \u2022 Mount Pleasant, Columbia Heights, Mt. Pleasant (ANC 1D)",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D)",
       "area_sq_mi": 0.129
     },
     "OR102": {
@@ -262,36 +262,36 @@
     "OR316": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.511
     },
     "OR315": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3C, 3A, 3B",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3C, 3A, 3B)",
+      "ancs": "ANC 3A, 3B, 3C",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B, 3C)",
       "area_sq_mi": 0.21
     },
     "OR308": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3D, 3E)",
       "area_sq_mi": 0.442
     },
     "OR602": {
-      "ward": "Ward 7 / Ward 6",
+      "ward": "Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.107
     },
     "OR506": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5C, 5B)",
+      "ancs": "ANC 5B, 5C, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5C, 5D)",
       "area_sq_mi": 0.405
     },
     "OR601": {
@@ -311,15 +311,15 @@
     "OR503": {
       "ward": "Ward 5",
       "neighborhoods": "Brookland, Brentwood, Langdon",
-      "ancs": "ANC 5C, 5A, 5B",
-      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5A, 5B)",
+      "ancs": "ANC 5A, 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5A, 5B, 5C)",
       "area_sq_mi": 0.507
     },
     "OR707": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7C, 7F, 7B",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F, 7B)",
+      "ancs": "ANC 7B, 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7B, 7C, 7F)",
       "area_sq_mi": 0.322
     },
     "OR711": {
@@ -332,50 +332,50 @@
     "OR502": {
       "ward": "Ward 5",
       "neighborhoods": "Brookland, Brentwood, Langdon",
-      "ancs": "ANC 5C, 5A",
-      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5A)",
+      "ancs": "ANC 5A, 5C",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5A, 5C)",
       "area_sq_mi": 0.598
     },
     "OR501": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B, 5A, 4B)",
+      "ancs": "ANC 4B, 5A, 5B, 5C",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 4B, 5A, 5B, 5C)",
       "area_sq_mi": 0.526
     },
     "OR507": {
       "ward": "Ward 5 / Ward 7",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 7D, 5B",
-      "area_desc": "Ward 5 / Ward 7 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 7D, 5B)",
+      "ancs": "ANC 5B, 5D, 7D",
+      "area_desc": "Ward 5 / Ward 7 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5D, 7D)",
       "area_sq_mi": 0.438
     },
     "OR603": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.106
     },
     "OR704": {
       "ward": "Ward 7",
       "neighborhoods": "Deanwood, Burrville, Grant Park",
-      "ancs": "ANC 7C, 7B, 7E",
-      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7C, 7B, 7E)",
+      "ancs": "ANC 7B, 7C, 7E",
+      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7B, 7C, 7E)",
       "area_sq_mi": 0.27
     },
     "OR505": {
       "ward": "Ward 5 / Ward 6",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 6A, 5B",
-      "area_desc": "Ward 5 / Ward 6 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 6A, 5B)",
+      "ancs": "ANC 5B, 5D, 6A",
+      "area_desc": "Ward 5 / Ward 6 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5D, 6A)",
       "area_sq_mi": 0.488
     },
     "OR409": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4D",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4D)",
+      "ancs": "ANC 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4E)",
       "area_sq_mi": 0.189
     },
     "OR411": {
@@ -428,10 +428,10 @@
       "area_sq_mi": 0.271
     },
     "OR512": {
-      "ward": "Ward 5 / Ward 1",
+      "ward": "Ward 1 / Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 1B",
-      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 1B)",
+      "ancs": "ANC 1B, 5E",
+      "area_desc": "Ward 1 / Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E)",
       "area_sq_mi": 0.149
     },
     "OR515": {
@@ -444,50 +444,50 @@
     "OR511": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.192
     },
     "OR414": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B, 4D",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B, 4D)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.284
     },
     "OR513": {
-      "ward": "Ward 5 / Ward 2",
+      "ward": "Ward 2 / Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 2 / Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.171
     },
     "OR417": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.224
     },
     "OR504": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5A, 5B",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5A, 5B)",
+      "ancs": "ANC 5A, 5B, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5A, 5B, 5D)",
       "area_sq_mi": 0.287
     },
     "OR516": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.099
     },
     "OR510": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5F, 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5F, 5B, 5A)",
+      "ancs": "ANC 5A, 5B, 5F",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B, 5F)",
       "area_sq_mi": 0.253
     },
     "OR416": {
@@ -499,16 +499,16 @@
     },
     "OR418": {
       "ward": "Ward 4",
-      "neighborhoods": "16th Street Heights, Brightwood Park, Crestwood",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
       "ancs": "ANC 4E",
-      "area_desc": "Ward 4 \u2022 16th Street Heights, Brightwood Park, Crestwood (ANC 4E)",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E)",
       "area_sq_mi": 0.271
     },
     "IC101": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A, 1E, 1D",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A, 1E, 1D)",
+      "ancs": "ANC 1A, 1B, 1D, 1E",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B, 1D, 1E)",
       "area_sq_mi": 0.332
     },
     "IC103": {
@@ -519,24 +519,24 @@
       "area_sq_mi": 0.195
     },
     "IC203": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Kalorama Heights, Adams Morgan, Lanier Heights",
-      "ancs": "ANC 2D, 1C, 2B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 2D, 1C, 2B)",
+      "ancs": "ANC 1C, 2B, 2D",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 1C, 2B, 2D)",
       "area_sq_mi": 0.373
     },
     "IC201": {
-      "ward": "Ward 2 / Ward 1 / Ward 5 / Ward 6",
+      "ward": "Ward 1 / Ward 2 / Ward 5 / Ward 6",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 2G, 1B, 6E, 5E",
-      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 2G, 1B, 6E, 5E)",
+      "ancs": "ANC 1B, 2G, 5E, 6E",
+      "area_desc": "Ward 1 / Ward 2 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 2G, 5E, 6E)",
       "area_sq_mi": 0.362
     },
     "IC106": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C, 2A",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C, 2A)",
+      "ancs": "ANC 1C, 2A, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2A, 2B)",
       "area_sq_mi": 0.48
     },
     "IC204": {
@@ -554,31 +554,31 @@
       "area_sq_mi": 0.255
     },
     "IC202": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2G, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2G, 2F, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.384
     },
     "IC206": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2F, 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2F, 2B, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.361
     },
     "IC105": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1D, 1A, 1C",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D, 1A, 1C)",
+      "ancs": "ANC 1A, 1C, 1D",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1C, 1D)",
       "area_sq_mi": 0.262
     },
     "IC102": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1E, 1B, 1D",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E, 1B, 1D)",
+      "ancs": "ANC 1A, 1B, 1D, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D, 1E)",
       "area_sq_mi": 0.279
     },
     "IC104": {
@@ -591,8 +591,8 @@
     "IC601": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6C, 6A, 7D",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6C, 6A, 7D)",
+      "ancs": "ANC 6A, 6B, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C, 7D)",
       "area_sq_mi": 0.193
     },
     "IC608": {
@@ -633,85 +633,85 @@
     "IC607": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A, 6B",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A, 6B)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.155
     },
     "IC605": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.161
     },
     "IC602": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D, 6B)",
+      "ancs": "ANC 6A, 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 7D)",
       "area_sq_mi": 0.2
     },
     "IC611": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.163
     },
     "IC603": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D, 6B)",
+      "ancs": "ANC 6A, 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 7D)",
       "area_sq_mi": 0.158
     },
     "IC612": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
-      "ancs": "ANC 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
+      "ancs": "ANC 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B)",
       "area_sq_mi": 0.196
     },
     "IC20": {
       "ward": "Ward 2 / Ward 1",
-      "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Howard University",
-      "ancs": "ANC 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 1B)",
+      "neighborhoods": "Georgetown, Burleith/Hillandale, Dupont Circle",
+      "ancs": "ANC 1B, 1C, 2B, 2D, 2E, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Georgetown, Burleith/Hillandale, Dupont Circle (ANC 1B, 1C, 2B, 2D, 2E, 2F)",
       "area_sq_mi": 0.049
     },
     "IC21": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 1 / Ward 6 / Ward 5",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
+      "ancs": "ANC 1A, 1B, 1D, 1E, 5E, 6B",
+      "area_desc": "Ward 1 / Ward 6 / Ward 5 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D, 1E, 5E, 6B)",
       "area_sq_mi": 0.045
     },
     "OR11": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 3 / Ward 4",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 3/4G, 3A, 3C, 3E, 4C",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 3/4G, 3A, 3C, 3E, 4C)",
       "area_sq_mi": 0.025
     },
     "IC11": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
+      "ancs": "ANC 6A, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C, 7D)",
       "area_sq_mi": 0.02
     },
     "IC10": {
       "ward": "Ward 6",
-      "neighborhoods": "Southwest Employment Area, Southwest/Waterfront, Fort McNair",
-      "ancs": "ANC 6D, 6B",
-      "area_desc": "Ward 6 \u2022 Southwest Employment Area, Southwest/Waterfront, Fort McNair (ANC 6D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Southwest Employment Area",
+      "ancs": "ANC 6A, 6B, 6C, 6D",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Southwest Employment Area (ANC 6A, 6B, 6C, 6D)",
       "area_sq_mi": 0.024
     },
     "OR30": {
-      "ward": "Ward 5 / Ward 4",
-      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 4C",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 4C)",
+      "ward": "Ward 4 / Ward 5",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 4C, 4E, 5E, 5F",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E, 5E, 5F)",
       "area_sq_mi": 0.042
     },
     "OR21": {
@@ -724,8 +724,8 @@
     "101_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A, 1E",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A, 1E)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.332
     },
     "101_4": {
@@ -738,8 +738,8 @@
     "102_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1E, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.279
     },
     "102_4": {
@@ -766,36 +766,36 @@
     "105_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1D, 1A, 1C",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D, 1A, 1C)",
+      "ancs": "ANC 1A, 1C, 1D",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1C, 1D)",
       "area_sq_mi": 0.262
     },
     "106_2": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C, 2A",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C, 2A)",
+      "ancs": "ANC 1C, 2A, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2A, 2B)",
       "area_sq_mi": 0.48
     },
     "201_2": {
       "ward": "Ward 2 / Ward 1 / Ward 5 / Ward 6",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 2G, 1B, 6E, 5E",
-      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 2G, 1B, 6E, 5E)",
+      "ancs": "ANC 1B, 2G, 5E, 6E",
+      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 2G, 5E, 6E)",
       "area_sq_mi": 0.362
     },
     "202_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2G, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2G, 2F, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.384
     },
     "203_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Kalorama Heights, Adams Morgan, Lanier Heights",
-      "ancs": "ANC 2D, 1C, 2B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 2D, 1C, 2B)",
+      "ancs": "ANC 1C, 2B, 2D",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 1C, 2B, 2D)",
       "area_sq_mi": 0.373
     },
     "204_2": {
@@ -815,8 +815,8 @@
     "206_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2F, 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2F, 2B, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.361
     },
     "301_1": {
@@ -871,8 +871,8 @@
     "304_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.883
     },
     "305_1": {
@@ -885,8 +885,8 @@
     "305_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3D)",
+      "ancs": "ANC 3D, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3D, 3E)",
       "area_sq_mi": 0.43
     },
     "306_1": {
@@ -920,8 +920,8 @@
     "308_1": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.442
     },
     "308_4": {
@@ -934,8 +934,8 @@
     "309_1": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E, 3F)",
       "area_sq_mi": 0.286
     },
     "309_4": {
@@ -969,15 +969,15 @@
     "311_4": {
       "ward": "Ward 3 / Ward 2",
       "neighborhoods": "Spring Valley, Palisades, Wesley Heights",
-      "ancs": "ANC 3D, 2E",
-      "area_desc": "Ward 3 / Ward 2 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 3D, 2E)",
+      "ancs": "ANC 2E, 3D",
+      "area_desc": "Ward 3 / Ward 2 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 2E, 3D)",
       "area_sq_mi": 0.108
     },
     "312_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3A, 3F, 3C, 3E",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3F, 3C, 3E)",
+      "ancs": "ANC 3A, 3C, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3E, 3F)",
       "area_sq_mi": 0.972
     },
     "312_4": {
@@ -990,8 +990,8 @@
     "313_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.528
     },
     "313_4": {
@@ -1011,15 +1011,15 @@
     "315_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3C, 3A, 3B",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3C, 3A, 3B)",
+      "ancs": "ANC 3A, 3B, 3C",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B, 3C)",
       "area_sq_mi": 0.21
     },
     "316_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.511
     },
     "317_4": {
@@ -1067,15 +1067,15 @@
     "402_3": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4E, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4E, 4A)",
+      "ancs": "ANC 4A, 4B, 4E",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B, 4E)",
       "area_sq_mi": 0.814
     },
     "402_4": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C)",
+      "ancs": "ANC 4C, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E)",
       "area_sq_mi": 0.814
     },
     "403_1": {
@@ -1165,8 +1165,8 @@
     "409_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4D",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4D)",
+      "ancs": "ANC 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4E)",
       "area_sq_mi": 0.189
     },
     "410_3": {
@@ -1200,8 +1200,8 @@
     "414_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B, 4D",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B, 4D)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.284
     },
     "415_3": {
@@ -1221,22 +1221,22 @@
     "417_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.224
     },
     "501_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.526
     },
     "501_3": {
       "ward": "Ward 5 / Ward 4",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B)",
+      "ancs": "ANC 4B, 5A",
+      "area_desc": "Ward 5 / Ward 4 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 5A)",
       "area_sq_mi": 0.526
     },
     "502_2": {
@@ -1298,8 +1298,8 @@
     "506_2": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5C",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5C)",
+      "ancs": "ANC 5C, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5C, 5D)",
       "area_sq_mi": 0.405
     },
     "506_3": {
@@ -1340,29 +1340,29 @@
     "510_3": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5F, 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5F, 5B, 5A)",
+      "ancs": "ANC 5A, 5B, 5F",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B, 5F)",
       "area_sq_mi": 0.253
     },
     "511_3": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.192
     },
     "512_3": {
       "ward": "Ward 5 / Ward 1",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 1B",
-      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 1B)",
+      "ancs": "ANC 1B, 5E",
+      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E)",
       "area_sq_mi": 0.149
     },
     "513_3": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.171
     },
     "514_3": {
@@ -1382,15 +1382,15 @@
     "516_3": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.099
     },
     "601_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6C, 6A)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.193
     },
     "601_2": {
@@ -1410,8 +1410,8 @@
     "602_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.2
     },
     "603_1": {
@@ -1424,8 +1424,8 @@
     "603_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.158
     },
     "604_1": {
@@ -1438,8 +1438,8 @@
     "605_1": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.161
     },
     "606_1": {
@@ -1452,8 +1452,8 @@
     "607_1": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A, 6B",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A, 6B)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.155
     },
     "608_1": {
@@ -1480,15 +1480,15 @@
     "701_2": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Deanwood",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7C, 7D)",
       "area_sq_mi": 0.779
     },
     "701_5": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7B",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7B)",
+      "ancs": "ANC 7B, 7F",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7F)",
       "area_sq_mi": 0.779
     },
     "702_2": {
@@ -1550,8 +1550,8 @@
     "706_2": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.738
     },
     "706_5": {
@@ -1592,22 +1592,22 @@
     "709_2": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7E",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7E)",
+      "ancs": "ANC 7E, 7F",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7E, 7F)",
       "area_sq_mi": 0.526
     },
     "709_5": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
-      "ancs": "ANC 8A, 7B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 8A, 7B)",
+      "ancs": "ANC 7B, 8A",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.526
     },
     "710_2": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7C",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7C)",
+      "ancs": "ANC 7C, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E)",
       "area_sq_mi": 0.958
     },
     "710_5": {
@@ -1627,8 +1627,8 @@
     "801_5": {
       "ward": "Ward 8 / Ward 7",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
-      "ancs": "ANC 8A, 7B",
-      "area_desc": "Ward 8 / Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 8A, 7B)",
+      "ancs": "ANC 7B, 8A",
+      "area_desc": "Ward 8 / Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.32
     },
     "802_5": {
@@ -1648,15 +1648,15 @@
     "804_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "area_sq_mi": 0.522
     },
     "805_5": {
       "ward": "Ward 8",
       "neighborhoods": "Douglas, Shipley Terrace",
-      "ancs": "ANC 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8E, 8C)",
+      "ancs": "ANC 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8C, 8E)",
       "area_sq_mi": 0.352
     },
     "806_5": {
@@ -1683,8 +1683,8 @@
     "809_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.78
     },
     "810_5": {
@@ -1704,8 +1704,8 @@
     "812_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.472
     }
   },
@@ -1720,8 +1720,8 @@
     "R420_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4A, 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4A, 4D, 4B)",
+      "ancs": "ANC 4A, 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4A, 4B, 4D, 4E)",
       "area_sq_mi": 0.497
     },
     "R423_3": {
@@ -1741,8 +1741,8 @@
     "R424_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 4D, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4D, 5A, 4B)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R519_3": {
@@ -1755,8 +1755,8 @@
     "R520_3B": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B)",
       "area_sq_mi": 0.396
     },
     "R518_3": {
@@ -1783,43 +1783,43 @@
     "R522_3": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5A, 5B)",
       "area_sq_mi": 0.407
     },
     "R527_3": {
       "ward": "Ward 5",
-      "neighborhoods": "Truxton Circle, Edgewood, Bloomingdale",
+      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
       "ancs": "ANC 5E, 5F",
-      "area_desc": "Ward 5 \u2022 Truxton Circle, Edgewood, Bloomingdale (ANC 5E, 5F)",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.205
     },
     "R526_3B": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 5F, 1B",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F, 1B)",
+      "ancs": "ANC 1B, 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E, 5F)",
       "area_sq_mi": 0.153
     },
     "R418_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.162
     },
     "R526_3": {
       "ward": "Ward 5",
-      "neighborhoods": "Stronghold, Edgewood, Bloomingdale",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Stronghold, Edgewood, Bloomingdale (ANC 5F, 5E)",
+      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.206
     },
     "R421_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.187
     },
     "R422_3": {
@@ -1853,15 +1853,15 @@
     "R425_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.194
     },
     "R426_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B, 4E",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B, 4E)",
+      "ancs": "ANC 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D, 4E)",
       "area_sq_mi": 0.248
     },
     "R524_3": {
@@ -1874,22 +1874,22 @@
     "R511_2": {
       "ward": "Ward 7 / Ward 5",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 5D",
-      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
+      "ancs": "ANC 5D, 7D",
+      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 5D, 7D)",
       "area_sq_mi": 0.139
     },
     "R510_2A": {
       "ward": "Ward 5",
-      "neighborhoods": "Brentwood, Trinidad, Brookland",
+      "neighborhoods": "Brookland, Brentwood, Langdon",
       "ancs": "ANC 5C, 5D",
-      "area_desc": "Ward 5 \u2022 Brentwood, Trinidad, Brookland (ANC 5C, 5D)",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5D)",
       "area_sq_mi": 0.317
     },
     "R508_2B": {
       "ward": "Ward 5",
-      "neighborhoods": "Langdon, Brookland, Brentwood",
+      "neighborhoods": "Brookland, Brentwood, Langdon",
       "ancs": "ANC 5C",
-      "area_desc": "Ward 5 \u2022 Langdon, Brookland, Brentwood (ANC 5C)",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C)",
       "area_sq_mi": 0.417
     },
     "R509_2": {
@@ -1901,16 +1901,16 @@
     },
     "R508_2A": {
       "ward": "Ward 5",
-      "neighborhoods": "South Central, Gateway, Woodridge",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 South Central, Gateway, Woodridge (ANC 5C, 5B)",
+      "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.434
     },
     "R711_2": {
       "ward": "Ward 7",
-      "neighborhoods": "Central NE, Mayfair, Hillbrook",
+      "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
       "ancs": "ANC 7C, 7F",
-      "area_desc": "Ward 7 \u2022 Central NE, Mayfair, Hillbrook (ANC 7C, 7F)",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.295
     },
     "R714_2A": {
@@ -1937,15 +1937,15 @@
     "R604_2A": {
       "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D, 7F",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 7D, 7F)",
       "area_sq_mi": 0.153
     },
     "R604_2B": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.125
     },
     "R713_2B": {
@@ -1958,15 +1958,15 @@
     "R714_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7C, 7F, 7E",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7F, 7E)",
+      "ancs": "ANC 7C, 7E, 7F",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E, 7F)",
       "area_sq_mi": 0.263
     },
     "R712_2A": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Mayfair",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7C, 7D)",
       "area_sq_mi": 0.299
     },
     "R715_2A": {
@@ -1986,15 +1986,15 @@
     "R715_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.203
     },
     "R321_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.39
     },
     "R318_4": {
@@ -2034,16 +2034,16 @@
     },
     "R328_4A": {
       "ward": "Ward 3",
-      "neighborhoods": "Mass. Ave. Heights, Woodland-Normanstone, Cleveland Park",
-      "ancs": "ANC 3C, 3A, 2D",
-      "area_desc": "Ward 3 \u2022 Mass. Ave. Heights, Woodland-Normanstone, Cleveland Park (ANC 3C, 3A, 2D)",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.67
     },
     "R326_4A": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3B, 3A",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3B, 3A)",
+      "ancs": "ANC 3A, 3B",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B)",
       "area_sq_mi": 0.211
     },
     "R325_4": {
@@ -2063,8 +2063,8 @@
     "R404_4B": {
       "ward": "Ward 4 / Ward 1",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C, 1D",
-      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C, 1D)",
+      "ancs": "ANC 1D, 4C, 4E",
+      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 1D, 4C, 4E)",
       "area_sq_mi": 0.177
     },
     "R405_4": {
@@ -2097,9 +2097,9 @@
     },
     "R328_4B": {
       "ward": "Ward 3",
-      "neighborhoods": "Woodley Park, Cleveland Park, Massachusetts Avenue Heights",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
       "ancs": "ANC 3C",
-      "area_desc": "Ward 3 \u2022 Woodley Park, Cleveland Park, Massachusetts Avenue Heights (ANC 3C)",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C)",
       "area_sq_mi": 0.403
     },
     "R314_1": {
@@ -2133,8 +2133,8 @@
     "R408_1": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4A)",
+      "ancs": "ANC 4A, 4B",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B)",
       "area_sq_mi": 0.272
     },
     "R316_1": {
@@ -2167,16 +2167,16 @@
     },
     "R321_1B": {
       "ward": "Ward 3",
-      "neighborhoods": "Van Ness, Cleveland Park, Woodley Park",
-      "ancs": "ANC 3C, 3F, 3A",
-      "area_desc": "Ward 3 \u2022 Van Ness, Cleveland Park, Woodley Park (ANC 3C, 3F, 3A)",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.921
     },
     "R319_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3/4G, 3F)",
       "area_sq_mi": 0.403
     },
     "R409_1B": {
@@ -2210,15 +2210,15 @@
     "R813_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8E, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8E, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C, 8E)",
       "area_sq_mi": 0.564
     },
     "R816_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.498
     },
     "R712_5A": {
@@ -2259,8 +2259,8 @@
     "R711_5B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7B",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7B)",
+      "ancs": "ANC 7B, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7E)",
       "area_sq_mi": 0.351
     },
     "R716_5A": {
@@ -2273,15 +2273,15 @@
     "R815_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.682
     },
     "R812_5": {
       "ward": "Ward 8",
-      "neighborhoods": "Woodland, Garfield Heights, Knox Hill/Buena Vista",
-      "ancs": "ANC 8B, 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Woodland, Garfield Heights, Knox Hill/Buena Vista (ANC 8B, 8E, 8C)",
+      "neighborhoods": "Douglas, Shipley Terrace, Woodland/Fort Stanton",
+      "ancs": "ANC 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace, Woodland/Fort Stanton (ANC 8B, 8C, 8E)",
       "area_sq_mi": 0.704
     },
     "R715_5A": {
@@ -2314,9 +2314,9 @@
     },
     "R621_1": {
       "ward": "Ward 6",
-      "neighborhoods": "Lincoln Park, Capitol Hill, Union Station",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Lincoln Park, Capitol Hill, Union Station (ANC 6B, 6A)",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B)",
       "area_sq_mi": 0.122
     },
     "R615_1": {
@@ -2364,8 +2364,8 @@
     "R113_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.143
     },
     "R108_2": {
@@ -2378,8 +2378,8 @@
     "R209_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2B, 2F, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.242
     },
     "R207_2": {
@@ -2392,8 +2392,8 @@
     "R208_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2F, 2G, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2F, 2G, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.321
     },
     "R109_2": {
@@ -2420,36 +2420,36 @@
     "R111_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A)",
+      "ancs": "ANC 1A, 1B",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B)",
       "area_sq_mi": 0.209
     },
     "R112_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A)",
+      "ancs": "ANC 1A, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "area_sq_mi": 0.141
     },
     "R616_4": {
       "ward": "Ward 6",
-      "neighborhoods": "Stanton Park, Union Station, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Stanton Park, Union Station, Kingman Park (ANC 6C, 6A)",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.109
     },
     "R617_4": {
       "ward": "Ward 6",
-      "neighborhoods": "Near Northeast, Union Station, Stanton Park",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 6C",
-      "area_desc": "Ward 6 \u2022 Near Northeast, Union Station, Stanton Park (ANC 6C)",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C)",
       "area_sq_mi": 0.11
     },
     "R618_4": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Kingman Park, Union Station, Stanton Park",
-      "ancs": "ANC 7D, 6A, 5D",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.168
     },
     "R614_4": {
@@ -2490,15 +2490,15 @@
     "R107_5": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C)",
+      "ancs": "ANC 1C, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2B)",
       "area_sq_mi": 0.447
     },
     "R208_5": {
       "ward": "Ward 2",
       "neighborhoods": "Georgetown, Burleith/Hillandale, West End",
-      "ancs": "ANC 2E, 2A, 2B, 2D",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2E, 2A, 2B, 2D)",
+      "ancs": "ANC 2A, 2B, 2D, 2E",
+      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2A, 2B, 2D, 2E)",
       "area_sq_mi": 0.254
     },
     "R209_5": {
@@ -2509,45 +2509,45 @@
       "area_sq_mi": 0.179
     },
     "RSP10_1": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 6 / Ward 3",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
+      "ancs": "ANC 3/4G, 3C, 3E, 6A, 6B, 6D",
+      "area_desc": "Ward 6 / Ward 3 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 3/4G, 3C, 3E, 6A, 6B, 6D)",
       "area_sq_mi": 0.049
     },
     "RSP21_2": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 1 / Ward 6 / Ward 5",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
+      "ancs": "ANC 1A, 1B, 1E, 5C, 5E, 6B",
+      "area_desc": "Ward 1 / Ward 6 / Ward 5 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E, 5C, 5E, 6B)",
       "area_sq_mi": 0.042
     },
     "RSP20_2": {
       "ward": "Ward 1 / Ward 2",
-      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1D, 2B",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
+      "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Columbia Heights",
+      "ancs": "ANC 1A, 1B, 1D, 1E, 2B, 2F",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Columbia Heights (ANC 1A, 1B, 1D, 1E, 2B, 2F)",
       "area_sq_mi": 0.048
     },
     "RSP50_5": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 2 / Ward 1 / Ward 3",
+      "neighborhoods": "Georgetown, Burleith/Hillandale, Dupont Circle",
+      "ancs": "ANC 1C, 2B, 2D, 2E, 3B, 8A",
+      "area_desc": "Ward 2 / Ward 1 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Dupont Circle (ANC 1C, 2B, 2D, 2E, 3B, 8A)",
       "area_sq_mi": 0.092
     },
     "RSP40_4": {
-      "ward": "Ward 4",
-      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C)",
+      "ward": "Ward 6 / Ward 4 / Ward 7",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 4C, 6A, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 4 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 4C, 6A, 6C, 7D)",
       "area_sq_mi": 0.028
     },
     "RSP30_3": {
-      "ward": "Ward 5 / Ward 4",
-      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 4C",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 4C)",
+      "ward": "Ward 4 / Ward 5",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 4C, 4E, 5E, 5F",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E, 5E, 5F)",
       "area_sq_mi": 0.042
     },
     "103_4": {
@@ -2567,8 +2567,8 @@
     "107_5": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C)",
+      "ancs": "ANC 1C, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2B)",
       "area_sq_mi": 0.447
     },
     "108_2": {
@@ -2595,22 +2595,22 @@
     "111_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A)",
+      "ancs": "ANC 1A, 1B",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B)",
       "area_sq_mi": 0.209
     },
     "112_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A)",
+      "ancs": "ANC 1A, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "area_sq_mi": 0.141
     },
     "113_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.143
     },
     "207_2": {
@@ -2651,22 +2651,22 @@
     "208_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2F, 2G, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2F, 2G, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.321
     },
     "208_5": {
       "ward": "Ward 2",
       "neighborhoods": "Georgetown, Burleith/Hillandale, West End",
-      "ancs": "ANC 2E, 2A, 2B, 2D",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2E, 2A, 2B, 2D)",
+      "ancs": "ANC 2A, 2B, 2D, 2E",
+      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2A, 2B, 2D, 2E)",
       "area_sq_mi": 0.254
     },
     "209_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2B, 2F, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.242
     },
     "R209_5A": {
@@ -2756,15 +2756,15 @@
     "R318_1A": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.294
     },
     "318_1A": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.294
     },
     "R318_1B": {
@@ -2791,8 +2791,8 @@
     "319_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3/4G, 3F)",
       "area_sq_mi": 0.403
     },
     "319_4": {
@@ -2819,36 +2819,36 @@
     "R321_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3C",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3C)",
+      "ancs": "ANC 3C, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3C, 3F)",
       "area_sq_mi": 0.39
     },
     "321_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3C",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3C)",
+      "ancs": "ANC 3C, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3C, 3F)",
       "area_sq_mi": 0.39
     },
     "321_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.39
     },
     "R322_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 3F",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 3F)",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.285
     },
     "322_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 3F",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 3F)",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.285
     },
     "322_4": {
@@ -2889,8 +2889,8 @@
     "326_4A": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3B, 3A",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3B, 3A)",
+      "ancs": "ANC 3A, 3B",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B)",
       "area_sq_mi": 0.211
     },
     "326_4B": {
@@ -2903,29 +2903,29 @@
     "R327_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.52
     },
     "327_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.52
     },
     "R328_4": {
       "ward": "Ward 3 / Ward 1",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 1D",
-      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 1D)",
+      "ancs": "ANC 1D, 3C",
+      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 1D, 3C)",
       "area_sq_mi": 0.67
     },
     "328_4": {
       "ward": "Ward 3 / Ward 1",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 1D",
-      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 1D)",
+      "ancs": "ANC 1D, 3C",
+      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 1D, 3C)",
       "area_sq_mi": 0.67
     },
     "R329_4A": {
@@ -2980,8 +2980,8 @@
     "404_4B": {
       "ward": "Ward 4 / Ward 1",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C, 1D",
-      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C, 1D)",
+      "ancs": "ANC 1D, 4C, 4E",
+      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 1D, 4C, 4E)",
       "area_sq_mi": 0.177
     },
     "405_4": {
@@ -3008,8 +3008,8 @@
     "408_1": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4A)",
+      "ancs": "ANC 4A, 4B",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B)",
       "area_sq_mi": 0.272
     },
     "409_1A": {
@@ -3050,8 +3050,8 @@
     "418_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.162
     },
     "419_3A": {
@@ -3071,8 +3071,8 @@
     "420_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4A, 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4A, 4D, 4B)",
+      "ancs": "ANC 4A, 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4A, 4B, 4D, 4E)",
       "area_sq_mi": 0.497
     },
     "R421_3A": {
@@ -3120,22 +3120,22 @@
     "424_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 4D, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4D, 5A, 4B)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R508_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.417
     },
     "508_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.417
     },
     "509_2": {
@@ -3211,8 +3211,8 @@
     "520_3B": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B)",
       "area_sq_mi": 0.396
     },
     "521_3": {
@@ -3225,8 +3225,8 @@
     "522_3": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5A, 5B)",
       "area_sq_mi": 0.407
     },
     "523_3": {
@@ -3267,8 +3267,8 @@
     "526_3B": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 5F, 1B",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F, 1B)",
+      "ancs": "ANC 1B, 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E, 5F)",
       "area_sq_mi": 0.153
     },
     "R527_3A": {
@@ -3288,85 +3288,85 @@
     "R527_3B": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.205
     },
     "527_3B": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.205
     },
     "R604_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.153
     },
     "604_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.153
     },
     "R611_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A)",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B)",
       "area_sq_mi": 0.18
     },
     "611_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A)",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B)",
       "area_sq_mi": 0.18
     },
     "R611_4": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.21
     },
     "611_4": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.21
     },
     "R612_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.15
     },
     "612_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.15
     },
     "R612_4": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 6A",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 6A)",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.18
     },
     "612_4": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 6A",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 6A)",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.18
     },
     "613_1": {
@@ -3393,15 +3393,15 @@
     "R613_4B": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.174
     },
     "613_4B": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.174
     },
     "614_1": {
@@ -3463,15 +3463,15 @@
     "711_5B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7B",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7B)",
+      "ancs": "ANC 7B, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7E)",
       "area_sq_mi": 0.351
     },
     "712_2A": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Mayfair",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7C, 7D)",
       "area_sq_mi": 0.299
     },
     "712_2B": {
@@ -3533,8 +3533,8 @@
     "714_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7C, 7F, 7E",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7F, 7E)",
+      "ancs": "ANC 7C, 7E, 7F",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E, 7F)",
       "area_sq_mi": 0.263
     },
     "R714_5": {
@@ -3561,8 +3561,8 @@
     "715_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.203
     },
     "715_5A": {
@@ -3596,8 +3596,8 @@
     "813_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8E, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8E, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C, 8E)",
       "area_sq_mi": 0.564
     },
     "814_5A": {
@@ -3617,15 +3617,15 @@
     "815_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.682
     },
     "816_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.498
     }
   },
@@ -3640,29 +3640,29 @@
     "OR708": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7D, 7B",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7D, 7B)",
+      "ancs": "ANC 7B, 7D",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7D)",
       "area_sq_mi": 0.606
     },
     "OR709": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7E, 8A, 7B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7E, 8A, 7B)",
+      "ancs": "ANC 7B, 7E, 7F, 8A",
+      "area_desc": "Ward 7 / Ward 8 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7E, 7F, 8A)",
       "area_sq_mi": 0.526
     },
     "OR710": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7C, 7B, 8B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7C, 7B, 8B)",
+      "ancs": "ANC 7B, 7C, 7E, 8B",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7C, 7E, 8B)",
       "area_sq_mi": 0.958
     },
     "OR701": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Deanwood",
-      "ancs": "ANC 7D, 7C, 7F, 7B",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7D, 7C, 7F, 7B)",
+      "ancs": "ANC 7B, 7C, 7D, 7F",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7B, 7C, 7D, 7F)",
       "area_sq_mi": 0.779
     },
     "OR702": {
@@ -3682,8 +3682,8 @@
     "OR706": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C, 7B",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C, 7B)",
+      "ancs": "ANC 7B, 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7B, 7C, 7F)",
       "area_sq_mi": 0.738
     },
     "OR803": {
@@ -3696,8 +3696,8 @@
     "OR812": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.472
     },
     "OR810": {
@@ -3717,8 +3717,8 @@
     "OR805": {
       "ward": "Ward 8",
       "neighborhoods": "Douglas, Shipley Terrace",
-      "ancs": "ANC 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8E, 8C)",
+      "ancs": "ANC 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8C, 8E)",
       "area_sq_mi": 0.352
     },
     "OR811": {
@@ -3738,43 +3738,43 @@
     "OR705": {
       "ward": "Ward 7",
       "neighborhoods": "Deanwood, Burrville, Grant Park",
-      "ancs": "ANC 7C, 7B",
-      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7C, 7B)",
+      "ancs": "ANC 7B, 7C",
+      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7B, 7C)",
       "area_sq_mi": 0.563
     },
     "OR804": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "area_sq_mi": 0.522
     },
     "OR313": {
       "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 2E, 3B",
-      "area_desc": "Ward 2 / Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 2E, 3B)",
+      "ancs": "ANC 2E, 3A, 3B, 3C",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 2E, 3A, 3B, 3C)",
       "area_sq_mi": 0.528
     },
     "OR312": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3A, 3F, 3C, 3E",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3F, 3C, 3E)",
+      "ancs": "ANC 3A, 3C, 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3D, 3E, 3F)",
       "area_sq_mi": 0.972
     },
     "OR310": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3D)",
+      "ancs": "ANC 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3D, 3E, 3F)",
       "area_sq_mi": 1.078
     },
     "OR309": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3/4G, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3/4G, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3D, 3E, 3F)",
       "area_sq_mi": 0.286
     },
     "OR307": {
@@ -3787,8 +3787,8 @@
     "OR305": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3F, 3E, 3D",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3F, 3E, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E, 3F",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3D, 3E, 3F)",
       "area_sq_mi": 0.43
     },
     "OR303": {
@@ -3801,8 +3801,8 @@
     "OR304": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3E, 3A",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3E, 3A)",
+      "ancs": "ANC 3/4G, 3A, 3E",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3A, 3E)",
       "area_sq_mi": 0.883
     },
     "OR301": {
@@ -3836,8 +3836,8 @@
     "OR402": {
       "ward": "Ward 4",
       "neighborhoods": "Colonial Village, Shepherd Park, North Portal Estates",
-      "ancs": "ANC 4A, 4B, 4E, 4C",
-      "area_desc": "Ward 4 \u2022 Colonial Village, Shepherd Park, North Portal Estates (ANC 4A, 4B, 4E, 4C)",
+      "ancs": "ANC 4A, 4B, 4C, 4E",
+      "area_desc": "Ward 4 \u2022 Colonial Village, Shepherd Park, North Portal Estates (ANC 4A, 4B, 4C, 4E)",
       "area_sq_mi": 0.814
     },
     "OR401": {
@@ -3857,22 +3857,22 @@
     "OR306": {
       "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
-      "ancs": "ANC 3/4G, 3F, 3D",
-      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3F, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3F",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3D, 3F)",
       "area_sq_mi": 0.491
     },
     "OR311": {
       "ward": "Ward 2 / Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3D, 2E",
-      "area_desc": "Ward 2 / Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3D, 2E)",
+      "ancs": "ANC 2E, 3D, 3F",
+      "area_desc": "Ward 2 / Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 2E, 3D, 3F)",
       "area_sq_mi": 0.108
     },
     "OR101": {
       "ward": "Ward 1",
-      "neighborhoods": "Mount Pleasant, Columbia Heights, Mt. Pleasant",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
       "ancs": "ANC 1D",
-      "area_desc": "Ward 1 \u2022 Mount Pleasant, Columbia Heights, Mt. Pleasant (ANC 1D)",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D)",
       "area_sq_mi": 0.129
     },
     "OR102": {
@@ -3892,36 +3892,36 @@
     "OR316": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.511
     },
     "OR315": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3C, 3A, 3B",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3C, 3A, 3B)",
+      "ancs": "ANC 3A, 3B, 3C",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B, 3C)",
       "area_sq_mi": 0.21
     },
     "OR308": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G, 3D)",
+      "ancs": "ANC 3/4G, 3D, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3D, 3E)",
       "area_sq_mi": 0.442
     },
     "OR602": {
-      "ward": "Ward 7 / Ward 6",
+      "ward": "Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.107
     },
     "OR506": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5C, 5B)",
+      "ancs": "ANC 5B, 5C, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5C, 5D)",
       "area_sq_mi": 0.405
     },
     "OR601": {
@@ -3941,15 +3941,15 @@
     "OR503": {
       "ward": "Ward 5",
       "neighborhoods": "Brookland, Brentwood, Langdon",
-      "ancs": "ANC 5C, 5A, 5B",
-      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5A, 5B)",
+      "ancs": "ANC 5A, 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5A, 5B, 5C)",
       "area_sq_mi": 0.507
     },
     "OR707": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7C, 7F, 7B",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F, 7B)",
+      "ancs": "ANC 7B, 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7B, 7C, 7F)",
       "area_sq_mi": 0.322
     },
     "OR711": {
@@ -3962,50 +3962,50 @@
     "OR502": {
       "ward": "Ward 5",
       "neighborhoods": "Brookland, Brentwood, Langdon",
-      "ancs": "ANC 5C, 5A",
-      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5A)",
+      "ancs": "ANC 5A, 5C",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5A, 5C)",
       "area_sq_mi": 0.598
     },
     "OR501": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B, 5A, 4B)",
+      "ancs": "ANC 4B, 5A, 5B, 5C",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 4B, 5A, 5B, 5C)",
       "area_sq_mi": 0.526
     },
     "OR507": {
       "ward": "Ward 5 / Ward 7",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 7D, 5B",
-      "area_desc": "Ward 5 / Ward 7 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 7D, 5B)",
+      "ancs": "ANC 5B, 5D, 7D",
+      "area_desc": "Ward 5 / Ward 7 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5D, 7D)",
       "area_sq_mi": 0.438
     },
     "OR603": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.106
     },
     "OR704": {
       "ward": "Ward 7",
       "neighborhoods": "Deanwood, Burrville, Grant Park",
-      "ancs": "ANC 7C, 7B, 7E",
-      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7C, 7B, 7E)",
+      "ancs": "ANC 7B, 7C, 7E",
+      "area_desc": "Ward 7 \u2022 Deanwood, Burrville, Grant Park (ANC 7B, 7C, 7E)",
       "area_sq_mi": 0.27
     },
     "OR505": {
       "ward": "Ward 5 / Ward 6",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 6A, 5B",
-      "area_desc": "Ward 5 / Ward 6 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 6A, 5B)",
+      "ancs": "ANC 5B, 5D, 6A",
+      "area_desc": "Ward 5 / Ward 6 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5D, 6A)",
       "area_sq_mi": 0.488
     },
     "OR409": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4D",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4D)",
+      "ancs": "ANC 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4E)",
       "area_sq_mi": 0.189
     },
     "OR411": {
@@ -4058,10 +4058,10 @@
       "area_sq_mi": 0.271
     },
     "OR512": {
-      "ward": "Ward 5 / Ward 1",
+      "ward": "Ward 1 / Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 1B",
-      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 1B)",
+      "ancs": "ANC 1B, 5E",
+      "area_desc": "Ward 1 / Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E)",
       "area_sq_mi": 0.149
     },
     "OR515": {
@@ -4074,50 +4074,50 @@
     "OR511": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.192
     },
     "OR414": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B, 4D",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B, 4D)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.284
     },
     "OR513": {
-      "ward": "Ward 5 / Ward 2",
+      "ward": "Ward 2 / Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 2 / Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.171
     },
     "OR417": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.224
     },
     "OR504": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5A, 5B",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5A, 5B)",
+      "ancs": "ANC 5A, 5B, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5A, 5B, 5D)",
       "area_sq_mi": 0.287
     },
     "OR516": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.099
     },
     "OR510": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5F, 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5F, 5B, 5A)",
+      "ancs": "ANC 5A, 5B, 5F",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B, 5F)",
       "area_sq_mi": 0.253
     },
     "OR416": {
@@ -4129,16 +4129,16 @@
     },
     "OR418": {
       "ward": "Ward 4",
-      "neighborhoods": "16th Street Heights, Brightwood Park, Crestwood",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
       "ancs": "ANC 4E",
-      "area_desc": "Ward 4 \u2022 16th Street Heights, Brightwood Park, Crestwood (ANC 4E)",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E)",
       "area_sq_mi": 0.271
     },
     "IC101": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A, 1E, 1D",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A, 1E, 1D)",
+      "ancs": "ANC 1A, 1B, 1D, 1E",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B, 1D, 1E)",
       "area_sq_mi": 0.332
     },
     "IC103": {
@@ -4149,24 +4149,24 @@
       "area_sq_mi": 0.195
     },
     "IC203": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Kalorama Heights, Adams Morgan, Lanier Heights",
-      "ancs": "ANC 2D, 1C, 2B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 2D, 1C, 2B)",
+      "ancs": "ANC 1C, 2B, 2D",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 1C, 2B, 2D)",
       "area_sq_mi": 0.373
     },
     "IC201": {
-      "ward": "Ward 2 / Ward 1 / Ward 5 / Ward 6",
+      "ward": "Ward 1 / Ward 2 / Ward 5 / Ward 6",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 2G, 1B, 6E, 5E",
-      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 2G, 1B, 6E, 5E)",
+      "ancs": "ANC 1B, 2G, 5E, 6E",
+      "area_desc": "Ward 1 / Ward 2 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 2G, 5E, 6E)",
       "area_sq_mi": 0.362
     },
     "IC106": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C, 2A",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C, 2A)",
+      "ancs": "ANC 1C, 2A, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2A, 2B)",
       "area_sq_mi": 0.48
     },
     "IC204": {
@@ -4184,31 +4184,31 @@
       "area_sq_mi": 0.255
     },
     "IC202": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2G, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2G, 2F, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.384
     },
     "IC206": {
-      "ward": "Ward 2 / Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2F, 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2F, 2B, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.361
     },
     "IC105": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1D, 1A, 1C",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D, 1A, 1C)",
+      "ancs": "ANC 1A, 1C, 1D",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1C, 1D)",
       "area_sq_mi": 0.262
     },
     "IC102": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1E, 1B, 1D",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E, 1B, 1D)",
+      "ancs": "ANC 1A, 1B, 1D, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D, 1E)",
       "area_sq_mi": 0.279
     },
     "IC104": {
@@ -4221,8 +4221,8 @@
     "IC601": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6C, 6A, 7D",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6C, 6A, 7D)",
+      "ancs": "ANC 6A, 6B, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C, 7D)",
       "area_sq_mi": 0.193
     },
     "IC608": {
@@ -4263,85 +4263,85 @@
     "IC607": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A, 6B",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A, 6B)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.155
     },
     "IC605": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.161
     },
     "IC602": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D, 6B)",
+      "ancs": "ANC 6A, 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 7D)",
       "area_sq_mi": 0.2
     },
     "IC611": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.163
     },
     "IC603": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D, 6B)",
+      "ancs": "ANC 6A, 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 7D)",
       "area_sq_mi": 0.158
     },
     "IC612": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
-      "ancs": "ANC 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
+      "ancs": "ANC 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B)",
       "area_sq_mi": 0.196
     },
     "IC20": {
       "ward": "Ward 2 / Ward 1",
-      "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Howard University",
-      "ancs": "ANC 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 1B)",
+      "neighborhoods": "Georgetown, Burleith/Hillandale, Dupont Circle",
+      "ancs": "ANC 1B, 1C, 2B, 2D, 2E, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Georgetown, Burleith/Hillandale, Dupont Circle (ANC 1B, 1C, 2B, 2D, 2E, 2F)",
       "area_sq_mi": 0.049
     },
     "IC21": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 1 / Ward 6 / Ward 5",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
+      "ancs": "ANC 1A, 1B, 1D, 1E, 5E, 6B",
+      "area_desc": "Ward 1 / Ward 6 / Ward 5 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D, 1E, 5E, 6B)",
       "area_sq_mi": 0.045
     },
     "OR11": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 3 / Ward 4",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 3/4G, 3A, 3C, 3E, 4C",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 3/4G, 3A, 3C, 3E, 4C)",
       "area_sq_mi": 0.025
     },
     "IC11": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6A, 7D",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
+      "ancs": "ANC 6A, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C, 7D)",
       "area_sq_mi": 0.02
     },
     "IC10": {
       "ward": "Ward 6",
-      "neighborhoods": "Southwest Employment Area, Southwest/Waterfront, Fort McNair",
-      "ancs": "ANC 6D, 6B",
-      "area_desc": "Ward 6 \u2022 Southwest Employment Area, Southwest/Waterfront, Fort McNair (ANC 6D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Southwest Employment Area",
+      "ancs": "ANC 6A, 6B, 6C, 6D",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Southwest Employment Area (ANC 6A, 6B, 6C, 6D)",
       "area_sq_mi": 0.024
     },
     "OR30": {
-      "ward": "Ward 5 / Ward 4",
-      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 4C",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 4C)",
+      "ward": "Ward 4 / Ward 5",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 4C, 4E, 5E, 5F",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E, 5E, 5F)",
       "area_sq_mi": 0.042
     },
     "OR21": {
@@ -4354,8 +4354,8 @@
     "101_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A, 1E",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A, 1E)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.332
     },
     "101_4": {
@@ -4368,8 +4368,8 @@
     "102_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1E, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.279
     },
     "102_4": {
@@ -4396,36 +4396,36 @@
     "105_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1D, 1A, 1C",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1D, 1A, 1C)",
+      "ancs": "ANC 1A, 1C, 1D",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1C, 1D)",
       "area_sq_mi": 0.262
     },
     "106_2": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C, 2A",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C, 2A)",
+      "ancs": "ANC 1C, 2A, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2A, 2B)",
       "area_sq_mi": 0.48
     },
     "201_2": {
       "ward": "Ward 2 / Ward 1 / Ward 5 / Ward 6",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 2G, 1B, 6E, 5E",
-      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 2G, 1B, 6E, 5E)",
+      "ancs": "ANC 1B, 2G, 5E, 6E",
+      "area_desc": "Ward 2 / Ward 1 / Ward 5 / Ward 6 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 2G, 5E, 6E)",
       "area_sq_mi": 0.362
     },
     "202_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2G, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2G, 2F, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.384
     },
     "203_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Kalorama Heights, Adams Morgan, Lanier Heights",
-      "ancs": "ANC 2D, 1C, 2B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 2D, 1C, 2B)",
+      "ancs": "ANC 1C, 2B, 2D",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 1C, 2B, 2D)",
       "area_sq_mi": 0.373
     },
     "204_2": {
@@ -4445,8 +4445,8 @@
     "206_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2F, 2B, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2F, 2B, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.361
     },
     "301_1": {
@@ -4501,8 +4501,8 @@
     "304_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.883
     },
     "305_1": {
@@ -4515,8 +4515,8 @@
     "305_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3D",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3D)",
+      "ancs": "ANC 3D, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3D, 3E)",
       "area_sq_mi": 0.43
     },
     "306_1": {
@@ -4550,8 +4550,8 @@
     "308_1": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.442
     },
     "308_4": {
@@ -4564,8 +4564,8 @@
     "309_1": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E, 3F)",
       "area_sq_mi": 0.286
     },
     "309_4": {
@@ -4599,15 +4599,15 @@
     "311_4": {
       "ward": "Ward 3 / Ward 2",
       "neighborhoods": "Spring Valley, Palisades, Wesley Heights",
-      "ancs": "ANC 3D, 2E",
-      "area_desc": "Ward 3 / Ward 2 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 3D, 2E)",
+      "ancs": "ANC 2E, 3D",
+      "area_desc": "Ward 3 / Ward 2 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 2E, 3D)",
       "area_sq_mi": 0.108
     },
     "312_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3A, 3F, 3C, 3E",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3F, 3C, 3E)",
+      "ancs": "ANC 3A, 3C, 3E, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3E, 3F)",
       "area_sq_mi": 0.972
     },
     "312_4": {
@@ -4620,8 +4620,8 @@
     "313_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.528
     },
     "313_4": {
@@ -4641,15 +4641,15 @@
     "315_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3C, 3A, 3B",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3C, 3A, 3B)",
+      "ancs": "ANC 3A, 3B, 3C",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B, 3C)",
       "area_sq_mi": 0.21
     },
     "316_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.511
     },
     "317_4": {
@@ -4697,15 +4697,15 @@
     "402_3": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4E, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4E, 4A)",
+      "ancs": "ANC 4A, 4B, 4E",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B, 4E)",
       "area_sq_mi": 0.814
     },
     "402_4": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C)",
+      "ancs": "ANC 4C, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E)",
       "area_sq_mi": 0.814
     },
     "403_1": {
@@ -4795,8 +4795,8 @@
     "409_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4D",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4D)",
+      "ancs": "ANC 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4E)",
       "area_sq_mi": 0.189
     },
     "410_3": {
@@ -4830,8 +4830,8 @@
     "414_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B, 4D",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B, 4D)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.284
     },
     "415_3": {
@@ -4851,22 +4851,22 @@
     "417_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.224
     },
     "501_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.526
     },
     "501_3": {
       "ward": "Ward 5 / Ward 4",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 5A, 4B",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 4B)",
+      "ancs": "ANC 4B, 5A",
+      "area_desc": "Ward 5 / Ward 4 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 5A)",
       "area_sq_mi": 0.526
     },
     "502_2": {
@@ -4928,8 +4928,8 @@
     "506_2": {
       "ward": "Ward 5",
       "neighborhoods": "Ivy City, Arboretum, Trinidad",
-      "ancs": "ANC 5D, 5C",
-      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 5C)",
+      "ancs": "ANC 5C, 5D",
+      "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5C, 5D)",
       "area_sq_mi": 0.405
     },
     "506_3": {
@@ -4970,29 +4970,29 @@
     "510_3": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5F, 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5F, 5B, 5A)",
+      "ancs": "ANC 5A, 5B, 5F",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B, 5F)",
       "area_sq_mi": 0.253
     },
     "511_3": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.192
     },
     "512_3": {
       "ward": "Ward 5 / Ward 1",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 1B",
-      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 1B)",
+      "ancs": "ANC 1B, 5E",
+      "area_desc": "Ward 5 / Ward 1 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E)",
       "area_sq_mi": 0.149
     },
     "513_3": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.171
     },
     "514_3": {
@@ -5012,15 +5012,15 @@
     "516_3": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 5E)",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.099
     },
     "601_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6C, 6A)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.193
     },
     "601_2": {
@@ -5040,8 +5040,8 @@
     "602_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.2
     },
     "603_1": {
@@ -5054,8 +5054,8 @@
     "603_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.158
     },
     "604_1": {
@@ -5068,8 +5068,8 @@
     "605_1": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.161
     },
     "606_1": {
@@ -5082,8 +5082,8 @@
     "607_1": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A, 6B",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A, 6B)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.155
     },
     "608_1": {
@@ -5110,15 +5110,15 @@
     "701_2": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Deanwood",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Deanwood (ANC 7C, 7D)",
       "area_sq_mi": 0.779
     },
     "701_5": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7B",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7B)",
+      "ancs": "ANC 7B, 7F",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7F)",
       "area_sq_mi": 0.779
     },
     "702_2": {
@@ -5180,8 +5180,8 @@
     "706_2": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.738
     },
     "706_5": {
@@ -5222,22 +5222,22 @@
     "709_2": {
       "ward": "Ward 7",
       "neighborhoods": "River Terrace, Benning, Greenway",
-      "ancs": "ANC 7F, 7E",
-      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7F, 7E)",
+      "ancs": "ANC 7E, 7F",
+      "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7E, 7F)",
       "area_sq_mi": 0.526
     },
     "709_5": {
       "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
-      "ancs": "ANC 8A, 7B",
-      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 8A, 7B)",
+      "ancs": "ANC 7B, 8A",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.526
     },
     "710_2": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7C",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7C)",
+      "ancs": "ANC 7C, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E)",
       "area_sq_mi": 0.958
     },
     "710_5": {
@@ -5257,8 +5257,8 @@
     "801_5": {
       "ward": "Ward 8 / Ward 7",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
-      "ancs": "ANC 8A, 7B",
-      "area_desc": "Ward 8 / Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 8A, 7B)",
+      "ancs": "ANC 7B, 8A",
+      "area_desc": "Ward 8 / Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.32
     },
     "802_5": {
@@ -5278,15 +5278,15 @@
     "804_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "area_sq_mi": 0.522
     },
     "805_5": {
       "ward": "Ward 8",
       "neighborhoods": "Douglas, Shipley Terrace",
-      "ancs": "ANC 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8E, 8C)",
+      "ancs": "ANC 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8C, 8E)",
       "area_sq_mi": 0.352
     },
     "806_5": {
@@ -5313,8 +5313,8 @@
     "809_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.78
     },
     "810_5": {
@@ -5334,8 +5334,8 @@
     "812_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.472
     }
   },
@@ -5350,8 +5350,8 @@
     "R420_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4A, 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4A, 4D, 4B)",
+      "ancs": "ANC 4A, 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4A, 4B, 4D, 4E)",
       "area_sq_mi": 0.497
     },
     "R423_3": {
@@ -5371,8 +5371,8 @@
     "R424_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 4D, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4D, 5A, 4B)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R519_3": {
@@ -5385,8 +5385,8 @@
     "R520_3B": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B)",
       "area_sq_mi": 0.396
     },
     "R518_3": {
@@ -5413,43 +5413,43 @@
     "R522_3": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5A, 5B)",
       "area_sq_mi": 0.407
     },
     "R527_3": {
       "ward": "Ward 5",
-      "neighborhoods": "Truxton Circle, Edgewood, Bloomingdale",
+      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
       "ancs": "ANC 5E, 5F",
-      "area_desc": "Ward 5 \u2022 Truxton Circle, Edgewood, Bloomingdale (ANC 5E, 5F)",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.205
     },
     "R526_3B": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 5F, 1B",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F, 1B)",
+      "ancs": "ANC 1B, 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E, 5F)",
       "area_sq_mi": 0.153
     },
     "R418_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.162
     },
     "R526_3": {
       "ward": "Ward 5",
-      "neighborhoods": "Stronghold, Edgewood, Bloomingdale",
-      "ancs": "ANC 5F, 5E",
-      "area_desc": "Ward 5 \u2022 Stronghold, Edgewood, Bloomingdale (ANC 5F, 5E)",
+      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
+      "ancs": "ANC 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "area_sq_mi": 0.206
     },
     "R421_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.187
     },
     "R422_3": {
@@ -5483,15 +5483,15 @@
     "R425_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B)",
+      "ancs": "ANC 4B, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D)",
       "area_sq_mi": 0.194
     },
     "R426_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4B, 4E",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4B, 4E)",
+      "ancs": "ANC 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4B, 4D, 4E)",
       "area_sq_mi": 0.248
     },
     "R524_3": {
@@ -5504,22 +5504,22 @@
     "R511_2": {
       "ward": "Ward 7 / Ward 5",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 5D",
-      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
+      "ancs": "ANC 5D, 7D",
+      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 5D, 7D)",
       "area_sq_mi": 0.139
     },
     "R510_2A": {
       "ward": "Ward 5",
-      "neighborhoods": "Brentwood, Trinidad, Brookland",
+      "neighborhoods": "Brookland, Brentwood, Langdon",
       "ancs": "ANC 5C, 5D",
-      "area_desc": "Ward 5 \u2022 Brentwood, Trinidad, Brookland (ANC 5C, 5D)",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C, 5D)",
       "area_sq_mi": 0.317
     },
     "R508_2B": {
       "ward": "Ward 5",
-      "neighborhoods": "Langdon, Brookland, Brentwood",
+      "neighborhoods": "Brookland, Brentwood, Langdon",
       "ancs": "ANC 5C",
-      "area_desc": "Ward 5 \u2022 Langdon, Brookland, Brentwood (ANC 5C)",
+      "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5C)",
       "area_sq_mi": 0.417
     },
     "R509_2": {
@@ -5531,16 +5531,16 @@
     },
     "R508_2A": {
       "ward": "Ward 5",
-      "neighborhoods": "South Central, Gateway, Woodridge",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 South Central, Gateway, Woodridge (ANC 5C, 5B)",
+      "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.434
     },
     "R711_2": {
       "ward": "Ward 7",
-      "neighborhoods": "Central NE, Mayfair, Hillbrook",
+      "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
       "ancs": "ANC 7C, 7F",
-      "area_desc": "Ward 7 \u2022 Central NE, Mayfair, Hillbrook (ANC 7C, 7F)",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.295
     },
     "R714_2A": {
@@ -5567,15 +5567,15 @@
     "R604_2A": {
       "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D, 7F",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 7D, 7F)",
       "area_sq_mi": 0.153
     },
     "R604_2B": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "neighborhoods": "Capitol Hill, Lincoln Park",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.125
     },
     "R713_2B": {
@@ -5588,15 +5588,15 @@
     "R714_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7C, 7F, 7E",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7F, 7E)",
+      "ancs": "ANC 7C, 7E, 7F",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E, 7F)",
       "area_sq_mi": 0.263
     },
     "R712_2A": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Mayfair",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7C, 7D)",
       "area_sq_mi": 0.299
     },
     "R715_2A": {
@@ -5616,15 +5616,15 @@
     "R715_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.203
     },
     "R321_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.39
     },
     "R318_4": {
@@ -5664,16 +5664,16 @@
     },
     "R328_4A": {
       "ward": "Ward 3",
-      "neighborhoods": "Mass. Ave. Heights, Woodland-Normanstone, Cleveland Park",
-      "ancs": "ANC 3C, 3A, 2D",
-      "area_desc": "Ward 3 \u2022 Mass. Ave. Heights, Woodland-Normanstone, Cleveland Park (ANC 3C, 3A, 2D)",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.67
     },
     "R326_4A": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3B, 3A",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3B, 3A)",
+      "ancs": "ANC 3A, 3B",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B)",
       "area_sq_mi": 0.211
     },
     "R325_4": {
@@ -5693,8 +5693,8 @@
     "R404_4B": {
       "ward": "Ward 4 / Ward 1",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C, 1D",
-      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C, 1D)",
+      "ancs": "ANC 1D, 4C, 4E",
+      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 1D, 4C, 4E)",
       "area_sq_mi": 0.177
     },
     "R405_4": {
@@ -5727,9 +5727,9 @@
     },
     "R328_4B": {
       "ward": "Ward 3",
-      "neighborhoods": "Woodley Park, Cleveland Park, Massachusetts Avenue Heights",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
       "ancs": "ANC 3C",
-      "area_desc": "Ward 3 \u2022 Woodley Park, Cleveland Park, Massachusetts Avenue Heights (ANC 3C)",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C)",
       "area_sq_mi": 0.403
     },
     "R314_1": {
@@ -5763,8 +5763,8 @@
     "R408_1": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4A)",
+      "ancs": "ANC 4A, 4B",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B)",
       "area_sq_mi": 0.272
     },
     "R316_1": {
@@ -5797,16 +5797,16 @@
     },
     "R321_1B": {
       "ward": "Ward 3",
-      "neighborhoods": "Van Ness, Cleveland Park, Woodley Park",
-      "ancs": "ANC 3C, 3F, 3A",
-      "area_desc": "Ward 3 \u2022 Van Ness, Cleveland Park, Woodley Park (ANC 3C, 3F, 3A)",
+      "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.921
     },
     "R319_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3/4G, 3F)",
       "area_sq_mi": 0.403
     },
     "R409_1B": {
@@ -5840,15 +5840,15 @@
     "R813_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8E, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8E, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C, 8E)",
       "area_sq_mi": 0.564
     },
     "R816_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.498
     },
     "R712_5A": {
@@ -5889,8 +5889,8 @@
     "R711_5B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7B",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7B)",
+      "ancs": "ANC 7B, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7E)",
       "area_sq_mi": 0.351
     },
     "R716_5A": {
@@ -5903,15 +5903,15 @@
     "R815_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.682
     },
     "R812_5": {
       "ward": "Ward 8",
-      "neighborhoods": "Woodland, Garfield Heights, Knox Hill/Buena Vista",
-      "ancs": "ANC 8B, 8E, 8C",
-      "area_desc": "Ward 8 \u2022 Woodland, Garfield Heights, Knox Hill/Buena Vista (ANC 8B, 8E, 8C)",
+      "neighborhoods": "Douglas, Shipley Terrace, Woodland/Fort Stanton",
+      "ancs": "ANC 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace, Woodland/Fort Stanton (ANC 8B, 8C, 8E)",
       "area_sq_mi": 0.704
     },
     "R715_5A": {
@@ -5944,9 +5944,9 @@
     },
     "R621_1": {
       "ward": "Ward 6",
-      "neighborhoods": "Lincoln Park, Capitol Hill, Union Station",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Lincoln Park, Capitol Hill, Union Station (ANC 6B, 6A)",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B)",
       "area_sq_mi": 0.122
     },
     "R615_1": {
@@ -5994,8 +5994,8 @@
     "R113_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.143
     },
     "R108_2": {
@@ -6008,8 +6008,8 @@
     "R209_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2B, 2F, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.242
     },
     "R207_2": {
@@ -6022,8 +6022,8 @@
     "R208_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2F, 2G, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2F, 2G, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.321
     },
     "R109_2": {
@@ -6050,36 +6050,36 @@
     "R111_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A)",
+      "ancs": "ANC 1A, 1B",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B)",
       "area_sq_mi": 0.209
     },
     "R112_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A)",
+      "ancs": "ANC 1A, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "area_sq_mi": 0.141
     },
     "R616_4": {
       "ward": "Ward 6",
-      "neighborhoods": "Stanton Park, Union Station, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Stanton Park, Union Station, Kingman Park (ANC 6C, 6A)",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.109
     },
     "R617_4": {
       "ward": "Ward 6",
-      "neighborhoods": "Near Northeast, Union Station, Stanton Park",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 6C",
-      "area_desc": "Ward 6 \u2022 Near Northeast, Union Station, Stanton Park (ANC 6C)",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C)",
       "area_sq_mi": 0.11
     },
     "R618_4": {
       "ward": "Ward 7 / Ward 6",
-      "neighborhoods": "Kingman Park, Union Station, Stanton Park",
-      "ancs": "ANC 7D, 6A, 5D",
-      "area_desc": "Ward 7 / Ward 6 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.168
     },
     "R614_4": {
@@ -6120,15 +6120,15 @@
     "R107_5": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C)",
+      "ancs": "ANC 1C, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2B)",
       "area_sq_mi": 0.447
     },
     "R208_5": {
       "ward": "Ward 2",
       "neighborhoods": "Georgetown, Burleith/Hillandale, West End",
-      "ancs": "ANC 2E, 2A, 2B, 2D",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2E, 2A, 2B, 2D)",
+      "ancs": "ANC 2A, 2B, 2D, 2E",
+      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2A, 2B, 2D, 2E)",
       "area_sq_mi": 0.254
     },
     "R209_5": {
@@ -6139,45 +6139,45 @@
       "area_sq_mi": 0.179
     },
     "RSP10_1": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 6 / Ward 3",
+      "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
+      "ancs": "ANC 3/4G, 3C, 3E, 6A, 6B, 6D",
+      "area_desc": "Ward 6 / Ward 3 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 3/4G, 3C, 3E, 6A, 6B, 6D)",
       "area_sq_mi": 0.049
     },
     "RSP21_2": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 1 / Ward 6 / Ward 5",
+      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
+      "ancs": "ANC 1A, 1B, 1E, 5C, 5E, 6B",
+      "area_desc": "Ward 1 / Ward 6 / Ward 5 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E, 5C, 5E, 6B)",
       "area_sq_mi": 0.042
     },
     "RSP20_2": {
       "ward": "Ward 1 / Ward 2",
-      "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1A, 1D, 2B",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
+      "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Columbia Heights",
+      "ancs": "ANC 1A, 1B, 1D, 1E, 2B, 2F",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Columbia Heights (ANC 1A, 1B, 1D, 1E, 2B, 2F)",
       "area_sq_mi": 0.048
     },
     "RSP50_5": {
-      "ward": "District-Wide",
-      "neighborhoods": "Residential Corridor",
-      "ancs": "",
-      "area_desc": "District-Wide \u2022 Residential Corridor",
+      "ward": "Ward 2 / Ward 1 / Ward 3",
+      "neighborhoods": "Georgetown, Burleith/Hillandale, Dupont Circle",
+      "ancs": "ANC 1C, 2B, 2D, 2E, 3B, 8A",
+      "area_desc": "Ward 2 / Ward 1 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Dupont Circle (ANC 1C, 2B, 2D, 2E, 3B, 8A)",
       "area_sq_mi": 0.092
     },
     "RSP40_4": {
-      "ward": "Ward 4",
-      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C)",
+      "ward": "Ward 6 / Ward 4 / Ward 7",
+      "neighborhoods": "Union Station, Stanton Park, Kingman Park",
+      "ancs": "ANC 4C, 6A, 6C, 7D",
+      "area_desc": "Ward 6 / Ward 4 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 4C, 6A, 6C, 7D)",
       "area_sq_mi": 0.028
     },
     "RSP30_3": {
-      "ward": "Ward 5 / Ward 4",
-      "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5F, 4C",
-      "area_desc": "Ward 5 / Ward 4 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F, 4C)",
+      "ward": "Ward 4 / Ward 5",
+      "neighborhoods": "Brightwood Park, Crestwood, Petworth",
+      "ancs": "ANC 4C, 4E, 5E, 5F",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4E, 5E, 5F)",
       "area_sq_mi": 0.042
     },
     "103_4": {
@@ -6197,8 +6197,8 @@
     "107_5": {
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
-      "ancs": "ANC 2B, 1C",
-      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 2B, 1C)",
+      "ancs": "ANC 1C, 2B",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1C, 2B)",
       "area_sq_mi": 0.447
     },
     "108_2": {
@@ -6225,22 +6225,22 @@
     "111_2": {
       "ward": "Ward 1",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
-      "ancs": "ANC 1B, 1A",
-      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1A)",
+      "ancs": "ANC 1A, 1B",
+      "area_desc": "Ward 1 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1A, 1B)",
       "area_sq_mi": 0.209
     },
     "112_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A)",
+      "ancs": "ANC 1A, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "area_sq_mi": 0.141
     },
     "113_2": {
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
-      "ancs": "ANC 1E, 1A, 1B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1E, 1A, 1B)",
+      "ancs": "ANC 1A, 1B, 1E",
+      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1E)",
       "area_sq_mi": 0.143
     },
     "207_2": {
@@ -6281,22 +6281,22 @@
     "208_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Howard University",
-      "ancs": "ANC 2F, 2G, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 2F, 2G, 1B)",
+      "ancs": "ANC 1B, 2F, 2G",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Howard University (ANC 1B, 2F, 2G)",
       "area_sq_mi": 0.321
     },
     "208_5": {
       "ward": "Ward 2",
       "neighborhoods": "Georgetown, Burleith/Hillandale, West End",
-      "ancs": "ANC 2E, 2A, 2B, 2D",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2E, 2A, 2B, 2D)",
+      "ancs": "ANC 2A, 2B, 2D, 2E",
+      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, West End (ANC 2A, 2B, 2D, 2E)",
       "area_sq_mi": 0.254
     },
     "209_2": {
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Shaw",
-      "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 2B, 2F, 1B)",
+      "ancs": "ANC 1B, 2B, 2F",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Shaw (ANC 1B, 2B, 2F)",
       "area_sq_mi": 0.242
     },
     "R209_5A": {
@@ -6386,15 +6386,15 @@
     "R318_1A": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.294
     },
     "318_1A": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "ancs": "ANC 3/4G, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "area_sq_mi": 0.294
     },
     "R318_1B": {
@@ -6421,8 +6421,8 @@
     "319_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3/4G",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3/4G)",
+      "ancs": "ANC 3/4G, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3/4G, 3F)",
       "area_sq_mi": 0.403
     },
     "319_4": {
@@ -6449,36 +6449,36 @@
     "R321_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3C",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3C)",
+      "ancs": "ANC 3C, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3C, 3F)",
       "area_sq_mi": 0.39
     },
     "321_1": {
       "ward": "Ward 3",
       "neighborhoods": "North Cleveland Park, Forest Hills, Van Ness",
-      "ancs": "ANC 3F, 3C",
-      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F, 3C)",
+      "ancs": "ANC 3C, 3F",
+      "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3C, 3F)",
       "area_sq_mi": 0.39
     },
     "321_4": {
       "ward": "Ward 3",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
-      "ancs": "ANC 3E, 3A",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3A)",
+      "ancs": "ANC 3A, 3E",
+      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "area_sq_mi": 0.39
     },
     "R322_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 3F",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 3F)",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.285
     },
     "322_1": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A, 3F",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A, 3F)",
+      "ancs": "ANC 3A, 3C, 3F",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C, 3F)",
       "area_sq_mi": 0.285
     },
     "322_4": {
@@ -6519,8 +6519,8 @@
     "326_4A": {
       "ward": "Ward 3",
       "neighborhoods": "Cathedral Heights, McLean Gardens, Glover Park",
-      "ancs": "ANC 3B, 3A",
-      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3B, 3A)",
+      "ancs": "ANC 3A, 3B",
+      "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B)",
       "area_sq_mi": 0.211
     },
     "326_4B": {
@@ -6533,29 +6533,29 @@
     "R327_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.52
     },
     "327_4": {
       "ward": "Ward 3",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 3A",
-      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 3A)",
+      "ancs": "ANC 3A, 3C",
+      "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "area_sq_mi": 0.52
     },
     "R328_4": {
       "ward": "Ward 3 / Ward 1",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 1D",
-      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 1D)",
+      "ancs": "ANC 1D, 3C",
+      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 1D, 3C)",
       "area_sq_mi": 0.67
     },
     "328_4": {
       "ward": "Ward 3 / Ward 1",
       "neighborhoods": "Cleveland Park, Woodley Park, Massachusetts Avenue Heights",
-      "ancs": "ANC 3C, 1D",
-      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3C, 1D)",
+      "ancs": "ANC 1D, 3C",
+      "area_desc": "Ward 3 / Ward 1 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 1D, 3C)",
       "area_sq_mi": 0.67
     },
     "R329_4A": {
@@ -6610,8 +6610,8 @@
     "404_4B": {
       "ward": "Ward 4 / Ward 1",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4C, 1D",
-      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4C, 1D)",
+      "ancs": "ANC 1D, 4C, 4E",
+      "area_desc": "Ward 4 / Ward 1 \u2022 Brightwood Park, Crestwood, Petworth (ANC 1D, 4C, 4E)",
       "area_sq_mi": 0.177
     },
     "405_4": {
@@ -6638,8 +6638,8 @@
     "408_1": {
       "ward": "Ward 4",
       "neighborhoods": "Takoma, Brightwood, Manor Park",
-      "ancs": "ANC 4B, 4A",
-      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B, 4A)",
+      "ancs": "ANC 4A, 4B",
+      "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B)",
       "area_sq_mi": 0.272
     },
     "409_1A": {
@@ -6680,8 +6680,8 @@
     "418_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4D, 4C",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4C)",
+      "ancs": "ANC 4C, 4D",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "area_sq_mi": 0.162
     },
     "419_3A": {
@@ -6701,8 +6701,8 @@
     "420_3": {
       "ward": "Ward 4",
       "neighborhoods": "Brightwood Park, Crestwood, Petworth",
-      "ancs": "ANC 4E, 4A, 4D, 4B",
-      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E, 4A, 4D, 4B)",
+      "ancs": "ANC 4A, 4B, 4D, 4E",
+      "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4A, 4B, 4D, 4E)",
       "area_sq_mi": 0.497
     },
     "R421_3A": {
@@ -6750,22 +6750,22 @@
     "424_3": {
       "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Lamont Riggs, Queens Chapel, Fort Totten",
-      "ancs": "ANC 4D, 5A, 4B",
-      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4D, 5A, 4B)",
+      "ancs": "ANC 4B, 4D, 5A",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R508_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.417
     },
     "508_2": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5C, 5B",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5C, 5B)",
+      "ancs": "ANC 5B, 5C",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5C)",
       "area_sq_mi": 0.417
     },
     "509_2": {
@@ -6841,8 +6841,8 @@
     "520_3B": {
       "ward": "Ward 5",
       "neighborhoods": "North Michigan Park, Michigan Park, University Heights",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B)",
       "area_sq_mi": 0.396
     },
     "521_3": {
@@ -6855,8 +6855,8 @@
     "522_3": {
       "ward": "Ward 5",
       "neighborhoods": "Woodridge, Fort Lincoln, Gateway",
-      "ancs": "ANC 5B, 5A",
-      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5A)",
+      "ancs": "ANC 5A, 5B",
+      "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5A, 5B)",
       "area_sq_mi": 0.407
     },
     "523_3": {
@@ -6897,8 +6897,8 @@
     "526_3B": {
       "ward": "Ward 5",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 5F, 1B",
-      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F, 1B)",
+      "ancs": "ANC 1B, 5E, 5F",
+      "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 1B, 5E, 5F)",
       "area_sq_mi": 0.153
     },
     "R527_3A": {
@@ -6918,85 +6918,85 @@
     "R527_3B": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.205
     },
     "527_3B": {
       "ward": "Ward 5 / Ward 2",
       "neighborhoods": "Edgewood, Bloomingdale, Truxton Circle",
-      "ancs": "ANC 5E, 2G",
-      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 2G)",
+      "ancs": "ANC 2G, 5E",
+      "area_desc": "Ward 5 / Ward 2 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 2G, 5E)",
       "area_sq_mi": 0.205
     },
     "R604_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.153
     },
     "604_2": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "ancs": "ANC 6B, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 7D)",
       "area_sq_mi": 0.153
     },
     "R611_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A)",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B)",
       "area_sq_mi": 0.18
     },
     "611_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
-      "ancs": "ANC 6B, 6A",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B, 6A)",
+      "ancs": "ANC 6A, 6B",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B)",
       "area_sq_mi": 0.18
     },
     "R611_4": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.21
     },
     "611_4": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.21
     },
     "R612_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.15
     },
     "612_1": {
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
-      "ancs": "ANC 6B, 6A, 6C",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6B, 6A, 6C)",
+      "ancs": "ANC 6A, 6B, 6C",
+      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 6A, 6B, 6C)",
       "area_sq_mi": 0.15
     },
     "R612_4": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 6A",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 6A)",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.18
     },
     "612_4": {
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 7D, 6A",
-      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 6A)",
+      "ancs": "ANC 6A, 7D",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.18
     },
     "613_1": {
@@ -7023,15 +7023,15 @@
     "R613_4B": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.174
     },
     "613_4B": {
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
-      "ancs": "ANC 6C, 6A",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C, 6A)",
+      "ancs": "ANC 6A, 6C",
+      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "area_sq_mi": 0.174
     },
     "614_1": {
@@ -7093,15 +7093,15 @@
     "711_5B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7E, 7B",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E, 7B)",
+      "ancs": "ANC 7B, 7E",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7E)",
       "area_sq_mi": 0.351
     },
     "712_2A": {
       "ward": "Ward 7",
       "neighborhoods": "Eastland Gardens, Kenilworth, Mayfair",
-      "ancs": "ANC 7D, 7C",
-      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7D, 7C)",
+      "ancs": "ANC 7C, 7D",
+      "area_desc": "Ward 7 \u2022 Eastland Gardens, Kenilworth, Mayfair (ANC 7C, 7D)",
       "area_sq_mi": 0.299
     },
     "712_2B": {
@@ -7163,8 +7163,8 @@
     "714_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Capitol View, Marshall Heights, Benning Heights",
-      "ancs": "ANC 7C, 7F, 7E",
-      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7F, 7E)",
+      "ancs": "ANC 7C, 7E, 7F",
+      "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7C, 7E, 7F)",
       "area_sq_mi": 0.263
     },
     "R714_5": {
@@ -7191,8 +7191,8 @@
     "715_2B": {
       "ward": "Ward 7",
       "neighborhoods": "Mayfair, Hillbrook, Mahaning Heights",
-      "ancs": "ANC 7F, 7C",
-      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7F, 7C)",
+      "ancs": "ANC 7C, 7F",
+      "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "area_sq_mi": 0.203
     },
     "715_5A": {
@@ -7226,8 +7226,8 @@
     "813_5": {
       "ward": "Ward 8",
       "neighborhoods": "Sheridan, Barry Farm, Buena Vista",
-      "ancs": "ANC 8B, 8E, 8A, 8C",
-      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8B, 8E, 8A, 8C)",
+      "ancs": "ANC 8A, 8B, 8C, 8E",
+      "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C, 8E)",
       "area_sq_mi": 0.564
     },
     "814_5A": {
@@ -7247,15 +7247,15 @@
     "815_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8D, 8C",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8C)",
+      "ancs": "ANC 8C, 8D",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D)",
       "area_sq_mi": 0.682
     },
     "816_5": {
       "ward": "Ward 8",
       "neighborhoods": "Congress Heights, Bellevue, Washington Highlands",
-      "ancs": "ANC 8E, 8D",
-      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E, 8D)",
+      "ancs": "ANC 8D, 8E",
+      "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8D, 8E)",
       "area_sq_mi": 0.498
     }
   }

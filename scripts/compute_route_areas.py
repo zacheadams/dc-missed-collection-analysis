@@ -87,14 +87,26 @@ def get_bbox(polys):
                 if y > max_y: max_y = y
     return (min_x, min_y, max_x, max_y)
 
+def anc_sort_key(anc):
+    """
+    Sort key for ascending numerical and alphabetical ordering of DC ANCs.
+    e.g. 1A < 1B < ... < 2A < 2B < ... < 3F < 3/4G < 4A ... < 8F
+    """
+    anc = anc.strip().replace('ANC', '').strip()
+    if not anc:
+        return (99, '', '')
+    if anc.startswith('3/4G'):
+        return (3, '4G', '')
+    m = re.match(r'^(\d+)([A-Z]+)?(.*)$', anc)
+    if m:
+        return (int(m.group(1)), m.group(2) or '', m.group(3) or '')
+    return (99, anc, '')
+
 def merge_line_props(props_list):
     """
     Merge spatial properties from multiple line route runs (e.g. 101_2 and 101_4).
+    Ensures ANCs are sorted in ascending numerical and then alphabetical order.
     """
-    if len(props_list) == 1:
-        p = props_list[0]
-        return p['ward'], p['neighborhoods'], p['ancs'], p['area_desc']
-
     # Collect unique wards in order
     wards = []
     for p in props_list:
@@ -103,15 +115,16 @@ def merge_line_props(props_list):
                 wards.append(w)
     ward_str = ' / '.join([f'Ward {w}' for w in sorted(wards)]) if wards else 'District-Wide'
 
-    # Collect unique ANCs in order
-    ancs = []
+    # Collect unique ANCs and sort in ascending numerical then alphabetical order
+    raw_ancs = []
     for p in props_list:
-        raw_ancs = p.get('ancs', '').replace('ANC', '').split(',')
-        for a in raw_ancs:
+        parts = p.get('ancs', '').replace('ANC', '').split(',')
+        for a in parts:
             a = a.strip()
-            if a and a not in ancs:
-                ancs.append(a)
-    ancs_str = 'ANC ' + ', '.join(ancs[:4]) if ancs else ''
+            if a and a not in raw_ancs:
+                raw_ancs.append(a)
+    sorted_ancs = sorted(raw_ancs, key=anc_sort_key)
+    ancs_str = 'ANC ' + ', '.join(sorted_ancs) if sorted_ancs else ''
 
     # Collect unique neighborhoods in order
     nbhs = []
@@ -186,50 +199,70 @@ def compute_route_areas():
         all_polys = []
         for f in feat_list:
             all_polys.extend(get_poly_rings_list(f['geometry']))
-        bbox = get_bbox(all_polys)
-
-        contained_nbhs = []
-        for np in nbh_pts:
-            nx, ny = np['coord']
-            if bbox[0] <= nx <= bbox[2] and bbox[1] <= ny <= bbox[3]:
-                if any(is_point_in_poly(nx, ny, p) for p in all_polys):
-                    contained_nbhs.append(np['name'])
 
         grid_clusters = Counter()
         grid_ancs = Counter()
         grid_wards = Counter()
 
-        steps = 14
-        for ix in range(steps):
-            gx = bbox[0] + (bbox[2] - bbox[0]) * (ix + 0.5) / steps
-            for iy in range(steps):
-                gy = bbox[1] + (bbox[3] - bbox[1]) * (iy + 0.5) / steps
-                if any(is_point_in_poly(gx, gy, p) for p in all_polys):
-                    for c in clusters:
-                        if c['bbox'][0] <= gx <= c['bbox'][2] and c['bbox'][1] <= gy <= c['bbox'][3]:
-                            if any(is_point_in_poly(gx, gy, cp) for cp in c['polys']):
-                                for part in c['name'].split(','):
-                                    p_clean = part.strip()
-                                    if p_clean: grid_clusters[p_clean] += 1
-                    for s in smds:
-                        if s['bbox'][0] <= gx <= s['bbox'][2] and s['bbox'][1] <= gy <= s['bbox'][3]:
-                            if any(is_point_in_poly(gx, gy, sp) for sp in s['polys']):
-                                grid_ancs[s['anc_id']] += 1
-                    for w in wards:
-                        if w['bbox'][0] <= gx <= w['bbox'][2] and w['bbox'][1] <= gy <= w['bbox'][3]:
-                            if any(is_point_in_poly(gx, gy, wp) for wp in w['polys']):
-                                grid_wards[str(w['ward'])] += 1
+        for p in all_polys:
+            p_box = get_bbox([p])
+            p_steps = 5
+            sampled_inside = 0
+            for ix in range(p_steps):
+                gx = p_box[0] + (p_box[2] - p_box[0]) * (ix + 0.5) / p_steps
+                for iy in range(p_steps):
+                    gy = p_box[1] + (p_box[3] - p_box[1]) * (iy + 0.5) / p_steps
+                    if is_point_in_poly(gx, gy, p):
+                        sampled_inside += 1
+                        for s in smds:
+                            if s['bbox'][0] <= gx <= s['bbox'][2] and s['bbox'][1] <= gy <= s['bbox'][3]:
+                                if any(is_point_in_poly(gx, gy, sp) for sp in s['polys']):
+                                    grid_ancs[s['anc_id']] += 1
+                                    break
+                        for w in wards:
+                            if w['bbox'][0] <= gx <= w['bbox'][2] and w['bbox'][1] <= gy <= w['bbox'][3]:
+                                if any(is_point_in_poly(gx, gy, wp) for wp in w['polys']):
+                                    grid_wards[str(w['ward'])] += 1
+                                    break
+                        for c in clusters:
+                            if c['bbox'][0] <= gx <= c['bbox'][2] and c['bbox'][1] <= gy <= c['bbox'][3]:
+                                if any(is_point_in_poly(gx, gy, cp) for cp in c['polys']):
+                                    for part in c['name'].split(','):
+                                        p_clean = part.strip()
+                                        if p_clean: grid_clusters[p_clean] += 1
+                                    break
+            # Fallback for very small polygons: sample centroid or first vertex
+            if sampled_inside == 0:
+                ring = p[0]
+                cx = sum(pt[0] for pt in ring) / len(ring)
+                cy = sum(pt[1] for pt in ring) / len(ring)
+                test_pt = (cx, cy) if is_point_in_poly(cx, cy, p) else ring[0]
+                for s in smds:
+                    if s['bbox'][0] <= test_pt[0] <= s['bbox'][2] and s['bbox'][1] <= test_pt[1] <= s['bbox'][3]:
+                        if any(is_point_in_poly(test_pt[0], test_pt[1], sp) for sp in s['polys']):
+                            grid_ancs[s['anc_id']] += 1
+                            break
+                for w in wards:
+                    if w['bbox'][0] <= test_pt[0] <= w['bbox'][2] and w['bbox'][1] <= test_pt[1] <= w['bbox'][3]:
+                        if any(is_point_in_poly(test_pt[0], test_pt[1], wp) for wp in w['polys']):
+                            grid_wards[str(w['ward'])] += 1
+                            break
+                for c in clusters:
+                    if c['bbox'][0] <= test_pt[0] <= c['bbox'][2] and c['bbox'][1] <= test_pt[1] <= c['bbox'][3]:
+                        if any(is_point_in_poly(test_pt[0], test_pt[1], cp) for cp in c['polys']):
+                            for part in c['name'].split(','):
+                                p_clean = part.strip()
+                                if p_clean: grid_clusters[p_clean] += 1
+                            break
 
-        final_nbhs = []
-        for n in contained_nbhs:
-            if n not in final_nbhs: final_nbhs.append(n)
-        for n, count in grid_clusters.most_common(5):
-            if n not in final_nbhs and len(final_nbhs) < 4:
-                final_nbhs.append(n)
+        total_anc_hits = sum(grid_ancs.values())
+        raw_top = [a for a, count in grid_ancs.most_common() if count >= 5 or (total_anc_hits > 0 and count / total_anc_hits >= 0.05)]
+        if not raw_top and grid_ancs:
+            raw_top = [grid_ancs.most_common(1)[0][0]]
+        sorted_ancs = sorted(raw_top[:6], key=anc_sort_key)
 
-        top_ancs = [a[0] for a in grid_ancs.most_common(3)]
         anc_wards = set()
-        for a in top_ancs:
+        for a in sorted_ancs:
             if a and a[0].isdigit():
                 anc_wards.add(a[0])
             elif a.startswith('3/4G'):
@@ -240,11 +273,15 @@ def compute_route_areas():
         if len(grid_wards) > 1:
             w1_cnt = grid_wards.most_common(1)[0][1]
             for w, cnt in grid_wards.most_common()[1:]:
-                if cnt > w1_cnt * 0.2 or (cnt > w1_cnt * 0.1 and w in anc_wards):
+                if cnt > w1_cnt * 0.15 or (cnt > w1_cnt * 0.08 and w in anc_wards):
                     top_ward += f" / Ward {w}"
 
-        area_str = ", ".join(final_nbhs[:3]) if final_nbhs else "Residential Corridor"
-        ancs_str = f"ANC {', '.join(top_ancs)}" if top_ancs else ""
+        nbh_names = []
+        for n, _ in grid_clusters.most_common():
+            if n not in nbh_names and len(nbh_names) < 3:
+                nbh_names.append(n)
+        area_str = ", ".join(nbh_names) if nbh_names else "Residential Corridor"
+        ancs_str = f"ANC {', '.join(sorted_ancs)}" if sorted_ancs else ""
         return {
             'ward': top_ward,
             'neighborhoods': area_str,
@@ -269,10 +306,12 @@ def compute_route_areas():
             if pid:
                 trash_poly_to_lines[pid].append(p)
             if rid:
+                raw_a = [x.strip() for x in p.get('ancs', '').replace('ANC', '').split(',') if x.strip()]
+                sorted_a = 'ANC ' + ', '.join(sorted(raw_a, key=anc_sort_key)) if raw_a else ''
                 trash_line_entries[rid] = {
                     'ward': p.get('ward', ''),
                     'neighborhoods': p.get('neighborhoods', ''),
-                    'ancs': p.get('ancs', ''),
+                    'ancs': sorted_a,
                     'area_desc': p.get('area_desc', ''),
                     'area_sq_mi': p.get('area_sq_mi', 0.0)
                 }
@@ -285,10 +324,12 @@ def compute_route_areas():
             p = feat.get('properties', {})
             rid = p.get('route')
             if rid:
+                raw_a = [x.strip() for x in p.get('ancs', '').replace('ANC', '').split(',') if x.strip()]
+                sorted_a = 'ANC ' + ', '.join(sorted(raw_a, key=anc_sort_key)) if raw_a else ''
                 rec_line_entries[rid] = {
                     'ward': p.get('ward', ''),
                     'neighborhoods': p.get('neighborhoods', ''),
-                    'ancs': p.get('ancs', ''),
+                    'ancs': sorted_a,
                     'area_desc': p.get('area_desc', ''),
                     'area_sq_mi': p.get('area_sq_mi', 0.0)
                 }

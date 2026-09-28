@@ -18,6 +18,7 @@ Strictly adheres to:
 import os
 import sys
 import json
+import re
 from collections import defaultdict
 from datetime import datetime
 
@@ -103,13 +104,24 @@ for smd in smds_list:
     anc_dict[anc]['repeat_addrs'] += smd['repeat_addrs']
     anc_dict[anc]['smd_count'] += 1
 
+def anc_sort_key(anc):
+    anc = anc.strip().replace('ANC', '').strip()
+    if not anc:
+        return (99, '', '')
+    if anc.startswith('3/4G'):
+        return (3, '4G', '')
+    m = re.match(r'^(\d+)([A-Z]+)?(.*)$', anc)
+    if m:
+        return (int(m.group(1)), m.group(2) or '', m.group(3) or '')
+    return (99, anc, '')
+
 ancs_list = []
 for anc, d in anc_dict.items():
     d['repeat_rate'] = round(d['repeat_addrs'] / d['unique_addrs'] * 100, 1) if d['unique_addrs'] > 0 else 0.0
     ancs_list.append(d)
 
-# Sort ANCs by Ward, then ANC ID
-ancs_list.sort(key=lambda x: (x['ward'], x['anc_id']))
+# Sort ANCs strictly in ascending numerical then alphabetical order
+ancs_list.sort(key=lambda x: anc_sort_key(x['anc_id']))
 
 # Chart 1 Data: Ward Breakdown (Trash vs Recycling)
 chart_ward_labels = [f"Ward {w}" for w in range(1, 9)]
