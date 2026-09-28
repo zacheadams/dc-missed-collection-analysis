@@ -2394,7 +2394,7 @@
       const wardShare = m ? m.ward_share_pct : (p.ward_share_pct || 0);
 
       document.getElementById('insp-title').innerText = `SMD ${p.smd_id}`;
-      document.getElementById('insp-sub').innerText = `ANC ${p.anc_id} • Ward ${p.ward} (Councilmember: ${WARD_COUNCIL[p.ward] || 'DC Council'})`;
+      document.getElementById('insp-sub').innerText = `Councilmember: ${WARD_COUNCIL[p.ward] || 'DC Council'}`;
       document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
       document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
@@ -2405,23 +2405,10 @@
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
       document.getElementById('insp-details').innerText = `SMD ${p.smd_id} represents ${wardShare}% of Ward ${p.ward}'s total missed collections over the ${periodLabel.toLowerCase()}.`;
 
-      if (centerLatLng) {
-        const tr = findRouteAtLatLng(trashRouteIndex, centerLatLng);
-        const rr = findRouteAtLatLng(recycleRouteIndex, centerLatLng);
-        let rHtml = '';
-        if (tr) {
-          rHtml += `<div class="kw-trash" style="font-size: 11px;">Trash Route: <strong>${tr.route}</strong> (${tr.day})</div>`;
-        }
-        if (rr) {
-          rHtml += `<div class="kw-recycle" style="font-size: 11px; margin-top: 2px;">Recycling Route: <strong>${rr.route}</strong> (${rr.day})</div>`;
-        }
-        if (rHtml) {
-          const rBox = document.getElementById('insp-route-box');
-          rBox.innerHTML = '<div style="font-weight: 700; font-size: 11px; margin-bottom: 4px; text-transform: uppercase;">Assigned DPW Routes:</div>' + rHtml;
-          rBox.style.display = 'block';
-        } else {
-          document.getElementById('insp-route-box').style.display = 'none';
-        }
+      const rBox = document.getElementById('insp-route-box');
+      if (rBox) {
+        rBox.innerHTML = '';
+        rBox.style.display = 'none';
       }
       ensureMobileInspectorOpen();
     }

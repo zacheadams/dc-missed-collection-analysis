@@ -296,6 +296,19 @@ def verify():
                                             outsideHoverShows604 && outsideHoverStyles604 &&
                                             backHoverShowsRsp && backHoverCleared604;
 
+            // Test SMD inspector: selecting SMD 1A01
+            selectHierarchy('1A01');
+            const smdTitle = document.getElementById('insp-title').innerText;
+            const smdSub = document.getElementById('insp-sub').innerText;
+            const rBoxDisplay = document.getElementById('insp-route-box').style.display;
+            const rBoxHtml = document.getElementById('insp-route-box').innerHTML;
+
+            const smdInspectorNoAncWard = !smdSub.includes('ANC') && !smdSub.includes('Ward') && smdSub.includes('Councilmember');
+            const smdInspectorNoRoutes = rBoxDisplay === 'none' && !rBoxHtml.includes('Assigned DPW Routes');
+            const smdInspectorPassed = smdTitle === 'SMD 1A01' && smdInspectorNoAncWard && smdInspectorNoRoutes;
+
+            resetToDefault();
+
             out.innerText = JSON.stringify({
               ic106Has1C2D,
               ic20HasAll,
@@ -311,6 +324,11 @@ def verify():
               multiFeatureSelectPassed,
               rspSelectedCount,
               overlapPrecedencePassed,
+              smdInspectorPassed,
+              smdTitle,
+              smdSub,
+              smdInspectorNoAncWard,
+              smdInspectorNoRoutes,
               findPrefRspCorrect,
               findPref604Correct,
               rsp21SelectedCount,
@@ -364,6 +382,7 @@ def verify():
                 assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
                 assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
                 assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
+                assert results['smdInspectorPassed'], f"Headless Chrome: SMD inspector failed (sub: {results.get('smdSub')}, routeBox: {results.get('smdInspectorNoRoutes')}): {results}"
                 print("PASS: Headless Chrome verification successful!")
             else:
                 print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
