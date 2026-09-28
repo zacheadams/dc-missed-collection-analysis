@@ -113,6 +113,21 @@ Across the 180-day evaluation window (March 24 – September 20, 2026), spatial 
 
 Every route is mapped to its underlying physical DC neighborhoods, Wards, and Advisory Neighborhood Commissions (ANCs) using spatial intersection against official DC GIS boundary layers.
 
+### Route Cartography: Catchment Polygons vs. Street Lines
+
+The application integrates two distinct, complementary spatial views of DPW collection operations:
+
+1. **Route Catchment Polygons (`dc_trash_routes.geojson` & `dc_recycle_routes.geojson`)**:
+   - Official municipal collection zones published by Open Data DC ("Conventional Trash Days" and "Supercan Trash Collection Areas").
+   - These polygons outline the macro catchment areas and service schedules across the city.
+   - **Multi-Part Service Corridors**: Several DPW routes—notably Inner City commercial corridors such as **IC20**, **IC10**, and **IC21**, as well as Outer Ring routes like **OR30**—are officially structured as disjoint `MultiPolygon` geometries. For example, **Trash Route IC20** comprises 23 disjoint polygon fragments covering high-density alleys, commercial avenues, and residential pockets across Georgetown, Dupont Circle, Adams Morgan, Shaw, Logan Circle, and Sheridan-Kalorama. The spatial analytics pipeline samples each individual polygon piece independently, ensuring that all intersected ANCs (`ANC 1B, 1C, 2B, 2D, 2E, 2F`) and Wards (`Ward 2 / Ward 1`) are thoroughly captured and accurately documented.
+2. **Route Street Lines (`dc_trash_routes_lines.geojson` & `dc_recycle_routes_lines.geojson`)**:
+   - Derived directly from DPW's 105,894 residential collection points (`dc_collection_points.geojson`).
+   - Line geometries trace the precise street and alley segments driven by collection vehicles, providing block-level operational granularity.
+   - Street lines help distinguish whether a service disruption represents a single skipped alley or an entire linear corridor bypass.
+
+All lists of Advisory Neighborhood Commissions (ANCs) and Single Member Districts (SMDs) throughout the application—including dropdown selectors, hover tooltips, and inspector panels—are strictly sorted in ascending numerical and alphabetical order (`1A < 1B < ... < 2A < 2B < ... < 3/4G < ... < 8F`).
+
 ### Core Operational Patterns
 
 #### Pattern 1: Extreme Pareto Concentration

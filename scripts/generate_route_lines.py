@@ -87,6 +87,21 @@ def parse_address(addr):
     st_name = ' '.join(st_parts)
     return st_name, block, parity, num
 
+def anc_sort_key(anc):
+    """
+    Sort key for ascending numerical and alphabetical ordering of DC ANCs.
+    e.g. 1A < 1B < ... < 2A < 2B < ... < 3F < 3/4G < 4A ... < 8F
+    """
+    anc = anc.strip().replace('ANC', '').strip()
+    if not anc:
+        return (99, '', '')
+    if anc.startswith('3/4G'):
+        return (3, '4G', '')
+    m = re.match(r'^(\d+)([A-Z]+)?(.*)$', anc)
+    if m:
+        return (int(m.group(1)), m.group(2) or '', m.group(3) or '')
+    return (99, anc, '')
+
 def is_point_in_ring(x, y, ring):
     """Ray-casting algorithm to test if (x, y) is inside a polygon ring."""
     inside = False
@@ -420,7 +435,8 @@ def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
         sig_ancs = [a for a, cnt in anc_counts.most_common() if cnt >= 10 or cnt / total_pts >= 0.05]
         if not sig_ancs and anc_counts:
             sig_ancs = [anc_counts.most_common(1)[0][0]]
-        ancs_str = 'ANC ' + ', '.join(sig_ancs[:4])
+        sig_ancs = sorted(sig_ancs, key=anc_sort_key)
+        ancs_str = 'ANC ' + ', '.join(sig_ancs[:5])
 
         # Neighborhoods: distinct names in frequency order
         top_nbhs = []

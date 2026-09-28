@@ -1390,6 +1390,80 @@ html_page = f'''<!DOCTYPE html>
       return true;
     }}
 
+    // Canonical Sorting for ANCs and SMDs (Ascending Numerical then Alphabetical)
+    function compareAnc(a, b) {{
+      if (!a) return 1;
+      if (!b) return -1;
+      const cleanA = String(a).replace(/^ANC\\s*/i, '').trim();
+      const cleanB = String(b).replace(/^ANC\\s*/i, '').trim();
+      const is34GA = cleanA.startsWith('3/4G');
+      const is34GB = cleanB.startsWith('3/4G');
+      if (is34GA && !is34GB) {{
+        const numB = parseInt(cleanB, 10);
+        return numB <= 3 ? 1 : -1;
+      }}
+      if (!is34GA && is34GB) {{
+        const numA = parseInt(cleanA, 10);
+        return numA <= 3 ? -1 : 1;
+      }}
+      const matchA = cleanA.match(/^(\\d+)([A-Z]+)?(.*)$/);
+      const matchB = cleanB.match(/^(\\d+)([A-Z]+)?(.*)$/);
+      if (matchA && matchB) {{
+        const numA = parseInt(matchA[1], 10);
+        const numB = parseInt(matchB[1], 10);
+        if (numA !== numB) return numA - numB;
+        const letA = matchA[2] || '';
+        const letB = matchB[2] || '';
+        if (letA !== letB) return letA.localeCompare(letB);
+        return (matchA[3] || '').localeCompare(matchB[3] || '');
+      }}
+      return cleanA.localeCompare(cleanB, undefined, {{ numeric: true }});
+    }}
+
+    function compareSmd(a, b) {{
+      if (!a) return 1;
+      if (!b) return -1;
+      const cleanA = String(a).replace(/^SMD\\s*/i, '').trim();
+      const cleanB = String(b).replace(/^SMD\\s*/i, '').trim();
+      const is34GA = cleanA.startsWith('3/4G');
+      const is34GB = cleanB.startsWith('3/4G');
+      if (is34GA && !is34GB) {{
+        const numB = parseInt(cleanB, 10);
+        return numB <= 3 ? 1 : -1;
+      }}
+      if (!is34GA && is34GB) {{
+        const numA = parseInt(cleanA, 10);
+        return numA <= 3 ? -1 : 1;
+      }}
+      if (is34GA && is34GB) {{
+        const numA = parseInt(cleanA.substring(4), 10) || 0;
+        const numB = parseInt(cleanB.substring(4), 10) || 0;
+        return numA - numB;
+      }}
+      const matchA = cleanA.match(/^(\\d+)([A-Z]+)(\\d+)?/);
+      const matchB = cleanB.match(/^(\\d+)([A-Z]+)(\\d+)?/);
+      if (matchA && matchB) {{
+        const numA = parseInt(matchA[1], 10);
+        const numB = parseInt(matchB[1], 10);
+        if (numA !== numB) return numA - numB;
+        const letA = matchA[2] || '';
+        const letB = matchB[2] || '';
+        if (letA !== letB) return letA.localeCompare(letB);
+        const smdNumA = parseInt(matchA[3] || '0', 10);
+        const smdNumB = parseInt(matchB[3] || '0', 10);
+        return smdNumA - smdNumB;
+      }}
+      return cleanA.localeCompare(cleanB, undefined, {{ numeric: true }});
+    }}
+
+    function formatSortedAncs(ancsStr) {{
+      if (!ancsStr) return '';
+      const rawList = ancsStr.replace(/^ANC\\s*/i, '').split(',');
+      const ancs = Array.from(new Set(rawList.map(a => a.trim()).filter(Boolean)));
+      ancs.sort(compareAnc);
+      return ancs.length > 0 ? ('ANC ' + ancs.join(', ')) : '';
+    }}
+
     function buildRouteSpatialIndex() {{
       trashRouteIndex = [];
       MAP_DATA.trash_routes.features.forEach(f => {{
@@ -1772,8 +1846,8 @@ html_page = f'''<!DOCTYPE html>
           const tTot = tStats.total || 0;
           const rTot = rStats.total || 0;
           const combTot = tTot + rTot;
-          const tAncs = tr.ancs || tStats.ancs || '';
-          const rAncs = rr.ancs || rStats.ancs || '';
+          const tAncs = formatSortedAncs(tr.ancs || tStats.ancs || '');
+          const rAncs = formatSortedAncs(rr.ancs || rStats.ancs || '');
           const ancsDisplay = (tAncs && rAncs && tAncs === rAncs) ? tAncs : [tAncs ? `Trash: ${{tAncs}}` : '', rAncs ? `Recycling: ${{rAncs}}` : ''].filter(Boolean).join(' • ');
 
           html = `
@@ -1791,7 +1865,7 @@ html_page = f'''<!DOCTYPE html>
         }} else if (tr) {{
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
           const tTot = tStats.total || 0;
-          const ancs = tr.ancs || tStats.ancs || '';
+          const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
@@ -1807,7 +1881,7 @@ html_page = f'''<!DOCTYPE html>
         }} else if (rr) {{
           const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
           const rTot = rStats.total || 0;
-          const ancs = rr.ancs || rStats.ancs || '';
+          const ancs = formatSortedAncs(rr.ancs || rStats.ancs || '');
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
@@ -1824,7 +1898,7 @@ html_page = f'''<!DOCTYPE html>
       }} else if (trashActive && tr) {{
         const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
         const tTot = tStats.total || 0;
-        const ancs = tr.ancs || tStats.ancs || '';
+        const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
         html = `
           <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
@@ -1840,7 +1914,7 @@ html_page = f'''<!DOCTYPE html>
       }} else if (recActive && rr) {{
         const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
         const rTot = rStats.total || 0;
-        const ancs = rr.ancs || rStats.ancs || '';
+        const ancs = formatSortedAncs(rr.ancs || rStats.ancs || '');
         html = `
           <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
@@ -1934,7 +2008,7 @@ html_page = f'''<!DOCTYPE html>
       const html = `
         <div style="font-weight: 800; font-size: 12px; color: ${{color}};">${{stream}} Route ${{p.route}} (Line)</div>
         <div style="font-size: 11px; color: var(--text-dim);">${{p.area_desc || p.neighborhoods || 'Residential Service Corridor'}}</div>
-        ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{p.ancs}}</strong></div>` : ''}}
+        ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{formatSortedAncs(p.ancs)}}</strong></div>` : ''}}
         <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{sched}} • ${{p.ward || 'DC'}}</div>
         <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{color}}; border-top: 1px solid rgba(${{isTrash ? '220,38,38' : '22,163,74'}},0.25); padding-top: 4px;">
           ${{totalReq}} ${{stream}} Requests (180d)
@@ -2123,7 +2197,7 @@ html_page = f'''<!DOCTYPE html>
         MAP_DATA.smds.features
           .filter(f => f.properties.ward === parseInt(wardVal))
           .map(f => f.properties.anc_id)
-      )).sort();
+      )).sort(compareAnc);
 
       aSel.disabled = false;
       aSel.innerHTML = `<option value="all">All ANCs in Ward ${{wardVal}}</option>` +
@@ -2140,7 +2214,7 @@ html_page = f'''<!DOCTYPE html>
       const smdsInAnc = MAP_DATA.smds.features
         .filter(f => f.properties.anc_id === ancVal)
         .map(f => f.properties.smd_id)
-        .sort();
+        .sort(compareSmd);
 
       sSel.disabled = false;
       sSel.innerHTML = `<option value="all">All SMDs in ANC ${{ancVal}}</option>` +
@@ -2414,7 +2488,7 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-rec').innerText = `${{density}} /sq mi`;
 
       const nbhDesc = (isLine ? (p.neighborhoods || stats.neighborhoods) : (stats.neighborhoods || p.neighborhoods)) || 'Residential Corridor';
-      const ancsDesc = (isLine ? (p.ancs || stats.ancs) : (stats.ancs || p.ancs)) || '';
+      const ancsDesc = formatSortedAncs((isLine ? (p.ancs || stats.ancs) : (stats.ancs || p.ancs)) || '');
       const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
 
       document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days (viewed via ${{geomType}}).`;

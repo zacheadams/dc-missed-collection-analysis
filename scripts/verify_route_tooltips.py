@@ -45,7 +45,16 @@ def verify():
     r107_ra = ra.get('recycle_routes', {}).get('R107_5')
     assert r107_ra, "R107_5 missing from recycle_routes in route_areas.json"
     assert '2B' in r107_ra['ancs'], f"ANC 2B missing from R107_5 in route_areas: {r107_ra['ancs']}"
-    print("PASS: data/route_areas.json verified for IC106, 106_2, and R107_5.")
+
+    # Verify IC20 polygon entry and ascending sorting
+    ic20_ra = ra.get('trash_routes', {}).get('IC20')
+    assert ic20_ra, "IC20 missing from trash_routes in route_areas.json"
+    for anc in ['1B', '1C', '2B', '2D', '2E', '2F']:
+        assert anc in ic20_ra['ancs'], f"ANC {anc} missing from IC20 in route_areas: {ic20_ra['ancs']}"
+    ancs_in_ic20 = [a.strip() for a in ic20_ra['ancs'].replace('ANC', '').split(',') if a.strip()]
+    assert ancs_in_ic20 == ['1B', '1C', '2B', '2D', '2E', '2F'], f"IC20 ANCs incorrect or unsorted: {ancs_in_ic20}"
+
+    print("PASS: data/route_areas.json verified for IC106, 106_2, R107_5, and IC20 (sorted).")
 
     # 2. Verify data/route_180d_stats.json
     rs_path = os.path.join(BASE_DIR, 'data/route_180d_stats.json')
@@ -76,7 +85,16 @@ def verify():
     assert line_106_feat, "106_2 missing from trash_routes_lines features in map_data"
     assert '2B' in line_106_feat['properties']['ancs'], f"ANC 2B missing from 106_2 line properties: {line_106_feat['properties']}"
     assert 'Dupont Circle' in line_106_feat['properties']['neighborhoods'], "Dupont Circle missing from 106_2 line properties"
-    print("PASS: data/dc_map_data_v2.json verified for IC106 and 106_2.")
+
+    # Check IC20 polygon feature in map_data
+    ic20_feat = next((f for f in md['trash_routes']['features'] if f['properties'].get('route_area') == 'IC20'), None)
+    assert ic20_feat, "IC20 missing from trash_routes features in map_data"
+    for anc in ['1B', '1C', '2B', '2D', '2E', '2F']:
+        assert anc in ic20_feat['properties']['ancs'], f"ANC {anc} missing from IC20 in map_data: {ic20_feat['properties']['ancs']}"
+    assert 'Dupont Circle' in ic20_feat['properties']['neighborhoods'], "Dupont Circle missing from IC20 in map_data"
+    assert 'Georgetown' in ic20_feat['properties']['neighborhoods'], "Georgetown missing from IC20 in map_data"
+
+    print("PASS: data/dc_map_data_v2.json verified for IC106, 106_2, and IC20.")
 
     # 4. Verify map.html code structure
     map_html_path = os.path.join(BASE_DIR, 'map.html')
@@ -88,6 +106,11 @@ def verify():
     assert "trashRouteIndex.push({" in html
     assert "ancs: f.properties.ancs" in html
     assert "recycleRouteIndex.push({" in html
+
+    # Check sorting helper functions
+    assert "function compareAnc" in html
+    assert "function compareSmd" in html
+    assert "function formatSortedAncs" in html
 
     # Check ROUTE_STATS has trash_106_2 and trash_IC106
     assert '"trash_IC106":' in html
@@ -109,12 +132,18 @@ def verify():
         assert '2B' in m, f"Embedded 106_2 does not have 2B: {m}"
         assert 'Dupont Circle' in m, f"Embedded 106_2 does not have Dupont Circle: {m}"
 
+    # Check that IC20 properties in embedded map data have all ANCs sorted
+    ic20_matches = [m.group(0) for m in re.finditer(r'\"route_area\":\s*\"IC20\"[^\}]+', html)]
+    for m in ic20_matches:
+        for anc in ['1B', '1C', '2B', '2D', '2E', '2F']:
+            assert anc in m, f"Embedded IC20 does not have {anc}: {m}"
+
     print("PASS: map.html structure and embedded data verified.")
 
     # 5. Headless Chrome DOM & Tooltip Execution Test
     chrome_bin = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
     if os.path.exists(chrome_bin):
-        print("Testing tooltip rendering via Headless Chrome...")
+        print("Testing tooltip rendering and canonical sorting via Headless Chrome...")
         test_script = """
         <script>
         window.addEventListener('DOMContentLoaded', () => {
@@ -122,9 +151,13 @@ def verify():
             const out = document.createElement('div');
             out.id = 'test-results';
             
-            // Check trashRouteIndex for IC106
+            // Check trashRouteIndex for IC106 and IC20
             const ic106 = trashRouteIndex.find(r => r.route === 'IC106');
             const ic106Has2B = ic106 && ic106.ancs && ic106.ancs.includes('2B');
+
+            const ic20 = trashRouteIndex.find(r => r.route === 'IC20');
+            const ic20Expected = ['1B', '1C', '2B', '2D', '2E', '2F'];
+            const ic20HasAll = ic20 && ic20Expected.every(a => ic20.ancs.includes(a));
             
             // Check trash_routes_lines for 106_2
             const line106 = MAP_DATA.trash_routes_lines.features.find(f => f.properties.route === '106_2');
@@ -135,11 +168,28 @@ def verify():
             const statsIC106 = ROUTE_STATS['trash_IC106'];
             const statsHave2B = stats106 && stats106.ancs.includes('2B') && statsIC106 && statsIC106.ancs.includes('2B');
 
+            // Test compareAnc sorting order
+            const testAncs = ['2B', '1A', '3/4G', '1B', '3F', '4A'];
+            testAncs.sort(compareAnc);
+            const expectedAncOrder = ['1A', '1B', '2B', '3F', '3/4G', '4A'];
+            const ancSortCorrect = JSON.stringify(testAncs) === JSON.stringify(expectedAncOrder);
+
+            // Test compareSmd sorting order
+            const testSmds = ['2B01', '1A02', '1A01', '3/4G02', '3/4G01', '4A01'];
+            testSmds.sort(compareSmd);
+            const expectedSmdOrder = ['1A01', '1A02', '2B01', '3/4G01', '3/4G02', '4A01'];
+            const smdSortCorrect = JSON.stringify(testSmds) === JSON.stringify(expectedSmdOrder);
+
             out.innerText = JSON.stringify({
               ic106Has2B,
+              ic20HasAll,
               lineHas2B,
               statsHave2B,
-              ic106_ancs: ic106 ? ic106.ancs : null,
+              ancSortCorrect,
+              smdSortCorrect,
+              sortedAncs: testAncs,
+              sortedSmds: testSmds,
+              ic20_ancs: ic20 ? ic20.ancs : null,
               line106_ancs: line106 ? line106.properties.ancs : null
             });
             document.body.appendChild(out);
@@ -166,8 +216,11 @@ def verify():
                 results = json.loads(m.group(1))
                 print(f"Headless Chrome execution result: {results}")
                 assert results['ic106Has2B'], "Headless Chrome: IC106 missing ANC 2B"
+                assert results['ic20HasAll'], f"Headless Chrome: IC20 missing required ANCs: {results['ic20_ancs']}"
                 assert results['lineHas2B'], "Headless Chrome: line 106_2 missing ANC 2B"
                 assert results['statsHave2B'], "Headless Chrome: ROUTE_STATS missing ANC 2B"
+                assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
+                assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
                 print("PASS: Headless Chrome verification successful!")
             else:
                 print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
