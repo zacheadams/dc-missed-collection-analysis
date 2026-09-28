@@ -21,7 +21,7 @@ import re
 import math
 import time
 import urllib.request
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
@@ -87,6 +87,147 @@ def parse_address(addr):
     st_name = ' '.join(st_parts)
     return st_name, block, parity, num
 
+def is_point_in_ring(x, y, ring):
+    """Ray-casting algorithm to test if (x, y) is inside a polygon ring."""
+    inside = False
+    n = len(ring)
+    for i in range(n):
+        j = (i - 1) % n
+        xi, yi = ring[i]
+        xj, yj = ring[j]
+        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi):
+            inside = not inside
+    return inside
+
+def is_point_in_poly(x, y, poly_rings):
+    """Test if (x, y) is inside a polygon with optional holes."""
+    if not is_point_in_ring(x, y, poly_rings[0]):
+        return False
+    for h in range(1, len(poly_rings)):
+        if is_point_in_ring(x, y, poly_rings[h]):
+            return False
+    return True
+
+def get_poly_rings_list(geom):
+    """Normalize Polygon or MultiPolygon coordinates into a list of polygon ring lists."""
+    t = geom['type']
+    coords = geom['coordinates']
+    if t == 'Polygon':
+        return [coords]
+    elif t == 'MultiPolygon':
+        return coords
+    return []
+
+def get_bbox(polys):
+    """Calculate min_x, min_y, max_x, max_y bounding box for polygon list."""
+    min_x = min_y = 1e9
+    max_x = max_y = -1e9
+    for poly in polys:
+        for ring in poly:
+            for x, y in ring:
+                if x < min_x: min_x = x
+                if x > max_x: max_x = x
+                if y < min_y: min_y = y
+                if y > max_y: max_y = y
+    return (min_x, min_y, max_x, max_y)
+
+def build_spatial_indexes():
+    """Build spatial grid indexes for Wards, SMDs/ANCs, and Neighborhood Clusters."""
+    grid_size = 0.01
+    ward_grid = defaultdict(list)
+    smd_grid = defaultdict(list)
+    clust_grid = defaultdict(list)
+
+    ward_path = os.path.join(DATA_DIR, 'dc_wards.geojson')
+    smd_path = os.path.join(DATA_DIR, 'dc_smds.geojson')
+    clust_path = os.path.join(DATA_DIR, 'dc_neighborhood_clusters.geojson')
+
+    if os.path.exists(ward_path):
+        with open(ward_path, 'r', encoding='utf-8') as f:
+            ward_geo = json.load(f)
+        for f in ward_geo['features']:
+            props = f['properties']
+            polys = get_poly_rings_list(f['geometry'])
+            bbox = get_bbox(polys)
+            item = {'ward': str(props.get('WARD', props.get('NAME', ''))), 'polys': polys, 'bbox': bbox}
+            for gx in range(int(bbox[0]/grid_size), int(bbox[2]/grid_size)+1):
+                for gy in range(int(bbox[1]/grid_size), int(bbox[3]/grid_size)+1):
+                    ward_grid[(gx, gy)].append(item)
+
+    if os.path.exists(smd_path):
+        with open(smd_path, 'r', encoding='utf-8') as f:
+            smd_geo = json.load(f)
+        for f in smd_geo['features']:
+            props = f['properties']
+            polys = get_poly_rings_list(f['geometry'])
+            bbox = get_bbox(polys)
+            item = {'anc_id': props['ANC_ID'], 'smd_id': props.get('SMD_ID'), 'polys': polys, 'bbox': bbox}
+            for gx in range(int(bbox[0]/grid_size), int(bbox[2]/grid_size)+1):
+                for gy in range(int(bbox[1]/grid_size), int(bbox[3]/grid_size)+1):
+                    smd_grid[(gx, gy)].append(item)
+
+    if os.path.exists(clust_path):
+        with open(clust_path, 'r', encoding='utf-8') as f:
+            clust_geo = json.load(f)
+        for f in clust_geo['features']:
+            props = f['properties']
+            polys = get_poly_rings_list(f['geometry'])
+            bbox = get_bbox(polys)
+            item = {'names': [p.strip() for p in props.get('NBH_NAMES', '').split(',') if p.strip()], 'polys': polys, 'bbox': bbox}
+            for gx in range(int(bbox[0]/grid_size), int(bbox[2]/grid_size)+1):
+                for gy in range(int(bbox[1]/grid_size), int(bbox[3]/grid_size)+1):
+                    clust_grid[(gx, gy)].append(item)
+
+    return grid_size, ward_grid, smd_grid, clust_grid
+
+def annotate_collection_points(data, grid_size, ward_grid, smd_grid, clust_grid):
+    """Spatially index all collection points to their Ward, ANC, and Neighborhoods."""
+    print("Classifying collection points against spatial boundaries...")
+    t0 = time.time()
+    for f in data.get('features', []):
+        c = f['geometry']['coordinates']
+        x, y = c[0], c[1]
+        cell = (int(x / grid_size), int(y / grid_size))
+
+        pt_ward = None
+        for item in ward_grid.get(cell, []):
+            bb = item['bbox']
+            if bb[0] <= x <= bb[2] and bb[1] <= y <= bb[3]:
+                if any(is_point_in_poly(x, y, p) for p in item['polys']):
+                    pt_ward = item['ward']
+                    break
+
+        pt_anc = None
+        for item in smd_grid.get(cell, []):
+            bb = item['bbox']
+            if bb[0] <= x <= bb[2] and bb[1] <= y <= bb[3]:
+                if any(is_point_in_poly(x, y, p) for p in item['polys']):
+                    pt_anc = item['anc_id']
+                    break
+
+        pt_clusters = []
+        for item in clust_grid.get(cell, []):
+            bb = item['bbox']
+            if bb[0] <= x <= bb[2] and bb[1] <= y <= bb[3]:
+                if any(is_point_in_poly(x, y, p) for p in item['polys']):
+                    pt_clusters.extend(item['names'])
+                    break
+
+        # Fallback to feature properties if point fell on outer boundary edge
+        if not pt_ward:
+            raw_w = f['properties'].get('WARD')
+            if raw_w:
+                m = re.search(r'\d+', str(raw_w))
+                if m:
+                    pt_ward = m.group(0)
+
+        f['_spatial'] = {
+            'ward': pt_ward,
+            'anc_id': pt_anc,
+            'clusters': pt_clusters
+        }
+    print(f"Annotated {len(data.get('features', []))} collection points in {time.time() - t0:.2f}s")
+
 def get_collection_points():
     """Load or download DPW collection points GeoJSON."""
     if os.path.exists(LOCAL_POINTS_PATH):
@@ -97,7 +238,6 @@ def get_collection_points():
         print(f"Loading collection points from cache {SCRATCH_POINTS_PATH}...")
         with open(SCRATCH_POINTS_PATH, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        # Cache to data directory
         try:
             with open(LOCAL_POINTS_PATH, 'w', encoding='utf-8') as f:
                 json.dump(data, f)
@@ -115,10 +255,9 @@ def get_collection_points():
 
 def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
     """
-    Construct MultiLineString features for each route with full operational properties.
+    Construct MultiLineString features for each route with accurate spatial boundaries and enumeration.
     """
     routes = defaultdict(list)
-    route_meta = {}
 
     for f in data.get('features', []):
         p = f.get('properties', {})
@@ -127,13 +266,6 @@ def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
             continue
         r_str = str(r).strip()
         routes[r_str].append(f)
-        if r_str not in route_meta:
-            route_meta[r_str] = {
-                'route': r_str,
-                'stream': stream_name,
-                'day': p.get('DAY') or 'Scheduled',
-                'ward': p.get('WARD') or 'Citywide'
-            }
 
     features = []
 
@@ -204,10 +336,9 @@ def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
         else:
             bbox_area_sq_mi = 0.0
 
-        props = dict(route_meta[r_id])
-        props['point_count'] = len(pts_list)
-        props['segment_count'] = len(cleaned_lines)
-        props['route_area'] = r_id
+        # Determine operational schedule day from collection points
+        day_counts = Counter(f['properties'].get('DAY') for f in pts_list if f['properties'].get('DAY'))
+        best_day = day_counts.most_common(1)[0][0] if day_counts else 'Scheduled'
 
         # Match to existing route stats and catchment areas
         stat_match = None
@@ -253,35 +384,74 @@ def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
                         area_match = v
                         break
 
-        # Populate operational stats
-        if stat_match:
-            props['total'] = stat_match.get('total', 0)
-            props['trash'] = props['total'] if stream_name == 'Trash' else 0
-            props['recycling'] = props['total'] if stream_name == 'Recycling' else 0
-            props['repeat_rate'] = stat_match.get('repeat_rate', 0.0)
-            props['unique_addrs'] = stat_match.get('unique_addrs', 0)
-            props['polygon_route_id'] = stat_match.get('route_id')
-        else:
-            props['total'] = 0
-            props['trash'] = 0
-            props['recycling'] = 0
-            props['repeat_rate'] = 0.0
-            props['unique_addrs'] = 0
-            props['polygon_route_id'] = None
+        # Compute spatial boundary presence from actual collection points
+        ward_counts = Counter()
+        anc_counts = Counter()
+        cluster_counts = Counter()
 
-        if area_match:
-            props['ward'] = area_match.get('ward') or props['ward']
-            props['neighborhoods'] = area_match.get('neighborhoods', '')
-            props['ancs'] = area_match.get('ancs', '')
-            props['area_desc'] = area_match.get('area_desc', '')
-            props['area_sq_mi'] = area_match.get('area_sq_mi') or bbox_area_sq_mi
-        else:
-            props['area_sq_mi'] = bbox_area_sq_mi
-            props['neighborhoods'] = 'Residential Service Corridor'
-            props['ancs'] = ''
-            props['area_desc'] = f"{props['ward']} Corridor ({props['point_count']} collection points)"
+        for f in pts_list:
+            sp = f.get('_spatial', {})
+            if sp.get('ward'):
+                ward_counts[sp['ward']] += 1
+            if sp.get('anc_id'):
+                anc_counts[sp['anc_id']] += 1
+            for cl in sp.get('clusters', []):
+                cluster_counts[cl] += 1
 
-        # Compute density (requests per square mile)
+        total_pts = len(pts_list)
+        # Significant wards: at least 15 collection points or >= 5% of route points
+        sig_wards = [w for w, cnt in ward_counts.most_common() if cnt >= 15 or cnt / total_pts >= 0.05]
+        if not sig_wards and ward_counts:
+            sig_wards = [ward_counts.most_common(1)[0][0]]
+
+        if len(sig_wards) > 1:
+            m = r_id.replace('R', '').split('_')[0]
+            root_w = m[0] if m and m[0].isdigit() else None
+            if root_w in sig_wards:
+                sorted_wards = [root_w] + [w for w in sorted(sig_wards) if w != root_w]
+            else:
+                sorted_wards = [w for w, _ in ward_counts.most_common() if w in sig_wards]
+        else:
+            sorted_wards = sig_wards
+
+        ward_str = ' / '.join([f'Ward {w}' for w in sorted_wards])
+
+        # Significant ANCs: at least 10 collection points or >= 5% of route points
+        sig_ancs = [a for a, cnt in anc_counts.most_common() if cnt >= 10 or cnt / total_pts >= 0.05]
+        if not sig_ancs and anc_counts:
+            sig_ancs = [anc_counts.most_common(1)[0][0]]
+        ancs_str = 'ANC ' + ', '.join(sig_ancs[:4])
+
+        # Neighborhoods: distinct names in frequency order
+        top_nbhs = []
+        for n, _ in cluster_counts.most_common():
+            if n not in top_nbhs and len(top_nbhs) < 3:
+                top_nbhs.append(n)
+        nbhs_str = ', '.join(top_nbhs) if top_nbhs else (area_match.get('neighborhoods') if area_match else 'Residential Service Corridor')
+
+        area_desc = f'{ward_str} • {nbhs_str}' + (f' ({ancs_str})' if ancs_str else '')
+
+        # Build feature properties
+        props = {
+            'route': r_id,
+            'stream': stream_name,
+            'day': best_day,
+            'ward': ward_str,
+            'point_count': total_pts,
+            'segment_count': len(cleaned_lines),
+            'route_area': r_id,
+            'neighborhoods': nbhs_str,
+            'ancs': ancs_str,
+            'area_desc': area_desc,
+            'total': stat_match.get('total', 0) if stat_match else 0,
+            'trash': (stat_match.get('total', 0) if stat_match else 0) if stream_name == 'Trash' else 0,
+            'recycling': (stat_match.get('total', 0) if stat_match else 0) if stream_name == 'Recycling' else 0,
+            'repeat_rate': stat_match.get('repeat_rate', 0.0) if stat_match else 0.0,
+            'unique_addrs': stat_match.get('unique_addrs', 0) if stat_match else 0,
+            'polygon_route_id': stat_match.get('route_id') if stat_match else None,
+            'area_sq_mi': (area_match.get('area_sq_mi') if area_match else 0.0) or bbox_area_sq_mi
+        }
+
         if props['area_sq_mi'] and props['area_sq_mi'] > 0:
             props['density'] = round(props['total'] / props['area_sq_mi'], 1)
         else:
@@ -307,6 +477,10 @@ def generate_route_lines():
 
     data = get_collection_points()
     print(f"Total collection points in dataset: {len(data.get('features', []))}")
+
+    # Build spatial index and classify collection points
+    grid_size, ward_grid, smd_grid, clust_grid = build_spatial_indexes()
+    annotate_collection_points(data, grid_size, ward_grid, smd_grid, clust_grid)
 
     # Load stats and areas
     stats_path = os.path.join(DATA_DIR, 'route_180d_stats.json')

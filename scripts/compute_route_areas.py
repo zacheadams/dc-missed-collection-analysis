@@ -171,9 +171,20 @@ def analyze_route(feat_list):
             final_nbhs.append(n)
 
     top_ancs = [a[0] for a in grid_ancs.most_common(3)]
+    anc_wards = set()
+    for a in top_ancs:
+        if a and a[0].isdigit():
+            anc_wards.add(a[0])
+        elif a.startswith('3/4G'):
+            anc_wards.add('3')
+            anc_wards.add('4')
+
     top_ward = f"Ward {grid_wards.most_common(1)[0][0]}" if grid_wards else "District-Wide"
-    if len(grid_wards) > 1 and grid_wards.most_common(2)[1][1] > grid_wards.most_common(1)[0][1] * 0.4:
-        top_ward += f" / Ward {grid_wards.most_common(2)[1][0]}"
+    if len(grid_wards) > 1:
+        w1_cnt = grid_wards.most_common(1)[0][1]
+        for w, cnt in grid_wards.most_common()[1:]:
+            if cnt > w1_cnt * 0.2 or (cnt > w1_cnt * 0.1 and w in anc_wards):
+                top_ward += f" / Ward {w}"
 
     area_str = ", ".join(final_nbhs[:3]) if final_nbhs else "Residential Corridor"
     ancs_str = f"ANC {', '.join(top_ancs)}" if top_ancs else ""

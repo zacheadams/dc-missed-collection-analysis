@@ -2082,6 +2082,61 @@ html_page = f'''<!DOCTYPE html>
 
       if (['1','2','3','4','5','6','7','8'].includes(q)) {{
         selectWard(parseInt(q));
+        return;
+      }}
+
+      const wardMatch = q.match(/^WARD\\s*([1-8])$/);
+      if (wardMatch) {{
+        selectWard(parseInt(wardMatch[1]));
+        return;
+      }}
+
+      // Route Search Support (Line routes prioritized if layer active, or polygon routes)
+      if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) {{
+        let match = null;
+        recycleLinesLayer.eachLayer(l => {{
+          if (l.feature.properties.route.toUpperCase() === q || l.feature.properties.route.toUpperCase() === 'R' + q) match = l;
+        }});
+        if (match) {{
+          selectLineRoute(match.feature, match, 'Recycling');
+          return;
+        }}
+      }}
+
+      if (trashLinesLayer && map.hasLayer(trashLinesLayer)) {{
+        let match = null;
+        trashLinesLayer.eachLayer(l => {{
+          if (l.feature.properties.route.toUpperCase() === q) match = l;
+        }});
+        if (match) {{
+          selectLineRoute(match.feature, match, 'Trash');
+          return;
+        }}
+      }}
+
+      if (recycleRoutesLayer) {{
+        let match = null;
+        recycleRoutesLayer.eachLayer(l => {{
+          if (l.feature.properties.route.toUpperCase() === q || l.feature.properties.route.toUpperCase() === 'R' + q) match = l;
+        }});
+        if (match) {{
+          if (!map.hasLayer(recycleRoutesLayer)) map.addLayer(recycleRoutesLayer);
+          selectRoute(match.feature, match, 'Recycling');
+          return;
+        }}
+      }}
+
+      if (trashRoutesLayer) {{
+        let match = null;
+        trashRoutesLayer.eachLayer(l => {{
+          const r = (l.feature.properties.route_area || l.feature.properties.route || '').toUpperCase();
+          if (r === q || r.endsWith(q)) match = l;
+        }});
+        if (match) {{
+          if (!map.hasLayer(trashRoutesLayer)) map.addLayer(trashRoutesLayer);
+          selectRoute(match.feature, match, 'Trash');
+          return;
+        }}
       }}
     }}
 
@@ -2230,21 +2285,21 @@ html_page = f'''<!DOCTYPE html>
       const rId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
       const key = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
       const stats = ROUTE_STATS[key] || {{}};
+      const isLine = !!p.point_count;
 
       const sched = (stats.schedule && stats.schedule !== 'Unassigned' ? stats.schedule : '') || p.days || p.day || stats.day || 'Scheduled';
-      const ward = stats.ward || p.ward || 'Citywide';
+      const ward = (isLine ? (p.ward || stats.ward) : (stats.ward || p.ward)) || 'Citywide';
       const total = stats.total != null ? stats.total : (p.total || 0);
       const repRate = stats.repeat_rate != null ? stats.repeat_rate : (p.repeat_rate != null ? p.repeat_rate : 0);
       const uniqAddrs = stats.unique_addrs != null ? stats.unique_addrs : (p.unique_addrs || 0);
       const density = stats.density != null ? stats.density : (p.density != null ? p.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0));
-      const areaSqMi = stats.area_sq_mi || p.area_sq_mi || 0;
-      const isLine = !!p.point_count;
+      const areaSqMi = (isLine ? (p.area_sq_mi || stats.area_sq_mi) : (stats.area_sq_mi || p.area_sq_mi)) || 0;
 
       const typeBadge = isLine
         ? '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Line Route)</span>'
         : '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Polygon)</span>';
 
-      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}}${{typeBadge}}`;
+      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} ${{typeBadge}}`;
       document.getElementById('insp-sub').innerText = `Collection day: ${{sched}} • ${{ward}}`;
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
@@ -2259,8 +2314,8 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-lbl-4').innerText = 'Density';
       document.getElementById('insp-stat-rec').innerText = `${{density}} /sq mi`;
 
-      const nbhDesc = stats.neighborhoods || p.neighborhoods || 'Residential Corridor';
-      const ancsDesc = stats.ancs || p.ancs || '';
+      const nbhDesc = (isLine ? (p.neighborhoods || stats.neighborhoods) : (stats.neighborhoods || p.neighborhoods)) || 'Residential Corridor';
+      const ancsDesc = (isLine ? (p.ancs || stats.ancs) : (stats.ancs || p.ancs)) || '';
       const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
 
       document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days (viewed via ${{geomType}}).`;

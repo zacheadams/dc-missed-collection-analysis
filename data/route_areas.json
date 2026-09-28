@@ -15,10 +15,10 @@
       "area_sq_mi": 0.606
     },
     "OR709": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Randle Highlands, Fairlawn, Twining",
       "ancs": "ANC 8A, 7B, 7E",
-      "area_desc": "Ward 7 \u2022 Randle Highlands, Fairlawn, Twining (ANC 8A, 7B, 7E)",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Randle Highlands, Fairlawn, Twining (ANC 8A, 7B, 7E)",
       "area_sq_mi": 0.526
     },
     "OR710": {
@@ -162,10 +162,10 @@
       "area_sq_mi": 0.43
     },
     "OR303": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
       "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
       "area_sq_mi": 0.585
     },
     "OR304": {
@@ -232,10 +232,10 @@
       "area_sq_mi": 0.491
     },
     "OR311": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Burleith/Hillandale, Georgetown, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Burleith/Hillandale, Georgetown, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Burleith/Hillandale, Georgetown, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.108
     },
     "OR101": {
@@ -281,10 +281,10 @@
       "area_sq_mi": 0.442
     },
     "OR602": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.107
     },
     "OR506": {
@@ -351,10 +351,10 @@
       "area_sq_mi": 0.438
     },
     "OR603": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.106
     },
     "OR704": {
@@ -526,10 +526,10 @@
       "area_sq_mi": 0.373
     },
     "IC201": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 6",
       "neighborhoods": "North Capitol Street, Shaw, Logan Circle",
       "ancs": "ANC 2G, 6E",
-      "area_desc": "Ward 2 \u2022 North Capitol Street, Shaw, Logan Circle (ANC 2G, 6E)",
+      "area_desc": "Ward 2 / Ward 6 \u2022 North Capitol Street, Shaw, Logan Circle (ANC 2G, 6E)",
       "area_sq_mi": 0.362
     },
     "IC106": {
@@ -540,10 +540,10 @@
       "area_sq_mi": 0.48
     },
     "IC204": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.229
     },
     "IC205": {
@@ -582,10 +582,10 @@
       "area_sq_mi": 0.279
     },
     "IC104": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Cardozo/Shaw, Le Droit Park, Howard University",
       "ancs": "ANC 1B, 2G, 1E",
-      "area_desc": "Ward 1 \u2022 Cardozo/Shaw, Le Droit Park, Howard University (ANC 1B, 2G, 1E)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Cardozo/Shaw, Le Droit Park, Howard University (ANC 1B, 2G, 1E)",
       "area_sq_mi": 0.299
     },
     "IC601": {
@@ -624,10 +624,10 @@
       "area_sq_mi": 0.277
     },
     "IC610": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Near Southeast, Southwest Employment Area, Southwest/Waterfront",
       "ancs": "ANC 6D, 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
       "area_sq_mi": 0.183
     },
     "IC607": {
@@ -694,10 +694,10 @@
       "area_sq_mi": 0.025
     },
     "IC11": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 6A, 7D",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.02
     },
     "IC10": {
@@ -752,10 +752,10 @@
       "area_sq_mi": 0.273
     },
     "R424_3": {
-      "ward": "Ward 4",
+      "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Fort Totten, Takoma, Brightwood",
       "ancs": "ANC 4B, 4D, 5A",
-      "area_desc": "Ward 4 \u2022 Fort Totten, Takoma, Brightwood (ANC 4B, 4D, 5A)",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Fort Totten, Takoma, Brightwood (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R519_3": {
@@ -885,10 +885,10 @@
       "area_sq_mi": 0.355
     },
     "R511_2": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 5",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 7D, 5D",
-      "area_desc": "Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
+      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
       "area_sq_mi": 0.139
     },
     "R510_2A": {
@@ -948,17 +948,17 @@
       "area_sq_mi": 0.356
     },
     "R604_2A": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
       "area_sq_mi": 0.153
     },
     "R604_2B": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.125
     },
     "R713_2B": {
@@ -1151,10 +1151,10 @@
       "area_sq_mi": 0.272
     },
     "R316_1": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
       "ancs": "ANC 3/4G",
-      "area_desc": "Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G)",
       "area_sq_mi": 0.356
     },
     "R315_1": {
@@ -1165,10 +1165,10 @@
       "area_sq_mi": 0.321
     },
     "R323_1": {
-      "ward": "Ward 4",
+      "ward": "Ward 4 / Ward 3",
       "neighborhoods": "Chevy Chase, Hawthorne, Barnaby Woods",
       "ancs": "ANC 3/4G",
-      "area_desc": "Ward 4 \u2022 Chevy Chase, Hawthorne, Barnaby Woods (ANC 3/4G)",
+      "area_desc": "Ward 4 / Ward 3 \u2022 Chevy Chase, Hawthorne, Barnaby Woods (ANC 3/4G)",
       "area_sq_mi": 0.32
     },
     "R320_1": {
@@ -1186,10 +1186,10 @@
       "area_sq_mi": 0.921
     },
     "R319_1": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
       "ancs": "ANC 3F, 3/4G, 3E",
-      "area_desc": "Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3F, 3/4G, 3E)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3F, 3/4G, 3E)",
       "area_sq_mi": 0.403
     },
     "R409_1B": {
@@ -1305,10 +1305,10 @@
       "area_sq_mi": 0.274
     },
     "R712_5B": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
       "ancs": "ANC 7B, 8A",
-      "area_desc": "Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.35
     },
     "R619_1": {
@@ -1340,17 +1340,17 @@
       "area_sq_mi": 0.218
     },
     "R618_1": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
       "ancs": "ANC 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
       "area_sq_mi": 0.179
     },
     "R617_1": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Near Southeast, Southwest Employment Area, Southwest/Waterfront",
       "ancs": "ANC 6D, 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
       "area_sq_mi": 0.169
     },
     "R616_1": {
@@ -1389,10 +1389,10 @@
       "area_sq_mi": 0.132
     },
     "R209_2": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Howard University",
       "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 2F, 1B)",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 2F, 1B)",
       "area_sq_mi": 0.242
     },
     "R207_2": {
@@ -1424,10 +1424,10 @@
       "area_sq_mi": 0.366
     },
     "R107_2": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Le Droit Park, Howard University, Cardozo/Shaw",
       "ancs": "ANC 1B, 2G, 1E",
-      "area_desc": "Ward 1 \u2022 Le Droit Park, Howard University, Cardozo/Shaw (ANC 1B, 2G, 1E)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Le Droit Park, Howard University, Cardozo/Shaw (ANC 1B, 2G, 1E)",
       "area_sq_mi": 0.206
     },
     "R111_2": {
@@ -1459,10 +1459,10 @@
       "area_sq_mi": 0.11
     },
     "R618_4": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Kingman Park, Union Station, Stanton Park",
       "ancs": "ANC 7D, 6A, 5D",
-      "area_desc": "Ward 7 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
       "area_sq_mi": 0.168
     },
     "R614_4": {
@@ -1501,10 +1501,10 @@
       "area_sq_mi": 0.373
     },
     "R107_5": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Lanier Heights, Kalorama Heights, Adams Morgan",
       "ancs": "ANC 1C, 2D, 2B",
-      "area_desc": "Ward 1 \u2022 Lanier Heights, Kalorama Heights, Adams Morgan (ANC 1C, 2D, 2B)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Lanier Heights, Kalorama Heights, Adams Morgan (ANC 1C, 2D, 2B)",
       "area_sq_mi": 0.447
     },
     "R208_5": {
@@ -1515,10 +1515,10 @@
       "area_sq_mi": 0.254
     },
     "R209_5": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.179
     },
     "RSP10_1": {
@@ -1536,10 +1536,10 @@
       "area_sq_mi": 0.042
     },
     "RSP20_2": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
       "ancs": "ANC 1A, 1D, 2B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
       "area_sq_mi": 0.048
     },
     "RSP50_5": {
@@ -1580,10 +1580,10 @@
       "area_sq_mi": 0.606
     },
     "OR709": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Randle Highlands, Fairlawn, Twining",
       "ancs": "ANC 8A, 7B, 7E",
-      "area_desc": "Ward 7 \u2022 Randle Highlands, Fairlawn, Twining (ANC 8A, 7B, 7E)",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Randle Highlands, Fairlawn, Twining (ANC 8A, 7B, 7E)",
       "area_sq_mi": 0.526
     },
     "OR710": {
@@ -1727,10 +1727,10 @@
       "area_sq_mi": 0.43
     },
     "OR303": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Friendship Heights, American University Park, Tenleytown",
       "ancs": "ANC 3E, 3/4G",
-      "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3E, 3/4G)",
       "area_sq_mi": 0.585
     },
     "OR304": {
@@ -1797,10 +1797,10 @@
       "area_sq_mi": 0.491
     },
     "OR311": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Burleith/Hillandale, Georgetown, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Burleith/Hillandale, Georgetown, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Burleith/Hillandale, Georgetown, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.108
     },
     "OR101": {
@@ -1846,10 +1846,10 @@
       "area_sq_mi": 0.442
     },
     "OR602": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.107
     },
     "OR506": {
@@ -1916,10 +1916,10 @@
       "area_sq_mi": 0.438
     },
     "OR603": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.106
     },
     "OR704": {
@@ -2091,10 +2091,10 @@
       "area_sq_mi": 0.373
     },
     "IC201": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 6",
       "neighborhoods": "North Capitol Street, Shaw, Logan Circle",
       "ancs": "ANC 2G, 6E",
-      "area_desc": "Ward 2 \u2022 North Capitol Street, Shaw, Logan Circle (ANC 2G, 6E)",
+      "area_desc": "Ward 2 / Ward 6 \u2022 North Capitol Street, Shaw, Logan Circle (ANC 2G, 6E)",
       "area_sq_mi": 0.362
     },
     "IC106": {
@@ -2105,10 +2105,10 @@
       "area_sq_mi": 0.48
     },
     "IC204": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.229
     },
     "IC205": {
@@ -2147,10 +2147,10 @@
       "area_sq_mi": 0.279
     },
     "IC104": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Cardozo/Shaw, Le Droit Park, Howard University",
       "ancs": "ANC 1B, 2G, 1E",
-      "area_desc": "Ward 1 \u2022 Cardozo/Shaw, Le Droit Park, Howard University (ANC 1B, 2G, 1E)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Cardozo/Shaw, Le Droit Park, Howard University (ANC 1B, 2G, 1E)",
       "area_sq_mi": 0.299
     },
     "IC601": {
@@ -2189,10 +2189,10 @@
       "area_sq_mi": 0.277
     },
     "IC610": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Near Southeast, Southwest Employment Area, Southwest/Waterfront",
       "ancs": "ANC 6D, 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
       "area_sq_mi": 0.183
     },
     "IC607": {
@@ -2259,10 +2259,10 @@
       "area_sq_mi": 0.025
     },
     "IC11": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 6A, 7D",
-      "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
+      "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "area_sq_mi": 0.02
     },
     "IC10": {
@@ -2317,10 +2317,10 @@
       "area_sq_mi": 0.273
     },
     "R424_3": {
-      "ward": "Ward 4",
+      "ward": "Ward 4 / Ward 5",
       "neighborhoods": "Fort Totten, Takoma, Brightwood",
       "ancs": "ANC 4B, 4D, 5A",
-      "area_desc": "Ward 4 \u2022 Fort Totten, Takoma, Brightwood (ANC 4B, 4D, 5A)",
+      "area_desc": "Ward 4 / Ward 5 \u2022 Fort Totten, Takoma, Brightwood (ANC 4B, 4D, 5A)",
       "area_sq_mi": 0.345
     },
     "R519_3": {
@@ -2450,10 +2450,10 @@
       "area_sq_mi": 0.355
     },
     "R511_2": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 5",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
       "ancs": "ANC 7D, 5D",
-      "area_desc": "Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
+      "area_desc": "Ward 7 / Ward 5 \u2022 Union Station, Stanton Park, Kingman Park (ANC 7D, 5D)",
       "area_sq_mi": 0.139
     },
     "R510_2A": {
@@ -2513,17 +2513,17 @@
       "area_sq_mi": 0.356
     },
     "R604_2A": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Capitol Hill, Lincoln Park, Union Station (ANC 7D, 6B)",
       "area_sq_mi": 0.153
     },
     "R604_2B": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Hill East, Capitol Hill, Lincoln Park",
       "ancs": "ANC 7D, 6B",
-      "area_desc": "Ward 7 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Hill East, Capitol Hill, Lincoln Park (ANC 7D, 6B)",
       "area_sq_mi": 0.125
     },
     "R713_2B": {
@@ -2716,10 +2716,10 @@
       "area_sq_mi": 0.272
     },
     "R316_1": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
       "ancs": "ANC 3/4G",
-      "area_desc": "Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G)",
       "area_sq_mi": 0.356
     },
     "R315_1": {
@@ -2730,10 +2730,10 @@
       "area_sq_mi": 0.321
     },
     "R323_1": {
-      "ward": "Ward 4",
+      "ward": "Ward 4 / Ward 3",
       "neighborhoods": "Chevy Chase, Hawthorne, Barnaby Woods",
       "ancs": "ANC 3/4G",
-      "area_desc": "Ward 4 \u2022 Chevy Chase, Hawthorne, Barnaby Woods (ANC 3/4G)",
+      "area_desc": "Ward 4 / Ward 3 \u2022 Chevy Chase, Hawthorne, Barnaby Woods (ANC 3/4G)",
       "area_sq_mi": 0.32
     },
     "R320_1": {
@@ -2751,10 +2751,10 @@
       "area_sq_mi": 0.921
     },
     "R319_1": {
-      "ward": "Ward 3",
+      "ward": "Ward 3 / Ward 4",
       "neighborhoods": "Hawthorne, Barnaby Woods, Chevy Chase",
       "ancs": "ANC 3F, 3/4G, 3E",
-      "area_desc": "Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3F, 3/4G, 3E)",
+      "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3F, 3/4G, 3E)",
       "area_sq_mi": 0.403
     },
     "R409_1B": {
@@ -2870,10 +2870,10 @@
       "area_sq_mi": 0.274
     },
     "R712_5B": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 8",
       "neighborhoods": "Twining, Fairlawn, Randle Highlands",
       "ancs": "ANC 7B, 8A",
-      "area_desc": "Ward 7 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
+      "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "area_sq_mi": 0.35
     },
     "R619_1": {
@@ -2905,17 +2905,17 @@
       "area_sq_mi": 0.218
     },
     "R618_1": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
       "ancs": "ANC 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Capitol Hill, Lincoln Park, Near Southeast (ANC 6B, 8F)",
       "area_sq_mi": 0.179
     },
     "R617_1": {
-      "ward": "Ward 6",
+      "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Near Southeast, Southwest Employment Area, Southwest/Waterfront",
       "ancs": "ANC 6D, 6B, 8F",
-      "area_desc": "Ward 6 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
+      "area_desc": "Ward 6 / Ward 8 \u2022 Near Southeast, Southwest Employment Area, Southwest/Waterfront (ANC 6D, 6B, 8F)",
       "area_sq_mi": 0.169
     },
     "R616_1": {
@@ -2954,10 +2954,10 @@
       "area_sq_mi": 0.132
     },
     "R209_2": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Howard University",
       "ancs": "ANC 2B, 2F, 1B",
-      "area_desc": "Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 2F, 1B)",
+      "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Howard University (ANC 2B, 2F, 1B)",
       "area_sq_mi": 0.242
     },
     "R207_2": {
@@ -2989,10 +2989,10 @@
       "area_sq_mi": 0.366
     },
     "R107_2": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Le Droit Park, Howard University, Cardozo/Shaw",
       "ancs": "ANC 1B, 2G, 1E",
-      "area_desc": "Ward 1 \u2022 Le Droit Park, Howard University, Cardozo/Shaw (ANC 1B, 2G, 1E)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Le Droit Park, Howard University, Cardozo/Shaw (ANC 1B, 2G, 1E)",
       "area_sq_mi": 0.206
     },
     "R111_2": {
@@ -3024,10 +3024,10 @@
       "area_sq_mi": 0.11
     },
     "R618_4": {
-      "ward": "Ward 7",
+      "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Kingman Park, Union Station, Stanton Park",
       "ancs": "ANC 7D, 6A, 5D",
-      "area_desc": "Ward 7 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
+      "area_desc": "Ward 7 / Ward 6 \u2022 Kingman Park, Union Station, Stanton Park (ANC 7D, 6A, 5D)",
       "area_sq_mi": 0.168
     },
     "R614_4": {
@@ -3066,10 +3066,10 @@
       "area_sq_mi": 0.373
     },
     "R107_5": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Lanier Heights, Kalorama Heights, Adams Morgan",
       "ancs": "ANC 1C, 2D, 2B",
-      "area_desc": "Ward 1 \u2022 Lanier Heights, Kalorama Heights, Adams Morgan (ANC 1C, 2D, 2B)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Lanier Heights, Kalorama Heights, Adams Morgan (ANC 1C, 2D, 2B)",
       "area_sq_mi": 0.447
     },
     "R208_5": {
@@ -3080,10 +3080,10 @@
       "area_sq_mi": 0.254
     },
     "R209_5": {
-      "ward": "Ward 2",
+      "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Cathedral Heights",
       "ancs": "ANC 2E, 3B",
-      "area_desc": "Ward 2 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
+      "area_desc": "Ward 2 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
       "area_sq_mi": 0.179
     },
     "RSP10_1": {
@@ -3101,10 +3101,10 @@
       "area_sq_mi": 0.042
     },
     "RSP20_2": {
-      "ward": "Ward 1",
+      "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
       "ancs": "ANC 1A, 1D, 2B",
-      "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
+      "area_desc": "Ward 1 / Ward 2 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 2B)",
       "area_sq_mi": 0.048
     },
     "RSP50_5": {
