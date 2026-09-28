@@ -1506,7 +1506,8 @@ html_page = f'''<!DOCTYPE html>
       return {{
         color: isDark ? '#ef4444' : '#dc2626',
         weight: 3.5,
-        opacity: 0.85,
+        opacity: 0.9,
+        fill: false,
         lineCap: 'round',
         lineJoin: 'round'
       }};
@@ -1518,6 +1519,7 @@ html_page = f'''<!DOCTYPE html>
         color: isDark ? '#fca5a5' : '#991b1b',
         weight: 5.5,
         opacity: 1.0,
+        fill: false,
         lineCap: 'round',
         lineJoin: 'round'
       }};
@@ -1528,7 +1530,8 @@ html_page = f'''<!DOCTYPE html>
       return {{
         color: isDark ? '#22c55e' : '#16a34a',
         weight: 3.5,
-        opacity: 0.85,
+        opacity: 0.9,
+        fill: false,
         lineCap: 'round',
         lineJoin: 'round'
       }};
@@ -1540,6 +1543,7 @@ html_page = f'''<!DOCTYPE html>
         color: isDark ? '#86efac' : '#166534',
         weight: 5.5,
         opacity: 1.0,
+        fill: false,
         lineCap: 'round',
         lineJoin: 'round'
       }};
@@ -1869,7 +1873,7 @@ html_page = f'''<!DOCTYPE html>
             mousemove: function(e) {{ handleLineHover(e, layer, true); }},
             mouseout: function() {{ handleLineMouseout(layer, true); }},
             click: function(e) {{
-              L.DomEvent.stopPropagation(e);
+              if (e && e.originalEvent) L.DomEvent.stopPropagation(e);
               selectLineRoute(feature, layer, 'Trash');
             }}
           }});
@@ -1890,7 +1894,7 @@ html_page = f'''<!DOCTYPE html>
             mousemove: function(e) {{ handleLineHover(e, layer, false); }},
             mouseout: function() {{ handleLineMouseout(layer, false); }},
             click: function(e) {{
-              L.DomEvent.stopPropagation(e);
+              if (e && e.originalEvent) L.DomEvent.stopPropagation(e);
               selectLineRoute(feature, layer, 'Recycling');
             }}
           }});
@@ -2465,35 +2469,45 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function toggleTrashLines(show) {{
+      if (!trashLinesLayer) initTrashLinesLayer();
       if (show) {{
-        map.addLayer(trashLinesLayer);
-        trashLinesLayer.setStyle(getTrashLineStyle());
-      }} else {{
-        if (selectedRouteStream === 'Trash' && selectedRouteLayer && selectedRouteLayer._isLine) {{
-          clearRouteSelection();
-          updateInspectorCitywide();
-          updateBreadcrumbs();
+        if (trashLinesLayer && !map.hasLayer(trashLinesLayer)) {{
+          map.addLayer(trashLinesLayer);
+          trashLinesLayer.setStyle(getTrashLineStyle());
         }}
-        map.removeLayer(trashLinesLayer);
-        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
-          activeHoverRouteLayer = null;
+      }} else {{
+        if (trashLinesLayer && map.hasLayer(trashLinesLayer)) {{
+          if (selectedRouteStream === 'Trash' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+            clearRouteSelection();
+            updateInspectorCitywide();
+            updateBreadcrumbs();
+          }}
+          map.removeLayer(trashLinesLayer);
+          if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
+            activeHoverRouteLayer = null;
+          }}
         }}
       }}
     }}
 
     function toggleRecycleLines(show) {{
+      if (!recycleLinesLayer) initRecycleLinesLayer();
       if (show) {{
-        map.addLayer(recycleLinesLayer);
-        recycleLinesLayer.setStyle(getRecycleLineStyle());
-      }} else {{
-        if (selectedRouteStream === 'Recycling' && selectedRouteLayer && selectedRouteLayer._isLine) {{
-          clearRouteSelection();
-          updateInspectorCitywide();
-          updateBreadcrumbs();
+        if (recycleLinesLayer && !map.hasLayer(recycleLinesLayer)) {{
+          map.addLayer(recycleLinesLayer);
+          recycleLinesLayer.setStyle(getRecycleLineStyle());
         }}
-        map.removeLayer(recycleLinesLayer);
-        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
-          activeHoverRouteLayer = null;
+      }} else {{
+        if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) {{
+          if (selectedRouteStream === 'Recycling' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+            clearRouteSelection();
+            updateInspectorCitywide();
+            updateBreadcrumbs();
+          }}
+          map.removeLayer(recycleLinesLayer);
+          if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
+            activeHoverRouteLayer = null;
+          }}
         }}
       }}
     }}
@@ -2700,6 +2714,8 @@ html_page = f'''<!DOCTYPE html>
     initWardLayer();
     initTrashRoutesLayer();
     initRecycleRoutesLayer();
+    initTrashLinesLayer();
+    initRecycleLinesLayer();
     ensureSvgPatterns();
     map.on('layeradd', ensureSvgPatterns);
     initMobileHandling();
