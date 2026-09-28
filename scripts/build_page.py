@@ -77,13 +77,13 @@ for r in route_stats_raw.get('trash_routes', []):
     area_sq_mi = ra.get('area_sq_mi', 0.0)
     r_copy['area_sq_mi'] = area_sq_mi
     r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
-    if not r_copy.get('ward') and ra.get('ward'):
+    if ra.get('ward'):
         r_copy['ward'] = ra.get('ward')
-    if not r_copy.get('neighborhoods') and ra.get('neighborhoods'):
+    if ra.get('neighborhoods'):
         r_copy['neighborhoods'] = ra.get('neighborhoods')
-    if not r_copy.get('ancs') and ra.get('ancs'):
+    if ra.get('ancs'):
         r_copy['ancs'] = ra.get('ancs')
-    if not r_copy.get('area_desc') and ra.get('area_desc'):
+    if ra.get('area_desc'):
         r_copy['area_desc'] = ra.get('area_desc')
     col_day = trash_days_map.get(aid) or (r_copy.get('schedule') if r_copy.get('schedule') != 'Unassigned' else None)
     if col_day:
@@ -98,13 +98,13 @@ for r in route_stats_raw.get('recycle_routes', []):
     area_sq_mi = ra.get('area_sq_mi', 0.0)
     r_copy['area_sq_mi'] = area_sq_mi
     r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
-    if not r_copy.get('ward') and ra.get('ward'):
+    if ra.get('ward'):
         r_copy['ward'] = ra.get('ward')
-    if not r_copy.get('neighborhoods') and ra.get('neighborhoods'):
+    if ra.get('neighborhoods'):
         r_copy['neighborhoods'] = ra.get('neighborhoods')
-    if not r_copy.get('ancs') and ra.get('ancs'):
+    if ra.get('ancs'):
         r_copy['ancs'] = ra.get('ancs')
-    if not r_copy.get('area_desc') and ra.get('area_desc'):
+    if ra.get('area_desc'):
         r_copy['area_desc'] = ra.get('area_desc')
     col_day = recycle_days_map.get(aid) or (r_copy.get('schedule') if r_copy.get('schedule') != 'Unassigned' else None)
     if col_day:
@@ -112,7 +112,7 @@ for r in route_stats_raw.get('recycle_routes', []):
         r_copy['day'] = col_day
     route_stats_lookup['recycle_' + str(aid)] = r_copy
 
-# Incorporate line routes directly into route_stats_lookup for instant key resolution
+# Incorporate line routes directly into route_stats_lookup with line-specific keys to prevent clobbering polygon stats
 for feat in map_data.get('trash_routes_lines', {}).get('features', []):
     p = feat.get('properties', {})
     rid = p.get('route')
@@ -121,7 +121,7 @@ for feat in map_data.get('trash_routes_lines', {}).get('features', []):
         p_stats = route_stats_lookup.get('trash_' + str(pid), {})
         total = p.get('total', p_stats.get('total', 0))
         area_sq = p.get('area_sq_mi', p_stats.get('area_sq_mi', 0.0))
-        route_stats_lookup['trash_' + str(rid)] = {
+        line_entry = {
             'route_id': rid,
             'type': 'Trash',
             'route_name': f"Trash Route {rid}",
@@ -141,6 +141,9 @@ for feat in map_data.get('trash_routes_lines', {}).get('features', []):
             'point_count': p.get('point_count', 0),
             'segment_count': p.get('segment_count', 0)
         }
+        route_stats_lookup['trash_line_' + str(rid)] = line_entry
+        if ('trash_' + str(rid)) not in route_stats_lookup:
+            route_stats_lookup['trash_' + str(rid)] = line_entry
 
 for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
     p = feat.get('properties', {})
@@ -169,8 +172,12 @@ for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
             'point_count': p.get('point_count', 0),
             'segment_count': p.get('segment_count', 0)
         }
-        route_stats_lookup['recycle_' + str(rid)] = rec_entry
+        route_stats_lookup['recycle_line_' + str(rid)] = rec_entry
         if rid.startswith('R'):
+            route_stats_lookup['recycle_line_' + str(rid[1:])] = rec_entry
+        if ('recycle_' + str(rid)) not in route_stats_lookup:
+            route_stats_lookup['recycle_' + str(rid)] = rec_entry
+        if rid.startswith('R') and ('recycle_' + str(rid[1:])) not in route_stats_lookup:
             route_stats_lookup['recycle_' + str(rid[1:])] = rec_entry
 
 route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
@@ -2456,12 +2463,14 @@ html_page = f'''<!DOCTYPE html>
 
     function updateInspectorRoute(p, stream) {{
       const rId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
-      const key = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
-      const stats = ROUTE_STATS[key] || {{}};
       const isLine = !!p.point_count;
+      const linePrefix = isLine ? 'line_' : '';
+      const key = (stream === 'Trash' ? ('trash_' + linePrefix) : ('recycle_' + linePrefix)) + rId;
+      const fallbackKey = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
+      const stats = ROUTE_STATS[key] || ROUTE_STATS[fallbackKey] || {{}};
 
       const sched = (stats.schedule && stats.schedule !== 'Unassigned' ? stats.schedule : '') || p.days || p.day || stats.day || 'Scheduled';
-      const ward = (isLine ? (p.ward || stats.ward) : (stats.ward || p.ward)) || 'Citywide';
+      const ward = p.ward || stats.ward || 'Citywide';
       const total = stats.total != null ? stats.total : (p.total || 0);
       const repRate = stats.repeat_rate != null ? stats.repeat_rate : (p.repeat_rate != null ? p.repeat_rate : 0);
       const uniqAddrs = stats.unique_addrs != null ? stats.unique_addrs : (p.unique_addrs || 0);
@@ -2487,8 +2496,8 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-lbl-4').innerText = 'Density';
       document.getElementById('insp-stat-rec').innerText = `${{density}} /sq mi`;
 
-      const nbhDesc = (isLine ? (p.neighborhoods || stats.neighborhoods) : (stats.neighborhoods || p.neighborhoods)) || 'Residential Corridor';
-      const ancsDesc = formatSortedAncs((isLine ? (p.ancs || stats.ancs) : (stats.ancs || p.ancs)) || '');
+      const nbhDesc = p.neighborhoods || stats.neighborhoods || 'Residential Corridor';
+      const ancsDesc = formatSortedAncs(p.ancs || stats.ancs || '');
       const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
 
       document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days (viewed via ${{geomType}}).`;

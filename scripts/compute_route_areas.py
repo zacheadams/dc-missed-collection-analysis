@@ -256,7 +256,7 @@ def compute_route_areas():
                             break
 
         total_anc_hits = sum(grid_ancs.values())
-        raw_top = [a for a, count in grid_ancs.most_common() if count >= 5 or (total_anc_hits > 0 and count / total_anc_hits >= 0.05)]
+        raw_top = [a for a, count in grid_ancs.most_common() if count >= 2 or (total_anc_hits > 0 and count / total_anc_hits >= 0.03)]
         if not raw_top and grid_ancs:
             raw_top = [grid_ancs.most_common(1)[0][0]]
         sorted_ancs = sorted(raw_top[:6], key=anc_sort_key)
@@ -343,69 +343,40 @@ def compute_route_areas():
     for f in rec_geo['features']:
         recycle_groups[f['properties']['Route']].append(f)
 
-    trash_areas = {}
+    trash_poly_areas = {}
     for rid, feats in trash_groups.items():
-        poly_sq_mi = feat_list_area_sq_mi(feats)
-        if rid in trash_poly_to_lines:
-            w, n, a, desc = merge_line_props(trash_poly_to_lines[rid])
-            trash_areas[rid] = {
-                'ward': w,
-                'neighborhoods': n,
-                'ancs': a,
-                'area_desc': desc,
-                'area_sq_mi': poly_sq_mi
-            }
-        else:
-            # Fallback to polygon grid sampling
-            res = analyze_polygon_features(feats)
-            trash_areas[rid] = res
+        trash_poly_areas[rid] = analyze_polygon_features(feats)
 
-    # Incorporate line route IDs directly into trash_areas
-    for line_id, entry in trash_line_entries.items():
-        if line_id not in trash_areas:
-            trash_areas[line_id] = entry
-
-    recycle_areas = {}
+    recycle_poly_areas = {}
     for rid, feats in recycle_groups.items():
-        poly_sq_mi = feat_list_area_sq_mi(feats)
-        # Try matching line entry with or without 'R' prefix
-        line_match = rec_line_entries.get(rid)
-        if not line_match:
-            alt_id = rid[1:] if rid.startswith('R') else f"R{rid}"
-            line_match = rec_line_entries.get(alt_id)
+        recycle_poly_areas[rid] = analyze_polygon_features(feats)
 
-        if line_match:
-            recycle_areas[rid] = {
-                'ward': line_match['ward'],
-                'neighborhoods': line_match['neighborhoods'],
-                'ancs': line_match['ancs'],
-                'area_desc': line_match['area_desc'],
-                'area_sq_mi': poly_sq_mi
-            }
-        else:
-            res = analyze_polygon_features(feats)
-            recycle_areas[rid] = res
+    # For backward-compatible unified lookups, combine line and polygon entries
+    # Polygon entries take strict precedence for polygon route IDs
+    trash_merged = dict(trash_line_entries)
+    trash_merged.update(trash_poly_areas)
 
-    # Incorporate line route IDs directly into recycle_areas
-    for line_id, entry in rec_line_entries.items():
-        if line_id not in recycle_areas:
-            recycle_areas[line_id] = entry
-        alt_id = line_id[1:] if line_id.startswith('R') else f"R{line_id}"
-        if alt_id not in recycle_areas:
-            recycle_areas[alt_id] = entry
+    recycle_merged = dict(rec_line_entries)
+    for lid, entry in list(recycle_merged.items()):
+        alt_id = lid[1:] if lid.startswith('R') else f"R{lid}"
+        if alt_id not in recycle_merged:
+            recycle_merged[alt_id] = entry
+    recycle_merged.update(recycle_poly_areas)
 
     output = {
-        'trash_routes': trash_areas,
-        'recycle_routes': recycle_areas,
-        'trash': trash_areas,
-        'recycle': recycle_areas
+        'trash_routes': trash_poly_areas,
+        'recycle_routes': recycle_poly_areas,
+        'trash_lines': trash_line_entries,
+        'recycle_lines': rec_line_entries,
+        'trash': trash_merged,
+        'recycle': recycle_merged
     }
 
     out_path = os.path.join(BASE_DIR, 'data/route_areas.json')
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2)
 
-    print(f"Generated data/route_areas.json: {len(trash_areas)} trash routes, {len(recycle_areas)} recycle routes")
+    print(f"Generated data/route_areas.json: {len(trash_poly_areas)} trash routes, {len(recycle_poly_areas)} recycle routes")
     return output
 
 if __name__ == '__main__':
