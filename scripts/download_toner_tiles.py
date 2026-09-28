@@ -77,31 +77,60 @@ def load_dc_geometry():
 
     return rings, all_pts, (min_lat, max_lat, min_lon, max_lon)
 
-def tile_intersects_dc(x, y, z, rings, all_pts):
-    nw_lat, nw_lon = num2deg(x, y, z)
-    se_lat, se_lon = num2deg(x + 1, y + 1, z)
-    tile_min_lat = se_lat
-    tile_max_lat = nw_lat
-    tile_min_lon = nw_lon
-    tile_max_lon = se_lon
-
-    for px, py in all_pts:
-        if tile_min_lon <= px <= tile_max_lon and tile_min_lat <= py <= tile_max_lat:
-            return True
-
-    for sx in range(4):
-        for sy in range(4):
-            tx = tile_min_lon + sx * (tile_max_lon - tile_min_lon) / 3.0
-            ty = tile_min_lat + sy * (tile_max_lat - tile_min_lat) / 3.0
-            for r in rings:
-                if is_point_in_ring(tx, ty, r):
-                    return True
-    return False
-
 def get_tiles_to_download():
     rings, all_pts, (min_lat, max_lat, min_lon, max_lon) = load_dc_geometry()
+
+    # Build spatial index grid for points
+    from collections import defaultdict
+    grid = defaultdict(list)
+    grid_size = 0.02
+    for px, py in all_pts:
+        gx = int(px / grid_size)
+        gy = int(py / grid_size)
+        grid[(gx, gy)].append((px, py))
+
+    # Ring bounding boxes
+    ring_bboxes = []
+    for r in rings:
+        rx = [p[0] for p in r]
+        ry = [p[1] for p in r]
+        ring_bboxes.append((min(rx), max(rx), min(ry), max(ry), r))
+
+    def fast_tile_intersects_dc(x, y, z):
+        nw_lat, nw_lon = num2deg(x, y, z)
+        se_lat, se_lon = num2deg(x + 1, y + 1, z)
+        tile_min_lat, tile_max_lat = se_lat, nw_lat
+        tile_min_lon, tile_max_lon = nw_lon, se_lon
+
+        # Check grid for points inside tile
+        gx_min = int(tile_min_lon / grid_size)
+        gx_max = int(tile_max_lon / grid_size)
+        gy_min = int(tile_min_lat / grid_size)
+        gy_max = int(tile_max_lat / grid_size)
+        for gx in range(gx_min, gx_max + 1):
+            for gy in range(gy_min, gy_max + 1):
+                for px, py in grid.get((gx, gy), []):
+                    if tile_min_lon <= px <= tile_max_lon and tile_min_lat <= py <= tile_max_lat:
+                        return True
+
+        # Check center and corners in rings
+        pts_to_test = [
+            ((tile_min_lon + tile_max_lon) / 2, (tile_min_lat + tile_max_lat) / 2),
+            (tile_min_lon, tile_min_lat),
+            (tile_max_lon, tile_min_lat),
+            (tile_min_lon, tile_max_lat),
+            (tile_max_lon, tile_max_lat)
+        ]
+        for min_rx, max_rx, min_ry, max_ry, r in ring_bboxes:
+            if tile_max_lon < min_rx or tile_min_lon > max_rx or tile_max_lat < min_ry or tile_min_lat > max_ry:
+                continue
+            for tx, ty in pts_to_test:
+                if is_point_in_ring(tx, ty, r):
+                    return True
+        return False
+
     tiles = []
-    for z in range(11, 17):
+    for z in range(11, 18):
         x1, y2 = deg2num(min_lat, min_lon, z)
         x2, y1 = deg2num(max_lat, max_lon, z)
         x_min, x_max = min(x1, x2), max(x1, x2)
@@ -109,7 +138,7 @@ def get_tiles_to_download():
 
         for x in range(x_min, x_max + 1):
             for y in range(y_min, y_max + 1):
-                if z <= 12 or tile_intersects_dc(x, y, z, rings, all_pts):
+                if z <= 12 or fast_tile_intersects_dc(x, y, z):
                     tiles.append((z, x, y))
     return tiles
 
@@ -125,7 +154,7 @@ def verify_tile(path):
 
 def migrate_existing_light_tiles():
     # If tiles were stored directly in tiles/{z}/{x}/{y}.png, migrate them to tiles/light/{z}/{x}/{y}.png
-    for z in range(11, 17):
+    for z in range(11, 18):
         src_z = os.path.join(TILES_DIR, str(z))
         if os.path.exists(src_z) and os.path.isdir(src_z):
             dst_z = os.path.join(LIGHT_DIR, str(z))
@@ -162,6 +191,8 @@ def download_set(style_name, target_dir, tiles, verify_only=False):
         'Referer': 'http://localhost:8000/'
     }
 
+    import urllib.error
+
     def fetch_tile(item):
         z, x, y = item
         tile_dir = os.path.join(target_dir, str(z), str(x))
@@ -173,9 +204,10 @@ def download_set(style_name, target_dir, tiles, verify_only=False):
 
         url = f"https://tiles.stadiamaps.com/tiles/{style_name}/{z}/{x}/{y}.png"
         req = urllib.request.Request(url, headers=headers)
-        for attempt in range(3):
+        for attempt in range(5):
             try:
-                with urllib.request.urlopen(req, timeout=10) as resp:
+                time.sleep(0.015)
+                with urllib.request.urlopen(req, timeout=12) as resp:
                     data = resp.read()
                     if data.startswith(PNG_HEADER):
                         with open(tile_path, 'wb') as f:
@@ -183,31 +215,41 @@ def download_set(style_name, target_dir, tiles, verify_only=False):
                         return ('downloaded', len(data))
                     else:
                         time.sleep(0.3)
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    time.sleep(2.0 * (attempt + 1))
+                else:
+                    time.sleep(0.5 * (attempt + 1))
             except Exception:
                 time.sleep(0.5 * (attempt + 1))
         return ('failed', 0)
 
     downloaded = 0
     skipped = 0
+    failed = 0
     total_size = 0
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
         for status, size in executor.map(fetch_tile, tiles):
             if status == 'downloaded':
                 downloaded += 1
                 total_size += size
+                if downloaded % 250 == 0:
+                    print(f" ... downloaded {downloaded} new tiles ({total_size / (1024*1024):.2f} MB)")
             elif status == 'skipped':
                 skipped += 1
                 total_size += size
+            elif status == 'failed':
+                failed += 1
 
-    print(f"Complete: {downloaded} downloaded, {skipped} cached. Total size: {total_size / (1024*1024):.2f} MB")
-    return True
+    print(f"Complete: {downloaded} downloaded, {skipped} cached, {failed} failed. Total size: {total_size / (1024*1024):.2f} MB")
+    return failed == 0
 
 def main():
     verify_flag = '--verify-only' in sys.argv
     migrate_existing_light_tiles()
     tiles = get_tiles_to_download()
-    print(f"Washington, DC tile set: {len(tiles)} tiles (Zooms 11 to 16)")
+    print(f"Washington, DC tile set: {len(tiles)} tiles (Zooms 11 to 17)")
 
     ok_light = download_set('stamen_toner', LIGHT_DIR, tiles, verify_only=verify_flag)
     ok_blacklite = download_set('stamen_toner_blacklite', BLACKLITE_DIR, tiles, verify_only=verify_flag)
