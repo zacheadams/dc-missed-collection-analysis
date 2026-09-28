@@ -37,15 +37,34 @@ if 'recycle_routes_lines' not in map_data:
         with open(rec_lines_path, 'r', encoding='utf-8') as f:
             map_data['recycle_routes_lines'] = json.load(f)
 
-json_str = json.dumps(map_data, separators=(',', ':'))
-
-with open(route_stats_path, 'r', encoding='utf-8') as f:
-    route_stats_raw = json.load(f)
-
 route_areas = {}
 if os.path.exists(route_areas_path):
     with open(route_areas_path, 'r', encoding='utf-8') as f:
         route_areas = json.load(f)
+
+# Synchronize polygon route features with latest route_areas data
+for feat in map_data.get('trash_routes', {}).get('features', []):
+    rid = feat.get('properties', {}).get('route_area')
+    if rid and rid in route_areas.get('trash_routes', {}):
+        ra = route_areas['trash_routes'][rid]
+        feat['properties']['ward'] = ra.get('ward', feat['properties'].get('ward', ''))
+        feat['properties']['neighborhoods'] = ra.get('neighborhoods', feat['properties'].get('neighborhoods', ''))
+        feat['properties']['ancs'] = ra.get('ancs', feat['properties'].get('ancs', ''))
+        feat['properties']['area_desc'] = ra.get('area_desc', feat['properties'].get('area_desc', ''))
+
+for feat in map_data.get('recycle_routes', {}).get('features', []):
+    rid = feat.get('properties', {}).get('route')
+    if rid and rid in route_areas.get('recycle_routes', {}):
+        ra = route_areas['recycle_routes'][rid]
+        feat['properties']['ward'] = ra.get('ward', feat['properties'].get('ward', ''))
+        feat['properties']['neighborhoods'] = ra.get('neighborhoods', feat['properties'].get('neighborhoods', ''))
+        feat['properties']['ancs'] = ra.get('ancs', feat['properties'].get('ancs', ''))
+        feat['properties']['area_desc'] = ra.get('area_desc', feat['properties'].get('area_desc', ''))
+
+json_str = json.dumps(map_data, separators=(',', ':'))
+
+with open(route_stats_path, 'r', encoding='utf-8') as f:
+    route_stats_raw = json.load(f)
 
 trash_days_map = {f['properties']['route_area']: f['properties'].get('days') for f in map_data.get('trash_routes', {}).get('features', []) if f.get('properties', {}).get('route_area')}
 recycle_days_map = {f['properties']['route']: f['properties'].get('day') for f in map_data.get('recycle_routes', {}).get('features', []) if f.get('properties', {}).get('route')}
@@ -92,6 +111,67 @@ for r in route_stats_raw.get('recycle_routes', []):
         r_copy['schedule'] = col_day
         r_copy['day'] = col_day
     route_stats_lookup['recycle_' + str(aid)] = r_copy
+
+# Incorporate line routes directly into route_stats_lookup for instant key resolution
+for feat in map_data.get('trash_routes_lines', {}).get('features', []):
+    p = feat.get('properties', {})
+    rid = p.get('route')
+    if rid:
+        pid = p.get('polygon_route_id')
+        p_stats = route_stats_lookup.get('trash_' + str(pid), {})
+        total = p.get('total', p_stats.get('total', 0))
+        area_sq = p.get('area_sq_mi', p_stats.get('area_sq_mi', 0.0))
+        route_stats_lookup['trash_' + str(rid)] = {
+            'route_id': rid,
+            'type': 'Trash',
+            'route_name': f"Trash Route {rid}",
+            'schedule': p.get('day', p_stats.get('schedule', 'Scheduled')),
+            'service_area': p_stats.get('service_area', 'Standard'),
+            'runs_per_week': p_stats.get('runs_per_week', 1),
+            'status': 'Active',
+            'ward': p.get('ward', p_stats.get('ward', '')),
+            'neighborhoods': p.get('neighborhoods', p_stats.get('neighborhoods', '')),
+            'ancs': p.get('ancs', p_stats.get('ancs', '')),
+            'area_desc': p.get('area_desc', p_stats.get('area_desc', '')),
+            'total': total,
+            'unique_addrs': p.get('unique_addrs', p_stats.get('unique_addrs', 0)),
+            'repeat_rate': p.get('repeat_rate', p_stats.get('repeat_rate', 0.0)),
+            'area_sq_mi': area_sq,
+            'density': round(total / area_sq, 1) if area_sq > 0 else 0.0,
+            'point_count': p.get('point_count', 0),
+            'segment_count': p.get('segment_count', 0)
+        }
+
+for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
+    p = feat.get('properties', {})
+    rid = p.get('route')
+    if rid:
+        p_stats = route_stats_lookup.get('recycle_' + str(rid), {})
+        total = p.get('total', p_stats.get('total', 0))
+        area_sq = p.get('area_sq_mi', p_stats.get('area_sq_mi', 0.0))
+        rec_entry = {
+            'route_id': rid,
+            'type': 'Recycling',
+            'route_name': f"Recycling Route {rid}",
+            'schedule': p.get('day', p_stats.get('schedule', 'Scheduled')),
+            'service_area': p_stats.get('service_area', 'Standard'),
+            'runs_per_week': 1,
+            'status': 'Active',
+            'ward': p.get('ward', p_stats.get('ward', '')),
+            'neighborhoods': p.get('neighborhoods', p_stats.get('neighborhoods', '')),
+            'ancs': p.get('ancs', p_stats.get('ancs', '')),
+            'area_desc': p.get('area_desc', p_stats.get('area_desc', '')),
+            'total': total,
+            'unique_addrs': p.get('unique_addrs', p_stats.get('unique_addrs', 0)),
+            'repeat_rate': p.get('repeat_rate', p_stats.get('repeat_rate', 0.0)),
+            'area_sq_mi': area_sq,
+            'density': round(total / area_sq, 1) if area_sq > 0 else 0.0,
+            'point_count': p.get('point_count', 0),
+            'segment_count': p.get('segment_count', 0)
+        }
+        route_stats_lookup['recycle_' + str(rid)] = rec_entry
+        if rid.startswith('R'):
+            route_stats_lookup['recycle_' + str(rid[1:])] = rec_entry
 
 route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
 
@@ -1331,6 +1411,9 @@ html_page = f'''<!DOCTYPE html>
           ringsList: ringsList,
           route: f.properties.route_area,
           day: f.properties.days,
+          ward: f.properties.ward,
+          neighborhoods: f.properties.neighborhoods,
+          ancs: f.properties.ancs,
           area_desc: f.properties.area_desc
         }});
       }});
@@ -1355,6 +1438,9 @@ html_page = f'''<!DOCTYPE html>
           ringsList: ringsList,
           route: f.properties.route,
           day: f.properties.day,
+          ward: f.properties.ward,
+          neighborhoods: f.properties.neighborhoods,
+          ancs: f.properties.ancs,
           area_desc: f.properties.area_desc
         }});
       }});
@@ -1686,10 +1772,14 @@ html_page = f'''<!DOCTYPE html>
           const tTot = tStats.total || 0;
           const rTot = rStats.total || 0;
           const combTot = tTot + rTot;
+          const tAncs = tr.ancs || tStats.ancs || '';
+          const rAncs = rr.ancs || rStats.ancs || '';
+          const ancsDisplay = (tAncs && rAncs && tAncs === rAncs) ? tAncs : [tAncs ? `Trash: ${{tAncs}}` : '', rAncs ? `Recycling: ${{rAncs}}` : ''].filter(Boolean).join(' • ');
 
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Route Intersection</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || rr.area_desc || 'DPW Catchment Area'}}</div>
+            ${{ancsDisplay ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancsDisplay}}</strong></div>` : ''}}
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--combined-color); border-top: 1px solid rgba(37,99,235,0.25); padding-top: 4px;">
               ${{combTot.toLocaleString()}} Combined Requests (180d)
             </div>
@@ -1701,9 +1791,11 @@ html_page = f'''<!DOCTYPE html>
         }} else if (tr) {{
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
           const tTot = tStats.total || 0;
+          const ancs = tr.ancs || tStats.ancs || '';
           html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}}</div>
+            <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
+            ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
               ${{tTot.toLocaleString()}} Trash Requests (180d)
@@ -1715,9 +1807,11 @@ html_page = f'''<!DOCTYPE html>
         }} else if (rr) {{
           const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
           const rTot = rStats.total || 0;
+          const ancs = rr.ancs || rStats.ancs || '';
           html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}}</div>
+            <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
+            ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
             <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
               ${{rTot.toLocaleString()}} Recycling Requests (180d)
@@ -1730,9 +1824,11 @@ html_page = f'''<!DOCTYPE html>
       }} else if (trashActive && tr) {{
         const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
         const tTot = tStats.total || 0;
+        const ancs = tr.ancs || tStats.ancs || '';
         html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}}</div>
+          <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
+          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
           <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
             ${{tTot.toLocaleString()}} Trash Requests (180d)
@@ -1744,9 +1840,11 @@ html_page = f'''<!DOCTYPE html>
       }} else if (recActive && rr) {{
         const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
         const rTot = rStats.total || 0;
+        const ancs = rr.ancs || rStats.ancs || '';
         html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}}</div>
+          <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
+          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
           <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
             ${{rTot.toLocaleString()}} Recycling Requests (180d)
@@ -1836,6 +1934,7 @@ html_page = f'''<!DOCTYPE html>
       const html = `
         <div style="font-weight: 800; font-size: 12px; color: ${{color}};">${{stream}} Route ${{p.route}} (Line)</div>
         <div style="font-size: 11px; color: var(--text-dim);">${{p.area_desc || p.neighborhoods || 'Residential Service Corridor'}}</div>
+        ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{p.ancs}}</strong></div>` : ''}}
         <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{sched}} • ${{p.ward || 'DC'}}</div>
         <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{color}}; border-top: 1px solid rgba(${{isTrash ? '220,38,38' : '22,163,74'}},0.25); padding-top: 4px;">
           ${{totalReq}} ${{stream}} Requests (180d)
