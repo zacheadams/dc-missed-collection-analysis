@@ -9,7 +9,7 @@ This resource provides an operational proof of concept for the DC Department of 
 ## Applications
 
 - **Project Hub ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Central portal displaying 180-day executive performance metrics, project methodology, and entry points to the interactive map and report.
-- **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 15), cascading Ward/ANC/SMD filters, DPW collection route overlays, and contextual PDF and PNG map exports.
+- **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 17), cascading Ward/ANC/SMD filters, dual DPW collection route overlays (catchment polygons and street network lines), and contextual PDF and PNG map exports.
 - **Operational Report ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))**: Municipal performance report featuring hierarchical Ward, ANC, and SMD deduplication benchmarks, collection day fleet bottleneck analysis, Chart.js visualizations with PNG/PDF exports, and a searchable 223-route performance matrix with CSV/PDF exports.
 
 ### Viewing Locally
@@ -181,7 +181,7 @@ Inner City routes receive twice-weekly collection (`Tuesday/Friday` or `Monday/T
 - **WCAG AAA Tooltips**: High-contrast tooltip styling (`#090d16` background, `#38bdf8` border, and bright `#ffffff`/`#facc15` typography) ensuring readability across all basemap contrast levels.
 - **Self-Contained Export Capability**: Each visualization contains an explicit time period subtitle and an inline footnote documenting the data source and temporal scope, enabling clean standalone screenshots for policy memos and community communications.
 - **Full Smooth Scroll-to-Zoom**: Enabled directly on the map viewport (`scrollWheelZoom: true`).
-- **Interactive Route Overlays**: When toggling DPW Trash Routes (140) or DPW Recycling Routes (173), hovering over the map displays route names, collection schedules, and physical neighborhood coverage directly within the high-contrast tooltip.
+- **Interactive Route Overlays (Dual Polygon & Line Modes)**: Selectable options for DPW Trash Routes (polygon), Recycling Routes (polygon), Trash Routes (line), and Recycling Routes (line). Line layers trace 105,894 collection points along street corridors. Clicking any route displays full operational intelligence, recurrence rates, unique properties, density, and neighborhood coverage in the inspector panel.
 
 ---
 
@@ -205,7 +205,7 @@ dc-missed-collection-analysis/
 │       ├── jspdf/                     # jsPDF 2.5.1
 │       ├── html2canvas/               # html2canvas 1.4.1
 │       └── jspdf-autotable/           # jsPDF-AutoTable 3.8.2
-├── tiles/                             # Offline Stamen Toner tiles for DC (zooms 11 to 15)
+├── tiles/                             # Offline Stamen Toner tiles for DC (zooms 11 to 17, Light & Blacklite)
 ├── data/                              # Aggregated datasets and geospatial boundaries
 │   ├── dc_180d_service_requests.json   # Rolling 180-day 311 missed collection records
 │   ├── route_180d_stats.json           # Precomputed DPW route-level performance and repeat metrics
@@ -216,16 +216,19 @@ dc-missed-collection-analysis/
 │   ├── dc_neighborhoods.geojson       # 132 DC Neighborhood point locations
 │   ├── dc_smds.geojson                # 345 DC Single Member District boundaries
 │   ├── dc_wards.geojson               # 8 DC Ward boundaries
-│   ├── dc_trash_routes.geojson        # 140 DPW trash collection routes
-│   └── dc_recycle_routes.geojson      # 173 DPW recycling collection routes
+│   ├── dc_trash_routes.geojson        # 140 DPW trash collection routes (polygons)
+│   ├── dc_recycle_routes.geojson      # 173 DPW recycling collection routes (polygons)
+│   ├── dc_trash_routes_lines.geojson  # 141 DPW trash collection routes (street lines)
+│   └── dc_recycle_routes_lines.geojson# 120 DPW recycling collection routes (street lines)
 └── scripts/                           # Reproducible data retrieval and analysis pipelines
     ├── update_pipeline.py             # Master pipeline orchestrator (fetch -> calculate -> compile)
     ├── fetch_311_data.py              # Incremental query to DC GIS FeatureServer 13 with retry logic
+    ├── generate_route_lines.py        # Generates street-level DPW route lines from collection points GIS
     ├── update_map_data.py             # Computes 30-day SMD & Ward metrics for interactive map
     ├── analyze_repeat_addresses.py    # Computes address deduplication and repeat metrics for SMDs
     ├── compute_route_stats.py         # Performs spatial ray-casting to compute DPW route metrics
     ├── compute_route_areas.py         # Performs spatial intersection to map routes to neighborhoods/ANCs
-    ├── download_toner_tiles.py        # Subsets and downloads Stamen Toner tiles for DC
+    ├── download_toner_tiles.py        # Subsets and downloads Stamen Toner tiles for DC (zooms 11 to 17)
     ├── download_vendor_assets.py      # Downloads client-side libraries into assets/vendor/
     ├── build_index_page.py            # Compiles index.html (Central Project Hub)
     ├── build_page.py                  # Compiles map.html (Dedicated Interactive Map)

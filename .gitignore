@@ -21,3 +21,6 @@ venv/
 scratch/
 tmp/
 *.tmp
+
+# Large raw GIS downloads (>50MB)
+data/dc_collection_points.geojson

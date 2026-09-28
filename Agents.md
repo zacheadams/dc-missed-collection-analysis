@@ -41,7 +41,11 @@ This document codifies development standards, operational conventions, and archi
   - Basemap tiles are Stamen Toner, hosted on Stadia Maps, downloaded and stored locally.
   - **Light Mode**: Uses native `stamen_toner` tiles (`tiles/light/{z}/{x}/{y}.png`).
   - **Dark Mode**: Uses native `stamen_toner_blacklite` tiles (`tiles/blacklite/{z}/{x}/{y}.png`).
-  - Tiles are strictly subsetted to the District of Columbia boundary polygon for Zooms 11 through 15 (351 tiles per variant, ~8 MB each).
+  - Tiles are strictly subsetted to the District of Columbia boundary polygon for Zooms 11 through 17 (4,567 tiles per variant, maxNativeZoom: 17, maxZoom: 17), eliminating blurriness when zoomed in.
+- **Dual Representation DPW Route Overlays**:
+  - **Catchment Polygons**: `Trash Routes (polygon)` and `Recycling Routes (polygon)` representing broad geographic collection zones.
+  - **Street Network Alignment Lines**: `Trash Routes (line)` and `Recycling Routes (line)` derived from 105,894 collection points in the DC Open Data Trash and Recycling Collection Points GIS dataset, clustered by street corridor and simplified via Ramer-Douglas-Peucker (RDP).
+  - Selecting any route (polygon or line) populates complete operational intelligence in the Inspector Panel (180d/30d metrics, repeat rate, unique addresses, density, schedule, and neighborhood/ANC breakdown).
 - **Single-Hue Relative Intensity Color Ramps**:
   - Choropleth fills must use single-hue intensity gradients (light tint to deep dark shade) rather than multi-hue spectral scales:
     - **Trash Stream**: Light red (`#fecaca`) to deep crimson (`#7f1d1d`).

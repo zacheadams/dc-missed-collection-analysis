@@ -364,6 +364,21 @@ def update_map_data():
             feat["properties"]["ancs"] = ra["ancs"]
             feat["properties"]["area_desc"] = ra["area_desc"]
 
+    # Load route lines if available
+    trash_lines_path = os.path.join(BASE_DIR, 'data', 'dc_trash_routes_lines.geojson')
+    recycle_lines_path = os.path.join(BASE_DIR, 'data', 'dc_recycle_routes_lines.geojson')
+
+    trash_routes_lines = old_map_data.get("trash_routes_lines", {"type": "FeatureCollection", "features": []})
+    recycle_routes_lines = old_map_data.get("recycle_routes_lines", {"type": "FeatureCollection", "features": []})
+
+    if os.path.exists(trash_lines_path):
+        with open(trash_lines_path, "r", encoding="utf-8") as f:
+            trash_routes_lines = json.load(f)
+
+    if os.path.exists(recycle_lines_path):
+        with open(recycle_lines_path, "r", encoding="utf-8") as f:
+            recycle_routes_lines = json.load(f)
+
     date_range_180d = f"{cutoff_180d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}"
     date_range_30d = f"{cutoff_30d.strftime('%Y-%m-%d')} to {max_dt.strftime('%Y-%m-%d')}"
 
@@ -390,6 +405,8 @@ def update_map_data():
         "smds": {"type": "FeatureCollection", "features": smd_features},
         "trash_routes": trash_routes,
         "recycle_routes": recycle_routes,
+        "trash_routes_lines": trash_routes_lines,
+        "recycle_routes_lines": recycle_routes_lines,
         "wards": {"type": "FeatureCollection", "features": ward_features}
     }
 

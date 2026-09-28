@@ -25,6 +25,18 @@ route_areas_path = os.path.join(BASE_DIR, 'data', 'route_areas.json')
 with open(map_data_path, 'r', encoding='utf-8') as f:
     map_data = json.load(f)
 
+if 'trash_routes_lines' not in map_data:
+    trash_lines_path = os.path.join(BASE_DIR, 'data', 'dc_trash_routes_lines.geojson')
+    if os.path.exists(trash_lines_path):
+        with open(trash_lines_path, 'r', encoding='utf-8') as f:
+            map_data['trash_routes_lines'] = json.load(f)
+
+if 'recycle_routes_lines' not in map_data:
+    rec_lines_path = os.path.join(BASE_DIR, 'data', 'dc_recycle_routes_lines.geojson')
+    if os.path.exists(rec_lines_path):
+        with open(rec_lines_path, 'r', encoding='utf-8') as f:
+            map_data['recycle_routes_lines'] = json.load(f)
+
 json_str = json.dumps(map_data, separators=(',', ':'))
 
 with open(route_stats_path, 'r', encoding='utf-8') as f:
@@ -864,6 +876,10 @@ html_page = f'''<!DOCTYPE html>
           </div>
         </div>
 
+        <div class="search-box">
+          <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
+        </div>
+
         <div class="hierarchy-container">
           <div class="hierarchy-row">
             <span class="hierarchy-label">Ward</span>
@@ -895,10 +911,6 @@ html_page = f'''<!DOCTYPE html>
           </div>
         </div>
 
-        <div class="search-box">
-          <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
-        </div>
-
         <div class="metric-toggle-group">
           <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span><br>Requests</button>
           <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span><br>Only</button>
@@ -911,12 +923,20 @@ html_page = f'''<!DOCTYPE html>
             <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span><span class="kw-trash">Trash</span> Routes</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span><span class="kw-trash">Trash</span> Routes (polygon)</span>
             <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
           </label>
           <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span><span class="kw-recycle">Recycling</span> Routes</span>
+            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span><span class="kw-recycle">Recycling</span> Routes (polygon)</span>
             <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
+          </label>
+          <label class="checkbox-row">
+            <span><span class="badge-route" style="background: var(--trash-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-trash">Trash</span> Routes (line)</span>
+            <input type="checkbox" id="chk-trash-lines" onchange="toggleTrashLines(this.checked)">
+          </label>
+          <label class="checkbox-row">
+            <span><span class="badge-route" style="background: var(--recycle-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-recycle">Recycling</span> Routes (line)</span>
+            <input type="checkbox" id="chk-recycle-lines" onchange="toggleRecycleLines(this.checked)">
           </label>
         </div>
 
@@ -1014,7 +1034,7 @@ html_page = f'''<!DOCTYPE html>
       zoom: 12,
       zoomControl: false,
       minZoom: 11,
-      maxZoom: 18,
+      maxZoom: 17,
       scrollWheelZoom: true
     }});
 
@@ -1036,16 +1056,19 @@ html_page = f'''<!DOCTYPE html>
     map.createPane('routePane');
     map.getPane('routePane').style.zIndex = 420;
 
+    map.createPane('routeLinePane');
+    map.getPane('routeLinePane').style.zIndex = 430;
+
     function getTileUrl(theme) {{
       return theme === 'dark' ? 'tiles/blacklite/{{z}}/{{x}}/{{y}}.png' : 'tiles/light/{{z}}/{{x}}/{{y}}.png';
     }}
 
-    // Basemap: Local Stamen Toner (Zooms 11 to 16)
+    // Basemap: Local Stamen Toner (Zooms 11 to 17)
     let baseTileLayer = L.tileLayer(getTileUrl(currentTheme), {{
       pane: 'tonerBasePane',
       minZoom: 11,
-      maxNativeZoom: 16,
-      maxZoom: 18,
+      maxNativeZoom: 17,
+      maxZoom: 17,
       bounds: [[38.7916, -77.1198], [38.9960, -76.9091]],
       attribution: 'Tiles: Stamen Design (CC BY 3.0) • Data: OpenStreetMap (ODbL)'
     }}).addTo(map);
@@ -1058,14 +1081,14 @@ html_page = f'''<!DOCTYPE html>
      *
      * L.tileLayer('https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Transportation/MapServer/tile/{{z}}/{{y}}/{{x}}', {{
      *   pane: 'tonerBasePane',
-     *   maxZoom: 18,
+     *   maxZoom: 17,
      *   opacity: 0.95,
      *   attribution: 'U.S. Census Bureau TIGERweb'
      * }}).addTo(map);
      *
      * L.tileLayer('https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Hydro/MapServer/tile/{{z}}/{{y}}/{{x}}', {{
      *   pane: 'tonerBasePane',
-     *   maxZoom: 18,
+     *   maxZoom: 17,
      *   opacity: 0.75,
      *   interactive: false
      * }}).addTo(map);
@@ -1075,6 +1098,8 @@ html_page = f'''<!DOCTYPE html>
     let wardLayer = null;
     let trashRoutesLayer = null;
     let recycleRoutesLayer = null;
+    let trashLinesLayer = null;
+    let recycleLinesLayer = null;
     let wardMaskLayer = null;
     let activeHoverLayer = null;
 
@@ -1476,6 +1501,50 @@ html_page = f'''<!DOCTYPE html>
       }};
     }}
 
+    function getTrashLineStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#ef4444' : '#dc2626',
+        weight: 3.5,
+        opacity: 0.85,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }};
+    }}
+
+    function getTrashLineHoverStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#fca5a5' : '#991b1b',
+        weight: 5.5,
+        opacity: 1.0,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }};
+    }}
+
+    function getRecycleLineStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#22c55e' : '#16a34a',
+        weight: 3.5,
+        opacity: 0.85,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }};
+    }}
+
+    function getRecycleLineHoverStyle() {{
+      const isDark = currentTheme === 'dark';
+      return {{
+        color: isDark ? '#86efac' : '#166534',
+        weight: 5.5,
+        opacity: 1.0,
+        lineCap: 'round',
+        lineJoin: 'round'
+      }};
+    }}
+
     let activeHoverRouteLayer = null;
     let selectedRouteId = null;
     let selectedRouteStream = null;
@@ -1483,11 +1552,16 @@ html_page = f'''<!DOCTYPE html>
 
     function clearRouteSelection() {{
       if (selectedRouteLayer) {{
-        selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        if (selectedRouteLayer._isLine) {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
+        }} else {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        }}
         selectedRouteLayer = null;
       }}
       selectedRouteId = null;
       selectedRouteStream = null;
+      selectedRouteType = '';
     }}
 
     function selectRoute(feature, layer, stream) {{
@@ -1499,12 +1573,18 @@ html_page = f'''<!DOCTYPE html>
       if (smdLayer) smdLayer.setStyle(smdStyle);
 
       if (selectedRouteLayer && selectedRouteLayer !== layer) {{
-        selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        if (selectedRouteLayer._isLine) {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
+        }} else {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        }}
       }}
 
-      selectedRouteId = stream === 'Trash' ? feature.properties.route_area : feature.properties.route;
+      selectedRouteId = stream === 'Trash' ? (feature.properties.route_area || feature.properties.route) : feature.properties.route;
       selectedRouteStream = stream;
+      selectedRouteType = ' (polygon)';
       selectedRouteLayer = layer;
+      layer._isLine = false;
 
       const isDark = currentTheme === 'dark';
       const selColor = stream === 'Trash'
@@ -1527,7 +1607,48 @@ html_page = f'''<!DOCTYPE html>
       map.fitBounds(layer.getBounds(), {{ padding: [50, 50], maxZoom: 15 }});
 
       updateInspectorRoute(feature.properties, stream);
-      updateBreadcrumbsRoute(feature.properties, stream);
+      updateBreadcrumbsRoute(feature.properties, stream, ' (polygon)');
+    }}
+
+    function selectLineRoute(feature, layer, stream) {{
+      selectedSmdId = null;
+      selectedAncId = null;
+      selectedWardNum = null;
+      updateDropdowns(null, null, null);
+      updateWardMask();
+      if (smdLayer) smdLayer.setStyle(smdStyle);
+
+      if (selectedRouteLayer && selectedRouteLayer !== layer) {{
+        if (selectedRouteLayer._isLine) {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
+        }} else {{
+          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+        }}
+      }}
+
+      selectedRouteId = feature.properties.route;
+      selectedRouteStream = stream;
+      selectedRouteType = ' (line)';
+      selectedRouteLayer = layer;
+      layer._isLine = true;
+      layer._isTrash = stream === 'Trash';
+
+      const isDark = currentTheme === 'dark';
+      const selColor = stream === 'Trash'
+        ? (isDark ? '#f87171' : '#b91c1c')
+        : (isDark ? '#4ade80' : '#15803d');
+
+      layer.setStyle({{
+        color: selColor,
+        weight: 6.5,
+        opacity: 1.0
+      }});
+      layer.bringToFront();
+
+      map.fitBounds(layer.getBounds(), {{ padding: [50, 50], maxZoom: 16 }});
+
+      updateInspectorRoute(feature.properties, stream);
+      updateBreadcrumbsRoute(feature.properties, stream, ' (line)');
     }}
 
     function handleRouteHover(e, layer, isTrash) {{
@@ -1681,6 +1802,96 @@ html_page = f'''<!DOCTYPE html>
             click: function(e) {{
               L.DomEvent.stopPropagation(e);
               selectRoute(feature, layer, 'Recycling');
+            }}
+          }});
+        }}
+      }});
+    }}
+
+    function handleLineHover(e, layer, isTrash) {{
+      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer && activeHoverRouteLayer !== selectedRouteLayer) {{
+        if (activeHoverRouteLayer._isLine) {{
+          activeHoverRouteLayer.setStyle(activeHoverRouteLayer._isTrash ? getTrashLineStyle() : getRecycleLineStyle());
+        }} else {{
+          activeHoverRouteLayer.setStyle(activeHoverRouteLayer._isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
+        }}
+      }}
+      activeHoverRouteLayer = layer;
+      layer._isTrash = isTrash;
+      layer._isLine = true;
+      if (layer !== selectedRouteLayer) {{
+        layer.setStyle(isTrash ? getTrashLineHoverStyle() : getRecycleLineHoverStyle());
+      }}
+
+      const p = layer.feature.properties;
+      const stream = isTrash ? 'Trash' : 'Recycling';
+      const color = isTrash ? 'var(--trash-color)' : 'var(--recycle-color)';
+      const totalReq = (p.total || 0).toLocaleString();
+      const sched = p.day || 'Scheduled';
+
+      const html = `
+        <div style="font-weight: 800; font-size: 12px; color: ${{color}};">${{stream}} Route ${{p.route}} (Line)</div>
+        <div style="font-size: 11px; color: var(--text-dim);">${{p.area_desc || p.neighborhoods || 'Residential Service Corridor'}}</div>
+        <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{sched}} • ${{p.ward || 'DC'}}</div>
+        <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{color}}; border-top: 1px solid rgba(${{isTrash ? '220,38,38' : '22,163,74'}},0.25); padding-top: 4px;">
+          ${{totalReq}} ${{stream}} Requests (180d)
+        </div>
+        <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+          ${{(p.point_count || 0).toLocaleString()}} Collection Points • ${{(p.segment_count || 0).toLocaleString()}} Street Segments
+        </div>
+      `;
+
+      smdTooltip.setContent(html);
+      smdTooltip.setLatLng(e.latlng);
+      if (!map.hasLayer(smdTooltip)) smdTooltip.openOn(map);
+    }}
+
+    function handleLineMouseout(layer, isTrash) {{
+      if (layer && layer !== selectedRouteLayer) {{
+        layer.setStyle(isTrash ? getTrashLineStyle() : getRecycleLineStyle());
+      }}
+      if (activeHoverRouteLayer === layer) {{
+        activeHoverRouteLayer = null;
+      }}
+      smdTooltip.close();
+    }}
+
+    function initTrashLinesLayer() {{
+      if (!MAP_DATA.trash_routes_lines) return;
+      trashLinesLayer = L.geoJSON(MAP_DATA.trash_routes_lines, {{
+        pane: 'routeLinePane',
+        style: getTrashLineStyle,
+        onEachFeature: function(feature, layer) {{
+          layer._isLine = true;
+          layer._isTrash = true;
+          layer.on({{
+            mouseover: function(e) {{ handleLineHover(e, layer, true); }},
+            mousemove: function(e) {{ handleLineHover(e, layer, true); }},
+            mouseout: function() {{ handleLineMouseout(layer, true); }},
+            click: function(e) {{
+              L.DomEvent.stopPropagation(e);
+              selectLineRoute(feature, layer, 'Trash');
+            }}
+          }});
+        }}
+      }});
+    }}
+
+    function initRecycleLinesLayer() {{
+      if (!MAP_DATA.recycle_routes_lines) return;
+      recycleLinesLayer = L.geoJSON(MAP_DATA.recycle_routes_lines, {{
+        pane: 'routeLinePane',
+        style: getRecycleLineStyle,
+        onEachFeature: function(feature, layer) {{
+          layer._isLine = true;
+          layer._isTrash = false;
+          layer.on({{
+            mouseover: function(e) {{ handleLineHover(e, layer, false); }},
+            mousemove: function(e) {{ handleLineHover(e, layer, false); }},
+            mouseout: function() {{ handleLineMouseout(layer, false); }},
+            click: function(e) {{
+              L.DomEvent.stopPropagation(e);
+              selectLineRoute(feature, layer, 'Recycling');
             }}
           }});
         }}
@@ -1870,11 +2081,13 @@ html_page = f'''<!DOCTYPE html>
       }}
     }}
 
+    let selectedRouteType = '';
+
     function updateBreadcrumbs() {{
       const bar = document.getElementById('breadcrumb-crumbs');
       if (!bar) return;
       if (selectedRouteId) {{
-        bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{selectedRouteStream}} Route ${{selectedRouteId}}</span>`;
+        bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{selectedRouteStream}} Route ${{selectedRouteId}}${{selectedRouteType}}</span>`;
         return;
       }}
       let html = '';
@@ -1890,11 +2103,11 @@ html_page = f'''<!DOCTYPE html>
       bar.innerHTML = html;
     }}
 
-    function updateBreadcrumbsRoute(p, stream) {{
+    function updateBreadcrumbsRoute(p, stream, typeLabel = '') {{
       const bar = document.getElementById('breadcrumb-crumbs');
       if (!bar) return;
-      const rId = stream === 'Trash' ? p.route_area : p.route;
-      bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{stream}} Route ${{rId}}</span>`;
+      const rId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
+      bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{stream}} Route ${{rId}}${{typeLabel}}</span>`;
     }}
 
     function updateInspectorCitywide() {{
@@ -2010,19 +2223,24 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function updateInspectorRoute(p, stream) {{
-      const rId = stream === 'Trash' ? p.route_area : p.route;
+      const rId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
       const key = (stream === 'Trash' ? 'trash_' : 'recycle_') + rId;
       const stats = ROUTE_STATS[key] || {{}};
 
       const sched = (stats.schedule && stats.schedule !== 'Unassigned' ? stats.schedule : '') || p.days || p.day || stats.day || 'Scheduled';
       const ward = stats.ward || p.ward || 'Citywide';
-      const total = stats.total || 0;
-      const repRate = stats.repeat_rate != null ? stats.repeat_rate : 0;
-      const uniqAddrs = stats.unique_addrs || 0;
-      const density = stats.density != null ? stats.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0);
+      const total = stats.total != null ? stats.total : (p.total || 0);
+      const repRate = stats.repeat_rate != null ? stats.repeat_rate : (p.repeat_rate != null ? p.repeat_rate : 0);
+      const uniqAddrs = stats.unique_addrs != null ? stats.unique_addrs : (p.unique_addrs || 0);
+      const density = stats.density != null ? stats.density : (p.density != null ? p.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0));
       const areaSqMi = stats.area_sq_mi || p.area_sq_mi || 0;
+      const isLine = !!p.point_count;
 
-      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}}`;
+      const typeBadge = isLine
+        ? '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Line Route)</span>'
+        : '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Polygon)</span>';
+
+      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}}${{typeBadge}}`;
       document.getElementById('insp-sub').innerText = `Collection day: ${{sched}} • ${{ward}}`;
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
@@ -2039,7 +2257,13 @@ html_page = f'''<!DOCTYPE html>
 
       const nbhDesc = stats.neighborhoods || p.neighborhoods || 'Residential Corridor';
       const ancsDesc = stats.ancs || p.ancs || '';
-      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days.`;
+      const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
+
+      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days (viewed via ${{geomType}}).`;
+
+      const pointInfo = isLine
+        ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Collection Points: <strong style="color: var(--text-main);">${{(p.point_count || 0).toLocaleString()}}</strong> (${{(p.segment_count || 0).toLocaleString()}} street segments)</div>`
+        : '';
 
       const rBox = document.getElementById('insp-route-box');
       rBox.innerHTML = `
@@ -2047,6 +2271,7 @@ html_page = f'''<!DOCTYPE html>
         <div style="font-size: 11px; color: var(--text-dim);">Neighborhoods: <strong style="color: var(--text-main);">${{nbhDesc}}</strong></div>
         ${{ancsDesc ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">ANCs: <strong style="color: var(--text-main);">${{ancsDesc}}</strong></div>` : ''}}
         ${{areaSqMi > 0 ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Area: <strong style="color: var(--text-main);">${{areaSqMi}} sq mi</strong> (${{density}} req/sq mi)</div>` : ''}}
+        ${{pointInfo}}
       `;
       rBox.style.display = 'block';
 
@@ -2166,6 +2391,32 @@ html_page = f'''<!DOCTYPE html>
           }}
         }});
       }}
+      if (trashLinesLayer) {{
+        trashLinesLayer.eachLayer(l => {{
+          if (l === selectedRouteLayer) {{
+            l.setStyle({{
+              color: isDark ? '#f87171' : '#b91c1c',
+              weight: 6.5,
+              opacity: 1.0
+            }});
+          }} else {{
+            l.setStyle(getTrashLineStyle());
+          }}
+        }});
+      }}
+      if (recycleLinesLayer) {{
+        recycleLinesLayer.eachLayer(l => {{
+          if (l === selectedRouteLayer) {{
+            l.setStyle({{
+              color: isDark ? '#4ade80' : '#15803d',
+              weight: 6.5,
+              opacity: 1.0
+            }});
+          }} else {{
+            l.setStyle(getRecycleLineStyle());
+          }}
+        }});
+      }}
     }}
 
     function toggleSMDLayer(show) {{
@@ -2183,13 +2434,13 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         trashRoutesLayer.setStyle(getTrashRouteStyle());
       }} else {{
-        if (selectedRouteStream === 'Trash') {{
+        if (selectedRouteStream === 'Trash' && selectedRouteLayer && !selectedRouteLayer._isLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
           updateBreadcrumbs();
         }}
         map.removeLayer(trashRoutesLayer);
-        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash) {{
+        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && !activeHoverRouteLayer._isLine) {{
           activeHoverRouteLayer = null;
         }}
       }}
@@ -2201,13 +2452,47 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         recycleRoutesLayer.setStyle(getRecycleRouteStyle());
       }} else {{
-        if (selectedRouteStream === 'Recycling') {{
+        if (selectedRouteStream === 'Recycling' && selectedRouteLayer && !selectedRouteLayer._isLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
           updateBreadcrumbs();
         }}
         map.removeLayer(recycleRoutesLayer);
-        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash) {{
+        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && !activeHoverRouteLayer._isLine) {{
+          activeHoverRouteLayer = null;
+        }}
+      }}
+    }}
+
+    function toggleTrashLines(show) {{
+      if (show) {{
+        map.addLayer(trashLinesLayer);
+        trashLinesLayer.setStyle(getTrashLineStyle());
+      }} else {{
+        if (selectedRouteStream === 'Trash' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+          clearRouteSelection();
+          updateInspectorCitywide();
+          updateBreadcrumbs();
+        }}
+        map.removeLayer(trashLinesLayer);
+        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
+          activeHoverRouteLayer = null;
+        }}
+      }}
+    }}
+
+    function toggleRecycleLines(show) {{
+      if (show) {{
+        map.addLayer(recycleLinesLayer);
+        recycleLinesLayer.setStyle(getRecycleLineStyle());
+      }} else {{
+        if (selectedRouteStream === 'Recycling' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+          clearRouteSelection();
+          updateInspectorCitywide();
+          updateBreadcrumbs();
+        }}
+        map.removeLayer(recycleLinesLayer);
+        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
           activeHoverRouteLayer = null;
         }}
       }}
@@ -2240,6 +2525,12 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('chk-recycle-routes').checked = false;
       if (recycleRoutesLayer && map.hasLayer(recycleRoutesLayer)) map.removeLayer(recycleRoutesLayer);
 
+      document.getElementById('chk-trash-lines').checked = false;
+      if (trashLinesLayer && map.hasLayer(trashLinesLayer)) map.removeLayer(trashLinesLayer);
+
+      document.getElementById('chk-recycle-lines').checked = false;
+      if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) map.removeLayer(recycleLinesLayer);
+
       map.setView([38.9072, -77.01], 12);
       updateWardMask();
       if (smdLayer) smdLayer.setStyle(smdStyle);
@@ -2258,7 +2549,14 @@ html_page = f'''<!DOCTYPE html>
       const periodLabel = currentPeriod === '30d' ? '30-Day' : '180-Day';
       const streamLabel = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
 
-      if (selectedSmdId) {{
+      if (selectedRouteId) {{
+        return {{
+          title: `Route Operational Report: ${{selectedRouteStream}} Route ${{selectedRouteId}}${{selectedRouteType}}`,
+          subtitle: `Collection Day & Geographic Alignment • ${{periodLabel}} Window`,
+          metrics: `Active Route: ${{selectedRouteStream}} Route ${{selectedRouteId}}${{selectedRouteType}}`,
+          filename: `dc-map-route-${{selectedRouteStream.toLowerCase()}}-${{selectedRouteId}}-${{currentPeriod}}`
+        }};
+      }} else if (selectedSmdId) {{
         const feat = MAP_DATA.smds.features.find(f => f.properties.smd_id === selectedSmdId);
         const p = feat ? feat.properties : {{}};
         const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;

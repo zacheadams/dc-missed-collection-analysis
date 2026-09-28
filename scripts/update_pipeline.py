@@ -32,7 +32,7 @@ def run_step(step_num, total_steps, title, func):
 
 def main():
     t_start = time.time()
-    total_steps = 7
+    total_steps = 8
     print("=" * 70)
     print(f"DC Missed Collection Pipeline -- Started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 70)
@@ -52,37 +52,41 @@ def main():
             lambda: update_service_requests(full_fetch=full_fetch)
         )
 
-    # Step 2: Update map data (180-day default and 30-day windows)
-    from update_map_data import update_map_data
-    run_step(2, total_steps, "Updating SMD & Ward Map Metrics (180d & 30d Windows)", update_map_data)
-
-    # Step 3: Compute 180-day address deduplication & repeat stats
+    # Step 2: Compute 180-day address deduplication & repeat stats
     from analyze_repeat_addresses import analyze_repeat_addresses
-    run_step(3, total_steps, "Computing 180-Day SMD & Ward Address Deduplication", analyze_repeat_addresses)
+    run_step(2, total_steps, "Computing 180-Day SMD & Ward Address Deduplication", analyze_repeat_addresses)
 
-    # Step 4: Compute route metrics
+    # Step 3: Compute route metrics
     from compute_route_stats import compute_route_stats
-    run_step(4, total_steps, "Computing DPW Route Performance Metrics", compute_route_stats)
+    run_step(3, total_steps, "Computing DPW Route Performance Metrics", compute_route_stats)
 
-    # Step 5: Build report.html
+    # Step 4: Generate DPW route line geometries
+    from generate_route_lines import generate_route_lines
+    run_step(4, total_steps, "Generating DPW Route Line Geometries from Collection Points", generate_route_lines)
+
+    # Step 5: Update map data (180-day default and 30-day windows)
+    from update_map_data import update_map_data
+    run_step(5, total_steps, "Updating SMD & Ward Map Metrics and Bundling Map Data", update_map_data)
+
+    # Step 6: Build report.html
     run_step(
-        5,
+        6,
         total_steps,
         "Compiling Unified Operational Report (report.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_report_page.py')])
     )
 
-    # Step 6: Build map.html
+    # Step 7: Build map.html
     run_step(
-        6,
+        7,
         total_steps,
         "Compiling Dedicated Interactive Map (map.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_page.py')])
     )
 
-    # Step 7: Build index.html
+    # Step 8: Build index.html
     run_step(
-        7,
+        8,
         total_steps,
         "Compiling Central Project Hub (index.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_index_page.py')])
