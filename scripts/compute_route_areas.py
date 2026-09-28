@@ -1,6 +1,18 @@
+#!/usr/bin/env python3
+"""
+Precomputes spatial intersections mapping DPW routes to wards, neighborhoods, and ANCs.
+Combines polygon geometries with street-level collection point boundaries for ground-truth accuracy.
+Generates data/route_areas.json.
+
+Strict standards:
+- Strictly zero emojis across code, logs, and outputs
+- Zero third-party pip dependencies (standard library only)
+"""
+
 import json
 import math
 import os
+import re
 from collections import defaultdict, Counter
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,151 +87,285 @@ def get_bbox(polys):
                 if y > max_y: max_y = y
     return (min_x, min_y, max_x, max_y)
 
-with open(os.path.join(BASE_DIR, 'data/dc_trash_routes.geojson')) as f:
-    trash_geo = json.load(f)
-with open(os.path.join(BASE_DIR, 'data/dc_recycle_routes.geojson')) as f:
-    rec_geo = json.load(f)
-with open(os.path.join(BASE_DIR, 'data/dc_neighborhood_clusters.geojson')) as f:
-    clust_geo = json.load(f)
-with open(os.path.join(BASE_DIR, 'data/dc_neighborhoods.geojson')) as f:
-    nbh_geo = json.load(f)
-with open(os.path.join(BASE_DIR, 'data/dc_smds.geojson')) as f:
-    smd_geo = json.load(f)
-with open(os.path.join(BASE_DIR, 'data/dc_wards.geojson')) as f:
-    ward_geo = json.load(f)
+def merge_line_props(props_list):
+    """
+    Merge spatial properties from multiple line route runs (e.g. 101_2 and 101_4).
+    """
+    if len(props_list) == 1:
+        p = props_list[0]
+        return p['ward'], p['neighborhoods'], p['ancs'], p['area_desc']
 
-# Build spatial indexes
-clusters = []
-for f in clust_geo['features']:
-    polys = get_poly_rings_list(f['geometry'])
-    clusters.append({
-        'name': f['properties'].get('NBH_NAMES', ''),
-        'cluster': f['properties'].get('NAME', ''),
-        'polys': polys,
-        'bbox': get_bbox(polys)
-    })
+    # Collect unique wards in order
+    wards = []
+    for p in props_list:
+        for w in re.findall(r'Ward\s+(\d+)', p.get('ward', '')):
+            if w not in wards:
+                wards.append(w)
+    ward_str = ' / '.join([f'Ward {w}' for w in sorted(wards)]) if wards else 'District-Wide'
 
-nbh_pts = []
-for f in nbh_geo['features']:
-    nbh_pts.append({
-        'name': f['properties']['NAME'],
-        'coord': f['geometry']['coordinates']
-    })
+    # Collect unique ANCs in order
+    ancs = []
+    for p in props_list:
+        raw_ancs = p.get('ancs', '').replace('ANC', '').split(',')
+        for a in raw_ancs:
+            a = a.strip()
+            if a and a not in ancs:
+                ancs.append(a)
+    ancs_str = 'ANC ' + ', '.join(ancs[:4]) if ancs else ''
 
-smds = []
-for f in smd_geo['features']:
-    polys = get_poly_rings_list(f['geometry'])
-    smds.append({
-        'smd_id': f['properties']['SMD_ID'],
-        'anc_id': f['properties']['ANC_ID'],
-        'polys': polys,
-        'bbox': get_bbox(polys)
-    })
+    # Collect unique neighborhoods in order
+    nbhs = []
+    for p in props_list:
+        for n in p.get('neighborhoods', '').split(','):
+            n = n.strip()
+            if n and n not in nbhs and len(nbhs) < 3:
+                nbhs.append(n)
+    nbhs_str = ', '.join(nbhs) if nbhs else 'Residential Corridor'
+    area_desc = f'{ward_str} • {nbhs_str}' + (f' ({ancs_str})' if ancs_str else '')
+    return ward_str, nbhs_str, ancs_str, area_desc
 
-wards = []
-for f in ward_geo['features']:
-    polys = get_poly_rings_list(f['geometry'])
-    wards.append({
-        'ward': f['properties'].get('WARD', f['properties'].get('NAME', '')),
-        'polys': polys,
-        'bbox': get_bbox(polys)
-    })
+def compute_route_areas():
+    trash_geo_path = os.path.join(BASE_DIR, 'data/dc_trash_routes.geojson')
+    rec_geo_path = os.path.join(BASE_DIR, 'data/dc_recycle_routes.geojson')
+    clust_geo_path = os.path.join(BASE_DIR, 'data/dc_neighborhood_clusters.geojson')
+    nbh_geo_path = os.path.join(BASE_DIR, 'data/dc_neighborhoods.geojson')
+    smd_geo_path = os.path.join(BASE_DIR, 'data/dc_smds.geojson')
+    ward_geo_path = os.path.join(BASE_DIR, 'data/dc_wards.geojson')
 
-def analyze_route(feat_list):
-    all_polys = []
-    for f in feat_list:
-        all_polys.extend(get_poly_rings_list(f['geometry']))
-    bbox = get_bbox(all_polys)
+    with open(trash_geo_path, 'r', encoding='utf-8') as f:
+        trash_geo = json.load(f)
+    with open(rec_geo_path, 'r', encoding='utf-8') as f:
+        rec_geo = json.load(f)
+    with open(clust_geo_path, 'r', encoding='utf-8') as f:
+        clust_geo = json.load(f)
+    with open(nbh_geo_path, 'r', encoding='utf-8') as f:
+        nbh_geo = json.load(f)
+    with open(smd_geo_path, 'r', encoding='utf-8') as f:
+        smd_geo = json.load(f)
+    with open(ward_geo_path, 'r', encoding='utf-8') as f:
+        ward_geo = json.load(f)
 
-    contained_nbhs = []
-    for np in nbh_pts:
-        nx, ny = np['coord']
-        if bbox[0] <= nx <= bbox[2] and bbox[1] <= ny <= bbox[3]:
-            if any(is_point_in_poly(nx, ny, p) for p in all_polys):
-                contained_nbhs.append(np['name'])
+    # Build spatial boundary indexes for fallback polygon sampling
+    clusters = []
+    for f in clust_geo['features']:
+        polys = get_poly_rings_list(f['geometry'])
+        clusters.append({
+            'name': f['properties'].get('NBH_NAMES', ''),
+            'cluster': f['properties'].get('NAME', ''),
+            'polys': polys,
+            'bbox': get_bbox(polys)
+        })
 
-    grid_clusters = Counter()
-    grid_ancs = Counter()
-    grid_wards = Counter()
+    nbh_pts = []
+    for f in nbh_geo['features']:
+        nbh_pts.append({
+            'name': f['properties']['NAME'],
+            'coord': f['geometry']['coordinates']
+        })
 
-    steps = 14
-    for ix in range(steps):
-        gx = bbox[0] + (bbox[2] - bbox[0]) * (ix + 0.5) / steps
-        for iy in range(steps):
-            gy = bbox[1] + (bbox[3] - bbox[1]) * (iy + 0.5) / steps
-            if any(is_point_in_poly(gx, gy, p) for p in all_polys):
-                for c in clusters:
-                    if c['bbox'][0] <= gx <= c['bbox'][2] and c['bbox'][1] <= gy <= c['bbox'][3]:
-                        if any(is_point_in_poly(gx, gy, cp) for cp in c['polys']):
-                            for part in c['name'].split(','):
-                                p_clean = part.strip()
-                                if p_clean: grid_clusters[p_clean] += 1
-                for s in smds:
-                    if s['bbox'][0] <= gx <= s['bbox'][2] and s['bbox'][1] <= gy <= s['bbox'][3]:
-                        if any(is_point_in_poly(gx, gy, sp) for sp in s['polys']):
-                            grid_ancs[s['anc_id']] += 1
-                for w in wards:
-                    if w['bbox'][0] <= gx <= w['bbox'][2] and w['bbox'][1] <= gy <= w['bbox'][3]:
-                        if any(is_point_in_poly(gx, gy, wp) for wp in w['polys']):
-                            grid_wards[str(w['ward'])] += 1
+    smds = []
+    for f in smd_geo['features']:
+        polys = get_poly_rings_list(f['geometry'])
+        smds.append({
+            'smd_id': f['properties']['SMD_ID'],
+            'anc_id': f['properties']['ANC_ID'],
+            'polys': polys,
+            'bbox': get_bbox(polys)
+        })
 
-    final_nbhs = []
-    for n in contained_nbhs:
-        if n not in final_nbhs: final_nbhs.append(n)
-    for n, count in grid_clusters.most_common(5):
-        if n not in final_nbhs and len(final_nbhs) < 4:
-            final_nbhs.append(n)
+    wards = []
+    for f in ward_geo['features']:
+        polys = get_poly_rings_list(f['geometry'])
+        wards.append({
+            'ward': f['properties'].get('WARD', f['properties'].get('NAME', '')),
+            'polys': polys,
+            'bbox': get_bbox(polys)
+        })
 
-    top_ancs = [a[0] for a in grid_ancs.most_common(3)]
-    anc_wards = set()
-    for a in top_ancs:
-        if a and a[0].isdigit():
-            anc_wards.add(a[0])
-        elif a.startswith('3/4G'):
-            anc_wards.add('3')
-            anc_wards.add('4')
+    def analyze_polygon_features(feat_list):
+        all_polys = []
+        for f in feat_list:
+            all_polys.extend(get_poly_rings_list(f['geometry']))
+        bbox = get_bbox(all_polys)
 
-    top_ward = f"Ward {grid_wards.most_common(1)[0][0]}" if grid_wards else "District-Wide"
-    if len(grid_wards) > 1:
-        w1_cnt = grid_wards.most_common(1)[0][1]
-        for w, cnt in grid_wards.most_common()[1:]:
-            if cnt > w1_cnt * 0.2 or (cnt > w1_cnt * 0.1 and w in anc_wards):
-                top_ward += f" / Ward {w}"
+        contained_nbhs = []
+        for np in nbh_pts:
+            nx, ny = np['coord']
+            if bbox[0] <= nx <= bbox[2] and bbox[1] <= ny <= bbox[3]:
+                if any(is_point_in_poly(nx, ny, p) for p in all_polys):
+                    contained_nbhs.append(np['name'])
 
-    area_str = ", ".join(final_nbhs[:3]) if final_nbhs else "Residential Corridor"
-    ancs_str = f"ANC {', '.join(top_ancs)}" if top_ancs else ""
-    return {
-        'ward': top_ward,
-        'neighborhoods': area_str,
-        'ancs': ancs_str,
-        'area_desc': f"{top_ward} • {area_str}" + (f" ({ancs_str})" if ancs_str else ""),
-        'area_sq_mi': feat_list_area_sq_mi(feat_list)
+        grid_clusters = Counter()
+        grid_ancs = Counter()
+        grid_wards = Counter()
+
+        steps = 14
+        for ix in range(steps):
+            gx = bbox[0] + (bbox[2] - bbox[0]) * (ix + 0.5) / steps
+            for iy in range(steps):
+                gy = bbox[1] + (bbox[3] - bbox[1]) * (iy + 0.5) / steps
+                if any(is_point_in_poly(gx, gy, p) for p in all_polys):
+                    for c in clusters:
+                        if c['bbox'][0] <= gx <= c['bbox'][2] and c['bbox'][1] <= gy <= c['bbox'][3]:
+                            if any(is_point_in_poly(gx, gy, cp) for cp in c['polys']):
+                                for part in c['name'].split(','):
+                                    p_clean = part.strip()
+                                    if p_clean: grid_clusters[p_clean] += 1
+                    for s in smds:
+                        if s['bbox'][0] <= gx <= s['bbox'][2] and s['bbox'][1] <= gy <= s['bbox'][3]:
+                            if any(is_point_in_poly(gx, gy, sp) for sp in s['polys']):
+                                grid_ancs[s['anc_id']] += 1
+                    for w in wards:
+                        if w['bbox'][0] <= gx <= w['bbox'][2] and w['bbox'][1] <= gy <= w['bbox'][3]:
+                            if any(is_point_in_poly(gx, gy, wp) for wp in w['polys']):
+                                grid_wards[str(w['ward'])] += 1
+
+        final_nbhs = []
+        for n in contained_nbhs:
+            if n not in final_nbhs: final_nbhs.append(n)
+        for n, count in grid_clusters.most_common(5):
+            if n not in final_nbhs and len(final_nbhs) < 4:
+                final_nbhs.append(n)
+
+        top_ancs = [a[0] for a in grid_ancs.most_common(3)]
+        anc_wards = set()
+        for a in top_ancs:
+            if a and a[0].isdigit():
+                anc_wards.add(a[0])
+            elif a.startswith('3/4G'):
+                anc_wards.add('3')
+                anc_wards.add('4')
+
+        top_ward = f"Ward {grid_wards.most_common(1)[0][0]}" if grid_wards else "District-Wide"
+        if len(grid_wards) > 1:
+            w1_cnt = grid_wards.most_common(1)[0][1]
+            for w, cnt in grid_wards.most_common()[1:]:
+                if cnt > w1_cnt * 0.2 or (cnt > w1_cnt * 0.1 and w in anc_wards):
+                    top_ward += f" / Ward {w}"
+
+        area_str = ", ".join(final_nbhs[:3]) if final_nbhs else "Residential Corridor"
+        ancs_str = f"ANC {', '.join(top_ancs)}" if top_ancs else ""
+        return {
+            'ward': top_ward,
+            'neighborhoods': area_str,
+            'ancs': ancs_str,
+            'area_desc': f"{top_ward} • {area_str}" + (f" ({ancs_str})" if ancs_str else ""),
+            'area_sq_mi': feat_list_area_sq_mi(feat_list)
+        }
+
+    # Load pre-annotated line geometries if available
+    trash_lines_path = os.path.join(BASE_DIR, 'data/dc_trash_routes_lines.geojson')
+    rec_lines_path = os.path.join(BASE_DIR, 'data/dc_recycle_routes_lines.geojson')
+
+    trash_poly_to_lines = defaultdict(list)
+    trash_line_entries = {}
+    if os.path.exists(trash_lines_path):
+        with open(trash_lines_path, 'r', encoding='utf-8') as f:
+            tl_data = json.load(f)
+        for feat in tl_data.get('features', []):
+            p = feat.get('properties', {})
+            rid = p.get('route')
+            pid = p.get('polygon_route_id')
+            if pid:
+                trash_poly_to_lines[pid].append(p)
+            if rid:
+                trash_line_entries[rid] = {
+                    'ward': p.get('ward', ''),
+                    'neighborhoods': p.get('neighborhoods', ''),
+                    'ancs': p.get('ancs', ''),
+                    'area_desc': p.get('area_desc', ''),
+                    'area_sq_mi': p.get('area_sq_mi', 0.0)
+                }
+
+    rec_line_entries = {}
+    if os.path.exists(rec_lines_path):
+        with open(rec_lines_path, 'r', encoding='utf-8') as f:
+            rl_data = json.load(f)
+        for feat in rl_data.get('features', []):
+            p = feat.get('properties', {})
+            rid = p.get('route')
+            if rid:
+                rec_line_entries[rid] = {
+                    'ward': p.get('ward', ''),
+                    'neighborhoods': p.get('neighborhoods', ''),
+                    'ancs': p.get('ancs', ''),
+                    'area_desc': p.get('area_desc', ''),
+                    'area_sq_mi': p.get('area_sq_mi', 0.0)
+                }
+
+    # Group polygon features by Route ID
+    trash_groups = defaultdict(list)
+    for f in trash_geo['features']:
+        trash_groups[f['properties']['TrashRouteArea']].append(f)
+
+    recycle_groups = defaultdict(list)
+    for f in rec_geo['features']:
+        recycle_groups[f['properties']['Route']].append(f)
+
+    trash_areas = {}
+    for rid, feats in trash_groups.items():
+        poly_sq_mi = feat_list_area_sq_mi(feats)
+        if rid in trash_poly_to_lines:
+            w, n, a, desc = merge_line_props(trash_poly_to_lines[rid])
+            trash_areas[rid] = {
+                'ward': w,
+                'neighborhoods': n,
+                'ancs': a,
+                'area_desc': desc,
+                'area_sq_mi': poly_sq_mi
+            }
+        else:
+            # Fallback to polygon grid sampling
+            res = analyze_polygon_features(feats)
+            trash_areas[rid] = res
+
+    # Incorporate line route IDs directly into trash_areas
+    for line_id, entry in trash_line_entries.items():
+        if line_id not in trash_areas:
+            trash_areas[line_id] = entry
+
+    recycle_areas = {}
+    for rid, feats in recycle_groups.items():
+        poly_sq_mi = feat_list_area_sq_mi(feats)
+        # Try matching line entry with or without 'R' prefix
+        line_match = rec_line_entries.get(rid)
+        if not line_match:
+            alt_id = rid[1:] if rid.startswith('R') else f"R{rid}"
+            line_match = rec_line_entries.get(alt_id)
+
+        if line_match:
+            recycle_areas[rid] = {
+                'ward': line_match['ward'],
+                'neighborhoods': line_match['neighborhoods'],
+                'ancs': line_match['ancs'],
+                'area_desc': line_match['area_desc'],
+                'area_sq_mi': poly_sq_mi
+            }
+        else:
+            res = analyze_polygon_features(feats)
+            recycle_areas[rid] = res
+
+    # Incorporate line route IDs directly into recycle_areas
+    for line_id, entry in rec_line_entries.items():
+        if line_id not in recycle_areas:
+            recycle_areas[line_id] = entry
+        alt_id = line_id[1:] if line_id.startswith('R') else f"R{line_id}"
+        if alt_id not in recycle_areas:
+            recycle_areas[alt_id] = entry
+
+    output = {
+        'trash_routes': trash_areas,
+        'recycle_routes': recycle_areas,
+        'trash': trash_areas,
+        'recycle': recycle_areas
     }
 
-trash_groups = defaultdict(list)
-for f in trash_geo['features']:
-    trash_groups[f['properties']['TrashRouteArea']].append(f)
+    out_path = os.path.join(BASE_DIR, 'data/route_areas.json')
+    with open(out_path, 'w', encoding='utf-8') as f:
+        json.dump(output, f, indent=2)
 
-recycle_groups = defaultdict(list)
-for f in rec_geo['features']:
-    recycle_groups[f['properties']['Route']].append(f)
+    print(f"Generated data/route_areas.json: {len(trash_areas)} trash routes, {len(recycle_areas)} recycle routes")
+    return output
 
-trash_areas = {}
-for rid, feats in trash_groups.items():
-    trash_areas[rid] = analyze_route(feats)
-
-recycle_areas = {}
-for rid, feats in recycle_groups.items():
-    recycle_areas[rid] = analyze_route(feats)
-
-output = {
-    'trash_routes': trash_areas,
-    'recycle_routes': recycle_areas,
-    'trash': trash_areas,
-    'recycle': recycle_areas
-}
-
-with open(os.path.join(BASE_DIR, 'data/route_areas.json'), 'w') as f:
-    json.dump(output, f, indent=2)
-
-print(f"Generated data/route_areas.json: {len(trash_areas)} trash routes, {len(recycle_areas)} recycle routes")
+if __name__ == '__main__':
+    compute_route_areas()

@@ -165,6 +165,14 @@ def compute_route_stats():
         service_area = props.get('ServiceAre', 'Outer Ring') if is_trash else 'Standard'
         status = props.get('Status', 'Active')
 
+        ra = route_areas.get('trash_routes' if is_trash else 'recycle_routes', {}).get(route_id, {})
+        if not ra:
+            ra = route_areas.get('trash' if is_trash else 'recycle', {}).get(route_id, {})
+        ward_val = ra.get('ward') or props.get('Ward') or props.get('ward', '')
+        nbh_val = ra.get('neighborhoods') or props.get('Neighborhoods') or props.get('neighborhoods', '')
+        anc_val = ra.get('ancs') or props.get('ANCs') or props.get('ancs', '')
+        desc_val = ra.get('area_desc') or props.get('AreaDesc') or props.get('area_desc', '')
+
         return {
             'route_id': route_id,
             'type': 'Trash' if is_trash else 'Recycling',
@@ -173,10 +181,10 @@ def compute_route_stats():
             'service_area': service_area,
             'runs_per_week': runs,
             'status': status,
-            'ward': props.get('Ward', ''),
-            'neighborhoods': props.get('Neighborhoods', ''),
-            'ancs': props.get('ANCs', ''),
-            'area_desc': props.get('AreaDesc', ''),
+            'ward': ward_val,
+            'neighborhoods': nbh_val,
+            'ancs': anc_val,
+            'area_desc': desc_val,
             'total': total,
             'unique_addrs': unique_addrs,
             'repeat_addrs': repeat_addrs,
