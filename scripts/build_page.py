@@ -1527,11 +1527,31 @@ html_page = f'''<!DOCTYPE html>
       }});
     }}
 
-    function findRouteAtLatLng(index, latlng) {{
+    function isPointInRoute(index, routeId, latlng) {{
+      if (!routeId || !latlng) return null;
       const x = latlng.lng;
       const y = latlng.lat;
       for (let i = 0; i < index.length; i++) {{
         const item = index[i];
+        if (item.route !== routeId) continue;
+        if (x < item.bbox[0] || x > item.bbox[2] || y < item.bbox[1] || y > item.bbox[3]) continue;
+        for (let j = 0; j < item.ringsList.length; j++) {{
+          if (isPointInPolygonRings(x, y, item.ringsList[j])) return item;
+        }}
+      }}
+      return null;
+    }}
+
+    function findRouteAtLatLng(index, latlng, preferredRouteId = null) {{
+      if (preferredRouteId) {{
+        const pref = isPointInRoute(index, preferredRouteId, latlng);
+        if (pref) return pref;
+      }}
+      const x = latlng.lng;
+      const y = latlng.lat;
+      for (let i = 0; i < index.length; i++) {{
+        const item = index[i];
+        if (preferredRouteId && item.route === preferredRouteId) continue;
         if (x < item.bbox[0] || x > item.bbox[2] || y < item.bbox[1] || y > item.bbox[3]) continue;
         for (let j = 0; j < item.ringsList.length; j++) {{
           if (isPointInPolygonRings(x, y, item.ringsList[j])) return item;
@@ -1743,6 +1763,14 @@ html_page = f'''<!DOCTYPE html>
       selectedRouteIsLine = false;
     }}
 
+    function ensureSelectedRoutesOnTop() {{
+      if (selectedRouteLayers && selectedRouteLayers.length > 0) {{
+        selectedRouteLayers.forEach(l => {{
+          if (l && l.bringToFront) l.bringToFront();
+        }});
+      }}
+    }}
+
     function clearRouteHover() {{
       if (activeHoverRouteLayers.length > 0) {{
         activeHoverRouteLayers.forEach(l => {{
@@ -1757,6 +1785,7 @@ html_page = f'''<!DOCTYPE html>
         activeHoverRouteLayers = [];
       }}
       activeHoverRouteLayer = null;
+      ensureSelectedRoutesOnTop();
     }}
 
     function selectRoute(feature, layer, stream) {{
@@ -1909,38 +1938,72 @@ html_page = f'''<!DOCTYPE html>
       const recActive = map.hasLayer(recycleRoutesLayer);
       if (!trashActive && !recActive) return;
 
+      const latlng = e.latlng;
       const p = layer.feature && layer.feature.properties;
-      const rId = isTrash ? (p.route_area || p.route) : p.route;
+      let rId = isTrash ? (p.route_area || p.route) : p.route;
 
-      if (!activeHoverRouteLayers.includes(layer)) {{
-        clearRouteHover();
+      const inSelRec = (selectedRouteId && !selectedRouteIsLine && selectedRouteStream === 'Recycling')
+        ? isPointInRoute(recycleRouteIndex, selectedRouteId, latlng)
+        : null;
+      const inSelTrash = (selectedRouteId && !selectedRouteIsLine && selectedRouteStream === 'Trash')
+        ? isPointInRoute(trashRouteIndex, selectedRouteId, latlng)
+        : null;
 
-        const parentLayer = isTrash ? trashRoutesLayer : recycleRoutesLayer;
-        const matchingLayers = [];
-        if (parentLayer) {{
-          parentLayer.eachLayer(l => {{
-            const lp = l.feature && l.feature.properties;
-            if (!lp) return;
-            const curId = isTrash ? (lp.route_area || lp.route) : lp.route;
-            if (curId === rId) matchingLayers.push(l);
-          }});
+      if (inSelRec) {{
+        rId = selectedRouteId;
+        isTrash = false;
+        if (activeHoverRouteLayers.length > 0) {{
+          clearRouteHover();
         }}
-        if (matchingLayers.length === 0) matchingLayers.push(layer);
+        ensureSelectedRoutesOnTop();
+      }} else if (inSelTrash) {{
+        rId = selectedRouteId;
+        isTrash = true;
+        if (activeHoverRouteLayers.length > 0) {{
+          clearRouteHover();
+        }}
+        ensureSelectedRoutesOnTop();
+      }} else {{
+        if (!activeHoverRouteLayers.includes(layer)) {{
+          clearRouteHover();
 
-        matchingLayers.forEach(l => {{
-          l._isTrash = isTrash;
-          l._isLine = false;
-          if (!selectedRouteLayers.includes(l)) {{
-            l.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+          const parentLayer = isTrash ? trashRoutesLayer : recycleRoutesLayer;
+          const matchingLayers = [];
+          if (parentLayer) {{
+            parentLayer.eachLayer(l => {{
+              const lp = l.feature && l.feature.properties;
+              if (!lp) return;
+              const curId = isTrash ? (lp.route_area || lp.route) : lp.route;
+              if (curId === rId) matchingLayers.push(l);
+            }});
           }}
-        }});
-        activeHoverRouteLayers = matchingLayers;
-        activeHoverRouteLayer = layer;
+          if (matchingLayers.length === 0) matchingLayers.push(layer);
+
+          matchingLayers.forEach(l => {{
+            l._isTrash = isTrash;
+            l._isLine = false;
+            if (!selectedRouteLayers.includes(l)) {{
+              l.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+            }}
+          }});
+          activeHoverRouteLayers = matchingLayers;
+          activeHoverRouteLayer = layer;
+          ensureSelectedRoutesOnTop();
+        }}
       }}
 
-      const latlng = e.latlng;
-      const tr = trashActive ? findRouteAtLatLng(trashRouteIndex, latlng) : null;
-      const rr = recActive ? findRouteAtLatLng(recycleRouteIndex, latlng) : null;
+      let prefTrash = null;
+      let prefRec = null;
+
+      if (selectedRouteId && !selectedRouteIsLine) {{
+        if (selectedRouteStream === 'Trash') prefTrash = selectedRouteId;
+        if (selectedRouteStream === 'Recycling') prefRec = selectedRouteId;
+      }}
+      if (!prefTrash && isTrash && rId) prefTrash = rId;
+      if (!prefRec && !isTrash && rId) prefRec = rId;
+
+      const tr = trashActive ? findRouteAtLatLng(trashRouteIndex, latlng, prefTrash) : null;
+      const rr = recActive ? findRouteAtLatLng(recycleRouteIndex, latlng, prefRec) : null;
 
       let html = '';
 
@@ -2110,6 +2173,7 @@ html_page = f'''<!DOCTYPE html>
         }});
         activeHoverRouteLayers = matchingLayers;
         activeHoverRouteLayer = layer;
+        ensureSelectedRoutesOnTop();
       }}
 
       const stream = isTrash ? 'Trash' : 'Recycling';
@@ -2756,6 +2820,7 @@ html_page = f'''<!DOCTYPE html>
           }}
         }});
       }}
+      ensureSelectedRoutesOnTop();
     }}
 
     function toggleSMDLayer(show) {{
@@ -2772,6 +2837,7 @@ html_page = f'''<!DOCTYPE html>
         map.addLayer(trashRoutesLayer);
         ensureSvgPatterns();
         trashRoutesLayer.setStyle(getTrashRouteStyle());
+        ensureSelectedRoutesOnTop();
       }} else {{
         if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {{
           clearRouteSelection();
@@ -2788,6 +2854,7 @@ html_page = f'''<!DOCTYPE html>
         map.addLayer(recycleRoutesLayer);
         ensureSvgPatterns();
         recycleRoutesLayer.setStyle(getRecycleRouteStyle());
+        ensureSelectedRoutesOnTop();
       }} else {{
         if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {{
           clearRouteSelection();
@@ -2805,6 +2872,7 @@ html_page = f'''<!DOCTYPE html>
         if (trashLinesLayer && !map.hasLayer(trashLinesLayer)) {{
           map.addLayer(trashLinesLayer);
           trashLinesLayer.setStyle(getTrashLineStyle());
+          ensureSelectedRoutesOnTop();
         }}
       }} else {{
         if (trashLinesLayer && map.hasLayer(trashLinesLayer)) {{
@@ -2825,6 +2893,7 @@ html_page = f'''<!DOCTYPE html>
         if (recycleLinesLayer && !map.hasLayer(recycleLinesLayer)) {{
           map.addLayer(recycleLinesLayer);
           recycleLinesLayer.setStyle(getRecycleLineStyle());
+          ensureSelectedRoutesOnTop();
         }}
       }} else {{
         if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) {{
@@ -3044,7 +3113,11 @@ html_page = f'''<!DOCTYPE html>
     initTrashLinesLayer();
     initRecycleLinesLayer();
     ensureSvgPatterns();
-    map.on('layeradd', ensureSvgPatterns);
+    map.on('layeradd', function() {{
+      ensureSvgPatterns();
+      ensureSelectedRoutesOnTop();
+    }});
+    map.on('zoomend', ensureSelectedRoutesOnTop);
     initMobileHandling();
     setTheme(currentTheme);
     updateLegend();

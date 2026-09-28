@@ -247,6 +247,55 @@ def verify():
             const rspCleared = selectedRouteLayers.length === 0;
             const multiFeatureSelectPassed = totalRspLayers === 6 && rspSelectedCount === 6 && rspAllStyled && rspCleared;
 
+            // Test overlapping route precedence (RSP21_2 over R604_2A north of Independence Ave SE)
+            const overlapPt = L.latLng(38.8886, -76.9841);
+            const outsideRspPt = L.latLng(38.8892, -76.9811);
+
+            let r604Layer = null;
+            let rsp21Layer = null;
+            recycleRoutesLayer.eachLayer(l => {
+              const r = l.feature && l.feature.properties && l.feature.properties.route;
+              if (r === 'R604_2A' && !r604Layer) r604Layer = l;
+              if (r === 'RSP21_2' && !rsp21Layer) rsp21Layer = l;
+            });
+
+            // 1. findRouteAtLatLng test with preference
+            const findWithPrefRsp = findRouteAtLatLng(recycleRouteIndex, overlapPt, 'RSP21_2');
+            const findWithPref604 = findRouteAtLatLng(recycleRouteIndex, overlapPt, 'R604_2A');
+            const findPrefRspCorrect = findWithPrefRsp && findWithPrefRsp.route === 'RSP21_2';
+            const findPref604Correct = findWithPref604 && findWithPref604.route === 'R604_2A';
+
+            // 2. Select RSP21_2 and hover over overlap area
+            selectRoute(rsp21Layer.feature, rsp21Layer, 'Recycling');
+            const rsp21SelectedCount = selectedRouteLayers.length; // should be 10
+
+            // Hover at overlap point (even passing r604Layer as triggering layer)
+            handleRouteHover({ latlng: overlapPt }, r604Layer, false);
+            const tipContentInside = smdTooltip._content || '';
+            const overlapHoverShowsRsp = tipContentInside.includes('Recycling Route RSP21_2') && !tipContentInside.includes('R604_2A');
+            const overlapHoverNotStyles604 = !activeHoverRouteLayers.includes(r604Layer);
+
+            // Hover at point outside RSP21_2 but inside R604_2A
+            handleRouteHover({ latlng: outsideRspPt }, r604Layer, false);
+            const tipContentOutside = smdTooltip._content || '';
+            const outsideHoverShows604 = tipContentOutside.includes('Recycling Route R604_2A');
+            const outsideHoverStyles604 = activeHoverRouteLayers.includes(r604Layer);
+
+            // Move back inside RSP21_2
+            handleRouteHover({ latlng: overlapPt }, r604Layer, false);
+            const tipContentBack = smdTooltip._content || '';
+            const backHoverShowsRsp = tipContentBack.includes('Recycling Route RSP21_2') && !tipContentBack.includes('R604_2A');
+            const backHoverCleared604 = !activeHoverRouteLayers.includes(r604Layer);
+
+            clearRouteSelection();
+            clearRouteHover();
+
+            const overlapPrecedencePassed = findPrefRspCorrect && findPref604Correct &&
+                                            rsp21SelectedCount === 10 &&
+                                            overlapHoverShowsRsp && overlapHoverNotStyles604 &&
+                                            outsideHoverShows604 && outsideHoverStyles604 &&
+                                            backHoverShowsRsp && backHoverCleared604;
+
             out.innerText = JSON.stringify({
               ic106Has1C2D,
               ic20HasAll,
@@ -261,6 +310,16 @@ def verify():
               smdSortCorrect,
               multiFeatureSelectPassed,
               rspSelectedCount,
+              overlapPrecedencePassed,
+              findPrefRspCorrect,
+              findPref604Correct,
+              rsp21SelectedCount,
+              overlapHoverShowsRsp,
+              overlapHoverNotStyles604,
+              outsideHoverShows604,
+              outsideHoverStyles604,
+              backHoverShowsRsp,
+              backHoverCleared604,
               sortedAncs: testAncs,
               sortedSmds: testSmds,
               ic106_ancs: ic106 ? ic106.ancs : null,
@@ -304,6 +363,7 @@ def verify():
                 assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
                 assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
                 assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
+                assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
                 print("PASS: Headless Chrome verification successful!")
             else:
                 print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
