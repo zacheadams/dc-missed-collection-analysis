@@ -1716,23 +1716,47 @@ html_page = f'''<!DOCTYPE html>
       }};
     }}
 
+    let activeHoverRouteLayers = [];
     let activeHoverRouteLayer = null;
     let selectedRouteId = null;
     let selectedRouteStream = null;
+    let selectedRouteType = '';
+    let selectedRouteIsLine = false;
+    let selectedRouteLayers = [];
     let selectedRouteLayer = null;
 
     function clearRouteSelection() {{
-      if (selectedRouteLayer) {{
-        if (selectedRouteLayer._isLine) {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
-        }} else {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
-        }}
-        selectedRouteLayer = null;
+      if (selectedRouteLayers.length > 0) {{
+        selectedRouteLayers.forEach(l => {{
+          if (selectedRouteIsLine) {{
+            l.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
+          }} else {{
+            l.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
+          }}
+        }});
+        selectedRouteLayers = [];
       }}
+      selectedRouteLayer = null;
       selectedRouteId = null;
       selectedRouteStream = null;
       selectedRouteType = '';
+      selectedRouteIsLine = false;
+    }}
+
+    function clearRouteHover() {{
+      if (activeHoverRouteLayers.length > 0) {{
+        activeHoverRouteLayers.forEach(l => {{
+          if (!selectedRouteLayers.includes(l)) {{
+            if (l._isLine) {{
+              l.setStyle(l._isTrash ? getTrashLineStyle() : getRecycleLineStyle());
+            }} else {{
+              l.setStyle(l._isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
+            }}
+          }}
+        }});
+        activeHoverRouteLayers = [];
+      }}
+      activeHoverRouteLayer = null;
     }}
 
     function selectRoute(feature, layer, stream) {{
@@ -1743,19 +1767,44 @@ html_page = f'''<!DOCTYPE html>
       updateWardMask();
       if (smdLayer) smdLayer.setStyle(smdStyle);
 
-      if (selectedRouteLayer && selectedRouteLayer !== layer) {{
-        if (selectedRouteLayer._isLine) {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
-        }} else {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
-        }}
-      }}
+      clearRouteSelection();
+      clearRouteHover();
 
-      selectedRouteId = stream === 'Trash' ? (feature.properties.route_area || feature.properties.route) : feature.properties.route;
+      const rId = stream === 'Trash' ? (feature.properties.route_area || feature.properties.route) : feature.properties.route;
+      selectedRouteId = rId;
       selectedRouteStream = stream;
       selectedRouteType = ' (polygon)';
-      selectedRouteLayer = layer;
-      layer._isLine = false;
+      selectedRouteIsLine = false;
+
+      const parentLayer = stream === 'Trash' ? trashRoutesLayer : recycleRoutesLayer;
+      const matchingLayers = [];
+      let combinedBounds = null;
+
+      if (parentLayer) {{
+        parentLayer.eachLayer(l => {{
+          const p = l.feature && l.feature.properties;
+          if (!p) return;
+          const curId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
+          if (curId === rId) {{
+            matchingLayers.push(l);
+            if (l.getBounds) {{
+              const b = l.getBounds();
+              if (b && b.isValid()) {{
+                if (combinedBounds) combinedBounds.extend(b);
+                else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
+              }}
+            }}
+          }}
+        }});
+      }}
+
+      if (matchingLayers.length === 0) {{
+        matchingLayers.push(layer);
+        if (layer.getBounds) combinedBounds = layer.getBounds();
+      }}
+
+      selectedRouteLayers = matchingLayers;
+      selectedRouteLayer = matchingLayers[0];
 
       const isDark = currentTheme === 'dark';
       const selColor = stream === 'Trash'
@@ -1765,17 +1814,22 @@ html_page = f'''<!DOCTYPE html>
         ? (isDark ? 'url(#hatch-trash-dark-hover)' : 'url(#hatch-trash-hover)')
         : (isDark ? 'url(#hatch-recycle-dark-hover)' : 'url(#hatch-recycle-hover)');
 
-      layer.setStyle({{
-        color: selColor,
-        weight: 4.5,
-        opacity: 1.0,
-        fill: true,
-        fillColor: hatchUrl,
-        fillOpacity: 1.0
+      selectedRouteLayers.forEach(l => {{
+        l._isLine = false;
+        l.setStyle({{
+          color: selColor,
+          weight: 4.5,
+          opacity: 1.0,
+          fill: true,
+          fillColor: hatchUrl,
+          fillOpacity: 1.0
+        }});
+        if (l.bringToFront) l.bringToFront();
       }});
-      layer.bringToFront();
 
-      map.fitBounds(layer.getBounds(), {{ padding: [50, 50], maxZoom: 15 }});
+      if (combinedBounds && combinedBounds.isValid()) {{
+        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 15 }});
+      }}
 
       updateInspectorRoute(feature.properties, stream);
       updateBreadcrumbsRoute(feature.properties, stream, ' (polygon)');
@@ -1789,34 +1843,62 @@ html_page = f'''<!DOCTYPE html>
       updateWardMask();
       if (smdLayer) smdLayer.setStyle(smdStyle);
 
-      if (selectedRouteLayer && selectedRouteLayer !== layer) {{
-        if (selectedRouteLayer._isLine) {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashLineStyle() : getRecycleLineStyle());
-        }} else {{
-          selectedRouteLayer.setStyle(selectedRouteStream === 'Trash' ? getTrashRouteStyle() : getRecycleRouteStyle());
-        }}
-      }}
+      clearRouteSelection();
+      clearRouteHover();
 
-      selectedRouteId = feature.properties.route;
+      const rId = feature.properties.route;
+      selectedRouteId = rId;
       selectedRouteStream = stream;
       selectedRouteType = ' (line)';
-      selectedRouteLayer = layer;
-      layer._isLine = true;
-      layer._isTrash = stream === 'Trash';
+      selectedRouteIsLine = true;
+
+      const parentLayer = stream === 'Trash' ? trashLinesLayer : recycleLinesLayer;
+      const matchingLayers = [];
+      let combinedBounds = null;
+
+      if (parentLayer) {{
+        parentLayer.eachLayer(l => {{
+          const p = l.feature && l.feature.properties;
+          if (p && p.route === rId) {{
+            matchingLayers.push(l);
+            if (l.getBounds) {{
+              const b = l.getBounds();
+              if (b && b.isValid()) {{
+                if (combinedBounds) combinedBounds.extend(b);
+                else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
+              }}
+            }}
+          }}
+        }});
+      }}
+
+      if (matchingLayers.length === 0) {{
+        matchingLayers.push(layer);
+        if (layer.getBounds) combinedBounds = layer.getBounds();
+      }}
+
+      selectedRouteLayers = matchingLayers;
+      selectedRouteLayer = matchingLayers[0];
 
       const isDark = currentTheme === 'dark';
       const selColor = stream === 'Trash'
         ? (isDark ? '#f87171' : '#b91c1c')
         : (isDark ? '#4ade80' : '#15803d');
 
-      layer.setStyle({{
-        color: selColor,
-        weight: 6.5,
-        opacity: 1.0
+      selectedRouteLayers.forEach(l => {{
+        l._isLine = true;
+        l._isTrash = stream === 'Trash';
+        l.setStyle({{
+          color: selColor,
+          weight: 6.5,
+          opacity: 1.0
+        }});
+        if (l.bringToFront) l.bringToFront();
       }});
-      layer.bringToFront();
 
-      map.fitBounds(layer.getBounds(), {{ padding: [50, 50], maxZoom: 16 }});
+      if (combinedBounds && combinedBounds.isValid()) {{
+        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 16 }});
+      }}
 
       updateInspectorRoute(feature.properties, stream);
       updateBreadcrumbsRoute(feature.properties, stream, ' (line)');
@@ -1827,17 +1909,33 @@ html_page = f'''<!DOCTYPE html>
       const recActive = map.hasLayer(recycleRoutesLayer);
       if (!trashActive && !recActive) return;
 
-      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer && activeHoverRouteLayer !== selectedRouteLayer) {{
-        if (activeHoverRouteLayer._isTrash) {{
-          activeHoverRouteLayer.setStyle(getTrashRouteStyle());
-        }} else {{
-          activeHoverRouteLayer.setStyle(getRecycleRouteStyle());
+      const p = layer.feature && layer.feature.properties;
+      const rId = isTrash ? (p.route_area || p.route) : p.route;
+
+      if (!activeHoverRouteLayers.includes(layer)) {{
+        clearRouteHover();
+
+        const parentLayer = isTrash ? trashRoutesLayer : recycleRoutesLayer;
+        const matchingLayers = [];
+        if (parentLayer) {{
+          parentLayer.eachLayer(l => {{
+            const lp = l.feature && l.feature.properties;
+            if (!lp) return;
+            const curId = isTrash ? (lp.route_area || lp.route) : lp.route;
+            if (curId === rId) matchingLayers.push(l);
+          }});
         }}
-      }}
-      activeHoverRouteLayer = layer;
-      layer._isTrash = isTrash;
-      if (layer !== selectedRouteLayer) {{
-        layer.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+        if (matchingLayers.length === 0) matchingLayers.push(layer);
+
+        matchingLayers.forEach(l => {{
+          l._isTrash = isTrash;
+          l._isLine = false;
+          if (!selectedRouteLayers.includes(l)) {{
+            l.setStyle(isTrash ? getTrashRouteHoverStyle() : getRecycleRouteHoverStyle());
+          }}
+        }});
+        activeHoverRouteLayers = matchingLayers;
+        activeHoverRouteLayer = layer;
       }}
 
       const latlng = e.latlng;
@@ -1946,12 +2044,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function handleRouteMouseout(layer, isTrash) {{
-      if (layer && layer !== selectedRouteLayer) {{
-        layer.setStyle(isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
-      }}
-      if (activeHoverRouteLayer === layer) {{
-        activeHoverRouteLayer = null;
-      }}
+      clearRouteHover();
       smdTooltip.close();
     }}
 
@@ -1992,21 +2085,33 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function handleLineHover(e, layer, isTrash) {{
-      if (activeHoverRouteLayer && activeHoverRouteLayer !== layer && activeHoverRouteLayer !== selectedRouteLayer) {{
-        if (activeHoverRouteLayer._isLine) {{
-          activeHoverRouteLayer.setStyle(activeHoverRouteLayer._isTrash ? getTrashLineStyle() : getRecycleLineStyle());
-        }} else {{
-          activeHoverRouteLayer.setStyle(activeHoverRouteLayer._isTrash ? getTrashRouteStyle() : getRecycleRouteStyle());
+      const p = layer.feature && layer.feature.properties;
+      const rId = p.route;
+
+      if (!activeHoverRouteLayers.includes(layer)) {{
+        clearRouteHover();
+
+        const parentLayer = isTrash ? trashLinesLayer : recycleLinesLayer;
+        const matchingLayers = [];
+        if (parentLayer) {{
+          parentLayer.eachLayer(l => {{
+            const lp = l.feature && l.feature.properties;
+            if (lp && lp.route === rId) matchingLayers.push(l);
+          }});
         }}
-      }}
-      activeHoverRouteLayer = layer;
-      layer._isTrash = isTrash;
-      layer._isLine = true;
-      if (layer !== selectedRouteLayer) {{
-        layer.setStyle(isTrash ? getTrashLineHoverStyle() : getRecycleLineHoverStyle());
+        if (matchingLayers.length === 0) matchingLayers.push(layer);
+
+        matchingLayers.forEach(l => {{
+          l._isTrash = isTrash;
+          l._isLine = true;
+          if (!selectedRouteLayers.includes(l)) {{
+            l.setStyle(isTrash ? getTrashLineHoverStyle() : getRecycleLineHoverStyle());
+          }}
+        }});
+        activeHoverRouteLayers = matchingLayers;
+        activeHoverRouteLayer = layer;
       }}
 
-      const p = layer.feature.properties;
       const stream = isTrash ? 'Trash' : 'Recycling';
       const color = isTrash ? 'var(--trash-color)' : 'var(--recycle-color)';
       const totalReq = (p.total || 0).toLocaleString();
@@ -2031,12 +2136,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function handleLineMouseout(layer, isTrash) {{
-      if (layer && layer !== selectedRouteLayer) {{
-        layer.setStyle(isTrash ? getTrashLineStyle() : getRecycleLineStyle());
-      }}
-      if (activeHoverRouteLayer === layer) {{
-        activeHoverRouteLayer = null;
-      }}
+      clearRouteHover();
       smdTooltip.close();
     }}
 
@@ -2320,8 +2420,6 @@ html_page = f'''<!DOCTYPE html>
       }}
     }}
 
-    let selectedRouteType = '';
-
     function updateBreadcrumbs() {{
       const bar = document.getElementById('breadcrumb-crumbs');
       if (!bar) return;
@@ -2602,7 +2700,7 @@ html_page = f'''<!DOCTYPE html>
       const isDark = theme === 'dark';
       if (trashRoutesLayer) {{
         trashRoutesLayer.eachLayer(l => {{
-          if (l === selectedRouteLayer) {{
+          if (selectedRouteLayers.includes(l)) {{
             l.setStyle({{
               color: isDark ? '#f87171' : '#b91c1c',
               weight: 4.5,
@@ -2618,7 +2716,7 @@ html_page = f'''<!DOCTYPE html>
       }}
       if (recycleRoutesLayer) {{
         recycleRoutesLayer.eachLayer(l => {{
-          if (l === selectedRouteLayer) {{
+          if (selectedRouteLayers.includes(l)) {{
             l.setStyle({{
               color: isDark ? '#4ade80' : '#15803d',
               weight: 4.5,
@@ -2634,7 +2732,7 @@ html_page = f'''<!DOCTYPE html>
       }}
       if (trashLinesLayer) {{
         trashLinesLayer.eachLayer(l => {{
-          if (l === selectedRouteLayer) {{
+          if (selectedRouteLayers.includes(l)) {{
             l.setStyle({{
               color: isDark ? '#f87171' : '#b91c1c',
               weight: 6.5,
@@ -2647,7 +2745,7 @@ html_page = f'''<!DOCTYPE html>
       }}
       if (recycleLinesLayer) {{
         recycleLinesLayer.eachLayer(l => {{
-          if (l === selectedRouteLayer) {{
+          if (selectedRouteLayers.includes(l)) {{
             l.setStyle({{
               color: isDark ? '#4ade80' : '#15803d',
               weight: 6.5,
@@ -2675,15 +2773,13 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         trashRoutesLayer.setStyle(getTrashRouteStyle());
       }} else {{
-        if (selectedRouteStream === 'Trash' && selectedRouteLayer && !selectedRouteLayer._isLine) {{
+        if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
           updateBreadcrumbs();
         }}
         map.removeLayer(trashRoutesLayer);
-        if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && !activeHoverRouteLayer._isLine) {{
-          activeHoverRouteLayer = null;
-        }}
+        clearRouteHover();
       }}
     }}
 
@@ -2693,15 +2789,13 @@ html_page = f'''<!DOCTYPE html>
         ensureSvgPatterns();
         recycleRoutesLayer.setStyle(getRecycleRouteStyle());
       }} else {{
-        if (selectedRouteStream === 'Recycling' && selectedRouteLayer && !selectedRouteLayer._isLine) {{
+        if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
           updateBreadcrumbs();
         }}
         map.removeLayer(recycleRoutesLayer);
-        if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && !activeHoverRouteLayer._isLine) {{
-          activeHoverRouteLayer = null;
-        }}
+        clearRouteHover();
       }}
     }}
 
@@ -2714,15 +2808,13 @@ html_page = f'''<!DOCTYPE html>
         }}
       }} else {{
         if (trashLinesLayer && map.hasLayer(trashLinesLayer)) {{
-          if (selectedRouteStream === 'Trash' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+          if (selectedRouteStream === 'Trash' && selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
             updateBreadcrumbs();
           }}
           map.removeLayer(trashLinesLayer);
-          if (activeHoverRouteLayer && activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
-            activeHoverRouteLayer = null;
-          }}
+          clearRouteHover();
         }}
       }}
     }}
@@ -2736,15 +2828,13 @@ html_page = f'''<!DOCTYPE html>
         }}
       }} else {{
         if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) {{
-          if (selectedRouteStream === 'Recycling' && selectedRouteLayer && selectedRouteLayer._isLine) {{
+          if (selectedRouteStream === 'Recycling' && selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
             updateBreadcrumbs();
           }}
           map.removeLayer(recycleLinesLayer);
-          if (activeHoverRouteLayer && !activeHoverRouteLayer._isTrash && activeHoverRouteLayer._isLine) {{
-            activeHoverRouteLayer = null;
-          }}
+          clearRouteHover();
         }}
       }}
     }}
