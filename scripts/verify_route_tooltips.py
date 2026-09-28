@@ -231,6 +231,22 @@ def verify():
             const expectedSmdOrder = ['1A01', '1A02', '2B01', '3/4G01', '3/4G02', '4A01'];
             const smdSortCorrect = JSON.stringify(testSmds) === JSON.stringify(expectedSmdOrder);
 
+            // Test multi-feature route selection on RSP20_2
+            if (!map.hasLayer(recycleRoutesLayer)) map.addLayer(recycleRoutesLayer);
+            const rspLayers = [];
+            recycleRoutesLayer.eachLayer(l => {
+              if (l.feature && l.feature.properties && l.feature.properties.route === 'RSP20_2') {
+                rspLayers.push(l);
+              }
+            });
+            const totalRspLayers = rspLayers.length;
+            selectRoute(rspLayers[0].feature, rspLayers[0], 'Recycling');
+            const rspSelectedCount = selectedRouteLayers.length;
+            const rspAllStyled = selectedRouteLayers.every(l => l.options.weight === 4.5 && l.options.fill === true);
+            clearRouteSelection();
+            const rspCleared = selectedRouteLayers.length === 0;
+            const multiFeatureSelectPassed = totalRspLayers === 6 && rspSelectedCount === 6 && rspAllStyled && rspCleared;
+
             out.innerText = JSON.stringify({
               ic106Has1C2D,
               ic20HasAll,
@@ -243,6 +259,8 @@ def verify():
               statsR210LineHas1C,
               ancSortCorrect,
               smdSortCorrect,
+              multiFeatureSelectPassed,
+              rspSelectedCount,
               sortedAncs: testAncs,
               sortedSmds: testSmds,
               ic106_ancs: ic106 ? ic106.ancs : null,
@@ -285,6 +303,7 @@ def verify():
                 assert results['statsR210LineHas1C'], "Headless Chrome: ROUTE_STATS['recycle_line_R210_5'] missing ANC 1C"
                 assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
                 assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
+                assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
                 print("PASS: Headless Chrome verification successful!")
             else:
                 print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
