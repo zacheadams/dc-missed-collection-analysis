@@ -11,6 +11,8 @@ Strict standards:
 
 import os
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import sys
 import json
 import re
 import subprocess
@@ -178,8 +180,14 @@ def verify():
     print("PASS: map.html structure and embedded data verified.")
 
     # 5. Headless Chrome DOM & Tooltip Execution Test
-    chrome_bin = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-    if os.path.exists(chrome_bin):
+    import shutil
+    chrome_bin = shutil.which('google-chrome') or shutil.which('chromium-browser')
+    if not chrome_bin:
+        mac_chrome = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+        if os.path.exists(mac_chrome):
+            chrome_bin = mac_chrome
+
+    if chrome_bin and os.path.exists(chrome_bin):
         print("Testing tooltip rendering and canonical sorting via Headless Chrome...")
         test_script = """
         <script>

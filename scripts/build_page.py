@@ -1106,6 +1106,10 @@ html_page = f'''<!DOCTYPE html>
     let currentPeriod = '180d';
     let currentTheme = 'light';
 
+    const trashRouteById = {{}};
+    const recycleRouteById = {{}};
+    const trashLineById = {{}};
+    const recycleLineById = {{}};
     // Determine default theme from localStorage or system prefers-color-scheme
     const savedTheme = localStorage.getItem('dc_map_theme');
     if (savedTheme) {{
@@ -1805,28 +1809,19 @@ html_page = f'''<!DOCTYPE html>
       selectedRouteType = ' (polygon)';
       selectedRouteIsLine = false;
 
-      const parentLayer = stream === 'Trash' ? trashRoutesLayer : recycleRoutesLayer;
-      const matchingLayers = [];
+      const lookupDict = stream === 'Trash' ? trashRouteById : recycleRouteById;
+      const matchingLayers = lookupDict[rId] ? [...lookupDict[rId]] : [];
       let combinedBounds = null;
 
-      if (parentLayer) {{
-        parentLayer.eachLayer(l => {{
-          const p = l.feature && l.feature.properties;
-          if (!p) return;
-          const curId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
-          if (curId === rId) {{
-            matchingLayers.push(l);
-            if (l.getBounds) {{
-              const b = l.getBounds();
-              if (b && b.isValid()) {{
-                if (combinedBounds) combinedBounds.extend(b);
-                else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
-              }}
-            }}
+      matchingLayers.forEach(l => {{
+        if (l.getBounds) {{
+          const b = l.getBounds();
+          if (b && b.isValid()) {{
+            if (combinedBounds) combinedBounds.extend(b);
+            else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
           }}
-        }});
-      }}
-
+        }}
+      }});
       if (matchingLayers.length === 0) {{
         matchingLayers.push(layer);
         if (layer.getBounds) combinedBounds = layer.getBounds();
@@ -1881,25 +1876,19 @@ html_page = f'''<!DOCTYPE html>
       selectedRouteType = ' (line)';
       selectedRouteIsLine = true;
 
-      const parentLayer = stream === 'Trash' ? trashLinesLayer : recycleLinesLayer;
-      const matchingLayers = [];
+      const lookupDict = stream === 'Trash' ? trashLineById : recycleLineById;
+      const matchingLayers = lookupDict[rId] ? [...lookupDict[rId]] : [];
       let combinedBounds = null;
 
-      if (parentLayer) {{
-        parentLayer.eachLayer(l => {{
-          const p = l.feature && l.feature.properties;
-          if (p && p.route === rId) {{
-            matchingLayers.push(l);
-            if (l.getBounds) {{
-              const b = l.getBounds();
-              if (b && b.isValid()) {{
-                if (combinedBounds) combinedBounds.extend(b);
-                else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
-              }}
-            }}
+      matchingLayers.forEach(l => {{
+        if (l.getBounds) {{
+          const b = l.getBounds();
+          if (b && b.isValid()) {{
+            if (combinedBounds) combinedBounds.extend(b);
+            else combinedBounds = L.latLngBounds(b.getSouthWest(), b.getNorthEast());
           }}
-        }});
-      }}
+        }}
+      }});
 
       if (matchingLayers.length === 0) {{
         matchingLayers.push(layer);
@@ -1967,16 +1956,8 @@ html_page = f'''<!DOCTYPE html>
         if (!activeHoverRouteLayers.includes(layer)) {{
           clearRouteHover();
 
-          const parentLayer = isTrash ? trashRoutesLayer : recycleRoutesLayer;
-          const matchingLayers = [];
-          if (parentLayer) {{
-            parentLayer.eachLayer(l => {{
-              const lp = l.feature && l.feature.properties;
-              if (!lp) return;
-              const curId = isTrash ? (lp.route_area || lp.route) : lp.route;
-              if (curId === rId) matchingLayers.push(l);
-            }});
-          }}
+          const lookupDict = isTrash ? trashRouteById : recycleRouteById;
+          const matchingLayers = lookupDict[rId] ? [...lookupDict[rId]] : [];
           if (matchingLayers.length === 0) matchingLayers.push(layer);
 
           matchingLayers.forEach(l => {{
@@ -2116,6 +2097,11 @@ html_page = f'''<!DOCTYPE html>
         pane: 'routePane',
         style: getTrashRouteStyle,
         onEachFeature: function(feature, layer) {{
+          const rid = feature.properties.route_area || feature.properties.route;
+          if (rid) {{
+            if (!trashRouteById[rid]) trashRouteById[rid] = [];
+            trashRouteById[rid].push(layer);
+          }}
           layer.on({{
             mouseover: function(e) {{ handleRouteHover(e, layer, true); }},
             mousemove: function(e) {{ handleRouteHover(e, layer, true); }},
@@ -2134,6 +2120,11 @@ html_page = f'''<!DOCTYPE html>
         pane: 'routePane',
         style: getRecycleRouteStyle,
         onEachFeature: function(feature, layer) {{
+          const rid = feature.properties.route;
+          if (rid) {{
+            if (!recycleRouteById[rid]) recycleRouteById[rid] = [];
+            recycleRouteById[rid].push(layer);
+          }}
           layer.on({{
             mouseover: function(e) {{ handleRouteHover(e, layer, false); }},
             mousemove: function(e) {{ handleRouteHover(e, layer, false); }},
@@ -2154,14 +2145,8 @@ html_page = f'''<!DOCTYPE html>
       if (!activeHoverRouteLayers.includes(layer)) {{
         clearRouteHover();
 
-        const parentLayer = isTrash ? trashLinesLayer : recycleLinesLayer;
-        const matchingLayers = [];
-        if (parentLayer) {{
-          parentLayer.eachLayer(l => {{
-            const lp = l.feature && l.feature.properties;
-            if (lp && lp.route === rId) matchingLayers.push(l);
-          }});
-        }}
+        const lookupDict = isTrash ? trashLineById : recycleLineById;
+        const matchingLayers = lookupDict[rId] ? [...lookupDict[rId]] : [];
         if (matchingLayers.length === 0) matchingLayers.push(layer);
 
         matchingLayers.forEach(l => {{
@@ -2212,6 +2197,11 @@ html_page = f'''<!DOCTYPE html>
         onEachFeature: function(feature, layer) {{
           layer._isLine = true;
           layer._isTrash = true;
+          const rid = feature.properties.route;
+          if (rid) {{
+            if (!trashLineById[rid]) trashLineById[rid] = [];
+            trashLineById[rid].push(layer);
+          }}
           layer.on({{
             mouseover: function(e) {{ handleLineHover(e, layer, true); }},
             mousemove: function(e) {{ handleLineHover(e, layer, true); }},
@@ -2233,6 +2223,11 @@ html_page = f'''<!DOCTYPE html>
         onEachFeature: function(feature, layer) {{
           layer._isLine = true;
           layer._isTrash = false;
+          const rid = feature.properties.route;
+          if (rid) {{
+            if (!recycleLineById[rid]) recycleLineById[rid] = [];
+            recycleLineById[rid].push(layer);
+          }}
           layer.on({{
             mouseover: function(e) {{ handleLineHover(e, layer, false); }},
             mousemove: function(e) {{ handleLineHover(e, layer, false); }},

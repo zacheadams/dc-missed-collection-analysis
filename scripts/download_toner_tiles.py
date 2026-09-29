@@ -8,6 +8,9 @@ for Zooms 11 through 15, eliminating runtime external dependencies and Stadia AP
 
 import os
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+import sys
 import json
 import math
 import time
@@ -37,16 +40,6 @@ def deg2num(lat_deg, lon_deg, zoom):
     ytile = int((1.0 - math.asinh(math.tan(lat_rad)) / math.pi) / 2.0 * n)
     return (xtile, ytile)
 
-def is_point_in_ring(x, y, ring):
-    inside = False
-    n = len(ring)
-    for i in range(n):
-        j = (i - 1) % n
-        xi, yi = ring[i]
-        xj, yj = ring[j]
-        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi):
-            inside = not inside
-    return inside
 
 def load_dc_geometry():
     with open(WARDS_PATH, 'r', encoding='utf-8') as f:

@@ -131,6 +131,11 @@ def handle_issue_comment(event, repo, token):
 
     print(f"Processing comment on Issue #{issue_number} from {comment_user}")
 
+    author_assoc = comment.get("author_association", "")
+    if author_assoc not in ("OWNER", "MEMBER", "COLLABORATOR"):
+        print(f"Comment from {comment_user} has insufficient permissions ({author_assoc}); ignoring approval keywords.")
+        return
+
     lower_body = comment_body.lower()
     approval_keywords = ["approved", "approve", "lgtm", "proceed", "looks good"]
     is_approved = any(kw in lower_body for kw in approval_keywords)

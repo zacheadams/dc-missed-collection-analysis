@@ -7,6 +7,9 @@ Outputs data/smd_180d_address_stats.json.
 
 import json
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
 from collections import defaultdict
 from datetime import datetime
 
