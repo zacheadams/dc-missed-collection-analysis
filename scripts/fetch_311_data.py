@@ -11,7 +11,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_DATA_FILE = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
@@ -46,14 +46,14 @@ def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, rol
             print(f"Could not load existing records: {e}. Proceeding with full fetch.")
             existing_records = {}
 
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
     if existing_records and not full_fetch:
         max_dt_ms = max(
             r["attributes"]["ADDDATE"]
             for r in existing_records.values()
             if r.get("attributes", {}).get("ADDDATE")
         )
-        max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0)
+        max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0, tz=timezone.utc)
         # 48-hour buffer to capture status/resolution changes on recent tickets
         start_date = max_dt - timedelta(hours=48)
         mode_desc = f"Incremental query from {start_date.strftime('%Y-%m-%d %H:%M:%S')} (48h buffer)"

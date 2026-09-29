@@ -7,6 +7,9 @@ and update data/dc_map_data_v2.json.
 
 import json
 import os
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
 from collections import defaultdict
 from datetime import datetime, timedelta
 
@@ -23,45 +26,9 @@ WARD_COUNCILMEMBERS = {
     8: "Trayon White, Sr."
 }
 
-def is_point_in_ring(x, y, ring):
-    inside = False
-    n = len(ring)
-    for i in range(n):
-        j = (i - 1) % n
-        xi, yi = ring[i]
-        xj, yj = ring[j]
-        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi):
-            inside = not inside
-    return inside
 
-def is_point_in_poly(x, y, poly_rings):
-    if not is_point_in_ring(x, y, poly_rings[0]):
-        return False
-    for h in range(1, len(poly_rings)):
-        if is_point_in_ring(x, y, poly_rings[h]):
-            return False
-    return True
 
-def get_poly_rings_list(geom):
-    t = geom["type"]
-    coords = geom["coordinates"]
-    if t == "Polygon":
-        return [coords]
-    elif t == "MultiPolygon":
-        return coords
-    return []
 
-def get_bbox(polys):
-    min_x = min_y = 1e9
-    max_x = max_y = -1e9
-    for poly in polys:
-        for ring in poly:
-            for x, y in ring:
-                if x < min_x: min_x = x
-                if x > max_x: max_x = x
-                if y < min_y: min_y = y
-                if y > max_y: max_y = y
-    return (min_x, min_y, max_x, max_y)
 
 def get_smd_ward(smd_id, anc_id):
     """

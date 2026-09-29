@@ -1299,7 +1299,16 @@ html_content += f"""
       const {{ jsPDF }} = window.jspdf;
       const doc = new jsPDF({{ orientation: 'landscape', format: 'letter', unit: 'in' }});
       const canvas = document.getElementById(canvasId);
-      const imgData = canvas.toDataURL('image/png', 2.0);
+      
+      const tmpCanvas = document.createElement('canvas');
+      tmpCanvas.width = canvas.width;
+      tmpCanvas.height = canvas.height;
+      const tmpCtx = tmpCanvas.getContext('2d');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      tmpCtx.fillStyle = isDark ? '#121215' : '#ffffff';
+      tmpCtx.fillRect(0, 0, tmpCanvas.width, tmpCanvas.height);
+      tmpCtx.drawImage(canvas, 0, 0);
+      const imgData = tmpCanvas.toDataURL('image/png', 2.0);
 
       // Title Banner
       doc.setFont('Courier', 'bold');
@@ -1320,7 +1329,12 @@ html_content += f"""
 
     function exportTableCsv(tableId, filename) {{
       const table = document.getElementById(tableId);
-      const rows = Array.from(table.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
+      let rows;
+      if (tableId === 'route-table') {{
+        rows = [table.querySelector('thead tr'), ...getFilteredRouteRows()];
+      }} else {{
+        rows = Array.from(table.querySelectorAll('tr')).filter(r => r.style.display !== 'none');
+      }}
       const csv = rows.map(r => {{
         const cells = Array.from(r.querySelectorAll('th, td'));
         return cells.map(c => `"${{c.innerText.replace(/"/g, '""').trim()}}"`).join(',');

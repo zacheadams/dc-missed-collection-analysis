@@ -16,6 +16,9 @@ Strict repository standards:
 
 import os
 import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+import sys
 import json
 import re
 import math
@@ -32,10 +35,6 @@ COLLECTION_POINTS_URL = (
 )
 
 LOCAL_POINTS_PATH = os.path.join(DATA_DIR, 'dc_collection_points.geojson')
-SCRATCH_POINTS_PATH = os.path.join(
-    os.path.dirname(BASE_DIR),
-    '.gemini/antigravity-cli/brain/82b706a0-f62c-4d3a-8964-31ead6cff2d3/scratch/collection_points.geojson'
-)
 
 def dist_m(p1, p2):
     """Euclidean distance in meters between two [lon, lat] coordinates."""
@@ -87,64 +86,6 @@ def parse_address(addr):
     st_name = ' '.join(st_parts)
     return st_name, block, parity, num
 
-def anc_sort_key(anc):
-    """
-    Sort key for ascending numerical and alphabetical ordering of DC ANCs.
-    e.g. 1A < 1B < ... < 2A < 2B < ... < 3F < 3/4G < 4A ... < 8F
-    """
-    anc = anc.strip().replace('ANC', '').strip()
-    if not anc:
-        return (99, '', '')
-    if anc.startswith('3/4G'):
-        return (3, '4G', '')
-    m = re.match(r'^(\d+)([A-Z]+)?(.*)$', anc)
-    if m:
-        return (int(m.group(1)), m.group(2) or '', m.group(3) or '')
-    return (99, anc, '')
-
-def is_point_in_ring(x, y, ring):
-    """Ray-casting algorithm to test if (x, y) is inside a polygon ring."""
-    inside = False
-    n = len(ring)
-    for i in range(n):
-        j = (i - 1) % n
-        xi, yi = ring[i]
-        xj, yj = ring[j]
-        if ((yi > y) != (yj > y)) and (x < (xj - xi) * (y - yi) / (yj - yi) + xi):
-            inside = not inside
-    return inside
-
-def is_point_in_poly(x, y, poly_rings):
-    """Test if (x, y) is inside a polygon with optional holes."""
-    if not is_point_in_ring(x, y, poly_rings[0]):
-        return False
-    for h in range(1, len(poly_rings)):
-        if is_point_in_ring(x, y, poly_rings[h]):
-            return False
-    return True
-
-def get_poly_rings_list(geom):
-    """Normalize Polygon or MultiPolygon coordinates into a list of polygon ring lists."""
-    t = geom['type']
-    coords = geom['coordinates']
-    if t == 'Polygon':
-        return [coords]
-    elif t == 'MultiPolygon':
-        return coords
-    return []
-
-def get_bbox(polys):
-    """Calculate min_x, min_y, max_x, max_y bounding box for polygon list."""
-    min_x = min_y = 1e9
-    max_x = max_y = -1e9
-    for poly in polys:
-        for ring in poly:
-            for x, y in ring:
-                if x < min_x: min_x = x
-                if x > max_x: max_x = x
-                if y < min_y: min_y = y
-                if y > max_y: max_y = y
-    return (min_x, min_y, max_x, max_y)
 
 def build_spatial_indexes():
     """Build spatial grid indexes for Wards, SMDs/ANCs, and Neighborhood Clusters."""
@@ -249,16 +190,6 @@ def get_collection_points():
         print(f"Loading collection points from {LOCAL_POINTS_PATH}...")
         with open(LOCAL_POINTS_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
-    elif os.path.exists(SCRATCH_POINTS_PATH):
-        print(f"Loading collection points from cache {SCRATCH_POINTS_PATH}...")
-        with open(SCRATCH_POINTS_PATH, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        try:
-            with open(LOCAL_POINTS_PATH, 'w', encoding='utf-8') as f:
-                json.dump(data, f)
-        except Exception:
-            pass
-        return data
     else:
         print("Downloading collection points from Open Data DC...")
         req = urllib.request.Request(COLLECTION_POINTS_URL, headers={'User-Agent': 'DCMissedCollectionAnalysis/1.0'})
