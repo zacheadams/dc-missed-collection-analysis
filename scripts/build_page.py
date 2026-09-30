@@ -417,23 +417,6 @@ html_page = f'''<!DOCTYPE html>
       transition: background 0.2s, border-color 0.2s;
     }}
 
-    .panel-header {{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
-    }}
-
-    .panel-title {{
-      font-size: 12px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--text-main);
-    }}
-
     .panel-tag {{
       background: var(--badge-bg);
       color: var(--text-main);
@@ -455,12 +438,17 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     .period-label {{
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
-      font-weight: 700;
-      color: var(--text-dim);
-      margin-bottom: 5px;
+      font-weight: 800;
+      color: #000000;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
       display: block;
+    }}
+
+    [data-theme="dark"] .period-label {{
+      color: #ffffff;
     }}
 
     .period-toggle-group {{
@@ -822,23 +810,6 @@ html_page = f'''<!DOCTYPE html>
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }}
-      .panel-header {{
-        cursor: pointer;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-      }}
-      .control-panel.is-expanded .panel-header {{
-        margin-bottom: 10px;
-        padding-bottom: 6px;
-        border-bottom: 1px solid var(--border);
-      }}
-      .mobile-toggle-indicator {{
-        display: inline-block;
-        font-size: 13px;
-        color: var(--accent);
-        font-weight: 800;
-      }}
       .inspector-panel {{
         top: auto;
         bottom: 0;
@@ -998,12 +969,7 @@ html_page = f'''<!DOCTYPE html>
 
     <!-- Floating Left Control Panel -->
     <div class="control-panel" id="control-panel">
-      <div class="panel-header" onclick="toggleMobilePanel('control')">
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <span class="panel-title">Layers</span>
-          <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
-        </div>
-      </div>
+      <div class="sheet-handle" onclick="toggleMobilePanel('control')"></div>
 
       <div class="panel-collapsible-body" id="ctrl-panel-body">
         <!-- Analytic Period Switcher -->
@@ -1070,23 +1036,9 @@ html_page = f'''<!DOCTYPE html>
 
         <div class="routes-section">
           <span class="period-label">Pickup Routes</span>
-          <div class="layer-controls">
-            <label class="checkbox-row">
-              <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span><span class="kw-trash">Trash</span> Routes (polygon)</span>
-              <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
-            </label>
-            <label class="checkbox-row">
-              <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span><span class="kw-recycle">Recycling</span> Routes (polygon)</span>
-              <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
-            </label>
-            <label class="checkbox-row">
-              <span><span class="badge-route" style="background: var(--trash-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-trash">Trash</span> Routes (line)</span>
-              <input type="checkbox" id="chk-trash-lines" onchange="toggleTrashLines(this.checked)">
-            </label>
-            <label class="checkbox-row">
-              <span><span class="badge-route" style="background: var(--recycle-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-recycle">Recycling</span> Routes (line)</span>
-              <input type="checkbox" id="chk-recycle-lines" onchange="toggleRecycleLines(this.checked)">
-            </label>
+          <div class="metric-toggle-group">
+            <button class="metric-btn" id="btn-route-trash" onclick="setRouteStream('Trash')"><span class="kw-trash">Trash</span></button>
+            <button class="metric-btn" id="btn-route-recycle" onclick="setRouteStream('Recycling')"><span class="kw-recycle">Recycling</span></button>
           </div>
         </div>
 
@@ -2931,37 +2883,84 @@ html_page = f'''<!DOCTYPE html>
       }}
     }}
 
-    function toggleTrashRoutes(show) {{
-      if (show) {{
-        map.addLayer(trashRoutesLayer);
-        ensureSvgPatterns();
-        trashRoutesLayer.setStyle(getTrashRouteStyle());
-        ensureSelectedRoutesOnTop();
-      }} else {{
-        if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {{
+    let activeRouteLayerStream = null;
+
+    function setRouteStream(stream) {{
+      if (!MAP_DATA) return;
+      if (activeRouteLayerStream === stream) {{
+        // Deselect
+        activeRouteLayerStream = null;
+        const btnT = document.getElementById('btn-route-trash');
+        const btnR = document.getElementById('btn-route-recycle');
+        if (btnT) btnT.classList.remove('active');
+        if (btnR) btnR.classList.remove('active');
+        if (trashRoutesLayer && map.hasLayer(trashRoutesLayer)) {{
+          map.removeLayer(trashRoutesLayer);
+        }}
+        if (recycleRoutesLayer && map.hasLayer(recycleRoutesLayer)) {{
+          map.removeLayer(recycleRoutesLayer);
+        }}
+        if (selectedRouteId && !selectedRouteIsLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
           updateBreadcrumbs();
         }}
-        map.removeLayer(trashRoutesLayer);
         clearRouteHover();
+      }} else {{
+        activeRouteLayerStream = stream;
+        const btnT = document.getElementById('btn-route-trash');
+        const btnR = document.getElementById('btn-route-recycle');
+        if (btnT) btnT.classList.toggle('active', stream === 'Trash');
+        if (btnR) btnR.classList.toggle('active', stream === 'Recycling');
+
+        if (stream === 'Trash') {{
+          if (recycleRoutesLayer && map.hasLayer(recycleRoutesLayer)) {{
+            map.removeLayer(recycleRoutesLayer);
+          }}
+          if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {{
+            clearRouteSelection();
+            updateInspectorCitywide();
+            updateBreadcrumbs();
+          }}
+          if (trashRoutesLayer && !map.hasLayer(trashRoutesLayer)) {{
+            map.addLayer(trashRoutesLayer);
+            ensureSvgPatterns();
+            trashRoutesLayer.setStyle(getTrashRouteStyle());
+            ensureSelectedRoutesOnTop();
+          }}
+        }} else if (stream === 'Recycling') {{
+          if (trashRoutesLayer && map.hasLayer(trashRoutesLayer)) {{
+            map.removeLayer(trashRoutesLayer);
+          }}
+          if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {{
+            clearRouteSelection();
+            updateInspectorCitywide();
+            updateBreadcrumbs();
+          }}
+          if (recycleRoutesLayer && !map.hasLayer(recycleRoutesLayer)) {{
+            map.addLayer(recycleRoutesLayer);
+            ensureSvgPatterns();
+            recycleRoutesLayer.setStyle(getRecycleRouteStyle());
+            ensureSelectedRoutesOnTop();
+          }}
+        }}
+        clearRouteHover();
+      }}
+    }}
+
+    function toggleTrashRoutes(show) {{
+      if (show) {{
+        setRouteStream('Trash');
+      }} else if (activeRouteLayerStream === 'Trash') {{
+        setRouteStream('Trash');
       }}
     }}
 
     function toggleRecycleRoutes(show) {{
       if (show) {{
-        map.addLayer(recycleRoutesLayer);
-        ensureSvgPatterns();
-        recycleRoutesLayer.setStyle(getRecycleRouteStyle());
-        ensureSelectedRoutesOnTop();
-      }} else {{
-        if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {{
-          clearRouteSelection();
-          updateInspectorCitywide();
-          updateBreadcrumbs();
-        }}
-        map.removeLayer(recycleRoutesLayer);
-        clearRouteHover();
+        setRouteStream('Recycling');
+      }} else if (activeRouteLayerStream === 'Recycling') {{
+        setRouteStream('Recycling');
       }}
     }}
 
@@ -3027,16 +3026,14 @@ html_page = f'''<!DOCTYPE html>
 
       if (smdLayer && !map.hasLayer(smdLayer)) map.addLayer(smdLayer);
 
-      document.getElementById('chk-trash-routes').checked = false;
+      activeRouteLayerStream = null;
+      const btnRouteTrash = document.getElementById('btn-route-trash');
+      const btnRouteRecycle = document.getElementById('btn-route-recycle');
+      if (btnRouteTrash) btnRouteTrash.classList.remove('active');
+      if (btnRouteRecycle) btnRouteRecycle.classList.remove('active');
       if (trashRoutesLayer && map.hasLayer(trashRoutesLayer)) map.removeLayer(trashRoutesLayer);
-
-      document.getElementById('chk-recycle-routes').checked = false;
       if (recycleRoutesLayer && map.hasLayer(recycleRoutesLayer)) map.removeLayer(recycleRoutesLayer);
-
-      document.getElementById('chk-trash-lines').checked = false;
       if (trashLinesLayer && map.hasLayer(trashLinesLayer)) map.removeLayer(trashLinesLayer);
-
-      document.getElementById('chk-recycle-lines').checked = false;
       if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) map.removeLayer(recycleLinesLayer);
 
       map.setView([38.9072, -77.01], 12);
