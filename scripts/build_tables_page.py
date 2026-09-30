@@ -144,29 +144,35 @@ chart_ward_repeat_pct = [wards_stats[str(w)]['repeat_rate'] for w in range(1, 9)
 # Chart 3 Data: Day of Week Collection Volumes
 days_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 trash_by_day = defaultdict(int)
-for r in trash_routes:
-    trash_by_day[r['schedule']] += r['total']
-
 rec_by_day = defaultdict(int)
+trash_counts_by_day = defaultdict(int)
+rec_counts_by_day = defaultdict(int)
+
+for r in trash_routes:
+    sched = r.get('schedule', '')
+    for d in days_order:
+        if d in sched:
+            trash_counts_by_day[d] += 1
+            trash_by_day[d] += r.get('days_count', {}).get(d, 0)
+
 for r in recycle_routes:
-    rec_by_day[r['schedule']] += r['total']
+    sched = r.get('schedule', '')
+    for d in days_order:
+        if d in sched:
+            rec_counts_by_day[d] += 1
+            rec_by_day[d] += r.get('days_count', {}).get(d, 0)
 
 chart_day_trash = [trash_by_day[d] for d in days_order]
 chart_day_rec = [rec_by_day[d] for d in days_order]
 
-# Chart 4 Data: Daily Average Requests per Route
-trash_counts_by_day = defaultdict(int)
-for r in trash_routes:
-    trash_counts_by_day[r['schedule']] += 1
-
-rec_counts_by_day = defaultdict(int)
-for r in recycle_routes:
-    rec_counts_by_day[r['schedule']] += 1
-
 chart_day_avg_trash = [round(trash_by_day[d] / trash_counts_by_day[d], 1) if trash_counts_by_day[d] else 0 for d in days_order]
 chart_day_avg_rec = [round(rec_by_day[d] / rec_counts_by_day[d], 1) if rec_counts_by_day[d] else 0 for d in days_order]
 
-day_sort_map = {'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5}
+day_sort_map = {
+    'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5,
+    'Monday/Thursday': 1.1, 'Monday or Thursday': 1.2, 'Monday or Wednesday': 1.3, 'Monday, Wednesday, or Thursday': 1.4,
+    'Tuesday/Friday': 2.1, 'Tuesday or Friday': 2.2, 'Tuesday or Wednesday': 2.3
+}
 
 # HTML Template
 html_content = f"""<!DOCTYPE html>
@@ -1295,7 +1301,7 @@ html_content += f"""
 
         const matchQ = !q || rowSearch.includes(q);
         const matchStream = !stream || rowStream === stream;
-        const matchDay = !day || rowDay === day;
+        const matchDay = !day || rowDay.includes(day);
         const matchWard = !ward || rowWard.includes(ward);
 
         return matchQ && matchStream && matchDay && matchWard;
