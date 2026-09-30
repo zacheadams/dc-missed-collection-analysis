@@ -476,6 +476,91 @@ def verify():
             if os.path.exists(temp_html_path):
                 os.remove(temp_html_path)
 
+        # -------------------------------------------------------------
+        # Mobile Headless Chrome Verification (390x844 viewport)
+        # -------------------------------------------------------------
+        print("Testing mobile viewport layout & drawer handling via Headless Chrome...")
+        mobile_script = """
+        <script>
+        function runMobileVerifications() {
+            const out = document.createElement('div');
+            out.id = 'mobile-results';
+
+            const ctrlBody = document.getElementById('ctrl-panel-body');
+            const ctrlIcon = document.getElementById('ctrl-toggle-icon');
+            const inspBody = document.getElementById('insp-panel-body');
+            const legend = document.querySelector('.legend-panel');
+            const legendBottom = legend ? window.getComputedStyle(legend).bottom : '';
+            const insp = document.getElementById('inspector-panel');
+            const inspMaxHeight = insp ? window.getComputedStyle(insp).maxHeight : '';
+
+            const initialCollapsed = ctrlBody ? ctrlBody.style.display === 'none' : false;
+            const initialIconDown = ctrlIcon ? ctrlIcon.innerText.trim() === '▾' : false;
+
+            toggleMobilePanel('control');
+            const toggledOpen = ctrlBody ? ctrlBody.style.display === 'block' : false;
+            const toggledIconUp = ctrlIcon ? ctrlIcon.innerText.trim() === '▴' : false;
+
+            collapseMobileControlPanel();
+            const collapsedAgain = ctrlBody ? ctrlBody.style.display === 'none' : false;
+
+            const toggleIndicator = document.getElementById('ctrl-toggle-icon');
+            const toggleRect = toggleIndicator ? toggleIndicator.getBoundingClientRect() : { width: 0, height: 0 };
+
+            out.innerText = JSON.stringify({
+                initialCollapsed,
+                initialIconDown,
+                toggledOpen,
+                toggledIconUp,
+                collapsedAgain,
+                legendBottom,
+                inspMaxHeight,
+                toggleWidth: toggleRect.width,
+                toggleHeight: toggleRect.height
+            });
+            document.body.appendChild(out);
+        }
+
+        if (window.__MAP_DATA_LOADED) {
+            runMobileVerifications();
+        } else {
+            window.addEventListener('map-data-loaded', () => {
+                setTimeout(runMobileVerifications, 100);
+            });
+        }
+        </script>
+        """
+        temp_mobile_path = os.path.join(BASE_DIR, 'test_map_mobile_dom.html')
+        with open(temp_mobile_path, 'w', encoding='utf-8') as f:
+            f.write(html.replace('</body>', mobile_script + '</body>'))
+
+        try:
+            cmd_mobile = [
+                chrome_bin,
+                '--headless=new',
+                '--allow-file-access-from-files',
+                '--window-size=390,844',
+                '--virtual-time-budget=3000',
+                '--dump-dom',
+                f'file://{temp_mobile_path}'
+            ]
+            res_mob = subprocess.run(cmd_mobile, capture_output=True, text=True, timeout=15)
+            m_mob = re.search(r'<div id="mobile-results">([^<]+)</div>', res_mob.stdout)
+            if m_mob:
+                m_res = json.loads(m_mob.group(1))
+                print(f"Headless Chrome mobile result: {m_res}")
+                assert m_res['initialCollapsed'], "Mobile: control panel should start collapsed"
+                assert m_res['initialIconDown'], "Mobile: control toggle icon should start with ▾"
+                assert m_res['toggledOpen'], "Mobile: toggleMobilePanel should open control panel"
+                assert m_res['toggledIconUp'], "Mobile: control toggle icon should flip to ▴"
+                assert m_res['collapsedAgain'], "Mobile: collapseMobileControlPanel should collapse panel"
+                assert '80px' in m_res['legendBottom'], f"Mobile: legend bottom should be 80px, got {m_res['legendBottom']}"
+                assert m_res['toggleWidth'] >= 40, f"Mobile: toggle width should be >= 40px, got {m_res['toggleWidth']}"
+                print("PASS: Headless Chrome mobile verification successful!")
+        finally:
+            if os.path.exists(temp_mobile_path):
+                os.remove(temp_mobile_path)
+
     print("=" * 70)
     print("ALL VERIFICATION CHECKS PASSED SUCCESSFULLY!")
     print("=" * 70)

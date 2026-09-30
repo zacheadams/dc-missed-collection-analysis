@@ -460,14 +460,14 @@ html_page = f'''<!DOCTYPE html>
       font-size: 12px;
       text-transform: uppercase;
       font-weight: 800;
-      color: #000000;
+      color: var(--text-main);
       letter-spacing: 0.04em;
       margin-bottom: 6px;
       display: block;
     }}
 
     [data-theme="dark"] .period-label {{
-      color: #ffffff;
+      color: var(--text-main);
     }}
 
     .period-toggle-group {{
@@ -788,6 +788,10 @@ html_page = f'''<!DOCTYPE html>
       display: none;
     }}
 
+    .mobile-control-header {{
+      display: none;
+    }}
+
     .mobile-toggle-indicator,
     .mobile-inspector-toggle {{
       display: none;
@@ -819,15 +823,53 @@ html_page = f'''<!DOCTYPE html>
         height: calc(100vh - 84px);
       }}
       .control-panel {{
-        top: 8px;
-        left: 8px;
-        right: 8px;
-        width: auto;
-        padding: 10px 12px;
-        border-radius: 2px;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 8px 12px 12px 12px;
+        border-radius: 0 0 2px 2px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
         max-height: calc(100vh - 160px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        z-index: 600;
+      }}
+      .mobile-control-header {{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        padding-bottom: 2px;
+      }}
+      .mobile-control-bar {{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 4px;
+      }}
+      .mobile-control-title {{
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-main);
+      }}
+      .mobile-toggle-indicator {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--accent);
       }}
       .inspector-panel {{
         top: auto;
@@ -836,39 +878,54 @@ html_page = f'''<!DOCTYPE html>
         right: 0;
         width: 100%;
         border-radius: 2px 2px 0 0;
-        padding: 10px 14px 16px 14px;
+        padding: 8px 14px 14px 14px;
         box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
-        max-height: 48vh;
+        max-height: 55vh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         z-index: 600;
       }}
       .sheet-handle {{
         display: block;
-        width: 40px;
-        height: 4px;
+        width: 44px;
+        height: 5px;
         border-radius: 2px;
         background: var(--border-dark);
-        margin: 0 auto 8px auto;
+        margin: 0 auto 6px auto;
         cursor: pointer;
+        position: relative;
+      }}
+      .sheet-handle::before {{
+        content: '';
+        position: absolute;
+        top: -12px;
+        bottom: -12px;
+        left: -20px;
+        right: -20px;
       }}
       .inspector-header {{
+        align-items: center;
         cursor: pointer;
+        padding-bottom: 2px;
       }}
       .mobile-inspector-toggle {{
-        display: block;
-        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 14px;
         font-weight: 800;
         color: var(--accent);
       }}
       .legend-panel {{
-        bottom: 64px;
+        bottom: 80px;
         left: 8px;
         padding: 6px 10px;
         max-width: calc(100vw - 80px);
       }}
       .leaflet-bottom.leaflet-right {{
-        bottom: 64px;
+        bottom: 80px;
         right: 8px;
       }}
       .hierarchy-select, .period-btn, .metric-btn, #smd-search {{
@@ -988,7 +1045,13 @@ html_page = f'''<!DOCTYPE html>
 
     <!-- Floating Left Control Panel -->
     <div class="control-panel" id="control-panel">
-      <div class="sheet-handle" onclick="toggleMobilePanel('control')"></div>
+      <div class="mobile-control-header" onclick="toggleMobilePanel('control')">
+        <div class="sheet-handle"></div>
+        <div class="mobile-control-bar">
+          <span class="mobile-control-title">Filters &amp; Layers</span>
+          <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
+        </div>
+      </div>
 
       <div class="panel-collapsible-body" id="ctrl-panel-body">
         <!-- Analytic Period Switcher -->
@@ -3217,6 +3280,19 @@ html_page = f'''<!DOCTYPE html>
       a.click();
     }}
 
+    function collapseMobileControlPanel() {{
+      if (window.innerWidth <= 768) {{
+        const cp = document.getElementById('control-panel');
+        const body = document.getElementById('ctrl-panel-body');
+        const icon = document.getElementById('ctrl-toggle-icon');
+        if (body && body.style.display !== 'none') {{
+          body.style.display = 'none';
+          if (cp) cp.classList.remove('is-expanded');
+          if (icon) icon.innerText = '▾';
+        }}
+      }}
+    }}
+
     // Mobile Drawer & Filter Toggles
     function toggleMobilePanel(type) {{
       if (window.innerWidth > 768) return;
@@ -3264,6 +3340,83 @@ html_page = f'''<!DOCTYPE html>
         if (ctrlBody) ctrlBody.style.display = 'none';
         const ctrlIcon = document.getElementById('ctrl-toggle-icon');
         if (ctrlIcon) ctrlIcon.innerText = '▾';
+      }}
+
+      // Breakpoint tracking on resize/orientation change
+      let wasMobile = window.innerWidth <= 768;
+      window.addEventListener('resize', function() {{
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile !== wasMobile) {{
+          wasMobile = isMobile;
+          const cp = document.getElementById('control-panel');
+          const ctrlBody = document.getElementById('ctrl-panel-body');
+          const inspBody = document.getElementById('insp-panel-body');
+          const ctrlIcon = document.getElementById('ctrl-toggle-icon');
+          const inspIcon = document.getElementById('insp-toggle-icon');
+          if (isMobile) {{
+            if (ctrlBody) ctrlBody.style.display = 'none';
+            if (ctrlIcon) ctrlIcon.innerText = '▾';
+            if (inspIcon) inspIcon.innerText = '▴';
+            if (cp) {{
+              cp.classList.remove('is-expanded');
+              cp.style.maxHeight = '';
+            }}
+          }} else {{
+            if (ctrlBody) ctrlBody.style.display = '';
+            if (inspBody) inspBody.style.display = '';
+            if (cp) {{
+              cp.classList.remove('is-expanded');
+              cp.style.maxHeight = '';
+            }}
+          }}
+        }}
+      }});
+
+      // Tap outside to collapse control panel on mobile
+      document.addEventListener('click', function(e) {{
+        if (window.innerWidth <= 768) {{
+          const cp = document.getElementById('control-panel');
+          if (cp && !cp.contains(e.target)) {{
+            collapseMobileControlPanel();
+          }}
+        }}
+      }});
+
+      if (typeof map !== 'undefined' && map) {{
+        map.on('click', collapseMobileControlPanel);
+      }}
+
+      // Virtual viewport handling for mobile virtual keyboard
+      if (window.visualViewport) {{
+        window.visualViewport.addEventListener('resize', function() {{
+          if (window.innerWidth <= 768) {{
+            const cp = document.getElementById('control-panel');
+            const ctrlBody = document.getElementById('ctrl-panel-body');
+            if (cp && ctrlBody && ctrlBody.style.display !== 'none') {{
+              const vh = window.visualViewport.height;
+              cp.style.maxHeight = Math.max(160, Math.floor(vh - 20)) + 'px';
+            }}
+          }}
+        }});
+      }}
+
+      const searchInput = document.getElementById('smd-search');
+      if (searchInput) {{
+        searchInput.addEventListener('focus', function() {{
+          if (window.innerWidth <= 768) {{
+            setTimeout(() => {{
+              searchInput.scrollIntoView({{ behavior: 'smooth', block: 'nearest' }});
+            }}, 300);
+          }}
+        }});
+        searchInput.addEventListener('blur', function() {{
+          if (window.innerWidth <= 768) {{
+            const cp = document.getElementById('control-panel');
+            if (cp && window.visualViewport) {{
+              cp.style.maxHeight = '';
+            }}
+          }}
+        }});
       }}
     }}
 
