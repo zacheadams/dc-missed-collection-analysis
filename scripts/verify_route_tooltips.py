@@ -158,26 +158,12 @@ def verify():
     # Check tooltip templates include dedicated ANCs rows
     assert "ANCs: <strong" in html
 
-    # Check that IC106 properties in embedded map data have ANC 1C, 2D
-    assert '"route_area":"IC106"' in html
-    ic106_matches = [m.group(0) for m in re.finditer(r'\"route_area\":\s*\"IC106\"[^\}]+', html)]
-    for m in ic106_matches:
-        assert '1C' in m and '2D' in m, f"Embedded IC106 does not have 1C/2D: {m}"
-        assert 'Kalorama Heights' in m, f"Embedded IC106 does not have Kalorama Heights: {m}"
+    # Check asynchronous map data fetching and loading overlay
+    assert "fetch('data/dc_map_data_v2.json')" in html
+    assert 'id="map-loading"' in html
+    assert "let MAP_DATA = null;" in html
 
-    # Check that 106_2 properties in embedded map data have ANC 2B
-    line_106_matches = [m.group(0) for m in re.finditer(r'\"route\":\s*\"106_2\"[^\}]+', html)]
-    for m in line_106_matches:
-        assert '2B' in m, f"Embedded 106_2 does not have 2B: {m}"
-        assert 'Dupont Circle' in m, f"Embedded 106_2 does not have Dupont Circle: {m}"
-
-    # Check that IC20 properties in embedded map data have all ANCs sorted
-    ic20_matches = [m.group(0) for m in re.finditer(r'\"route_area\":\s*\"IC20\"[^\}]+', html)]
-    for m in ic20_matches:
-        for anc in ['1B', '1C', '2B', '2D', '2E', '2F']:
-            assert anc in m, f"Embedded IC20 does not have {anc}: {m}"
-
-    print("PASS: map.html structure and embedded data verified.")
+    print("PASS: map.html structure and asynchronous data loading verified.")
 
     # 5. Headless Chrome DOM & Tooltip Execution Test
     import shutil
@@ -191,10 +177,9 @@ def verify():
         print("Testing tooltip rendering and canonical sorting via Headless Chrome...")
         test_script = """
         <script>
-        window.addEventListener('DOMContentLoaded', () => {
-          setTimeout(() => {
-            const out = document.createElement('div');
-            out.id = 'test-results';
+        function runVerificationTests() {
+          const out = document.createElement('div');
+          out.id = 'test-results';
             
             // Check trashRouteIndex for IC106 and IC20
             const ic106 = trashRouteIndex.find(r => r.route === 'IC106');
@@ -355,8 +340,15 @@ def verify():
               lineR210_ancs: lineR210 ? lineR210.properties.ancs : null
             });
             document.body.appendChild(out);
-          }, 300);
-        });
+        }
+
+        if (window.__MAP_DATA_LOADED) {
+          runVerificationTests();
+        } else {
+          window.addEventListener('map-data-loaded', () => {
+            setTimeout(runVerificationTests, 100);
+          });
+        }
         </script>
         """
         temp_html_path = os.path.join(BASE_DIR, 'test_map_dom.html')
@@ -367,7 +359,8 @@ def verify():
             cmd = [
                 chrome_bin,
                 '--headless=new',
-                '--virtual-time-budget=2000',
+                '--allow-file-access-from-files',
+                '--virtual-time-budget=3000',
                 '--dump-dom',
                 f'file://{temp_html_path}'
             ]
