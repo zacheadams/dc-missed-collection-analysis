@@ -579,13 +579,9 @@ html_content = f"""<!DOCTYPE html>
       display: inline-block;
     }}
 
-    .badge-hotspot {{
-      background: rgba(220, 38, 38, 0.12);
-      color: var(--trash-color);
+    .val-highlight {{
+      color: var(--combined-color);
       font-weight: 700;
-      padding: 1px 4px;
-      border-radius: 2px;
-      border: 1px solid rgba(220, 38, 38, 0.3);
     }}
 
     .font-num {{
@@ -710,6 +706,7 @@ total_citywide_requests = citywide['total_requests']
 for w in range(1, 9):
     ws = wards_stats[str(w)]
     share_pct = round(ws['total'] / total_citywide_requests * 100, 1) if total_citywide_requests > 0 else 0.0
+    rep_display = f'<span class="val-highlight">{ws["repeat_rate"]}%</span>' if ws['repeat_rate'] >= 26.0 else f"{ws['repeat_rate']}%"
     html_content += f"""
             <tr>
               <td data-sort="{w}"><strong>Ward {w}</strong></td>
@@ -719,9 +716,7 @@ for w in range(1, 9):
               <td data-sort="{ws['recycling']}" style="text-align: right;" class="kw-recycle font-num">{ws['recycling']:,}</td>
               <td data-sort="{ws['unique_addresses']}" style="text-align: right;" class="font-num">{ws['unique_addresses']:,}</td>
               <td data-sort="{ws['repeat_addresses']}" style="text-align: right;" class="font-num">{ws['repeat_addresses']:,}</td>
-              <td data-sort="{ws['repeat_rate']}" style="text-align: right;" class="font-num">
-                <span class="{ 'badge-hotspot' if ws['repeat_rate'] >= 24 else '' }">{ws['repeat_rate']}%</span>
-              </td>
+              <td data-sort="{ws['repeat_rate']}" style="text-align: right;" class="font-num">{rep_display}</td>
               <td data-sort="{share_pct}" style="text-align: right;" class="font-num">{share_pct}%</td>
             </tr>
 """
@@ -780,6 +775,7 @@ html_content += f"""
 """
 
 for anc in ancs_list:
+    anc_rep_display = f'<span class="val-highlight">{anc["repeat_rate"]}%</span>' if anc['repeat_rate'] >= 30.0 else f"{anc['repeat_rate']}%"
     html_content += f"""
             <tr data-anc="{anc['anc_id']}" data-ward="{anc['ward']}">
               <td data-sort="{anc['ward']}">Ward {anc['ward']}</td>
@@ -790,9 +786,7 @@ for anc in ancs_list:
               <td data-sort="{anc['recycling']}" style="text-align: right;" class="kw-recycle font-num">{anc['recycling']:,}</td>
               <td data-sort="{anc['unique_addrs']}" style="text-align: right;" class="font-num">{anc['unique_addrs']:,}</td>
               <td data-sort="{anc['repeat_addrs']}" style="text-align: right;" class="font-num">{anc['repeat_addrs']:,}</td>
-              <td data-sort="{anc['repeat_rate']}" style="text-align: right;" class="font-num">
-                <span class="{ 'badge-hotspot' if anc['repeat_rate'] >= 25 else '' }">{anc['repeat_rate']}%</span>
-              </td>
+              <td data-sort="{anc['repeat_rate']}" style="text-align: right;" class="font-num">{anc_rep_display}</td>
             </tr>
 """
 
@@ -901,6 +895,7 @@ for r in all_routes:
     ward_str = r.get('ward', 'N/A')
     m_ward = re.search(r'\d+', ward_str)
     ward_num = int(m_ward.group(0)) if m_ward else 99
+    density_display = f'<span class="val-highlight">{r["density"]}</span>' if r['density'] >= 350.0 else f"{r['density']}"
     html_content += f"""
             <tr data-stream="{stream}" data-day="{r['schedule']}" data-ward="{ward_str}" data-search="{search_text}">
               <td data-sort="{r['route_id']}"><strong>{r['route_id']}</strong></td>
@@ -912,9 +907,7 @@ for r in all_routes:
               </td>
               <td data-sort="{r['area_sq_mi']}" style="text-align: right;" class="font-num">{r['area_sq_mi']}</td>
               <td data-sort="{r['total']}" style="text-align: right;" class="{ 'kw-trash' if stream == 'Trash' else 'kw-recycle' } font-num"><strong>{r['total']:,}</strong></td>
-              <td data-sort="{r['density']}" style="text-align: right;" class="font-num">
-                <span class="{ 'badge-hotspot' if r['density'] >= 75 else '' }">{r['density']}</span>
-              </td>
+              <td data-sort="{r['density']}" style="text-align: right;" class="font-num">{density_display}</td>
             </tr>
 """
 
