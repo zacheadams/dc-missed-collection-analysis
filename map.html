@@ -245,7 +245,12 @@
 
     /* Period Toggle Group */
     .period-section {
-      margin-bottom: 10px;
+      margin-bottom: 0;
+    }
+
+    .control-divider {
+      border-top: 1px solid var(--border);
+      margin: 10px 0;
     }
 
     .period-label {
@@ -253,7 +258,7 @@
       text-transform: uppercase;
       font-weight: 700;
       color: var(--text-dim);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       display: block;
     }
 
@@ -293,7 +298,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 10px;
+      margin-bottom: 0;
     }
 
     .hierarchy-row {
@@ -360,7 +365,7 @@
       padding: 3px;
       border-radius: 2px;
       border: 1px solid var(--border);
-      margin-bottom: 10px;
+      margin-bottom: 0;
     }
 
     .metric-btn {
@@ -369,7 +374,7 @@
       border: none;
       color: var(--text-muted);
       padding: 5px 4px;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       border-radius: 2px;
       cursor: pointer;
@@ -391,8 +396,6 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      padding-top: 8px;
-      border-top: 1px solid var(--border);
     }
 
     .checkbox-row {
@@ -811,73 +814,84 @@
           </div>
         </div>
 
-        <span class="period-label">Geographic Subset</span>
-        <div class="search-box">
-          <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
-        </div>
+        <div class="control-divider"></div>
 
-        <div class="hierarchy-container">
-          <div class="hierarchy-row">
-            <span class="hierarchy-label">Ward</span>
-            <select class="hierarchy-select" id="ward-select" onchange="handleWardDropdown(this.value)">
-              <option value="all">All Wards (Citywide)</option>
-              <option value="1">Ward 1 • Brianne Nadeau</option>
-              <option value="2">Ward 2 • Brooke Pinto</option>
-              <option value="3">Ward 3 • Matthew Frumin</option>
-              <option value="4">Ward 4 • Janeese Lewis George</option>
-              <option value="5">Ward 5 • Zachary Parker</option>
-              <option value="6">Ward 6 • Charles Allen</option>
-              <option value="7">Ward 7 • Wendell Felder</option>
-              <option value="8">Ward 8 • Trayon White, Sr.</option>
-            </select>
+        <div class="geographic-section">
+          <span class="period-label">Geographic Subset</span>
+          <div class="search-box">
+            <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
           </div>
 
-          <div class="hierarchy-row">
-            <span class="hierarchy-label">ANC</span>
-            <select class="hierarchy-select" id="anc-select" onchange="handleAncDropdown(this.value)" disabled>
-              <option value="all">— Select Ward First —</option>
-            </select>
+          <div class="hierarchy-container">
+            <div class="hierarchy-row">
+              <span class="hierarchy-label">Ward</span>
+              <select class="hierarchy-select" id="ward-select" onchange="handleWardDropdown(this.value)">
+                <option value="all">All Wards (Citywide)</option>
+                <option value="1">Ward 1 • Brianne Nadeau</option>
+                <option value="2">Ward 2 • Brooke Pinto</option>
+                <option value="3">Ward 3 • Matthew Frumin</option>
+                <option value="4">Ward 4 • Janeese Lewis George</option>
+                <option value="5">Ward 5 • Zachary Parker</option>
+                <option value="6">Ward 6 • Charles Allen</option>
+                <option value="7">Ward 7 • Wendell Felder</option>
+                <option value="8">Ward 8 • Trayon White, Sr.</option>
+              </select>
+            </div>
+
+            <div class="hierarchy-row">
+              <span class="hierarchy-label">ANC</span>
+              <select class="hierarchy-select" id="anc-select" onchange="handleAncDropdown(this.value)" disabled>
+                <option value="all">— Select Ward First —</option>
+              </select>
+            </div>
+
+            <div class="hierarchy-row">
+              <span class="hierarchy-label">SMD</span>
+              <select class="hierarchy-select" id="smd-select" onchange="handleSmdDropdown(this.value)" disabled>
+                <option value="all">— Select ANC First —</option>
+              </select>
+            </div>
           </div>
+        </div>
 
-          <div class="hierarchy-row">
-            <span class="hierarchy-label">SMD</span>
-            <select class="hierarchy-select" id="smd-select" onchange="handleSmdDropdown(this.value)" disabled>
-              <option value="all">— Select ANC First —</option>
-            </select>
+        <div class="control-divider"></div>
+
+        <div class="requests-section">
+          <span class="period-label">311 Requests</span>
+          <div class="metric-toggle-group">
+            <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span></button>
+            <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span></button>
+            <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span></button>
           </div>
         </div>
 
-        <span class="period-label">311 Requests</span>
-        <div class="metric-toggle-group">
-          <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span><br>Requests</button>
-          <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span><br>Only</button>
-          <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span><br>Only</button>
+        <div class="control-divider"></div>
+
+        <div class="routes-section">
+          <span class="period-label">Pickup Routes</span>
+          <div class="layer-controls">
+            <label class="checkbox-row">
+              <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span><span class="kw-trash">Trash</span> Routes (polygon)</span>
+              <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
+            </label>
+            <label class="checkbox-row">
+              <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span><span class="kw-recycle">Recycling</span> Routes (polygon)</span>
+              <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
+            </label>
+            <label class="checkbox-row">
+              <span><span class="badge-route" style="background: var(--trash-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-trash">Trash</span> Routes (line)</span>
+              <input type="checkbox" id="chk-trash-lines" onchange="toggleTrashLines(this.checked)">
+            </label>
+            <label class="checkbox-row">
+              <span><span class="badge-route" style="background: var(--recycle-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-recycle">Recycling</span> Routes (line)</span>
+              <input type="checkbox" id="chk-recycle-lines" onchange="toggleRecycleLines(this.checked)">
+            </label>
+          </div>
         </div>
 
-        <div class="layer-controls">
-          <label class="checkbox-row">
-            <span><span class="badge-route" id="marker-311-requests" style="background: var(--combined-color);"></span>Missed Collections</span>
-            <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
-          </label>
-          <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(45deg, var(--trash-color), var(--trash-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--trash-color);"></span><span class="kw-trash">Trash</span> Routes (polygon)</span>
-            <input type="checkbox" id="chk-trash-routes" onchange="toggleTrashRoutes(this.checked)">
-          </label>
-          <label class="checkbox-row">
-            <span><span class="badge-route" style="background: repeating-linear-gradient(-45deg, var(--recycle-color), var(--recycle-color) 2px, transparent 2px, transparent 4px); border: 1px solid var(--recycle-color);"></span><span class="kw-recycle">Recycling</span> Routes (polygon)</span>
-            <input type="checkbox" id="chk-recycle-routes" onchange="toggleRecycleRoutes(this.checked)">
-          </label>
-          <label class="checkbox-row">
-            <span><span class="badge-route" style="background: var(--trash-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-trash">Trash</span> Routes (line)</span>
-            <input type="checkbox" id="chk-trash-lines" onchange="toggleTrashLines(this.checked)">
-          </label>
-          <label class="checkbox-row">
-            <span><span class="badge-route" style="background: var(--recycle-color); height: 3px; border-radius: 1px; margin-top: 5px;"></span><span class="kw-recycle">Recycling</span> Routes (line)</span>
-            <input type="checkbox" id="chk-recycle-lines" onchange="toggleRecycleLines(this.checked)">
-          </label>
-        </div>
+        <div class="control-divider"></div>
 
-        <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border);">
+        <div>
           <button id="btn-reset-default" class="btn-action" style="width: 100%; text-align: center; padding: 7px 10px; font-weight: 700; border-radius: 2px;" onclick="resetToDefault()">Reset to Default</button>
         </div>
       </div>
@@ -1120,6 +1134,9 @@
     }
 
     function smdStyle(feature) {
+      if (!currentMetric) {
+        return { fillOpacity: 0, opacity: 0, weight: 0 };
+      }
       const p = feature.properties;
       const val = getSmdMetric(p, currentMetric, currentPeriod);
       const isSelected = selectedSmdId === p.smd_id;
@@ -2534,12 +2551,27 @@
 
     function setMetric(metric) {
       if (!MAP_DATA) return;
-      currentMetric = metric;
-      document.getElementById('btn-total').classList.toggle('active', metric === 'total');
-      document.getElementById('btn-trash').classList.toggle('active', metric === 'trash');
-      document.getElementById('btn-recycling').classList.toggle('active', metric === 'recycling');
-      updateLegend();
-      if (smdLayer) smdLayer.setStyle(smdStyle);
+      if (currentMetric === metric) {
+        currentMetric = null;
+        document.getElementById('btn-total').classList.remove('active');
+        document.getElementById('btn-trash').classList.remove('active');
+        document.getElementById('btn-recycling').classList.remove('active');
+        if (smdLayer && map.hasLayer(smdLayer)) {
+          map.removeLayer(smdLayer);
+          smdTooltip.close();
+        }
+        updateLegend();
+      } else {
+        currentMetric = metric;
+        document.getElementById('btn-total').classList.toggle('active', metric === 'total');
+        document.getElementById('btn-trash').classList.toggle('active', metric === 'trash');
+        document.getElementById('btn-recycling').classList.toggle('active', metric === 'recycling');
+        if (smdLayer && !map.hasLayer(smdLayer)) {
+          map.addLayer(smdLayer);
+        }
+        if (smdLayer) smdLayer.setStyle(smdStyle);
+        updateLegend();
+      }
     }
 
     function setPeriod(period) {
@@ -2549,7 +2581,7 @@
       document.getElementById('btn-period-30d').classList.toggle('active', period === '30d');
 
       updateLegend();
-      if (smdLayer) smdLayer.setStyle(smdStyle);
+      if (smdLayer && currentMetric) smdLayer.setStyle(smdStyle);
 
       // Refresh currently active inspector
       if (selectedRouteId && selectedRouteLayer) {
@@ -2572,29 +2604,31 @@
     }
 
     function updateLegend() {
+      const legendPanel = document.querySelector('.legend-panel');
+      if (!currentMetric) {
+        if (legendPanel) legendPanel.style.display = 'none';
+        return;
+      }
+      if (legendPanel) legendPanel.style.display = 'block';
+
       const pal = PALETTES[currentMetric];
       const th = THRESHOLDS[currentPeriod][currentMetric];
       const scaleEl = document.getElementById('legend-scale');
-      scaleEl.innerHTML = pal.map(c => `<div class="scale-box" style="background: ${c};"></div>`).join('');
+      if (scaleEl && pal) {
+        scaleEl.innerHTML = pal.map(c => `<div class="scale-box" style="background: ${c};"></div>`).join('');
+      }
       const streamName = currentMetric === 'total' ? '<span class="kw-combined">Combined</span>' : (currentMetric === 'trash' ? '<span class="kw-trash">Trash</span>' : '<span class="kw-recycle">Recycling</span>');
       const periodLabel = currentPeriod === '30d' ? '30 Days' : '180 Days';
-      document.getElementById('legend-title').innerHTML = `${streamName} Requests (${periodLabel})`;
-      document.getElementById('legend-labels').innerHTML = `
-        <span>0</span>
-        <span>${th[1]}</span>
-        <span>${th[3]}</span>
-        <span>${th[5]}+</span>
-      `;
-
-      const marker311 = document.getElementById('marker-311-requests');
-      if (marker311) {
-        if (currentMetric === 'trash') {
-          marker311.style.background = 'var(--trash-color)';
-        } else if (currentMetric === 'recycling') {
-          marker311.style.background = 'var(--recycle-color)';
-        } else {
-          marker311.style.background = 'var(--combined-color)';
-        }
+      const titleEl = document.getElementById('legend-title');
+      if (titleEl) titleEl.innerHTML = `${streamName} Requests (${periodLabel})`;
+      const labelsEl = document.getElementById('legend-labels');
+      if (labelsEl && th) {
+        labelsEl.innerHTML = `
+          <span>0</span>
+          <span>${th[1]}</span>
+          <span>${th[3]}</span>
+          <span>${th[5]}+</span>
+        `;
       }
     }
 
@@ -2678,10 +2712,21 @@
 
     function toggleSMDLayer(show) {
       if (show) {
-        map.addLayer(smdLayer);
+        if (!currentMetric) {
+          setMetric('total');
+        } else if (smdLayer && !map.hasLayer(smdLayer)) {
+          map.addLayer(smdLayer);
+        }
       } else {
-        map.removeLayer(smdLayer);
-        smdTooltip.close();
+        if (smdLayer && map.hasLayer(smdLayer)) {
+          map.removeLayer(smdLayer);
+          smdTooltip.close();
+        }
+        currentMetric = null;
+        document.getElementById('btn-total').classList.remove('active');
+        document.getElementById('btn-trash').classList.remove('active');
+        document.getElementById('btn-recycling').classList.remove('active');
+        updateLegend();
       }
     }
 
@@ -2779,8 +2824,7 @@
       document.getElementById('btn-period-180d').classList.add('active');
       document.getElementById('btn-period-30d').classList.remove('active');
 
-      document.getElementById('chk-smd').checked = true;
-      if (!map.hasLayer(smdLayer)) map.addLayer(smdLayer);
+      if (smdLayer && !map.hasLayer(smdLayer)) map.addLayer(smdLayer);
 
       document.getElementById('chk-trash-routes').checked = false;
       if (trashRoutesLayer && map.hasLayer(trashRoutesLayer)) map.removeLayer(trashRoutesLayer);
@@ -2810,7 +2854,7 @@
     // Static Contextual Exports
     function getExportMetadata() {
       const periodLabel = currentPeriod === '30d' ? '30-Day' : '180-Day';
-      const streamLabel = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
+      const streamLabel = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : (currentMetric === 'recycling' ? 'Recycling' : 'None'));
 
       if (selectedRouteId) {
         return {
