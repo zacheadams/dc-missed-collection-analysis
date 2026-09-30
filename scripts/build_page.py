@@ -2657,7 +2657,7 @@ html_page = f'''<!DOCTYPE html>
       const rep = formatRepName(p.rep_name || (MAP_DATA.smds.features.find(f => f.properties.smd_id === p.smd_id)?.properties?.rep_name) || '');
 
       document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
-      document.getElementById('insp-sub').innerText = `Advisory Neighborhood Commissioner: ${{rep || 'Vacant'}}`;
+      document.getElementById('insp-sub').innerText = `Commissioner: ${{rep || 'Vacant'}}`;
       document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
 
