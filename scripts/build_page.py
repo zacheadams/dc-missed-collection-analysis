@@ -983,6 +983,27 @@ html_page = f'''<!DOCTYPE html>
 
         <div class="control-divider"></div>
 
+        <div class="requests-section">
+          <span class="period-label">311 Requests</span>
+          <div class="metric-toggle-group">
+            <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span></button>
+            <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span></button>
+            <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span></button>
+          </div>
+        </div>
+
+        <div class="control-divider"></div>
+
+        <div class="routes-section">
+          <span class="period-label">Pickup Routes</span>
+          <div class="metric-toggle-group">
+            <button class="metric-btn" id="btn-route-trash" onclick="setRouteStream('Trash')"><span class="kw-trash">Trash</span></button>
+            <button class="metric-btn" id="btn-route-recycle" onclick="setRouteStream('Recycling')"><span class="kw-recycle">Recycling</span></button>
+          </div>
+        </div>
+
+        <div class="control-divider"></div>
+
         <div class="geographic-section">
           <span class="period-label">Geographic Subset</span>
           <div class="search-box">
@@ -1023,27 +1044,6 @@ html_page = f'''<!DOCTYPE html>
 
         <div class="control-divider"></div>
 
-        <div class="requests-section">
-          <span class="period-label">311 Requests</span>
-          <div class="metric-toggle-group">
-            <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span></button>
-            <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span></button>
-            <button class="metric-btn" id="btn-recycling" onclick="setMetric('recycling')"><span class="kw-recycle">Recycling</span></button>
-          </div>
-        </div>
-
-        <div class="control-divider"></div>
-
-        <div class="routes-section">
-          <span class="period-label">Pickup Routes</span>
-          <div class="metric-toggle-group">
-            <button class="metric-btn" id="btn-route-trash" onclick="setRouteStream('Trash')"><span class="kw-trash">Trash</span></button>
-            <button class="metric-btn" id="btn-route-recycle" onclick="setRouteStream('Recycling')"><span class="kw-recycle">Recycling</span></button>
-          </div>
-        </div>
-
-        <div class="control-divider"></div>
-
         <div>
           <button id="btn-reset-default" class="btn-action" style="width: 100%; text-align: center; padding: 7px 10px; font-weight: 700; border-radius: 2px;" onclick="resetToDefault()">Reset to Default</button>
         </div>
@@ -1063,12 +1063,12 @@ html_page = f'''<!DOCTYPE html>
 
       <div class="inspector-collapsible-body" id="insp-panel-body">
         <div class="inspector-stat-grid">
-          <div class="stat-tile">
-            <div class="stat-tile-lbl" id="insp-lbl-1">Selected Requests</div>
+          <div class="stat-tile" id="insp-tile-total" style="grid-column: span 2;">
+            <div class="stat-tile-lbl" id="insp-lbl-1"><span class="kw-combined">Combined</span> Requests</div>
             <div class="stat-tile-val" id="insp-stat-total">0</div>
           </div>
-          <div class="stat-tile">
-            <div class="stat-tile-lbl" id="insp-lbl-2">Share of Volume</div>
+          <div class="stat-tile" id="insp-tile-share" style="display: none;">
+            <div class="stat-tile-lbl" id="insp-lbl-2">Percent of Requests in Ward</div>
             <div class="stat-tile-val" id="insp-stat-share">100%</div>
           </div>
           <div class="stat-tile">
@@ -1449,6 +1449,16 @@ html_page = f'''<!DOCTYPE html>
         return (matchA[3] || '').localeCompare(matchB[3] || '');
       }}
       return cleanA.localeCompare(cleanB, undefined, {{ numeric: true }});
+    }}
+
+    function formatRepName(name) {{
+      if (!name) return '';
+      const trimmed = name.trim();
+      if (trimmed.toUpperCase() === 'VACANT') return 'Vacant';
+      if (trimmed.toUpperCase() === 'ZACHARY ADAMS' || trimmed.toUpperCase() === 'ZACH ADAMS') return 'Zach Adams';
+      return trimmed.toLowerCase().replace(/(?:^|\\s|[-"'(])\\S/g, function(c) {{
+        return c.toUpperCase();
+      }});
     }}
 
     function compareSmd(a, b) {{
@@ -2413,14 +2423,18 @@ html_page = f'''<!DOCTYPE html>
       }}
 
       // Populate SMDs
-      const smdsInAnc = MAP_DATA.smds.features
+      const smdFeaturesInAnc = MAP_DATA.smds.features
         .filter(f => f.properties.anc_id === ancVal)
-        .map(f => f.properties.smd_id)
-        .sort(compareSmd);
+        .sort((a, b) => compareSmd(a.properties.smd_id, b.properties.smd_id));
 
       sSel.disabled = false;
       sSel.innerHTML = `<option value="all">All SMDs in ANC ${{ancVal}}</option>` +
-        smdsInAnc.map(s => `<option value="${{s}}">SMD ${{s}}</option>`).join('');
+        smdFeaturesInAnc.map(f => {{
+          const s = f.properties.smd_id;
+          const rep = formatRepName(f.properties.rep_name);
+          const repLabel = rep ? ` • ${{rep}}` : '';
+          return `<option value="${{s}}">SMD ${{s}}${{repLabel}}</option>`;
+        }}).join('');
       sSel.value = smdVal || 'all';
     }}
 
@@ -2544,20 +2558,26 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function updateInspectorCitywide() {{
-      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
       const stats = getCitywideStats(currentPeriod);
 
       document.getElementById('insp-title').innerText = 'District of Columbia';
-      document.getElementById('insp-sub').innerText = `Citywide Performance Summary (${{periodLabel}})`;
-      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
+      document.getElementById('insp-sub').innerText = 'Citywide Performance Summary';
+      document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = stats.total.toLocaleString();
-      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
+
+      const tileTotal = document.getElementById('insp-tile-total');
+      const tileShare = document.getElementById('insp-tile-share');
+      if (tileTotal) tileTotal.style.gridColumn = 'span 2';
+      if (tileShare) tileShare.style.display = 'none';
+
+      document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = '100%';
       document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = stats.trash.toLocaleString();
       document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = stats.rec.toLocaleString();
-      document.getElementById('insp-details').innerText = `Evaluating ${{stats.total.toLocaleString()}} 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts over the ${{periodLabel.toLowerCase()}}.`;
+      const periodLabel = currentPeriod === '30d' ? 'past 30 days' : 'past 180 days';
+      document.getElementById('insp-details').innerText = `Evaluating ${{stats.total.toLocaleString()}} 311 missed collection service requests across all 8 Wards, 46 ANCs, and 345 Single Member Districts over the ${{periodLabel}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
     }}
 
@@ -2572,9 +2592,15 @@ html_page = f'''<!DOCTYPE html>
 
       document.getElementById('insp-title').innerText = `Ward ${{p.ward}}`;
       document.getElementById('insp-sub').innerText = `Councilmember: ${{p.councilmember || WARD_COUNCIL[p.ward] || 'DC Council'}}`;
-      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
+      document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
-      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
+
+      const tileTotal = document.getElementById('insp-tile-total');
+      const tileShare = document.getElementById('insp-tile-share');
+      if (tileTotal) tileTotal.style.gridColumn = '';
+      if (tileShare) tileShare.style.display = '';
+
+      document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
       document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
@@ -2601,9 +2627,15 @@ html_page = f'''<!DOCTYPE html>
 
       document.getElementById('insp-title').innerText = `ANC ${{ancId}}`;
       document.getElementById('insp-sub').innerText = `Ward ${{ward}} • ${{smdsInAnc.length}} Single Member Districts`;
-      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
+      document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
-      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
+
+      const tileTotal = document.getElementById('insp-tile-total');
+      const tileShare = document.getElementById('insp-tile-share');
+      if (tileTotal) tileTotal.style.gridColumn = '';
+      if (tileShare) tileShare.style.display = '';
+
+      document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
       document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
@@ -2622,11 +2654,19 @@ html_page = f'''<!DOCTYPE html>
       const rec = m ? m.recycling : p.recycling;
       const wardShare = m ? m.ward_share_pct : (p.ward_share_pct || 0);
 
+      const rep = formatRepName(p.rep_name || (MAP_DATA.smds.features.find(f => f.properties.smd_id === p.smd_id)?.properties?.rep_name) || '');
+
       document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
-      document.getElementById('insp-sub').innerText = `Councilmember: ${{WARD_COUNCIL[p.ward] || 'DC Council'}}`;
-      document.getElementById('insp-lbl-1').innerText = 'Selected Requests';
+      document.getElementById('insp-sub').innerText = `Advisory Neighborhood Commissioner: ${{rep || 'Vacant'}}`;
+      document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
-      document.getElementById('insp-lbl-2').innerText = 'Share of Volume';
+
+      const tileTotal = document.getElementById('insp-tile-total');
+      const tileShare = document.getElementById('insp-tile-share');
+      if (tileTotal) tileTotal.style.gridColumn = '';
+      if (tileShare) tileShare.style.display = '';
+
+      document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = `${{wardShare}}%`;
       document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
@@ -2666,6 +2706,11 @@ html_page = f'''<!DOCTYPE html>
       const schedDisplay = isSplit ? (p.days + ' (Route runs ' + stats.schedule + ')') : sched;
       document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} ${{typeBadge}}`;
       document.getElementById('insp-sub').innerText = `Collection day: ${{schedDisplay}} • ${{ward}}`;
+
+      const tileTotal = document.getElementById('insp-tile-total');
+      const tileShare = document.getElementById('insp-tile-share');
+      if (tileTotal) tileTotal.style.gridColumn = '';
+      if (tileShare) tileShare.style.display = '';
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();

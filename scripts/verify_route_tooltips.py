@@ -282,12 +282,39 @@ def verify():
 
             clearRouteSelection();
             clearRouteHover();
+            resetToCitywide();
 
             const overlapPrecedencePassed = findPrefRspCorrect && findPref604Correct &&
                                             rsp21SelectedCount === 10 &&
                                             overlapHoverShowsRsp && overlapHoverNotStyles604 &&
                                             outsideHoverShows604 && outsideHoverStyles604 &&
                                             backHoverShowsRsp && backHoverCleared604;
+
+            const citywideSubInitial = document.getElementById('insp-sub').innerText;
+            const citywideSubClean = !citywideSubInitial.includes('Past 180 Days') && !citywideSubInitial.includes('Past 30 Days') && citywideSubInitial === 'Citywide Performance Summary';
+            const citywideLbl1 = document.getElementById('insp-lbl-1').textContent;
+            const citywideLbl1Html = document.getElementById('insp-lbl-1').innerHTML;
+            const citywideLbl1Correct = citywideLbl1.includes('Combined Requests') && citywideLbl1Html.includes('kw-combined');
+            const citywideShareHidden = document.getElementById('insp-tile-share').style.display === 'none';
+
+            // Test Ward selection: Ward 2
+            selectWard(2);
+            const ward2Sub = document.getElementById('insp-sub').innerText;
+            const ward2CouncilCorrect = ward2Sub === 'Councilmember: Brooke Pinto';
+            const ward2ShareVisible = document.getElementById('insp-tile-share').style.display !== 'none';
+            const ward2Lbl2 = document.getElementById('insp-lbl-2').textContent;
+            const ward2Lbl2Correct = ward2Lbl2 === 'Percent of Requests in Ward';
+
+            // Test SMD inspector: selecting SMD 2B08
+            selectHierarchy('2B08');
+            const smd2B08Title = document.getElementById('insp-title').innerText;
+            const smd2B08Sub = document.getElementById('insp-sub').innerText;
+            const smd2B08CommCorrect = smd2B08Sub === 'Advisory Neighborhood Commissioner: Zach Adams';
+            const smd2B08ShareVisible = document.getElementById('insp-tile-share').style.display !== 'none';
+            const smd2B08Lbl2 = document.getElementById('insp-lbl-2').textContent;
+            const smd2B08Lbl2Correct = smd2B08Lbl2 === 'Percent of Requests in Ward';
+            const smdOpt2B08 = Array.from(document.getElementById('smd-select').options).find(o => o.value === '2B08');
+            const smdDropdownCorrect = smdOpt2B08 && smdOpt2B08.text === 'SMD 2B08 • Zach Adams';
 
             // Test SMD inspector: selecting SMD 1A01
             selectHierarchy('1A01');
@@ -296,11 +323,13 @@ def verify():
             const rBoxDisplay = document.getElementById('insp-route-box').style.display;
             const rBoxHtml = document.getElementById('insp-route-box').innerHTML;
 
-            const smdInspectorNoAncWard = !smdSub.includes('ANC') && !smdSub.includes('Ward') && smdSub.includes('Councilmember');
+            const smdInspectorNoAncWard = !smdSub.includes('ANC') && !smdSub.includes('Ward') && smdSub.includes('Commissioner') && !smdSub.includes('Councilmember');
             const smdInspectorNoRoutes = rBoxDisplay === 'none' && !rBoxHtml.includes('Assigned DPW Routes');
-            const smdInspectorPassed = smdTitle === 'SMD 1A01' && smdInspectorNoAncWard && smdInspectorNoRoutes;
+            const smdInspectorPassed = smdTitle === 'SMD 1A01' && smdInspectorNoAncWard && smdInspectorNoRoutes && smdSub.includes('Jaspal Bhatia');
 
             resetToDefault();
+            const resetShareHidden = document.getElementById('insp-tile-share').style.display === 'none';
+            const resetSubClean = document.getElementById('insp-sub').innerText === 'Citywide Performance Summary';
 
             out.innerText = JSON.stringify({
               ic106Has1C2D,
@@ -318,6 +347,18 @@ def verify():
               rspSelectedCount,
               overlapPrecedencePassed,
               smdInspectorPassed,
+              citywideSubClean,
+              citywideLbl1Correct,
+              citywideShareHidden,
+              ward2CouncilCorrect,
+              ward2ShareVisible,
+              ward2Lbl2Correct,
+              smd2B08CommCorrect,
+              smd2B08ShareVisible,
+              smd2B08Lbl2Correct,
+              smdDropdownCorrect,
+              resetShareHidden,
+              resetSubClean,
               smdTitle,
               smdSub,
               smdInspectorNoAncWard,
@@ -384,6 +425,18 @@ def verify():
                 assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
                 assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
                 assert results['smdInspectorPassed'], f"Headless Chrome: SMD inspector failed (sub: {results.get('smdSub')}, routeBox: {results.get('smdInspectorNoRoutes')}): {results}"
+                assert results['citywideSubClean'], f"Headless Chrome: Citywide header contained past days window"
+                assert results['citywideLbl1Correct'], f"Headless Chrome: Combined Requests label not stylized properly"
+                assert results['citywideShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden when Citywide"
+                assert results['ward2CouncilCorrect'], f"Headless Chrome: Ward 2 councilmember incorrect: {results.get('ward2Sub')}"
+                assert results['ward2ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for Ward 2"
+                assert results['ward2Lbl2Correct'], f"Headless Chrome: Ward 2 label was not 'Percent of Requests in Ward'"
+                assert results['smd2B08CommCorrect'], f"Headless Chrome: SMD 2B08 commissioner incorrect: {results.get('smd2B08Sub')}"
+                assert results['smd2B08ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for SMD 2B08"
+                assert results['smd2B08Lbl2Correct'], f"Headless Chrome: SMD 2B08 label was not 'Percent of Requests in Ward'"
+                assert results['smdDropdownCorrect'], f"Headless Chrome: SMD dropdown option for 2B08 incorrect: {results.get('smdDropdownCorrect')}"
+                assert results['resetShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden after resetToDefault"
+                assert results['resetSubClean'], f"Headless Chrome: Citywide subheader incorrect after resetToDefault"
                 print("PASS: Headless Chrome verification successful!")
             else:
                 print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
