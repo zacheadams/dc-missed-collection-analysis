@@ -88,7 +88,8 @@ for r in route_stats_raw.get('trash_routes', []):
         r_copy['ancs'] = ra.get('ancs')
     if ra.get('area_desc'):
         r_copy['area_desc'] = ra.get('area_desc')
-    col_day = trash_days_map.get(aid) or (r_copy.get('schedule') if r_copy.get('schedule') != 'Unassigned' else None)
+    sched_val = r_copy.get('schedule')
+    col_day = (sched_val if sched_val and sched_val != 'Unassigned' else None) or trash_days_map.get(aid)
     if col_day:
         r_copy['schedule'] = col_day
         r_copy['day'] = col_day
@@ -996,7 +997,7 @@ html_page = f'''<!DOCTYPE html>
     <div class="control-panel" id="control-panel">
       <div class="panel-header" onclick="toggleMobilePanel('control')">
         <div style="display: flex; align-items: center; gap: 6px;">
-          <span class="panel-title">Geographic Subset</span>
+          <span class="panel-title">Layers</span>
           <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
         </div>
       </div>
@@ -1011,6 +1012,7 @@ html_page = f'''<!DOCTYPE html>
           </div>
         </div>
 
+        <span class="period-label">Geographic Subset</span>
         <div class="search-box">
           <input type="text" id="smd-search" placeholder="Search SMD (e.g. 5E03), ANC, or Ward..." oninput="handleSearch(this.value)">
         </div>
@@ -1046,6 +1048,7 @@ html_page = f'''<!DOCTYPE html>
           </div>
         </div>
 
+        <span class="period-label">311 Requests</span>
         <div class="metric-toggle-group">
           <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span><br>Requests</button>
           <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span><br>Only</button>
@@ -1054,7 +1057,7 @@ html_page = f'''<!DOCTYPE html>
 
         <div class="layer-controls">
           <label class="checkbox-row">
-            <span><span class="badge-route" id="marker-311-requests" style="background: var(--combined-color);"></span>311 Requests</span>
+            <span><span class="badge-route" id="marker-311-requests" style="background: var(--combined-color);"></span>Missed Collections</span>
             <input type="checkbox" id="chk-smd" checked onchange="toggleSMDLayer(this.checked)">
           </label>
           <label class="checkbox-row">
@@ -2034,6 +2037,14 @@ html_page = f'''<!DOCTYPE html>
       const tr = trashActive ? findRouteAtLatLng(trashRouteIndex, latlng, prefTrash) : null;
       const rr = recActive ? findRouteAtLatLng(recycleRouteIndex, latlng, prefRec) : null;
 
+      function formatTrashDay(featureDay, routeSchedule) {{
+        if (!featureDay && !routeSchedule) return 'Scheduled';
+        if (routeSchedule && routeSchedule.includes(' or ') && featureDay && !featureDay.includes('/')) {{
+          return featureDay + ' (Route runs ' + routeSchedule + ')';
+        }}
+        return featureDay || routeSchedule || 'Scheduled';
+      }}
+
       let html = '';
 
       if (trashActive && recActive) {{
@@ -2046,6 +2057,7 @@ html_page = f'''<!DOCTYPE html>
           const tAncs = formatSortedAncs(tr.ancs || tStats.ancs || '');
           const rAncs = formatSortedAncs(rr.ancs || rStats.ancs || '');
           const ancsDisplay = (tAncs && rAncs && tAncs === rAncs) ? tAncs : [tAncs ? `Trash: ${{tAncs}}` : '', rAncs ? `Recycling: ${{rAncs}}` : ''].filter(Boolean).join(' • ');
+          const tSched = formatTrashDay(tr.day, tStats.schedule);
 
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Route Intersection</div>
@@ -2055,7 +2067,7 @@ html_page = f'''<!DOCTYPE html>
               ${{combTot.toLocaleString()}} Combined Requests (180d)
             </div>
             <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 2px; font-size: 11px;">
-              <span style="color: var(--trash-color);">Trash (${{tr.route}}): <strong>${{tTot.toLocaleString()}}</strong> (${{tr.day}})</span>
+              <span style="color: var(--trash-color);">Trash (${{tr.route}}): <strong>${{tTot.toLocaleString()}}</strong> (${{tSched}})</span>
               <span style="color: var(--recycle-color);">Recycling (${{rr.route}}): <strong>${{rTot.toLocaleString()}}</strong> (${{rr.day}})</span>
             </div>
           `;
@@ -2063,11 +2075,12 @@ html_page = f'''<!DOCTYPE html>
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
           const tTot = tStats.total || 0;
           const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
+          const tSched = formatTrashDay(tr.day, tStats.schedule);
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
             ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
+            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tSched}}</div>
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
               ${{tTot.toLocaleString()}} Trash Requests (180d)
             </div>
@@ -2096,11 +2109,12 @@ html_page = f'''<!DOCTYPE html>
         const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
         const tTot = tStats.total || 0;
         const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
+        const tSched = formatTrashDay(tr.day, tStats.schedule);
         html = `
           <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
           <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
           ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tr.day || 'Scheduled'}}</div>
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tSched}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
             ${{tTot.toLocaleString()}} Trash Requests (180d)
           </div>
@@ -2679,8 +2693,10 @@ html_page = f'''<!DOCTYPE html>
         ? '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Line Route)</span>'
         : '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Polygon)</span>';
 
+      const isSplit = stats.schedule && stats.schedule.includes(' or ') && p.days && !p.days.includes('/');
+      const schedDisplay = isSplit ? (p.days + ' (Route runs ' + stats.schedule + ')') : sched;
       document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} ${{typeBadge}}`;
-      document.getElementById('insp-sub').innerText = `Collection day: ${{sched}} • ${{ward}}`;
+      document.getElementById('insp-sub').innerText = `Collection day: ${{schedDisplay}} • ${{ward}}`;
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();

@@ -38,7 +38,7 @@
       "route_id": "OR708",
       "type": "Trash",
       "route_name": "Trash Route OR708",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -53,20 +53,20 @@
       "repeat_rate": 23.8,
       "req_per_addr": 1.4,
       "days_count": {
-        "Friday": 35,
-        "Wednesday": 20,
-        "Monday": 25,
-        "Thursday": 19,
-        "Tuesday": 23,
-        "Sunday": 5,
-        "Saturday": 14
+        "Friday": 36,
+        "Tuesday": 26,
+        "Monday": 24,
+        "Sunday": 6,
+        "Thursday": 16,
+        "Saturday": 13,
+        "Wednesday": 20
       }
     },
     {
       "route_id": "OR709",
       "type": "Trash",
       "route_name": "Trash Route OR709",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -81,20 +81,20 @@
       "repeat_rate": 13.8,
       "req_per_addr": 1.17,
       "days_count": {
-        "Friday": 16,
+        "Friday": 15,
         "Thursday": 8,
-        "Wednesday": 10,
+        "Wednesday": 11,
         "Tuesday": 21,
-        "Monday": 10,
-        "Sunday": 4,
-        "Saturday": 7
+        "Monday": 9,
+        "Saturday": 9,
+        "Sunday": 3
       }
     },
     {
       "route_id": "OR710",
       "type": "Trash",
       "route_name": "Trash Route OR710",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -109,20 +109,20 @@
       "repeat_rate": 30.2,
       "req_per_addr": 1.55,
       "days_count": {
-        "Friday": 41,
-        "Wednesday": 34,
+        "Friday": 43,
+        "Wednesday": 33,
         "Tuesday": 55,
-        "Saturday": 28,
-        "Monday": 32,
-        "Sunday": 11,
-        "Thursday": 15
+        "Monday": 33,
+        "Saturday": 29,
+        "Sunday": 9,
+        "Thursday": 14
       }
     },
     {
       "route_id": "OR701",
       "type": "Trash",
       "route_name": "Trash Route OR701",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -140,17 +140,17 @@
         "Friday": 21,
         "Saturday": 5,
         "Thursday": 6,
-        "Tuesday": 18,
+        "Tuesday": 19,
         "Monday": 9,
         "Sunday": 3,
-        "Wednesday": 10
+        "Wednesday": 9
       }
     },
     {
       "route_id": "OR702",
       "type": "Trash",
       "route_name": "Trash Route OR702",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -167,9 +167,9 @@
       "days_count": {
         "Friday": 11,
         "Wednesday": 16,
-        "Tuesday": 16,
+        "Tuesday": 17,
         "Monday": 3,
-        "Sunday": 5,
+        "Sunday": 4,
         "Saturday": 7,
         "Thursday": 9
       }
@@ -178,7 +178,7 @@
       "route_id": "OR703",
       "type": "Trash",
       "route_name": "Trash Route OR703",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -193,9 +193,9 @@
       "repeat_rate": 27.3,
       "req_per_addr": 1.41,
       "days_count": {
-        "Thursday": 14,
-        "Wednesday": 18,
-        "Tuesday": 42,
+        "Thursday": 12,
+        "Wednesday": 17,
+        "Tuesday": 45,
         "Monday": 11,
         "Saturday": 11,
         "Friday": 21,
@@ -206,7 +206,7 @@
       "route_id": "OR706",
       "type": "Trash",
       "route_name": "Trash Route OR706",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -221,12 +221,12 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.36,
       "days_count": {
-        "Friday": 32,
-        "Thursday": 14,
+        "Friday": 34,
+        "Thursday": 13,
         "Monday": 8,
-        "Saturday": 10,
-        "Tuesday": 45,
-        "Wednesday": 25,
+        "Saturday": 8,
+        "Tuesday": 49,
+        "Wednesday": 22,
         "Sunday": 2
       }
     },
@@ -249,13 +249,13 @@
       "repeat_rate": 29.8,
       "req_per_addr": 1.6,
       "days_count": {
-        "Friday": 29,
-        "Wednesday": 3,
-        "Monday": 12,
+        "Friday": 33,
+        "Tuesday": 12,
+        "Monday": 13,
         "Sunday": 6,
-        "Saturday": 12,
+        "Saturday": 8,
         "Thursday": 2,
-        "Tuesday": 11
+        "Wednesday": 1
       }
     },
     {
@@ -277,12 +277,12 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.33,
       "days_count": {
-        "Friday": 13,
-        "Monday": 10,
-        "Thursday": 2,
+        "Thursday": 3,
+        "Monday": 12,
+        "Friday": 12,
         "Saturday": 6,
-        "Tuesday": 5,
         "Sunday": 2,
+        "Tuesday": 3,
         "Wednesday": 2
       }
     },
@@ -334,11 +334,11 @@
       "req_per_addr": 1.26,
       "days_count": {
         "Saturday": 7,
-        "Wednesday": 4,
+        "Wednesday": 2,
         "Monday": 3,
-        "Sunday": 4,
-        "Friday": 9,
-        "Tuesday": 4,
+        "Sunday": 3,
+        "Friday": 10,
+        "Tuesday": 6,
         "Thursday": 3
       }
     },
@@ -361,11 +361,11 @@
       "repeat_rate": 16.3,
       "req_per_addr": 1.33,
       "days_count": {
-        "Friday": 29,
-        "Tuesday": 8,
-        "Monday": 10,
+        "Friday": 31,
+        "Monday": 11,
         "Sunday": 2,
-        "Saturday": 8
+        "Saturday": 6,
+        "Tuesday": 7
       }
     },
     {
@@ -387,10 +387,9 @@
       "repeat_rate": 13.0,
       "req_per_addr": 1.26,
       "days_count": {
-        "Friday": 14,
-        "Saturday": 4,
-        "Thursday": 2,
-        "Wednesday": 2,
+        "Friday": 15,
+        "Saturday": 3,
+        "Wednesday": 4,
         "Tuesday": 2,
         "Monday": 3,
         "Sunday": 2
@@ -415,19 +414,19 @@
       "repeat_rate": 27.9,
       "req_per_addr": 1.58,
       "days_count": {
-        "Sunday": 7,
-        "Saturday": 20,
-        "Friday": 17,
+        "Sunday": 5,
+        "Saturday": 19,
+        "Friday": 21,
         "Wednesday": 3,
         "Tuesday": 8,
-        "Monday": 13
+        "Monday": 12
       }
     },
     {
       "route_id": "OR705",
       "type": "Trash",
       "route_name": "Trash Route OR705",
-      "schedule": "Friday",
+      "schedule": "Tuesday or Friday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -443,11 +442,11 @@
       "req_per_addr": 1.22,
       "days_count": {
         "Monday": 13,
-        "Friday": 18,
-        "Wednesday": 30,
-        "Tuesday": 44,
-        "Saturday": 16,
-        "Thursday": 12,
+        "Friday": 22,
+        "Wednesday": 26,
+        "Tuesday": 48,
+        "Saturday": 11,
+        "Thursday": 13,
         "Sunday": 4
       }
     },
@@ -471,10 +470,10 @@
       "req_per_addr": 1.57,
       "days_count": {
         "Friday": 26,
-        "Monday": 18,
+        "Monday": 17,
         "Saturday": 11,
         "Tuesday": 10,
-        "Sunday": 3,
+        "Sunday": 4,
         "Thursday": 1,
         "Wednesday": 3
       }
@@ -500,8 +499,8 @@
       "days_count": {
         "Friday": 1,
         "Wednesday": 3,
-        "Tuesday": 6,
-        "Monday": 3,
+        "Tuesday": 5,
+        "Monday": 4,
         "Thursday": 1
       }
     },
@@ -509,7 +508,7 @@
       "route_id": "OR312",
       "type": "Trash",
       "route_name": "Trash Route OR312",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -525,9 +524,9 @@
       "req_per_addr": 1.27,
       "days_count": {
         "Thursday": 24,
-        "Monday": 9,
+        "Monday": 14,
         "Friday": 15,
-        "Wednesday": 11,
+        "Wednesday": 6,
         "Tuesday": 17,
         "Saturday": 4
       }
@@ -536,7 +535,7 @@
       "route_id": "OR310",
       "type": "Trash",
       "route_name": "Trash Route OR310",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -552,12 +551,12 @@
       "req_per_addr": 1.19,
       "days_count": {
         "Saturday": 4,
-        "Tuesday": 22,
-        "Monday": 22,
+        "Tuesday": 18,
+        "Monday": 25,
         "Friday": 11,
-        "Thursday": 10,
-        "Wednesday": 4,
-        "Sunday": 1
+        "Thursday": 9,
+        "Sunday": 2,
+        "Wednesday": 5
       }
     },
     {
@@ -579,10 +578,10 @@
       "repeat_rate": 40.3,
       "req_per_addr": 1.58,
       "days_count": {
-        "Monday": 45,
+        "Monday": 54,
         "Friday": 4,
-        "Wednesday": 15,
-        "Tuesday": 46,
+        "Wednesday": 14,
+        "Tuesday": 38,
         "Thursday": 10,
         "Sunday": 1,
         "Saturday": 1
@@ -592,7 +591,7 @@
       "route_id": "OR307",
       "type": "Trash",
       "route_name": "Trash Route OR307",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -607,11 +606,11 @@
       "repeat_rate": 27.0,
       "req_per_addr": 1.4,
       "days_count": {
-        "Monday": 44,
-        "Friday": 15,
-        "Thursday": 22,
+        "Monday": 51,
+        "Friday": 11,
+        "Thursday": 25,
         "Wednesday": 18,
-        "Tuesday": 37,
+        "Tuesday": 31,
         "Sunday": 2,
         "Saturday": 2
       }
@@ -636,18 +635,18 @@
       "req_per_addr": 1.36,
       "days_count": {
         "Wednesday": 13,
-        "Tuesday": 44,
-        "Monday": 44,
+        "Tuesday": 36,
+        "Monday": 53,
         "Thursday": 9,
         "Saturday": 1,
-        "Friday": 5
+        "Friday": 4
       }
     },
     {
       "route_id": "OR303",
       "type": "Trash",
       "route_name": "Trash Route OR303",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -662,11 +661,11 @@
       "repeat_rate": 21.2,
       "req_per_addr": 1.35,
       "days_count": {
-        "Friday": 18,
-        "Thursday": 19,
-        "Wednesday": 11,
-        "Monday": 28,
-        "Tuesday": 26,
+        "Friday": 14,
+        "Thursday": 22,
+        "Wednesday": 9,
+        "Monday": 32,
+        "Tuesday": 25,
         "Saturday": 5,
         "Sunday": 1
       }
@@ -675,7 +674,7 @@
       "route_id": "OR304",
       "type": "Trash",
       "route_name": "Trash Route OR304",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -690,12 +689,12 @@
       "repeat_rate": 37.3,
       "req_per_addr": 1.73,
       "days_count": {
-        "Friday": 17,
         "Thursday": 14,
-        "Wednesday": 31,
-        "Tuesday": 111,
-        "Monday": 80,
-        "Sunday": 3,
+        "Wednesday": 30,
+        "Tuesday": 99,
+        "Monday": 96,
+        "Friday": 15,
+        "Sunday": 2,
         "Saturday": 3
       }
     },
@@ -728,7 +727,7 @@
       "route_id": "OR405",
       "type": "Trash",
       "route_name": "Trash Route OR405",
-      "schedule": "Monday",
+      "schedule": "Monday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -743,19 +742,20 @@
       "repeat_rate": 5.4,
       "req_per_addr": 1.08,
       "days_count": {
-        "Monday": 12,
+        "Monday": 11,
         "Saturday": 2,
         "Friday": 2,
         "Thursday": 6,
         "Tuesday": 9,
-        "Wednesday": 9
+        "Wednesday": 9,
+        "Sunday": 1
       }
     },
     {
       "route_id": "OR404",
       "type": "Trash",
       "route_name": "Trash Route OR404",
-      "schedule": "Monday",
+      "schedule": "Monday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -770,10 +770,10 @@
       "repeat_rate": 25.8,
       "req_per_addr": 1.32,
       "days_count": {
-        "Thursday": 10,
-        "Wednesday": 29,
-        "Tuesday": 21,
-        "Monday": 21,
+        "Thursday": 9,
+        "Wednesday": 27,
+        "Tuesday": 22,
+        "Monday": 23,
         "Saturday": 2,
         "Friday": 4
       }
@@ -782,7 +782,7 @@
       "route_id": "OR403",
       "type": "Trash",
       "route_name": "Trash Route OR403",
-      "schedule": "Monday",
+      "schedule": "Monday, Wednesday, or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -799,18 +799,18 @@
       "days_count": {
         "Thursday": 33,
         "Wednesday": 20,
-        "Tuesday": 28,
-        "Monday": 27,
-        "Sunday": 5,
+        "Tuesday": 26,
+        "Monday": 29,
+        "Sunday": 6,
         "Saturday": 6,
-        "Friday": 12
+        "Friday": 11
       }
     },
     {
       "route_id": "OR402",
       "type": "Trash",
       "route_name": "Trash Route OR402",
-      "schedule": "Monday",
+      "schedule": "Monday, Wednesday, or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -825,10 +825,10 @@
       "repeat_rate": 23.1,
       "req_per_addr": 1.29,
       "days_count": {
-        "Thursday": 30,
+        "Thursday": 27,
         "Wednesday": 23,
-        "Tuesday": 12,
-        "Monday": 25,
+        "Tuesday": 13,
+        "Monday": 27,
         "Friday": 10,
         "Saturday": 1
       }
@@ -837,7 +837,7 @@
       "route_id": "OR401",
       "type": "Trash",
       "route_name": "Trash Route OR401",
-      "schedule": "Monday",
+      "schedule": "Monday, Wednesday, or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -852,12 +852,12 @@
       "repeat_rate": 18.9,
       "req_per_addr": 1.42,
       "days_count": {
-        "Wednesday": 35,
-        "Tuesday": 9,
-        "Monday": 18,
+        "Wednesday": 38,
+        "Tuesday": 10,
+        "Monday": 19,
         "Friday": 22,
-        "Thursday": 35,
-        "Saturday": 7,
+        "Thursday": 32,
+        "Saturday": 5,
         "Sunday": 2
       }
     },
@@ -865,7 +865,7 @@
       "route_id": "OR302",
       "type": "Trash",
       "route_name": "Trash Route OR302",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -880,12 +880,12 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.45,
       "days_count": {
-        "Friday": 9,
-        "Tuesday": 14,
-        "Monday": 14,
+        "Friday": 8,
+        "Tuesday": 12,
+        "Monday": 17,
         "Saturday": 9,
-        "Thursday": 8,
-        "Wednesday": 4
+        "Thursday": 9,
+        "Wednesday": 3
       }
     },
     {
@@ -935,10 +935,10 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.27,
       "days_count": {
-        "Tuesday": 1,
-        "Thursday": 5,
+        "Monday": 1,
+        "Thursday": 6,
         "Saturday": 5,
-        "Friday": 8
+        "Friday": 7
       }
     },
     {
@@ -960,13 +960,13 @@
       "repeat_rate": 10.0,
       "req_per_addr": 1.17,
       "days_count": {
-        "Saturday": 4,
-        "Thursday": 13,
-        "Sunday": 2,
-        "Wednesday": 3,
         "Friday": 8,
-        "Tuesday": 4,
-        "Monday": 1
+        "Thursday": 14,
+        "Sunday": 2,
+        "Saturday": 3,
+        "Wednesday": 3,
+        "Tuesday": 3,
+        "Monday": 2
       }
     },
     {
@@ -1011,8 +1011,8 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.17,
       "days_count": {
-        "Thursday": 9,
-        "Friday": 9,
+        "Thursday": 10,
+        "Friday": 8,
         "Wednesday": 1,
         "Tuesday": 4,
         "Monday": 2,
@@ -1039,12 +1039,12 @@
       "repeat_rate": 35.3,
       "req_per_addr": 1.62,
       "days_count": {
-        "Friday": 21,
-        "Thursday": 15,
+        "Friday": 19,
+        "Thursday": 18,
         "Saturday": 7,
+        "Monday": 7,
         "Sunday": 2,
-        "Monday": 6,
-        "Tuesday": 4
+        "Tuesday": 2
       }
     },
     {
@@ -1067,8 +1067,8 @@
       "req_per_addr": 1.15,
       "days_count": {
         "Friday": 10,
-        "Thursday": 11,
-        "Saturday": 3,
+        "Thursday": 12,
+        "Saturday": 2,
         "Monday": 2,
         "Wednesday": 2,
         "Sunday": 2
@@ -1093,11 +1093,12 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.35,
       "days_count": {
-        "Friday": 14,
-        "Saturday": 5,
-        "Wednesday": 2,
+        "Friday": 15,
+        "Saturday": 4,
+        "Wednesday": 1,
         "Monday": 3,
-        "Thursday": 3
+        "Thursday": 3,
+        "Tuesday": 1
       }
     },
     {
@@ -1119,8 +1120,8 @@
       "repeat_rate": 13.0,
       "req_per_addr": 1.65,
       "days_count": {
-        "Wednesday": 11,
-        "Tuesday": 14,
+        "Wednesday": 6,
+        "Tuesday": 19,
         "Friday": 4,
         "Sunday": 2,
         "Saturday": 2,
@@ -1131,7 +1132,7 @@
       "route_id": "OR506",
       "type": "Trash",
       "route_name": "Trash Route OR506",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1146,11 +1147,11 @@
       "repeat_rate": 14.6,
       "req_per_addr": 1.25,
       "days_count": {
-        "Wednesday": 18,
+        "Wednesday": 19,
         "Tuesday": 18,
-        "Friday": 8,
         "Thursday": 12,
-        "Saturday": 2,
+        "Friday": 8,
+        "Saturday": 1,
         "Monday": 2
       }
     },
@@ -1174,8 +1175,8 @@
       "req_per_addr": 1.5,
       "days_count": {
         "Friday": 4,
-        "Thursday": 9,
-        "Tuesday": 6,
+        "Thursday": 8,
+        "Tuesday": 7,
         "Saturday": 3,
         "Wednesday": 13,
         "Monday": 1
@@ -1203,8 +1204,8 @@
         "Saturday": 1,
         "Friday": 6,
         "Thursday": 3,
-        "Wednesday": 8,
-        "Tuesday": 12,
+        "Wednesday": 7,
+        "Tuesday": 13,
         "Monday": 2,
         "Sunday": 1
       }
@@ -1213,7 +1214,7 @@
       "route_id": "OR503",
       "type": "Trash",
       "route_name": "Trash Route OR503",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1229,10 +1230,10 @@
       "req_per_addr": 1.42,
       "days_count": {
         "Sunday": 3,
-        "Friday": 5,
+        "Friday": 4,
         "Thursday": 8,
-        "Wednesday": 27,
-        "Tuesday": 24,
+        "Wednesday": 25,
+        "Tuesday": 27,
         "Monday": 2,
         "Saturday": 2
       }
@@ -1257,10 +1258,10 @@
       "req_per_addr": 1.23,
       "days_count": {
         "Saturday": 3,
-        "Wednesday": 23,
-        "Tuesday": 24,
-        "Thursday": 13,
-        "Friday": 10,
+        "Tuesday": 26,
+        "Thursday": 14,
+        "Wednesday": 22,
+        "Friday": 8,
         "Monday": 2
       }
     },
@@ -1283,10 +1284,11 @@
       "repeat_rate": 16.7,
       "req_per_addr": 1.31,
       "days_count": {
-        "Tuesday": 22,
+        "Tuesday": 24,
         "Thursday": 6,
-        "Wednesday": 24,
-        "Saturday": 2,
+        "Wednesday": 22,
+        "Saturday": 1,
+        "Friday": 1,
         "Sunday": 1
       }
     },
@@ -1294,7 +1296,7 @@
       "route_id": "OR502",
       "type": "Trash",
       "route_name": "Trash Route OR502",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1311,10 +1313,10 @@
       "days_count": {
         "Monday": 4,
         "Saturday": 2,
-        "Wednesday": 28,
-        "Friday": 15,
-        "Tuesday": 6,
-        "Thursday": 7,
+        "Wednesday": 26,
+        "Friday": 12,
+        "Tuesday": 10,
+        "Thursday": 8,
         "Sunday": 1
       }
     },
@@ -1322,7 +1324,7 @@
       "route_id": "OR501",
       "type": "Trash",
       "route_name": "Trash Route OR501",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1348,7 +1350,7 @@
       "route_id": "OR507",
       "type": "Trash",
       "route_name": "Trash Route OR507",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1363,12 +1365,12 @@
       "repeat_rate": 26.3,
       "req_per_addr": 1.4,
       "days_count": {
-        "Thursday": 22,
-        "Wednesday": 30,
-        "Tuesday": 15,
-        "Monday": 8,
+        "Thursday": 16,
+        "Wednesday": 33,
+        "Tuesday": 18,
+        "Monday": 7,
         "Friday": 2,
-        "Sunday": 2,
+        "Sunday": 3,
         "Saturday": 1
       }
     },
@@ -1393,10 +1395,10 @@
       "days_count": {
         "Friday": 3,
         "Thursday": 6,
-        "Wednesday": 13,
-        "Tuesday": 15,
-        "Monday": 3,
-        "Sunday": 1
+        "Wednesday": 11,
+        "Tuesday": 17,
+        "Monday": 2,
+        "Sunday": 2
       }
     },
     {
@@ -1418,18 +1420,19 @@
       "repeat_rate": 28.3,
       "req_per_addr": 1.54,
       "days_count": {
-        "Wednesday": 20,
-        "Tuesday": 28,
-        "Friday": 6,
+        "Wednesday": 19,
+        "Tuesday": 29,
+        "Friday": 5,
         "Thursday": 16,
-        "Saturday": 1
+        "Saturday": 1,
+        "Monday": 1
       }
     },
     {
       "route_id": "OR505",
       "type": "Trash",
       "route_name": "Trash Route OR505",
-      "schedule": "Tuesday",
+      "schedule": "Tuesday or Wednesday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -1444,13 +1447,13 @@
       "repeat_rate": 28.1,
       "req_per_addr": 1.53,
       "days_count": {
-        "Thursday": 18,
-        "Wednesday": 25,
-        "Tuesday": 31,
-        "Friday": 6,
-        "Sunday": 2,
+        "Thursday": 17,
+        "Wednesday": 27,
+        "Tuesday": 32,
+        "Friday": 4,
+        "Sunday": 1,
         "Monday": 4,
-        "Saturday": 1
+        "Saturday": 2
       }
     },
     {
@@ -1472,10 +1475,10 @@
       "repeat_rate": 29.2,
       "req_per_addr": 1.6,
       "days_count": {
-        "Friday": 9,
-        "Thursday": 35,
-        "Wednesday": 23,
-        "Saturday": 7,
+        "Friday": 10,
+        "Thursday": 27,
+        "Wednesday": 31,
+        "Saturday": 6,
         "Tuesday": 1,
         "Monday": 2
       }
@@ -1500,9 +1503,9 @@
       "req_per_addr": 1.28,
       "days_count": {
         "Saturday": 1,
-        "Thursday": 16,
+        "Thursday": 13,
         "Friday": 10,
-        "Wednesday": 28,
+        "Wednesday": 31,
         "Sunday": 1,
         "Tuesday": 2,
         "Monday": 1
@@ -1528,11 +1531,11 @@
       "req_per_addr": 1.35,
       "days_count": {
         "Friday": 10,
-        "Thursday": 18,
-        "Wednesday": 25,
+        "Thursday": 17,
+        "Wednesday": 26,
+        "Tuesday": 2,
         "Monday": 3,
-        "Saturday": 4,
-        "Tuesday": 1,
+        "Saturday": 3,
         "Sunday": 1
       }
     },
@@ -1582,10 +1585,11 @@
       "repeat_rate": 10.3,
       "req_per_addr": 1.21,
       "days_count": {
-        "Thursday": 12,
-        "Wednesday": 16,
+        "Thursday": 9,
+        "Wednesday": 18,
         "Saturday": 1,
-        "Friday": 6
+        "Friday": 6,
+        "Tuesday": 1
       }
     },
     {
@@ -1608,8 +1612,8 @@
       "req_per_addr": 1.5,
       "days_count": {
         "Friday": 4,
-        "Thursday": 9,
-        "Wednesday": 9,
+        "Thursday": 7,
+        "Wednesday": 11,
         "Tuesday": 1,
         "Monday": 1
       }
@@ -1661,9 +1665,9 @@
       "days_count": {
         "Monday": 3,
         "Friday": 5,
-        "Thursday": 16,
+        "Thursday": 15,
         "Wednesday": 30,
-        "Tuesday": 1,
+        "Tuesday": 2,
         "Saturday": 3
       }
     },
@@ -1686,11 +1690,11 @@
       "repeat_rate": 26.0,
       "req_per_addr": 1.28,
       "days_count": {
-        "Saturday": 2,
-        "Thursday": 15,
-        "Wednesday": 27,
-        "Monday": 8,
         "Friday": 10,
+        "Thursday": 14,
+        "Wednesday": 29,
+        "Monday": 7,
+        "Saturday": 2,
         "Sunday": 1,
         "Tuesday": 1
       }
@@ -1714,13 +1718,13 @@
       "repeat_rate": 24.3,
       "req_per_addr": 1.43,
       "days_count": {
-        "Wednesday": 42,
-        "Monday": 7,
-        "Sunday": 3,
-        "Thursday": 35,
-        "Saturday": 4,
-        "Tuesday": 3,
-        "Friday": 6
+        "Wednesday": 52,
+        "Sunday": 6,
+        "Thursday": 26,
+        "Monday": 5,
+        "Saturday": 3,
+        "Friday": 6,
+        "Tuesday": 2
       }
     },
     {
@@ -1742,9 +1746,9 @@
       "repeat_rate": 18.2,
       "req_per_addr": 1.18,
       "days_count": {
-        "Thursday": 5,
+        "Thursday": 6,
         "Wednesday": 14,
-        "Friday": 7
+        "Friday": 6
       }
     },
     {
@@ -1791,10 +1795,10 @@
       "repeat_rate": 21.1,
       "req_per_addr": 1.35,
       "days_count": {
-        "Saturday": 3,
+        "Saturday": 2,
         "Friday": 7,
-        "Thursday": 19,
-        "Wednesday": 35,
+        "Wednesday": 41,
+        "Thursday": 14,
         "Sunday": 4,
         "Tuesday": 5,
         "Monday": 4
@@ -1820,8 +1824,8 @@
       "req_per_addr": 1.34,
       "days_count": {
         "Friday": 5,
-        "Wednesday": 16,
-        "Thursday": 17,
+        "Wednesday": 18,
+        "Thursday": 15,
         "Saturday": 2,
         "Tuesday": 1,
         "Monday": 1,
@@ -1847,10 +1851,10 @@
       "repeat_rate": 33.0,
       "req_per_addr": 1.63,
       "days_count": {
-        "Thursday": 65,
-        "Wednesday": 90,
-        "Saturday": 5,
-        "Friday": 16,
+        "Thursday": 56,
+        "Wednesday": 103,
+        "Saturday": 4,
+        "Friday": 13,
         "Monday": 6,
         "Tuesday": 1
       }
@@ -1874,12 +1878,11 @@
       "repeat_rate": 27.3,
       "req_per_addr": 1.44,
       "days_count": {
-        "Friday": 11,
-        "Thursday": 24,
-        "Wednesday": 44,
+        "Friday": 10,
+        "Thursday": 23,
+        "Wednesday": 46,
         "Sunday": 10,
-        "Monday": 5,
-        "Tuesday": 1
+        "Monday": 6
       }
     },
     {
@@ -1901,13 +1904,12 @@
       "repeat_rate": 24.0,
       "req_per_addr": 1.56,
       "days_count": {
-        "Saturday": 2,
-        "Thursday": 13,
-        "Wednesday": 14,
-        "Tuesday": 4,
-        "Friday": 3,
-        "Monday": 2,
-        "Sunday": 1
+        "Saturday": 3,
+        "Wednesday": 17,
+        "Thursday": 11,
+        "Tuesday": 3,
+        "Friday": 2,
+        "Monday": 3
       }
     },
     {
@@ -1929,13 +1931,13 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.57,
       "days_count": {
-        "Wednesday": 20,
+        "Wednesday": 24,
         "Tuesday": 5,
+        "Thursday": 13,
         "Friday": 8,
-        "Thursday": 15,
         "Sunday": 1,
-        "Saturday": 3,
-        "Monday": 3
+        "Monday": 3,
+        "Saturday": 1
       }
     },
     {
@@ -1957,12 +1959,13 @@
       "repeat_rate": 27.5,
       "req_per_addr": 1.48,
       "days_count": {
-        "Wednesday": 22,
+        "Wednesday": 23,
         "Friday": 8,
-        "Thursday": 16,
+        "Thursday": 15,
         "Tuesday": 3,
-        "Monday": 9,
-        "Saturday": 1
+        "Monday": 8,
+        "Saturday": 1,
+        "Sunday": 1
       }
     },
     {
@@ -1985,11 +1988,11 @@
       "req_per_addr": 1.35,
       "days_count": {
         "Thursday": 5,
-        "Wednesday": 17,
-        "Tuesday": 24,
+        "Wednesday": 16,
+        "Tuesday": 26,
         "Sunday": 1,
         "Friday": 9,
-        "Saturday": 8,
+        "Saturday": 7,
         "Monday": 2
       }
     },
@@ -1998,8 +2001,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC103",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
@@ -2013,11 +2016,11 @@
       "req_per_addr": 1.51,
       "days_count": {
         "Sunday": 3,
-        "Saturday": 10,
-        "Friday": 27,
-        "Wednesday": 27,
-        "Tuesday": 49,
-        "Thursday": 11,
+        "Saturday": 8,
+        "Friday": 28,
+        "Wednesday": 26,
+        "Tuesday": 55,
+        "Thursday": 7,
         "Monday": 4
       }
     },
@@ -2026,8 +2029,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC203",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights",
@@ -2041,12 +2044,12 @@
       "req_per_addr": 1.63,
       "days_count": {
         "Sunday": 11,
-        "Saturday": 19,
-        "Friday": 34,
-        "Tuesday": 72,
-        "Monday": 9,
-        "Thursday": 14,
-        "Wednesday": 47
+        "Saturday": 17,
+        "Friday": 36,
+        "Tuesday": 77,
+        "Monday": 10,
+        "Thursday": 11,
+        "Wednesday": 44
       }
     },
     {
@@ -2054,8 +2057,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC201",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2 / Ward 6 / Ward 5",
       "neighborhoods": "Shaw, Logan Circle, Downtown",
@@ -2068,11 +2071,11 @@
       "repeat_rate": 25.5,
       "req_per_addr": 1.35,
       "days_count": {
-        "Friday": 9,
-        "Thursday": 9,
-        "Tuesday": 34,
-        "Wednesday": 13,
-        "Saturday": 7,
+        "Friday": 12,
+        "Thursday": 6,
+        "Tuesday": 36,
+        "Wednesday": 14,
+        "Saturday": 4,
         "Monday": 2
       }
     },
@@ -2081,8 +2084,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC106",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Kalorama Heights, Adams Morgan, Lanier Heights",
@@ -2095,10 +2098,10 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.27,
       "days_count": {
-        "Monday": 7,
-        "Sunday": 8,
+        "Monday": 6,
+        "Sunday": 7,
         "Saturday": 12,
-        "Friday": 26,
+        "Friday": 28,
         "Wednesday": 7,
         "Tuesday": 7,
         "Thursday": 3
@@ -2109,8 +2112,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC204",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2 / Ward 3",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Cathedral Heights",
@@ -2126,8 +2129,8 @@
         "Thursday": 3,
         "Wednesday": 2,
         "Tuesday": 5,
-        "Friday": 20,
-        "Saturday": 9,
+        "Friday": 21,
+        "Saturday": 8,
         "Monday": 2,
         "Sunday": 1
       }
@@ -2137,8 +2140,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC205",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2",
       "neighborhoods": "Georgetown, Burleith/Hillandale",
@@ -2151,13 +2154,12 @@
       "repeat_rate": 25.8,
       "req_per_addr": 1.26,
       "days_count": {
-        "Saturday": 7,
-        "Friday": 13,
-        "Thursday": 5,
-        "Wednesday": 6,
-        "Tuesday": 6,
-        "Sunday": 1,
-        "Monday": 1
+        "Saturday": 5,
+        "Friday": 15,
+        "Thursday": 4,
+        "Wednesday": 5,
+        "Tuesday": 8,
+        "Sunday": 2
       }
     },
     {
@@ -2165,8 +2167,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC202",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Shaw, Logan Circle, Dupont Circle",
@@ -2179,13 +2181,13 @@
       "repeat_rate": 27.2,
       "req_per_addr": 1.36,
       "days_count": {
-        "Saturday": 8,
-        "Wednesday": 34,
-        "Tuesday": 29,
-        "Sunday": 10,
+        "Saturday": 10,
+        "Wednesday": 29,
+        "Tuesday": 36,
+        "Sunday": 9,
         "Thursday": 9,
-        "Monday": 7,
-        "Friday": 13
+        "Monday": 6,
+        "Friday": 11
       }
     },
     {
@@ -2193,8 +2195,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC206",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2",
       "neighborhoods": "Dupont Circle, Connecticut Avenue/K Street, West End",
@@ -2207,13 +2209,13 @@
       "repeat_rate": 10.5,
       "req_per_addr": 1.13,
       "days_count": {
-        "Friday": 14,
+        "Thursday": 2,
         "Tuesday": 9,
         "Saturday": 4,
-        "Sunday": 2,
-        "Wednesday": 8,
-        "Monday": 3,
-        "Thursday": 3
+        "Friday": 13,
+        "Sunday": 4,
+        "Wednesday": 10,
+        "Monday": 1
       }
     },
     {
@@ -2221,8 +2223,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC105",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
@@ -2235,11 +2237,11 @@
       "repeat_rate": 15.9,
       "req_per_addr": 1.17,
       "days_count": {
-        "Wednesday": 26,
-        "Tuesday": 44,
+        "Wednesday": 17,
+        "Tuesday": 54,
         "Friday": 7,
         "Monday": 8,
-        "Thursday": 4,
+        "Thursday": 3,
         "Saturday": 7
       }
     },
@@ -2248,8 +2250,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC102",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
@@ -2262,12 +2264,13 @@
       "repeat_rate": 24.0,
       "req_per_addr": 1.35,
       "days_count": {
-        "Monday": 4,
-        "Saturday": 7,
-        "Friday": 26,
-        "Wednesday": 18,
-        "Tuesday": 36,
-        "Thursday": 10
+        "Monday": 2,
+        "Friday": 28,
+        "Wednesday": 16,
+        "Tuesday": 41,
+        "Thursday": 8,
+        "Saturday": 4,
+        "Sunday": 2
       }
     },
     {
@@ -2275,8 +2278,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC104",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1 / Ward 2",
       "neighborhoods": "Howard University, Le Droit Park, Cardozo/Shaw",
@@ -2289,12 +2292,12 @@
       "repeat_rate": 25.2,
       "req_per_addr": 1.31,
       "days_count": {
-        "Friday": 19,
-        "Wednesday": 36,
-        "Tuesday": 67,
+        "Friday": 18,
+        "Wednesday": 31,
+        "Tuesday": 76,
+        "Thursday": 3,
         "Monday": 7,
         "Saturday": 15,
-        "Thursday": 6,
         "Sunday": 1
       }
     },
@@ -2303,8 +2306,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC601",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Union Station",
@@ -2317,11 +2320,11 @@
       "repeat_rate": 29.2,
       "req_per_addr": 1.46,
       "days_count": {
-        "Friday": 7,
-        "Thursday": 10,
-        "Wednesday": 4,
+        "Friday": 6,
+        "Thursday": 11,
+        "Wednesday": 3,
         "Tuesday": 7,
-        "Monday": 7
+        "Monday": 8
       }
     },
     {
@@ -2329,8 +2332,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC608",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2343,12 +2346,12 @@
       "repeat_rate": 14.7,
       "req_per_addr": 1.24,
       "days_count": {
-        "Saturday": 2,
-        "Monday": 15,
-        "Thursday": 11,
-        "Wednesday": 3,
         "Friday": 6,
-        "Tuesday": 5
+        "Monday": 15,
+        "Thursday": 12,
+        "Wednesday": 2,
+        "Tuesday": 6,
+        "Saturday": 1
       }
     },
     {
@@ -2356,8 +2359,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC609",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2371,10 +2374,10 @@
       "req_per_addr": 1.29,
       "days_count": {
         "Monday": 27,
-        "Thursday": 17,
-        "Wednesday": 10,
-        "Tuesday": 9,
-        "Friday": 7,
+        "Thursday": 19,
+        "Wednesday": 9,
+        "Tuesday": 10,
+        "Friday": 5,
         "Saturday": 1
       }
     },
@@ -2383,8 +2386,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC604",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
@@ -2399,8 +2402,8 @@
       "days_count": {
         "Friday": 3,
         "Thursday": 2,
-        "Monday": 8,
-        "Tuesday": 4
+        "Monday": 9,
+        "Tuesday": 3
       }
     },
     {
@@ -2408,8 +2411,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC606",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
@@ -2422,11 +2425,11 @@
       "repeat_rate": 23.8,
       "req_per_addr": 1.44,
       "days_count": {
-        "Friday": 12,
-        "Thursday": 21,
+        "Friday": 10,
+        "Thursday": 23,
         "Wednesday": 9,
-        "Tuesday": 16,
-        "Monday": 31,
+        "Monday": 35,
+        "Tuesday": 12,
         "Saturday": 2
       }
     },
@@ -2435,8 +2438,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC610",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6 / Ward 8",
       "neighborhoods": "Southwest Employment Area, Southwest/Waterfront, Fort McNair",
@@ -2449,12 +2452,12 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.19,
       "days_count": {
-        "Tuesday": 7,
+        "Tuesday": 6,
         "Sunday": 1,
-        "Friday": 4,
-        "Thursday": 2,
-        "Wednesday": 3,
-        "Monday": 2
+        "Monday": 3,
+        "Friday": 2,
+        "Thursday": 4,
+        "Wednesday": 3
       }
     },
     {
@@ -2462,8 +2465,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC607",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2476,8 +2479,8 @@
       "repeat_rate": 18.2,
       "req_per_addr": 1.25,
       "days_count": {
-        "Friday": 15,
-        "Thursday": 24,
+        "Friday": 13,
+        "Thursday": 26,
         "Monday": 20,
         "Saturday": 1,
         "Tuesday": 7,
@@ -2489,8 +2492,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC605",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2503,13 +2506,13 @@
       "repeat_rate": 13.6,
       "req_per_addr": 1.21,
       "days_count": {
-        "Monday": 14,
-        "Saturday": 7,
-        "Friday": 8,
+        "Sunday": 4,
+        "Saturday": 6,
+        "Friday": 9,
         "Thursday": 25,
         "Tuesday": 19,
-        "Sunday": 3,
-        "Wednesday": 4
+        "Monday": 15,
+        "Wednesday": 2
       }
     },
     {
@@ -2517,8 +2520,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC602",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 7 / Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2533,11 +2536,11 @@
       "days_count": {
         "Monday": 25,
         "Saturday": 3,
-        "Tuesday": 10,
+        "Tuesday": 11,
         "Sunday": 1,
         "Friday": 15,
         "Thursday": 24,
-        "Wednesday": 4
+        "Wednesday": 3
       }
     },
     {
@@ -2545,8 +2548,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC611",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park",
@@ -2559,11 +2562,11 @@
       "repeat_rate": 18.2,
       "req_per_addr": 1.3,
       "days_count": {
-        "Wednesday": 7,
-        "Tuesday": 11,
-        "Monday": 21,
+        "Wednesday": 5,
+        "Tuesday": 13,
+        "Monday": 22,
         "Saturday": 2,
-        "Friday": 6,
+        "Friday": 5,
         "Thursday": 10
       }
     },
@@ -2572,8 +2575,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC603",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2586,12 +2589,12 @@
       "repeat_rate": 20.5,
       "req_per_addr": 1.33,
       "days_count": {
-        "Thursday": 19,
-        "Monday": 17,
-        "Friday": 9,
+        "Thursday": 23,
+        "Monday": 18,
+        "Friday": 5,
         "Wednesday": 1,
-        "Tuesday": 2,
         "Sunday": 3,
+        "Tuesday": 1,
         "Saturday": 1
       }
     },
@@ -2600,8 +2603,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC612",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Near Southeast",
@@ -2614,11 +2617,10 @@
       "repeat_rate": 12.8,
       "req_per_addr": 1.18,
       "days_count": {
-        "Monday": 14,
-        "Thursday": 16,
-        "Wednesday": 4,
-        "Tuesday": 11,
-        "Friday": 1
+        "Monday": 16,
+        "Thursday": 17,
+        "Wednesday": 3,
+        "Tuesday": 10
       }
     },
     {
@@ -2626,8 +2628,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC20",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 2 / Ward 1",
       "neighborhoods": "Georgetown, Burleith/Hillandale, Dupont Circle",
@@ -2640,13 +2642,13 @@
       "repeat_rate": 14.3,
       "req_per_addr": 1.21,
       "days_count": {
-        "Sunday": 2,
+        "Saturday": 4,
         "Friday": 8,
-        "Tuesday": 10,
+        "Tuesday": 11,
         "Wednesday": 6,
-        "Saturday": 3,
         "Monday": 2,
-        "Thursday": 3
+        "Sunday": 1,
+        "Thursday": 2
       }
     },
     {
@@ -2654,8 +2656,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC21",
       "schedule": "Tuesday/Friday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 1 / Ward 6 / Ward 5",
       "neighborhoods": "Columbia Heights, Mt. Pleasant, Pleasant Plains",
@@ -2668,20 +2670,20 @@
       "repeat_rate": 33.3,
       "req_per_addr": 1.53,
       "days_count": {
-        "Monday": 2,
+        "Monday": 1,
+        "Sunday": 2,
         "Wednesday": 7,
-        "Saturday": 3,
-        "Friday": 5,
+        "Saturday": 2,
+        "Friday": 6,
         "Thursday": 3,
-        "Tuesday": 2,
-        "Sunday": 1
+        "Tuesday": 2
       }
     },
     {
       "route_id": "OR11",
       "type": "Trash",
       "route_name": "Trash Route OR11",
-      "schedule": "Monday",
+      "schedule": "Monday or Thursday",
       "service_area": "Outer Ring",
       "runs_per_week": 1,
       "status": "Active",
@@ -2704,8 +2706,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC11",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6 / Ward 7",
       "neighborhoods": "Union Station, Stanton Park, Kingman Park",
@@ -2718,8 +2720,8 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Thursday": 3,
-        "Friday": 4,
+        "Thursday": 5,
+        "Friday": 2,
         "Wednesday": 1,
         "Tuesday": 1
       }
@@ -2729,8 +2731,8 @@
       "type": "Trash",
       "route_name": "Trash Route IC10",
       "schedule": "Monday/Thursday",
-      "service_area": "Outer Ring",
-      "runs_per_week": 1,
+      "service_area": "Inner City",
+      "runs_per_week": 2,
       "status": "Active",
       "ward": "Ward 6",
       "neighborhoods": "Capitol Hill, Lincoln Park, Southwest Employment Area",
@@ -2768,11 +2770,11 @@
       "repeat_rate": 13.9,
       "req_per_addr": 1.47,
       "days_count": {
-        "Wednesday": 29,
-        "Monday": 5,
-        "Sunday": 1,
-        "Thursday": 12,
-        "Friday": 5,
+        "Wednesday": 32,
+        "Monday": 2,
+        "Sunday": 4,
+        "Thursday": 10,
+        "Friday": 4,
         "Saturday": 1
       }
     },
@@ -2821,8 +2823,7 @@
       "req_per_addr": 1.0,
       "days_count": {
         "Wednesday": 2,
-        "Saturday": 1,
-        "Friday": 1
+        "Friday": 2
       }
     },
     {
@@ -2846,8 +2847,8 @@
       "days_count": {
         "Saturday": 2,
         "Tuesday": 1,
-        "Friday": 2,
-        "Wednesday": 3,
+        "Friday": 1,
+        "Wednesday": 4,
         "Thursday": 2
       }
     },
@@ -2870,8 +2871,8 @@
       "repeat_rate": 33.3,
       "req_per_addr": 1.71,
       "days_count": {
-        "Wednesday": 14,
-        "Thursday": 10,
+        "Wednesday": 16,
+        "Thursday": 8,
         "Tuesday": 4,
         "Friday": 6,
         "Monday": 2
@@ -2896,8 +2897,8 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Wednesday": 6,
-        "Thursday": 10,
+        "Wednesday": 8,
+        "Thursday": 8,
         "Friday": 3
       }
     },
@@ -2920,10 +2921,10 @@
       "repeat_rate": 18.2,
       "req_per_addr": 1.18,
       "days_count": {
-        "Friday": 7,
-        "Thursday": 21,
-        "Wednesday": 21,
-        "Saturday": 3
+        "Friday": 8,
+        "Thursday": 15,
+        "Wednesday": 27,
+        "Saturday": 2
       }
     },
     {
@@ -2945,9 +2946,9 @@
       "repeat_rate": 7.7,
       "req_per_addr": 1.08,
       "days_count": {
-        "Wednesday": 6,
+        "Wednesday": 7,
         "Friday": 1,
-        "Thursday": 5,
+        "Thursday": 4,
         "Saturday": 1,
         "Monday": 1
       }
@@ -2972,8 +2973,8 @@
       "req_per_addr": 1.91,
       "days_count": {
         "Wednesday": 4,
-        "Friday": 6,
-        "Thursday": 7,
+        "Friday": 5,
+        "Thursday": 8,
         "Tuesday": 1,
         "Monday": 2,
         "Saturday": 1
@@ -3000,9 +3001,9 @@
       "days_count": {
         "Saturday": 1,
         "Thursday": 2,
-        "Monday": 1,
+        "Monday": 2,
         "Wednesday": 3,
-        "Tuesday": 4
+        "Tuesday": 3
       }
     },
     {
@@ -3024,10 +3025,10 @@
       "repeat_rate": 29.4,
       "req_per_addr": 1.29,
       "days_count": {
+        "Thursday": 8,
+        "Wednesday": 10,
         "Friday": 3,
-        "Thursday": 10,
-        "Wednesday": 7,
-        "Saturday": 2
+        "Saturday": 1
       }
     },
     {
@@ -3049,10 +3050,10 @@
       "repeat_rate": 6.7,
       "req_per_addr": 1.07,
       "days_count": {
-        "Friday": 4,
+        "Friday": 3,
         "Thursday": 3,
-        "Saturday": 1,
-        "Wednesday": 8
+        "Wednesday": 9,
+        "Saturday": 1
       }
     },
     {
@@ -3074,8 +3075,8 @@
       "repeat_rate": 23.5,
       "req_per_addr": 1.59,
       "days_count": {
-        "Thursday": 12,
-        "Wednesday": 11,
+        "Thursday": 9,
+        "Wednesday": 14,
         "Friday": 3,
         "Sunday": 1
       }
@@ -3099,13 +3100,12 @@
       "repeat_rate": 12.0,
       "req_per_addr": 1.24,
       "days_count": {
-        "Saturday": 3,
+        "Saturday": 2,
         "Friday": 10,
-        "Thursday": 17,
-        "Tuesday": 1,
-        "Sunday": 5,
-        "Wednesday": 25,
-        "Monday": 1
+        "Thursday": 16,
+        "Tuesday": 2,
+        "Sunday": 6,
+        "Wednesday": 26
       }
     },
     {
@@ -3128,9 +3128,9 @@
       "req_per_addr": 1.26,
       "days_count": {
         "Saturday": 1,
-        "Wednesday": 19,
-        "Friday": 6,
-        "Thursday": 13,
+        "Wednesday": 24,
+        "Friday": 5,
+        "Thursday": 9,
         "Tuesday": 1,
         "Monday": 1,
         "Sunday": 2
@@ -3156,9 +3156,9 @@
       "req_per_addr": 1.1,
       "days_count": {
         "Friday": 1,
-        "Wednesday": 4,
+        "Wednesday": 6,
         "Sunday": 1,
-        "Thursday": 4,
+        "Thursday": 2,
         "Saturday": 1
       }
     },
@@ -3181,13 +3181,13 @@
       "repeat_rate": 19.2,
       "req_per_addr": 1.23,
       "days_count": {
-        "Friday": 6,
         "Thursday": 19,
-        "Monday": 17,
-        "Wednesday": 16,
+        "Monday": 14,
+        "Wednesday": 18,
         "Tuesday": 1,
-        "Sunday": 4,
-        "Saturday": 1
+        "Sunday": 7,
+        "Saturday": 1,
+        "Friday": 4
       }
     },
     {
@@ -3209,10 +3209,9 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.12,
       "days_count": {
-        "Thursday": 4,
+        "Thursday": 5,
         "Monday": 1,
-        "Wednesday": 3,
-        "Friday": 1
+        "Wednesday": 3
       }
     },
     {
@@ -3234,8 +3233,8 @@
       "repeat_rate": 8.0,
       "req_per_addr": 1.08,
       "days_count": {
-        "Thursday": 10,
-        "Wednesday": 13,
+        "Thursday": 7,
+        "Wednesday": 16,
         "Friday": 4
       }
     },
@@ -3332,9 +3331,9 @@
       "repeat_rate": 8.3,
       "req_per_addr": 1.12,
       "days_count": {
-        "Thursday": 15,
-        "Wednesday": 6,
+        "Wednesday": 9,
         "Saturday": 1,
+        "Thursday": 12,
         "Friday": 3,
         "Tuesday": 1,
         "Monday": 1
@@ -3359,9 +3358,9 @@
       "repeat_rate": 10.7,
       "req_per_addr": 1.11,
       "days_count": {
-        "Friday": 4,
-        "Thursday": 21,
-        "Wednesday": 6
+        "Friday": 3,
+        "Thursday": 18,
+        "Wednesday": 10
       }
     },
     {
@@ -3383,9 +3382,9 @@
       "repeat_rate": 50.0,
       "req_per_addr": 2.0,
       "days_count": {
+        "Thursday": 2,
+        "Saturday": 1,
         "Friday": 1,
-        "Saturday": 2,
-        "Thursday": 1,
         "Wednesday": 4
       }
     },
@@ -3433,10 +3432,10 @@
       "repeat_rate": 14.3,
       "req_per_addr": 1.19,
       "days_count": {
-        "Tuesday": 9,
-        "Thursday": 4,
+        "Tuesday": 10,
+        "Thursday": 2,
         "Friday": 3,
-        "Wednesday": 8,
+        "Wednesday": 9,
         "Saturday": 1
       }
     },
@@ -3460,9 +3459,9 @@
       "req_per_addr": 1.19,
       "days_count": {
         "Thursday": 10,
-        "Wednesday": 20,
+        "Wednesday": 19,
         "Friday": 1,
-        "Tuesday": 18,
+        "Tuesday": 19,
         "Sunday": 1
       }
     },
@@ -3485,10 +3484,10 @@
       "repeat_rate": 14.3,
       "req_per_addr": 1.21,
       "days_count": {
-        "Friday": 3,
-        "Wednesday": 11,
-        "Tuesday": 10,
-        "Thursday": 9,
+        "Friday": 2,
+        "Wednesday": 10,
+        "Tuesday": 13,
+        "Thursday": 8,
         "Monday": 1
       }
     },
@@ -3511,8 +3510,8 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.12,
       "days_count": {
-        "Wednesday": 6,
-        "Tuesday": 2,
+        "Wednesday": 5,
+        "Tuesday": 3,
         "Thursday": 1
       }
     },
@@ -3586,9 +3585,9 @@
       "repeat_rate": 5.0,
       "req_per_addr": 1.1,
       "days_count": {
-        "Tuesday": 14,
+        "Tuesday": 15,
         "Thursday": 4,
-        "Wednesday": 4
+        "Wednesday": 3
       }
     },
     {
@@ -3635,8 +3634,8 @@
       "days_count": {
         "Sunday": 1,
         "Tuesday": 4,
-        "Friday": 2,
-        "Thursday": 1
+        "Friday": 1,
+        "Thursday": 2
       }
     },
     {
@@ -3731,8 +3730,8 @@
       "repeat_rate": 4.8,
       "req_per_addr": 1.05,
       "days_count": {
-        "Wednesday": 12,
-        "Tuesday": 10
+        "Wednesday": 10,
+        "Tuesday": 12
       }
     },
     {
@@ -3779,8 +3778,8 @@
       "repeat_rate": 7.7,
       "req_per_addr": 1.08,
       "days_count": {
-        "Tuesday": 5,
-        "Wednesday": 7,
+        "Tuesday": 6,
+        "Wednesday": 6,
         "Friday": 2
       }
     },
@@ -3826,12 +3825,12 @@
       "repeat_rate": 32.2,
       "req_per_addr": 1.58,
       "days_count": {
-        "Friday": 36,
-        "Thursday": 33,
+        "Friday": 29,
+        "Thursday": 41,
         "Wednesday": 2,
         "Tuesday": 4,
         "Sunday": 3,
-        "Monday": 8,
+        "Monday": 7,
         "Saturday": 7
       }
     },
@@ -3855,9 +3854,9 @@
       "req_per_addr": 1.56,
       "days_count": {
         "Tuesday": 2,
-        "Saturday": 4,
+        "Saturday": 3,
         "Thursday": 11,
-        "Friday": 6,
+        "Friday": 7,
         "Monday": 3,
         "Sunday": 2
       }
@@ -3881,9 +3880,9 @@
       "repeat_rate": 36.8,
       "req_per_addr": 1.42,
       "days_count": {
-        "Saturday": 3,
-        "Friday": 4,
-        "Thursday": 11,
+        "Saturday": 1,
+        "Friday": 5,
+        "Thursday": 12,
         "Sunday": 2,
         "Monday": 5,
         "Tuesday": 2
@@ -3909,9 +3908,9 @@
       "req_per_addr": 2.0,
       "days_count": {
         "Tuesday": 2,
-        "Friday": 4,
+        "Thursday": 3,
         "Saturday": 1,
-        "Thursday": 2,
+        "Friday": 3,
         "Wednesday": 1
       }
     },
@@ -3935,8 +3934,8 @@
       "req_per_addr": 1.0,
       "days_count": {
         "Saturday": 1,
-        "Friday": 3,
-        "Thursday": 2,
+        "Friday": 2,
+        "Thursday": 3,
         "Wednesday": 1
       }
     },
@@ -3959,8 +3958,8 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.44,
       "days_count": {
-        "Friday": 11,
-        "Thursday": 6,
+        "Friday": 9,
+        "Thursday": 8,
         "Sunday": 2,
         "Tuesday": 1,
         "Monday": 3
@@ -3985,9 +3984,9 @@
       "repeat_rate": 35.7,
       "req_per_addr": 1.79,
       "days_count": {
-        "Thursday": 13,
-        "Friday": 21,
-        "Saturday": 6,
+        "Thursday": 17,
+        "Friday": 19,
+        "Saturday": 4,
         "Monday": 3,
         "Wednesday": 3,
         "Tuesday": 4
@@ -4060,8 +4059,8 @@
       "req_per_addr": 1.21,
       "days_count": {
         "Monday": 2,
-        "Friday": 8,
-        "Thursday": 4,
+        "Friday": 7,
+        "Thursday": 5,
         "Tuesday": 5,
         "Sunday": 3,
         "Wednesday": 1
@@ -4110,10 +4109,10 @@
       "repeat_rate": 18.8,
       "req_per_addr": 1.25,
       "days_count": {
-        "Saturday": 4,
+        "Saturday": 3,
         "Tuesday": 1,
         "Friday": 8,
-        "Thursday": 3,
+        "Thursday": 4,
         "Sunday": 1,
         "Monday": 2,
         "Wednesday": 1
@@ -4139,8 +4138,8 @@
       "req_per_addr": 1.17,
       "days_count": {
         "Sunday": 1,
-        "Friday": 2,
-        "Thursday": 3,
+        "Friday": 1,
+        "Thursday": 4,
         "Monday": 1
       }
     },
@@ -4189,10 +4188,10 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.12,
       "days_count": {
-        "Friday": 1,
+        "Friday": 2,
         "Monday": 2,
-        "Saturday": 3,
-        "Thursday": 3
+        "Thursday": 3,
+        "Saturday": 2
       }
     },
     {
@@ -4262,11 +4261,10 @@
       "repeat_rate": 12.0,
       "req_per_addr": 1.12,
       "days_count": {
-        "Friday": 1,
-        "Wednesday": 14,
-        "Tuesday": 11,
-        "Monday": 1,
-        "Thursday": 1
+        "Thursday": 2,
+        "Wednesday": 12,
+        "Tuesday": 12,
+        "Monday": 2
       }
     },
     {
@@ -4288,11 +4286,10 @@
       "repeat_rate": 15.4,
       "req_per_addr": 1.15,
       "days_count": {
-        "Friday": 1,
-        "Thursday": 2,
+        "Thursday": 3,
         "Wednesday": 3,
-        "Tuesday": 4,
-        "Monday": 5
+        "Tuesday": 3,
+        "Monday": 6
       }
     },
     {
@@ -4316,8 +4313,8 @@
       "days_count": {
         "Friday": 1,
         "Wednesday": 1,
-        "Tuesday": 6,
-        "Monday": 16
+        "Tuesday": 4,
+        "Monday": 18
       }
     },
     {
@@ -4339,8 +4336,8 @@
       "repeat_rate": 19.2,
       "req_per_addr": 1.42,
       "days_count": {
-        "Monday": 14,
-        "Tuesday": 13,
+        "Monday": 17,
+        "Tuesday": 10,
         "Thursday": 8,
         "Wednesday": 1,
         "Friday": 1
@@ -4365,11 +4362,11 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.5,
       "days_count": {
-        "Wednesday": 4,
+        "Wednesday": 6,
         "Tuesday": 15,
         "Monday": 11,
         "Friday": 2,
-        "Thursday": 4
+        "Thursday": 2
       }
     },
     {
@@ -4391,10 +4388,10 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.39,
       "days_count": {
-        "Monday": 16,
-        "Tuesday": 26,
-        "Thursday": 5,
-        "Wednesday": 2,
+        "Monday": 20,
+        "Tuesday": 22,
+        "Thursday": 3,
+        "Wednesday": 4,
         "Saturday": 1
       }
     },
@@ -4420,8 +4417,8 @@
         "Wednesday": 7,
         "Friday": 3,
         "Thursday": 1,
-        "Tuesday": 42,
-        "Monday": 31
+        "Tuesday": 35,
+        "Monday": 38
       }
     },
     {
@@ -4443,9 +4440,9 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.36,
       "days_count": {
-        "Monday": 17,
-        "Wednesday": 11,
-        "Tuesday": 27,
+        "Monday": 22,
+        "Wednesday": 7,
+        "Tuesday": 26,
         "Friday": 2,
         "Thursday": 3
       }
@@ -4470,10 +4467,9 @@
       "req_per_addr": 1.05,
       "days_count": {
         "Monday": 8,
-        "Tuesday": 7,
-        "Thursday": 2,
-        "Wednesday": 1,
-        "Friday": 2
+        "Tuesday": 8,
+        "Thursday": 3,
+        "Friday": 1
       }
     },
     {
@@ -4495,10 +4491,10 @@
       "repeat_rate": 11.8,
       "req_per_addr": 1.12,
       "days_count": {
-        "Tuesday": 7,
-        "Monday": 9,
+        "Tuesday": 4,
+        "Monday": 12,
         "Wednesday": 2,
-        "Friday": 1
+        "Thursday": 1
       }
     },
     {
@@ -4521,10 +4517,9 @@
       "req_per_addr": 1.12,
       "days_count": {
         "Thursday": 4,
-        "Wednesday": 9,
+        "Wednesday": 10,
         "Tuesday": 12,
-        "Monday": 2,
-        "Friday": 1
+        "Monday": 2
       }
     },
     {
@@ -4549,8 +4544,8 @@
         "Friday": 2,
         "Thursday": 4,
         "Wednesday": 9,
-        "Tuesday": 15,
-        "Monday": 17
+        "Tuesday": 13,
+        "Monday": 19
       }
     },
     {
@@ -4572,10 +4567,10 @@
       "repeat_rate": 36.1,
       "req_per_addr": 1.39,
       "days_count": {
-        "Tuesday": 18,
-        "Monday": 15,
+        "Tuesday": 21,
+        "Monday": 16,
         "Friday": 3,
-        "Wednesday": 11,
+        "Wednesday": 7,
         "Thursday": 2,
         "Saturday": 1
       }
@@ -4599,9 +4594,9 @@
       "repeat_rate": 22.9,
       "req_per_addr": 1.29,
       "days_count": {
-        "Saturday": 15,
+        "Saturday": 12,
         "Tuesday": 4,
-        "Friday": 13,
+        "Friday": 16,
         "Monday": 10,
         "Sunday": 3
       }
@@ -4625,9 +4620,10 @@
       "repeat_rate": 15.8,
       "req_per_addr": 1.37,
       "days_count": {
-        "Monday": 10,
-        "Saturday": 7,
-        "Friday": 7,
+        "Monday": 8,
+        "Saturday": 5,
+        "Friday": 9,
+        "Sunday": 2,
         "Thursday": 1,
         "Tuesday": 1
       }
@@ -4679,11 +4675,11 @@
       "repeat_rate": 28.6,
       "req_per_addr": 1.57,
       "days_count": {
-        "Tuesday": 3,
-        "Sunday": 3,
-        "Saturday": 3,
+        "Tuesday": 2,
+        "Sunday": 4,
+        "Saturday": 2,
         "Monday": 4,
-        "Friday": 9
+        "Friday": 10
       }
     },
     {
@@ -4729,10 +4725,10 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Friday": 13,
+        "Friday": 14,
         "Monday": 2,
         "Tuesday": 1,
-        "Saturday": 2,
+        "Saturday": 1,
         "Wednesday": 1
       }
     },
@@ -4759,9 +4755,9 @@
         "Saturday": 5,
         "Friday": 7,
         "Thursday": 2,
-        "Wednesday": 2,
+        "Wednesday": 1,
         "Monday": 5,
-        "Tuesday": 1
+        "Tuesday": 2
       }
     },
     {
@@ -4785,8 +4781,8 @@
       "days_count": {
         "Monday": 8,
         "Sunday": 4,
-        "Saturday": 8,
-        "Friday": 7,
+        "Saturday": 7,
+        "Friday": 8,
         "Wednesday": 2,
         "Thursday": 1,
         "Tuesday": 1
@@ -4812,9 +4808,9 @@
       "req_per_addr": 1.19,
       "days_count": {
         "Saturday": 3,
-        "Thursday": 3,
+        "Thursday": 4,
         "Monday": 7,
-        "Friday": 7,
+        "Friday": 6,
         "Tuesday": 3,
         "Wednesday": 2
       }
@@ -4864,9 +4860,9 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Saturday": 2,
-        "Friday": 2,
-        "Monday": 4
+        "Friday": 3,
+        "Monday": 4,
+        "Saturday": 1
       }
     },
     {
@@ -4888,9 +4884,9 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.75,
       "days_count": {
-        "Friday": 5,
-        "Saturday": 4,
+        "Friday": 6,
         "Sunday": 4,
+        "Saturday": 3,
         "Tuesday": 4,
         "Monday": 3,
         "Wednesday": 1
@@ -4917,9 +4913,9 @@
       "days_count": {
         "Friday": 5,
         "Monday": 4,
-        "Sunday": 2,
-        "Saturday": 3,
+        "Saturday": 4,
         "Tuesday": 1,
+        "Sunday": 1,
         "Wednesday": 1
       }
     },
@@ -4944,9 +4940,9 @@
       "days_count": {
         "Friday": 3,
         "Saturday": 3,
-        "Monday": 3,
+        "Monday": 4,
         "Sunday": 2,
-        "Tuesday": 2
+        "Tuesday": 1
       }
     },
     {
@@ -4968,9 +4964,9 @@
       "repeat_rate": 42.9,
       "req_per_addr": 2.29,
       "days_count": {
-        "Monday": 13,
-        "Wednesday": 6,
-        "Tuesday": 11,
+        "Monday": 14,
+        "Tuesday": 12,
+        "Wednesday": 4,
         "Friday": 1,
         "Thursday": 1
       }
@@ -4994,10 +4990,9 @@
       "repeat_rate": 23.1,
       "req_per_addr": 1.38,
       "days_count": {
-        "Monday": 14,
+        "Monday": 15,
         "Thursday": 2,
-        "Wednesday": 1,
-        "Tuesday": 1
+        "Wednesday": 1
       }
     },
     {
@@ -5021,8 +5016,8 @@
       "days_count": {
         "Thursday": 1,
         "Monday": 4,
-        "Wednesday": 4,
-        "Tuesday": 4
+        "Wednesday": 2,
+        "Tuesday": 6
       }
     },
     {
@@ -5045,9 +5040,9 @@
       "req_per_addr": 1.7,
       "days_count": {
         "Monday": 7,
-        "Thursday": 5,
+        "Thursday": 4,
         "Wednesday": 2,
-        "Tuesday": 3
+        "Tuesday": 4
       }
     },
     {
@@ -5069,9 +5064,9 @@
       "repeat_rate": 15.4,
       "req_per_addr": 1.28,
       "days_count": {
-        "Wednesday": 11,
-        "Tuesday": 15,
-        "Monday": 21,
+        "Wednesday": 10,
+        "Tuesday": 12,
+        "Monday": 25,
         "Saturday": 1,
         "Thursday": 1,
         "Friday": 1
@@ -5097,9 +5092,11 @@
       "req_per_addr": 1.78,
       "days_count": {
         "Monday": 8,
-        "Tuesday": 4,
-        "Friday": 3,
-        "Wednesday": 1
+        "Tuesday": 3,
+        "Friday": 2,
+        "Thursday": 1,
+        "Wednesday": 1,
+        "Sunday": 1
       }
     },
     {
@@ -5121,11 +5118,11 @@
       "repeat_rate": 23.3,
       "req_per_addr": 1.33,
       "days_count": {
-        "Friday": 3,
-        "Thursday": 4,
+        "Friday": 2,
+        "Thursday": 5,
         "Wednesday": 8,
-        "Tuesday": 11,
-        "Monday": 13,
+        "Tuesday": 9,
+        "Monday": 15,
         "Saturday": 1
       }
     },
@@ -5148,8 +5145,8 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.12,
       "days_count": {
-        "Tuesday": 8,
-        "Monday": 1
+        "Tuesday": 7,
+        "Monday": 2
       }
     },
     {
@@ -5171,9 +5168,9 @@
       "repeat_rate": 26.7,
       "req_per_addr": 1.6,
       "days_count": {
-        "Thursday": 4,
-        "Monday": 9,
         "Wednesday": 3,
+        "Monday": 11,
+        "Thursday": 2,
         "Tuesday": 6,
         "Friday": 1,
         "Sunday": 1
@@ -5198,12 +5195,12 @@
       "repeat_rate": 19.2,
       "req_per_addr": 1.58,
       "days_count": {
-        "Wednesday": 13,
+        "Wednesday": 15,
         "Sunday": 1,
-        "Thursday": 5,
-        "Tuesday": 16,
-        "Saturday": 2,
-        "Friday": 4
+        "Tuesday": 17,
+        "Friday": 4,
+        "Thursday": 3,
+        "Saturday": 1
       }
     },
     {
@@ -5226,9 +5223,9 @@
       "req_per_addr": 1.59,
       "days_count": {
         "Friday": 1,
-        "Tuesday": 14,
-        "Thursday": 8,
-        "Wednesday": 18,
+        "Tuesday": 18,
+        "Thursday": 7,
+        "Wednesday": 15,
         "Monday": 1,
         "Saturday": 1
       }
@@ -5255,9 +5252,9 @@
         "Monday": 1,
         "Saturday": 3,
         "Friday": 6,
-        "Thursday": 7,
-        "Wednesday": 38,
-        "Tuesday": 15,
+        "Wednesday": 33,
+        "Tuesday": 23,
+        "Thursday": 4,
         "Sunday": 1
       }
     },
@@ -5280,8 +5277,8 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Tuesday": 9,
-        "Wednesday": 2
+        "Tuesday": 10,
+        "Wednesday": 1
       }
     },
     {
@@ -5304,8 +5301,8 @@
       "req_per_addr": 1.4,
       "days_count": {
         "Thursday": 3,
-        "Wednesday": 4,
-        "Tuesday": 4,
+        "Wednesday": 3,
+        "Tuesday": 5,
         "Friday": 3
       }
     },
@@ -5328,9 +5325,9 @@
       "repeat_rate": 33.3,
       "req_per_addr": 1.49,
       "days_count": {
-        "Thursday": 10,
-        "Wednesday": 26,
-        "Tuesday": 27,
+        "Thursday": 8,
+        "Wednesday": 17,
+        "Tuesday": 38,
         "Saturday": 2,
         "Monday": 1,
         "Sunday": 1
@@ -5355,9 +5352,9 @@
       "repeat_rate": 16.7,
       "req_per_addr": 1.21,
       "days_count": {
-        "Tuesday": 23,
-        "Wednesday": 17,
-        "Thursday": 8,
+        "Tuesday": 27,
+        "Wednesday": 15,
+        "Thursday": 6,
         "Friday": 3
       }
     },
@@ -5407,9 +5404,9 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Thursday": 2,
-        "Tuesday": 5,
-        "Wednesday": 2
+        "Thursday": 1,
+        "Wednesday": 2,
+        "Tuesday": 6
       }
     },
     {
@@ -5431,10 +5428,10 @@
       "repeat_rate": 28.6,
       "req_per_addr": 1.38,
       "days_count": {
-        "Tuesday": 9,
+        "Tuesday": 11,
         "Thursday": 5,
         "Monday": 2,
-        "Wednesday": 9,
+        "Wednesday": 7,
         "Friday": 2,
         "Sunday": 1,
         "Saturday": 1
@@ -5483,9 +5480,9 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.3,
       "days_count": {
-        "Thursday": 8,
-        "Saturday": 2,
-        "Friday": 2,
+        "Thursday": 10,
+        "Saturday": 1,
+        "Friday": 1,
         "Monday": 1
       }
     },
@@ -5508,10 +5505,9 @@
       "repeat_rate": 22.2,
       "req_per_addr": 1.33,
       "days_count": {
-        "Friday": 5,
+        "Friday": 6,
         "Thursday": 3,
         "Wednesday": 1,
-        "Saturday": 1,
         "Sunday": 1,
         "Tuesday": 1
       }
@@ -5535,8 +5531,8 @@
       "repeat_rate": 10.0,
       "req_per_addr": 1.2,
       "days_count": {
-        "Friday": 10,
-        "Thursday": 8,
+        "Friday": 7,
+        "Thursday": 11,
         "Saturday": 2,
         "Monday": 1,
         "Wednesday": 1,
@@ -5584,8 +5580,8 @@
       "repeat_rate": 15.4,
       "req_per_addr": 1.31,
       "days_count": {
-        "Thursday": 8,
-        "Friday": 8,
+        "Thursday": 10,
+        "Friday": 6,
         "Monday": 1
       }
     },
@@ -5608,9 +5604,9 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Friday": 2,
-        "Saturday": 2,
-        "Wednesday": 1,
+        "Friday": 3,
+        "Saturday": 1,
+        "Tuesday": 1,
         "Monday": 2,
         "Sunday": 1
       }
@@ -5634,13 +5630,13 @@
       "repeat_rate": 23.5,
       "req_per_addr": 1.62,
       "days_count": {
-        "Monday": 12,
+        "Monday": 13,
+        "Friday": 13,
+        "Tuesday": 8,
         "Saturday": 10,
-        "Friday": 12,
-        "Tuesday": 9,
-        "Sunday": 6,
-        "Thursday": 2,
-        "Wednesday": 4
+        "Thursday": 3,
+        "Sunday": 5,
+        "Wednesday": 3
       }
     },
     {
@@ -5662,13 +5658,13 @@
       "repeat_rate": 19.0,
       "req_per_addr": 1.19,
       "days_count": {
-        "Monday": 3,
-        "Wednesday": 2,
-        "Saturday": 5,
-        "Friday": 8,
-        "Sunday": 2,
-        "Thursday": 3,
-        "Tuesday": 2
+        "Monday": 2,
+        "Wednesday": 3,
+        "Friday": 10,
+        "Saturday": 3,
+        "Sunday": 3,
+        "Thursday": 1,
+        "Tuesday": 3
       }
     },
     {
@@ -5739,8 +5735,7 @@
       "req_per_addr": 2.0,
       "days_count": {
         "Wednesday": 1,
-        "Tuesday": 1,
-        "Monday": 4
+        "Monday": 5
       }
     },
     {
@@ -5789,8 +5784,8 @@
       "req_per_addr": 1.18,
       "days_count": {
         "Thursday": 2,
-        "Wednesday": 6,
-        "Tuesday": 5
+        "Tuesday": 7,
+        "Wednesday": 4
       }
     },
     {
