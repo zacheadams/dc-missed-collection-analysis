@@ -936,6 +936,7 @@ html_page = f'''<!DOCTYPE html>
       <a href="index.html" class="nav-link">Index</a>
       <a href="map.html" class="nav-link active">The Map</a>
       <a href="report.html" class="nav-link">The Report</a>
+      <a href="tables.html" class="nav-link">Tables and Graphs</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="exportMapPdf()" class="btn-action">Export Map (PDF)</button>
       <button onclick="exportMapPng()" class="btn-action">Export Map (PNG)</button>

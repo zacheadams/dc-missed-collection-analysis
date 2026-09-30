@@ -8,9 +8,10 @@ This resource provides an operational proof of concept for the DC Department of 
 
 ## Applications
 
-- **Project Hub ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Central portal displaying 180-day executive performance metrics, project methodology, and entry points to the interactive map and report.
+- **Project Hub ([`index.html`](https://zacheadams.github.io/dc-missed-collection-analysis/))**: Central portal displaying 180-day executive performance metrics, project methodology, and entry points to the interactive map, report, and tables/graphs.
 - **Interactive Map Application ([`map.html`](https://zacheadams.github.io/dc-missed-collection-analysis/map.html))**: Dedicated spatial explorer featuring local offline Stamen Toner cartography (zooms 11 to 17), cascading Ward/ANC/SMD filters, dual DPW collection route overlays (catchment polygons and street network lines), and contextual PDF and PNG map exports.
-- **Operational Report ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))**: Municipal performance report featuring hierarchical Ward, ANC, and SMD deduplication benchmarks, collection day fleet bottleneck analysis, Chart.js visualizations with PNG/PDF exports, and a searchable 223-route performance matrix with CSV/PDF exports.
+- **Operational Report ([`report.html`](https://zacheadams.github.io/dc-missed-collection-analysis/report.html))**: Municipal narrative report featuring investigative context, DPW oversight history, routing analysis, and strategic policy recommendations for District leadership.
+- **Tables and Graphs ([`tables.html`](https://zacheadams.github.io/dc-missed-collection-analysis/tables.html))**: Dedicated data visualizations and operational tables featuring Ward volume and repeat breakdown charts, day-of-week collection distributions, daily route averages bar chart, and bidirectional sortable Ward, ANC, and 223-Route performance tables with CSV and PDF exports.
 
 ### Viewing Locally
 ```bash
@@ -22,9 +23,10 @@ cd dc-missed-collection-analysis
 python3 -m http.server 8000
 
 # Open applications in your browser:
-# Project Hub:       http://localhost:8000/index.html
-# Interactive Map:   http://localhost:8000/map.html
+# Project Hub:        http://localhost:8000/index.html
+# Interactive Map:    http://localhost:8000/map.html
 # Operational Report: http://localhost:8000/report.html
+# Tables and Graphs:  http://localhost:8000/tables.html
 ```
 
 ---
