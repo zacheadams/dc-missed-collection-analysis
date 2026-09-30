@@ -2601,7 +2601,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function updateInspectorWard(p) {{
-      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const periodLabel = currentPeriod === '30d' ? 'past 30 days' : 'past 180 days';
       const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;
       const total = m ? m.total : p.total;
       const trash = m ? m.trash : p.trash;
@@ -2617,7 +2617,7 @@ html_page = f'''<!DOCTYPE html>
       const tileTotal = document.getElementById('insp-tile-total');
       const tileShare = document.getElementById('insp-tile-share');
       if (tileTotal) tileTotal.style.gridColumn = '';
-      if (tileShare) tileShare.style.display = '';
+      if (tileShare) tileShare.style.display = 'block';
 
       document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
@@ -2625,13 +2625,13 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
       document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
-      document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel.toLowerCase()}}.`;
+      document.getElementById('insp-details').innerText = `Ward ${{p.ward}} accounts for ${{total.toLocaleString()}} missed collections (${{share}}% of citywide volume) over the ${{periodLabel}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
       ensureMobileInspectorOpen();
     }}
 
     function updateInspectorANC(ancId) {{
-      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const periodLabel = currentPeriod === '30d' ? 'past 30 days' : 'past 180 days';
       const smdsInAnc = MAP_DATA.smds.features.filter(f => f.properties.anc_id === ancId);
       let total = 0, trash = 0, rec = 0;
       smdsInAnc.forEach(f => {{
@@ -2652,31 +2652,31 @@ html_page = f'''<!DOCTYPE html>
       const tileTotal = document.getElementById('insp-tile-total');
       const tileShare = document.getElementById('insp-tile-share');
       if (tileTotal) tileTotal.style.gridColumn = '';
-      if (tileShare) tileShare.style.display = '';
+      if (tileShare) tileShare.style.display = 'block';
 
-      document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
+      document.getElementById('insp-lbl-2').innerText = 'Percent of Citywide Requests';
       document.getElementById('insp-stat-share').innerText = `${{share}}%`;
       document.getElementById('insp-lbl-3').innerHTML = '<span class="kw-trash">Trash</span> (S0441)';
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
       document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
-      document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel.toLowerCase()}}.`;
+      document.getElementById('insp-details').innerText = `ANC ${{ancId}} contains ${{smdsInAnc.length}} Single Member Districts with ${{total.toLocaleString()}} missed requests over the ${{periodLabel}}.`;
       document.getElementById('insp-route-box').style.display = 'none';
       ensureMobileInspectorOpen();
     }}
 
     function updateInspectorSMD(p, centerLatLng) {{
-      const periodLabel = currentPeriod === '30d' ? 'Past 30 Days' : 'Past 180 Days';
+      const periodLabel = currentPeriod === '30d' ? 'past 30 days' : 'past 180 days';
       const m = currentPeriod === '30d' ? p.metrics_30d : p.metrics_180d;
       const total = m ? m.total : p.total;
       const trash = m ? m.trash : p.trash;
       const rec = m ? m.recycling : p.recycling;
       const wardShare = m ? m.ward_share_pct : (p.ward_share_pct || 0);
 
-      const rep = formatRepName(p.rep_name || (MAP_DATA.smds.features.find(f => f.properties.smd_id === p.smd_id)?.properties?.rep_name) || '');
+      const rep = formatRepName(p.rep_name || '');
 
       document.getElementById('insp-title').innerText = `SMD ${{p.smd_id}}`;
-      if (!rep || rep.toLowerCase() === 'vacant') {{
+      if (!rep || rep === 'Vacant') {{
         document.getElementById('insp-sub').innerHTML = `Commissioner: <span class="kw-vacant">Vacant</span> <a href="https://51st.news/what-are-washington-dc-advisory-neighborhood-commissions-anc/" target="_blank" rel="noopener" class="vacant-link" onclick="event.stopPropagation()">(run for ANC!)</a>`;
       }} else {{
         document.getElementById('insp-sub').innerText = `Commissioner: ${{rep}}`;
@@ -2687,7 +2687,7 @@ html_page = f'''<!DOCTYPE html>
       const tileTotal = document.getElementById('insp-tile-total');
       const tileShare = document.getElementById('insp-tile-share');
       if (tileTotal) tileTotal.style.gridColumn = '';
-      if (tileShare) tileShare.style.display = '';
+      if (tileShare) tileShare.style.display = 'block';
 
       document.getElementById('insp-lbl-2').innerText = 'Percent of Requests in Ward';
       document.getElementById('insp-stat-share').innerText = `${{wardShare}}%`;
@@ -2695,7 +2695,7 @@ html_page = f'''<!DOCTYPE html>
       document.getElementById('insp-stat-trash').innerText = trash.toLocaleString();
       document.getElementById('insp-lbl-4').innerHTML = '<span class="kw-recycle">Recycling</span> (S0321)';
       document.getElementById('insp-stat-rec').innerText = rec.toLocaleString();
-      document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{wardShare}}% of Ward ${{p.ward}}'s total missed collections over the ${{periodLabel.toLowerCase()}}.`;
+      document.getElementById('insp-details').innerText = `SMD ${{p.smd_id}} represents ${{wardShare}}% of Ward ${{p.ward}}'s total missed collections over the ${{periodLabel}}.`;
 
       const rBox = document.getElementById('insp-route-box');
       if (rBox) {{
@@ -2733,7 +2733,7 @@ html_page = f'''<!DOCTYPE html>
       const tileTotal = document.getElementById('insp-tile-total');
       const tileShare = document.getElementById('insp-tile-share');
       if (tileTotal) tileTotal.style.gridColumn = '';
-      if (tileShare) tileShare.style.display = '';
+      if (tileShare) tileShare.style.display = 'block';
 
       document.getElementById('insp-lbl-1').innerText = 'Total Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();

@@ -305,6 +305,16 @@ def verify():
             const ward2Lbl2 = document.getElementById('insp-lbl-2').textContent;
             const ward2Lbl2Correct = ward2Lbl2 === 'Percent of Requests in Ward';
 
+            // Test ANC inspector: selecting ANC 2B
+            selectWard(2);
+            selectANC('2B');
+            const anc2BSub = document.getElementById('insp-sub').innerText;
+            const anc2BTitle = document.getElementById('insp-title').innerText;
+            const anc2BSubCorrect = anc2BSub.startsWith('Ward 2') && anc2BSub.includes('Single Member Districts');
+            const anc2BShareVisible = document.getElementById('insp-tile-share').style.display !== 'none';
+            const anc2BLbl2 = document.getElementById('insp-lbl-2').textContent;
+            const anc2BLbl2Correct = anc2BLbl2 === 'Percent of Citywide Requests';
+
             // Test SMD inspector: selecting SMD 2B08
             selectHierarchy('2B08');
             const smd2B08Title = document.getElementById('insp-title').innerText;
@@ -366,6 +376,11 @@ def verify():
               ward2CouncilCorrect,
               ward2ShareVisible,
               ward2Lbl2Correct,
+              anc2BSubCorrect,
+              anc2BShareVisible,
+              anc2BLbl2Correct,
+              anc2BTitle,
+              anc2BSub,
               smd2B08CommCorrect,
               smd2B08ShareVisible,
               smd2B08Lbl2Correct,
@@ -445,6 +460,9 @@ def verify():
                 assert results['ward2CouncilCorrect'], f"Headless Chrome: Ward 2 councilmember incorrect: {results.get('ward2Sub')}"
                 assert results['ward2ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for Ward 2"
                 assert results['ward2Lbl2Correct'], f"Headless Chrome: Ward 2 label was not 'Percent of Requests in Ward'"
+                assert results['anc2BSubCorrect'], f"Headless Chrome: ANC 2B subheader incorrect: {results.get('anc2BSub')}"
+                assert results['anc2BShareVisible'], f"Headless Chrome: share tile was hidden for ANC 2B"
+                assert results['anc2BLbl2Correct'], f"Headless Chrome: ANC 2B label was not 'Percent of Citywide Requests': {results.get('anc2BLbl2')}"
                 assert results['smd2B08CommCorrect'], f"Headless Chrome: SMD 2B08 commissioner incorrect: {results.get('smd2B08Sub')}"
                 assert results['smd2B08ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for SMD 2B08"
                 assert results['smd2B08Lbl2Correct'], f"Headless Chrome: SMD 2B08 label was not 'Percent of Requests in Ward'"
