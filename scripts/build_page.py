@@ -43,25 +43,28 @@ if os.path.exists(route_areas_path):
         route_areas = json.load(f)
 
 # Synchronize polygon route features with latest route_areas data
+has_map_data_changes = False
 for feat in map_data.get('trash_routes', {}).get('features', []):
     rid = feat.get('properties', {}).get('route_area')
     if rid and rid in route_areas.get('trash_routes', {}):
         ra = route_areas['trash_routes'][rid]
-        feat['properties']['ward'] = ra.get('ward', feat['properties'].get('ward', ''))
-        feat['properties']['neighborhoods'] = ra.get('neighborhoods', feat['properties'].get('neighborhoods', ''))
-        feat['properties']['ancs'] = ra.get('ancs', feat['properties'].get('ancs', ''))
-        feat['properties']['area_desc'] = ra.get('area_desc', feat['properties'].get('area_desc', ''))
+        for prop in ['ward', 'neighborhoods', 'ancs', 'area_desc']:
+            if feat['properties'].get(prop) != ra.get(prop, ''):
+                feat['properties'][prop] = ra.get(prop, '')
+                has_map_data_changes = True
 
 for feat in map_data.get('recycle_routes', {}).get('features', []):
     rid = feat.get('properties', {}).get('route')
     if rid and rid in route_areas.get('recycle_routes', {}):
         ra = route_areas['recycle_routes'][rid]
-        feat['properties']['ward'] = ra.get('ward', feat['properties'].get('ward', ''))
-        feat['properties']['neighborhoods'] = ra.get('neighborhoods', feat['properties'].get('neighborhoods', ''))
-        feat['properties']['ancs'] = ra.get('ancs', feat['properties'].get('ancs', ''))
-        feat['properties']['area_desc'] = ra.get('area_desc', feat['properties'].get('area_desc', ''))
+        for prop in ['ward', 'neighborhoods', 'ancs', 'area_desc']:
+            if feat['properties'].get(prop) != ra.get(prop, ''):
+                feat['properties'][prop] = ra.get(prop, '')
+                has_map_data_changes = True
 
-json_str = json.dumps(map_data, separators=(',', ':'))
+if has_map_data_changes:
+    with open(map_data_path, 'w', encoding='utf-8') as f:
+        json.dump(map_data, f, separators=(',', ':'))
 
 with open(route_stats_path, 'r', encoding='utf-8') as f:
     route_stats_raw = json.load(f)
@@ -883,6 +886,42 @@ html_page = f'''<!DOCTYPE html>
         font-size: 12px;
       }}
     }}
+
+    /* Map Data Loading Overlay */
+    .map-loading-overlay {{
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-main);
+      z-index: 2000;
+      transition: opacity 0.2s ease-out;
+    }}
+
+    .map-loading-box {{
+      border: 1px solid var(--border);
+      padding: 20px 28px;
+      background: var(--bg-card);
+      border-radius: 2px;
+      text-align: center;
+      max-width: 480px;
+      box-shadow: var(--card-shadow);
+      font-family: 'IBM Plex Mono', monospace;
+    }}
+
+    .map-loading-title {{
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }}
+
+    .map-loading-sub {{
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }}
   </style>
 </head>
 <body>
@@ -943,6 +982,14 @@ html_page = f'''<!DOCTYPE html>
   <!-- Full Viewport Map Workspace -->
   <div class="map-workspace" id="map-interactive">
     <div id="map"></div>
+
+    <!-- Map Data Loading Overlay -->
+    <div id="map-loading" class="map-loading-overlay">
+      <div id="map-loading-box" class="map-loading-box">
+        <div class="map-loading-title">Loading Spatial Data...</div>
+        <div class="map-loading-sub" id="map-loading-detail">Fetching DC SMDs, Wards, and DPW Routes</div>
+      </div>
+    </div>
 
     <!-- Floating Left Control Panel -->
     <div class="control-panel" id="control-panel">
@@ -1094,7 +1141,7 @@ html_page = f'''<!DOCTYPE html>
   <script src="assets/vendor/leaflet/leaflet.js"></script>
 
   <script>
-    const MAP_DATA = {json_str};
+    let MAP_DATA = null;
     const WARD_COUNCIL = {ward_council_json};
     const ROUTE_STATS = {route_stats_json};
 
@@ -2255,6 +2302,7 @@ html_page = f'''<!DOCTYPE html>
 
     // Selection Handling
     function selectHierarchy(smdId) {{
+      if (!MAP_DATA || !smdLayer) return;
       clearRouteSelection();
       let targetLayer = null;
       smdLayer.eachLayer(l => {{
@@ -2280,6 +2328,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function selectWard(wNum) {{
+      if (!MAP_DATA) return;
       clearRouteSelection();
       selectedWardNum = wNum ? parseInt(wNum) : null;
       selectedSmdId = null;
@@ -2305,6 +2354,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function selectANC(ancId) {{
+      if (!MAP_DATA) return;
       clearRouteSelection();
       selectedAncId = ancId;
       selectedSmdId = null;
@@ -2327,6 +2377,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function resetToCitywide() {{
+      if (!MAP_DATA) return;
       clearRouteSelection();
       selectedWardNum = null;
       selectedAncId = null;
@@ -2344,6 +2395,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function updateDropdowns(wardVal, ancVal, smdVal) {{
+      if (!MAP_DATA) return;
       const wSel = document.getElementById('ward-select');
       const aSel = document.getElementById('anc-select');
       const sSel = document.getElementById('smd-select');
@@ -2404,6 +2456,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function handleSearch(query) {{
+      if (!MAP_DATA) return;
       const q = query.trim().toUpperCase();
       if (!q) return;
 
@@ -2664,6 +2717,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function setMetric(metric) {{
+      if (!MAP_DATA) return;
       currentMetric = metric;
       document.getElementById('btn-total').classList.toggle('active', metric === 'total');
       document.getElementById('btn-trash').classList.toggle('active', metric === 'trash');
@@ -2673,6 +2727,7 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     function setPeriod(period) {{
+      if (!MAP_DATA) return;
       currentPeriod = period;
       document.getElementById('btn-period-180d').classList.toggle('active', period === '180d');
       document.getElementById('btn-period-30d').classList.toggle('active', period === '30d');
@@ -3086,24 +3141,64 @@ html_page = f'''<!DOCTYPE html>
       }}
     }}
 
+    function initMapData(data) {{
+      MAP_DATA = data;
+      buildRouteSpatialIndex();
+      initSMDLayer();
+      initWardLayer();
+      initTrashRoutesLayer();
+      initRecycleRoutesLayer();
+      initTrashLinesLayer();
+      initRecycleLinesLayer();
+      ensureSvgPatterns();
+      updateLegend();
+      resetToCitywide();
+
+      const loadingEl = document.getElementById('map-loading');
+      if (loadingEl) {{
+        loadingEl.style.opacity = '0';
+        setTimeout(() => {{
+          loadingEl.style.display = 'none';
+        }}, 200);
+      }}
+
+      window.__MAP_DATA_LOADED = true;
+      window.dispatchEvent(new CustomEvent('map-data-loaded'));
+    }}
+
     // Initialization
-    buildRouteSpatialIndex();
-    initSMDLayer();
-    initWardLayer();
-    initTrashRoutesLayer();
-    initRecycleRoutesLayer();
-    initTrashLinesLayer();
-    initRecycleLinesLayer();
-    ensureSvgPatterns();
+    initMobileHandling();
+    setTheme(currentTheme);
     map.on('layeradd', function() {{
       ensureSvgPatterns();
       ensureSelectedRoutesOnTop();
     }});
     map.on('zoomend', ensureSelectedRoutesOnTop);
-    initMobileHandling();
-    setTheme(currentTheme);
-    updateLegend();
-    resetToCitywide();
+
+    fetch('data/dc_map_data_v2.json')
+      .then(res => {{
+        if (!res.ok) throw new Error(`HTTP ${{res.status}}: ${{res.statusText}}`);
+        return res.json();
+      }})
+      .then(data => {{
+        initMapData(data);
+      }})
+      .catch(err => {{
+        console.error('Failed to load map data:', err);
+        const loadingBox = document.getElementById('map-loading-box');
+        if (loadingBox) {{
+          const isFile = window.location.protocol === 'file:';
+          loadingBox.innerHTML = `
+            <div style="font-weight: 700; font-size: 14px; margin-bottom: 8px; color: var(--accent-trash);">Unable to Load Map Data</div>
+            <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-bottom: 12px;">
+              ${{isFile
+                ? 'Browsers restrict asynchronous fetch requests over direct <code>file://</code> URLs. To run locally, start a local server:<br><br><code style="background: var(--bg-surface); padding: 3px 6px; border: 1px solid var(--border);">python3 -m http.server 8000</code><br><br>then open <code style="background: var(--bg-surface); padding: 3px 6px; border: 1px solid var(--border);">http://localhost:8000/map.html</code>.'
+                : 'Failed to fetch <code>data/dc_map_data_v2.json</code> (' + err.message + ').'}}
+            </div>
+            ${{isFile ? '<div style="font-size: 11px; color: var(--text-dim);">Alternatively, view the live hosted map on <a href="https://zacheadams.github.io/dc-missed-collection-analysis/map.html" target="_blank" rel="noopener" style="color: var(--accent-combined); text-decoration: underline;">GitHub Pages</a>.</div>' : ''}}
+          `;
+        }}
+      }});
 
   </script>
 </body>

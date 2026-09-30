@@ -18,14 +18,13 @@ This resource provides an operational proof of concept for the DC Department of 
 git clone https://github.com/zacheadams/dc-missed-collection-analysis.git
 cd dc-missed-collection-analysis
 
-# Open the project hub
-open index.html
+# Start a local web server (enables asynchronous map data loading)
+python3 -m http.server 8000
 
-# Open the dedicated interactive map
-open map.html
-
-# Open the unified operational report
-open report.html
+# Open applications in your browser:
+# Project Hub:       http://localhost:8000/index.html
+# Interactive Map:   http://localhost:8000/map.html
+# Operational Report: http://localhost:8000/report.html
 ```
 
 ---
