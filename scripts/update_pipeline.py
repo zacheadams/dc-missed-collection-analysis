@@ -2,10 +2,11 @@
 """
 Master Data Refresh & Build Pipeline for Washington, DC Missed Collection Analysis.
 Executes end-to-end data ingestion, spatial calculations, metric aggregations,
-and HTML compilation for all three applications:
+and HTML compilation for all four applications:
 - index.html (Central Project Hub)
 - map.html (Dedicated Interactive Map Explorer)
 - report.html (Unified Operational Report)
+- tables.html (Tables and Graphs)
 Strictly adheres to:
 - No emojis across all logs and outputs
 - Zero external pip dependencies
@@ -32,7 +33,7 @@ def run_step(step_num, total_steps, title, func):
 
 def main():
     t_start = time.time()
-    total_steps = 9
+    total_steps = 10
     print("=" * 70)
     print(f"DC Missed Collection Pipeline -- Started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 70)
@@ -72,25 +73,33 @@ def main():
     from update_map_data import update_map_data
     run_step(6, total_steps, "Updating SMD & Ward Map Metrics and Bundling Map Data", update_map_data)
 
-    # Step 7: Build report.html
+    # Step 7: Build tables.html
     run_step(
         7,
+        total_steps,
+        "Compiling Tables and Graphs (tables.html)",
+        lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_tables_page.py')])
+    )
+
+    # Step 8: Build report.html
+    run_step(
+        8,
         total_steps,
         "Compiling Unified Operational Report (report.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_report_page.py')])
     )
 
-    # Step 8: Build map.html
+    # Step 9: Build map.html
     run_step(
-        8,
+        9,
         total_steps,
         "Compiling Dedicated Interactive Map (map.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_page.py')])
     )
 
-    # Step 9: Build index.html
+    # Step 10: Build index.html
     run_step(
-        9,
+        10,
         total_steps,
         "Compiling Central Project Hub (index.html)",
         lambda: subprocess.check_call([sys.executable, os.path.join(BASE_DIR, 'scripts', 'build_index_page.py')])

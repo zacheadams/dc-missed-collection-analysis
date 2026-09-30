@@ -480,6 +480,7 @@ html_content = f"""<!DOCTYPE html>
       <a href="index.html" class="nav-link active">Index</a>
       <a href="map.html" class="nav-link">The Map</a>
       <a href="report.html" class="nav-link">The Report</a>
+      <a href="tables.html" class="nav-link">Tables and Graphs</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="window.print()" class="btn-action">Export (PDF)</button>
     </div>
@@ -494,6 +495,7 @@ html_content = f"""<!DOCTYPE html>
       <div class="hero-actions">
         <a href="map.html" class="btn-hero-secondary">The Map</a>
         <a href="report.html" class="btn-hero-secondary">The Report</a>
+        <a href="tables.html" class="btn-hero-secondary">Tables and Graphs</a>
       </div>
     </section>
 
