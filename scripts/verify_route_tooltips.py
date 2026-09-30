@@ -309,7 +309,7 @@ def verify():
             selectHierarchy('2B08');
             const smd2B08Title = document.getElementById('insp-title').innerText;
             const smd2B08Sub = document.getElementById('insp-sub').innerText;
-            const smd2B08CommCorrect = smd2B08Sub === 'Advisory Neighborhood Commissioner: Zach Adams';
+            const smd2B08CommCorrect = smd2B08Sub === 'Commissioner: Zach Adams';
             const smd2B08ShareVisible = document.getElementById('insp-tile-share').style.display !== 'none';
             const smd2B08Lbl2 = document.getElementById('insp-lbl-2').textContent;
             const smd2B08Lbl2Correct = smd2B08Lbl2 === 'Percent of Requests in Ward';
