@@ -327,6 +327,16 @@ def verify():
             const smdInspectorNoRoutes = rBoxDisplay === 'none' && !rBoxHtml.includes('Assigned DPW Routes');
             const smdInspectorPassed = smdTitle === 'SMD 1A01' && smdInspectorNoAncWard && smdInspectorNoRoutes && smdSub.includes('Jaspal Bhatia');
 
+            // Test vacant SMD inspector: selecting SMD 7E07
+            selectHierarchy('7E07');
+            const smdVacantTitle = document.getElementById('insp-title').innerText;
+            const smdVacantSubText = document.getElementById('insp-sub').innerText;
+            const smdVacantSubHtml = document.getElementById('insp-sub').innerHTML;
+            const smdVacantYellow = smdVacantSubHtml.includes('kw-vacant') && smdVacantSubHtml.includes('Vacant');
+            const smdVacantLink = smdVacantSubHtml.includes('https://51st.news/what-are-washington-dc-advisory-neighborhood-commissions-anc/') &&
+                                  smdVacantSubText.includes('(run for ANC!)');
+            const smdVacantPassed = smdVacantTitle === 'SMD 7E07' && smdVacantYellow && smdVacantLink;
+
             resetToDefault();
             const resetShareHidden = document.getElementById('insp-tile-share').style.display === 'none';
             const resetSubClean = document.getElementById('insp-sub').innerText === 'Citywide Performance Summary';
@@ -347,6 +357,9 @@ def verify():
               rspSelectedCount,
               overlapPrecedencePassed,
               smdInspectorPassed,
+              smdVacantPassed,
+              smdVacantYellow,
+              smdVacantLink,
               citywideSubClean,
               citywideLbl1Correct,
               citywideShareHidden,
@@ -425,6 +438,7 @@ def verify():
                 assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
                 assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
                 assert results['smdInspectorPassed'], f"Headless Chrome: SMD inspector failed (sub: {results.get('smdSub')}, routeBox: {results.get('smdInspectorNoRoutes')}): {results}"
+                assert results['smdVacantPassed'], f"Headless Chrome: Vacant SMD inspector failed (yellow: {results.get('smdVacantYellow')}, link: {results.get('smdVacantLink')})"
                 assert results['citywideSubClean'], f"Headless Chrome: Citywide header contained past days window"
                 assert results['citywideLbl1Correct'], f"Headless Chrome: Combined Requests label not stylized properly"
                 assert results['citywideShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden when Citywide"

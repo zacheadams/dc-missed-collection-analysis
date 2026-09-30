@@ -37,6 +37,7 @@
       --trash-color: #dc2626;
       --recycle-color: #16a34a;
       --combined-color: #2563eb;
+      --warning-color: #d97706;
       --ward-boundary: #7c3aed;
       --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
       --badge-bg: rgba(37, 99, 235, 0.08);
@@ -60,6 +61,7 @@
       --trash-color: #ef4444;
       --recycle-color: #22c55e;
       --combined-color: #38bdf8;
+      --warning-color: #f59e0b;
       --ward-boundary: #c084fc;
       --card-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
       --badge-bg: rgba(56, 189, 248, 0.12);
@@ -104,6 +106,23 @@
     .kw-combined {
       color: var(--combined-color);
       font-weight: 700;
+    }
+
+    .kw-vacant {
+      color: var(--warning-color);
+      font-weight: 700;
+    }
+
+    .vacant-link {
+      color: var(--accent);
+      text-decoration: underline;
+      margin-left: 4px;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .vacant-link:hover {
+      color: var(--accent-hover);
     }
 
     /* Top Navigation Bar */
@@ -2456,7 +2475,11 @@
       const rep = formatRepName(p.rep_name || (MAP_DATA.smds.features.find(f => f.properties.smd_id === p.smd_id)?.properties?.rep_name) || '');
 
       document.getElementById('insp-title').innerText = `SMD ${p.smd_id}`;
-      document.getElementById('insp-sub').innerText = `Commissioner: ${rep || 'Vacant'}`;
+      if (!rep || rep.toLowerCase() === 'vacant') {
+        document.getElementById('insp-sub').innerHTML = `Commissioner: <span class="kw-vacant">Vacant</span> <a href="https://51st.news/what-are-washington-dc-advisory-neighborhood-commissions-anc/" target="_blank" rel="noopener" class="vacant-link" onclick="event.stopPropagation()">(run for ANC!)</a>`;
+      } else {
+        document.getElementById('insp-sub').innerText = `Commissioner: ${rep}`;
+      }
       document.getElementById('insp-lbl-1').innerHTML = '<span class="kw-combined">Combined</span> Requests';
       document.getElementById('insp-stat-total').innerText = total.toLocaleString();
 
