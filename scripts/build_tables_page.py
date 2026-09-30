@@ -762,13 +762,12 @@ html_content += f"""
             <tr>
               <th data-col="0">Ward</th>
               <th data-col="1">ANC</th>
-              <th data-col="2" style="text-align: right;">SMD Count</th>
-              <th data-col="3" style="text-align: right;">Total Requests</th>
-              <th data-col="4" style="text-align: right;" class="kw-trash">Trash</th>
-              <th data-col="5" style="text-align: right;" class="kw-recycle">Recycling</th>
-              <th data-col="6" style="text-align: right;">Unique Addrs</th>
-              <th data-col="7" style="text-align: right;">Repeat Addrs</th>
-              <th data-col="8" style="text-align: right;">Repeat Rate</th>
+              <th data-col="2" style="text-align: right;">Total Requests</th>
+              <th data-col="3" style="text-align: right;" class="kw-trash">Trash</th>
+              <th data-col="4" style="text-align: right;" class="kw-recycle">Recycling</th>
+              <th data-col="5" style="text-align: right;">Unique Addrs</th>
+              <th data-col="6" style="text-align: right;">Repeat Addrs</th>
+              <th data-col="7" style="text-align: right;">Repeat Rate</th>
             </tr>
           </thead>
           <tbody id="anc-table-body">
@@ -780,7 +779,6 @@ for anc in ancs_list:
             <tr data-anc="{anc['anc_id']}" data-ward="{anc['ward']}">
               <td data-sort="{anc['ward']}">Ward {anc['ward']}</td>
               <td data-sort="{anc['anc_id']}" data-type="anc"><strong>ANC {anc['anc_id']}</strong></td>
-              <td data-sort="{anc['smd_count']}" style="text-align: right;" class="font-num">{anc['smd_count']}</td>
               <td data-sort="{anc['total']}" style="text-align: right;" class="kw-combined font-num"><strong>{anc['total']:,}</strong></td>
               <td data-sort="{anc['trash']}" style="text-align: right;" class="kw-trash font-num">{anc['trash']:,}</td>
               <td data-sort="{anc['recycling']}" style="text-align: right;" class="kw-recycle font-num">{anc['recycling']:,}</td>
