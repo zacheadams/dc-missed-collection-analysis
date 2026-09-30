@@ -746,7 +746,7 @@ html_content += f"""
           <div class="toolbar-filters">
             <input type="text" id="anc-search" class="input-search" placeholder="Search ANC (e.g. 5E, 7B)..." oninput="filterAncTable()">
             <select id="anc-ward-filter" class="select-filter" onchange="filterAncTable()">
-              <option value="">All Wards (1 to 8)</option>
+              <option value="">All Wards</option>
               <option value="1">Ward 1</option>
               <option value="2">Ward 2</option>
               <option value="3">Ward 3</option>
@@ -857,7 +857,7 @@ html_content += f"""
               <option value="Friday">Friday</option>
             </select>
             <select id="route-ward-filter" class="select-filter" onchange="filterRouteTable()">
-              <option value="">All Primary Wards</option>
+              <option value="">All Wards</option>
               <option value="Ward 1">Ward 1</option>
               <option value="Ward 2">Ward 2</option>
               <option value="Ward 3">Ward 3</option>
