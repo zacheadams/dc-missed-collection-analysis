@@ -251,29 +251,6 @@
       color: var(--accent-hover);
     }
 
-    .report-img-zoomable {
-      max-width: 480px;
-      width: 100%;
-      height: auto;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      display: block;
-      cursor: zoom-in;
-      transition: max-width 0.25s ease;
-    }
-
-    .report-img-zoomable.is-enlarged {
-      max-width: 100%;
-      cursor: zoom-out;
-    }
-
-    .report-img-caption {
-      font-size: 11px;
-      color: var(--text-dim);
-      margin-top: 6px;
-      user-select: none;
-    }
-
     /* Footer */
     .site-footer {
       text-align: center;
@@ -311,9 +288,6 @@
         border-color: #cccccc !important;
         color: #000000 !important;
       }
-      .report-img-zoomable {
-        max-width: 400px !important;
-      }
     }
   </style>
 </head>
@@ -350,11 +324,6 @@
 
       <p>In early September 2026, the DC Department of Public Works (DPW) launched a <a href="https://dpw.dc.gov/collection-status-map" target="_blank" rel="noopener">Status Collection Map</a>, so that residents serviced by DPW could see when they could expect their <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> to be picked up. Like the actual solid waste service, as of the end of September, that website was still not working as intended.</p>
 
-      <div style="margin: 20px 0;">
-        <img id="status-map-img" src="assets/dpw-status-map-error.png" onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/9d52cd97-cd17-40c9-a0fa-72882378bbee'" alt="DPW Status Collection Map Error" class="report-img-zoomable" onclick="toggleImageZoom(this)" tabindex="0" role="button" aria-label="DPW Status Collection Map Error (click to enlarge or contract)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleImageZoom(this)" title="Click to enlarge or contract" />
-        <div class="report-img-caption">(Click image to enlarge / contract)</div>
-      </div>
-
       <p>I happen to moonlight as an <a href="https://en.wikipedia.org/wiki/Advisory_Neighborhood_Commission" target="_blank" rel="noopener">Advisory Neighborhood Commissioner</a> (ANC), and as part of that, I get some visibility into what happens when resident interactions with city services go sideways. I've seen numerous neighbors' complaints to DPW in that capacity, when their solid waste pickups get missed, and their subsequent begs for help (which I often join in to prod for updates and visibility) are either slowly or insufficiently addressed. Inspired by some of <a href="https://www.axios.com/local/washington-dc/2026/07/31/311-app-alternatives-josh-jacobson-civic-tech-government-tools" target="_blank" rel="noopener">fellow ANC Josh Jacobson’s work</a> creating dashboards to supplant inadequate trackers for kiddie pools and rat treatment, I was motivated to make something better myself. I have lately been a little GIS-curious after being out of that game for about a decade now, and I recently got access to the paid version of Google Gemini, courtesy of a Google Drive family plan upgrade.</p>
 
       <p>In short, people deserve a functioning local government with services they’re paying for through tax revenue. If they are not receiving those services, they deserve to know why, with a plan to rectify the problem.</p>
@@ -382,7 +351,7 @@
 
       <p>DPW services <a href="https://washingtonian.com/2023/04/21/dcs-new-curbside-composting-program-everything-you-need-to-know/" target="_blank" rel="noopener">over 100,000 households</a> (~105k at last count). Of them, ~6,000 requests missed <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> pickup service in the last 6 months, a total of ~10,000 times (~7,000 <span class="kw-trash">trash</span> and ~3,000 <span class="kw-recycle">recycling</span>). ~1 in 4 households who reported a missed collection in the last 6 months reported another. Many reported numerous times. Wards 5, 7, and especially 4, had the most tickets filed. All Wards, by law, have about the same number of people, though they don’t have the same number of DPW-served addresses. Ward 1 has the highest rate of misses per service address count over the time period. Ward 3 the lowest (~1/5th the rate of Ward 1). Ward 4 has the most service addresses and Ward 2 has the fewest.</p>
 
-      <p>Even with Ward 2’s vanishingly fewe service addresses, ANC 2B appears to have the highest repeat request rate of any ANC for DPW missed collection tickets. SMD 2B08 has the highest repeat request rate within that ANC. You can see how this landed on my radar, and it’s both reassuring and frustrating to see a problem validated by the data.</p>
+      <p>Even with Ward 2’s vanishingly few service addresses, ANC 2B appears to have the highest repeat request rate of any ANC for DPW missed collection tickets. SMD 2B08 has the highest repeat request rate within that ANC. You can see how this landed on my radar, and it’s both reassuring and frustrating to see a problem validated by the data.</p>
 
       <h3>Routing Takeaways</h3>
 
@@ -448,10 +417,6 @@
       localStorage.setItem('dc_map_theme', theme);
       const btn = document.getElementById('theme-toggle-btn');
       if (btn) btn.innerText = theme === 'dark' ? 'Theme: Dark' : 'Theme: Light';
-    }
-
-    function toggleImageZoom(img) {
-      img.classList.toggle('is-enlarged');
     }
   </script>
 </body>
