@@ -1164,17 +1164,32 @@ html_content += f"""
             bodyFont: {{ family: 'IBM Plex Mono', size: 11 }},
             callbacks: {{
               title: function(items) {{
-                if (!items.length) return '';
-                const pt = items[0].raw;
-                return `Route ${{pt.route_id}} (${{pt.stream}})`;
+                if (!items || !items.length) return '';
+                if (items.length === 1) {{
+                  const pt = items[0].raw;
+                  return `Route ${{pt.route_id}} (${{pt.stream}})`;
+                }}
+                return `${{items.length}} Overlapping Routes`;
               }},
               label: function(context) {{
                 const pt = context.raw;
-                return [
-                  `Total Requests: ${{pt.x.toLocaleString()}}`,
-                  `Service Area: ${{pt.y}} sq mi`,
-                  `Density: ${{pt.density.toLocaleString()}} req/sq mi`
-                ];
+                const totalItems = context.chart.tooltip?.dataPoints?.length || 1;
+                const lines = [];
+                if (totalItems > 1) {{
+                  lines.push(`Route ${{pt.route_id}} (${{pt.stream}}):`);
+                  lines.push(`  Total Requests: ${{pt.x.toLocaleString()}}`);
+                  lines.push(`  Service Area: ${{pt.y}} sq mi`);
+                  lines.push(`  Density: ${{pt.density.toLocaleString()}} req/sq mi`);
+                }} else {{
+                  lines.push(`Total Requests: ${{pt.x.toLocaleString()}}`);
+                  lines.push(`Service Area: ${{pt.y}} sq mi`);
+                  lines.push(`Density: ${{pt.density.toLocaleString()}} req/sq mi`);
+                }}
+                return lines;
+              }},
+              afterLabel: function(context) {{
+                const totalItems = context.chart.tooltip?.dataPoints?.length || 1;
+                return totalItems > 1 ? ' ' : '';
               }}
             }}
           }}
