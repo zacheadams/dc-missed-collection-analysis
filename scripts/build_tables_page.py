@@ -1079,7 +1079,7 @@ html_content += f"""
     }});
 
     // ----------------------------------------------------
-    // Chart 3: Day of Week Collection Volumes (Grouped Bar)
+    // Chart 3: Day of Week Collection Volumes (Stacked Bar)
     // ----------------------------------------------------
     const ctxDayVol = document.getElementById('chartDayVol').getContext('2d');
     const chartDayVol = new Chart(ctxDayVol, {{
@@ -1112,10 +1112,12 @@ html_content += f"""
         }},
         scales: {{
           x: {{
+            stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
+            stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
