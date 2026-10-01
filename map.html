@@ -813,9 +813,11 @@
       /* ── Leaflet attribution & controls at bottom right on mobile ── */
       .leaflet-bottom.leaflet-right {
         display: block;
-        bottom: 12px;
-        right: 8px;
+        position: fixed !important;
+        bottom: 20px;
+        right: 12px;
         left: auto;
+        top: auto;
         z-index: 400; /* Stays below drawer panels (650 and 700) */
         pointer-events: none;
         transition: opacity 0.2s ease;
@@ -3501,6 +3503,7 @@
         loadingEl.style.opacity = '0';
         setTimeout(() => {
           loadingEl.style.display = 'none';
+          map.invalidateSize();
         }, 200);
       }
 
