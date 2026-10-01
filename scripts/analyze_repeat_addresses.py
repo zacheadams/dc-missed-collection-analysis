@@ -11,9 +11,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
 from collections import defaultdict
-from datetime import datetime
-
-import sys
+from datetime import datetime, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.join(BASE_DIR, "scripts"))
@@ -30,22 +28,6 @@ def extract_polys(geom):
             res.extend(poly)
         return res
     return []
-
-def point_in_ring(x, y, ring):
-    n = len(ring)
-    inside = False
-    p1x, p1y = ring[0]
-    for i in range(n + 1):
-        p2x, p2y = ring[i % n]
-        if y > min(p1y, p2y):
-            if y <= max(p1y, p2y):
-                if x <= max(p1x, p2x):
-                    if p1y != p2y:
-                        xinters = (y - p1y) * (p2x - p1x) / (p2y - p1y) + p1x
-                    if p1x == p2x or x <= xinters:
-                        inside = not inside
-        p1x, p1y = p2x, p2y
-    return inside
 
 def analyze_repeat_addresses():
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
@@ -97,7 +79,7 @@ def analyze_repeat_addresses():
             unmatched += 1
             continue
 
-        dt = datetime.fromtimestamp(adddate_ms / 1000.0)
+        dt = datetime.fromtimestamp(adddate_ms / 1000.0, tz=timezone.utc)
         date_str = dt.strftime("%Y-%m-%d")
 
         found = False
@@ -105,7 +87,7 @@ def analyze_repeat_addresses():
             b = smd["bbox"]
             if b[0] <= lon <= b[2] and b[1] <= lat <= b[3]:
                 for ring in smd["rings"]:
-                    if point_in_ring(lon, lat, ring):
+                    if is_point_in_ring(lon, lat, ring):
                         smd["total"] += 1
                         smd["addr_dates"][addr].add(date_str)
                         if code == "S0441":

@@ -21,7 +21,13 @@ def fetch_with_retry(url, headers, max_retries=3):
     for attempt in range(max_retries):
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
-                return json.load(resp)
+                data = json.load(resp)
+                if "error" in data:
+                    err = data["error"]
+                    err_msg = err.get("message", "Unknown ArcGIS FeatureServer error")
+                    err_details = err.get("details", [])
+                    raise RuntimeError(f"ArcGIS FeatureServer error (code {err.get('code')}): {err_msg} {err_details}")
+                return data
         except Exception as e:
             if attempt == max_retries - 1:
                 raise e
