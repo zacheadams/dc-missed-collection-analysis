@@ -588,9 +588,6 @@
     .mobile-fab {
       display: none;
     }
-    #mobile-attribution {
-      display: none;
-    }
     .drawer-backdrop {
       display: none;
     }
@@ -808,43 +805,52 @@
       }
 
       body.drawer-active .mobile-fab,
-      body.drawer-active #mobile-attribution {
+      body.drawer-active .leaflet-bottom.leaflet-right {
         opacity: 0;
         pointer-events: none;
       }
 
-      /* Leaflet attribution hidden on mobile — replaced by #mobile-attribution */
+      /* ── Leaflet attribution & controls at bottom right on mobile ── */
       .leaflet-bottom.leaflet-right {
-        display: none;
+        display: block;
+        bottom: 12px;
+        right: 8px;
+        left: auto;
+        z-index: 400; /* Stays below drawer panels (650 and 700) */
+        pointer-events: none;
+        transition: opacity 0.2s ease;
       }
 
-      /* ── Custom mobile attribution beside the Layers FAB ── */
-      #mobile-attribution {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        position: fixed;
-        bottom: 20px;
-        left: 120px;
-        z-index: 800;
-        min-height: 44px;
-        padding: 4px 10px;
-        background: var(--bg-panel);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid var(--border);
-        border-radius: 2px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
-        font-size: 9px;
-        font-family: var(--font-mono);
-        color: var(--text-dim);
-        line-height: 1.5;
+      .leaflet-bottom.leaflet-right .leaflet-control {
+        margin: 0 0 6px 0 !important;
         pointer-events: auto;
       }
 
-      #mobile-attribution a {
-        color: var(--accent);
-        text-decoration: none;
+      .leaflet-control-attribution {
+        background: var(--bg-panel) !important;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: var(--text-dim) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 2px !important;
+        padding: 3px 7px !important;
+        font-size: 9px !important;
+        font-family: var(--font-mono) !important;
+        line-height: 1.35 !important;
+        margin: 0 !important;
+        box-shadow: var(--card-shadow) !important;
+        max-width: min(250px, calc(100vw - 120px)) !important;
+        text-align: right;
+        pointer-events: auto;
+      }
+
+      .leaflet-control-attribution a {
+        color: var(--accent) !important;
+        text-decoration: none !important;
+      }
+
+      .leaflet-control-attribution a:hover {
+        text-decoration: underline !important;
       }
 
       /* ── Touch target sizing ───────────────────────── */
@@ -969,12 +975,6 @@
             aria-label="Open map layers">
       ☰ Layers
     </button>
-
-    <!-- Mobile attribution: shown beside Layers FAB (hidden on desktop via CSS) -->
-    <div id="mobile-attribution" aria-label="Map attribution">
-      Tiles: <a href="https://stamen.com" target="_blank" rel="noopener">Stamen Design</a> (CC BY 3.0)<br>
-      Data: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> (ODbL)
-    </div>
 
     <!-- Backdrop: tap to dismiss any open drawer -->
     <div class="drawer-backdrop" id="drawer-backdrop"
