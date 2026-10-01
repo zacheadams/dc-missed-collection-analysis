@@ -483,6 +483,49 @@ def generate_route_lines():
     rec_size = os.path.getsize(out_rec) / (1024 * 1024)
     print(f"Generated Recycling Routes (line): {len(rec_fc['features'])} routes -> {out_rec} ({rec_size:.2f} MB)")
 
+    # Synchronize line areas into route_areas.json
+    if os.path.exists(areas_path):
+        try:
+            with open(areas_path, 'r', encoding='utf-8') as f:
+                cur_areas = json.load(f)
+            t_lines_entry = {}
+            for feat in trash_fc.get('features', []):
+                p = feat.get('properties', {})
+                rid = p.get('route')
+                if rid:
+                    raw_a = [x.strip() for x in p.get('ancs', '').replace('ANC', '').split(',') if x.strip()]
+                    sorted_a = 'ANC ' + ', '.join(sorted(raw_a, key=anc_sort_key)) if raw_a else ''
+                    t_lines_entry[rid] = {
+                        'ward': p.get('ward', ''),
+                        'neighborhoods': p.get('neighborhoods', ''),
+                        'ancs': sorted_a,
+                        'area_desc': p.get('area_desc', ''),
+                        'area_sq_mi': p.get('area_sq_mi', 0.0)
+                    }
+            r_lines_entry = {}
+            for feat in rec_fc.get('features', []):
+                p = feat.get('properties', {})
+                rid = p.get('route')
+                if rid:
+                    raw_a = [x.strip() for x in p.get('ancs', '').replace('ANC', '').split(',') if x.strip()]
+                    sorted_a = 'ANC ' + ', '.join(sorted(raw_a, key=anc_sort_key)) if raw_a else ''
+                    r_lines_entry[rid] = {
+                        'ward': p.get('ward', ''),
+                        'neighborhoods': p.get('neighborhoods', ''),
+                        'ancs': sorted_a,
+                        'area_desc': p.get('area_desc', ''),
+                        'area_sq_mi': p.get('area_sq_mi', 0.0)
+                    }
+            cur_areas['trash_lines'] = t_lines_entry
+            cur_areas['recycle_lines'] = r_lines_entry
+            cur_areas.setdefault('trash', {}).update(t_lines_entry)
+            cur_areas.setdefault('recycle', {}).update(r_lines_entry)
+            with open(areas_path, 'w', encoding='utf-8') as f:
+                json.dump(cur_areas, f, indent=2)
+            print(f"Synchronized route line areas into {areas_path}")
+        except Exception as e:
+            print(f"Warning: could not sync route_areas.json from route lines: {e}")
+
     print(f"Completed route line generation in {time.time() - t0:.2f}s")
     print("=" * 70)
 

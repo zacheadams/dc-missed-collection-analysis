@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_poly, get_poly_rings_list, get_bbox
 import json
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -137,14 +137,16 @@ def compute_route_stats():
         days_count = defaultdict(int)
 
         for attrs in req_list:
-            addr = attrs.get('STREETADDRESS') or attrs.get('MARADDRESSREPOSITORYID') or 'UNKNOWN'
+            x_coord = attrs.get('LONGITUDE', attrs.get('x'))
+            y_coord = attrs.get('LATITUDE', attrs.get('y'))
+            addr = attrs.get('STREETADDRESS') or attrs.get('MARADDRESSREPOSITORYID') or f"COORD_{y_coord}_{x_coord}"
             addr = str(addr).strip().upper()
             addrs[addr] += 1
             add_date = attrs.get('ADDDATE')
             if add_date:
                 try:
                     if isinstance(add_date, (int, float)):
-                        dt = datetime.fromtimestamp(add_date / 1000.0)
+                        dt = datetime.fromtimestamp(add_date / 1000.0, tz=timezone.utc)
                     else:
                         dt = datetime.fromisoformat(str(add_date).replace('Z', '+00:00'))
                     days_count[dt.strftime('%A')] += 1

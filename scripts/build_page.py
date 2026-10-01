@@ -184,7 +184,7 @@ for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
         if rid.startswith('R') and ('recycle_' + str(rid[1:])) not in route_stats_lookup:
             route_stats_lookup['recycle_' + str(rid[1:])] = rec_entry
 
-route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':'))
+route_stats_json = json.dumps(route_stats_lookup, separators=(',', ':')).replace('</script>', '<\\/script>').replace('<!--', '<\\!--')
 
 ward_council = {
     1: "Brianne Nadeau",
@@ -196,7 +196,17 @@ ward_council = {
     7: "Wendell Felder",
     8: "Trayon White, Sr."
 }
-ward_council_json = json.dumps(ward_council)
+config_path = os.path.join(BASE_DIR, 'data', 'config.json')
+if os.path.exists(config_path):
+    try:
+        with open(config_path, 'r', encoding='utf-8') as f:
+            cfg = json.load(f)
+            if 'ward_councilmembers' in cfg:
+                for k, v in cfg['ward_councilmembers'].items():
+                    ward_council[int(k)] = v
+    except Exception:
+        pass
+ward_council_json = json.dumps(ward_council).replace('</script>', '<\\/script>')
 
 
 html_page = f'''<!DOCTYPE html>
@@ -1533,6 +1543,16 @@ html_page = f'''<!DOCTYPE html>
       return cleanA.localeCompare(cleanB, undefined, {{ numeric: true }});
     }}
 
+    function escapeHtml(str) {{
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }}
+
     function formatRepName(name) {{
       if (!name) return '';
       const trimmed = name.trim();
@@ -2509,12 +2529,13 @@ html_page = f'''<!DOCTYPE html>
         .filter(f => f.properties.anc_id === ancVal)
         .sort((a, b) => compareSmd(a.properties.smd_id, b.properties.smd_id));
 
+      const safeAncVal = escapeHtml(ancVal);
       sSel.disabled = false;
-      sSel.innerHTML = `<option value="all">All SMDs in ANC ${{ancVal}}</option>` +
+      sSel.innerHTML = `<option value="all">All SMDs in ANC ${{safeAncVal}}</option>` +
         smdFeaturesInAnc.map(f => {{
-          const s = f.properties.smd_id;
+          const s = escapeHtml(f.properties.smd_id);
           const rep = formatRepName(f.properties.rep_name);
-          const repLabel = rep ? ` • ${{rep}}` : '';
+          const repLabel = rep ? ` • ${{escapeHtml(rep)}}` : '';
           return `<option value="${{s}}">SMD ${{s}}${{repLabel}}</option>`;
         }}).join('');
       sSel.value = smdVal || 'all';
@@ -2624,10 +2645,12 @@ html_page = f'''<!DOCTYPE html>
         html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedAncId ? 'active' : ''}}" onclick="selectWard(${{selectedWardNum}})">Ward ${{selectedWardNum}}</span>`;
       }}
       if (selectedAncId) {{
-        html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedSmdId ? 'active' : ''}}" onclick="selectANC('${{selectedAncId}}')">ANC ${{selectedAncId}}</span>`;
+        const safeAnc = escapeHtml(selectedAncId);
+        html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedSmdId ? 'active' : ''}}" onclick="selectANC('${{safeAnc}}')">ANC ${{safeAnc}}</span>`;
       }}
       if (selectedSmdId) {{
-        html += ` &rsaquo; <span class="breadcrumb-item active">SMD ${{selectedSmdId}}</span>`;
+        const safeSmd = escapeHtml(selectedSmdId);
+        html += ` &rsaquo; <span class="breadcrumb-item active">SMD ${{safeSmd}}</span>`;
       }}
       bar.innerHTML = html;
     }}
@@ -3231,53 +3254,63 @@ html_page = f'''<!DOCTYPE html>
     }}
 
     async function exportMapPdf() {{
-      const meta = getExportMetadata();
-      const mapEl = document.getElementById('map-interactive');
+      try {{
+        const meta = getExportMetadata();
+        const mapEl = document.getElementById('map-interactive');
 
-      const canvas = await html2canvas(mapEl, {{
-        useCORS: true,
-        allowTaint: true,
-        scale: 2.0
-      }});
+        const canvas = await html2canvas(mapEl, {{
+          useCORS: true,
+          allowTaint: true,
+          scale: 2.0
+        }});
 
-      const {{ jsPDF }} = window.jspdf;
-      // US Letter Landscape: 11" x 8.5"
-      const doc = new jsPDF({{ orientation: 'landscape', format: 'letter', unit: 'in' }});
-      const imgData = canvas.toDataURL('image/png');
+        const {{ jsPDF }} = window.jspdf;
+        // US Letter Landscape: 11" x 8.5"
+        const doc = new jsPDF({{ orientation: 'landscape', format: 'letter', unit: 'in' }});
+        const imgData = canvas.toDataURL('image/png');
 
-      // Title & Context Header
-      doc.setFont('Courier', 'bold');
-      doc.setFontSize(15);
-      doc.setTextColor(15, 23, 42);
-      doc.text(meta.title, 0.5, 0.6);
+        // Title & Context Header
+        doc.setFont('Courier', 'bold');
+        doc.setFontSize(15);
+        doc.setTextColor(15, 23, 42);
+        doc.text(meta.title, 0.5, 0.6);
 
-      doc.setFont('Courier', 'normal');
-      doc.setFontSize(10);
-      doc.setTextColor(51, 65, 85);
-      doc.text(meta.subtitle, 0.5, 0.82);
+        doc.setFont('Courier', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(51, 65, 85);
+        doc.text(meta.subtitle, 0.5, 0.82);
 
-      doc.setFontSize(9);
-      doc.setTextColor(100, 116, 139);
-      doc.text(meta.metrics, 0.5, 1.02);
-      doc.text(`Generated: ${{new Date().toLocaleDateString()}} • Stamen Toner Basemap`, 10.5, 1.02, {{ align: 'right' }});
+        doc.setFontSize(9);
+        doc.setTextColor(100, 116, 139);
+        doc.text(meta.metrics, 0.5, 1.02);
+        doc.text(`Generated: ${{new Date().toLocaleDateString()}} • Stamen Toner Basemap`, 10.5, 1.02, {{ align: 'right' }});
 
-      doc.addImage(imgData, 'PNG', 0.5, 1.15, 10.0, 6.75);
-      doc.save(`${{meta.filename}}.pdf`);
+        doc.addImage(imgData, 'PNG', 0.5, 1.15, 10.0, 6.75);
+        doc.save(`${{meta.filename}}.pdf`);
+      }} catch (err) {{
+        console.error('Failed to export map PDF:', err);
+        alert('Map PDF export failed: ' + (err.message || 'canvas render error'));
+      }}
     }}
 
     async function exportMapPng() {{
-      const meta = getExportMetadata();
-      const mapEl = document.getElementById('map-interactive');
-      const canvas = await html2canvas(mapEl, {{
-        useCORS: true,
-        allowTaint: true,
-        scale: 2.0
-      }});
-      const url = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${{meta.filename}}.png`;
-      a.click();
+      try {{
+        const meta = getExportMetadata();
+        const mapEl = document.getElementById('map-interactive');
+        const canvas = await html2canvas(mapEl, {{
+          useCORS: true,
+          allowTaint: true,
+          scale: 2.0
+        }});
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${{meta.filename}}.png`;
+        a.click();
+      }} catch (err) {{
+        console.error('Failed to export map PNG:', err);
+        alert('Map PNG export failed: ' + (err.message || 'canvas render error'));
+      }}
     }}
 
     function collapseMobileControlPanel() {{

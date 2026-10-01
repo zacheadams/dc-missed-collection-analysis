@@ -11,7 +11,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,6 +25,17 @@ WARD_COUNCILMEMBERS = {
     7: "Wendell Felder",
     8: "Trayon White, Sr."
 }
+
+config_path = os.path.join(BASE_DIR, "data", "config.json")
+if os.path.exists(config_path):
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            cfg = json.load(f)
+            if "ward_councilmembers" in cfg:
+                for k, v in cfg["ward_councilmembers"].items():
+                    WARD_COUNCILMEMBERS[int(k)] = v
+    except Exception:
+        pass
 
 
 
@@ -122,7 +133,7 @@ def update_map_data():
         if sr.get("attributes", {}).get("ADDDATE")
     ]
     max_dt_ms = max(valid_dates)
-    max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0)
+    max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0, tz=timezone.utc)
 
     cutoff_30d = max_dt - timedelta(days=30)
     cutoff_30d_ms = int(cutoff_30d.timestamp() * 1000)
@@ -305,12 +316,40 @@ def update_map_data():
             }
         })
 
-    # Existing map data for routes preservation
-    with open(output_path, "r", encoding="utf-8") as f:
-        old_map_data = json.load(f)
+    # Existing map data for routes preservation or initialize from source GeoJSON
+    trash_routes = {"type": "FeatureCollection", "features": []}
+    recycle_routes = {"type": "FeatureCollection", "features": []}
+    trash_routes_lines = {"type": "FeatureCollection", "features": []}
+    recycle_routes_lines = {"type": "FeatureCollection", "features": []}
 
-    trash_routes = old_map_data.get("trash_routes", {"type": "FeatureCollection", "features": []})
-    recycle_routes = old_map_data.get("recycle_routes", {"type": "FeatureCollection", "features": []})
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, "r", encoding="utf-8") as f:
+                old_map_data = json.load(f)
+            trash_routes = old_map_data.get("trash_routes", trash_routes)
+            recycle_routes = old_map_data.get("recycle_routes", recycle_routes)
+            trash_routes_lines = old_map_data.get("trash_routes_lines", trash_routes_lines)
+            recycle_routes_lines = old_map_data.get("recycle_routes_lines", recycle_routes_lines)
+        except Exception:
+            pass
+
+    trash_base_path = os.path.join(BASE_DIR, "data", "dc_trash_routes.geojson")
+    rec_base_path = os.path.join(BASE_DIR, "data", "dc_recycle_routes.geojson")
+    if not trash_routes.get("features") and os.path.exists(trash_base_path):
+        with open(trash_base_path, "r", encoding="utf-8") as f:
+            t_base = json.load(f)
+            for feat in t_base.get("features", []):
+                p = dict(feat.get("properties", {}))
+                p["route_area"] = p.get("TrashRouteArea", p.get("route_area"))
+                trash_routes["features"].append({"type": "Feature", "geometry": feat.get("geometry"), "properties": p})
+
+    if not recycle_routes.get("features") and os.path.exists(rec_base_path):
+        with open(rec_base_path, "r", encoding="utf-8") as f:
+            r_base = json.load(f)
+            for feat in r_base.get("features", []):
+                p = dict(feat.get("properties", {}))
+                p["route"] = p.get("Route", p.get("route"))
+                recycle_routes["features"].append({"type": "Feature", "geometry": feat.get("geometry"), "properties": p})
 
     # Ensure route area descriptions are up-to-date
     for feat in trash_routes.get("features", []):
@@ -334,9 +373,6 @@ def update_map_data():
     # Load route lines if available
     trash_lines_path = os.path.join(BASE_DIR, 'data', 'dc_trash_routes_lines.geojson')
     recycle_lines_path = os.path.join(BASE_DIR, 'data', 'dc_recycle_routes_lines.geojson')
-
-    trash_routes_lines = old_map_data.get("trash_routes_lines", {"type": "FeatureCollection", "features": []})
-    recycle_routes_lines = old_map_data.get("recycle_routes_lines", {"type": "FeatureCollection", "features": []})
 
     if os.path.exists(trash_lines_path):
         with open(trash_lines_path, "r", encoding="utf-8") as f:

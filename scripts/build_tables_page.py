@@ -19,6 +19,7 @@ import os
 import sys
 import json
 import re
+from html import escape
 from collections import defaultdict
 from datetime import datetime
 
@@ -165,8 +166,28 @@ for r in recycle_routes:
 chart_day_trash = [trash_by_day[d] for d in days_order]
 chart_day_rec = [rec_by_day[d] for d in days_order]
 
-chart_day_avg_trash = [round(trash_by_day[d] / trash_counts_by_day[d], 1) if trash_counts_by_day[d] else 0 for d in days_order]
-chart_day_avg_rec = [round(rec_by_day[d] / rec_counts_by_day[d], 1) if rec_counts_by_day[d] else 0 for d in days_order]
+# Chart 4 Data: Total Requests vs. Service Area by Route (Scatter Plot)
+scatter_trash_data = [
+    {
+        'x': r['total'],
+        'y': round(r['area_sq_mi'], 3),
+        'route_id': r['route_id'],
+        'density': r['density'],
+        'stream': 'Trash'
+    }
+    for r in all_routes if r['stream'] == 'Trash'
+]
+
+scatter_rec_data = [
+    {
+        'x': r['total'],
+        'y': round(r['area_sq_mi'], 3),
+        'route_id': r['route_id'],
+        'density': r['density'],
+        'stream': 'Recycling'
+    }
+    for r in all_routes if r['stream'] == 'Recycling'
+]
 
 day_sort_map = {
     'Monday': 1, 'Tuesday': 2, 'Wednesday': 3, 'Thursday': 4, 'Friday': 5,
@@ -664,10 +685,10 @@ html_content = f"""<!DOCTYPE html>
       <div class="chart-grid">
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Ward Volume by Stream (<span class="kw-trash">Trash</span> vs <span class="kw-recycle">Recycling</span>)</span>
+            <span class="chart-title">311-reported Missed Collections by Ward and Type</span>
             <div class="chart-actions">
               <button onclick="exportChartPng('chartWardReq', 'dc-ward-volume')" class="btn-action">PNG</button>
-              <button onclick="exportChartPdf('chartWardReq', 'Ward Missed Collections by Stream', 'dc-ward-volume')" class="btn-action">PDF</button>
+              <button onclick="exportChartPdf('chartWardReq', '311-reported Missed Collections by Ward and Type', 'dc-ward-volume')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -677,10 +698,10 @@ html_content = f"""<!DOCTYPE html>
 
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Single vs. Repeat Addresses by Ward</span>
+            <span class="chart-title">311-reported Missed Collections by Ward and Repeat Status</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartWardRep', 'dc-ward-repeat-addrs')" class="btn-action">PNG</button>
-              <button onclick="exportChartPdf('chartWardRep', 'Ward Single vs Repeat Address Volume', 'dc-ward-repeat-addrs')" class="btn-action">PDF</button>
+              <button onclick="exportChartPng('chartWardRep', 'dc-ward-repeat-status')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartWardRep', '311-reported Missed Collections by Ward and Repeat Status', 'dc-ward-repeat-status')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -713,10 +734,11 @@ for w in range(1, 9):
     ws = wards_stats[str(w)]
     share_pct = round(ws['total'] / total_citywide_requests * 100, 1) if total_citywide_requests > 0 else 0.0
     rep_display = f'<span class="val-highlight">{ws["repeat_rate"]}%</span>' if ws['repeat_rate'] >= 26.0 else f"{ws['repeat_rate']}%"
+    cm_name = escape(str(ward_council.get(w, '')))
     html_content += f"""
             <tr>
               <td data-sort="{w}"><strong>Ward {w}</strong></td>
-              <td data-sort="{ward_council.get(w, '')}">{ward_council.get(w, '')}</td>
+              <td data-sort="{cm_name}">{cm_name}</td>
               <td data-sort="{ws['total']}" style="text-align: right;" class="kw-combined font-num"><strong>{ws['total']:,}</strong></td>
               <td data-sort="{ws['trash']}" style="text-align: right;" class="kw-trash font-num">{ws['trash']:,}</td>
               <td data-sort="{ws['recycling']}" style="text-align: right;" class="kw-recycle font-num">{ws['recycling']:,}</td>
@@ -780,9 +802,11 @@ html_content += f"""
 
 for anc in ancs_list:
     anc_rep_display = f'<span class="val-highlight">{anc["repeat_rate"]}%</span>' if anc['repeat_rate'] >= 30.0 else f"{anc['repeat_rate']}%"
+    anc_id_esc = escape(str(anc['anc_id']))
+    anc_ward_esc = escape(str(anc['ward']))
     html_content += f"""
-            <tr data-anc="{anc['anc_id']}" data-ward="{anc['ward']}">
-              <td data-sort="{anc['anc_id']}" data-type="anc"><strong>ANC {anc['anc_id']}</strong></td>
+            <tr data-anc="{anc_id_esc}" data-ward="{anc_ward_esc}">
+              <td data-sort="{anc_id_esc}" data-type="anc"><strong>ANC {anc_id_esc}</strong></td>
               <td data-sort="{anc['total']}" style="text-align: right;" class="kw-combined font-num"><strong>{anc['total']:,}</strong></td>
               <td data-sort="{anc['trash']}" style="text-align: right;" class="kw-trash font-num">{anc['trash']:,}</td>
               <td data-sort="{anc['recycling']}" style="text-align: right;" class="kw-recycle font-num">{anc['recycling']:,}</td>
@@ -810,10 +834,10 @@ html_content += f"""
       <div class="chart-grid">
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Requests by Scheduled Collection Day (<span class="kw-trash">Trash</span> vs <span class="kw-recycle">Recycling</span>)</span>
+            <span class="chart-title">311-reported Missed Collections by Scheduled Day and Type</span>
             <div class="chart-actions">
               <button onclick="exportChartPng('chartDayVol', 'dc-routes-by-day')" class="btn-action">PNG</button>
-              <button onclick="exportChartPdf('chartDayVol', 'Requests by Scheduled Collection Day', 'dc-routes-by-day')" class="btn-action">PDF</button>
+              <button onclick="exportChartPdf('chartDayVol', '311-reported Missed Collections by Scheduled Day and Type', 'dc-routes-by-day')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -823,14 +847,14 @@ html_content += f"""
 
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">Average Requests per Route by Day</span>
+            <span class="chart-title">Total Requests per Square Mile by Route</span>
             <div class="chart-actions">
-              <button onclick="exportChartPng('chartDayAvg', 'dc-routes-avg-density')" class="btn-action">PNG</button>
-              <button onclick="exportChartPdf('chartDayAvg', 'Average Requests per Route by Day', 'dc-routes-avg-density')" class="btn-action">PDF</button>
+              <button onclick="exportChartPng('chartRouteScatter', 'dc-routes-requests-per-sq-mi')" class="btn-action">PNG</button>
+              <button onclick="exportChartPdf('chartRouteScatter', 'Total Requests per Square Mile by Route', 'dc-routes-requests-per-sq-mi')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
-            <canvas id="chartDayAvg"></canvas>
+            <canvas id="chartRouteScatter"></canvas>
           </div>
         </div>
       </div>
@@ -898,14 +922,21 @@ for r in all_routes:
     m_ward = re.search(r'\d+', ward_str)
     ward_num = int(m_ward.group(0)) if m_ward else 99
     density_display = f'<span class="val-highlight">{r["density"]}</span>' if r['density'] >= 350.0 else f"{r['density']}"
+    r_id_esc = escape(str(r['route_id']))
+    stream_esc = escape(str(stream))
+    sched_esc = escape(str(r['schedule']))
+    ward_esc = escape(str(ward_str))
+    search_esc = escape(search_text)
+    area_desc_raw = r.get('area_desc', 'Citywide DPW service route')
+    area_desc_esc = escape(area_desc_raw)
     html_content += f"""
-            <tr data-stream="{stream}" data-day="{r['schedule']}" data-ward="{ward_str}" data-search="{search_text}">
-              <td data-sort="{r['route_id']}"><strong>{r['route_id']}</strong></td>
-              <td data-sort="{stream}"><span class="{badge_cls}">{stream}</span></td>
-              <td data-sort="{day_num}">{r['schedule']}</td>
-              <td data-sort="{ward_num}">{ward_str}</td>
-              <td data-sort="{r.get('area_desc', '')}" style="max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{r.get('area_desc', '')}">
-                {r.get('area_desc', 'Citywide DPW service route')}
+            <tr data-stream="{stream_esc}" data-day="{sched_esc}" data-ward="{ward_esc}" data-search="{search_esc}">
+              <td data-sort="{r_id_esc}"><strong>{r_id_esc}</strong></td>
+              <td data-sort="{stream_esc}"><span class="{badge_cls}">{stream_esc}</span></td>
+              <td data-sort="{day_num}">{sched_esc}</td>
+              <td data-sort="{ward_num}">{ward_esc}</td>
+              <td data-sort="{area_desc_esc}" style="max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{area_desc_esc}">
+                {area_desc_esc}
               </td>
               <td data-sort="{r['area_sq_mi']}" style="text-align: right;" class="font-num">{r['area_sq_mi']}</td>
               <td data-sort="{r['total']}" style="text-align: right;" class="{ 'kw-trash' if stream == 'Trash' else 'kw-recycle' } font-num"><strong>{r['total']:,}</strong></td>
@@ -1034,10 +1065,12 @@ html_content += f"""
         }},
         scales: {{
           x: {{
+            stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
+            stacked: true,
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
@@ -1055,13 +1088,13 @@ html_content += f"""
         labels: {json.dumps(days_order)},
         datasets: [
           {{
-            label: 'Trash Requests',
+            label: 'Trash (S0441)',
             data: {json.dumps(chart_day_trash)},
             backgroundColor: '#dc2626',
             borderRadius: 2
           }},
           {{
-            label: 'Recycling Requests',
+            label: 'Recycling (S0321)',
             data: {json.dumps(chart_day_rec)},
             backgroundColor: '#16a34a',
             borderRadius: 2
@@ -1091,25 +1124,30 @@ html_content += f"""
     }});
 
     // ----------------------------------------------------
-    // Chart 4: Daily Route Average Density (Bar Chart)
+    // Chart 4: Total Requests per Square Mile by Route (Scatter Plot)
     // ----------------------------------------------------
-    const ctxDayAvg = document.getElementById('chartDayAvg').getContext('2d');
-    const chartDayAvg = new Chart(ctxDayAvg, {{
-      type: 'bar',
+    const ctxRouteScatter = document.getElementById('chartRouteScatter').getContext('2d');
+    const chartRouteScatter = new Chart(ctxRouteScatter, {{
+      type: 'scatter',
       data: {{
-        labels: {json.dumps(days_order)},
         datasets: [
           {{
-            label: 'Trash Avg Req/Route',
-            data: {json.dumps(chart_day_avg_trash)},
-            backgroundColor: '#dc2626',
-            borderRadius: 2
+            label: 'Trash (S0441)',
+            data: {json.dumps(scatter_trash_data)},
+            backgroundColor: 'rgba(220, 38, 38, 0.65)',
+            borderColor: '#dc2626',
+            borderWidth: 1,
+            pointRadius: 4.5,
+            pointHoverRadius: 7
           }},
           {{
-            label: 'Recycling Avg Req/Route',
-            data: {json.dumps(chart_day_avg_rec)},
-            backgroundColor: '#16a34a',
-            borderRadius: 2
+            label: 'Recycling (S0321)',
+            data: {json.dumps(scatter_rec_data)},
+            backgroundColor: 'rgba(22, 163, 74, 0.65)',
+            borderColor: '#16a34a',
+            borderWidth: 1,
+            pointRadius: 4.5,
+            pointHoverRadius: 7
           }}
         ]
       }},
@@ -1120,14 +1158,48 @@ html_content += f"""
           legend: {{
             position: 'top',
             labels: {{ font: {{ family: 'IBM Plex Mono', size: 11 }} }}
+          }},
+          tooltip: {{
+            titleFont: {{ family: 'IBM Plex Mono', size: 12 }},
+            bodyFont: {{ family: 'IBM Plex Mono', size: 11 }},
+            callbacks: {{
+              title: function(items) {{
+                if (!items.length) return '';
+                const pt = items[0].raw;
+                return `Route ${{pt.route_id}} (${{pt.stream}})`;
+              }},
+              label: function(context) {{
+                const pt = context.raw;
+                return [
+                  `Total Requests: ${{pt.x.toLocaleString()}}`,
+                  `Service Area: ${{pt.y}} sq mi`,
+                  `Density: ${{pt.density.toLocaleString()}} req/sq mi`
+                ];
+              }}
+            }}
           }}
         }},
         scales: {{
           x: {{
+            type: 'linear',
+            position: 'bottom',
+            beginAtZero: true,
+            title: {{
+              display: true,
+              text: 'Total Requests',
+              font: {{ family: 'IBM Plex Mono', size: 10 }}
+            }},
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }},
           y: {{
+            type: 'linear',
+            beginAtZero: true,
+            title: {{
+              display: true,
+              text: 'Service Area (sq mi)',
+              font: {{ family: 'IBM Plex Mono', size: 10 }}
+            }},
             grid: {{ color: 'rgba(0, 0, 0, 0.06)' }},
             ticks: {{ font: {{ family: 'IBM Plex Mono', size: 10 }} }}
           }}
@@ -1141,7 +1213,7 @@ html_content += f"""
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
       const tickColor = isDark ? '#a1a1aa' : '#52525b';
 
-      [chartWardReq, chartWardRep, chartDayVol, chartDayAvg].forEach(chart => {{
+      [chartWardReq, chartWardRep, chartDayVol, chartRouteScatter].forEach(chart => {{
         if (!chart) return;
         if (chart.options.plugins?.legend?.labels) {{
           chart.options.plugins.legend.labels.color = textColor;
@@ -1151,11 +1223,17 @@ html_content += f"""
           chart.options.scales.x.ticks.color = tickColor;
           chart.options.scales.x.ticks.font = {{ family: 'IBM Plex Mono', size: 10 }};
           chart.options.scales.x.grid.color = gridColor;
+          if (chart.options.scales.x.title) {{
+            chart.options.scales.x.title.color = textColor;
+          }}
         }}
         if (chart.options.scales?.y) {{
           chart.options.scales.y.ticks.color = tickColor;
           chart.options.scales.y.ticks.font = {{ family: 'IBM Plex Mono', size: 10 }};
           chart.options.scales.y.grid.color = gridColor;
+          if (chart.options.scales.y.title) {{
+            chart.options.scales.y.title.color = textColor;
+          }}
         }}
         chart.update();
       }});
@@ -1218,7 +1296,13 @@ html_content += f"""
       }}
       const csv = rows.map(r => {{
         const cells = Array.from(r.querySelectorAll('th, td'));
-        return cells.map(c => `"${{c.innerText.replace(/"/g, '""').trim()}}"`).join(',');
+        return cells.map(c => {{
+          let val = c.innerText.replace(/"/g, '""').trim();
+          if (/^[=\\+\\-@\\t\\r]/.test(val)) {{
+            val = "'" + val;
+          }}
+          return `"${{val}}"`;
+        }}).join(',');
       }}).join('\\n');
 
       const blob = new Blob([csv], {{ type: 'text/csv;charset=utf-8;' }});

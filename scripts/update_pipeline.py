@@ -19,6 +19,7 @@ import time
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, "scripts"))
 
 def run_step(step_num, total_steps, title, func):
     print(f"\n[{step_num}/{total_steps}] {title}...")
@@ -57,17 +58,17 @@ def main():
     from analyze_repeat_addresses import analyze_repeat_addresses
     run_step(2, total_steps, "Computing 180-Day SMD & Ward Address Deduplication", analyze_repeat_addresses)
 
-    # Step 3: Generate DPW route line geometries from collection points
-    from generate_route_lines import generate_route_lines
-    run_step(3, total_steps, "Generating DPW Route Line Geometries from Collection Points", generate_route_lines)
-
-    # Step 4: Compute route areas, ANCs, and neighborhoods
+    # Step 3: Compute route areas, ANCs, and neighborhoods (catchments)
     from compute_route_areas import compute_route_areas
-    run_step(4, total_steps, "Computing DPW Catchment Areas, ANCs & Neighborhoods", compute_route_areas)
+    run_step(3, total_steps, "Computing DPW Catchment Areas, ANCs & Neighborhoods", compute_route_areas)
 
-    # Step 5: Compute route metrics
+    # Step 4: Compute route metrics
     from compute_route_stats import compute_route_stats
-    run_step(5, total_steps, "Computing DPW Route Performance Metrics", compute_route_stats)
+    run_step(4, total_steps, "Computing DPW Route Performance Metrics", compute_route_stats)
+
+    # Step 5: Generate DPW route line geometries from collection points (with fresh stats and areas)
+    from generate_route_lines import generate_route_lines
+    run_step(5, total_steps, "Generating DPW Route Line Geometries from Collection Points", generate_route_lines)
 
     # Step 6: Update map data (180-day default and 30-day windows)
     from update_map_data import update_map_data

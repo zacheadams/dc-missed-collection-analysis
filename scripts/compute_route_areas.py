@@ -244,12 +244,21 @@ def compute_route_areas():
             'area_sq_mi': feat_list_area_sq_mi(feat_list)
         }
 
-    # Load pre-annotated line geometries if available
+    # Load pre-annotated line geometries or existing route_areas if available
     trash_lines_path = os.path.join(BASE_DIR, 'data/dc_trash_routes_lines.geojson')
     rec_lines_path = os.path.join(BASE_DIR, 'data/dc_recycle_routes_lines.geojson')
+    out_path = os.path.join(BASE_DIR, 'data/route_areas.json')
+
+    existing_ra = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path, 'r', encoding='utf-8') as f:
+                existing_ra = json.load(f)
+        except Exception:
+            existing_ra = {}
 
     trash_poly_to_lines = defaultdict(list)
-    trash_line_entries = {}
+    trash_line_entries = dict(existing_ra.get('trash_lines', {}))
     if os.path.exists(trash_lines_path):
         with open(trash_lines_path, 'r', encoding='utf-8') as f:
             tl_data = json.load(f)
@@ -270,7 +279,7 @@ def compute_route_areas():
                     'area_sq_mi': p.get('area_sq_mi', 0.0)
                 }
 
-    rec_line_entries = {}
+    rec_line_entries = dict(existing_ra.get('recycle_lines', {}))
     if os.path.exists(rec_lines_path):
         with open(rec_lines_path, 'r', encoding='utf-8') as f:
             rl_data = json.load(f)

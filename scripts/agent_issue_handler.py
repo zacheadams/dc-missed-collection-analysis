@@ -39,21 +39,29 @@ def post_github_comment(repo, issue_number, token, body):
 def generate_plan_with_gemini(api_key, issue_title, issue_body):
     prompt = f"""You are Antigravity, an AI development agent working on the repository dc-missed-collection-analysis (Washington, DC Department of Public Works missed collection analysis).
 
-Strict repository standard from Agents.md:
+Strict repository standards from Agents.md:
 - Absolutely NO emojis anywhere in output or plans.
 - Lo-fi monochrome technical style.
 - Pure Python 3 standard library for pipeline scripts.
 - Target audience is DPW, route supervisors, and data analysts.
 
-An issue has been opened:
-Title: {issue_title}
-Description:
+An issue has been opened. Analyze the requirements delimited below:
+<issue_title>
+{issue_title}
+</issue_title>
+<issue_body>
 {issue_body}
+</issue_body>
 
-Analyze the requirements, draft a concrete implementation plan, list specific files to inspect or modify, and note that execution is paused awaiting review/approval reply before any code changes will be made. Format your response cleanly in Markdown without emojis."""
+Draft a concrete implementation plan, list specific files to inspect or modify, and note that execution is paused awaiting review/approval reply before any code changes will be made. Format your response cleanly in Markdown without emojis."""
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
-    headers = {"Content-Type": "application/json"}
+    model = get_env_var("GEMINI_MODEL", "gemini-3.8-flash")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+    headers = {
+        "Content-Type": "application/json",
+        "x-goog-api-key": api_key,
+        "User-Agent": "Antigravity-Actions/1.0"
+    }
     payload = json.dumps({
         "contents": [{
             "parts": [{"text": prompt}]
@@ -69,6 +77,8 @@ Analyze the requirements, draft a concrete implementation plan, list specific fi
                 parts = candidates[0].get("content", {}).get("parts", [])
                 if parts:
                     return parts[0].get("text", "").strip()
+    except urllib.error.HTTPError as e:
+        sys.stderr.write(f"Gemini API request failed: HTTP {e.code} - {e.reason}\n")
     except Exception as e:
         sys.stderr.write(f"Gemini API request failed: {e}\n")
     return ""
