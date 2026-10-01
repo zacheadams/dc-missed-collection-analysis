@@ -847,10 +847,10 @@ html_content += f"""
 
         <div class="chart-card">
           <div class="chart-header">
-            <span class="chart-title">311-reported Missed Collections by Route and Service Area</span>
+            <span class="chart-title">311-reported Missed Collections by Service Area and Route</span>
             <div class="chart-actions">
               <button onclick="exportChartPng('chartRouteScatter', 'dc-routes-by-service-area')" class="btn-action">PNG</button>
-              <button onclick="exportChartPdf('chartRouteScatter', '311-reported Missed Collections by Route and Service Area', 'dc-routes-by-service-area')" class="btn-action">PDF</button>
+              <button onclick="exportChartPdf('chartRouteScatter', '311-reported Missed Collections by Service Area and Route', 'dc-routes-by-service-area')" class="btn-action">PDF</button>
             </div>
           </div>
           <div class="chart-container">
@@ -1124,7 +1124,7 @@ html_content += f"""
     }});
 
     // ----------------------------------------------------
-    // Chart 4: 311-reported Missed Collections by Route and Service Area (Scatter Plot)
+    // Chart 4: 311-reported Missed Collections by Service Area and Route (Scatter Plot)
     // ----------------------------------------------------
     const ctxRouteScatter = document.getElementById('chartRouteScatter').getContext('2d');
     const chartRouteScatter = new Chart(ctxRouteScatter, {{
