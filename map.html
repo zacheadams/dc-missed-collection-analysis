@@ -741,7 +741,7 @@
         touch-action: none;
       }
 
-      /* ── FAB — Filters button ──────────────────────── */
+      /* ── FAB — Layers button ──────────────────────── */
       .mobile-fab {
         display: flex;
         position: fixed;
@@ -804,11 +804,18 @@
         pointer-events: none;
       }
 
-      /* Leaflet attribution — tuck below drawers and FAB on mobile */
+      /* Leaflet attribution — inline beside the Layers FAB */
       .leaflet-bottom.leaflet-right {
-        bottom: 80px;
-        right: 8px;
+        bottom: 20px;
+        left: 120px;
+        right: auto;
         z-index: 400;
+      }
+      .leaflet-bottom.leaflet-right .leaflet-control-attribution {
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        line-height: 44px; /* vertically center with FAB */
       }
 
       /* ── Touch target sizing ───────────────────────── */
@@ -927,11 +934,11 @@
       </div>
     </div>
 
-    <!-- Mobile FAB: opens Filters drawer (hidden on desktop via CSS) -->
+    <!-- Mobile FAB: opens Layers drawer (hidden on desktop via CSS) -->
     <button class="mobile-fab" id="mobile-fab-filters"
             onclick="toggleDrawer('control')"
-            aria-label="Open map filters">
-      ☰ Filters
+            aria-label="Open map layers">
+      ☰ Layers
     </button>
 
     <!-- Backdrop: tap to dismiss any open drawer -->
@@ -3217,7 +3224,7 @@
       if (el) el.classList.toggle('is-visible', visible);
     }
 
-    // ── Control (Filters) drawer ───────────────────────
+    // ── Control (Layers) drawer ───────────────────────
     function _openControlDrawer() {
       if (_openDrawer === 'inspector') _closeInspectorDrawer();
       const cp = document.getElementById('control-panel');
@@ -3233,7 +3240,7 @@
       const cp = document.getElementById('control-panel');
       const fab = document.getElementById('mobile-fab-filters');
       if (cp) cp.classList.remove('is-open');
-      if (fab) fab.textContent = '☰ Filters';
+      if (fab) fab.textContent = '☰ Layers';
       if (_openDrawer === 'control') {
         _openDrawer = null;
         _setBackdrop(false);
@@ -3292,7 +3299,7 @@
       }
     }
 
-    /** Toggle the Filters drawer (called by FAB) */
+    /** Toggle the Layers drawer (called by FAB) */
     function toggleDrawer(type) {
       if (window.innerWidth > 768) return;
       if (type === 'control') {
@@ -3405,7 +3412,7 @@
           _setBackdrop(false);
           _setDrawerActive(false);
           const fab = document.getElementById('mobile-fab-filters');
-          if (fab) fab.textContent = '☰ Filters';
+          if (fab) fab.textContent = '☰ Layers';
         }
       });
 
