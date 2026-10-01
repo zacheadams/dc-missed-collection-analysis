@@ -823,6 +823,8 @@
         padding: 0;
         line-height: normal;
         font-size: 10px;
+        max-width: calc(100vw - 136px); /* don't overflow past right edge */
+        margin-bottom: 0 !important;    /* let leaflet-bottom anchor it cleanly */
       }
 
       /* ── Touch target sizing ───────────────────────── */
