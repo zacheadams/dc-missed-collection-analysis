@@ -209,6 +209,20 @@
       box-shadow: var(--card-shadow);
     }
 
+    .report-narrative h3 {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.01em;
+      margin: 32px 0 14px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-narrative h3:first-child {
+      margin-top: 0;
+    }
+
     .report-narrative p {
       margin: 0 0 16px 0;
     }
@@ -293,6 +307,10 @@
         box-shadow: none !important;
         padding: 16px !important;
       }
+      .report-narrative h3 {
+        border-color: #cccccc !important;
+        color: #000000 !important;
+      }
       .report-img-zoomable {
         max-width: 400px !important;
       }
@@ -326,43 +344,73 @@
 
     <!-- Report Narrative -->
     <div class="report-narrative">
-      <p>If you don’t care about my editorialization, and just care about the charts, you’re wrong (*unless you’ve already read this), but feel free to explore them directly on the <a href="tables.html">Tables and Graphs</a> page.</p>
+      <h3>Who am I and why did I make this?</h3>
 
-      <p>In September 2026, the DC Department of Public Works (DPW) launched a <a href="https://dpw.dc.gov/collection-status-map" target="_blank" rel="noopener">Status Collection Map</a>, so that residents serviced by DPW could see when they could expect their <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> to be picked up.</p>
+      <p>If you don’t care about my editorialization, and just care about the charts and map alone, you’re wrong (*unless you’ve already read this)! I can’t stop you from skipping context and interpretation, but I think it’s important.</p>
 
-      <p>Like the actual solid waste service, as of 9 PM on Wednesday, September 23rd, 2026, that website was not working as intended (screenshot below).</p>
+      <p>In early September 2026, the DC Department of Public Works (DPW) launched a <a href="https://dpw.dc.gov/collection-status-map" target="_blank" rel="noopener">Status Collection Map</a>, so that residents serviced by DPW could see when they could expect their <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> to be picked up. Like the actual solid waste service, as of the end of September, that website was still not working as intended.</p>
 
       <div style="margin: 20px 0;">
         <img id="status-map-img" src="assets/dpw-status-map-error.png" onerror="this.onerror=null; this.src='https://github.com/user-attachments/assets/9d52cd97-cd17-40c9-a0fa-72882378bbee'" alt="DPW Status Collection Map Error" class="report-img-zoomable" onclick="toggleImageZoom(this)" tabindex="0" role="button" aria-label="DPW Status Collection Map Error (click to enlarge or contract)" onkeydown="if(event.key==='Enter'||event.key===' ') toggleImageZoom(this)" title="Click to enlarge or contract" />
         <div class="report-img-caption">(Click image to enlarge / contract)</div>
       </div>
 
-      <p>While I'm just some guy, I happen to have some visibility into some of these problems because I've seen neighbors' complaints to DPW in my capacity as an ANC myself. I also have been a little GIS-curious after being out of that game for about a decade now, and I recently got access to the paid version of Google Gemini, courtesy of a Google Drive family plan upgrade. So, inspired by some of <a href="https://www.axios.com/local/washington-dc/2026/07/31/311-app-alternatives-josh-jacobson-civic-tech-government-tools" target="_blank" rel="noopener">Josh Jacobson’s work</a> creating dashboards to supplant insufficient trackers for kiddie pools and rat treatment, I was motivated to make something better.</p>
+      <p>I happen to moonlight as an <a href="https://en.wikipedia.org/wiki/Advisory_Neighborhood_Commission" target="_blank" rel="noopener">Advisory Neighborhood Commissioner</a> (ANC), and as part of that, I get some visibility into what happens when resident interactions with city services go sideways. I've seen numerous neighbors' complaints to DPW in that capacity, when their solid waste pickups get missed, and their subsequent begs for help (which I often join in to prod for updates and visibility) are either slowly or insufficiently addressed. Inspired by some of <a href="https://www.axios.com/local/washington-dc/2026/07/31/311-app-alternatives-josh-jacobson-civic-tech-government-tools" target="_blank" rel="noopener">fellow ANC Josh Jacobson’s work</a> creating dashboards to supplant inadequate trackers for kiddie pools and rat treatment, I was motivated to make something better myself. I have lately been a little GIS-curious after being out of that game for about a decade now, and I recently got access to the paid version of Google Gemini, courtesy of a Google Drive family plan upgrade.</p>
 
-      <p>What I built (with substantial coding assistance from my robot) is a dashboard of 311 requests for missed <span class="kw-trash">trash</span> and missed <span class="kw-recycle">recycling</span> pickup. It offers two time periods to choose from: the last 30 days and the last 180 days (which, notably, entirely falls after the <a href="https://51st.news/dc-spent-67-million-cleaning-up-after-januarys-snowstorm/" target="_blank" rel="noopener">Snowcrete debacle</a> and the March 4th Performance Oversight Hearing - <a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">VOD</a> + <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">written responses</a>). It allows you to look citywide, at your Ward, at your Advisory Neighborhood Commission (ANC), or even at your Single Member District (SMD). You want to see what the actual route the pickup drivers are driving? You betcha, that’s there (*both as route lines and as service area polygons, more on that later).</p>
+      <p>In short, people deserve a functioning local government with services they’re paying for through tax revenue. If they are not receiving those services, they deserve to know why, with a plan to rectify the problem.</p>
 
-      <p>311 requests are an imperfect measure, but I suspect they underestimate missed pickups, because it’s dependent on the individuals reporting them missed. 311 itself has had a <a href="https://51st.news/311-app-dc-ouc/" target="_blank" rel="noopener">smattering of issues</a> this year, many have started using <a href="https://snap311.app/" target="_blank" rel="noopener">Snap311</a> instead of the official app, but I digress.</p>
+      <h3>What am I looking at?</h3>
 
-      <p>So what are some of the stories I think this dashboard can tell? I can’t figure out all of this, but here are a subset from a few days of manic panic:</p>
+      <p>I built, with substantial coding assistance from my robot, my own <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickup dashboard. Unlike DPW’s status dashboard, the goal is not to show a live map of where the waste has been picked up within the day (I hypothesize few care about the exact moment of pickup). My goal is to identify where there are misses, especially repeat misses, and map the actual geometries (<span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> routes and city divisions like Ward or ANC). I have layered into those geometries:</p>
+
       <ul>
-        <li>DPW services <a href="https://washingtonian.com/2023/04/21/dcs-new-curbside-composting-program-everything-you-need-to-know/" target="_blank" rel="noopener">over 100,000 households</a> in DC.</li>
-        <li>~6,000 of them in the last 6 months reported missed service, a total of ~9,000 times.</li>
-        <li>~1 in 4 households who reported a missed collection in the last 6 months reported another. Many reported numerous times.</li>
-        <li>Mondays were the least reliable day. Thursday was the most reliable day. Maybe sanitation workers are like Garfield.</li>
-        <li>Wards 5, 7, and especially 4, had the most tickets filed. All Wards, by law, have about the same number of people, though they don’t have the same number of DPW-served addresses. Ward 1 has the highest rate of misses per service address count over the time period. Ward 3 the lowest (~1/5th the rate of Ward 1). Ward 4 has the most service addresses and Ward 2 has the fewest.</li>
+        <li>The frequency of 311 missed collection requests, both over the last 180 days (default) and the last 30 days. This 6-month period notably falls entirely after the <a href="https://51st.news/dc-spent-67-million-cleaning-up-after-januarys-snowstorm/" target="_blank" rel="noopener">Snowcrete debacle</a> and the March 4th DPW Performance Oversight Hearing (<a href="https://video.oct.dc.gov/VOD/DCC/2026_03/03_04_26_PubWorks.html" target="_blank" rel="noopener">VOD</a> + <a href="https://github.com/user-attachments/files/32541391/dpw.responses.to.performance.oversight.questions.pdf" target="_blank" rel="noopener">written responses</a>). If you toggle this off, it dissolves the city divisions.</li>
+        <li>You can see “combined” 311 requests (default) or subset to <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span>.</li>
+        <li>The updated route maps, not easily readable from DPW or other DC sites, are included as polygons. I recommend toggling the 311 requests layer off when viewing this.</li>
+        <li>The older route maps, derived from <a href="https://opendata.dc.gov/datasets/DCGIS::trash-and-recycling-collection-points" target="_blank" rel="noopener">collection points</a> last updated over 2 years ago, were included as lines (read: squiggles), but after confirming the updated route maps, I have deprecated their access.</li>
       </ul>
 
-      <p>I want to briefly talk about routing, as I think it's one of the weirdest quirks of this project, and is more than just a little takeaway, but raises concerns both about service quality AND with data quality. My initial mapping generated routes as polygons - shapes that encompassed <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> routes. But when trying to dig into where these came from, I could not find an official data source accessible on Open Data DC, and again, the DPW official status dashboard is broken. As best I can tell, there are a few things at play.</p>
-    
-      <p>Gemini/Antigravity seem to have pulled data from sites I cannot directly access. They may have been accessible at the time, they may be APIs or have machine readable information, but I cannot render DPW's <a href="https://experience.arcgis.com/experience/dc136d89551c4a039757659567950c0e/" target="_blank" rel="noopener">Routes Assignment Experience Builder</a>, nor their <a href="https://maps2.dcgis.dc.gov/dcgis/rest/services" target="_blank" rel="noopener">REST Services Directory</a>, on my browser. I'd love it if someone provided some confirmation or checked my work, or DPW made their publicly accessible dashboards actually work (among other things, cough cough). As a result, there are routes I cannot verify or find record of, like RSP20_2 or RSP50_5, which appear to be the alleyway <span class="kw-recycle">recycling</span> pickup routes in ANC SMD 2B08 contributing to a high concentration of 311 pickup complaints.</p>
+      <h3>Limitations</h3>
 
-      <p>Now because these can't be confirmed, the LLMs are doing a bit of lifting here and I can't figure out how much is predicted text and how much is excerpted text from official sources. When I query an explanation for what the route names mean, it says RSP stands for <span class="kw-recycle">Recycling</span> Special/Service/Single-stream Program/Packer. The 50 is the route group identifier, and the _5 is the day of the week (Friday). For <span class="kw-recycle">recycling</span>, 6 of these are identified: RSP10_1, RSP20_2, RSP21_2, RSP30_3, RSP40_4, RSP50_5. Not knowing if they were hallucinated, but not wanting to lose data that may not otherwise be available, I also added layers that are just line routes to the map, using the <a href="https://opendata.dc.gov/datasets/DCGIS::trash-and-recycling-collection-points" target="_blank" rel="noopener">Collection Points</a> map/list as a verifiable source of truth. Take your pick. For the curious, tinfoil-hat-wearing "I want to believe" among you, the official DPW pickup status map, when it's not broken, does appear to show similar looking alleyway polygons. This lends some credence to there being different routes for these alleys that are not well-documented. DPW has said that they have trouble in these alleys, and it'd be great if someone could confirm that they do actually send a different truck (a small packer, perhaps!) than standard curbside pickup.</p>
+      <p>I like putting the limitations <em>before</em> the interpretations so that people can keep them in mind while reading the analytic conclusions. Not to get too into theoryposting here, but it’s incumbent upon me to present you with enough evidence that things are going wrong in the city that you are sufficiently convinced to doubt things are going right.</p>
 
-      <p>The clearest overall theme is that DPW is ignoring their massive service problem. Service across all 8 Wards, all 46 ANCs, all 345 SMDs, and all 223 (103 <span class="kw-trash">trash</span> and 120 <span class="kw-recycle">recycling</span>) routes deserve scrutiny. Ask DPW and they might tell you that there are frequent call-outs, which were more intense in the <a href="https://grist.org/extreme-heat/yes-this-summer-really-was-as-hot-as-you-think-it-was/" target="_blank" rel="noopener">hottest summer on record</a>, but they have the historical data (or just intuitive knowledge) to predict this, and they could, they should, they must hire more people. Less staff leads to more overtime, which leads to more expenditure, which leads to less staff. It’s a vicious cycle.</p>
+      <p>The outcome we are trying to identify is missed collections, but our key measurement of that outcome is 311 requests requesting service for a missed collection. Assuming minimal to no false or erroneous requests, we are getting an underestimate of the problem. That assumption seems reasonable because it’s a pain to report on 311, which has had a <a href="https://51st.news/311-app-dc-ouc/" target="_blank" rel="noopener">smattering of issues</a> this year and many have started using <a href="https://snap311.app/" target="_blank" rel="noopener">Snap311</a> instead of the official app. It’s also not hard to assume that the underreporting is data <a href="https://stefvanbuuren.name/fimd/sec-MCAR.html" target="_blank" rel="noopener">missing not at random</a>. Further analysis attempting to predict pickups using sociodemographic factors would be meaningful for assuring an equitable policy intervention.</p>
+
+      <p>The outcome mapped is also a count of 311 requests rather than a rate. Showing a percent of serviced households (or individuals) within the geometry reporting missed service over the time period would adjust for the concentration of serviceable addresses. Including both would be the most informative, but calculating an accurate intersection of routes within political representation boundaries (+ vice versa) and the tickets that fall within those intersections, requires very careful analytic oversight (and the time to provide it). Mark that down for a future feature.</p>
+
+      <h3>District- and Ward-level Takeaways</h3>
+
+      <p>DPW services <a href="https://washingtonian.com/2023/04/21/dcs-new-curbside-composting-program-everything-you-need-to-know/" target="_blank" rel="noopener">over 100,000 households</a> (~105k at last count). Of them, ~6,000 requests missed <span class="kw-trash">trash</span> or <span class="kw-recycle">recycling</span> pickup service in the last 6 months, a total of ~10,000 times (~7,000 <span class="kw-trash">trash</span> and ~3,000 <span class="kw-recycle">recycling</span>). ~1 in 4 households who reported a missed collection in the last 6 months reported another. Many reported numerous times. Wards 5, 7, and especially 4, had the most tickets filed. All Wards, by law, have about the same number of people, though they don’t have the same number of DPW-served addresses. Ward 1 has the highest rate of misses per service address count over the time period. Ward 3 the lowest (~1/5th the rate of Ward 1). Ward 4 has the most service addresses and Ward 2 has the fewest.</p>
+
+      <p>Even with Ward 2’s vanishingly fewe service addresses, ANC 2B appears to have the highest repeat request rate of any ANC for DPW missed collection tickets. SMD 2B08 has the highest repeat request rate within that ANC. You can see how this landed on my radar, and it’s both reassuring and frustrating to see a problem validated by the data.</p>
+
+      <h3>Routing Takeaways</h3>
+
+      <p>This will sound like a digression, but I think some of the process difficulties can and should inform the conclusions (see: <a href="https://en.wikipedia.org/wiki/The_purpose_of_a_system_is_what_it_does" target="_blank" rel="noopener">POSIWID</a>, <a href="https://en.wikipedia.org/wiki/Form_follows_function" target="_blank" rel="noopener">form follows function</a>). When I initially wrote this up, among other concerns, I was trying to get confirmation of some unusual routes’ existence. If you look at some of the smaller alleys around the city, you’ll find some funny cutouts like <span class="kw-recycle">recycling</span> routes RSP20_2 or RSP50_5 in ANC SMD 2B08, which contain a high concentration of 311 missed <span class="kw-recycle">recycling</span> pickup complaints. But searching for information on DPW service routes is remarkably difficult: I couldn’t find these on the <a href="https://opendata.dc.gov/" target="_blank" rel="noopener">Open Data DC</a> site, nor on basic Google searches. As it turns out, Gemini/Antigravity pulled data from sites I cannot directly access on a web browser using DPW’s <a href="https://experience.arcgis.com/experience/dc136d89551c4a039757659567950c0e/" target="_blank" rel="noopener">Routes Assignment Experience Builder</a> and the DC Office of the Chief Technology Officer’s (OCTO’s) <a href="https://maps2.dcgis.dc.gov/dcgis/rest/services" target="_blank" rel="noopener">REST Services Directory</a>. I was able to eventually confirm these routes exist, but it was not easy.</p>
+
+      <p>For these little routes, I couldn’t figure out the exact expansion of the initialism RSP, but it seemingly stands for <span class="kw-recycle">Recycling</span> Special/Service/Single-stream Program/Packer. For RSP50_5, the 50 is the route group identifier, and the _5 redundantly identifies the day of the week (Friday). For <span class="kw-recycle">recycling</span>, 6 of these are identified: RSP10_1, RSP20_2, RSP21_2, RSP30_3, RSP40_4, RSP50_5. For <span class="kw-trash">trash</span>, 7 of these are identified: IC10, IC11, IC20, IC21, OR11, OR21, and OR30. They don’t denote the special case in the initialisms, which seemingly stands for Inner City/Circle and Outer Ring, but use a similar two digit route group identifier which implies the day of the week.</p>
+
+      <p>The special routes don’t cover a lot of service addresses, but they do seem to have a lot of missed collections. Consider OR30, whose fractional area combined with ~50 requests saw a density of &gt;1,000/sqmi (OR21 saw ~2,000/sqmi on just 2 requests, but the request count and route are too small to see as anything but noise).</p>
+
+      <p>A look at <a href="tables.html">the charts</a> will show you that Monday routes were the least reliable and Thursday routes were the most reliable. I don’t have much to say about this other than it looks like some of you have lucky pickup days assigned and that perhaps sanitation workers take inspiration from Garfield.</p>
+
+      <h3>Hypothesis Generation</h3>
+
+      <p>The clearest overall theme is that DPW is ignoring their massive service problem. Service across all 8 Wards, all 46 ANCs, all 345 SMDs, and all 223 (103 <span class="kw-trash">trash</span> and 120 <span class="kw-recycle">recycling</span>) routes deserve scrutiny. Ask DPW and they might tell you that there are frequent call-outs, which were more intense in the <a href="https://grist.org/extreme-heat/yes-this-summer-really-was-as-hot-as-you-think-it-was/" target="_blank" rel="noopener">hottest summer on record</a>.</p>
+
+      <p>Looking at some of these smaller routes, it’s hard not to think that they’re less resilient to call-outs. If a single person can’t make their shift, does it mean that the route performance is degraded? Some sites skipped? The route skipped entirely that day? To investigate this hypothesis, I FOIA’d (R014873-093026, September 30th, 2026) employee counts and leave per route per day since the beginning of the year. I’ll add any updates here.</p>
+
+      <p>I’ve at least seen incidental sick reporting and route delays, so I know DPW has the historical data to predict this, and regardless of the analysis. Even on its face, they could, should, <em>must</em> hire more people. Less staff leads to more overtime, which leads to more expenditure, which leads to less staff. It’s a vicious cycle.</p>
+
+      <p>It’s also possible that DPW’s community relations team may have inaccurate information on routes. If they don’t share clear and accurate data with the public, it’s certainly possible they don’t share it internally either. It would not surprise me if the reason for repeat misses on some of these routes is that a follow-up collection from a 311 report is routed to the wrong place or the wrong team. They wouldn’t be the only <a href="https://statter911.com/2025/10/19/dc911-more-blown-addresses-new-rules-to-help-hide-mistakes/" target="_blank" rel="noopener">DC agency with that problem</a>.</p>
+
+      <p>DPW could investigate their data and make these changes. DPW could provide updated information to all residents without a FOIA. DPW could improve their infrastructure, physical and digital, instead of allowing it to break and stay broken.</p>
+
+      <h3>Call to Action</h3>
 
       <p>DPW has not had a good year. But it’s hard to look at the <a href="https://github.com/user-attachments/files/32562927/FY26.Plan.-.DPW.pdf" target="_blank" rel="noopener">FY2026 Performance Plan</a> and think key performance indicators have been met. Sure, residential <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickup under the Solid Waste Management Administration isn’t <em>all</em> of what DPW does, but it certainly is one of the most salient touchpoints to the District government. If people don’t get routine service—and worse, if people can no longer depend on reporting missed service—faith in basic functions of local government start to erode pretty quickly. My neighbors have had repeat misses and have been frankly gaslit by absurd responses from DPW and their community relations team, and something’s got to give. We need a real plan, and solid, material change, sooner rather than later.</p>
 
-      <p>If you’re reading this and you’re a resident who’s missed service: keep reporting to 311, you’re not alone. Write to your ANC, Councilmember, and DPW.</p>
+      <p>If you’re reading this and you’re a resident who’s missed service: keep entering 311 requests, you’re not alone. Write to your ANC, Councilmember, and DPW.</p>
 
       <p>If you’re reading this and you’re in Council: demand answers from DPW and budget them accordingly for fixes. Make sure leadership is held accountable.</p>
 
