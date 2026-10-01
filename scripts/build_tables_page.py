@@ -1164,12 +1164,11 @@ html_content += f"""
             bodyFont: {{ family: 'IBM Plex Mono', size: 11 }},
             callbacks: {{
               title: function(items) {{
-                if (!items || !items.length) return '';
-                if (items.length === 1) {{
+                if (items && items.length === 1) {{
                   const pt = items[0].raw;
                   return `Route ${{pt.route_id}} (${{pt.stream}})`;
                 }}
-                return `${{items.length}} Overlapping Routes`;
+                return '';
               }},
               label: function(context) {{
                 const pt = context.raw;
