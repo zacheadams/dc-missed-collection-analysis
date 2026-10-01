@@ -583,20 +583,29 @@
     }
 
     /* Mobile Responsive Layout and Touch Handling */
+
+    /* Hidden on desktop — shown only inside @media block */
+    .mobile-fab {
+      display: none;
+    }
+    .drawer-backdrop {
+      display: none;
+    }
+    /* Sheet handle hidden on desktop */
     .sheet-handle {
       display: none;
     }
-
+    /* Mobile header and inspector toggle hidden on desktop */
     .mobile-control-header {
       display: none;
     }
-
-    .mobile-toggle-indicator,
     .mobile-inspector-toggle {
       display: none;
     }
 
     @media (max-width: 768px) {
+
+      /* ── Site Nav ──────────────────────────────── */
       .site-nav {
         padding: 8px 12px;
         flex-wrap: wrap;
@@ -618,95 +627,96 @@
         white-space: nowrap;
         flex-shrink: 0;
       }
+
+      /* Map workspace height */
       .map-workspace {
         height: calc(100vh - 84px);
       }
+
+      /* ── CONTROL PANEL → Bottom Drawer ─────────── */
       .control-panel {
-        top: 0;
+        position: fixed;
+        bottom: 0;
         left: 0;
         right: 0;
+        top: auto;
         width: 100%;
-        padding: 8px 12px 12px 12px;
-        border-radius: 0 0 2px 2px;
-        border-top: none;
+        max-height: 82vh;
+        border-radius: 12px 12px 0 0;
+        border-top: 1px solid var(--border);
         border-left: none;
         border-right: none;
-        border-bottom: 1px solid var(--border);
-        max-height: calc(100vh - 160px);
+        border-bottom: none;
+        padding: 0 14px env(safe-area-inset-bottom, 20px) 14px;
+        z-index: 700;
+        transform: translateY(100%);
+        transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        z-index: 600;
+        will-change: transform;
       }
+
+      .control-panel.is-open {
+        transform: translateY(0);
+      }
+
+      /* Drag handle area at top of control drawer */
       .mobile-control-header {
         display: flex;
         flex-direction: column;
         align-items: center;
-        cursor: pointer;
+        padding-bottom: 8px;
+        cursor: grab;
         user-select: none;
         -webkit-user-select: none;
-        padding-bottom: 2px;
+        touch-action: none;
       }
-      .mobile-control-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        padding: 0 4px;
-      }
-      .mobile-control-title {
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: var(--text-main);
-      }
-      .mobile-toggle-indicator {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 44px;
-        min-height: 44px;
-        font-size: 14px;
-        font-weight: 800;
-        color: var(--accent);
-      }
+
+      /* ── INSPECTOR PANEL → Two-Snap Bottom Drawer ─ */
       .inspector-panel {
-        top: auto;
+        position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
+        top: auto;
         width: 100%;
-        border-radius: 2px 2px 0 0;
-        padding: 8px 14px 14px 14px;
+        border-radius: 12px 12px 0 0;
+        border-top: 1px solid var(--border);
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        padding: 0 14px env(safe-area-inset-bottom, 20px) 14px;
+        z-index: 650;
+        transform: translateY(100%);
+        transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+        overflow: hidden;
+        will-change: transform;
+        max-height: 65vh;
         box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
-        max-height: 55vh;
+      }
+
+      /* Peek snap: title + stat grid visible (~130px) */
+      .inspector-panel.is-peek {
+        transform: translateY(0);
+        max-height: 130px;
+        overflow: hidden;
+      }
+
+      /* Expanded snap: full panel, scrollable */
+      .inspector-panel.is-expanded {
+        transform: translateY(0);
+        max-height: 65vh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
-        z-index: 600;
       }
-      .sheet-handle {
-        display: block;
-        width: 44px;
-        height: 5px;
-        border-radius: 2px;
-        background: var(--border-dark);
-        margin: 0 auto 6px auto;
-        cursor: pointer;
-        position: relative;
-      }
-      .sheet-handle::before {
-        content: '';
-        position: absolute;
-        top: -12px;
-        bottom: -12px;
-        left: -20px;
-        right: -20px;
-      }
+
       .inspector-header {
         align-items: center;
         cursor: pointer;
-        padding-bottom: 2px;
+        padding-bottom: 4px;
       }
+
+      /* Inspector expand/collapse arrow */
       .mobile-inspector-toggle {
         display: flex;
         align-items: center;
@@ -717,23 +727,97 @@
         font-weight: 800;
         color: var(--accent);
       }
+
+      /* ── Sheet handle pill (both drawers) ─────────── */
+      .sheet-handle {
+        display: block;
+        width: 36px;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--border-dark);
+        margin: 10px auto 8px auto;
+        flex-shrink: 0;
+        cursor: grab;
+        touch-action: none;
+      }
+
+      /* ── FAB — Filters button ──────────────────────── */
+      .mobile-fab {
+        display: flex;
+        position: fixed;
+        bottom: 20px;
+        left: 16px;
+        z-index: 800;
+        background: var(--bg-panel);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--border);
+        border-radius: 2px;
+        padding: 10px 16px;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--text-main);
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+        align-items: center;
+        gap: 6px;
+        min-height: 44px;
+        min-width: 44px;
+        transition: background 0.15s, transform 0.15s;
+      }
+
+      .mobile-fab:active {
+        transform: scale(0.96);
+        background: var(--bg-input);
+      }
+
+      /* ── Backdrop ──────────────────────────────────── */
+      .drawer-backdrop {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.38);
+        z-index: 600;
+      }
+
+      .drawer-backdrop.is-visible {
+        display: block;
+      }
+
+      /* ── Legend: hides when any drawer is active ───── */
       .legend-panel {
+        position: fixed;
         bottom: 80px;
-        left: 8px;
+        left: 16px;
+        right: auto;
         padding: 6px 10px;
         max-width: calc(100vw - 80px);
+        z-index: 500;
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.2s ease;
       }
+
+      body.drawer-active .legend-panel {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Leaflet attribution — above FAB */
       .leaflet-bottom.leaflet-right {
         bottom: 80px;
         right: 8px;
       }
+
+      /* ── Touch target sizing ───────────────────────── */
       .hierarchy-select, .period-btn, .metric-btn, #smd-search {
-        min-height: 38px;
-        font-size: 12px;
+        min-height: 44px;
+        font-size: 13px;
       }
       .checkbox-row {
-        padding: 6px 0;
-        font-size: 12px;
+        padding: 8px 0;
+        font-size: 13px;
       }
     }
 
@@ -842,13 +926,23 @@
       </div>
     </div>
 
+    <!-- Mobile FAB: opens Filters drawer (hidden on desktop via CSS) -->
+    <button class="mobile-fab" id="mobile-fab-filters"
+            onclick="toggleDrawer('control')"
+            aria-label="Open map filters">
+      ☰ Filters
+    </button>
+
+    <!-- Backdrop: tap to dismiss any open drawer -->
+    <div class="drawer-backdrop" id="drawer-backdrop"
+         onclick="closeAllDrawers()" aria-hidden="true"></div>
+
     <!-- Floating Left Control Panel -->
     <div class="control-panel" id="control-panel">
-      <div class="mobile-control-header" onclick="toggleMobilePanel('control')">
+      <div class="mobile-control-header" id="ctrl-sheet-handle">
         <div class="sheet-handle"></div>
         <div class="mobile-control-bar">
           <span class="mobile-control-title">Filters &amp; Layers</span>
-          <span class="mobile-toggle-indicator" id="ctrl-toggle-icon">▾</span>
         </div>
       </div>
 
@@ -933,8 +1027,8 @@
 
     <!-- Floating Right Inspector Panel -->
     <div class="inspector-panel" id="inspector-panel">
-      <div class="sheet-handle" onclick="toggleMobilePanel('inspector')"></div>
-      <div class="inspector-header" onclick="toggleMobilePanel('inspector')">
+      <div class="sheet-handle" id="insp-sheet-handle"></div>
+      <div class="inspector-header" id="insp-header" onclick="handleInspectorHeaderTap()">
         <div>
           <div class="inspector-title" id="insp-title">District of Columbia</div>
           <div class="inspector-sub" id="insp-sub">Citywide Performance Summary</div>
@@ -3102,51 +3196,187 @@
       }
     }
 
-    function collapseMobileControlPanel() {
-      if (window.innerWidth <= 768) {
-        const cp = document.getElementById('control-panel');
-        const body = document.getElementById('ctrl-panel-body');
-        const icon = document.getElementById('ctrl-toggle-icon');
-        if (body && body.style.display !== 'none') {
-          body.style.display = 'none';
-          if (cp) cp.classList.remove('is-expanded');
-          if (icon) icon.innerText = '▾';
+    // ═══════════════════════════════════════════════════
+    //  MOBILE DRAWER SYSTEM (mobile-only, ≤768px)
+    // ═══════════════════════════════════════════════════
+
+    // Which drawer is logically open: null | 'control' | 'inspector'
+    let _openDrawer = null;
+    // Inspector snap state: null | 'peek' | 'expanded'
+    let _inspectorSnap = null;
+
+    /** Toggle body class that hides the legend when any drawer is open */
+    function _setDrawerActive(active) {
+      document.body.classList.toggle('drawer-active', active);
+    }
+
+    /** Show/hide the semi-transparent backdrop */
+    function _setBackdrop(visible) {
+      const el = document.getElementById('drawer-backdrop');
+      if (el) el.classList.toggle('is-visible', visible);
+    }
+
+    // ── Control (Filters) drawer ───────────────────────
+    function _openControlDrawer() {
+      if (_openDrawer === 'inspector') _closeInspectorDrawer();
+      const cp = document.getElementById('control-panel');
+      const fab = document.getElementById('mobile-fab-filters');
+      if (cp) cp.classList.add('is-open');
+      if (fab) fab.textContent = '✕ Close';
+      _setBackdrop(true);
+      _setDrawerActive(true);
+      _openDrawer = 'control';
+    }
+
+    function _closeControlDrawer() {
+      const cp = document.getElementById('control-panel');
+      const fab = document.getElementById('mobile-fab-filters');
+      if (cp) cp.classList.remove('is-open');
+      if (fab) fab.textContent = '☰ Filters';
+      if (_openDrawer === 'control') {
+        _openDrawer = null;
+        _setBackdrop(false);
+        _setDrawerActive(false);
+      }
+    }
+
+    // ── Inspector drawer ───────────────────────────────
+    function _openInspectorPeek() {
+      if (_openDrawer === 'control') _closeControlDrawer();
+      const insp = document.getElementById('inspector-panel');
+      if (!insp) return;
+      insp.classList.remove('is-expanded');
+      insp.classList.add('is-peek');
+      _inspectorSnap = 'peek';
+      const icon = document.getElementById('insp-toggle-icon');
+      if (icon) icon.textContent = '▴';
+      _setBackdrop(true);
+      _setDrawerActive(true);
+      _openDrawer = 'inspector';
+    }
+
+    function _expandInspector() {
+      const insp = document.getElementById('inspector-panel');
+      if (!insp) return;
+      insp.classList.remove('is-peek');
+      insp.classList.add('is-expanded');
+      _inspectorSnap = 'expanded';
+      const icon = document.getElementById('insp-toggle-icon');
+      if (icon) icon.textContent = '▾';
+    }
+
+    function _closeInspectorDrawer() {
+      const insp = document.getElementById('inspector-panel');
+      if (!insp) return;
+      insp.classList.remove('is-peek', 'is-expanded');
+      _inspectorSnap = null;
+      const icon = document.getElementById('insp-toggle-icon');
+      if (icon) icon.textContent = '▴';
+      if (_openDrawer === 'inspector') {
+        _openDrawer = null;
+        _setBackdrop(false);
+        _setDrawerActive(false);
+      }
+    }
+
+    // ── Public API ─────────────────────────────────────
+
+    /** Tap inspector header: peek → expanded → closed */
+    function handleInspectorHeaderTap() {
+      if (window.innerWidth > 768) return;
+      if (_inspectorSnap === 'peek') {
+        _expandInspector();
+      } else if (_inspectorSnap === 'expanded') {
+        _closeInspectorDrawer();
+      }
+    }
+
+    /** Toggle the Filters drawer (called by FAB) */
+    function toggleDrawer(type) {
+      if (window.innerWidth > 768) return;
+      if (type === 'control') {
+        if (_openDrawer === 'control') {
+          _closeControlDrawer();
+        } else {
+          _openControlDrawer();
         }
       }
     }
 
-    // Mobile Drawer & Filter Toggles
-    function toggleMobilePanel(type) {
+    /** Close all open drawers — called by backdrop tap or swipe dismiss */
+    function closeAllDrawers() {
       if (window.innerWidth > 768) return;
-      if (type === 'control') {
-        const cp = document.getElementById('control-panel');
-        const body = document.getElementById('ctrl-panel-body');
-        const icon = document.getElementById('ctrl-toggle-icon');
-        const isHidden = body.style.display === 'none';
-        body.style.display = isHidden ? 'block' : 'none';
-        if (cp) cp.classList.toggle('is-expanded', isHidden);
-        if (icon) icon.innerText = isHidden ? '▴' : '▾';
-      } else if (type === 'inspector') {
-        const body = document.getElementById('insp-panel-body');
-        const icon = document.getElementById('insp-toggle-icon');
-        const isHidden = body.style.display === 'none';
-        body.style.display = isHidden ? 'block' : 'none';
-        if (icon) icon.innerText = isHidden ? '▾' : '▴';
-      }
+      _closeControlDrawer();
+      _closeInspectorDrawer();
+      _setBackdrop(false);
+      _setDrawerActive(false);
+      _openDrawer = null;
     }
 
+    /** Called when user taps a district → open Inspector at Peek snap */
     function ensureMobileInspectorOpen() {
       if (window.innerWidth <= 768) {
-        const body = document.getElementById('insp-panel-body');
-        const icon = document.getElementById('insp-toggle-icon');
-        if (body) body.style.display = 'block';
-        if (icon) icon.innerText = '▾';
+        _openInspectorPeek();
       }
     }
 
+    /** Called when control panel should collapse (e.g. Reset to Default) */
+    function collapseMobileControlPanel() {
+      if (window.innerWidth <= 768) {
+        _closeControlDrawer();
+      }
+    }
+
+    // ── Swipe-to-dismiss ───────────────────────────────
+    function initDrawerSwipeToDismiss(panelId, getType) {
+      const el = document.getElementById(panelId);
+      if (!el) return;
+      let startY = 0, dragY = 0, dragging = false;
+
+      el.addEventListener('pointerdown', function(e) {
+        const handle = el.querySelector('.sheet-handle');
+        const isHandle = handle && handle.contains(e.target);
+        const isTop = e.offsetY < 44;
+        if (!isHandle && !isTop) return;
+        startY = e.clientY;
+        dragY = 0;
+        dragging = true;
+        el.style.transition = 'none';
+        el.setPointerCapture(e.pointerId);
+      });
+
+      el.addEventListener('pointermove', function(e) {
+        if (!dragging) return;
+        dragY = e.clientY - startY;
+        if (dragY > 0) el.style.transform = 'translateY(' + dragY + 'px)';
+      });
+
+      function onEnd() {
+        if (!dragging) return;
+        dragging = false;
+        el.style.transition = '';
+        el.style.transform = '';
+        const type = getType();
+        if (dragY > 90) {
+          if (type === 'control') {
+            _closeControlDrawer();
+          } else if (type === 'inspector') {
+            _closeInspectorDrawer();
+          }
+        }
+        dragY = 0;
+      }
+
+      el.addEventListener('pointerup', onEnd);
+      el.addEventListener('pointercancel', onEnd);
+    }
+
+    // ── initMobileHandling ─────────────────────────────
     function initMobileHandling() {
       const cp = document.getElementById('control-panel');
       const insp = document.getElementById('inspector-panel');
+
+      // Prevent Leaflet from swallowing panel interactions
       if (cp) {
         L.DomEvent.disableClickPropagation(cp);
         L.DomEvent.disableScrollPropagation(cp);
@@ -3156,87 +3386,55 @@
         L.DomEvent.disableScrollPropagation(insp);
       }
 
-      // Initial state on mobile: collapse controls so map is prominent
-      if (window.innerWidth <= 768) {
-        const ctrlBody = document.getElementById('ctrl-panel-body');
-        if (ctrlBody) ctrlBody.style.display = 'none';
-        const ctrlIcon = document.getElementById('ctrl-toggle-icon');
-        if (ctrlIcon) ctrlIcon.innerText = '▾';
-      }
+      // Swipe-to-dismiss on both panels
+      initDrawerSwipeToDismiss('control-panel', function() { return 'control'; });
+      initDrawerSwipeToDismiss('inspector-panel', function() { return 'inspector'; });
 
-      // Breakpoint tracking on resize/orientation change
+      // Breakpoint tracking: reset drawer state when crossing 768px
       let wasMobile = window.innerWidth <= 768;
       window.addEventListener('resize', function() {
         const isMobile = window.innerWidth <= 768;
         if (isMobile !== wasMobile) {
           wasMobile = isMobile;
-          const cp = document.getElementById('control-panel');
-          const ctrlBody = document.getElementById('ctrl-panel-body');
-          const inspBody = document.getElementById('insp-panel-body');
-          const ctrlIcon = document.getElementById('ctrl-toggle-icon');
-          const inspIcon = document.getElementById('insp-toggle-icon');
-          if (isMobile) {
-            if (ctrlBody) ctrlBody.style.display = 'none';
-            if (ctrlIcon) ctrlIcon.innerText = '▾';
-            if (inspIcon) inspIcon.innerText = '▴';
-            if (cp) {
-              cp.classList.remove('is-expanded');
-              cp.style.maxHeight = '';
-            }
-          } else {
-            if (ctrlBody) ctrlBody.style.display = '';
-            if (inspBody) inspBody.style.display = '';
-            if (cp) {
-              cp.classList.remove('is-expanded');
-              cp.style.maxHeight = '';
-            }
-          }
+          // Reset all drawer state cleanly on breakpoint change
+          if (cp) { cp.classList.remove('is-open'); cp.style.transform = ''; cp.style.maxHeight = ''; }
+          if (insp) { insp.classList.remove('is-peek', 'is-expanded'); insp.style.transform = ''; }
+          _openDrawer = null;
+          _inspectorSnap = null;
+          _setBackdrop(false);
+          _setDrawerActive(false);
+          const fab = document.getElementById('mobile-fab-filters');
+          if (fab) fab.textContent = '☰ Filters';
         }
       });
 
-      // Tap outside to collapse control panel on mobile
-      document.addEventListener('click', function(e) {
-        if (window.innerWidth <= 768) {
-          const cp = document.getElementById('control-panel');
-          if (cp && !cp.contains(e.target)) {
-            collapseMobileControlPanel();
-          }
-        }
-      });
-
-      if (typeof map !== 'undefined' && map) {
-        map.on('click', collapseMobileControlPanel);
-      }
-
-      // Virtual viewport handling for mobile virtual keyboard
+      // Virtual keyboard: adjust drawer max-height when keyboard opens
       if (window.visualViewport) {
         window.visualViewport.addEventListener('resize', function() {
-          if (window.innerWidth <= 768) {
-            const cp = document.getElementById('control-panel');
-            const ctrlBody = document.getElementById('ctrl-panel-body');
-            if (cp && ctrlBody && ctrlBody.style.display !== 'none') {
+          if (window.innerWidth <= 768 && _openDrawer === 'control') {
+            const cpEl = document.getElementById('control-panel');
+            if (cpEl) {
               const vh = window.visualViewport.height;
-              cp.style.maxHeight = Math.max(160, Math.floor(vh - 20)) + 'px';
+              cpEl.style.maxHeight = Math.max(160, Math.floor(vh - 20)) + 'px';
             }
           }
         });
       }
 
+      // Search input: scroll into view when keyboard appears
       const searchInput = document.getElementById('smd-search');
       if (searchInput) {
         searchInput.addEventListener('focus', function() {
           if (window.innerWidth <= 768) {
-            setTimeout(() => {
+            setTimeout(function() {
               searchInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 300);
           }
         });
         searchInput.addEventListener('blur', function() {
           if (window.innerWidth <= 768) {
-            const cp = document.getElementById('control-panel');
-            if (cp && window.visualViewport) {
-              cp.style.maxHeight = '';
-            }
+            const cpEl = document.getElementById('control-panel');
+            if (cpEl) cpEl.style.maxHeight = '';
           }
         });
       }
