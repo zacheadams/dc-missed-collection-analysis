@@ -1,9 +1,9 @@
 name: Scheduled 311 Data Refresh
 
 on:
-  schedule:
-    # Runs every Monday at 10:00 AM UTC (6:00 AM EDT)
-    - cron: '0 10 * * 1'
+  # schedule:
+  #   # Scheduled runs disabled (previously ran every Monday at 10:00 AM UTC)
+  #   - cron: '0 10 * * 1'
   workflow_dispatch:
     # Allows manual trigger via the GitHub Actions tab
 
