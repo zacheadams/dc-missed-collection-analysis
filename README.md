@@ -1,5 +1,8 @@
 # Washington, DC Missed Collection Analysis
 
+> [!NOTE]
+> The technical documentation in this repository's Markdown files (`README.md`, `Agents.md`) is structured specifically for automated agents, indexing, and technical architecture reference. The actual human-written and human-readable content, investigative narrative, and interactive analyses are published on the rendered site—particularly the **[Operational Report](https://zacheadams.github.io/dc-missed-collection-analysis/report.html)**, alongside the **[Project Hub](https://zacheadams.github.io/dc-missed-collection-analysis/)**, **[Interactive Map Explorer](https://zacheadams.github.io/dc-missed-collection-analysis/map.html)**, and **[Tables and Graphs](https://zacheadams.github.io/dc-missed-collection-analysis/tables.html)**.
+
 An open spatial analysis and interactive mapping application evaluating Washington, DC Department of Public Works (DPW) missed trash (`S0441`) and missed recycling (`S0321`) 311 service requests.
 
 This resource provides an operational proof of concept for the DC Department of Public Works (DPW), route supervisors, and data analytics teams, while providing accessible spatial intelligence for Advisory Neighborhood Commissioners (ANCs), Councilmembers, policy analysts, and residents to understand waste collection reliability, routing bottlenecks, and service recurrence.
@@ -33,9 +36,9 @@ python3 -m http.server 8000
 
 ## Automated Data Refresh & Pipeline
 
-This repository includes a fully automated, incremental data pipeline that keeps the application up to date:
+This repository includes an automated, incremental data pipeline that keeps the application up to date:
 
-- **Weekly GitHub Actions Automation**: A scheduled GitHub Actions workflow (`.github/workflows/update_data.yml`) runs every **Monday at 10:00 AM UTC (6:00 AM EDT)**, as well as on-demand via manual `workflow_dispatch`.
+- **GitHub Actions Automation**: A GitHub Actions workflow (`.github/workflows/update_data.yml`) runs on demand via manual `workflow_dispatch` (scheduled cron runs can also be configured).
 - **Incremental Data Ingestion**: Rather than redownloading the entire 180-day archive, `scripts/fetch_311_data.py` reads existing records to identify the latest submission timestamp (`max(ADDDATE)`). It queries Open Data DC strictly for records added or updated within a 48-hour buffer, merges new tickets by unique `OBJECTID`, and prunes records older than 180 days to maintain a clean rolling window.
 - **Zero External Dependencies**: All scripts rely solely on the Python standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`), requiring no external packages or third-party paid infrastructure.
 - **Automatic GitHub Pages Deployment**: Any detected data or application changes are automatically committed by `github-actions[bot]` and pushed to `main`, triggering instantaneous GitHub Pages redeployment.
