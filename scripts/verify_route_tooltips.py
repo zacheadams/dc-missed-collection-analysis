@@ -72,23 +72,23 @@ def verify():
 
     print("PASS: data/route_areas.json verified for IC106, 106_2, R107_5, R210_5 (poly & line), and IC20 (sorted).")
 
-    # 2. Verify data/route_180d_stats.json
-    rs_path = os.path.join(BASE_DIR, 'data/route_180d_stats.json')
-    assert os.path.exists(rs_path), "Missing data/route_180d_stats.json"
+    # 2. Verify data/route_stats.json
+    rs_path = os.path.join(BASE_DIR, 'data/route_stats.json')
+    assert os.path.exists(rs_path), "Missing data/route_stats.json"
     with open(rs_path, 'r', encoding='utf-8') as f:
         rs = json.load(f)
 
     ic106_rs = next((r for r in rs.get('trash_routes', []) if r['route_id'] == 'IC106'), None)
-    assert ic106_rs, "IC106 missing from route_180d_stats.json"
-    assert '1C' in ic106_rs['ancs'] and '2D' in ic106_rs['ancs'], f"ANC 1C, 2D missing from IC106 in route_180d_stats: {ic106_rs['ancs']}"
-    assert 'Kalorama Heights' in ic106_rs['neighborhoods'], f"Kalorama Heights missing from IC106 in route_180d_stats"
+    assert ic106_rs, "IC106 missing from route_stats.json"
+    assert '1C' in ic106_rs['ancs'] and '2D' in ic106_rs['ancs'], f"ANC 1C, 2D missing from IC106 in route_stats: {ic106_rs['ancs']}"
+    assert 'Kalorama Heights' in ic106_rs['neighborhoods'], f"Kalorama Heights missing from IC106 in route_stats"
 
     r210_rs = next((r for r in rs.get('recycle_routes', []) if r['route_id'] == 'R210_5'), None)
-    assert r210_rs, "R210_5 missing from route_180d_stats.json"
+    assert r210_rs, "R210_5 missing from route_stats.json"
     assert '2B' in r210_rs['ancs'] and '2A' in r210_rs['ancs'] and '2D' in r210_rs['ancs'], \
-        f"ANC 2A, 2B, 2D missing from R210_5 in route_180d_stats: {r210_rs['ancs']}"
-    assert 'Dupont Circle' in r210_rs['neighborhoods'], f"Dupont Circle missing from R210_5 in route_180d_stats"
-    print("PASS: data/route_180d_stats.json verified for IC106 and R210_5.")
+        f"ANC 2A, 2B, 2D missing from R210_5 in route_stats: {r210_rs['ancs']}"
+    assert 'Dupont Circle' in r210_rs['neighborhoods'], f"Dupont Circle missing from R210_5 in route_stats"
+    print("PASS: data/route_stats.json verified for IC106 and R210_5.")
 
     # 3. Verify data/dc_map_data_v2.json
     map_data_path = os.path.join(BASE_DIR, 'data/dc_map_data_v2.json')

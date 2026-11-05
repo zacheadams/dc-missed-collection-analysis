@@ -2,7 +2,7 @@
 """
 Compute address deduplication and distinct-day repeat failure metrics across
 all 345 DC Single Member Districts (SMDs) and 8 Wards over 180 days.
-Outputs data/smd_180d_address_stats.json.
+Outputs data/smd_address_stats.json.
 """
 
 import json
@@ -31,14 +31,32 @@ def extract_polys(geom):
 
 def analyze_repeat_addresses():
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
-    sr_path = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
-    output_path = os.path.join(BASE_DIR, "data/smd_180d_address_stats.json")
+    sr_path = os.path.join(BASE_DIR, "data/dc_service_requests.json")
+    if not os.path.exists(sr_path):
+        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
+    output_path = os.path.join(BASE_DIR, "data/smd_address_stats.json")
 
     with open(smd_path, "r", encoding="utf-8") as f:
         smds_geojson = json.load(f)
 
     with open(sr_path, "r", encoding="utf-8") as f:
-        sr_data = json.load(f)
+        all_sr_data = json.load(f)
+
+    # Dynamically slice to the rolling 180-day window
+    if all_sr_data:
+        max_dt_ms = max(
+            item.get("attributes", item).get("ADDDATE", 0)
+            for item in all_sr_data
+            if item.get("attributes", item).get("ADDDATE")
+        )
+        cutoff_180d_ms = max_dt_ms - (180 * 86400 * 1000)
+        sr_data = [
+            item for item in all_sr_data
+            if item.get("attributes", item).get("ADDDATE", 0) >= cutoff_180d_ms
+        ]
+        print(f"Loaded {len(all_sr_data)} total records; sliced {len(sr_data)} records for 180-day SMD repeat analysis.")
+    else:
+        sr_data = all_sr_data
 
     smd_cache = []
     for feat in smds_geojson["features"]:

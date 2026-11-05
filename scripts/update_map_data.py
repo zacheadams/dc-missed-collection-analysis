@@ -108,7 +108,9 @@ def compute_window_ranks(smd_index, ward_index, prefix):
     return ward_stats
 
 def update_map_data():
-    sr_path = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
+    sr_path = os.path.join(BASE_DIR, "data/dc_service_requests.json")
+    if not os.path.exists(sr_path):
+        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
     ward_path = os.path.join(BASE_DIR, "data/dc_wards.geojson")
     route_areas_path = os.path.join(BASE_DIR, "data/route_areas.json")
