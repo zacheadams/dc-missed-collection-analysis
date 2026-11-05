@@ -14,7 +14,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DEFAULT_DATA_FILE = os.path.join(BASE_DIR, "data/dc_180d_service_requests.json")
+DEFAULT_DATA_FILE = os.path.join(BASE_DIR, "data/dc_service_requests.json")
 
 def fetch_with_retry(url, headers, max_retries=3):
     req = urllib.request.Request(url, headers=headers)
@@ -35,9 +35,10 @@ def fetch_with_retry(url, headers, max_retries=3):
             print(f"Fetch failed: {e}. Retrying in {wait_time}s...")
             time.sleep(wait_time)
 
-def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, rolling_days=180):
+def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, start_override=None):
     existing_records = {}
     
+    # Load from target output_file
     if os.path.exists(output_file) and not full_fetch:
         try:
             with open(output_file, "r", encoding="utf-8") as f:
@@ -53,19 +54,37 @@ def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, rol
             existing_records = {}
 
     now = datetime.now(timezone.utc)
-    if existing_records and not full_fetch:
-        max_dt_ms = max(
+    target_history_start = datetime(2026, 4, 1, 0, 0, 0, tzinfo=timezone.utc)
+
+    # Determine query start date
+    if start_override:
+        start_date = start_override
+        mode_desc = f"Custom query from {start_date.strftime('%Y-%m-%d %H:%M:%S')}"
+    elif existing_records and not full_fetch:
+        min_dt_ms = min(
             r["attributes"]["ADDDATE"]
             for r in existing_records.values()
             if r.get("attributes", {}).get("ADDDATE")
         )
-        max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0, tz=timezone.utc)
-        # 48-hour buffer to capture status/resolution changes on recent tickets
-        start_date = max_dt - timedelta(hours=48)
-        mode_desc = f"Incremental query from {start_date.strftime('%Y-%m-%d %H:%M:%S')} (48h buffer)"
+        min_dt = datetime.fromtimestamp(min_dt_ms / 1000.0, tz=timezone.utc)
+        
+        # Check if we need historical backfill to April 1, 2026
+        if min_dt > target_history_start + timedelta(days=2):
+            start_date = target_history_start
+            mode_desc = f"Historical backfill query from {start_date.strftime('%Y-%m-%d %H:%M:%S')}"
+        else:
+            max_dt_ms = max(
+                r["attributes"]["ADDDATE"]
+                for r in existing_records.values()
+                if r.get("attributes", {}).get("ADDDATE")
+            )
+            max_dt = datetime.fromtimestamp(max_dt_ms / 1000.0, tz=timezone.utc)
+            # 48-hour buffer to capture status/resolution changes on recent tickets
+            start_date = max_dt - timedelta(hours=48)
+            mode_desc = f"Incremental query from {start_date.strftime('%Y-%m-%d %H:%M:%S')} (48h buffer)"
     else:
-        start_date = now - timedelta(days=rolling_days)
-        mode_desc = f"Full {rolling_days}-day query from {start_date.strftime('%Y-%m-%d 00:00:00')}"
+        start_date = target_history_start
+        mode_desc = f"Full 2026 query from {start_date.strftime('%Y-%m-%d 00:00:00')}"
 
     print(mode_desc)
     start_str = start_date.strftime("%Y-%m-%d %H:%M:%S")
@@ -77,9 +96,10 @@ def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, rol
     offset = 0
     headers = {"User-Agent": "DC-311-Missed-Collection-Pipeline/1.0"}
 
+    # Query Layer 21 (All Service Requests - 2026) for comprehensive 2026 history
     while True:
         url = (
-            f"https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/ServiceRequests/FeatureServer/13/query"
+            f"https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/ServiceRequests/FeatureServer/21/query"
             f"?where={urllib.parse.quote(where)}&outFields={fields}&returnGeometry=false"
             f"&resultOffset={offset}&resultRecordCount=1000&f=json"
         )
@@ -106,16 +126,8 @@ def update_service_requests(output_file=DEFAULT_DATA_FILE, full_fetch=False, rol
 
     print(f"Downloaded records: {new_count} new, {updated_count} refreshed.")
 
-    # Prune records older than rolling_days
-    cutoff_ms = int((now - timedelta(days=rolling_days)).timestamp() * 1000)
-    initial_total = len(existing_records)
-    active_records = [
-        r for r in existing_records.values()
-        if r.get("attributes", {}).get("ADDDATE", 0) >= cutoff_ms
-    ]
-    pruned_count = initial_total - len(active_records)
-    if pruned_count > 0:
-        print(f"Pruned {pruned_count} records older than {rolling_days} days to maintain rolling window.")
+    # All records are preserved without artificial pruning
+    active_records = list(existing_records.values())
 
     # Sort descending by ADDDATE
     active_records.sort(key=lambda r: r.get("attributes", {}).get("ADDDATE", 0), reverse=True)

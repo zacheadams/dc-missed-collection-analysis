@@ -226,10 +226,10 @@ dc-missed-collection-analysis/
 │       └── jspdf-autotable/           # jsPDF-AutoTable 3.8.2
 ├── tiles/                             # Offline Stamen Toner tiles for DC (zooms 11 to 17, Light & Blacklite)
 ├── data/                              # Aggregated datasets and geospatial boundaries
-│   ├── dc_180d_service_requests.json   # Rolling 180-day 311 missed collection records
-│   ├── route_180d_stats.json           # Precomputed DPW route-level performance and repeat metrics
+│   ├── dc_service_requests.json       # Master 311 missed collection records (expanded historical store)
+│   ├── route_stats.json               # Precomputed DPW route-level performance and repeat metrics (180d window)
 │   ├── route_areas.json                # Precomputed spatial intersections mapping routes to neighborhoods & ANCs
-│   ├── smd_180d_address_stats.json     # 180-day SMD address-level deduplication metrics
+│   ├── smd_address_stats.json         # SMD address-level deduplication metrics (180d window)
 │   ├── dc_map_data_v2.json            # 30-day map payload with route geometries and area annotations
 │   ├── dc_neighborhood_clusters.geojson # 46 official DC Neighborhood Cluster boundaries
 │   ├── dc_neighborhoods.geojson       # 132 DC Neighborhood point locations

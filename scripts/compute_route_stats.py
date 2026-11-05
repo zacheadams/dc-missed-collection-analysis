@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Computes DPW route performance metrics and exports data/route_180d_stats.json.
+Computes DPW route performance metrics and exports data/route_stats.json.
 Performs spatial point-in-polygon ray casting matching 180-day service requests
 against 103 DPW Trash Routes and 120 DPW Recycling Routes.
 
@@ -45,13 +45,31 @@ def format_trash_schedule(feats):
 
 def compute_route_stats():
     # Load datasets
-    sr_path = os.path.join(BASE_DIR, 'data', 'dc_180d_service_requests.json')
+    sr_path = os.path.join(BASE_DIR, 'data', 'dc_service_requests.json')
+    if not os.path.exists(sr_path):
+        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
     trash_geo_path = os.path.join(BASE_DIR, 'data', 'dc_trash_routes.geojson')
     rec_geo_path = os.path.join(BASE_DIR, 'data', 'dc_recycle_routes.geojson')
     areas_path = os.path.join(BASE_DIR, 'data', 'route_areas.json')
 
     with open(sr_path, 'r', encoding='utf-8') as f:
-        srs = json.load(f)
+        all_srs = json.load(f)
+
+    # Dynamically slice to the rolling 180-day window
+    if all_srs:
+        max_dt_ms = max(
+            item.get('attributes', item).get('ADDDATE', 0)
+            for item in all_srs
+            if item.get('attributes', item).get('ADDDATE')
+        )
+        cutoff_180d_ms = max_dt_ms - (180 * 86400 * 1000)
+        srs = [
+            item for item in all_srs
+            if item.get('attributes', item).get('ADDDATE', 0) >= cutoff_180d_ms
+        ]
+        print(f"Loaded {len(all_srs)} total records; sliced {len(srs)} records for the 180-day window.")
+    else:
+        srs = all_srs
 
     with open(trash_geo_path, 'r', encoding='utf-8') as f:
         trash_geo = json.load(f)
@@ -207,7 +225,7 @@ def compute_route_stats():
         reqs = recycle_srs_by_route.get(r_id, [])
         recycle_out.append(analyze_route(r_id, reqs, props, is_trash=False))
 
-    route_stats_path = os.path.join(BASE_DIR, 'data', 'route_180d_stats.json')
+    route_stats_path = os.path.join(BASE_DIR, 'data', 'route_stats.json')
     with open(route_stats_path, 'w', encoding='utf-8') as f:
         json.dump({
             'metadata': {

@@ -17,7 +17,9 @@ import json
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-addr_stats_path = os.path.join(BASE_DIR, 'data', 'smd_180d_address_stats.json')
+addr_stats_path = os.path.join(BASE_DIR, 'data', 'smd_address_stats.json')
+if not os.path.exists(addr_stats_path):
+    raise FileNotFoundError(f"Missing address stats file: {addr_stats_path}. Run scripts/analyze_repeat_addresses.py first.")
 
 with open(addr_stats_path, 'r', encoding='utf-8') as f:
     addr_data = json.load(f)

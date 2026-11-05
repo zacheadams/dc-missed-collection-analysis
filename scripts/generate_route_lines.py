@@ -430,7 +430,7 @@ def generate_route_lines():
     annotate_collection_points(data, grid_size, ward_grid, smd_grid, clust_grid)
 
     # Load stats and areas
-    stats_path = os.path.join(DATA_DIR, 'route_180d_stats.json')
+    stats_path = os.path.join(DATA_DIR, 'route_stats.json')
     areas_path = os.path.join(DATA_DIR, 'route_areas.json')
 
     trash_stats_lookup = {}

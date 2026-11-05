@@ -19,7 +19,9 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 map_data_path = os.path.join(BASE_DIR, 'data', 'dc_map_data_v2.json')
-route_stats_path = os.path.join(BASE_DIR, 'data', 'route_180d_stats.json')
+route_stats_path = os.path.join(BASE_DIR, 'data', 'route_stats.json')
+if not os.path.exists(route_stats_path):
+    raise FileNotFoundError(f"Missing route stats file: {route_stats_path}. Run scripts/compute_route_stats.py first.")
 route_areas_path = os.path.join(BASE_DIR, 'data', 'route_areas.json')
 
 with open(map_data_path, 'r', encoding='utf-8') as f:
