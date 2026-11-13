@@ -404,6 +404,13 @@ def build_route_lines(data, route_key, stream_name, stats_lookup, areas_lookup):
         else:
             props['density'] = 0.0
 
+        m30 = dict(stat_match.get('metrics_30d', {})) if stat_match else {}
+        if props['area_sq_mi'] and props['area_sq_mi'] > 0:
+            m30['density'] = round(m30.get('total', 0) / props['area_sq_mi'], 1)
+        else:
+            m30['density'] = 0.0
+        props['metrics_30d'] = m30
+
         feat = {
             'type': 'Feature',
             'properties': props,

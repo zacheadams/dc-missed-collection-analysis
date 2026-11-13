@@ -82,6 +82,9 @@ for r in route_stats_raw.get('trash_routes', []):
     area_sq_mi = ra.get('area_sq_mi', 0.0)
     r_copy['area_sq_mi'] = area_sq_mi
     r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    m30 = dict(r_copy.get('metrics_30d', {}))
+    m30['density'] = round(m30.get('total', 0) / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    r_copy['metrics_30d'] = m30
     if ra.get('ward'):
         r_copy['ward'] = ra.get('ward')
     if ra.get('neighborhoods'):
@@ -104,6 +107,9 @@ for r in route_stats_raw.get('recycle_routes', []):
     area_sq_mi = ra.get('area_sq_mi', 0.0)
     r_copy['area_sq_mi'] = area_sq_mi
     r_copy['density'] = round(r_copy['total'] / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    m30 = dict(r_copy.get('metrics_30d', {}))
+    m30['density'] = round(m30.get('total', 0) / area_sq_mi, 1) if area_sq_mi > 0 else 0.0
+    r_copy['metrics_30d'] = m30
     if ra.get('ward'):
         r_copy['ward'] = ra.get('ward')
     if ra.get('neighborhoods'):
@@ -127,6 +133,8 @@ for feat in map_data.get('trash_routes_lines', {}).get('features', []):
         p_stats = route_stats_lookup.get('trash_' + str(pid), {})
         total = p.get('total', p_stats.get('total', 0))
         area_sq = p.get('area_sq_mi', p_stats.get('area_sq_mi', 0.0))
+        p_m30 = p.get('metrics_30d') or p_stats.get('metrics_30d') or {}
+        m30_total = p_m30.get('total', 0)
         line_entry = {
             'route_id': rid,
             'type': 'Trash',
@@ -144,6 +152,12 @@ for feat in map_data.get('trash_routes_lines', {}).get('features', []):
             'repeat_rate': p.get('repeat_rate', p_stats.get('repeat_rate', 0.0)),
             'area_sq_mi': area_sq,
             'density': round(total / area_sq, 1) if area_sq > 0 else 0.0,
+            'metrics_30d': {
+                'total': m30_total,
+                'unique_addrs': p_m30.get('unique_addrs', 0),
+                'repeat_rate': p_m30.get('repeat_rate', 0.0),
+                'density': round(m30_total / area_sq, 1) if area_sq > 0 else 0.0
+            },
             'point_count': p.get('point_count', 0),
             'segment_count': p.get('segment_count', 0)
         }
@@ -158,6 +172,8 @@ for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
         p_stats = route_stats_lookup.get('recycle_' + str(rid), {})
         total = p.get('total', p_stats.get('total', 0))
         area_sq = p.get('area_sq_mi', p_stats.get('area_sq_mi', 0.0))
+        p_m30 = p.get('metrics_30d') or p_stats.get('metrics_30d') or {}
+        m30_total = p_m30.get('total', 0)
         rec_entry = {
             'route_id': rid,
             'type': 'Recycling',
@@ -175,6 +191,12 @@ for feat in map_data.get('recycle_routes_lines', {}).get('features', []):
             'repeat_rate': p.get('repeat_rate', p_stats.get('repeat_rate', 0.0)),
             'area_sq_mi': area_sq,
             'density': round(total / area_sq, 1) if area_sq > 0 else 0.0,
+            'metrics_30d': {
+                'total': m30_total,
+                'unique_addrs': p_m30.get('unique_addrs', 0),
+                'repeat_rate': p_m30.get('repeat_rate', 0.0),
+                'density': round(m30_total / area_sq, 1) if area_sq > 0 else 0.0
+            },
             'point_count': p.get('point_count', 0),
             'segment_count': p.get('segment_count', 0)
         }
@@ -1217,7 +1239,7 @@ html_page = f'''<!DOCTYPE html>
         <div class="control-divider"></div>
 
         <div class="requests-section">
-          <span class="period-label">311 Requests</span>
+          <span class="period-label">Request Types</span>
           <div class="metric-toggle-group">
             <button class="metric-btn active" id="btn-total" onclick="setMetric('total')"><span class="kw-combined">Combined</span></button>
             <button class="metric-btn" id="btn-trash" onclick="setMetric('trash')"><span class="kw-trash">Trash</span></button>
@@ -2267,14 +2289,51 @@ html_page = f'''<!DOCTYPE html>
         return featureDay || routeSchedule || 'Scheduled';
       }}
 
+      function getRoutePeriodMetrics(stats, fallbackProps) {{
+        const is30 = currentPeriod === '30d';
+        const s = stats || {{}};
+        const p = fallbackProps || {{}};
+        const m = is30 ? (s.metrics_30d || p.metrics_30d || {{}}) : s;
+        const total = m.total != null ? m.total : (is30 ? 0 : (p.total || 0));
+        const repRate = m.repeat_rate != null ? m.repeat_rate : (is30 ? 0 : (p.repeat_rate != null ? p.repeat_rate : 0));
+        const uniqAddrs = m.unique_addrs != null ? m.unique_addrs : (is30 ? 0 : (p.unique_addrs || 0));
+        const areaSqMi = s.area_sq_mi || p.area_sq_mi || 0;
+        const density = m.density != null ? m.density : (areaSqMi > 0 ? (total / areaSqMi).toFixed(1) : (is30 ? 0 : (p.density != null ? p.density : 0)));
+        return {{ total, repeat_rate: repRate, unique_addrs: uniqAddrs, density }};
+      }}
+
+      const periodTag = currentPeriod === '30d' ? '30d' : '180d';
+
+      function buildSingleRouteTooltipHtml(stream, routeProps, stats, schedText) {{
+        const isTrashStream = stream === 'Trash';
+        const colorVar = isTrashStream ? 'var(--trash-color)' : 'var(--recycle-color)';
+        const borderRgba = isTrashStream ? '220,38,38' : '22,163,74';
+        const m = getRoutePeriodMetrics(stats, routeProps);
+        const ancs = formatSortedAncs(routeProps.ancs || stats.ancs || '');
+        return `
+          <div style="font-weight: 800; font-size: 12px; color: ${{colorVar}};">${{stream}} Route ${{routeProps.route}} (Polygon)</div>
+          <div style="font-size: 11px; color: var(--text-dim);">${{routeProps.area_desc || 'DPW Catchment Area'}}</div>
+          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{schedText}}</div>
+          <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{colorVar}}; border-top: 1px solid rgba(${{borderRgba}},0.25); padding-top: 4px;">
+            ${{m.total.toLocaleString()}} ${{stream}} Requests (${{periodTag}})
+          </div>
+          <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+            Repeat Rate: ${{m.repeat_rate != null ? m.repeat_rate + '%' : 'N/A'}} • ${{m.unique_addrs || 0}} unique addresses
+          </div>
+        `;
+      }}
+
       let html = '';
 
       if (trashActive && recActive) {{
         if (tr && rr) {{
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
           const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
-          const tTot = tStats.total || 0;
-          const rTot = rStats.total || 0;
+          const tM = getRoutePeriodMetrics(tStats, tr);
+          const rM = getRoutePeriodMetrics(rStats, rr);
+          const tTot = tM.total;
+          const rTot = rM.total;
           const combTot = tTot + rTot;
           const tAncs = formatSortedAncs(tr.ancs || tStats.ancs || '');
           const rAncs = formatSortedAncs(rr.ancs || rStats.ancs || '');
@@ -2286,7 +2345,7 @@ html_page = f'''<!DOCTYPE html>
             <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || rr.area_desc || 'DPW Catchment Area'}}</div>
             ${{ancsDisplay ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancsDisplay}}</strong></div>` : ''}}
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--combined-color); border-top: 1px solid rgba(37,99,235,0.25); padding-top: 4px;">
-              ${{combTot.toLocaleString()}} Combined Requests (180d)
+              ${{combTot.toLocaleString()}} Combined Requests (${{periodTag}})
             </div>
             <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 2px; font-size: 11px;">
               <span style="color: var(--trash-color);">Trash (${{tr.route}}): <strong>${{tTot.toLocaleString()}}</strong> (${{tSched}})</span>
@@ -2295,71 +2354,17 @@ html_page = f'''<!DOCTYPE html>
           `;
         }} else if (tr) {{
           const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
-          const tTot = tStats.total || 0;
-          const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
-          const tSched = formatTrashDay(tr.day, tStats.schedule);
-          html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
-            <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
-            ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tSched}}</div>
-            <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
-              ${{tTot.toLocaleString()}} Trash Requests (180d)
-            </div>
-            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
-              Repeat Rate: ${{tStats.repeat_rate != null ? tStats.repeat_rate + '%' : 'N/A'}} • ${{tStats.unique_addrs || 0}} unique addresses
-            </div>
-          `;
+          html = buildSingleRouteTooltipHtml('Trash', tr, tStats, formatTrashDay(tr.day, tStats.schedule));
         }} else if (rr) {{
           const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
-          const rTot = rStats.total || 0;
-          const ancs = formatSortedAncs(rr.ancs || rStats.ancs || '');
-          html = `
-            <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
-            <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
-            ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-            <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
-            <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
-              ${{rTot.toLocaleString()}} Recycling Requests (180d)
-            </div>
-            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
-              Repeat Rate: ${{rStats.repeat_rate != null ? rStats.repeat_rate + '%' : 'N/A'}} • ${{rStats.unique_addrs || 0}} unique addresses
-            </div>
-          `;
+          html = buildSingleRouteTooltipHtml('Recycling', rr, rStats, rr.day || 'Scheduled');
         }}
       }} else if (trashActive && tr) {{
         const tStats = ROUTE_STATS['trash_' + tr.route] || {{}};
-        const tTot = tStats.total || 0;
-        const ancs = formatSortedAncs(tr.ancs || tStats.ancs || '');
-        const tSched = formatTrashDay(tr.day, tStats.schedule);
-        html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--trash-color);">Trash Route ${{tr.route}} (Polygon)</div>
-          <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || 'DPW Catchment Area'}}</div>
-          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{tSched}}</div>
-          <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--trash-color); border-top: 1px solid rgba(220,38,38,0.25); padding-top: 4px;">
-            ${{tTot.toLocaleString()}} Trash Requests (180d)
-          </div>
-          <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
-            Repeat Rate: ${{tStats.repeat_rate != null ? tStats.repeat_rate + '%' : 'N/A'}} • ${{tStats.unique_addrs || 0}} unique addresses
-          </div>
-        `;
+        html = buildSingleRouteTooltipHtml('Trash', tr, tStats, formatTrashDay(tr.day, tStats.schedule));
       }} else if (recActive && rr) {{
         const rStats = ROUTE_STATS['recycle_' + rr.route] || {{}};
-        const rTot = rStats.total || 0;
-        const ancs = formatSortedAncs(rr.ancs || rStats.ancs || '');
-        html = `
-          <div style="font-weight: 800; font-size: 12px; color: var(--recycle-color);">Recycling Route ${{rr.route}} (Polygon)</div>
-          <div style="font-size: 11px; color: var(--text-dim);">${{rr.area_desc || 'DPW Catchment Area'}}</div>
-          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{rr.day || 'Scheduled'}}</div>
-          <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--recycle-color); border-top: 1px solid rgba(22,163,74,0.25); padding-top: 4px;">
-            ${{rTot.toLocaleString()}} Recycling Requests (180d)
-          </div>
-          <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
-            Repeat Rate: ${{rStats.repeat_rate != null ? rStats.repeat_rate + '%' : 'N/A'}} • ${{rStats.unique_addrs || 0}} unique addresses
-          </div>
-        `;
+        html = buildSingleRouteTooltipHtml('Recycling', rr, rStats, rr.day || 'Scheduled');
       }}
 
       if (html) {{
@@ -2447,7 +2452,10 @@ html_page = f'''<!DOCTYPE html>
 
       const stream = isTrash ? 'Trash' : 'Recycling';
       const color = isTrash ? 'var(--trash-color)' : 'var(--recycle-color)';
-      const totalReq = (p.total || 0).toLocaleString();
+      const lineStats = ROUTE_STATS[(isTrash ? 'trash_line_' : 'recycle_line_') + p.route] || ROUTE_STATS[(isTrash ? 'trash_' : 'recycle_') + p.route] || {{}};
+      const periodTag = currentPeriod === '30d' ? '30d' : '180d';
+      const m = currentPeriod === '30d' ? (lineStats.metrics_30d || p.metrics_30d || {{}}) : lineStats;
+      const totalReq = (m.total != null ? m.total : (currentPeriod === '30d' ? 0 : (p.total || 0))).toLocaleString();
       const sched = p.day || 'Scheduled';
 
       const html = `
@@ -2456,7 +2464,7 @@ html_page = f'''<!DOCTYPE html>
         ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{formatSortedAncs(p.ancs)}}</strong></div>` : ''}}
         <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{sched}} • ${{p.ward || 'DC'}}</div>
         <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{color}}; border-top: 1px solid rgba(${{isTrash ? '220,38,38' : '22,163,74'}},0.25); padding-top: 4px;">
-          ${{totalReq}} ${{stream}} Requests (180d)
+          ${{totalReq}} ${{stream}} Requests (${{periodTag}})
         </div>
         <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
           ${{(p.point_count || 0).toLocaleString()}} Collection Points • ${{(p.segment_count || 0).toLocaleString()}} Street Segments
@@ -2942,11 +2950,14 @@ html_page = f'''<!DOCTYPE html>
 
       const sched = (stats.schedule && stats.schedule !== 'Unassigned' ? stats.schedule : '') || p.days || p.day || stats.day || 'Scheduled';
       const ward = p.ward || stats.ward || 'Citywide';
-      const total = stats.total != null ? stats.total : (p.total || 0);
-      const repRate = stats.repeat_rate != null ? stats.repeat_rate : (p.repeat_rate != null ? p.repeat_rate : 0);
-      const uniqAddrs = stats.unique_addrs != null ? stats.unique_addrs : (p.unique_addrs || 0);
-      const density = stats.density != null ? stats.density : (p.density != null ? p.density : (stats.area_sq_mi > 0 ? (total / stats.area_sq_mi).toFixed(1) : 0));
+      const is30 = currentPeriod === '30d';
+      const periodMetrics = is30 ? (stats.metrics_30d || p.metrics_30d || {{}}) : stats;
+      const total = periodMetrics.total != null ? periodMetrics.total : (is30 ? 0 : (p.total || 0));
+      const repRate = periodMetrics.repeat_rate != null ? periodMetrics.repeat_rate : (is30 ? 0 : (p.repeat_rate != null ? p.repeat_rate : 0));
+      const uniqAddrs = periodMetrics.unique_addrs != null ? periodMetrics.unique_addrs : (is30 ? 0 : (p.unique_addrs || 0));
       const areaSqMi = (isLine ? (p.area_sq_mi || stats.area_sq_mi) : (stats.area_sq_mi || p.area_sq_mi)) || 0;
+      const density = periodMetrics.density != null ? periodMetrics.density : (areaSqMi > 0 ? (total / areaSqMi).toFixed(1) : (is30 ? 0 : (p.density != null ? p.density : 0)));
+      const periodText = is30 ? '30 days' : '180 days';
 
       const typeBadge = isLine
         ? '<span style="font-size: 11px; font-weight: 600; color: var(--text-dim); margin-left: 6px;">(Line Route)</span>'
@@ -2978,7 +2989,7 @@ html_page = f'''<!DOCTYPE html>
       const ancsDesc = formatSortedAncs(p.ancs || stats.ancs || '');
       const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
 
-      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over 180 days (viewed via ${{geomType}}).`;
+      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over ${{periodText}} (viewed via ${{geomType}}).`;
 
       const pointInfo = isLine
         ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Collection Points: <strong style="color: var(--text-main);">${{(p.point_count || 0).toLocaleString()}}</strong> (${{(p.segment_count || 0).toLocaleString()}} street segments)</div>`
