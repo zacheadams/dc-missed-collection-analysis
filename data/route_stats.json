@@ -33,6 +33,20 @@
         "Wednesday": 2,
         "Sunday": 6,
         "Tuesday": 5
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 8,
+        "repeat_addrs": 3,
+        "single_addrs": 5,
+        "repeat_rate": 37.5,
+        "req_per_addr": 1.38,
+        "days_count": {
+          "Friday": 8,
+          "Monday": 1,
+          "Thursday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -61,6 +75,22 @@
         "Wednesday": 30,
         "Thursday": 30,
         "Sunday": 5
+      },
+      "metrics_30d": {
+        "total": 15,
+        "unique_addrs": 14,
+        "repeat_addrs": 1,
+        "single_addrs": 13,
+        "repeat_rate": 7.1,
+        "req_per_addr": 1.07,
+        "days_count": {
+          "Monday": 4,
+          "Friday": 5,
+          "Tuesday": 2,
+          "Saturday": 2,
+          "Wednesday": 1,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -89,6 +119,22 @@
         "Wednesday": 28,
         "Monday": 14,
         "Sunday": 7
+      },
+      "metrics_30d": {
+        "total": 14,
+        "unique_addrs": 11,
+        "repeat_addrs": 2,
+        "single_addrs": 9,
+        "repeat_rate": 18.2,
+        "req_per_addr": 1.27,
+        "days_count": {
+          "Friday": 3,
+          "Thursday": 1,
+          "Tuesday": 4,
+          "Saturday": 1,
+          "Wednesday": 3,
+          "Monday": 2
+        }
       }
     },
     {
@@ -117,6 +163,23 @@
         "Thursday": 26,
         "Wednesday": 49,
         "Friday": 74
+      },
+      "metrics_30d": {
+        "total": 45,
+        "unique_addrs": 35,
+        "repeat_addrs": 7,
+        "single_addrs": 28,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.29,
+        "days_count": {
+          "Monday": 9,
+          "Sunday": 3,
+          "Tuesday": 16,
+          "Saturday": 3,
+          "Thursday": 5,
+          "Wednesday": 6,
+          "Friday": 3
+        }
       }
     },
     {
@@ -145,6 +208,21 @@
         "Tuesday": 23,
         "Thursday": 6,
         "Sunday": 3
+      },
+      "metrics_30d": {
+        "total": 26,
+        "unique_addrs": 21,
+        "repeat_addrs": 3,
+        "single_addrs": 18,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.24,
+        "days_count": {
+          "Monday": 3,
+          "Saturday": 6,
+          "Friday": 10,
+          "Wednesday": 5,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -173,6 +251,22 @@
         "Saturday": 16,
         "Thursday": 18,
         "Sunday": 9
+      },
+      "metrics_30d": {
+        "total": 30,
+        "unique_addrs": 29,
+        "repeat_addrs": 1,
+        "single_addrs": 28,
+        "repeat_rate": 3.4,
+        "req_per_addr": 1.03,
+        "days_count": {
+          "Friday": 4,
+          "Wednesday": 11,
+          "Tuesday": 8,
+          "Monday": 4,
+          "Saturday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -201,6 +295,21 @@
         "Monday": 29,
         "Thursday": 18,
         "Sunday": 11
+      },
+      "metrics_30d": {
+        "total": 27,
+        "unique_addrs": 25,
+        "repeat_addrs": 2,
+        "single_addrs": 23,
+        "repeat_rate": 8.0,
+        "req_per_addr": 1.08,
+        "days_count": {
+          "Saturday": 5,
+          "Friday": 8,
+          "Wednesday": 2,
+          "Tuesday": 5,
+          "Monday": 7
+        }
       }
     },
     {
@@ -229,6 +338,23 @@
         "Sunday": 5,
         "Saturday": 22,
         "Thursday": 23
+      },
+      "metrics_30d": {
+        "total": 25,
+        "unique_addrs": 20,
+        "repeat_addrs": 2,
+        "single_addrs": 18,
+        "repeat_rate": 10.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Monday": 3,
+          "Friday": 8,
+          "Wednesday": 5,
+          "Tuesday": 5,
+          "Sunday": 1,
+          "Saturday": 1,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -257,6 +383,21 @@
         "Thursday": 6,
         "Sunday": 14,
         "Saturday": 26
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 11,
+        "repeat_addrs": 1,
+        "single_addrs": 10,
+        "repeat_rate": 9.1,
+        "req_per_addr": 1.18,
+        "days_count": {
+          "Wednesday": 3,
+          "Tuesday": 1,
+          "Monday": 3,
+          "Friday": 5,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -285,6 +426,21 @@
         "Saturday": 14,
         "Thursday": 2,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 7,
+        "repeat_addrs": 2,
+        "single_addrs": 5,
+        "repeat_rate": 28.6,
+        "req_per_addr": 1.43,
+        "days_count": {
+          "Monday": 3,
+          "Tuesday": 3,
+          "Sunday": 1,
+          "Friday": 1,
+          "Saturday": 2
+        }
       }
     },
     {
@@ -313,6 +469,17 @@
         "Sunday": 4,
         "Tuesday": 3,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 3
+        }
       }
     },
     {
@@ -341,6 +508,18 @@
         "Friday": 13,
         "Tuesday": 5,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Sunday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -369,6 +548,20 @@
         "Monday": 14,
         "Thursday": 1,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 8,
+        "repeat_addrs": 1,
+        "single_addrs": 7,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Saturday": 2,
+          "Friday": 4,
+          "Tuesday": 1,
+          "Sunday": 2
+        }
       }
     },
     {
@@ -397,6 +590,21 @@
         "Monday": 4,
         "Thursday": 2,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 7,
+        "repeat_addrs": 2,
+        "single_addrs": 5,
+        "repeat_rate": 28.6,
+        "req_per_addr": 1.29,
+        "days_count": {
+          "Friday": 4,
+          "Saturday": 2,
+          "Tuesday": 1,
+          "Wednesday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -425,6 +633,20 @@
         "Wednesday": 5,
         "Sunday": 8,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 21,
+        "unique_addrs": 14,
+        "repeat_addrs": 3,
+        "single_addrs": 11,
+        "repeat_rate": 21.4,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Friday": 7,
+          "Tuesday": 2,
+          "Monday": 6,
+          "Saturday": 6
+        }
       }
     },
     {
@@ -453,6 +675,21 @@
         "Wednesday": 44,
         "Thursday": 16,
         "Saturday": 22
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 11,
+        "repeat_addrs": 4,
+        "single_addrs": 7,
+        "repeat_rate": 36.4,
+        "req_per_addr": 1.55,
+        "days_count": {
+          "Monday": 1,
+          "Friday": 6,
+          "Tuesday": 4,
+          "Sunday": 1,
+          "Wednesday": 5
+        }
       }
     },
     {
@@ -481,6 +718,21 @@
         "Sunday": 6,
         "Saturday": 14,
         "Thursday": 1
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 12,
+        "repeat_addrs": 0,
+        "single_addrs": 12,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 5,
+          "Wednesday": 1,
+          "Tuesday": 3,
+          "Monday": 2,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -507,6 +759,18 @@
         "Friday": 1,
         "Wednesday": 3,
         "Thursday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 3,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -535,6 +799,20 @@
         "Wednesday": 21,
         "Saturday": 5,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 10,
+        "repeat_addrs": 2,
+        "single_addrs": 8,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 3,
+          "Friday": 5,
+          "Tuesday": 1,
+          "Thursday": 3
+        }
       }
     },
     {
@@ -563,6 +841,21 @@
         "Friday": 18,
         "Saturday": 5,
         "Sunday": 3
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 8,
+        "repeat_addrs": 2,
+        "single_addrs": 6,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Monday": 4,
+          "Thursday": 3,
+          "Wednesday": 1,
+          "Tuesday": 1,
+          "Friday": 1
+        }
       }
     },
     {
@@ -591,6 +884,19 @@
         "Friday": 8,
         "Sunday": 1,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 7,
+        "repeat_addrs": 1,
+        "single_addrs": 6,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.57,
+        "days_count": {
+          "Monday": 3,
+          "Tuesday": 6,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -619,6 +925,22 @@
         "Saturday": 6,
         "Friday": 27,
         "Sunday": 5
+      },
+      "metrics_30d": {
+        "total": 28,
+        "unique_addrs": 25,
+        "repeat_addrs": 3,
+        "single_addrs": 22,
+        "repeat_rate": 12.0,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Monday": 9,
+          "Thursday": 6,
+          "Wednesday": 4,
+          "Tuesday": 6,
+          "Saturday": 2,
+          "Friday": 1
+        }
       }
     },
     {
@@ -647,6 +969,21 @@
         "Tuesday": 66,
         "Saturday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 10,
+        "repeat_addrs": 2,
+        "single_addrs": 8,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 5,
+          "Thursday": 3,
+          "Friday": 1,
+          "Wednesday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -675,6 +1012,22 @@
         "Friday": 27,
         "Thursday": 32,
         "Tuesday": 37
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 9,
+        "repeat_addrs": 1,
+        "single_addrs": 8,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Saturday": 1,
+          "Monday": 3,
+          "Sunday": 1,
+          "Wednesday": 2,
+          "Friday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -703,6 +1056,22 @@
         "Monday": 96,
         "Sunday": 4,
         "Saturday": 8
+      },
+      "metrics_30d": {
+        "total": 23,
+        "unique_addrs": 17,
+        "repeat_addrs": 5,
+        "single_addrs": 12,
+        "repeat_rate": 29.4,
+        "req_per_addr": 1.35,
+        "days_count": {
+          "Friday": 2,
+          "Tuesday": 8,
+          "Thursday": 4,
+          "Wednesday": 3,
+          "Monday": 5,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -729,6 +1098,21 @@
         "Friday": 2,
         "Thursday": 4,
         "Wednesday": 10
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 10,
+        "repeat_addrs": 2,
+        "single_addrs": 8,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.3,
+        "days_count": {
+          "Monday": 1,
+          "Tuesday": 4,
+          "Friday": 2,
+          "Thursday": 2,
+          "Wednesday": 4
+        }
       }
     },
     {
@@ -756,6 +1140,20 @@
         "Thursday": 10,
         "Saturday": 2,
         "Friday": 4
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 8,
+        "repeat_addrs": 1,
+        "single_addrs": 7,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Tuesday": 2,
+          "Wednesday": 2,
+          "Monday": 4,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -783,6 +1181,22 @@
         "Friday": 8,
         "Wednesday": 33,
         "Monday": 31
+      },
+      "metrics_30d": {
+        "total": 19,
+        "unique_addrs": 16,
+        "repeat_addrs": 3,
+        "single_addrs": 13,
+        "repeat_rate": 18.8,
+        "req_per_addr": 1.19,
+        "days_count": {
+          "Thursday": 4,
+          "Tuesday": 6,
+          "Saturday": 1,
+          "Friday": 1,
+          "Wednesday": 1,
+          "Monday": 6
+        }
       }
     },
     {
@@ -811,6 +1225,22 @@
         "Wednesday": 35,
         "Tuesday": 45,
         "Sunday": 5
+      },
+      "metrics_30d": {
+        "total": 19,
+        "unique_addrs": 17,
+        "repeat_addrs": 2,
+        "single_addrs": 15,
+        "repeat_rate": 11.8,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Saturday": 4,
+          "Friday": 3,
+          "Thursday": 4,
+          "Monday": 1,
+          "Wednesday": 2,
+          "Tuesday": 5
+        }
       }
     },
     {
@@ -839,6 +1269,22 @@
         "Saturday": 7,
         "Friday": 38,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 40,
+        "unique_addrs": 36,
+        "repeat_addrs": 4,
+        "single_addrs": 32,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Monday": 3,
+          "Thursday": 15,
+          "Wednesday": 11,
+          "Tuesday": 4,
+          "Saturday": 1,
+          "Friday": 6
+        }
       }
     },
     {
@@ -867,6 +1313,21 @@
         "Tuesday": 19,
         "Saturday": 10,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 9,
+        "repeat_addrs": 2,
+        "single_addrs": 7,
+        "repeat_rate": 22.2,
+        "req_per_addr": 1.44,
+        "days_count": {
+          "Wednesday": 2,
+          "Monday": 3,
+          "Friday": 4,
+          "Thursday": 3,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -895,6 +1356,20 @@
         "Saturday": 15,
         "Wednesday": 6,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 9,
+        "repeat_addrs": 1,
+        "single_addrs": 8,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Monday": 2,
+          "Friday": 3,
+          "Tuesday": 4,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -923,6 +1398,19 @@
         "Tuesday": 3,
         "Wednesday": 2,
         "Monday": 3
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 2,
+          "Sunday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -951,6 +1439,17 @@
         "Sunday": 3,
         "Monday": 5,
         "Wednesday": 6
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -979,6 +1478,17 @@
         "Sunday": 9,
         "Friday": 26,
         "Monday": 6
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -1005,6 +1515,15 @@
         "Sunday": 1,
         "Monday": 2,
         "Friday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -1033,6 +1552,21 @@
         "Saturday": 5,
         "Wednesday": 1,
         "Tuesday": 6
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 9,
+        "repeat_addrs": 2,
+        "single_addrs": 7,
+        "repeat_rate": 22.2,
+        "req_per_addr": 1.22,
+        "days_count": {
+          "Sunday": 2,
+          "Thursday": 2,
+          "Monday": 2,
+          "Friday": 4,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -1061,6 +1595,20 @@
         "Sunday": 2,
         "Tuesday": 5,
         "Wednesday": 3
+      },
+      "metrics_30d": {
+        "total": 14,
+        "unique_addrs": 12,
+        "repeat_addrs": 2,
+        "single_addrs": 10,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.17,
+        "days_count": {
+          "Friday": 3,
+          "Thursday": 9,
+          "Monday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -1088,6 +1636,18 @@
         "Monday": 3,
         "Wednesday": 2,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Friday": 2
+        }
       }
     },
     {
@@ -1116,6 +1676,22 @@
         "Monday": 7,
         "Sunday": 2,
         "Tuesday": 3
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 15,
+        "repeat_addrs": 2,
+        "single_addrs": 13,
+        "repeat_rate": 13.3,
+        "req_per_addr": 1.13,
+        "days_count": {
+          "Saturday": 2,
+          "Friday": 7,
+          "Thursday": 5,
+          "Wednesday": 1,
+          "Monday": 1,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -1143,6 +1719,20 @@
         "Thursday": 10,
         "Sunday": 2,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 8,
+        "repeat_addrs": 2,
+        "single_addrs": 6,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Friday": 1,
+          "Wednesday": 5,
+          "Tuesday": 3,
+          "Thursday": 3
+        }
       }
     },
     {
@@ -1170,6 +1760,21 @@
         "Wednesday": 29,
         "Monday": 4,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 8,
+        "repeat_addrs": 4,
+        "single_addrs": 4,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.62,
+        "days_count": {
+          "Thursday": 2,
+          "Tuesday": 5,
+          "Friday": 1,
+          "Wednesday": 3,
+          "Monday": 2
+        }
       }
     },
     {
@@ -1197,6 +1802,18 @@
         "Thursday": 10,
         "Saturday": 3,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 3,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -1225,6 +1842,18 @@
         "Wednesday": 14,
         "Tuesday": 15,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -1253,6 +1882,21 @@
         "Sunday": 4,
         "Monday": 5,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 7,
+        "repeat_addrs": 1,
+        "single_addrs": 6,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.14,
+        "days_count": {
+          "Friday": 1,
+          "Tuesday": 4,
+          "Thursday": 1,
+          "Wednesday": 1,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -1281,6 +1925,19 @@
         "Friday": 14,
         "Monday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 10,
+        "repeat_addrs": 1,
+        "single_addrs": 9,
+        "repeat_rate": 10.0,
+        "req_per_addr": 1.1,
+        "days_count": {
+          "Wednesday": 5,
+          "Tuesday": 5,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -1308,6 +1965,21 @@
         "Thursday": 19,
         "Sunday": 3,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 11,
+        "repeat_addrs": 2,
+        "single_addrs": 9,
+        "repeat_rate": 18.2,
+        "req_per_addr": 1.55,
+        "days_count": {
+          "Wednesday": 6,
+          "Tuesday": 4,
+          "Friday": 1,
+          "Thursday": 5,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -1336,6 +2008,21 @@
         "Tuesday": 14,
         "Saturday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 18,
+        "unique_addrs": 15,
+        "repeat_addrs": 2,
+        "single_addrs": 13,
+        "repeat_rate": 13.3,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 1,
+          "Friday": 1,
+          "Thursday": 4,
+          "Wednesday": 8,
+          "Tuesday": 4
+        }
       }
     },
     {
@@ -1362,6 +2049,19 @@
         "Thursday": 14,
         "Monday": 1,
         "Friday": 7
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 2,
+          "Tuesday": 2,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -1390,6 +2090,21 @@
         "Wednesday": 52,
         "Sunday": 3,
         "Saturday": 3
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 13,
+        "repeat_addrs": 0,
+        "single_addrs": 13,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1,
+          "Friday": 1,
+          "Thursday": 6,
+          "Tuesday": 3,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -1417,6 +2132,18 @@
         "Wednesday": 13,
         "Monday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 7,
+        "repeat_addrs": 0,
+        "single_addrs": 7,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Tuesday": 5
+        }
       }
     },
     {
@@ -1445,6 +2172,23 @@
         "Thursday": 29,
         "Saturday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 31,
+        "unique_addrs": 25,
+        "repeat_addrs": 5,
+        "single_addrs": 20,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.24,
+        "days_count": {
+          "Monday": 1,
+          "Friday": 3,
+          "Wednesday": 9,
+          "Tuesday": 9,
+          "Thursday": 6,
+          "Saturday": 2,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -1473,6 +2217,19 @@
         "Tuesday": 37,
         "Sunday": 3,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 7,
+        "repeat_addrs": 0,
+        "single_addrs": 7,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 5,
+          "Wednesday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -1501,6 +2258,19 @@
         "Saturday": 9,
         "Tuesday": 1,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 34,
+        "unique_addrs": 31,
+        "repeat_addrs": 3,
+        "single_addrs": 28,
+        "repeat_rate": 9.7,
+        "req_per_addr": 1.1,
+        "days_count": {
+          "Friday": 8,
+          "Thursday": 14,
+          "Wednesday": 12
+        }
       }
     },
     {
@@ -1529,6 +2299,19 @@
         "Sunday": 1,
         "Tuesday": 4,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 3,
+          "Friday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -1557,6 +2340,19 @@
         "Saturday": 7,
         "Tuesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 9,
+        "repeat_addrs": 1,
+        "single_addrs": 8,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Monday": 2,
+          "Wednesday": 4,
+          "Thursday": 4
+        }
       }
     },
     {
@@ -1584,6 +2380,17 @@
         "Monday": 2,
         "Saturday": 4,
         "Tuesday": 4
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 5
+        }
       }
     },
     {
@@ -1609,6 +2416,20 @@
         "Saturday": 5,
         "Friday": 11,
         "Thursday": 23
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 7,
+        "repeat_addrs": 0,
+        "single_addrs": 7,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1,
+          "Saturday": 1,
+          "Friday": 2,
+          "Thursday": 3
+        }
       }
     },
     {
@@ -1636,6 +2457,18 @@
         "Friday": 4,
         "Monday": 3,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 10,
+        "repeat_addrs": 0,
+        "single_addrs": 10,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 6,
+          "Thursday": 4
+        }
       }
     },
     {
@@ -1662,6 +2495,19 @@
         "Wednesday": 9,
         "Tuesday": 1,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 2,
+          "Thursday": 1,
+          "Wednesday": 3
+        }
       }
     },
     {
@@ -1690,6 +2536,19 @@
         "Monday": 4,
         "Tuesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 10,
+        "repeat_addrs": 1,
+        "single_addrs": 9,
+        "repeat_rate": 10.0,
+        "req_per_addr": 1.1,
+        "days_count": {
+          "Wednesday": 7,
+          "Saturday": 1,
+          "Thursday": 3
+        }
       }
     },
     {
@@ -1718,6 +2577,19 @@
         "Saturday": 3,
         "Sunday": 2,
         "Tuesday": 3
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 7,
+        "repeat_addrs": 1,
+        "single_addrs": 6,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.14,
+        "days_count": {
+          "Wednesday": 6,
+          "Monday": 1,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -1746,6 +2618,23 @@
         "Tuesday": 6,
         "Monday": 12,
         "Saturday": 7
+      },
+      "metrics_30d": {
+        "total": 21,
+        "unique_addrs": 16,
+        "repeat_addrs": 5,
+        "single_addrs": 11,
+        "repeat_rate": 31.2,
+        "req_per_addr": 1.31,
+        "days_count": {
+          "Sunday": 1,
+          "Thursday": 6,
+          "Wednesday": 5,
+          "Friday": 5,
+          "Tuesday": 1,
+          "Monday": 2,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -1772,6 +2661,19 @@
         "Tuesday": 1,
         "Friday": 8,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 8,
+        "repeat_addrs": 2,
+        "single_addrs": 6,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Thursday": 6,
+          "Wednesday": 3,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -1799,6 +2701,19 @@
         "Sunday": 1,
         "Tuesday": 1,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 8,
+        "repeat_addrs": 1,
+        "single_addrs": 7,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Friday": 1,
+          "Thursday": 3,
+          "Wednesday": 5
+        }
       }
     },
     {
@@ -1827,6 +2742,19 @@
         "Friday": 11,
         "Sunday": 8,
         "Tuesday": 7
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 8,
+        "repeat_addrs": 1,
+        "single_addrs": 7,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Wednesday": 5,
+          "Monday": 2,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -1855,6 +2783,21 @@
         "Saturday": 3,
         "Monday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 18,
+        "unique_addrs": 16,
+        "repeat_addrs": 2,
+        "single_addrs": 14,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Thursday": 6,
+          "Wednesday": 2,
+          "Friday": 8,
+          "Tuesday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -1883,6 +2826,19 @@
         "Monday": 8,
         "Tuesday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 14,
+        "unique_addrs": 12,
+        "repeat_addrs": 1,
+        "single_addrs": 11,
+        "repeat_rate": 8.3,
+        "req_per_addr": 1.17,
+        "days_count": {
+          "Friday": 5,
+          "Thursday": 4,
+          "Wednesday": 5
+        }
       }
     },
     {
@@ -1911,6 +2867,21 @@
         "Tuesday": 4,
         "Saturday": 3,
         "Sunday": 10
+      },
+      "metrics_30d": {
+        "total": 16,
+        "unique_addrs": 14,
+        "repeat_addrs": 2,
+        "single_addrs": 12,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.14,
+        "days_count": {
+          "Friday": 2,
+          "Thursday": 4,
+          "Wednesday": 6,
+          "Monday": 1,
+          "Tuesday": 3
+        }
       }
     },
     {
@@ -1939,6 +2910,19 @@
         "Tuesday": 4,
         "Friday": 6,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 4,
+        "repeat_addrs": 2,
+        "single_addrs": 2,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Monday": 2,
+          "Wednesday": 3,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -1967,6 +2951,19 @@
         "Tuesday": 6,
         "Sunday": 3,
         "Saturday": 4
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Friday": 2,
+          "Wednesday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -1995,6 +2992,21 @@
         "Saturday": 5,
         "Monday": 11,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 7,
+        "repeat_addrs": 5,
+        "single_addrs": 2,
+        "repeat_rate": 71.4,
+        "req_per_addr": 1.86,
+        "days_count": {
+          "Friday": 2,
+          "Wednesday": 6,
+          "Thursday": 3,
+          "Tuesday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -2023,6 +3035,20 @@
         "Thursday": 5,
         "Sunday": 2,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 17,
+        "repeat_addrs": 0,
+        "single_addrs": 17,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 5,
+          "Wednesday": 6,
+          "Tuesday": 4,
+          "Friday": 2
+        }
       }
     },
     {
@@ -2051,6 +3077,22 @@
         "Thursday": 17,
         "Wednesday": 52,
         "Monday": 6
+      },
+      "metrics_30d": {
+        "total": 24,
+        "unique_addrs": 19,
+        "repeat_addrs": 4,
+        "single_addrs": 15,
+        "repeat_rate": 21.1,
+        "req_per_addr": 1.26,
+        "days_count": {
+          "Sunday": 1,
+          "Tuesday": 5,
+          "Saturday": 2,
+          "Friday": 8,
+          "Thursday": 3,
+          "Wednesday": 5
+        }
       }
     },
     {
@@ -2079,6 +3121,23 @@
         "Sunday": 21,
         "Friday": 62,
         "Thursday": 25
+      },
+      "metrics_30d": {
+        "total": 46,
+        "unique_addrs": 40,
+        "repeat_addrs": 5,
+        "single_addrs": 35,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.15,
+        "days_count": {
+          "Monday": 8,
+          "Saturday": 5,
+          "Wednesday": 7,
+          "Tuesday": 10,
+          "Sunday": 6,
+          "Friday": 6,
+          "Thursday": 4
+        }
       }
     },
     {
@@ -2107,6 +3166,21 @@
         "Thursday": 16,
         "Monday": 2,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 10,
+        "repeat_addrs": 0,
+        "single_addrs": 10,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 2,
+          "Tuesday": 4,
+          "Saturday": 1,
+          "Friday": 1,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -2135,6 +3209,23 @@
         "Monday": 13,
         "Saturday": 21,
         "Friday": 45
+      },
+      "metrics_30d": {
+        "total": 32,
+        "unique_addrs": 26,
+        "repeat_addrs": 5,
+        "single_addrs": 21,
+        "repeat_rate": 19.2,
+        "req_per_addr": 1.23,
+        "days_count": {
+          "Sunday": 1,
+          "Thursday": 2,
+          "Wednesday": 2,
+          "Tuesday": 13,
+          "Monday": 3,
+          "Saturday": 3,
+          "Friday": 8
+        }
       }
     },
     {
@@ -2163,6 +3254,21 @@
         "Tuesday": 13,
         "Thursday": 4,
         "Monday": 3
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 17,
+        "repeat_addrs": 0,
+        "single_addrs": 17,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 5,
+          "Sunday": 1,
+          "Friday": 8,
+          "Wednesday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -2191,6 +3297,21 @@
         "Wednesday": 12,
         "Thursday": 7,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 16,
+        "unique_addrs": 10,
+        "repeat_addrs": 2,
+        "single_addrs": 8,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.6,
+        "days_count": {
+          "Friday": 9,
+          "Saturday": 1,
+          "Tuesday": 1,
+          "Sunday": 2,
+          "Wednesday": 3
+        }
       }
     },
     {
@@ -2219,6 +3340,23 @@
         "Friday": 37,
         "Monday": 14,
         "Sunday": 13
+      },
+      "metrics_30d": {
+        "total": 36,
+        "unique_addrs": 29,
+        "repeat_addrs": 4,
+        "single_addrs": 25,
+        "repeat_rate": 13.8,
+        "req_per_addr": 1.24,
+        "days_count": {
+          "Thursday": 3,
+          "Wednesday": 10,
+          "Tuesday": 18,
+          "Saturday": 1,
+          "Friday": 1,
+          "Monday": 2,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -2247,6 +3385,22 @@
         "Thursday": 7,
         "Wednesday": 32,
         "Monday": 3
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 14,
+        "repeat_addrs": 3,
+        "single_addrs": 11,
+        "repeat_rate": 21.4,
+        "req_per_addr": 1.21,
+        "days_count": {
+          "Sunday": 2,
+          "Tuesday": 5,
+          "Saturday": 2,
+          "Friday": 4,
+          "Thursday": 1,
+          "Wednesday": 3
+        }
       }
     },
     {
@@ -2274,6 +3428,21 @@
         "Saturday": 10,
         "Monday": 10,
         "Friday": 11
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 12,
+        "repeat_addrs": 1,
+        "single_addrs": 11,
+        "repeat_rate": 8.3,
+        "req_per_addr": 1.08,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 5,
+          "Tuesday": 4,
+          "Saturday": 1,
+          "Monday": 2
+        }
       }
     },
     {
@@ -2301,6 +3470,21 @@
         "Tuesday": 56,
         "Thursday": 18,
         "Saturday": 13
+      },
+      "metrics_30d": {
+        "total": 26,
+        "unique_addrs": 18,
+        "repeat_addrs": 6,
+        "single_addrs": 12,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.44,
+        "days_count": {
+          "Monday": 2,
+          "Friday": 3,
+          "Wednesday": 13,
+          "Tuesday": 6,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -2329,6 +3513,23 @@
         "Monday": 9,
         "Sunday": 2,
         "Saturday": 24
+      },
+      "metrics_30d": {
+        "total": 24,
+        "unique_addrs": 17,
+        "repeat_addrs": 5,
+        "single_addrs": 12,
+        "repeat_rate": 29.4,
+        "req_per_addr": 1.41,
+        "days_count": {
+          "Friday": 5,
+          "Thursday": 4,
+          "Tuesday": 6,
+          "Wednesday": 2,
+          "Monday": 1,
+          "Sunday": 1,
+          "Saturday": 5
+        }
       }
     },
     {
@@ -2355,6 +3556,19 @@
         "Thursday": 13,
         "Friday": 8,
         "Wednesday": 4
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 5,
+        "repeat_addrs": 1,
+        "single_addrs": 4,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 3,
+          "Tuesday": 1,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -2383,6 +3597,21 @@
         "Sunday": 1,
         "Saturday": 2,
         "Wednesday": 4
+      },
+      "metrics_30d": {
+        "total": 15,
+        "unique_addrs": 13,
+        "repeat_addrs": 2,
+        "single_addrs": 11,
+        "repeat_rate": 15.4,
+        "req_per_addr": 1.15,
+        "days_count": {
+          "Monday": 5,
+          "Thursday": 3,
+          "Friday": 2,
+          "Tuesday": 4,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -2410,6 +3639,22 @@
         "Tuesday": 11,
         "Saturday": 2,
         "Friday": 13
+      },
+      "metrics_30d": {
+        "total": 15,
+        "unique_addrs": 13,
+        "repeat_addrs": 2,
+        "single_addrs": 11,
+        "repeat_rate": 15.4,
+        "req_per_addr": 1.15,
+        "days_count": {
+          "Monday": 6,
+          "Thursday": 2,
+          "Wednesday": 3,
+          "Tuesday": 1,
+          "Saturday": 1,
+          "Friday": 2
+        }
       }
     },
     {
@@ -2437,6 +3682,18 @@
         "Tuesday": 5,
         "Wednesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 4,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -2465,6 +3722,22 @@
         "Friday": 18,
         "Sunday": 2,
         "Tuesday": 20
+      },
+      "metrics_30d": {
+        "total": 19,
+        "unique_addrs": 15,
+        "repeat_addrs": 3,
+        "single_addrs": 12,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.27,
+        "days_count": {
+          "Monday": 11,
+          "Saturday": 1,
+          "Thursday": 3,
+          "Wednesday": 2,
+          "Friday": 1,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -2492,6 +3765,21 @@
         "Wednesday": 6,
         "Monday": 12,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 17,
+        "unique_addrs": 17,
+        "repeat_addrs": 0,
+        "single_addrs": 17,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Tuesday": 7,
+          "Thursday": 2,
+          "Wednesday": 1,
+          "Monday": 6
+        }
       }
     },
     {
@@ -2520,6 +3808,21 @@
         "Sunday": 1,
         "Saturday": 1,
         "Wednesday": 3
+      },
+      "metrics_30d": {
+        "total": 20,
+        "unique_addrs": 19,
+        "repeat_addrs": 1,
+        "single_addrs": 18,
+        "repeat_rate": 5.3,
+        "req_per_addr": 1.05,
+        "days_count": {
+          "Monday": 7,
+          "Friday": 6,
+          "Thursday": 5,
+          "Tuesday": 1,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -2548,6 +3851,21 @@
         "Friday": 16,
         "Sunday": 3,
         "Wednesday": 4
+      },
+      "metrics_30d": {
+        "total": 18,
+        "unique_addrs": 15,
+        "repeat_addrs": 3,
+        "single_addrs": 12,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 8,
+          "Saturday": 1,
+          "Thursday": 2,
+          "Tuesday": 5,
+          "Friday": 2
+        }
       }
     },
     {
@@ -2576,6 +3894,22 @@
         "Tuesday": 19,
         "Wednesday": 7,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 8,
+        "repeat_addrs": 1,
+        "single_addrs": 7,
+        "repeat_rate": 12.5,
+        "req_per_addr": 1.12,
+        "days_count": {
+          "Saturday": 1,
+          "Thursday": 2,
+          "Friday": 1,
+          "Monday": 2,
+          "Tuesday": 2,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -2603,6 +3937,20 @@
         "Wednesday": 10,
         "Saturday": 3,
         "Friday": 11
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 6,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.67,
+        "days_count": {
+          "Thursday": 4,
+          "Monday": 1,
+          "Tuesday": 3,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -2631,6 +3979,22 @@
         "Friday": 15,
         "Tuesday": 8,
         "Sunday": 4
+      },
+      "metrics_30d": {
+        "total": 16,
+        "unique_addrs": 16,
+        "repeat_addrs": 0,
+        "single_addrs": 16,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 8,
+          "Thursday": 3,
+          "Wednesday": 1,
+          "Saturday": 1,
+          "Friday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -2658,6 +4022,21 @@
         "Thursday": 26,
         "Wednesday": 7,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 14,
+        "unique_addrs": 14,
+        "repeat_addrs": 0,
+        "single_addrs": 14,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 9,
+          "Friday": 2,
+          "Tuesday": 1,
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -2686,6 +4065,20 @@
         "Friday": 12,
         "Sunday": 3,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 6,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.17,
+        "days_count": {
+          "Saturday": 2,
+          "Wednesday": 1,
+          "Tuesday": 3,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -2714,6 +4107,19 @@
         "Friday": 5,
         "Tuesday": 8,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Wednesday": 4,
+          "Thursday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -2736,6 +4142,15 @@
       "req_per_addr": 1.0,
       "days_count": {
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -2762,6 +4177,19 @@
         "Thursday": 6,
         "Wednesday": 1,
         "Tuesday": 4
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Friday": 1,
+          "Monday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -2787,6 +4215,17 @@
         "Monday": 4,
         "Tuesday": 2,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1
+        }
       }
     },
     {
@@ -2815,6 +4254,20 @@
         "Sunday": 2,
         "Saturday": 2,
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 2,
+          "Friday": 1,
+          "Monday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -2838,6 +4291,15 @@
       "days_count": {
         "Monday": 1,
         "Friday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     }
   ],
@@ -2865,6 +4327,18 @@
         "Friday": 4,
         "Wednesday": 5,
         "Thursday": 2
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 2,
+        "repeat_addrs": 1,
+        "single_addrs": 1,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Saturday": 1,
+          "Friday": 2
+        }
       }
     },
     {
@@ -2892,6 +4366,20 @@
         "Wednesday": 9,
         "Tuesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 10,
+        "repeat_addrs": 0,
+        "single_addrs": 10,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 1,
+          "Friday": 4,
+          "Thursday": 4,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -2920,6 +4408,19 @@
         "Monday": 3,
         "Sunday": 1,
         "Saturday": 3
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -2946,6 +4447,20 @@
         "Wednesday": 11,
         "Tuesday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 9,
+        "unique_addrs": 9,
+        "repeat_addrs": 0,
+        "single_addrs": 9,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 2,
+          "Thursday": 1,
+          "Wednesday": 3,
+          "Tuesday": 3
+        }
       }
     },
     {
@@ -2973,6 +4488,20 @@
         "Friday": 13,
         "Saturday": 3,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 8,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 5,
+          "Wednesday": 1,
+          "Tuesday": 1,
+          "Friday": 1
+        }
       }
     },
     {
@@ -3000,6 +4529,17 @@
         "Friday": 2,
         "Saturday": 1,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3027,6 +4567,18 @@
         "Thursday": 13,
         "Tuesday": 1,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 1,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -3054,6 +4606,19 @@
         "Saturday": 1,
         "Monday": 1,
         "Tuesday": 4
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1,
+          "Friday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3081,6 +4646,21 @@
         "Friday": 6,
         "Monday": 2,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 7,
+        "repeat_addrs": 1,
+        "single_addrs": 6,
+        "repeat_rate": 14.3,
+        "req_per_addr": 1.14,
+        "days_count": {
+          "Sunday": 1,
+          "Thursday": 1,
+          "Wednesday": 4,
+          "Friday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -3109,6 +4689,19 @@
         "Saturday": 2,
         "Tuesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 2,
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3136,6 +4729,19 @@
         "Friday": 4,
         "Tuesday": 1,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.67,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 3,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -3164,6 +4770,20 @@
         "Saturday": 3,
         "Tuesday": 3,
         "Sunday": 8
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 3,
+          "Friday": 1,
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3192,6 +4812,17 @@
         "Tuesday": 2,
         "Monday": 2,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -3218,6 +4849,19 @@
         "Wednesday": 9,
         "Thursday": 6,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 2,
+        "repeat_addrs": 1,
+        "single_addrs": 1,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Sunday": 1,
+          "Friday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3246,6 +4890,19 @@
         "Tuesday": 1,
         "Sunday": 5,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 3,
+          "Friday": 1
+        }
       }
     },
     {
@@ -3272,6 +4929,15 @@
         "Wednesday": 3,
         "Friday": 4,
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -3296,6 +4962,18 @@
         "Thursday": 14,
         "Wednesday": 16,
         "Friday": 4
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 1,
+        "repeat_addrs": 1,
+        "single_addrs": 0,
+        "repeat_rate": 100.0,
+        "req_per_addr": 2.0,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3320,6 +4998,17 @@
         "Wednesday": 9,
         "Thursday": 7,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3346,6 +5035,17 @@
         "Tuesday": 2,
         "Monday": 2,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3372,6 +5072,18 @@
         "Friday": 6,
         "Saturday": 1,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -3400,6 +5112,21 @@
         "Friday": 8,
         "Tuesday": 1,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 9,
+        "repeat_addrs": 2,
+        "single_addrs": 7,
+        "repeat_rate": 22.2,
+        "req_per_addr": 1.22,
+        "days_count": {
+          "Wednesday": 2,
+          "Thursday": 3,
+          "Sunday": 1,
+          "Saturday": 2,
+          "Friday": 3
+        }
       }
     },
     {
@@ -3426,6 +5153,20 @@
         "Wednesday": 11,
         "Sunday": 1,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Thursday": 1,
+          "Friday": 1,
+          "Wednesday": 2,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -3451,6 +5192,18 @@
         "Friday": 4,
         "Saturday": 2,
         "Thursday": 8
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1,
+          "Friday": 2
+        }
       }
     },
     {
@@ -3477,6 +5230,18 @@
         "Thursday": 4,
         "Wednesday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3504,6 +5269,19 @@
         "Tuesday": 11,
         "Wednesday": 9,
         "Saturday": 3
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1,
+          "Friday": 1,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -3531,6 +5309,20 @@
         "Monday": 2,
         "Friday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 12,
+        "repeat_addrs": 1,
+        "single_addrs": 11,
+        "repeat_rate": 8.3,
+        "req_per_addr": 1.08,
+        "days_count": {
+          "Thursday": 3,
+          "Tuesday": 7,
+          "Wednesday": 2,
+          "Monday": 1
+        }
       }
     },
     {
@@ -3557,6 +5349,18 @@
         "Wednesday": 13,
         "Thursday": 12,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 2,
+          "Friday": 1
+        }
       }
     },
     {
@@ -3582,6 +5386,15 @@
         "Tuesday": 10,
         "Thursday": 4,
         "Friday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -3608,6 +5421,18 @@
         "Friday": 2,
         "Wednesday": 8,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Sunday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3635,6 +5460,20 @@
         "Wednesday": 16,
         "Thursday": 2,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 2,
+        "repeat_addrs": 1,
+        "single_addrs": 1,
+        "repeat_rate": 50.0,
+        "req_per_addr": 2.5,
+        "days_count": {
+          "Saturday": 1,
+          "Tuesday": 2,
+          "Monday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3659,6 +5498,19 @@
         "Thursday": 12,
         "Wednesday": 16,
         "Tuesday": 23
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 9,
+        "repeat_addrs": 1,
+        "single_addrs": 8,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Thursday": 4,
+          "Wednesday": 3,
+          "Tuesday": 3
+        }
       }
     },
     {
@@ -3683,6 +5535,17 @@
         "Tuesday": 2,
         "Wednesday": 2,
         "Thursday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -3709,6 +5572,19 @@
         "Tuesday": 6,
         "Sunday": 1,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Wednesday": 2,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3734,6 +5610,18 @@
         "Tuesday": 6,
         "Monday": 1,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3759,6 +5647,18 @@
         "Thursday": 7,
         "Friday": 1,
         "Wednesday": 3
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Tuesday": 1,
+          "Thursday": 3
+        }
       }
     },
     {
@@ -3783,6 +5683,15 @@
         "Tuesday": 7,
         "Thursday": 1,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -3808,6 +5717,18 @@
         "Wednesday": 13,
         "Tuesday": 10,
         "Thursday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 1,
+        "repeat_addrs": 1,
+        "single_addrs": 0,
+        "repeat_rate": 100.0,
+        "req_per_addr": 2.0,
+        "days_count": {
+          "Monday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3834,6 +5755,15 @@
         "Friday": 3,
         "Thursday": 3,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -3859,6 +5789,18 @@
         "Thursday": 3,
         "Wednesday": 8,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 2,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -3884,6 +5826,17 @@
         "Thursday": 9,
         "Friday": 1,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -3912,6 +5865,22 @@
         "Thursday": 49,
         "Wednesday": 5,
         "Tuesday": 10
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 8,
+        "repeat_addrs": 2,
+        "single_addrs": 6,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Friday": 5,
+          "Monday": 1,
+          "Sunday": 1,
+          "Saturday": 1,
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -3939,6 +5908,17 @@
         "Thursday": 17,
         "Monday": 10,
         "Sunday": 8
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1
+        }
       }
     },
     {
@@ -3967,6 +5947,20 @@
         "Saturday": 8,
         "Thursday": 14,
         "Sunday": 4
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 5,
+        "repeat_addrs": 1,
+        "single_addrs": 4,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Friday": 2,
+          "Wednesday": 1,
+          "Tuesday": 1,
+          "Monday": 2
+        }
       }
     },
     {
@@ -3995,6 +5989,18 @@
         "Wednesday": 3,
         "Monday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 4,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -4021,6 +6027,17 @@
         "Friday": 7,
         "Thursday": 6,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1
+        }
       }
     },
     {
@@ -4048,6 +6065,18 @@
         "Tuesday": 1,
         "Monday": 4,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 3,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -4075,6 +6104,21 @@
         "Saturday": 16,
         "Thursday": 28,
         "Tuesday": 7
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 7,
+        "repeat_addrs": 3,
+        "single_addrs": 4,
+        "repeat_rate": 42.9,
+        "req_per_addr": 1.71,
+        "days_count": {
+          "Monday": 4,
+          "Friday": 3,
+          "Wednesday": 2,
+          "Saturday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -4101,6 +6145,17 @@
         "Wednesday": 2,
         "Friday": 1,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2
+        }
       }
     },
     {
@@ -4125,6 +6180,17 @@
         "Friday": 5,
         "Thursday": 11,
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1
+        }
       }
     },
     {
@@ -4153,6 +6219,18 @@
         "Sunday": 4,
         "Wednesday": 1,
         "Saturday": 3
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Friday": 1
+        }
       }
     },
     {
@@ -4179,6 +6257,17 @@
         "Friday": 5,
         "Saturday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -4207,6 +6296,22 @@
         "Sunday": 3,
         "Thursday": 10,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 19,
+        "unique_addrs": 18,
+        "repeat_addrs": 1,
+        "single_addrs": 17,
+        "repeat_rate": 5.6,
+        "req_per_addr": 1.06,
+        "days_count": {
+          "Saturday": 7,
+          "Friday": 3,
+          "Tuesday": 1,
+          "Monday": 5,
+          "Sunday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -4232,6 +6337,18 @@
         "Thursday": 4,
         "Sunday": 1,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -4260,6 +6377,15 @@
         "Thursday": 14,
         "Tuesday": 6,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4288,6 +6414,18 @@
         "Friday": 2,
         "Saturday": 4,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -4313,6 +6451,17 @@
         "Saturday": 3,
         "Thursday": 1,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1
+        }
       }
     },
     {
@@ -4336,6 +6485,15 @@
       "days_count": {
         "Tuesday": 5,
         "Monday": 3
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4363,6 +6521,18 @@
         "Friday": 3,
         "Thursday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 2,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -4389,6 +6559,20 @@
         "Monday": 7,
         "Thursday": 4,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.67,
+        "days_count": {
+          "Wednesday": 1,
+          "Tuesday": 1,
+          "Monday": 1,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -4414,6 +6598,15 @@
         "Wednesday": 1,
         "Tuesday": 6,
         "Monday": 16
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4440,6 +6633,20 @@
         "Monday": 17,
         "Thursday": 10,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1,
+          "Tuesday": 2,
+          "Monday": 1,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -4467,6 +6674,20 @@
         "Wednesday": 10,
         "Friday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 18,
+        "unique_addrs": 14,
+        "repeat_addrs": 3,
+        "single_addrs": 11,
+        "repeat_rate": 21.4,
+        "req_per_addr": 1.29,
+        "days_count": {
+          "Tuesday": 8,
+          "Monday": 5,
+          "Thursday": 4,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -4494,6 +6715,20 @@
         "Monday": 31,
         "Saturday": 1,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 14,
+        "unique_addrs": 13,
+        "repeat_addrs": 1,
+        "single_addrs": 12,
+        "repeat_rate": 7.7,
+        "req_per_addr": 1.08,
+        "days_count": {
+          "Thursday": 4,
+          "Wednesday": 3,
+          "Tuesday": 5,
+          "Monday": 2
+        }
       }
     },
     {
@@ -4521,6 +6756,20 @@
         "Wednesday": 18,
         "Saturday": 1,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 11,
+        "unique_addrs": 10,
+        "repeat_addrs": 1,
+        "single_addrs": 9,
+        "repeat_rate": 10.0,
+        "req_per_addr": 1.1,
+        "days_count": {
+          "Monday": 6,
+          "Thursday": 2,
+          "Tuesday": 2,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -4547,6 +6796,18 @@
         "Monday": 23,
         "Wednesday": 15,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -4575,6 +6836,15 @@
         "Friday": 8,
         "Sunday": 1,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4601,6 +6871,19 @@
         "Friday": 2,
         "Wednesday": 5,
         "Thursday": 3
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 4,
+        "repeat_addrs": 2,
+        "single_addrs": 2,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Monday": 2,
+          "Tuesday": 3,
+          "Friday": 1
+        }
       }
     },
     {
@@ -4627,6 +6910,15 @@
         "Tuesday": 16,
         "Monday": 2,
         "Friday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4653,6 +6945,19 @@
         "Wednesday": 21,
         "Friday": 6,
         "Thursday": 14
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 5,
+        "repeat_addrs": 1,
+        "single_addrs": 4,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.4,
+        "days_count": {
+          "Monday": 3,
+          "Tuesday": 2,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -4681,6 +6986,19 @@
         "Monday": 22,
         "Saturday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Thursday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -4708,6 +7026,20 @@
         "Friday": 19,
         "Sunday": 7,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1,
+          "Tuesday": 2,
+          "Saturday": 1,
+          "Friday": 1
+        }
       }
     },
     {
@@ -4736,6 +7068,21 @@
         "Friday": 12,
         "Thursday": 1,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 6,
+        "repeat_addrs": 2,
+        "single_addrs": 4,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Tuesday": 3,
+          "Monday": 2,
+          "Sunday": 1,
+          "Saturday": 1,
+          "Friday": 1
+        }
       }
     },
     {
@@ -4764,6 +7111,15 @@
         "Saturday": 6,
         "Wednesday": 1,
         "Sunday": 3
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -4791,6 +7147,18 @@
         "Sunday": 4,
         "Monday": 7,
         "Friday": 9
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Saturday": 2,
+          "Thursday": 1
+        }
       }
     },
     {
@@ -4817,6 +7185,19 @@
         "Monday": 2,
         "Friday": 6,
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Sunday": 1,
+          "Saturday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -4844,6 +7225,20 @@
         "Friday": 14,
         "Tuesday": 2,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.67,
+        "days_count": {
+          "Sunday": 1,
+          "Saturday": 2,
+          "Monday": 1,
+          "Friday": 1
+        }
       }
     },
     {
@@ -4872,6 +7267,20 @@
         "Saturday": 6,
         "Wednesday": 2,
         "Monday": 6
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 8,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 4,
+          "Thursday": 1,
+          "Tuesday": 1,
+          "Sunday": 2
+        }
       }
     },
     {
@@ -4900,6 +7309,19 @@
         "Wednesday": 3,
         "Thursday": 1,
         "Tuesday": 4
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Friday": 2,
+          "Sunday": 1,
+          "Saturday": 2
+        }
       }
     },
     {
@@ -4928,6 +7350,17 @@
         "Tuesday": 4,
         "Wednesday": 2,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 3
+        }
       }
     },
     {
@@ -4955,6 +7388,20 @@
         "Saturday": 2,
         "Thursday": 2,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1,
+          "Tuesday": 1,
+          "Friday": 2,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -4981,6 +7428,19 @@
         "Saturday": 8,
         "Friday": 4,
         "Monday": 5
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 8,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1,
+          "Sunday": 2,
+          "Saturday": 5
+        }
       }
     },
     {
@@ -5008,6 +7468,20 @@
         "Friday": 10,
         "Tuesday": 4,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Monday": 1,
+          "Sunday": 2,
+          "Saturday": 2,
+          "Friday": 1
+        }
       }
     },
     {
@@ -5035,6 +7509,17 @@
         "Saturday": 4,
         "Tuesday": 2,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1
+        }
       }
     },
     {
@@ -5062,6 +7547,15 @@
         "Sunday": 5,
         "Tuesday": 2,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -5089,6 +7583,19 @@
         "Friday": 1,
         "Thursday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 5,
+        "repeat_addrs": 0,
+        "single_addrs": 5,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 3,
+          "Wednesday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -5116,6 +7623,19 @@
         "Wednesday": 5,
         "Saturday": 1,
         "Friday": 1
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 5,
+        "repeat_addrs": 1,
+        "single_addrs": 4,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Thursday": 3,
+          "Monday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -5143,6 +7663,18 @@
         "Monday": 12,
         "Wednesday": 5,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 2,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -5170,6 +7702,18 @@
         "Wednesday": 8,
         "Tuesday": 10,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Monday": 4,
+          "Friday": 1
+        }
       }
     },
     {
@@ -5197,6 +7741,17 @@
         "Tuesday": 18,
         "Saturday": 2,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 2
+        }
       }
     },
     {
@@ -5223,6 +7778,21 @@
         "Tuesday": 6,
         "Friday": 4,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 11,
+        "repeat_addrs": 1,
+        "single_addrs": 10,
+        "repeat_rate": 9.1,
+        "req_per_addr": 1.09,
+        "days_count": {
+          "Monday": 8,
+          "Sunday": 1,
+          "Tuesday": 1,
+          "Friday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5250,6 +7820,20 @@
         "Tuesday": 13,
         "Friday": 4,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 6,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.17,
+        "days_count": {
+          "Monday": 3,
+          "Thursday": 2,
+          "Wednesday": 1,
+          "Tuesday": 1
+        }
       }
     },
     {
@@ -5277,6 +7861,20 @@
         "Sunday": 2,
         "Friday": 2,
         "Monday": 2
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 2,
+        "repeat_addrs": 2,
+        "single_addrs": 0,
+        "repeat_rate": 100.0,
+        "req_per_addr": 2.5,
+        "days_count": {
+          "Thursday": 1,
+          "Wednesday": 1,
+          "Tuesday": 1,
+          "Sunday": 2
+        }
       }
     },
     {
@@ -5304,6 +7902,18 @@
         "Thursday": 5,
         "Wednesday": 6,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1,
+          "Monday": 1
+        }
       }
     },
     {
@@ -5331,6 +7941,19 @@
         "Sunday": 2,
         "Saturday": 3,
         "Friday": 6
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 8,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 5,
+          "Thursday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -5359,6 +7982,21 @@
         "Thursday": 13,
         "Saturday": 1,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 12,
+        "unique_addrs": 10,
+        "repeat_addrs": 2,
+        "single_addrs": 8,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.2,
+        "days_count": {
+          "Monday": 1,
+          "Wednesday": 5,
+          "Tuesday": 2,
+          "Friday": 2,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -5387,6 +8025,18 @@
         "Friday": 10,
         "Thursday": 11,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 3,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5411,6 +8061,15 @@
         "Wednesday": 4,
         "Tuesday": 15,
         "Thursday": 1
+      },
+      "metrics_30d": {
+        "total": 0,
+        "unique_addrs": 0,
+        "repeat_addrs": 0,
+        "single_addrs": 0,
+        "repeat_rate": 0.0,
+        "req_per_addr": 0.0,
+        "days_count": {}
       }
     },
     {
@@ -5436,6 +8095,18 @@
         "Tuesday": 10,
         "Thursday": 3,
         "Friday": 3
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -5464,6 +8135,19 @@
         "Monday": 1,
         "Sunday": 2,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 13,
+        "unique_addrs": 12,
+        "repeat_addrs": 1,
+        "single_addrs": 11,
+        "repeat_rate": 8.3,
+        "req_per_addr": 1.08,
+        "days_count": {
+          "Thursday": 2,
+          "Wednesday": 6,
+          "Tuesday": 5
+        }
       }
     },
     {
@@ -5491,6 +8175,19 @@
         "Friday": 5,
         "Monday": 2,
         "Saturday": 3
+      },
+      "metrics_30d": {
+        "total": 6,
+        "unique_addrs": 6,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 2,
+          "Tuesday": 2,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -5518,6 +8215,18 @@
         "Thursday": 5,
         "Friday": 5,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 6,
+        "repeat_addrs": 2,
+        "single_addrs": 4,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Wednesday": 5,
+          "Tuesday": 3
+        }
       }
     },
     {
@@ -5545,6 +8254,18 @@
         "Thursday": 3,
         "Tuesday": 9,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5573,6 +8294,19 @@
         "Friday": 3,
         "Sunday": 1,
         "Saturday": 2
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 4,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Tuesday": 1,
+          "Thursday": 1,
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -5598,6 +8332,17 @@
         "Thursday": 4,
         "Friday": 3,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1
+        }
       }
     },
     {
@@ -5625,6 +8370,17 @@
         "Friday": 3,
         "Sunday": 1,
         "Tuesday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 1
+        }
       }
     },
     {
@@ -5653,6 +8409,21 @@
         "Saturday": 2,
         "Wednesday": 1,
         "Sunday": 2
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 5,
+        "repeat_addrs": 1,
+        "single_addrs": 4,
+        "repeat_rate": 20.0,
+        "req_per_addr": 1.4,
+        "days_count": {
+          "Friday": 2,
+          "Thursday": 2,
+          "Monday": 1,
+          "Tuesday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -5681,6 +8452,18 @@
         "Thursday": 9,
         "Wednesday": 1,
         "Tuesday": 2
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Monday": 2,
+          "Sunday": 1
+        }
       }
     },
     {
@@ -5709,6 +8492,22 @@
         "Friday": 1,
         "Wednesday": 1,
         "Sunday": 1
+      },
+      "metrics_30d": {
+        "total": 8,
+        "unique_addrs": 6,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Saturday": 2,
+          "Thursday": 2,
+          "Tuesday": 1,
+          "Monday": 1,
+          "Friday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5735,6 +8534,17 @@
         "Friday": 10,
         "Monday": 2,
         "Wednesday": 2
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Thursday": 1
+        }
       }
     },
     {
@@ -5762,6 +8572,17 @@
         "Monday": 3,
         "Sunday": 2,
         "Tuesday": 2
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 2
+        }
       }
     },
     {
@@ -5790,6 +8611,21 @@
         "Wednesday": 7,
         "Friday": 20,
         "Sunday": 11
+      },
+      "metrics_30d": {
+        "total": 10,
+        "unique_addrs": 9,
+        "repeat_addrs": 1,
+        "single_addrs": 8,
+        "repeat_rate": 11.1,
+        "req_per_addr": 1.11,
+        "days_count": {
+          "Thursday": 1,
+          "Monday": 5,
+          "Saturday": 2,
+          "Tuesday": 1,
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5818,6 +8654,18 @@
         "Wednesday": 3,
         "Thursday": 3,
         "Tuesday": 2
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 2,
+        "repeat_addrs": 0,
+        "single_addrs": 2,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Sunday": 1,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -5843,6 +8691,18 @@
         "Saturday": 3,
         "Friday": 6,
         "Tuesday": 2
+      },
+      "metrics_30d": {
+        "total": 3,
+        "unique_addrs": 2,
+        "repeat_addrs": 1,
+        "single_addrs": 1,
+        "repeat_rate": 50.0,
+        "req_per_addr": 1.5,
+        "days_count": {
+          "Monday": 1,
+          "Saturday": 2
+        }
       }
     },
     {
@@ -5869,6 +8729,17 @@
         "Saturday": 7,
         "Wednesday": 2,
         "Tuesday": 5
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Friday": 1
+        }
       }
     },
     {
@@ -5895,6 +8766,19 @@
         "Tuesday": 9,
         "Wednesday": 2,
         "Monday": 7
+      },
+      "metrics_30d": {
+        "total": 5,
+        "unique_addrs": 4,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
+        "req_per_addr": 1.25,
+        "days_count": {
+          "Friday": 1,
+          "Thursday": 2,
+          "Tuesday": 2
+        }
       }
     },
     {
@@ -5923,6 +8807,17 @@
         "Sunday": 3,
         "Saturday": 1,
         "Monday": 1
+      },
+      "metrics_30d": {
+        "total": 1,
+        "unique_addrs": 1,
+        "repeat_addrs": 0,
+        "single_addrs": 1,
+        "repeat_rate": 0.0,
+        "req_per_addr": 1.0,
+        "days_count": {
+          "Wednesday": 1
+        }
       }
     },
     {
@@ -5949,6 +8844,18 @@
         "Monday": 1,
         "Tuesday": 8,
         "Friday": 2
+      },
+      "metrics_30d": {
+        "total": 7,
+        "unique_addrs": 6,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
+        "req_per_addr": 1.17,
+        "days_count": {
+          "Wednesday": 5,
+          "Thursday": 2
+        }
       }
     },
     {
@@ -5973,6 +8880,17 @@
         "Wednesday": 2,
         "Friday": 2,
         "Monday": 3
+      },
+      "metrics_30d": {
+        "total": 2,
+        "unique_addrs": 1,
+        "repeat_addrs": 1,
+        "single_addrs": 0,
+        "repeat_rate": 100.0,
+        "req_per_addr": 2.0,
+        "days_count": {
+          "Wednesday": 2
+        }
       }
     },
     {
@@ -6000,6 +8918,19 @@
         "Thursday": 8,
         "Tuesday": 2,
         "Wednesday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Friday": 1,
+          "Monday": 2,
+          "Saturday": 1
+        }
       }
     },
     {
@@ -6026,6 +8957,19 @@
         "Wednesday": 4,
         "Friday": 2,
         "Saturday": 1
+      },
+      "metrics_30d": {
+        "total": 4,
+        "unique_addrs": 3,
+        "repeat_addrs": 1,
+        "single_addrs": 2,
+        "repeat_rate": 33.3,
+        "req_per_addr": 1.33,
+        "days_count": {
+          "Monday": 1,
+          "Thursday": 1,
+          "Wednesday": 2
+        }
       }
     }
   ]

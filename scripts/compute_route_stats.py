@@ -55,7 +55,8 @@ def compute_route_stats():
     with open(sr_path, 'r', encoding='utf-8') as f:
         all_srs = json.load(f)
 
-    # Dynamically slice to the rolling 180-day window
+    # Dynamically slice to the rolling 180-day and 30-day windows
+    cutoff_30d_ms = 0
     if all_srs:
         max_dt_ms = max(
             item.get('attributes', item).get('ADDDATE', 0)
@@ -63,6 +64,7 @@ def compute_route_stats():
             if item.get('attributes', item).get('ADDDATE')
         )
         cutoff_180d_ms = max_dt_ms - (180 * 86400 * 1000)
+        cutoff_30d_ms = max_dt_ms - (30 * 86400 * 1000)
         srs = [
             item for item in all_srs
             if item.get('attributes', item).get('ADDDATE', 0) >= cutoff_180d_ms
@@ -149,12 +151,12 @@ def compute_route_stats():
             if matched:
                 recycle_srs_by_route[matched['id']].append(attrs)
 
-    def analyze_route(route_id, req_list, props, is_trash=True, custom_sched=None):
-        total = len(req_list)
+    def compute_window_metrics(reqs_subset):
+        total = len(reqs_subset)
         addrs = defaultdict(int)
         days_count = defaultdict(int)
 
-        for attrs in req_list:
+        for attrs in reqs_subset:
             x_coord = attrs.get('LONGITUDE', attrs.get('x'))
             y_coord = attrs.get('LATITUDE', attrs.get('y'))
             addr = attrs.get('STREETADDRESS') or attrs.get('MARADDRESSREPOSITORYID') or f"COORD_{y_coord}_{x_coord}"
@@ -175,6 +177,23 @@ def compute_route_stats():
         repeat_addrs = sum(1 for a, count in addrs.items() if count > 1)
         repeat_rate = round(repeat_addrs / unique_addrs * 100, 1) if unique_addrs > 0 else 0.0
         req_per_addr = round(total / unique_addrs, 2) if unique_addrs > 0 else 0.0
+        return {
+            'total': total,
+            'unique_addrs': unique_addrs,
+            'repeat_addrs': repeat_addrs,
+            'single_addrs': unique_addrs - repeat_addrs,
+            'repeat_rate': repeat_rate,
+            'req_per_addr': req_per_addr,
+            'days_count': dict(days_count)
+        }
+
+    def analyze_route(route_id, req_list, props, is_trash=True, custom_sched=None):
+        metrics_180d = compute_window_metrics(req_list)
+        reqs_30d = [
+            attrs for attrs in req_list
+            if isinstance(attrs.get('ADDDATE'), (int, float)) and attrs.get('ADDDATE', 0) >= cutoff_30d_ms
+        ]
+        metrics_30d = compute_window_metrics(reqs_30d)
 
         if custom_sched:
             sched = custom_sched
@@ -205,13 +224,8 @@ def compute_route_stats():
             'neighborhoods': nbh_val,
             'ancs': anc_val,
             'area_desc': desc_val,
-            'total': total,
-            'unique_addrs': unique_addrs,
-            'repeat_addrs': repeat_addrs,
-            'single_addrs': unique_addrs - repeat_addrs,
-            'repeat_rate': repeat_rate,
-            'req_per_addr': req_per_addr,
-            'days_count': dict(days_count)
+            **metrics_180d,
+            'metrics_30d': metrics_30d
         }
 
     trash_out = []
