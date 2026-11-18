@@ -28,7 +28,7 @@ html_content = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Missed Collections • The Report</title>
+  <title>Missed Collections • Report</title>
 
   <!-- Google Fonts: IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -326,8 +326,8 @@ html_content = f"""<!DOCTYPE html>
     </div>
     <div class="nav-links">
       <a href="index.html" class="nav-link">Index</a>
-      <a href="map.html" class="nav-link">The Map</a>
-      <a href="report.html" class="nav-link active">The Report</a>
+      <a href="map.html" class="nav-link">Map</a>
+      <a href="report.html" class="nav-link active">Report</a>
       <a href="tables.html" class="nav-link">Tables and Graphs</a>
       <button onclick="toggleTheme()" class="btn-action" id="theme-toggle-btn">Theme: Light</button>
       <button onclick="window.print()" class="btn-action">Export Report (PDF)</button>
@@ -338,7 +338,7 @@ html_content = f"""<!DOCTYPE html>
 
     <!-- Report Header -->
     <header class="report-header">
-      <h1 class="report-title">The Report</h1>
+      <h1 class="report-title">Report</h1>
     </header>
 
     <!-- Report Narrative -->
