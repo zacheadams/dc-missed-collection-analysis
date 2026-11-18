@@ -1485,7 +1485,7 @@ html_page = f'''<!DOCTYPE html>
       maxNativeZoom: 17,
       maxZoom: 17,
       bounds: [[38.7916, -77.1198], [38.9960, -76.9091]],
-      attribution: 'Tiles: Stamen Design (CC BY 3.0) • Data: OpenStreetMap (ODbL)'
+      attribution: 'Tiles: Stamen Design (CC BY 3.0) | Data: Open Data DC'
     }}).addTo(map);
 
     map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
