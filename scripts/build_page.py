@@ -507,7 +507,7 @@ html_page = f'''<!DOCTYPE html>
       position: absolute;
       top: 14px;
       left: 14px;
-      width: 320px;
+      width: 335px;
       max-height: calc(100vh - 140px);
       overflow-y: auto;
       background: var(--bg-panel);
@@ -718,7 +718,7 @@ html_page = f'''<!DOCTYPE html>
       position: absolute;
       top: 14px;
       right: 14px;
-      width: 320px;
+      width: 335px;
       max-height: calc(100vh - 96px);
       overflow-y: auto;
       background: var(--bg-panel);
