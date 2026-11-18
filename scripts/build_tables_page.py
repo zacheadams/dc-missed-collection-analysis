@@ -207,10 +207,7 @@ html_content = f"""<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Missed Collections • Tables and Graphs</title>
 
-  <!-- Google Fonts: IBM Plex Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Self-hosted IBM Plex Mono (loaded via @font-face in CSS) -->
 
   <!-- Local Vendored Assets -->
   <script src="assets/vendor/chartjs/chart.umd.min.js"></script>
@@ -218,6 +215,49 @@ html_content = f"""<!DOCTYPE html>
   <script src="assets/vendor/html2canvas/html2canvas.min.js"></script>
 
   <style>
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Italic.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-SemiBold.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    }}
+
     :root {{
       --font-mono: 'IBM Plex Mono', monospace;
 
@@ -318,6 +358,8 @@ html_content = f"""<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
       transition: background 0.2s, border-color 0.2s;
     }}
 
@@ -331,6 +373,7 @@ html_content = f"""<!DOCTYPE html>
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.01em;
+      text-decoration: none;
     }}
 
     .nav-subtitle {{
@@ -340,8 +383,9 @@ html_content = f"""<!DOCTYPE html>
 
     .nav-links {{
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
+      flex-wrap: wrap;
     }}
 
     .nav-link {{
@@ -655,7 +699,7 @@ html_content = f"""<!DOCTYPE html>
   <!-- Top Navigation Bar -->
   <nav class="site-nav">
     <div class="nav-brand">
-      <span class="nav-title">Missed Collections</span>
+      <a href="index.html" class="nav-title">Missed Collections</a>
       <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
