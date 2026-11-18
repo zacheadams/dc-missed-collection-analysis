@@ -2151,7 +2151,6 @@ html_page = f'''<!DOCTYPE html>
       }}
 
       updateInspectorRoute(feature.properties, stream);
-      updateBreadcrumbsRoute(feature.properties, stream, ' (polygon)');
     }}
 
     function selectLineRoute(feature, layer, stream) {{
@@ -2214,7 +2213,6 @@ html_page = f'''<!DOCTYPE html>
       }}
 
       updateInspectorRoute(feature.properties, stream);
-      updateBreadcrumbsRoute(feature.properties, stream, ' (line)');
     }}
 
     function handleRouteHover(e, layer, isTrash) {{
@@ -2569,7 +2567,6 @@ html_page = f'''<!DOCTYPE html>
       map.fitBounds(targetLayer.getBounds(), {{ maxZoom: 16, padding: [60, 60] }});
 
       updateInspectorSMD(p, targetLayer.getBounds().getCenter());
-      updateBreadcrumbs();
     }}
 
     function selectWard(wNum) {{
@@ -2595,7 +2592,6 @@ html_page = f'''<!DOCTYPE html>
         map.fitBounds(b, {{ padding: [30, 30] }});
         updateInspectorWard(wardFeat.properties);
       }}
-      updateBreadcrumbs();
     }}
 
     function selectANC(ancId) {{
@@ -2618,7 +2614,6 @@ html_page = f'''<!DOCTYPE html>
         map.fitBounds(grp.getBounds(), {{ padding: [40, 40] }});
       }}
       updateInspectorANC(ancId);
-      updateBreadcrumbs();
     }}
 
     function resetToCitywide() {{
@@ -2636,7 +2631,6 @@ html_page = f'''<!DOCTYPE html>
 
       map.setView([38.9072, -77.01], 12);
       updateInspectorCitywide();
-      updateBreadcrumbs();
     }}
 
     function updateDropdowns(wardVal, ancVal, smdVal) {{
@@ -3180,7 +3174,6 @@ html_page = f'''<!DOCTYPE html>
         if (selectedRouteId && !selectedRouteIsLine) {{
           clearRouteSelection();
           updateInspectorCitywide();
-          updateBreadcrumbs();
         }}
         clearRouteHover();
       }} else {{
@@ -3197,7 +3190,6 @@ html_page = f'''<!DOCTYPE html>
           if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }}
           if (trashRoutesLayer && !map.hasLayer(trashRoutesLayer)) {{
             map.addLayer(trashRoutesLayer);
@@ -3212,7 +3204,6 @@ html_page = f'''<!DOCTYPE html>
           if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }}
           if (recycleRoutesLayer && !map.hasLayer(recycleRoutesLayer)) {{
             map.addLayer(recycleRoutesLayer);
@@ -3254,7 +3245,6 @@ html_page = f'''<!DOCTYPE html>
           if (selectedRouteStream === 'Trash' && selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }}
           map.removeLayer(trashLinesLayer);
           clearRouteHover();
@@ -3275,7 +3265,6 @@ html_page = f'''<!DOCTYPE html>
           if (selectedRouteStream === 'Recycling' && selectedRouteIsLine) {{
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }}
           map.removeLayer(recycleLinesLayer);
           clearRouteHover();
@@ -3323,7 +3312,6 @@ html_page = f'''<!DOCTYPE html>
 
       updateLegend();
       updateInspectorCitywide();
-      updateBreadcrumbs();
     }}
 
     // Static Contextual Exports
