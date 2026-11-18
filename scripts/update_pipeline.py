@@ -1,25 +1,39 @@
 #!/usr/bin/env python3
 """
 Master Data Refresh & Build Pipeline for Washington, DC Missed Collection Analysis.
-Executes end-to-end data ingestion, spatial calculations, metric aggregations,
-and HTML compilation for all four applications:
+Reads 311 service requests and DC boundary GeoJSONs from the sibling
+dc-311-sentinel repository and its DuckDB warehouse, then executes spatial
+calculations, metric aggregations, and HTML compilation for all applications:
 - index.html (Central Project Hub)
 - map.html (Dedicated Interactive Map Explorer)
 - report.html (Unified Operational Report)
 - tables.html (Tables and Graphs)
+
+Usage:
+  python3 scripts/update_pipeline.py                      # Build from dc-311-sentinel warehouse
+  python3 scripts/update_pipeline.py --refresh-sentinel   # Refresh dc-311-sentinel first, then build
+  python3 scripts/update_pipeline.py --skip-route-lines   # Skip regenerating DPW street route lines
+
 Strictly adheres to:
 - No emojis across all logs and outputs
-- Zero external pip dependencies
 """
 
 import os
-import sys
 import subprocess
+import sys
 import time
 from datetime import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(BASE_DIR, "scripts"))
+
+from sentinel_source import (
+    ensure_duckdb_interpreter,
+    get_sentinel_dir,
+    get_sentinel_python,
+    get_warehouse_summary,
+)
+
 
 def run_step(step_num, total_steps, title, func):
     print(f"\n[{step_num}/{total_steps}] {title}...")
@@ -32,26 +46,48 @@ def run_step(step_num, total_steps, title, func):
         print(f"[{step_num}/{total_steps}] Failed: {e}")
         sys.exit(1)
 
+
+def refresh_sentinel_pipeline():
+    sentinel_dir = get_sentinel_dir()
+    sentinel_py = get_sentinel_python() or sys.executable
+    sentinel_script = os.path.join(sentinel_dir, "scripts", "update_pipeline.py")
+    subprocess.check_call([sentinel_py, sentinel_script], cwd=sentinel_dir)
+
+
+def verify_sentinel_warehouse():
+    count, min_date, max_date = get_warehouse_summary()
+    print(
+        f"Verified dc-311-sentinel warehouse: {count:,} missed collection records "
+        f"({min_date} to {max_date})"
+    )
+
+
 def main():
+    ensure_duckdb_interpreter()
+
     t_start = time.time()
     total_steps = 10
     print("=" * 70)
     print(f"DC Missed Collection Pipeline -- Started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 70)
 
-    skip_fetch = "--skip-fetch" in sys.argv
-    full_fetch = "--full-fetch" in sys.argv
+    refresh_sentinel = "--refresh-sentinel" in sys.argv
+    skip_route_lines = "--skip-route-lines" in sys.argv
 
-    # Step 1: Fetch 311 data
-    if skip_fetch:
-        print(f"\n[1/{total_steps}] Skipping 311 data fetch (--skip-fetch specified)")
-    else:
-        from fetch_311_data import update_service_requests
+    # Step 1: Verify or refresh shared dc-311-sentinel warehouse
+    if refresh_sentinel:
         run_step(
             1,
             total_steps,
-            "Fetching 311 Missed Trash & Recycling Records (Incremental)",
-            lambda: update_service_requests(full_fetch=full_fetch)
+            "Refreshing Shared dc-311-sentinel Data & Warehouse",
+            refresh_sentinel_pipeline,
+        )
+    else:
+        run_step(
+            1,
+            total_steps,
+            "Verifying Shared dc-311-sentinel DuckDB Warehouse",
+            verify_sentinel_warehouse,
         )
 
     # Step 2: Compute 180-day address deduplication & repeat stats
@@ -67,8 +103,11 @@ def main():
     run_step(4, total_steps, "Computing DPW Route Performance Metrics", compute_route_stats)
 
     # Step 5: Generate DPW route line geometries from collection points (with fresh stats and areas)
-    from generate_route_lines import generate_route_lines
-    run_step(5, total_steps, "Generating DPW Route Line Geometries from Collection Points", generate_route_lines)
+    if skip_route_lines:
+        print(f"\n[5/{total_steps}] Skipping DPW route line generation (--skip-route-lines specified)")
+    else:
+        from generate_route_lines import generate_route_lines
+        run_step(5, total_steps, "Generating DPW Route Line Geometries from Collection Points", generate_route_lines)
 
     # Step 6: Update map data (180-day default and 30-day windows)
     from update_map_data import update_map_data
@@ -110,6 +149,7 @@ def main():
     print("\n" + "=" * 70)
     print(f"Pipeline finished successfully in {total_elapsed:.2f}s!")
     print("=" * 70)
+
 
 if __name__ == "__main__":
     main()

@@ -117,10 +117,10 @@ Legacy duplicate files (`dc_missed_collection_map.html` and `routes.html`) are d
 
 ---
 
-## 9. Data Pipeline & Zero External Infrastructure
+## 9. Shared Storage & Data Pipeline
 
-- All pipeline scripts in `scripts/` must rely solely on the Python 3 standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`, `math`).
-- Do not introduce Python pip dependencies (e.g. `pandas`, `requests`, `geopandas`) to maintain automated compatibility with zero-setup GitHub Actions runners.
+- **Shared Warehouse & Boundaries**: 311 missed-collection records (`S0441`, `S0321`) and DC Ward/SMD boundary GeoJSONs (`dc_wards.geojson`, `dc_smds.geojson`) are sourced from the sibling `dc-311-sentinel` repository (`data/warehouse.duckdb` via `scripts/sentinel_source.py`, configurable with `SENTINEL_DIR`) rather than stored redundantly in this repository.
+- **Dependencies**: Pipeline scripts rely on the Python 3 standard library plus `duckdb` (`requirements.txt`, matching `dc-311-sentinel`). When run with system `python3`, `scripts/sentinel_source.py` can also re-exec under `../dc-311-sentinel/.venv/bin/python`.
 
 ---
 

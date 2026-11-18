@@ -27,10 +27,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_DIR = os.path.dirname(os.path.dirname(HERE))
 DATA_DIR = os.path.join(REPO_DIR, "data")
 OUTPUT_DIR = os.path.join(HERE, "output")
+sys.path.insert(0, os.path.join(REPO_DIR, "scripts"))
+from sentinel_source import load_missed_collection_requests
 
 # Input datasets
 FOIA_ATTENDANCE_CSV = os.path.join(OUTPUT_DIR, "route_attendance_daily_by_route.csv")
-SERVICE_REQUESTS_JSON = os.path.join(DATA_DIR, "dc_service_requests.json")
 WEATHER_JSON = os.path.join(HERE, "data", "dc_weather_2026.json")
 TRASH_GEO_JSON = os.path.join(DATA_DIR, "dc_trash_routes.geojson")
 REC_GEO_JSON = os.path.join(DATA_DIR, "dc_recycle_routes.geojson")
@@ -158,10 +159,9 @@ def main():
                 return r["id"]
         return None
 
-    # 2. Load 311 Service Requests
+    # 2. Load 311 Service Requests from shared dc-311-sentinel DuckDB warehouse
     print("Loading and spatially matching 311 service requests...")
-    with open(SERVICE_REQUESTS_JSON, encoding="utf-8") as f:
-        all_srs = json.load(f)
+    all_srs = load_missed_collection_requests(start_date="2026-04-01")
 
     # Filter 311 requests from April 1 to October 5, 2026 (including lag buffer)
     requests_by_route_and_date = defaultdict(int)

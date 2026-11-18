@@ -10,6 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+from sentinel_source import get_boundary_path, load_missed_collection_requests
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
@@ -108,16 +109,12 @@ def compute_window_ranks(smd_index, ward_index, prefix):
     return ward_stats
 
 def update_map_data():
-    sr_path = os.path.join(BASE_DIR, "data/dc_service_requests.json")
-    if not os.path.exists(sr_path):
-        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
-    smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
-    ward_path = os.path.join(BASE_DIR, "data/dc_wards.geojson")
+    smd_path = get_boundary_path("dc_smds.geojson")
+    ward_path = get_boundary_path("dc_wards.geojson")
     route_areas_path = os.path.join(BASE_DIR, "data/route_areas.json")
     output_path = os.path.join(BASE_DIR, "data/dc_map_data_v2.json")
 
-    with open(sr_path, "r", encoding="utf-8") as f:
-        srs = json.load(f)
+    srs = load_missed_collection_requests()
 
     with open(smd_path, "r", encoding="utf-8") as f:
         smd_geo = json.load(f)
