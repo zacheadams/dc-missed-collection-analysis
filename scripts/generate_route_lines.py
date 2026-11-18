@@ -18,6 +18,7 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+from sentinel_source import get_boundary_path
 import json
 import re
 import math
@@ -93,8 +94,8 @@ def build_spatial_indexes():
     smd_grid = defaultdict(list)
     clust_grid = defaultdict(list)
 
-    ward_path = os.path.join(DATA_DIR, 'dc_wards.geojson')
-    smd_path = os.path.join(DATA_DIR, 'dc_smds.geojson')
+    ward_path = get_boundary_path('dc_wards.geojson')
+    smd_path = get_boundary_path('dc_smds.geojson')
     clust_path = os.path.join(DATA_DIR, 'dc_neighborhood_clusters.geojson')
 
     if os.path.exists(ward_path):

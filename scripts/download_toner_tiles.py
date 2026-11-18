@@ -10,6 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+from sentinel_source import get_boundary_path
 import json
 import math
 import time
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TILES_DIR = os.path.join(BASE_DIR, 'tiles')
 LIGHT_DIR = os.path.join(TILES_DIR, 'light')
 BLACKLITE_DIR = os.path.join(TILES_DIR, 'blacklite')
-WARDS_PATH = os.path.join(BASE_DIR, 'data', 'dc_wards.geojson')
+WARDS_PATH = get_boundary_path('dc_wards.geojson')
 
 PNG_HEADER = b'\x89PNG\r\n\x1a\n'
 

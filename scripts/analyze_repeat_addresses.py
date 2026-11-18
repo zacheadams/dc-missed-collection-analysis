@@ -10,6 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+from sentinel_source import get_boundary_path, load_missed_collection_requests
 from collections import defaultdict
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -19,17 +20,13 @@ from update_map_data import get_smd_ward
 NY_TZ = ZoneInfo("America/New_York")
 
 def analyze_repeat_addresses():
-    smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
-    sr_path = os.path.join(BASE_DIR, "data/dc_service_requests.json")
-    if not os.path.exists(sr_path):
-        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
+    smd_path = get_boundary_path("dc_smds.geojson")
     output_path = os.path.join(BASE_DIR, "data/smd_address_stats.json")
 
     with open(smd_path, "r", encoding="utf-8") as f:
         smds_geojson = json.load(f)
 
-    with open(sr_path, "r", encoding="utf-8") as f:
-        all_sr_data = json.load(f)
+    all_sr_data = load_missed_collection_requests()
 
     # Dynamically slice to the rolling 180-day window
     if all_sr_data:

@@ -18,6 +18,7 @@ import re
 from collections import defaultdict, Counter
 
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
+from sentinel_source import get_boundary_path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -60,8 +61,8 @@ def compute_route_areas():
     trash_geo_path = os.path.join(BASE_DIR, 'data/dc_trash_routes.geojson')
     rec_geo_path = os.path.join(BASE_DIR, 'data/dc_recycle_routes.geojson')
     clust_geo_path = os.path.join(BASE_DIR, 'data/dc_neighborhood_clusters.geojson')
-    smd_geo_path = os.path.join(BASE_DIR, 'data/dc_smds.geojson')
-    ward_geo_path = os.path.join(BASE_DIR, 'data/dc_wards.geojson')
+    smd_geo_path = get_boundary_path('dc_smds.geojson')
+    ward_geo_path = get_boundary_path('dc_wards.geojson')
 
     with open(trash_geo_path, 'r', encoding='utf-8') as f:
         trash_geo = json.load(f)

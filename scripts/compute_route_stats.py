@@ -13,6 +13,7 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_poly, get_poly_rings_list, get_bbox
+from sentinel_source import load_missed_collection_requests
 import json
 from collections import defaultdict
 from datetime import datetime
@@ -47,15 +48,11 @@ def format_trash_schedule(feats):
 
 def compute_route_stats():
     # Load datasets
-    sr_path = os.path.join(BASE_DIR, 'data', 'dc_service_requests.json')
-    if not os.path.exists(sr_path):
-        raise FileNotFoundError(f"Missing master service requests file: {sr_path}. Run scripts/fetch_311_data.py first.")
     trash_geo_path = os.path.join(BASE_DIR, 'data', 'dc_trash_routes.geojson')
     rec_geo_path = os.path.join(BASE_DIR, 'data', 'dc_recycle_routes.geojson')
     areas_path = os.path.join(BASE_DIR, 'data', 'route_areas.json')
 
-    with open(sr_path, 'r', encoding='utf-8') as f:
-        all_srs = json.load(f)
+    all_srs = load_missed_collection_requests()
 
     # Dynamically slice to the rolling 180-day and 30-day windows
     cutoff_30d_ms = 0

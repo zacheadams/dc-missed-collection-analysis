@@ -38,21 +38,20 @@ python3 -m http.server 8000
 
 This repository includes an automated, incremental data pipeline that keeps the application up to date:
 
-- **GitHub Actions Automation**: A GitHub Actions workflow (`.github/workflows/update_data.yml`) runs on demand via manual `workflow_dispatch` (scheduled cron runs can also be configured).
-- **Incremental Data Ingestion**: Rather than redownloading the entire 180-day archive, `scripts/fetch_311_data.py` reads existing records to identify the latest submission timestamp (`max(ADDDATE)`). It queries Open Data DC strictly for records added or updated within a 48-hour buffer, merges new tickets by unique `OBJECTID`, and prunes records older than 180 days to maintain a clean rolling window.
-- **Zero External Dependencies**: All scripts rely solely on the Python standard library (`urllib`, `json`, `datetime`, `collections`, `os`, `sys`, `time`), requiring no external packages or third-party paid infrastructure.
+- **GitHub Actions Automation**: A GitHub Actions workflow (`.github/workflows/update_data.yml`) checks out `dc-311-sentinel` alongside this repository and runs on demand via manual `workflow_dispatch`.
+- **Shared 311 Warehouse & Boundaries**: Rather than storing a duplicate 311 JSON archive or duplicate Ward/SMD GeoJSONs, `scripts/sentinel_source.py` queries `S0441` and `S0321` directly from `../dc-311-sentinel/data/warehouse.duckdb` (`duckdb` in `requirements.txt`) and reads `dc_smds.geojson` / `dc_wards.geojson` from `../dc-311-sentinel/data/`.
 - **Automatic GitHub Pages Deployment**: Any detected data or application changes are automatically committed by `github-actions[bot]` and pushed to `main`, triggering instantaneous GitHub Pages redeployment.
 
 ### Running the Pipeline Locally
 ```bash
-# Run the complete automated pipeline (incremental fetch + calculations + HTML build)
+# Build from the sibling dc-311-sentinel DuckDB warehouse (auto-uses ../dc-311-sentinel/.venv if needed)
 python3 scripts/update_pipeline.py
 
-# Recompute metrics and rebuild HTML applications from existing local data
-python3 scripts/update_pipeline.py --skip-fetch
+# Refresh dc-311-sentinel first, then rebuild missed-collections
+python3 scripts/update_pipeline.py --refresh-sentinel
 
-# Force a full 180-day re-fetch
-python3 scripts/update_pipeline.py --full-fetch
+# Skip regenerating DPW street route line geometries (faster routine rebuilds)
+python3 scripts/update_pipeline.py --skip-route-lines
 ```
 
 ---
@@ -225,23 +224,20 @@ dc-missed-collection-analysis/
 │       ├── html2canvas/               # html2canvas 1.4.1
 │       └── jspdf-autotable/           # jsPDF-AutoTable 3.8.2
 ├── tiles/                             # Offline Stamen Toner tiles for DC (zooms 11 to 17, Light & Blacklite)
-├── data/                              # Aggregated datasets and geospatial boundaries
-│   ├── dc_service_requests.json       # Master 311 missed collection records (expanded historical store)
+├── data/                              # Aggregated datasets and route/neighborhood geometries (311 requests, SMDs, and Wards read from ../dc-311-sentinel/data/)
 │   ├── route_stats.json               # Precomputed DPW route-level performance and repeat metrics (180d window)
-│   ├── route_areas.json                # Precomputed spatial intersections mapping routes to neighborhoods & ANCs
+│   ├── route_areas.json               # Precomputed spatial intersections mapping routes to neighborhoods & ANCs
 │   ├── smd_address_stats.json         # SMD address-level deduplication metrics (180d window)
-│   ├── dc_map_data_v2.json            # 30-day map payload with route geometries and area annotations
+│   ├── dc_map_data_v2.json            # 180d & 30d map payload with route geometries and area annotations
 │   ├── dc_neighborhood_clusters.geojson # 46 official DC Neighborhood Cluster boundaries
 │   ├── dc_neighborhoods.geojson       # 132 DC Neighborhood point locations
-│   ├── dc_smds.geojson                # 345 DC Single Member District boundaries
-│   ├── dc_wards.geojson               # 8 DC Ward boundaries
 │   ├── dc_trash_routes.geojson        # 140 DPW trash collection routes (polygons)
 │   ├── dc_recycle_routes.geojson      # 173 DPW recycling collection routes (polygons)
 │   ├── dc_trash_routes_lines.geojson  # 141 DPW trash collection routes (street lines)
 │   └── dc_recycle_routes_lines.geojson# 120 DPW recycling collection routes (street lines)
-└── scripts/                           # Reproducible data retrieval and analysis pipelines
-    ├── update_pipeline.py             # Master pipeline orchestrator (fetch -> calculate -> compile)
-    ├── fetch_311_data.py              # Incremental query to DC GIS FeatureServer 13 with retry logic
+└── scripts/                           # Reproducible analysis and build pipelines
+    ├── update_pipeline.py             # Master pipeline orchestrator (verify/refresh sentinel -> calculate -> compile)
+    ├── sentinel_source.py             # Shared reader for ../dc-311-sentinel/data/warehouse.duckdb and boundaries
     ├── generate_route_lines.py        # Generates street-level DPW route lines from collection points GIS
     ├── update_map_data.py             # Computes 30-day SMD & Ward metrics for interactive map
     ├── analyze_repeat_addresses.py    # Computes address deduplication and repeat metrics for SMDs
