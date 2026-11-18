@@ -1445,7 +1445,7 @@ html_page = f'''<!DOCTYPE html>
 
     // Initialize Map
     const map = L.map('map', {{
-      center: [38.9072, -77.01],
+      center: [38.8938, -77.0145],
       zoom: 12,
       zoomControl: false,
       minZoom: 11,
@@ -2686,7 +2686,7 @@ html_page = f'''<!DOCTYPE html>
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
 
-      map.setView([38.9072, -77.01], 12, {{ animate: true }});
+      map.setView([38.8938, -77.0145], 12, {{ animate: true }});
       updateInspectorCitywide();
     }}
 
@@ -3359,7 +3359,7 @@ html_page = f'''<!DOCTYPE html>
       if (trashLinesLayer && map.hasLayer(trashLinesLayer)) map.removeLayer(trashLinesLayer);
       if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) map.removeLayer(recycleLinesLayer);
 
-      map.setView([38.9072, -77.01], 12, {{ animate: true }});
+      map.setView([38.8938, -77.0145], 12, {{ animate: true }});
       updateWardMask();
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
