@@ -1916,7 +1916,6 @@
       }
 
       updateInspectorRoute(feature.properties, stream);
-      updateBreadcrumbsRoute(feature.properties, stream, ' (polygon)');
     }
 
     function selectLineRoute(feature, layer, stream) {
@@ -1979,7 +1978,6 @@
       }
 
       updateInspectorRoute(feature.properties, stream);
-      updateBreadcrumbsRoute(feature.properties, stream, ' (line)');
     }
 
     function handleRouteHover(e, layer, isTrash) {
@@ -2334,7 +2332,6 @@
       map.fitBounds(targetLayer.getBounds(), { maxZoom: 16, padding: [60, 60] });
 
       updateInspectorSMD(p, targetLayer.getBounds().getCenter());
-      updateBreadcrumbs();
     }
 
     function selectWard(wNum) {
@@ -2360,7 +2357,6 @@
         map.fitBounds(b, { padding: [30, 30] });
         updateInspectorWard(wardFeat.properties);
       }
-      updateBreadcrumbs();
     }
 
     function selectANC(ancId) {
@@ -2383,7 +2379,6 @@
         map.fitBounds(grp.getBounds(), { padding: [40, 40] });
       }
       updateInspectorANC(ancId);
-      updateBreadcrumbs();
     }
 
     function resetToCitywide() {
@@ -2401,7 +2396,6 @@
 
       map.setView([38.9072, -77.01], 12);
       updateInspectorCitywide();
-      updateBreadcrumbs();
     }
 
     function updateDropdowns(wardVal, ancVal, smdVal) {
@@ -2945,7 +2939,6 @@
         if (selectedRouteId && !selectedRouteIsLine) {
           clearRouteSelection();
           updateInspectorCitywide();
-          updateBreadcrumbs();
         }
         clearRouteHover();
       } else {
@@ -2962,7 +2955,6 @@
           if (selectedRouteStream === 'Recycling' && !selectedRouteIsLine) {
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }
           if (trashRoutesLayer && !map.hasLayer(trashRoutesLayer)) {
             map.addLayer(trashRoutesLayer);
@@ -2977,7 +2969,6 @@
           if (selectedRouteStream === 'Trash' && !selectedRouteIsLine) {
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }
           if (recycleRoutesLayer && !map.hasLayer(recycleRoutesLayer)) {
             map.addLayer(recycleRoutesLayer);
@@ -3019,7 +3010,6 @@
           if (selectedRouteStream === 'Trash' && selectedRouteIsLine) {
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }
           map.removeLayer(trashLinesLayer);
           clearRouteHover();
@@ -3040,7 +3030,6 @@
           if (selectedRouteStream === 'Recycling' && selectedRouteIsLine) {
             clearRouteSelection();
             updateInspectorCitywide();
-            updateBreadcrumbs();
           }
           map.removeLayer(recycleLinesLayer);
           clearRouteHover();
@@ -3088,7 +3077,6 @@
 
       updateLegend();
       updateInspectorCitywide();
-      updateBreadcrumbs();
     }
 
     // Static Contextual Exports
