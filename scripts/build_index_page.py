@@ -361,7 +361,9 @@ html_content = f"""<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 14px;
-      margin-bottom: 44px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
     }}
 
     .kpi-box {{
@@ -395,7 +397,7 @@ html_content = f"""<!DOCTYPE html>
       border: 1px solid var(--border);
       border-radius: 2px;
       padding: 24px;
-      margin-top: 10px;
+      margin-top: 0;
       margin-bottom: 40px;
       box-shadow: var(--card-shadow);
     }}
