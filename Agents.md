@@ -52,7 +52,7 @@ This document codifies development standards, operational conventions, and archi
     - **Recycling Stream**: Light green (`#bbf7d0`) to deep forest green (`#14532d`).
     - **Combined Stream**: Light blue (`#bfdbfe`) to deep navy blue (`#172554`).
 - **Permanent Ward Boundaries**:
-  - Ward boundaries must remain permanently visible on the map with crisp contrast and dashed outlines (`#7c3aed` / `#c084fc`) at all times.
+  - Ward boundaries must remain permanently visible on the map with crisp contrast and dotted black/white outlines (`#000000` light / `#ffffff` dark, `dashArray: '2, 5'`) at all times.
 - **Dual Analytic Period Toggle**:
   - The map supports switching between **180-Day** (default) and **30-Day** analysis windows with instantaneous choropleth and inspector metric updates.
 - **Census TIGERweb Fallback**:

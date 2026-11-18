@@ -243,16 +243,56 @@ html_page = f'''<!DOCTYPE html>
   <!-- Local Vendored Leaflet CSS -->
   <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
 
-  <!-- Google Fonts: IBM Plex Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Self-hosted IBM Plex Mono (loaded via @font-face in CSS) -->
 
   <!-- Local Vendored Export Libraries -->
   <script src="assets/vendor/jspdf/jspdf.umd.min.js"></script>
   <script src="assets/vendor/html2canvas/html2canvas.min.js"></script>
 
   <style>
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Italic.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Medium.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-SemiBold.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    }}
+    @font-face {{
+      font-family: 'IBM Plex Mono';
+      font-style: normal;
+      font-weight: 800;
+      font-display: swap;
+      src: url('assets/fonts/IBMPlexMono-Bold.woff2') format('woff2');
+    }}
+
     :root {{
       --font-mono: 'IBM Plex Mono', monospace;
 
@@ -324,7 +364,10 @@ html_page = f'''<!DOCTYPE html>
       font-family: var(--font-mono);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }}
 
     /* Keyword Color Classes */
@@ -372,6 +415,8 @@ html_page = f'''<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
       transition: background 0.2s, border-color 0.2s;
     }}
 
@@ -385,6 +430,7 @@ html_page = f'''<!DOCTYPE html>
       font-weight: 800;
       color: var(--text-main);
       letter-spacing: -0.01em;
+      text-decoration: none;
     }}
 
     .nav-subtitle {{
@@ -395,7 +441,8 @@ html_page = f'''<!DOCTYPE html>
     .nav-links {{
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }}
 
     .nav-link {{
@@ -443,8 +490,9 @@ html_page = f'''<!DOCTYPE html>
     /* Main Full-Viewport Workspace */
     .map-workspace {{
       position: relative;
+      flex: 1;
       width: 100vw;
-      height: calc(100vh - 54px);
+      height: calc(100vh - 53px);
       overflow: hidden;
     }}
 
@@ -460,6 +508,8 @@ html_page = f'''<!DOCTYPE html>
       top: 14px;
       left: 14px;
       width: 320px;
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
@@ -669,6 +719,8 @@ html_page = f'''<!DOCTYPE html>
       top: 14px;
       right: 14px;
       width: 320px;
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
       background: var(--bg-panel);
       backdrop-filter: blur(12px);
       border: 1px solid var(--border);
@@ -877,7 +929,7 @@ html_page = f'''<!DOCTYPE html>
         top: auto;
         width: 100%;
         max-height: 82vh;
-        border-radius: 12px 12px 0 0;
+        border-radius: 2px 2px 0 0;
         border-top: 1px solid var(--border);
         border-left: none;
         border-right: none;
@@ -915,7 +967,7 @@ html_page = f'''<!DOCTYPE html>
         right: 0;
         top: auto;
         width: 100%;
-        border-radius: 12px 12px 0 0;
+        border-radius: 2px 2px 0 0;
         border-top: 1px solid var(--border);
         border-left: none;
         border-right: none;
@@ -930,10 +982,10 @@ html_page = f'''<!DOCTYPE html>
         box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.25);
       }}
 
-      /* Peek snap: title + stat grid visible (~130px) */
+      /* Peek snap: title + stat grid visible (~145px) */
       .inspector-panel.is-peek {{
         transform: translateY(0);
-        max-height: 130px;
+        max-height: 145px;
         overflow: hidden;
       }}
 
@@ -1143,7 +1195,7 @@ html_page = f'''<!DOCTYPE html>
   <!-- Top Navigation Bar -->
   <nav class="site-nav">
     <div class="nav-brand">
-      <span class="nav-title">Missed Collections</span>
+      <a href="index.html" class="nav-title">Missed Collections</a>
       <span class="nav-subtitle">Where—and why—are <span class="kw-trash">trash</span> and <span class="kw-recycle">recycling</span> pickups missed in DC?</span>
     </div>
     <div class="nav-links">
@@ -1614,10 +1666,10 @@ html_page = f'''<!DOCTYPE html>
         }} else {{
           return {{
             fillColor: getColor(val, currentMetric),
-            weight: 0.8,
-            opacity: 0.85,
-            color: currentTheme === 'dark' ? '#3f3f46' : '#52525b',
-            fillOpacity: val === 0 ? 0.25 : 0.72
+            weight: 0.4,
+            opacity: 0.25,
+            color: outlineColor,
+            fillOpacity: 0.14
           }};
         }}
       }}
@@ -1876,6 +1928,7 @@ html_page = f'''<!DOCTYPE html>
               activeHoverLayer = layer;
               const streamColor = getStreamColor(currentMetric);
               layer.setStyle({{ weight: 3.8, color: streamColor, fillOpacity: 0.88 }});
+              if (layer.bringToFront) layer.bringToFront();
               const val = getSmdMetric(p, currentMetric, currentPeriod);
               const streamName = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
               smdTooltip.setContent(`
@@ -1898,6 +1951,10 @@ html_page = f'''<!DOCTYPE html>
               smdTooltip.close();
             }},
             click: function(e) {{
+              if (selectedSmdId === p.smd_id) {{
+                resetToDefault();
+                return;
+              }}
               selectHierarchy(p.smd_id);
             }}
           }});
@@ -2147,7 +2204,7 @@ html_page = f'''<!DOCTYPE html>
       }});
 
       if (combinedBounds && combinedBounds.isValid()) {{
-        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 15 }});
+        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 15, animate: true, duration: 0.55 }});
       }}
 
       updateInspectorRoute(feature.properties, stream);
@@ -2209,7 +2266,7 @@ html_page = f'''<!DOCTYPE html>
       }});
 
       if (combinedBounds && combinedBounds.isValid()) {{
-        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 16 }});
+        map.fitBounds(combinedBounds, {{ padding: [50, 50], maxZoom: 16, animate: true, duration: 0.55 }});
       }}
 
       updateInspectorRoute(feature.properties, stream);
@@ -2564,7 +2621,7 @@ html_page = f'''<!DOCTYPE html>
       if (wardLayer) wardLayer.setStyle(wardStyle);
 
       targetLayer.bringToFront();
-      map.fitBounds(targetLayer.getBounds(), {{ maxZoom: 16, padding: [60, 60] }});
+      map.fitBounds(targetLayer.getBounds(), {{ maxZoom: 16, padding: [60, 60], animate: true, duration: 0.55 }});
 
       updateInspectorSMD(p, targetLayer.getBounds().getCenter());
     }}
@@ -2589,7 +2646,7 @@ html_page = f'''<!DOCTYPE html>
       const wardFeat = MAP_DATA.wards.features.find(f => f.properties.ward === selectedWardNum);
       if (wardFeat) {{
         const b = L.geoJSON(wardFeat).getBounds();
-        map.fitBounds(b, {{ padding: [30, 30] }});
+        map.fitBounds(b, {{ padding: [30, 30], animate: true, duration: 0.55 }});
         updateInspectorWard(wardFeat.properties);
       }}
     }}
@@ -2611,7 +2668,7 @@ html_page = f'''<!DOCTYPE html>
       const matching = MAP_DATA.smds.features.filter(f => f.properties.anc_id === ancId);
       if (matching.length > 0) {{
         const grp = L.featureGroup(matching.map(f => L.geoJSON(f)));
-        map.fitBounds(grp.getBounds(), {{ padding: [40, 40] }});
+        map.fitBounds(grp.getBounds(), {{ padding: [40, 40], animate: true, duration: 0.55 }});
       }}
       updateInspectorANC(ancId);
     }}
@@ -2629,7 +2686,7 @@ html_page = f'''<!DOCTYPE html>
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
 
-      map.setView([38.9072, -77.01], 12);
+      map.setView([38.9072, -77.01], 12, {{ animate: true }});
       updateInspectorCitywide();
     }}
 
@@ -3302,7 +3359,7 @@ html_page = f'''<!DOCTYPE html>
       if (trashLinesLayer && map.hasLayer(trashLinesLayer)) map.removeLayer(trashLinesLayer);
       if (recycleLinesLayer && map.hasLayer(recycleLinesLayer)) map.removeLayer(recycleLinesLayer);
 
-      map.setView([38.9072, -77.01], 12);
+      map.setView([38.9072, -77.01], 12, {{ animate: true }});
       updateWardMask();
       if (smdLayer) smdLayer.setStyle(smdStyle);
       if (wardLayer) wardLayer.setStyle(wardStyle);
