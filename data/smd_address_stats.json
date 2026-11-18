@@ -2,9 +2,9 @@
   "citywide": {
     "total_requests": 17180,
     "unique_addresses": 10165,
-    "repeat_addresses": 3165,
+    "repeat_addresses": 3162,
     "repeat_rate": 31.1,
-    "single_addresses": 7000,
+    "single_addresses": 7003,
     "requests_per_address": 1.69
   },
   "wards": {
@@ -13,8 +13,8 @@
       "trash": 1906,
       "recycling": 815,
       "unique_addresses": 1618,
-      "repeat_addresses": 498,
-      "repeat_rate": 30.8,
+      "repeat_addresses": 497,
+      "repeat_rate": 30.7,
       "requests_per_address": 1.68
     },
     "1": {
@@ -40,8 +40,8 @@
       "trash": 2252,
       "recycling": 917,
       "unique_addresses": 1910,
-      "repeat_addresses": 584,
-      "repeat_rate": 30.6,
+      "repeat_addresses": 586,
+      "repeat_rate": 30.7,
       "requests_per_address": 1.66
     },
     "2": {
@@ -49,8 +49,8 @@
       "trash": 1088,
       "recycling": 306,
       "unique_addresses": 766,
-      "repeat_addresses": 257,
-      "repeat_rate": 33.6,
+      "repeat_addresses": 255,
+      "repeat_rate": 33.3,
       "requests_per_address": 1.82
     },
     "8": {
@@ -58,8 +58,8 @@
       "trash": 981,
       "recycling": 349,
       "unique_addresses": 771,
-      "repeat_addresses": 247,
-      "repeat_rate": 32.0,
+      "repeat_addresses": 245,
+      "repeat_rate": 31.8,
       "requests_per_address": 1.73
     },
     "6": {
@@ -107,7 +107,7 @@
       "repeat_addrs": 18,
       "single_addrs": 25,
       "repeat_rate": 41.9,
-      "repeat_tickets": 50,
+      "repeat_tickets": 51,
       "max_repeat_days": 5
     },
     {
@@ -202,11 +202,11 @@
       "trash": 44,
       "recycling": 2,
       "unique_addrs": 27,
-      "repeat_addrs": 9,
-      "single_addrs": 18,
-      "repeat_rate": 33.3,
-      "repeat_tickets": 25,
-      "max_repeat_days": 5
+      "repeat_addrs": 8,
+      "single_addrs": 19,
+      "repeat_rate": 29.6,
+      "repeat_tickets": 24,
+      "max_repeat_days": 6
     },
     {
       "smd_id": "8F03",
@@ -258,10 +258,10 @@
       "trash": 40,
       "recycling": 7,
       "unique_addrs": 29,
-      "repeat_addrs": 9,
-      "single_addrs": 20,
-      "repeat_rate": 31.0,
-      "repeat_tickets": 26,
+      "repeat_addrs": 8,
+      "single_addrs": 21,
+      "repeat_rate": 27.6,
+      "repeat_tickets": 24,
       "max_repeat_days": 6
     },
     {
@@ -289,7 +289,7 @@
       "repeat_addrs": 13,
       "single_addrs": 44,
       "repeat_rate": 22.8,
-      "repeat_tickets": 36,
+      "repeat_tickets": 37,
       "max_repeat_days": 6
     },
     {
@@ -440,10 +440,10 @@
       "trash": 13,
       "recycling": 6,
       "unique_addrs": 12,
-      "repeat_addrs": 4,
-      "single_addrs": 8,
-      "repeat_rate": 33.3,
-      "repeat_tickets": 9,
+      "repeat_addrs": 3,
+      "single_addrs": 9,
+      "repeat_rate": 25.0,
+      "repeat_tickets": 7,
       "max_repeat_days": 3
     },
     {
@@ -513,8 +513,8 @@
       "repeat_addrs": 3,
       "single_addrs": 19,
       "repeat_rate": 13.6,
-      "repeat_tickets": 7,
-      "max_repeat_days": 3
+      "repeat_tickets": 6,
+      "max_repeat_days": 2
     },
     {
       "smd_id": "4B10",
@@ -597,8 +597,8 @@
       "repeat_addrs": 6,
       "single_addrs": 18,
       "repeat_rate": 25.0,
-      "repeat_tickets": 16,
-      "max_repeat_days": 4
+      "repeat_tickets": 15,
+      "max_repeat_days": 3
     },
     {
       "smd_id": "4C01",
@@ -706,11 +706,11 @@
       "trash": 56,
       "recycling": 8,
       "unique_addrs": 39,
-      "repeat_addrs": 8,
-      "single_addrs": 31,
-      "repeat_rate": 20.5,
-      "repeat_tickets": 28,
-      "max_repeat_days": 9
+      "repeat_addrs": 7,
+      "single_addrs": 32,
+      "repeat_rate": 17.9,
+      "repeat_tickets": 27,
+      "max_repeat_days": 10
     },
     {
       "smd_id": "7D09",
@@ -751,7 +751,7 @@
       "repeat_addrs": 16,
       "single_addrs": 37,
       "repeat_rate": 30.2,
-      "repeat_tickets": 40,
+      "repeat_tickets": 39,
       "max_repeat_days": 5
     },
     {
@@ -762,10 +762,10 @@
       "trash": 70,
       "recycling": 51,
       "unique_addrs": 57,
-      "repeat_addrs": 16,
-      "single_addrs": 41,
-      "repeat_rate": 28.1,
-      "repeat_tickets": 67,
+      "repeat_addrs": 17,
+      "single_addrs": 40,
+      "repeat_rate": 29.8,
+      "repeat_tickets": 69,
       "max_repeat_days": 10
     },
     {
@@ -835,7 +835,7 @@
       "repeat_addrs": 22,
       "single_addrs": 45,
       "repeat_rate": 32.8,
-      "repeat_tickets": 55,
+      "repeat_tickets": 56,
       "max_repeat_days": 7
     },
     {
@@ -891,8 +891,8 @@
       "repeat_addrs": 10,
       "single_addrs": 24,
       "repeat_rate": 29.4,
-      "repeat_tickets": 28,
-      "max_repeat_days": 4
+      "repeat_tickets": 29,
+      "max_repeat_days": 5
     },
     {
       "smd_id": "5D06",
@@ -930,10 +930,10 @@
       "trash": 59,
       "recycling": 3,
       "unique_addrs": 41,
-      "repeat_addrs": 11,
-      "single_addrs": 30,
-      "repeat_rate": 26.8,
-      "repeat_tickets": 28,
+      "repeat_addrs": 12,
+      "single_addrs": 29,
+      "repeat_rate": 29.3,
+      "repeat_tickets": 30,
       "max_repeat_days": 3
     },
     {
@@ -1129,7 +1129,7 @@
       "repeat_addrs": 19,
       "single_addrs": 53,
       "repeat_rate": 26.4,
-      "repeat_tickets": 60,
+      "repeat_tickets": 59,
       "max_repeat_days": 6
     },
     {
@@ -1196,10 +1196,10 @@
       "trash": 36,
       "recycling": 19,
       "unique_addrs": 34,
-      "repeat_addrs": 10,
-      "single_addrs": 24,
-      "repeat_rate": 29.4,
-      "repeat_tickets": 25,
+      "repeat_addrs": 9,
+      "single_addrs": 25,
+      "repeat_rate": 26.5,
+      "repeat_tickets": 23,
       "max_repeat_days": 4
     },
     {
@@ -1308,10 +1308,10 @@
       "trash": 37,
       "recycling": 32,
       "unique_addrs": 46,
-      "repeat_addrs": 12,
-      "single_addrs": 34,
-      "repeat_rate": 26.1,
-      "repeat_tickets": 33,
+      "repeat_addrs": 13,
+      "single_addrs": 33,
+      "repeat_rate": 28.3,
+      "repeat_tickets": 35,
       "max_repeat_days": 5
     },
     {
@@ -1479,7 +1479,7 @@
       "repeat_addrs": 33,
       "single_addrs": 69,
       "repeat_rate": 32.4,
-      "repeat_tickets": 94,
+      "repeat_tickets": 95,
       "max_repeat_days": 6
     },
     {
@@ -1560,10 +1560,10 @@
       "trash": 21,
       "recycling": 37,
       "unique_addrs": 40,
-      "repeat_addrs": 10,
-      "single_addrs": 30,
-      "repeat_rate": 25.0,
-      "repeat_tickets": 26,
+      "repeat_addrs": 9,
+      "single_addrs": 31,
+      "repeat_rate": 22.5,
+      "repeat_tickets": 24,
       "max_repeat_days": 4
     },
     {
@@ -1644,10 +1644,10 @@
       "trash": 59,
       "recycling": 7,
       "unique_addrs": 42,
-      "repeat_addrs": 11,
-      "single_addrs": 31,
-      "repeat_rate": 26.2,
-      "repeat_tickets": 32,
+      "repeat_addrs": 12,
+      "single_addrs": 30,
+      "repeat_rate": 28.6,
+      "repeat_tickets": 34,
       "max_repeat_days": 4
     },
     {
@@ -1689,7 +1689,7 @@
       "repeat_addrs": 21,
       "single_addrs": 35,
       "repeat_rate": 37.5,
-      "repeat_tickets": 55,
+      "repeat_tickets": 56,
       "max_repeat_days": 7
     },
     {
@@ -1731,8 +1731,8 @@
       "repeat_addrs": 1,
       "single_addrs": 0,
       "repeat_rate": 100.0,
-      "repeat_tickets": 6,
-      "max_repeat_days": 6
+      "repeat_tickets": 5,
+      "max_repeat_days": 5
     },
     {
       "smd_id": "8A01",
@@ -1770,10 +1770,10 @@
       "trash": 62,
       "recycling": 13,
       "unique_addrs": 42,
-      "repeat_addrs": 15,
-      "single_addrs": 27,
-      "repeat_rate": 35.7,
-      "repeat_tickets": 42,
+      "repeat_addrs": 14,
+      "single_addrs": 28,
+      "repeat_rate": 33.3,
+      "repeat_tickets": 40,
       "max_repeat_days": 13
     },
     {
@@ -1812,10 +1812,10 @@
       "trash": 52,
       "recycling": 33,
       "unique_addrs": 44,
-      "repeat_addrs": 16,
-      "single_addrs": 28,
-      "repeat_rate": 36.4,
-      "repeat_tickets": 53,
+      "repeat_addrs": 15,
+      "single_addrs": 29,
+      "repeat_rate": 34.1,
+      "repeat_tickets": 51,
       "max_repeat_days": 12
     },
     {
@@ -1941,7 +1941,7 @@
       "repeat_addrs": 17,
       "single_addrs": 29,
       "repeat_rate": 37.0,
-      "repeat_tickets": 46,
+      "repeat_tickets": 45,
       "max_repeat_days": 8
     },
     {
@@ -2039,7 +2039,7 @@
       "repeat_addrs": 14,
       "single_addrs": 22,
       "repeat_rate": 38.9,
-      "repeat_tickets": 42,
+      "repeat_tickets": 41,
       "max_repeat_days": 6
     },
     {
@@ -2095,7 +2095,7 @@
       "repeat_addrs": 29,
       "single_addrs": 47,
       "repeat_rate": 38.2,
-      "repeat_tickets": 96,
+      "repeat_tickets": 95,
       "max_repeat_days": 15
     },
     {
@@ -2165,8 +2165,8 @@
       "repeat_addrs": 17,
       "single_addrs": 56,
       "repeat_rate": 23.3,
-      "repeat_tickets": 43,
-      "max_repeat_days": 5
+      "repeat_tickets": 44,
+      "max_repeat_days": 6
     },
     {
       "smd_id": "4D07",
@@ -2235,7 +2235,7 @@
       "repeat_addrs": 27,
       "single_addrs": 49,
       "repeat_rate": 35.5,
-      "repeat_tickets": 73,
+      "repeat_tickets": 75,
       "max_repeat_days": 8
     },
     {
@@ -2473,7 +2473,7 @@
       "repeat_addrs": 12,
       "single_addrs": 21,
       "repeat_rate": 36.4,
-      "repeat_tickets": 44,
+      "repeat_tickets": 45,
       "max_repeat_days": 8
     },
     {
@@ -2498,10 +2498,10 @@
       "trash": 182,
       "recycling": 51,
       "unique_addrs": 113,
-      "repeat_addrs": 54,
-      "single_addrs": 59,
-      "repeat_rate": 47.8,
-      "repeat_tickets": 167,
+      "repeat_addrs": 55,
+      "single_addrs": 58,
+      "repeat_rate": 48.7,
+      "repeat_tickets": 169,
       "max_repeat_days": 10
     },
     {
@@ -2697,8 +2697,8 @@
       "repeat_addrs": 15,
       "single_addrs": 26,
       "repeat_rate": 36.6,
-      "repeat_tickets": 48,
-      "max_repeat_days": 11
+      "repeat_tickets": 49,
+      "max_repeat_days": 12
     },
     {
       "smd_id": "1B04",
@@ -2753,7 +2753,7 @@
       "repeat_addrs": 11,
       "single_addrs": 13,
       "repeat_rate": 45.8,
-      "repeat_tickets": 41,
+      "repeat_tickets": 42,
       "max_repeat_days": 11
     },
     {
@@ -3033,8 +3033,8 @@
       "repeat_addrs": 1,
       "single_addrs": 0,
       "repeat_rate": 100.0,
-      "repeat_tickets": 4,
-      "max_repeat_days": 4
+      "repeat_tickets": 3,
+      "max_repeat_days": 3
     },
     {
       "smd_id": "1C03",
@@ -3187,8 +3187,8 @@
       "repeat_addrs": 4,
       "single_addrs": 13,
       "repeat_rate": 23.5,
-      "repeat_tickets": 17,
-      "max_repeat_days": 9
+      "repeat_tickets": 18,
+      "max_repeat_days": 10
     },
     {
       "smd_id": "2F08",
@@ -3226,10 +3226,10 @@
       "trash": 39,
       "recycling": 12,
       "unique_addrs": 35,
-      "repeat_addrs": 11,
-      "single_addrs": 24,
-      "repeat_rate": 31.4,
-      "repeat_tickets": 26,
+      "repeat_addrs": 10,
+      "single_addrs": 25,
+      "repeat_rate": 28.6,
+      "repeat_tickets": 24,
       "max_repeat_days": 5
     },
     {
@@ -3492,10 +3492,10 @@
       "trash": 67,
       "recycling": 43,
       "unique_addrs": 70,
-      "repeat_addrs": 18,
-      "single_addrs": 52,
-      "repeat_rate": 25.7,
-      "repeat_tickets": 47,
+      "repeat_addrs": 19,
+      "single_addrs": 51,
+      "repeat_rate": 27.1,
+      "repeat_tickets": 49,
       "max_repeat_days": 6
     },
     {
@@ -3621,7 +3621,7 @@
       "repeat_addrs": 31,
       "single_addrs": 52,
       "repeat_rate": 37.3,
-      "repeat_tickets": 107,
+      "repeat_tickets": 105,
       "max_repeat_days": 10
     },
     {
@@ -3663,8 +3663,8 @@
       "repeat_addrs": 8,
       "single_addrs": 18,
       "repeat_rate": 30.8,
-      "repeat_tickets": 22,
-      "max_repeat_days": 4
+      "repeat_tickets": 23,
+      "max_repeat_days": 5
     },
     {
       "smd_id": "8F02",
@@ -3943,7 +3943,7 @@
       "repeat_addrs": 11,
       "single_addrs": 32,
       "repeat_rate": 25.6,
-      "repeat_tickets": 56,
+      "repeat_tickets": 57,
       "max_repeat_days": 27
     },
     {
@@ -4125,7 +4125,7 @@
       "repeat_addrs": 8,
       "single_addrs": 24,
       "repeat_rate": 25.0,
-      "repeat_tickets": 36,
+      "repeat_tickets": 35,
       "max_repeat_days": 12
     },
     {
@@ -4192,10 +4192,10 @@
       "trash": 63,
       "recycling": 29,
       "unique_addrs": 56,
-      "repeat_addrs": 13,
-      "single_addrs": 43,
-      "repeat_rate": 23.2,
-      "repeat_tickets": 42,
+      "repeat_addrs": 12,
+      "single_addrs": 44,
+      "repeat_rate": 21.4,
+      "repeat_tickets": 40,
       "max_repeat_days": 8
     },
     {
@@ -4220,10 +4220,10 @@
       "trash": 17,
       "recycling": 27,
       "unique_addrs": 30,
-      "repeat_addrs": 12,
-      "single_addrs": 18,
-      "repeat_rate": 40.0,
-      "repeat_tickets": 25,
+      "repeat_addrs": 13,
+      "single_addrs": 17,
+      "repeat_rate": 43.3,
+      "repeat_tickets": 27,
       "max_repeat_days": 3
     },
     {
@@ -4265,7 +4265,7 @@
       "repeat_addrs": 15,
       "single_addrs": 25,
       "repeat_rate": 37.5,
-      "repeat_tickets": 43,
+      "repeat_tickets": 42,
       "max_repeat_days": 5
     },
     {
@@ -4335,7 +4335,7 @@
       "repeat_addrs": 18,
       "single_addrs": 27,
       "repeat_rate": 40.0,
-      "repeat_tickets": 68,
+      "repeat_tickets": 69,
       "max_repeat_days": 9
     },
     {
@@ -4433,8 +4433,8 @@
       "repeat_addrs": 28,
       "single_addrs": 51,
       "repeat_rate": 35.4,
-      "repeat_tickets": 90,
-      "max_repeat_days": 10
+      "repeat_tickets": 91,
+      "max_repeat_days": 11
     },
     {
       "smd_id": "3E03",
@@ -4601,7 +4601,7 @@
       "repeat_addrs": 24,
       "single_addrs": 58,
       "repeat_rate": 29.3,
-      "repeat_tickets": 58,
+      "repeat_tickets": 57,
       "max_repeat_days": 5
     },
     {
@@ -4713,8 +4713,8 @@
       "repeat_addrs": 18,
       "single_addrs": 39,
       "repeat_rate": 31.6,
-      "repeat_tickets": 41,
-      "max_repeat_days": 3
+      "repeat_tickets": 42,
+      "max_repeat_days": 4
     },
     {
       "smd_id": "2B09",

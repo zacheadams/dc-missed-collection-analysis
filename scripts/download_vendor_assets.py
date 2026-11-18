@@ -83,7 +83,7 @@ def download_assets():
         expected_sha256 = item.get('sha256')
         print(f" - Downloading: {url} -> {os.path.relpath(dest, BASE_DIR)}")
         req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req) as resp, open(dest, 'wb') as out_f:
+        with urllib.request.urlopen(req, timeout=30) as resp, open(dest, 'wb') as out_f:
             data = resp.read()
             out_f.write(data)
             sz = len(data)

@@ -56,46 +56,10 @@ def feat_list_area_sq_mi(feat_list):
 
 
 
-def merge_line_props(props_list):
-    """
-    Merge spatial properties from multiple line route runs (e.g. 101_2 and 101_4).
-    Ensures ANCs are sorted in ascending numerical and then alphabetical order.
-    """
-    # Collect unique wards in order
-    wards = []
-    for p in props_list:
-        for w in re.findall(r'Ward\s+(\d+)', p.get('ward', '')):
-            if w not in wards:
-                wards.append(w)
-    ward_str = ' / '.join([f'Ward {w}' for w in sorted(wards)]) if wards else 'District-Wide'
-
-    # Collect unique ANCs and sort in ascending numerical then alphabetical order
-    raw_ancs = []
-    for p in props_list:
-        parts = p.get('ancs', '').replace('ANC', '').split(',')
-        for a in parts:
-            a = a.strip()
-            if a and a not in raw_ancs:
-                raw_ancs.append(a)
-    sorted_ancs = sorted(raw_ancs, key=anc_sort_key)
-    ancs_str = 'ANC ' + ', '.join(sorted_ancs) if sorted_ancs else ''
-
-    # Collect unique neighborhoods in order
-    nbhs = []
-    for p in props_list:
-        for n in p.get('neighborhoods', '').split(','):
-            n = n.strip()
-            if n and n not in nbhs and len(nbhs) < 3:
-                nbhs.append(n)
-    nbhs_str = ', '.join(nbhs) if nbhs else 'Residential Corridor'
-    area_desc = f'{ward_str} • {nbhs_str}' + (f' ({ancs_str})' if ancs_str else '')
-    return ward_str, nbhs_str, ancs_str, area_desc
-
 def compute_route_areas():
     trash_geo_path = os.path.join(BASE_DIR, 'data/dc_trash_routes.geojson')
     rec_geo_path = os.path.join(BASE_DIR, 'data/dc_recycle_routes.geojson')
     clust_geo_path = os.path.join(BASE_DIR, 'data/dc_neighborhood_clusters.geojson')
-    nbh_geo_path = os.path.join(BASE_DIR, 'data/dc_neighborhoods.geojson')
     smd_geo_path = os.path.join(BASE_DIR, 'data/dc_smds.geojson')
     ward_geo_path = os.path.join(BASE_DIR, 'data/dc_wards.geojson')
 
@@ -105,8 +69,6 @@ def compute_route_areas():
         rec_geo = json.load(f)
     with open(clust_geo_path, 'r', encoding='utf-8') as f:
         clust_geo = json.load(f)
-    with open(nbh_geo_path, 'r', encoding='utf-8') as f:
-        nbh_geo = json.load(f)
     with open(smd_geo_path, 'r', encoding='utf-8') as f:
         smd_geo = json.load(f)
     with open(ward_geo_path, 'r', encoding='utf-8') as f:
@@ -121,13 +83,6 @@ def compute_route_areas():
             'cluster': f['properties'].get('NAME', ''),
             'polys': polys,
             'bbox': get_bbox(polys)
-        })
-
-    nbh_pts = []
-    for f in nbh_geo['features']:
-        nbh_pts.append({
-            'name': f['properties']['NAME'],
-            'coord': f['geometry']['coordinates']
         })
 
     smds = []
@@ -257,7 +212,6 @@ def compute_route_areas():
         except Exception:
             existing_ra = {}
 
-    trash_poly_to_lines = defaultdict(list)
     trash_line_entries = dict(existing_ra.get('trash_lines', {}))
     if os.path.exists(trash_lines_path):
         with open(trash_lines_path, 'r', encoding='utf-8') as f:
@@ -265,9 +219,6 @@ def compute_route_areas():
         for feat in tl_data.get('features', []):
             p = feat.get('properties', {})
             rid = p.get('route')
-            pid = p.get('polygon_route_id')
-            if pid:
-                trash_poly_to_lines[pid].append(p)
             if rid:
                 raw_a = [x.strip() for x in p.get('ancs', '').replace('ANC', '').split(',') if x.strip()]
                 sorted_a = 'ANC ' + ', '.join(sorted(raw_a, key=anc_sort_key)) if raw_a else ''

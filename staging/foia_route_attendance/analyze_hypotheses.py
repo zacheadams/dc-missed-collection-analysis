@@ -608,7 +608,6 @@ def build_html_report(h1, r1, p1, rho1, h2, h3, h4a_tiers, h4b_tiers, h4c_grid, 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="../../../assets/vendor/chartjs/chart.umd.min.js"></script>
-  <script>if (typeof Chart === 'undefined') {{ document.write('<script src="https://cdn.jsdelivr.net/npm/chart.js"><\\/script>'); }}</script>
   <style>
     :root {{
       --font-mono: 'IBM Plex Mono', monospace;

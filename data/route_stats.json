@@ -21,15 +21,15 @@
       "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C)",
       "total": 69,
       "unique_addrs": 48,
-      "repeat_addrs": 14,
-      "single_addrs": 34,
-      "repeat_rate": 29.2,
+      "repeat_addrs": 13,
+      "single_addrs": 35,
+      "repeat_rate": 27.1,
       "req_per_addr": 1.44,
       "days_count": {
-        "Friday": 34,
+        "Friday": 35,
         "Monday": 12,
         "Thursday": 1,
-        "Saturday": 9,
+        "Saturday": 8,
         "Wednesday": 2,
         "Sunday": 6,
         "Tuesday": 5
@@ -63,18 +63,18 @@
       "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7B, 7D)",
       "total": 214,
       "unique_addrs": 145,
-      "repeat_addrs": 44,
-      "single_addrs": 101,
-      "repeat_rate": 30.3,
+      "repeat_addrs": 42,
+      "single_addrs": 103,
+      "repeat_rate": 29.0,
       "req_per_addr": 1.48,
       "days_count": {
-        "Monday": 35,
-        "Friday": 53,
-        "Tuesday": 39,
-        "Saturday": 22,
-        "Wednesday": 30,
-        "Thursday": 30,
-        "Sunday": 5
+        "Monday": 33,
+        "Friday": 54,
+        "Tuesday": 43,
+        "Saturday": 21,
+        "Wednesday": 33,
+        "Thursday": 23,
+        "Sunday": 7
       },
       "metrics_30d": {
         "total": 15,
@@ -107,18 +107,18 @@
       "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 7C, 7E, 8A)",
       "total": 137,
       "unique_addrs": 103,
-      "repeat_addrs": 25,
-      "single_addrs": 78,
-      "repeat_rate": 24.3,
+      "repeat_addrs": 23,
+      "single_addrs": 80,
+      "repeat_rate": 22.3,
       "req_per_addr": 1.33,
       "days_count": {
         "Friday": 24,
-        "Thursday": 13,
-        "Tuesday": 36,
-        "Saturday": 15,
+        "Thursday": 12,
+        "Tuesday": 38,
+        "Saturday": 16,
         "Wednesday": 28,
-        "Monday": 14,
-        "Sunday": 7
+        "Monday": 13,
+        "Sunday": 6
       },
       "metrics_30d": {
         "total": 14,
@@ -151,18 +151,18 @@
       "area_desc": "Ward 7 / Ward 8 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7B, 7C, 7E, 7F, 8B)",
       "total": 355,
       "unique_addrs": 208,
-      "repeat_addrs": 67,
-      "single_addrs": 141,
-      "repeat_rate": 32.2,
+      "repeat_addrs": 65,
+      "single_addrs": 143,
+      "repeat_rate": 31.2,
       "req_per_addr": 1.71,
       "days_count": {
-        "Monday": 49,
-        "Sunday": 25,
-        "Tuesday": 87,
-        "Saturday": 45,
+        "Monday": 50,
+        "Sunday": 22,
+        "Tuesday": 88,
+        "Saturday": 46,
         "Thursday": 26,
-        "Wednesday": 49,
-        "Friday": 74
+        "Wednesday": 48,
+        "Friday": 75
       },
       "metrics_30d": {
         "total": 45,
@@ -174,9 +174,9 @@
         "days_count": {
           "Monday": 9,
           "Sunday": 3,
-          "Tuesday": 16,
+          "Tuesday": 17,
           "Saturday": 3,
-          "Thursday": 5,
+          "Thursday": 4,
           "Wednesday": 6,
           "Friday": 3
         }
@@ -196,16 +196,16 @@
       "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7B, 7D, 7F)",
       "total": 119,
       "unique_addrs": 89,
-      "repeat_addrs": 17,
-      "single_addrs": 72,
-      "repeat_rate": 19.1,
+      "repeat_addrs": 16,
+      "single_addrs": 73,
+      "repeat_rate": 18.0,
       "req_per_addr": 1.34,
       "days_count": {
         "Monday": 15,
-        "Saturday": 13,
-        "Friday": 42,
-        "Wednesday": 17,
-        "Tuesday": 23,
+        "Saturday": 12,
+        "Friday": 43,
+        "Wednesday": 16,
+        "Tuesday": 24,
         "Thursday": 6,
         "Sunday": 3
       },
@@ -218,8 +218,8 @@
         "req_per_addr": 1.24,
         "days_count": {
           "Monday": 3,
-          "Saturday": 6,
-          "Friday": 10,
+          "Saturday": 5,
+          "Friday": 11,
           "Wednesday": 5,
           "Tuesday": 2
         }
@@ -244,13 +244,13 @@
       "repeat_rate": 26.6,
       "req_per_addr": 1.34,
       "days_count": {
-        "Friday": 27,
-        "Wednesday": 34,
-        "Tuesday": 28,
+        "Friday": 29,
+        "Wednesday": 32,
+        "Tuesday": 33,
         "Monday": 14,
-        "Saturday": 16,
-        "Thursday": 18,
-        "Sunday": 9
+        "Saturday": 15,
+        "Thursday": 16,
+        "Sunday": 7
       },
       "metrics_30d": {
         "total": 30,
@@ -289,12 +289,12 @@
       "req_per_addr": 1.57,
       "days_count": {
         "Saturday": 30,
-        "Friday": 35,
-        "Wednesday": 35,
-        "Tuesday": 58,
-        "Monday": 29,
-        "Thursday": 18,
-        "Sunday": 11
+        "Friday": 36,
+        "Wednesday": 34,
+        "Tuesday": 61,
+        "Monday": 30,
+        "Thursday": 15,
+        "Sunday": 10
       },
       "metrics_30d": {
         "total": 27,
@@ -326,18 +326,18 @@
       "area_desc": "Ward 7 \u2022 Fairfax Village, Naylor Gardens, Hillcrest (ANC 7B, 7C)",
       "total": 219,
       "unique_addrs": 159,
-      "repeat_addrs": 34,
-      "single_addrs": 125,
-      "repeat_rate": 21.4,
+      "repeat_addrs": 30,
+      "single_addrs": 129,
+      "repeat_rate": 18.9,
       "req_per_addr": 1.38,
       "days_count": {
-        "Monday": 17,
-        "Friday": 46,
-        "Wednesday": 41,
-        "Tuesday": 65,
-        "Sunday": 5,
-        "Saturday": 22,
-        "Thursday": 23
+        "Monday": 16,
+        "Friday": 48,
+        "Wednesday": 36,
+        "Tuesday": 71,
+        "Sunday": 6,
+        "Saturday": 20,
+        "Thursday": 22
       },
       "metrics_30d": {
         "total": 25,
@@ -371,18 +371,18 @@
       "area_desc": "Ward 8 \u2022 Historic Anacostia, Twining, Fairlawn (ANC 8A)",
       "total": 134,
       "unique_addrs": 78,
-      "repeat_addrs": 29,
-      "single_addrs": 49,
-      "repeat_rate": 37.2,
+      "repeat_addrs": 26,
+      "single_addrs": 52,
+      "repeat_rate": 33.3,
       "req_per_addr": 1.72,
       "days_count": {
-        "Wednesday": 7,
-        "Tuesday": 14,
+        "Wednesday": 5,
+        "Tuesday": 15,
         "Monday": 25,
-        "Friday": 42,
+        "Sunday": 13,
+        "Friday": 48,
         "Thursday": 6,
-        "Sunday": 14,
-        "Saturday": 26
+        "Saturday": 22
       },
       "metrics_30d": {
         "total": 13,
@@ -394,7 +394,8 @@
         "days_count": {
           "Wednesday": 3,
           "Tuesday": 1,
-          "Monday": 3,
+          "Monday": 2,
+          "Sunday": 1,
           "Friday": 5,
           "Thursday": 1
         }
@@ -414,31 +415,31 @@
       "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8C, 8D, 8E)",
       "total": 76,
       "unique_addrs": 51,
-      "repeat_addrs": 13,
-      "single_addrs": 38,
-      "repeat_rate": 25.5,
+      "repeat_addrs": 12,
+      "single_addrs": 39,
+      "repeat_rate": 23.5,
       "req_per_addr": 1.49,
       "days_count": {
-        "Monday": 18,
-        "Tuesday": 15,
+        "Monday": 21,
         "Sunday": 4,
-        "Friday": 21,
-        "Saturday": 14,
-        "Thursday": 2,
+        "Friday": 20,
+        "Tuesday": 11,
+        "Saturday": 15,
+        "Thursday": 3,
         "Wednesday": 2
       },
       "metrics_30d": {
         "total": 10,
         "unique_addrs": 7,
-        "repeat_addrs": 2,
-        "single_addrs": 5,
-        "repeat_rate": 28.6,
+        "repeat_addrs": 1,
+        "single_addrs": 6,
+        "repeat_rate": 14.3,
         "req_per_addr": 1.43,
         "days_count": {
           "Monday": 3,
-          "Tuesday": 3,
-          "Sunday": 1,
+          "Sunday": 2,
           "Friday": 1,
+          "Tuesday": 2,
           "Saturday": 2
         }
       }
@@ -462,8 +463,8 @@
       "repeat_rate": 15.9,
       "req_per_addr": 1.23,
       "days_count": {
-        "Saturday": 7,
-        "Friday": 18,
+        "Saturday": 6,
+        "Friday": 19,
         "Monday": 10,
         "Wednesday": 9,
         "Sunday": 4,
@@ -501,12 +502,12 @@
       "repeat_rate": 24.2,
       "req_per_addr": 1.39,
       "days_count": {
-        "Sunday": 7,
+        "Sunday": 6,
         "Saturday": 9,
-        "Wednesday": 4,
-        "Monday": 5,
-        "Friday": 13,
-        "Tuesday": 5,
+        "Wednesday": 2,
+        "Monday": 6,
+        "Friday": 14,
+        "Tuesday": 6,
         "Thursday": 3
       },
       "metrics_30d": {
@@ -536,18 +537,17 @@
       "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace (ANC 8C, 8E)",
       "total": 114,
       "unique_addrs": 78,
-      "repeat_addrs": 22,
-      "single_addrs": 56,
-      "repeat_rate": 28.2,
+      "repeat_addrs": 21,
+      "single_addrs": 57,
+      "repeat_rate": 26.9,
       "req_per_addr": 1.46,
       "days_count": {
-        "Saturday": 21,
-        "Friday": 55,
-        "Tuesday": 16,
+        "Saturday": 19,
+        "Friday": 57,
+        "Tuesday": 15,
         "Sunday": 5,
-        "Monday": 14,
-        "Thursday": 1,
-        "Wednesday": 2
+        "Monday": 15,
+        "Wednesday": 3
       },
       "metrics_30d": {
         "total": 9,
@@ -578,17 +578,16 @@
       "area_desc": "Ward 8 \u2022 Congress Heights, Bellevue, Washington Highlands (ANC 8E)",
       "total": 64,
       "unique_addrs": 45,
-      "repeat_addrs": 12,
-      "single_addrs": 33,
-      "repeat_rate": 26.7,
+      "repeat_addrs": 10,
+      "single_addrs": 35,
+      "repeat_rate": 22.2,
       "req_per_addr": 1.42,
       "days_count": {
-        "Friday": 36,
-        "Saturday": 14,
+        "Friday": 37,
+        "Saturday": 13,
         "Tuesday": 3,
-        "Wednesday": 3,
+        "Wednesday": 5,
         "Monday": 4,
-        "Thursday": 2,
         "Sunday": 2
       },
       "metrics_30d": {
@@ -621,17 +620,17 @@
       "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace, Congress Heights (ANC 8C, 8E)",
       "total": 137,
       "unique_addrs": 80,
-      "repeat_addrs": 23,
-      "single_addrs": 57,
-      "repeat_rate": 28.7,
+      "repeat_addrs": 21,
+      "single_addrs": 59,
+      "repeat_rate": 26.2,
       "req_per_addr": 1.71,
       "days_count": {
-        "Friday": 46,
-        "Tuesday": 15,
-        "Monday": 25,
-        "Saturday": 35,
+        "Friday": 54,
+        "Monday": 24,
+        "Saturday": 30,
+        "Tuesday": 14,
+        "Sunday": 7,
         "Wednesday": 5,
-        "Sunday": 8,
         "Thursday": 3
       },
       "metrics_30d": {
@@ -642,10 +641,11 @@
         "repeat_rate": 21.4,
         "req_per_addr": 1.5,
         "days_count": {
-          "Friday": 7,
-          "Tuesday": 2,
+          "Friday": 10,
           "Monday": 6,
-          "Saturday": 6
+          "Saturday": 3,
+          "Tuesday": 1,
+          "Sunday": 1
         }
       }
     },
@@ -668,13 +668,13 @@
       "repeat_rate": 24.3,
       "req_per_addr": 1.43,
       "days_count": {
-        "Monday": 17,
-        "Friday": 39,
-        "Tuesday": 57,
-        "Sunday": 5,
-        "Wednesday": 44,
-        "Thursday": 16,
-        "Saturday": 22
+        "Monday": 16,
+        "Friday": 42,
+        "Tuesday": 62,
+        "Sunday": 6,
+        "Wednesday": 40,
+        "Thursday": 17,
+        "Saturday": 17
       },
       "metrics_30d": {
         "total": 17,
@@ -706,18 +706,18 @@
       "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "total": 105,
       "unique_addrs": 65,
-      "repeat_addrs": 17,
-      "single_addrs": 48,
-      "repeat_rate": 26.2,
+      "repeat_addrs": 16,
+      "single_addrs": 49,
+      "repeat_rate": 24.6,
       "req_per_addr": 1.62,
       "days_count": {
-        "Friday": 41,
+        "Friday": 40,
         "Wednesday": 6,
         "Tuesday": 15,
-        "Monday": 22,
-        "Sunday": 6,
-        "Saturday": 14,
-        "Thursday": 1
+        "Monday": 21,
+        "Sunday": 7,
+        "Thursday": 2,
+        "Saturday": 14
       },
       "metrics_30d": {
         "total": 12,
@@ -727,11 +727,12 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Friday": 5,
+          "Friday": 4,
           "Wednesday": 1,
           "Tuesday": 3,
           "Monday": 2,
-          "Sunday": 1
+          "Sunday": 1,
+          "Thursday": 1
         }
       }
     },
@@ -754,8 +755,8 @@
       "repeat_rate": 11.8,
       "req_per_addr": 1.18,
       "days_count": {
-        "Monday": 6,
-        "Tuesday": 9,
+        "Monday": 7,
+        "Tuesday": 8,
         "Friday": 1,
         "Wednesday": 3,
         "Thursday": 1
@@ -787,16 +788,16 @@
       "area_desc": "Ward 3 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 3A, 3C, 3D, 3E, 3F)",
       "total": 130,
       "unique_addrs": 99,
-      "repeat_addrs": 20,
-      "single_addrs": 79,
-      "repeat_rate": 20.2,
+      "repeat_addrs": 18,
+      "single_addrs": 81,
+      "repeat_rate": 18.2,
       "req_per_addr": 1.31,
       "days_count": {
-        "Monday": 16,
-        "Friday": 27,
-        "Tuesday": 26,
-        "Thursday": 34,
-        "Wednesday": 21,
+        "Monday": 22,
+        "Friday": 26,
+        "Thursday": 33,
+        "Wednesday": 16,
+        "Tuesday": 27,
         "Saturday": 5,
         "Sunday": 1
       },
@@ -808,9 +809,8 @@
         "repeat_rate": 20.0,
         "req_per_addr": 1.2,
         "days_count": {
-          "Monday": 3,
+          "Monday": 4,
           "Friday": 5,
-          "Tuesday": 1,
           "Thursday": 3
         }
       }
@@ -834,12 +834,12 @@
       "repeat_rate": 22.1,
       "req_per_addr": 1.36,
       "days_count": {
-        "Monday": 31,
-        "Thursday": 18,
-        "Wednesday": 9,
-        "Tuesday": 33,
-        "Friday": 18,
-        "Saturday": 5,
+        "Monday": 35,
+        "Thursday": 19,
+        "Wednesday": 10,
+        "Tuesday": 28,
+        "Friday": 16,
+        "Saturday": 6,
         "Sunday": 3
       },
       "metrics_30d": {
@@ -872,15 +872,15 @@
       "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "total": 167,
       "unique_addrs": 96,
-      "repeat_addrs": 38,
-      "single_addrs": 58,
-      "repeat_rate": 39.6,
+      "repeat_addrs": 36,
+      "single_addrs": 60,
+      "repeat_rate": 37.5,
       "req_per_addr": 1.74,
       "days_count": {
-        "Monday": 59,
-        "Tuesday": 60,
+        "Monday": 70,
+        "Tuesday": 51,
         "Wednesday": 23,
-        "Thursday": 15,
+        "Thursday": 13,
         "Friday": 8,
         "Sunday": 1,
         "Saturday": 1
@@ -893,8 +893,8 @@
         "repeat_rate": 14.3,
         "req_per_addr": 1.57,
         "days_count": {
-          "Monday": 3,
-          "Tuesday": 6,
+          "Monday": 4,
+          "Tuesday": 5,
           "Wednesday": 2
         }
       }
@@ -913,33 +913,33 @@
       "area_desc": "Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3D, 3F)",
       "total": 230,
       "unique_addrs": 148,
-      "repeat_addrs": 43,
-      "single_addrs": 105,
-      "repeat_rate": 29.1,
+      "repeat_addrs": 41,
+      "single_addrs": 107,
+      "repeat_rate": 27.7,
       "req_per_addr": 1.55,
       "days_count": {
-        "Monday": 73,
-        "Thursday": 41,
+        "Monday": 81,
+        "Thursday": 44,
         "Wednesday": 25,
-        "Tuesday": 53,
-        "Saturday": 6,
-        "Friday": 27,
-        "Sunday": 5
+        "Tuesday": 47,
+        "Saturday": 5,
+        "Friday": 22,
+        "Sunday": 6
       },
       "metrics_30d": {
         "total": 28,
         "unique_addrs": 25,
-        "repeat_addrs": 3,
-        "single_addrs": 22,
-        "repeat_rate": 12.0,
+        "repeat_addrs": 2,
+        "single_addrs": 23,
+        "repeat_rate": 8.0,
         "req_per_addr": 1.12,
         "days_count": {
           "Monday": 9,
-          "Thursday": 6,
-          "Wednesday": 4,
-          "Tuesday": 6,
-          "Saturday": 2,
-          "Friday": 1
+          "Thursday": 4,
+          "Wednesday": 5,
+          "Tuesday": 7,
+          "Saturday": 1,
+          "Friday": 2
         }
       }
     },
@@ -957,16 +957,16 @@
       "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3/4G, 3E, 3F)",
       "total": 191,
       "unique_addrs": 116,
-      "repeat_addrs": 43,
-      "single_addrs": 73,
-      "repeat_rate": 37.1,
+      "repeat_addrs": 41,
+      "single_addrs": 75,
+      "repeat_rate": 35.3,
       "req_per_addr": 1.65,
       "days_count": {
-        "Monday": 71,
-        "Thursday": 18,
-        "Friday": 8,
+        "Monday": 85,
+        "Thursday": 17,
+        "Friday": 7,
         "Wednesday": 26,
-        "Tuesday": 66,
+        "Tuesday": 54,
         "Saturday": 1,
         "Sunday": 1
       },
@@ -979,9 +979,9 @@
         "req_per_addr": 1.2,
         "days_count": {
           "Monday": 5,
-          "Thursday": 3,
+          "Thursday": 2,
           "Friday": 1,
-          "Wednesday": 1,
+          "Wednesday": 2,
           "Tuesday": 2
         }
       }
@@ -1005,13 +1005,13 @@
       "repeat_rate": 29.2,
       "req_per_addr": 1.41,
       "days_count": {
-        "Saturday": 7,
-        "Monday": 37,
+        "Saturday": 6,
+        "Monday": 42,
         "Sunday": 2,
-        "Wednesday": 17,
-        "Friday": 27,
-        "Thursday": 32,
-        "Tuesday": 37
+        "Wednesday": 15,
+        "Friday": 21,
+        "Thursday": 38,
+        "Tuesday": 35
       },
       "metrics_30d": {
         "total": 10,
@@ -1044,17 +1044,17 @@
       "area_desc": "Ward 4 / Ward 3 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3A, 3D, 3E)",
       "total": 354,
       "unique_addrs": 199,
-      "repeat_addrs": 70,
-      "single_addrs": 129,
-      "repeat_rate": 35.2,
+      "repeat_addrs": 69,
+      "single_addrs": 130,
+      "repeat_rate": 34.7,
       "req_per_addr": 1.78,
       "days_count": {
-        "Friday": 35,
-        "Tuesday": 134,
-        "Thursday": 34,
-        "Wednesday": 43,
-        "Monday": 96,
-        "Sunday": 4,
+        "Friday": 31,
+        "Tuesday": 121,
+        "Thursday": 36,
+        "Wednesday": 40,
+        "Monday": 115,
+        "Sunday": 3,
         "Saturday": 8
       },
       "metrics_30d": {
@@ -1066,10 +1066,10 @@
         "req_per_addr": 1.35,
         "days_count": {
           "Friday": 2,
-          "Tuesday": 8,
+          "Tuesday": 7,
           "Thursday": 4,
           "Wednesday": 3,
-          "Monday": 5,
+          "Monday": 6,
           "Sunday": 1
         }
       }
@@ -1088,16 +1088,16 @@
       "area_desc": "Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G)",
       "total": 37,
       "unique_addrs": 32,
-      "repeat_addrs": 4,
-      "single_addrs": 28,
-      "repeat_rate": 12.5,
+      "repeat_addrs": 3,
+      "single_addrs": 29,
+      "repeat_rate": 9.4,
       "req_per_addr": 1.16,
       "days_count": {
         "Monday": 12,
-        "Tuesday": 9,
+        "Tuesday": 10,
         "Friday": 2,
         "Thursday": 4,
-        "Wednesday": 10
+        "Wednesday": 9
       },
       "metrics_30d": {
         "total": 13,
@@ -1108,10 +1108,10 @@
         "req_per_addr": 1.3,
         "days_count": {
           "Monday": 1,
-          "Tuesday": 4,
+          "Tuesday": 5,
           "Friday": 2,
           "Thursday": 2,
-          "Wednesday": 4
+          "Wednesday": 3
         }
       }
     },
@@ -1129,24 +1129,25 @@
       "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B)",
       "total": 71,
       "unique_addrs": 63,
-      "repeat_addrs": 7,
-      "single_addrs": 56,
-      "repeat_rate": 11.1,
+      "repeat_addrs": 5,
+      "single_addrs": 58,
+      "repeat_rate": 7.9,
       "req_per_addr": 1.13,
       "days_count": {
-        "Tuesday": 13,
-        "Wednesday": 21,
+        "Tuesday": 12,
+        "Wednesday": 22,
         "Monday": 21,
-        "Thursday": 10,
+        "Thursday": 9,
         "Saturday": 2,
-        "Friday": 4
+        "Friday": 4,
+        "Sunday": 1
       },
       "metrics_30d": {
         "total": 9,
         "unique_addrs": 8,
-        "repeat_addrs": 1,
-        "single_addrs": 7,
-        "repeat_rate": 12.5,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.12,
         "days_count": {
           "Tuesday": 2,
@@ -1170,17 +1171,17 @@
       "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B)",
       "total": 124,
       "unique_addrs": 86,
-      "repeat_addrs": 26,
-      "single_addrs": 60,
-      "repeat_rate": 30.2,
+      "repeat_addrs": 25,
+      "single_addrs": 61,
+      "repeat_rate": 29.1,
       "req_per_addr": 1.44,
       "days_count": {
-        "Thursday": 18,
+        "Thursday": 16,
         "Tuesday": 31,
         "Saturday": 3,
+        "Wednesday": 32,
         "Friday": 8,
-        "Wednesday": 33,
-        "Monday": 31
+        "Monday": 34
       },
       "metrics_30d": {
         "total": 19,
@@ -1190,12 +1191,12 @@
         "repeat_rate": 18.8,
         "req_per_addr": 1.19,
         "days_count": {
-          "Thursday": 4,
-          "Tuesday": 6,
+          "Thursday": 3,
+          "Tuesday": 5,
           "Saturday": 1,
+          "Wednesday": 2,
           "Friday": 1,
-          "Wednesday": 1,
-          "Monday": 6
+          "Monday": 7
         }
       }
     },
@@ -1213,18 +1214,18 @@
       "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B, 4C, 4D)",
       "total": 228,
       "unique_addrs": 147,
-      "repeat_addrs": 41,
-      "single_addrs": 106,
-      "repeat_rate": 27.9,
+      "repeat_addrs": 39,
+      "single_addrs": 108,
+      "repeat_rate": 26.5,
       "req_per_addr": 1.55,
       "days_count": {
-        "Saturday": 18,
-        "Friday": 29,
-        "Thursday": 56,
-        "Monday": 40,
+        "Saturday": 17,
+        "Friday": 27,
+        "Thursday": 58,
+        "Monday": 44,
         "Wednesday": 35,
-        "Tuesday": 45,
-        "Sunday": 5
+        "Tuesday": 41,
+        "Sunday": 6
       },
       "metrics_30d": {
         "total": 19,
@@ -1234,8 +1235,8 @@
         "repeat_rate": 11.8,
         "req_per_addr": 1.12,
         "days_count": {
-          "Saturday": 4,
-          "Friday": 3,
+          "Saturday": 3,
+          "Friday": 4,
           "Thursday": 4,
           "Monday": 1,
           "Wednesday": 2,
@@ -1262,28 +1263,27 @@
       "repeat_rate": 31.4,
       "req_per_addr": 1.48,
       "days_count": {
-        "Monday": 35,
-        "Thursday": 97,
-        "Wednesday": 54,
-        "Tuesday": 22,
-        "Saturday": 7,
-        "Friday": 38,
+        "Monday": 40,
+        "Thursday": 92,
+        "Wednesday": 58,
+        "Tuesday": 21,
+        "Friday": 36,
+        "Saturday": 6,
         "Sunday": 1
       },
       "metrics_30d": {
         "total": 40,
         "unique_addrs": 36,
-        "repeat_addrs": 4,
-        "single_addrs": 32,
-        "repeat_rate": 11.1,
+        "repeat_addrs": 3,
+        "single_addrs": 33,
+        "repeat_rate": 8.3,
         "req_per_addr": 1.11,
         "days_count": {
-          "Monday": 3,
-          "Thursday": 15,
-          "Wednesday": 11,
-          "Tuesday": 4,
-          "Saturday": 1,
-          "Friday": 6
+          "Monday": 4,
+          "Thursday": 13,
+          "Wednesday": 13,
+          "Tuesday": 3,
+          "Friday": 7
         }
       }
     },
@@ -1301,18 +1301,18 @@
       "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4A, 4B, 4E)",
       "total": 204,
       "unique_addrs": 120,
-      "repeat_addrs": 29,
-      "single_addrs": 91,
-      "repeat_rate": 24.2,
+      "repeat_addrs": 27,
+      "single_addrs": 93,
+      "repeat_rate": 22.5,
       "req_per_addr": 1.7,
       "days_count": {
-        "Wednesday": 52,
-        "Monday": 30,
-        "Friday": 34,
-        "Thursday": 57,
-        "Tuesday": 19,
-        "Saturday": 10,
-        "Sunday": 2
+        "Wednesday": 56,
+        "Monday": 31,
+        "Friday": 32,
+        "Thursday": 54,
+        "Tuesday": 20,
+        "Saturday": 8,
+        "Sunday": 3
       },
       "metrics_30d": {
         "total": 13,
@@ -1344,17 +1344,17 @@
       "area_desc": "Ward 3 / Ward 4 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3/4G, 3E)",
       "total": 102,
       "unique_addrs": 66,
-      "repeat_addrs": 17,
-      "single_addrs": 49,
-      "repeat_rate": 25.8,
+      "repeat_addrs": 16,
+      "single_addrs": 50,
+      "repeat_rate": 24.2,
       "req_per_addr": 1.55,
       "days_count": {
-        "Monday": 21,
-        "Friday": 20,
-        "Tuesday": 20,
-        "Thursday": 18,
-        "Saturday": 15,
-        "Wednesday": 6,
+        "Monday": 25,
+        "Friday": 17,
+        "Thursday": 22,
+        "Tuesday": 18,
+        "Saturday": 14,
+        "Wednesday": 4,
         "Sunday": 2
       },
       "metrics_30d": {
@@ -1365,10 +1365,10 @@
         "repeat_rate": 11.1,
         "req_per_addr": 1.11,
         "days_count": {
-          "Monday": 2,
-          "Friday": 3,
-          "Tuesday": 4,
-          "Thursday": 1
+          "Monday": 3,
+          "Friday": 2,
+          "Thursday": 2,
+          "Tuesday": 3
         }
       }
     },
@@ -1386,15 +1386,15 @@
       "area_desc": "Ward 3 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 3D, 3E)",
       "total": 56,
       "unique_addrs": 32,
-      "repeat_addrs": 7,
-      "single_addrs": 25,
-      "repeat_rate": 21.9,
+      "repeat_addrs": 6,
+      "single_addrs": 26,
+      "repeat_rate": 18.8,
       "req_per_addr": 1.75,
       "days_count": {
-        "Friday": 19,
-        "Sunday": 3,
-        "Saturday": 4,
-        "Thursday": 22,
+        "Thursday": 24,
+        "Saturday": 5,
+        "Friday": 17,
+        "Sunday": 2,
         "Tuesday": 3,
         "Wednesday": 2,
         "Monday": 3
@@ -1407,9 +1407,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Friday": 2,
-          "Sunday": 1,
-          "Saturday": 1
+          "Thursday": 2,
+          "Saturday": 2
         }
       }
     },
@@ -1427,17 +1426,17 @@
       "area_desc": "Ward 2 / Ward 3 \u2022 Georgetown, Burleith/Hillandale, Cathedral Heights (ANC 2E, 3B)",
       "total": 54,
       "unique_addrs": 37,
-      "repeat_addrs": 11,
-      "single_addrs": 26,
-      "repeat_rate": 29.7,
+      "repeat_addrs": 10,
+      "single_addrs": 27,
+      "repeat_rate": 27.0,
       "req_per_addr": 1.46,
       "days_count": {
-        "Tuesday": 3,
-        "Thursday": 13,
-        "Saturday": 8,
-        "Friday": 16,
-        "Sunday": 3,
-        "Monday": 5,
+        "Tuesday": 2,
+        "Monday": 6,
+        "Thursday": 15,
+        "Saturday": 10,
+        "Friday": 14,
+        "Sunday": 1,
         "Wednesday": 6
       },
       "metrics_30d": {
@@ -1471,13 +1470,13 @@
       "repeat_rate": 20.3,
       "req_per_addr": 1.32,
       "days_count": {
-        "Tuesday": 6,
+        "Tuesday": 4,
         "Wednesday": 4,
-        "Saturday": 10,
-        "Thursday": 17,
+        "Friday": 24,
+        "Thursday": 20,
         "Sunday": 9,
-        "Friday": 26,
-        "Monday": 6
+        "Saturday": 9,
+        "Monday": 8
       },
       "metrics_30d": {
         "total": 1,
@@ -1545,11 +1544,11 @@
       "repeat_rate": 23.9,
       "req_per_addr": 1.37,
       "days_count": {
-        "Sunday": 5,
-        "Thursday": 19,
+        "Sunday": 4,
+        "Thursday": 22,
         "Monday": 6,
-        "Friday": 21,
-        "Saturday": 5,
+        "Friday": 18,
+        "Saturday": 6,
         "Wednesday": 1,
         "Tuesday": 6
       },
@@ -1562,9 +1561,9 @@
         "req_per_addr": 1.22,
         "days_count": {
           "Sunday": 2,
-          "Thursday": 2,
+          "Thursday": 3,
           "Monday": 2,
-          "Friday": 4,
+          "Friday": 3,
           "Saturday": 1
         }
       }
@@ -1583,18 +1582,18 @@
       "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "total": 115,
       "unique_addrs": 67,
-      "repeat_addrs": 26,
-      "single_addrs": 41,
-      "repeat_rate": 38.8,
+      "repeat_addrs": 24,
+      "single_addrs": 43,
+      "repeat_rate": 35.8,
       "req_per_addr": 1.72,
       "days_count": {
-        "Friday": 35,
-        "Thursday": 45,
-        "Monday": 11,
+        "Friday": 30,
+        "Thursday": 51,
+        "Monday": 12,
         "Saturday": 14,
         "Sunday": 2,
-        "Tuesday": 5,
-        "Wednesday": 3
+        "Tuesday": 4,
+        "Wednesday": 2
       },
       "metrics_30d": {
         "total": 14,
@@ -1625,14 +1624,14 @@
       "area_desc": "Ward 3 \u2022 Cathedral Heights, McLean Gardens, Glover Park (ANC 3A, 3B)",
       "total": 40,
       "unique_addrs": 34,
-      "repeat_addrs": 5,
-      "single_addrs": 29,
-      "repeat_rate": 14.7,
+      "repeat_addrs": 4,
+      "single_addrs": 30,
+      "repeat_rate": 11.8,
       "req_per_addr": 1.18,
       "days_count": {
-        "Thursday": 17,
+        "Thursday": 18,
         "Friday": 13,
-        "Saturday": 3,
+        "Saturday": 2,
         "Monday": 3,
         "Wednesday": 2,
         "Sunday": 2
@@ -1669,13 +1668,13 @@
       "repeat_rate": 30.0,
       "req_per_addr": 1.48,
       "days_count": {
-        "Saturday": 8,
-        "Friday": 27,
-        "Thursday": 24,
-        "Wednesday": 3,
-        "Monday": 7,
-        "Sunday": 2,
-        "Tuesday": 3
+        "Saturday": 7,
+        "Thursday": 27,
+        "Friday": 25,
+        "Tuesday": 5,
+        "Sunday": 3,
+        "Wednesday": 1,
+        "Monday": 6
       },
       "metrics_30d": {
         "total": 17,
@@ -1686,11 +1685,10 @@
         "req_per_addr": 1.13,
         "days_count": {
           "Saturday": 2,
-          "Friday": 7,
-          "Thursday": 5,
-          "Wednesday": 1,
-          "Monday": 1,
-          "Sunday": 1
+          "Thursday": 7,
+          "Friday": 5,
+          "Tuesday": 1,
+          "Sunday": 2
         }
       }
     },
@@ -1714,8 +1712,8 @@
       "req_per_addr": 1.74,
       "days_count": {
         "Friday": 5,
-        "Wednesday": 22,
-        "Tuesday": 27,
+        "Wednesday": 17,
+        "Tuesday": 32,
         "Thursday": 10,
         "Sunday": 2,
         "Saturday": 2
@@ -1749,17 +1747,17 @@
       "area_desc": "Ward 5 \u2022 Woodridge, Fort Lincoln, Gateway (ANC 5B, 5D)",
       "total": 99,
       "unique_addrs": 69,
-      "repeat_addrs": 17,
-      "single_addrs": 52,
-      "repeat_rate": 24.6,
+      "repeat_addrs": 16,
+      "single_addrs": 53,
+      "repeat_rate": 23.2,
       "req_per_addr": 1.43,
       "days_count": {
-        "Thursday": 22,
-        "Tuesday": 28,
-        "Friday": 14,
-        "Wednesday": 29,
+        "Wednesday": 33,
+        "Tuesday": 29,
+        "Thursday": 19,
         "Monday": 4,
-        "Saturday": 2
+        "Friday": 13,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 13,
@@ -1769,10 +1767,9 @@
         "repeat_rate": 50.0,
         "req_per_addr": 1.62,
         "days_count": {
-          "Thursday": 2,
+          "Wednesday": 5,
           "Tuesday": 5,
-          "Friday": 1,
-          "Wednesday": 3,
+          "Thursday": 1,
           "Monday": 2
         }
       }
@@ -1796,10 +1793,10 @@
       "repeat_rate": 28.1,
       "req_per_addr": 1.41,
       "days_count": {
-        "Tuesday": 10,
+        "Tuesday": 11,
         "Wednesday": 16,
         "Friday": 5,
-        "Thursday": 10,
+        "Thursday": 9,
         "Saturday": 3,
         "Monday": 1
       },
@@ -1830,17 +1827,17 @@
       "area_desc": "Ward 5 / Ward 7 \u2022 Ivy City, Arboretum, Trinidad (ANC 5D, 7D)",
       "total": 53,
       "unique_addrs": 36,
-      "repeat_addrs": 12,
-      "single_addrs": 24,
-      "repeat_rate": 33.3,
+      "repeat_addrs": 11,
+      "single_addrs": 25,
+      "repeat_rate": 30.6,
       "req_per_addr": 1.47,
       "days_count": {
-        "Friday": 10,
+        "Friday": 11,
         "Monday": 3,
-        "Saturday": 2,
-        "Thursday": 7,
-        "Wednesday": 14,
-        "Tuesday": 15,
+        "Saturday": 1,
+        "Thursday": 6,
+        "Wednesday": 13,
+        "Tuesday": 17,
         "Sunday": 2
       },
       "metrics_30d": {
@@ -1870,15 +1867,15 @@
       "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5C)",
       "total": 111,
       "unique_addrs": 71,
-      "repeat_addrs": 25,
-      "single_addrs": 46,
-      "repeat_rate": 35.2,
+      "repeat_addrs": 23,
+      "single_addrs": 48,
+      "repeat_rate": 32.4,
       "req_per_addr": 1.56,
       "days_count": {
-        "Friday": 7,
-        "Tuesday": 36,
+        "Friday": 6,
+        "Tuesday": 39,
         "Thursday": 18,
-        "Wednesday": 39,
+        "Wednesday": 37,
         "Sunday": 4,
         "Monday": 5,
         "Saturday": 2
@@ -1886,9 +1883,9 @@
       "metrics_30d": {
         "total": 8,
         "unique_addrs": 7,
-        "repeat_addrs": 1,
-        "single_addrs": 6,
-        "repeat_rate": 14.3,
+        "repeat_addrs": 0,
+        "single_addrs": 7,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.14,
         "days_count": {
           "Friday": 1,
@@ -1913,18 +1910,18 @@
       "area_desc": "Ward 7 \u2022 River Terrace, Benning, Greenway (ANC 7F)",
       "total": 122,
       "unique_addrs": 84,
-      "repeat_addrs": 28,
-      "single_addrs": 56,
-      "repeat_rate": 33.3,
+      "repeat_addrs": 25,
+      "single_addrs": 59,
+      "repeat_rate": 29.8,
       "req_per_addr": 1.45,
       "days_count": {
         "Wednesday": 37,
-        "Tuesday": 40,
+        "Tuesday": 43,
         "Thursday": 23,
         "Saturday": 3,
-        "Friday": 14,
-        "Monday": 4,
-        "Sunday": 1
+        "Friday": 11,
+        "Monday": 3,
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 11,
@@ -1954,17 +1951,17 @@
       "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E)",
       "total": 116,
       "unique_addrs": 79,
-      "repeat_addrs": 22,
-      "single_addrs": 57,
-      "repeat_rate": 27.8,
+      "repeat_addrs": 21,
+      "single_addrs": 58,
+      "repeat_rate": 26.6,
       "req_per_addr": 1.47,
       "days_count": {
-        "Wednesday": 45,
-        "Tuesday": 38,
+        "Wednesday": 43,
+        "Tuesday": 40,
         "Friday": 9,
-        "Thursday": 19,
+        "Thursday": 20,
         "Sunday": 3,
-        "Saturday": 2
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 17,
@@ -1996,32 +1993,32 @@
       "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5C)",
       "total": 105,
       "unique_addrs": 73,
-      "repeat_addrs": 20,
-      "single_addrs": 53,
-      "repeat_rate": 27.4,
+      "repeat_addrs": 19,
+      "single_addrs": 54,
+      "repeat_rate": 26.0,
       "req_per_addr": 1.44,
       "days_count": {
         "Monday": 6,
-        "Friday": 20,
-        "Thursday": 15,
-        "Wednesday": 45,
-        "Tuesday": 14,
+        "Friday": 17,
+        "Wednesday": 44,
+        "Tuesday": 19,
+        "Thursday": 14,
         "Saturday": 4,
         "Sunday": 1
       },
       "metrics_30d": {
         "total": 18,
         "unique_addrs": 15,
-        "repeat_addrs": 2,
-        "single_addrs": 13,
-        "repeat_rate": 13.3,
+        "repeat_addrs": 1,
+        "single_addrs": 14,
+        "repeat_rate": 6.7,
         "req_per_addr": 1.2,
         "days_count": {
           "Monday": 1,
           "Friday": 1,
-          "Thursday": 4,
-          "Wednesday": 8,
-          "Tuesday": 4
+          "Wednesday": 9,
+          "Tuesday": 4,
+          "Thursday": 3
         }
       }
     },
@@ -2044,11 +2041,11 @@
       "repeat_rate": 24.4,
       "req_per_addr": 1.37,
       "days_count": {
-        "Wednesday": 25,
+        "Wednesday": 24,
         "Tuesday": 9,
-        "Thursday": 14,
-        "Monday": 1,
-        "Friday": 7
+        "Thursday": 15,
+        "Monday": 2,
+        "Friday": 6
       },
       "metrics_30d": {
         "total": 6,
@@ -2078,17 +2075,17 @@
       "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5B, 5C, 5D)",
       "total": 146,
       "unique_addrs": 101,
-      "repeat_addrs": 27,
-      "single_addrs": 74,
-      "repeat_rate": 26.7,
+      "repeat_addrs": 25,
+      "single_addrs": 76,
+      "repeat_rate": 24.8,
       "req_per_addr": 1.45,
       "days_count": {
-        "Monday": 11,
-        "Friday": 9,
-        "Thursday": 41,
-        "Tuesday": 27,
-        "Wednesday": 52,
-        "Sunday": 3,
+        "Monday": 10,
+        "Friday": 7,
+        "Thursday": 34,
+        "Tuesday": 32,
+        "Wednesday": 56,
+        "Sunday": 4,
         "Saturday": 3
       },
       "metrics_30d": {
@@ -2101,9 +2098,9 @@
         "days_count": {
           "Monday": 1,
           "Friday": 1,
-          "Thursday": 6,
+          "Thursday": 5,
           "Tuesday": 3,
-          "Wednesday": 2
+          "Wednesday": 3
         }
       }
     },
@@ -2126,12 +2123,12 @@
       "repeat_rate": 27.0,
       "req_per_addr": 1.46,
       "days_count": {
-        "Thursday": 10,
-        "Tuesday": 24,
+        "Thursday": 9,
+        "Wednesday": 12,
+        "Tuesday": 26,
         "Friday": 3,
-        "Wednesday": 13,
-        "Monday": 3,
-        "Sunday": 1
+        "Monday": 2,
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 7,
@@ -2141,7 +2138,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 2,
+          "Thursday": 1,
+          "Wednesday": 1,
           "Tuesday": 5
         }
       }
@@ -2160,34 +2158,32 @@
       "area_desc": "Ward 7 \u2022 Mayfair, Hillbrook, Mahaning Heights (ANC 7C, 7F)",
       "total": 139,
       "unique_addrs": 81,
-      "repeat_addrs": 29,
-      "single_addrs": 52,
-      "repeat_rate": 35.8,
+      "repeat_addrs": 27,
+      "single_addrs": 54,
+      "repeat_rate": 33.3,
       "req_per_addr": 1.72,
       "days_count": {
-        "Monday": 3,
-        "Friday": 10,
-        "Wednesday": 38,
-        "Tuesday": 54,
-        "Thursday": 29,
-        "Saturday": 4,
-        "Sunday": 1
+        "Monday": 4,
+        "Thursday": 30,
+        "Tuesday": 58,
+        "Wednesday": 34,
+        "Saturday": 5,
+        "Friday": 8
       },
       "metrics_30d": {
         "total": 31,
         "unique_addrs": 25,
-        "repeat_addrs": 5,
-        "single_addrs": 20,
-        "repeat_rate": 20.0,
+        "repeat_addrs": 2,
+        "single_addrs": 23,
+        "repeat_rate": 8.0,
         "req_per_addr": 1.24,
         "days_count": {
           "Monday": 1,
-          "Friday": 3,
-          "Wednesday": 9,
-          "Tuesday": 9,
-          "Thursday": 6,
-          "Saturday": 2,
-          "Sunday": 1
+          "Thursday": 7,
+          "Tuesday": 10,
+          "Wednesday": 8,
+          "Saturday": 3,
+          "Friday": 2
         }
       }
     },
@@ -2205,17 +2201,17 @@
       "area_desc": "Ward 5 \u2022 Ivy City, Arboretum, Trinidad (ANC 5A, 5B, 5D)",
       "total": 128,
       "unique_addrs": 82,
-      "repeat_addrs": 21,
-      "single_addrs": 61,
-      "repeat_rate": 25.6,
+      "repeat_addrs": 18,
+      "single_addrs": 64,
+      "repeat_rate": 22.0,
       "req_per_addr": 1.56,
       "days_count": {
-        "Thursday": 29,
-        "Wednesday": 37,
+        "Thursday": 27,
+        "Wednesday": 41,
         "Monday": 6,
-        "Friday": 14,
-        "Tuesday": 37,
-        "Sunday": 3,
+        "Friday": 12,
+        "Tuesday": 38,
+        "Sunday": 2,
         "Saturday": 2
       },
       "metrics_30d": {
@@ -2226,8 +2222,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 5,
-          "Wednesday": 1,
+          "Thursday": 4,
+          "Wednesday": 2,
           "Monday": 1
         }
       }
@@ -2246,30 +2242,29 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D, 4E)",
       "total": 158,
       "unique_addrs": 101,
-      "repeat_addrs": 30,
-      "single_addrs": 71,
-      "repeat_rate": 29.7,
+      "repeat_addrs": 27,
+      "single_addrs": 74,
+      "repeat_rate": 26.7,
       "req_per_addr": 1.56,
       "days_count": {
-        "Friday": 20,
-        "Thursday": 75,
-        "Wednesday": 47,
+        "Thursday": 65,
+        "Wednesday": 60,
+        "Friday": 19,
         "Monday": 4,
         "Saturday": 9,
-        "Tuesday": 1,
-        "Sunday": 2
+        "Tuesday": 1
       },
       "metrics_30d": {
         "total": 34,
         "unique_addrs": 31,
-        "repeat_addrs": 3,
-        "single_addrs": 28,
-        "repeat_rate": 9.7,
+        "repeat_addrs": 2,
+        "single_addrs": 29,
+        "repeat_rate": 6.5,
         "req_per_addr": 1.1,
         "days_count": {
-          "Friday": 8,
-          "Thursday": 14,
-          "Wednesday": 12
+          "Thursday": 13,
+          "Wednesday": 16,
+          "Friday": 5
         }
       }
     },
@@ -2292,9 +2287,9 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.5,
       "days_count": {
-        "Wednesday": 40,
+        "Wednesday": 43,
         "Friday": 16,
-        "Thursday": 27,
+        "Thursday": 24,
         "Saturday": 1,
         "Sunday": 1,
         "Tuesday": 4,
@@ -2328,17 +2323,17 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "total": 118,
       "unique_addrs": 83,
-      "repeat_addrs": 23,
-      "single_addrs": 60,
-      "repeat_rate": 27.7,
+      "repeat_addrs": 22,
+      "single_addrs": 61,
+      "repeat_rate": 26.5,
       "req_per_addr": 1.42,
       "days_count": {
         "Monday": 8,
-        "Wednesday": 48,
-        "Thursday": 35,
-        "Friday": 18,
-        "Saturday": 7,
-        "Tuesday": 1,
+        "Wednesday": 49,
+        "Thursday": 36,
+        "Friday": 16,
+        "Tuesday": 2,
+        "Saturday": 6,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -2374,9 +2369,9 @@
       "repeat_rate": 23.2,
       "req_per_addr": 1.66,
       "days_count": {
-        "Thursday": 34,
-        "Friday": 21,
-        "Wednesday": 28,
+        "Thursday": 33,
+        "Wednesday": 31,
+        "Friday": 19,
         "Monday": 2,
         "Saturday": 4,
         "Tuesday": 4
@@ -2389,7 +2384,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 5
+          "Thursday": 4,
+          "Wednesday": 1
         }
       }
     },
@@ -2407,15 +2403,16 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D)",
       "total": 60,
       "unique_addrs": 44,
-      "repeat_addrs": 10,
-      "single_addrs": 34,
-      "repeat_rate": 22.7,
+      "repeat_addrs": 9,
+      "single_addrs": 35,
+      "repeat_rate": 20.5,
       "req_per_addr": 1.36,
       "days_count": {
-        "Wednesday": 21,
-        "Saturday": 5,
-        "Friday": 11,
-        "Thursday": 23
+        "Wednesday": 25,
+        "Friday": 12,
+        "Thursday": 19,
+        "Saturday": 3,
+        "Tuesday": 1
       },
       "metrics_30d": {
         "total": 7,
@@ -2426,9 +2423,8 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Wednesday": 1,
-          "Saturday": 1,
           "Friday": 2,
-          "Thursday": 3
+          "Thursday": 4
         }
       }
     },
@@ -2446,17 +2442,16 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4D)",
       "total": 48,
       "unique_addrs": 29,
-      "repeat_addrs": 10,
-      "single_addrs": 19,
-      "repeat_rate": 34.5,
+      "repeat_addrs": 9,
+      "single_addrs": 20,
+      "repeat_rate": 31.0,
       "req_per_addr": 1.66,
       "days_count": {
-        "Wednesday": 21,
-        "Thursday": 17,
+        "Wednesday": 24,
+        "Thursday": 14,
         "Tuesday": 2,
-        "Friday": 4,
-        "Monday": 3,
-        "Saturday": 1
+        "Friday": 5,
+        "Monday": 3
       },
       "metrics_30d": {
         "total": 10,
@@ -2485,9 +2480,9 @@
       "area_desc": "Ward 4 / Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 4B, 5A)",
       "total": 23,
       "unique_addrs": 20,
-      "repeat_addrs": 3,
-      "single_addrs": 17,
-      "repeat_rate": 15.0,
+      "repeat_addrs": 2,
+      "single_addrs": 18,
+      "repeat_rate": 10.0,
       "req_per_addr": 1.15,
       "days_count": {
         "Friday": 4,
@@ -2524,17 +2519,17 @@
       "area_desc": "Ward 5 \u2022 Brookland, Brentwood, Langdon (ANC 5B)",
       "total": 106,
       "unique_addrs": 71,
-      "repeat_addrs": 21,
-      "single_addrs": 50,
-      "repeat_rate": 29.6,
+      "repeat_addrs": 20,
+      "single_addrs": 51,
+      "repeat_rate": 28.2,
       "req_per_addr": 1.49,
       "days_count": {
         "Wednesday": 52,
-        "Saturday": 5,
-        "Thursday": 33,
         "Friday": 10,
+        "Thursday": 33,
         "Monday": 4,
-        "Tuesday": 1,
+        "Tuesday": 2,
+        "Saturday": 4,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -2546,7 +2541,7 @@
         "req_per_addr": 1.1,
         "days_count": {
           "Wednesday": 7,
-          "Saturday": 1,
+          "Friday": 1,
           "Thursday": 3
         }
       }
@@ -2565,25 +2560,25 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E)",
       "total": 116,
       "unique_addrs": 82,
-      "repeat_addrs": 28,
-      "single_addrs": 54,
-      "repeat_rate": 34.1,
+      "repeat_addrs": 26,
+      "single_addrs": 56,
+      "repeat_rate": 31.7,
       "req_per_addr": 1.41,
       "days_count": {
-        "Wednesday": 52,
+        "Wednesday": 57,
         "Monday": 10,
-        "Thursday": 29,
+        "Thursday": 25,
         "Friday": 17,
         "Saturday": 3,
         "Sunday": 2,
-        "Tuesday": 3
+        "Tuesday": 2
       },
       "metrics_30d": {
         "total": 8,
         "unique_addrs": 7,
-        "repeat_addrs": 1,
-        "single_addrs": 6,
-        "repeat_rate": 14.3,
+        "repeat_addrs": 0,
+        "single_addrs": 7,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.14,
         "days_count": {
           "Wednesday": 6,
@@ -2606,18 +2601,18 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F)",
       "total": 226,
       "unique_addrs": 150,
-      "repeat_addrs": 46,
-      "single_addrs": 104,
-      "repeat_rate": 30.7,
+      "repeat_addrs": 44,
+      "single_addrs": 106,
+      "repeat_rate": 29.3,
       "req_per_addr": 1.51,
       "days_count": {
-        "Sunday": 6,
-        "Thursday": 90,
-        "Wednesday": 82,
-        "Friday": 23,
-        "Tuesday": 6,
-        "Monday": 12,
-        "Saturday": 7
+        "Sunday": 9,
+        "Thursday": 74,
+        "Wednesday": 103,
+        "Friday": 20,
+        "Tuesday": 5,
+        "Monday": 10,
+        "Saturday": 5
       },
       "metrics_30d": {
         "total": 21,
@@ -2628,12 +2623,11 @@
         "req_per_addr": 1.31,
         "days_count": {
           "Sunday": 1,
-          "Thursday": 6,
+          "Thursday": 8,
           "Wednesday": 5,
-          "Friday": 5,
+          "Friday": 4,
           "Tuesday": 1,
-          "Monday": 2,
-          "Saturday": 1
+          "Monday": 2
         }
       }
     },
@@ -2651,15 +2645,15 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5F)",
       "total": 47,
       "unique_addrs": 34,
-      "repeat_addrs": 8,
-      "single_addrs": 26,
-      "repeat_rate": 23.5,
+      "repeat_addrs": 7,
+      "single_addrs": 27,
+      "repeat_rate": 20.6,
       "req_per_addr": 1.38,
       "days_count": {
-        "Thursday": 15,
+        "Thursday": 16,
         "Wednesday": 21,
-        "Tuesday": 1,
-        "Friday": 8,
+        "Monday": 1,
+        "Friday": 7,
         "Sunday": 2
       },
       "metrics_30d": {
@@ -2672,7 +2666,7 @@
         "days_count": {
           "Thursday": 6,
           "Wednesday": 3,
-          "Tuesday": 1
+          "Monday": 1
         }
       }
     },
@@ -2695,8 +2689,8 @@
       "repeat_rate": 23.1,
       "req_per_addr": 1.42,
       "days_count": {
-        "Friday": 5,
-        "Thursday": 13,
+        "Friday": 4,
+        "Thursday": 14,
         "Wednesday": 15,
         "Sunday": 1,
         "Tuesday": 1,
@@ -2730,25 +2724,25 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "total": 112,
       "unique_addrs": 82,
-      "repeat_addrs": 18,
-      "single_addrs": 64,
-      "repeat_rate": 22.0,
+      "repeat_addrs": 16,
+      "single_addrs": 66,
+      "repeat_rate": 19.5,
       "req_per_addr": 1.37,
       "days_count": {
-        "Wednesday": 47,
+        "Wednesday": 55,
         "Monday": 8,
-        "Thursday": 27,
-        "Saturday": 4,
-        "Friday": 11,
+        "Thursday": 21,
+        "Saturday": 3,
+        "Friday": 10,
         "Sunday": 8,
         "Tuesday": 7
       },
       "metrics_30d": {
         "total": 9,
         "unique_addrs": 8,
-        "repeat_addrs": 1,
-        "single_addrs": 7,
-        "repeat_rate": 12.5,
+        "repeat_addrs": 0,
+        "single_addrs": 8,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.12,
         "days_count": {
           "Wednesday": 5,
@@ -2776,9 +2770,9 @@
       "repeat_rate": 28.6,
       "req_per_addr": 1.46,
       "days_count": {
-        "Thursday": 31,
-        "Wednesday": 24,
-        "Friday": 17,
+        "Thursday": 32,
+        "Wednesday": 26,
+        "Friday": 14,
         "Tuesday": 3,
         "Saturday": 3,
         "Monday": 3,
@@ -2792,9 +2786,9 @@
         "repeat_rate": 12.5,
         "req_per_addr": 1.12,
         "days_count": {
-          "Thursday": 6,
+          "Thursday": 9,
           "Wednesday": 2,
-          "Friday": 8,
+          "Friday": 5,
           "Tuesday": 1,
           "Saturday": 1
         }
@@ -2819,10 +2813,10 @@
       "repeat_rate": 38.7,
       "req_per_addr": 1.92,
       "days_count": {
-        "Friday": 28,
-        "Thursday": 101,
-        "Wednesday": 123,
-        "Saturday": 7,
+        "Friday": 22,
+        "Wednesday": 143,
+        "Thursday": 88,
+        "Saturday": 6,
         "Monday": 8,
         "Tuesday": 4,
         "Sunday": 1
@@ -2835,9 +2829,9 @@
         "repeat_rate": 8.3,
         "req_per_addr": 1.17,
         "days_count": {
-          "Friday": 5,
-          "Thursday": 4,
-          "Wednesday": 5
+          "Friday": 4,
+          "Wednesday": 6,
+          "Thursday": 4
         }
       }
     },
@@ -2855,16 +2849,16 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E)",
       "total": 146,
       "unique_addrs": 94,
-      "repeat_addrs": 33,
-      "single_addrs": 61,
-      "repeat_rate": 35.1,
+      "repeat_addrs": 31,
+      "single_addrs": 63,
+      "repeat_rate": 33.0,
       "req_per_addr": 1.55,
       "days_count": {
-        "Friday": 21,
-        "Thursday": 41,
-        "Wednesday": 59,
-        "Monday": 8,
-        "Tuesday": 4,
+        "Friday": 19,
+        "Thursday": 39,
+        "Wednesday": 63,
+        "Monday": 9,
+        "Tuesday": 3,
         "Saturday": 3,
         "Sunday": 10
       },
@@ -2898,25 +2892,25 @@
       "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A, 5B)",
       "total": 67,
       "unique_addrs": 37,
-      "repeat_addrs": 12,
-      "single_addrs": 25,
-      "repeat_rate": 32.4,
+      "repeat_addrs": 11,
+      "single_addrs": 26,
+      "repeat_rate": 29.7,
       "req_per_addr": 1.81,
       "days_count": {
-        "Monday": 5,
-        "Wednesday": 26,
-        "Thursday": 21,
+        "Monday": 6,
+        "Wednesday": 31,
+        "Thursday": 17,
         "Saturday": 3,
-        "Tuesday": 4,
+        "Tuesday": 3,
         "Friday": 6,
-        "Sunday": 2
+        "Sunday": 1
       },
       "metrics_30d": {
         "total": 6,
         "unique_addrs": 4,
-        "repeat_addrs": 2,
-        "single_addrs": 2,
-        "repeat_rate": 50.0,
+        "repeat_addrs": 1,
+        "single_addrs": 3,
+        "repeat_rate": 25.0,
         "req_per_addr": 1.5,
         "days_count": {
           "Monday": 2,
@@ -2939,18 +2933,18 @@
       "area_desc": "Ward 4 \u2022 Takoma, Brightwood, Manor Park (ANC 4B)",
       "total": 106,
       "unique_addrs": 56,
-      "repeat_addrs": 14,
-      "single_addrs": 42,
-      "repeat_rate": 25.0,
+      "repeat_addrs": 12,
+      "single_addrs": 44,
+      "repeat_rate": 21.4,
       "req_per_addr": 1.89,
       "days_count": {
         "Friday": 17,
-        "Wednesday": 40,
-        "Thursday": 32,
+        "Wednesday": 47,
+        "Thursday": 27,
         "Monday": 4,
         "Tuesday": 6,
         "Sunday": 3,
-        "Saturday": 4
+        "Saturday": 2
       },
       "metrics_30d": {
         "total": 5,
@@ -2980,25 +2974,25 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4E)",
       "total": 115,
       "unique_addrs": 69,
-      "repeat_addrs": 28,
-      "single_addrs": 41,
-      "repeat_rate": 40.6,
+      "repeat_addrs": 27,
+      "single_addrs": 42,
+      "repeat_rate": 39.1,
       "req_per_addr": 1.67,
       "days_count": {
-        "Friday": 14,
-        "Wednesday": 41,
+        "Friday": 12,
+        "Wednesday": 43,
         "Thursday": 37,
         "Tuesday": 6,
         "Saturday": 5,
-        "Monday": 11,
-        "Sunday": 1
+        "Monday": 10,
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 13,
         "unique_addrs": 7,
-        "repeat_addrs": 5,
-        "single_addrs": 2,
-        "repeat_rate": 71.4,
+        "repeat_addrs": 4,
+        "single_addrs": 3,
+        "repeat_rate": 57.1,
         "req_per_addr": 1.86,
         "days_count": {
           "Friday": 2,
@@ -3028,10 +3022,10 @@
       "repeat_rate": 17.1,
       "req_per_addr": 1.36,
       "days_count": {
-        "Saturday": 15,
-        "Wednesday": 24,
-        "Tuesday": 35,
+        "Saturday": 14,
+        "Tuesday": 41,
         "Friday": 12,
+        "Wednesday": 19,
         "Thursday": 5,
         "Sunday": 2,
         "Monday": 2
@@ -3045,9 +3039,9 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Saturday": 5,
-          "Wednesday": 6,
-          "Tuesday": 4,
-          "Friday": 2
+          "Tuesday": 8,
+          "Friday": 2,
+          "Wednesday": 2
         }
       }
     },
@@ -3065,33 +3059,32 @@
       "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "total": 214,
       "unique_addrs": 129,
-      "repeat_addrs": 45,
-      "single_addrs": 84,
-      "repeat_rate": 34.9,
+      "repeat_addrs": 42,
+      "single_addrs": 87,
+      "repeat_rate": 32.6,
       "req_per_addr": 1.66,
       "days_count": {
-        "Sunday": 5,
-        "Tuesday": 74,
-        "Saturday": 13,
+        "Saturday": 12,
+        "Tuesday": 83,
         "Friday": 47,
-        "Thursday": 17,
-        "Wednesday": 52,
-        "Monday": 6
+        "Thursday": 13,
+        "Wednesday": 48,
+        "Sunday": 4,
+        "Monday": 7
       },
       "metrics_30d": {
         "total": 24,
         "unique_addrs": 19,
-        "repeat_addrs": 4,
-        "single_addrs": 15,
-        "repeat_rate": 21.1,
+        "repeat_addrs": 3,
+        "single_addrs": 16,
+        "repeat_rate": 15.8,
         "req_per_addr": 1.26,
         "days_count": {
-          "Sunday": 1,
+          "Saturday": 3,
           "Tuesday": 5,
-          "Saturday": 2,
           "Friday": 8,
-          "Thursday": 3,
-          "Wednesday": 5
+          "Thursday": 2,
+          "Wednesday": 6
         }
       }
     },
@@ -3109,18 +3102,18 @@
       "area_desc": "Ward 2 / Ward 1 \u2022 Dupont Circle, Connecticut Avenue/K Street, Kalorama Heights (ANC 1B, 1C, 2B)",
       "total": 376,
       "unique_addrs": 195,
-      "repeat_addrs": 87,
-      "single_addrs": 108,
-      "repeat_rate": 44.6,
+      "repeat_addrs": 86,
+      "single_addrs": 109,
+      "repeat_rate": 44.1,
       "req_per_addr": 1.93,
       "days_count": {
-        "Monday": 18,
+        "Monday": 19,
         "Saturday": 32,
-        "Wednesday": 86,
-        "Tuesday": 132,
-        "Sunday": 21,
-        "Friday": 62,
-        "Thursday": 25
+        "Tuesday": 152,
+        "Sunday": 19,
+        "Friday": 64,
+        "Thursday": 20,
+        "Wednesday": 70
       },
       "metrics_30d": {
         "total": 46,
@@ -3131,12 +3124,12 @@
         "req_per_addr": 1.15,
         "days_count": {
           "Monday": 8,
-          "Saturday": 5,
-          "Wednesday": 7,
-          "Tuesday": 10,
-          "Sunday": 6,
+          "Saturday": 6,
+          "Tuesday": 13,
+          "Sunday": 5,
           "Friday": 6,
-          "Thursday": 4
+          "Thursday": 3,
+          "Wednesday": 5
         }
       }
     },
@@ -3159,11 +3152,11 @@
       "repeat_rate": 27.1,
       "req_per_addr": 1.41,
       "days_count": {
-        "Wednesday": 22,
-        "Tuesday": 55,
-        "Saturday": 8,
-        "Friday": 15,
-        "Thursday": 16,
+        "Wednesday": 21,
+        "Tuesday": 60,
+        "Friday": 19,
+        "Thursday": 12,
+        "Saturday": 4,
         "Monday": 2,
         "Sunday": 2
       },
@@ -3177,8 +3170,7 @@
         "days_count": {
           "Wednesday": 2,
           "Tuesday": 4,
-          "Saturday": 1,
-          "Friday": 1,
+          "Friday": 2,
           "Thursday": 2
         }
       }
@@ -3197,31 +3189,30 @@
       "area_desc": "Ward 1 / Ward 2 \u2022 Kalorama Heights, Adams Morgan, Lanier Heights (ANC 1C, 2D)",
       "total": 142,
       "unique_addrs": 88,
-      "repeat_addrs": 32,
-      "single_addrs": 56,
-      "repeat_rate": 36.4,
+      "repeat_addrs": 29,
+      "single_addrs": 59,
+      "repeat_rate": 33.0,
       "req_per_addr": 1.61,
       "days_count": {
-        "Sunday": 10,
+        "Sunday": 9,
         "Thursday": 7,
-        "Wednesday": 15,
-        "Tuesday": 31,
-        "Monday": 13,
-        "Saturday": 21,
-        "Friday": 45
+        "Tuesday": 34,
+        "Monday": 12,
+        "Saturday": 20,
+        "Friday": 48,
+        "Wednesday": 12
       },
       "metrics_30d": {
         "total": 32,
         "unique_addrs": 26,
-        "repeat_addrs": 5,
-        "single_addrs": 21,
-        "repeat_rate": 19.2,
+        "repeat_addrs": 4,
+        "single_addrs": 22,
+        "repeat_rate": 15.4,
         "req_per_addr": 1.23,
         "days_count": {
           "Sunday": 1,
           "Thursday": 2,
-          "Wednesday": 2,
-          "Tuesday": 13,
+          "Tuesday": 15,
           "Monday": 3,
           "Saturday": 3,
           "Friday": 8
@@ -3247,13 +3238,13 @@
       "repeat_rate": 17.6,
       "req_per_addr": 1.43,
       "days_count": {
-        "Saturday": 20,
-        "Sunday": 6,
-        "Friday": 45,
+        "Saturday": 18,
+        "Friday": 48,
         "Wednesday": 6,
         "Tuesday": 13,
         "Thursday": 4,
-        "Monday": 3
+        "Monday": 3,
+        "Sunday": 5
       },
       "metrics_30d": {
         "total": 17,
@@ -3264,8 +3255,7 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Saturday": 5,
-          "Sunday": 1,
-          "Friday": 8,
+          "Friday": 9,
           "Wednesday": 1,
           "Tuesday": 2
         }
@@ -3290,13 +3280,13 @@
       "repeat_rate": 32.0,
       "req_per_addr": 1.46,
       "days_count": {
-        "Friday": 26,
-        "Saturday": 12,
-        "Tuesday": 11,
-        "Sunday": 3,
-        "Wednesday": 12,
-        "Thursday": 7,
-        "Monday": 2
+        "Friday": 29,
+        "Saturday": 9,
+        "Tuesday": 13,
+        "Sunday": 4,
+        "Wednesday": 11,
+        "Thursday": 6,
+        "Monday": 1
       },
       "metrics_30d": {
         "total": 16,
@@ -3328,18 +3318,18 @@
       "area_desc": "Ward 2 / Ward 1 \u2022 Shaw, Logan Circle, Dupont Circle (ANC 1B, 2B, 2F, 2G)",
       "total": 251,
       "unique_addrs": 143,
-      "repeat_addrs": 49,
-      "single_addrs": 94,
-      "repeat_rate": 34.3,
+      "repeat_addrs": 48,
+      "single_addrs": 95,
+      "repeat_rate": 33.6,
       "req_per_addr": 1.76,
       "days_count": {
-        "Thursday": 25,
-        "Wednesday": 63,
-        "Tuesday": 69,
+        "Thursday": 24,
+        "Wednesday": 54,
+        "Tuesday": 81,
         "Saturday": 30,
-        "Friday": 37,
-        "Monday": 14,
-        "Sunday": 13
+        "Friday": 38,
+        "Monday": 12,
+        "Sunday": 12
       },
       "metrics_30d": {
         "total": 36,
@@ -3350,12 +3340,11 @@
         "req_per_addr": 1.24,
         "days_count": {
           "Thursday": 3,
-          "Wednesday": 10,
-          "Tuesday": 18,
-          "Saturday": 1,
+          "Wednesday": 6,
+          "Tuesday": 22,
+          "Saturday": 2,
           "Friday": 1,
-          "Monday": 2,
-          "Sunday": 1
+          "Monday": 2
         }
       }
     },
@@ -3373,16 +3362,16 @@
       "area_desc": "Ward 2 \u2022 Dupont Circle, Connecticut Avenue/K Street, West End (ANC 2A, 2B, 2D, 2E)",
       "total": 140,
       "unique_addrs": 100,
-      "repeat_addrs": 28,
-      "single_addrs": 72,
-      "repeat_rate": 28.0,
+      "repeat_addrs": 25,
+      "single_addrs": 75,
+      "repeat_rate": 25.0,
       "req_per_addr": 1.4,
       "days_count": {
-        "Sunday": 6,
+        "Sunday": 7,
         "Tuesday": 55,
-        "Saturday": 9,
-        "Friday": 28,
-        "Thursday": 7,
+        "Saturday": 8,
+        "Friday": 29,
+        "Thursday": 6,
         "Wednesday": 32,
         "Monday": 3
       },
@@ -3395,11 +3384,11 @@
         "req_per_addr": 1.21,
         "days_count": {
           "Sunday": 2,
-          "Tuesday": 5,
-          "Saturday": 2,
-          "Friday": 4,
+          "Tuesday": 6,
+          "Saturday": 1,
+          "Friday": 5,
           "Thursday": 1,
-          "Wednesday": 3
+          "Wednesday": 2
         }
       }
     },
@@ -3417,14 +3406,14 @@
       "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D)",
       "total": 135,
       "unique_addrs": 108,
-      "repeat_addrs": 23,
-      "single_addrs": 85,
-      "repeat_rate": 21.3,
+      "repeat_addrs": 20,
+      "single_addrs": 88,
+      "repeat_rate": 18.5,
       "req_per_addr": 1.25,
       "days_count": {
-        "Thursday": 8,
-        "Wednesday": 40,
-        "Tuesday": 56,
+        "Thursday": 7,
+        "Wednesday": 26,
+        "Tuesday": 71,
         "Saturday": 10,
         "Monday": 10,
         "Friday": 11
@@ -3432,14 +3421,14 @@
       "metrics_30d": {
         "total": 13,
         "unique_addrs": 12,
-        "repeat_addrs": 1,
-        "single_addrs": 11,
-        "repeat_rate": 8.3,
+        "repeat_addrs": 0,
+        "single_addrs": 12,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.08,
         "days_count": {
           "Thursday": 1,
-          "Wednesday": 5,
-          "Tuesday": 4,
+          "Wednesday": 4,
+          "Tuesday": 5,
           "Saturday": 1,
           "Monday": 2
         }
@@ -3459,17 +3448,18 @@
       "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1D, 1E)",
       "total": 174,
       "unique_addrs": 111,
-      "repeat_addrs": 35,
-      "single_addrs": 76,
-      "repeat_rate": 31.5,
+      "repeat_addrs": 33,
+      "single_addrs": 78,
+      "repeat_rate": 29.7,
       "req_per_addr": 1.57,
       "days_count": {
-        "Monday": 7,
-        "Friday": 38,
-        "Wednesday": 42,
-        "Tuesday": 56,
-        "Thursday": 18,
-        "Saturday": 13
+        "Monday": 5,
+        "Friday": 40,
+        "Wednesday": 36,
+        "Tuesday": 68,
+        "Thursday": 13,
+        "Saturday": 10,
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 26,
@@ -3481,9 +3471,9 @@
         "days_count": {
           "Monday": 2,
           "Friday": 3,
-          "Wednesday": 13,
-          "Tuesday": 6,
-          "Thursday": 2
+          "Wednesday": 11,
+          "Tuesday": 9,
+          "Thursday": 1
         }
       }
     },
@@ -3501,33 +3491,32 @@
       "area_desc": "Ward 1 / Ward 2 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1E, 2G)",
       "total": 225,
       "unique_addrs": 149,
-      "repeat_addrs": 48,
-      "single_addrs": 101,
-      "repeat_rate": 32.2,
+      "repeat_addrs": 43,
+      "single_addrs": 106,
+      "repeat_rate": 28.9,
       "req_per_addr": 1.51,
       "days_count": {
-        "Friday": 35,
-        "Thursday": 16,
-        "Tuesday": 87,
-        "Wednesday": 52,
+        "Friday": 36,
+        "Thursday": 13,
+        "Tuesday": 100,
+        "Wednesday": 43,
         "Monday": 9,
-        "Sunday": 2,
-        "Saturday": 24
+        "Saturday": 23,
+        "Sunday": 1
       },
       "metrics_30d": {
         "total": 24,
         "unique_addrs": 17,
-        "repeat_addrs": 5,
-        "single_addrs": 12,
-        "repeat_rate": 29.4,
+        "repeat_addrs": 4,
+        "single_addrs": 13,
+        "repeat_rate": 23.5,
         "req_per_addr": 1.41,
         "days_count": {
-          "Friday": 5,
+          "Friday": 6,
           "Thursday": 4,
           "Tuesday": 6,
           "Wednesday": 2,
           "Monday": 1,
-          "Sunday": 1,
           "Saturday": 5
         }
       }
@@ -3551,11 +3540,11 @@
       "repeat_rate": 20.0,
       "req_per_addr": 1.37,
       "days_count": {
-        "Monday": 13,
+        "Monday": 14,
         "Tuesday": 10,
-        "Thursday": 13,
-        "Friday": 8,
-        "Wednesday": 4
+        "Thursday": 14,
+        "Friday": 7,
+        "Wednesday": 3
       },
       "metrics_30d": {
         "total": 6,
@@ -3590,13 +3579,13 @@
       "repeat_rate": 19.3,
       "req_per_addr": 1.33,
       "days_count": {
-        "Monday": 24,
-        "Thursday": 22,
+        "Monday": 25,
+        "Thursday": 23,
         "Friday": 12,
         "Tuesday": 11,
         "Sunday": 1,
-        "Saturday": 2,
-        "Wednesday": 4
+        "Wednesday": 3,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 15,
@@ -3633,12 +3622,12 @@
       "repeat_rate": 26.0,
       "req_per_addr": 1.34,
       "days_count": {
-        "Monday": 37,
-        "Thursday": 26,
-        "Wednesday": 14,
+        "Monday": 38,
+        "Thursday": 30,
+        "Wednesday": 13,
         "Tuesday": 11,
         "Saturday": 2,
-        "Friday": 13
+        "Friday": 9
       },
       "metrics_30d": {
         "total": 15,
@@ -3671,16 +3660,15 @@
       "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B)",
       "total": 32,
       "unique_addrs": 25,
-      "repeat_addrs": 3,
-      "single_addrs": 22,
-      "repeat_rate": 12.0,
+      "repeat_addrs": 2,
+      "single_addrs": 23,
+      "repeat_rate": 8.0,
       "req_per_addr": 1.28,
       "days_count": {
-        "Monday": 15,
+        "Monday": 16,
         "Thursday": 6,
         "Friday": 4,
         "Tuesday": 5,
-        "Wednesday": 1,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -3715,13 +3703,13 @@
       "repeat_rate": 31.5,
       "req_per_addr": 1.58,
       "days_count": {
-        "Monday": 46,
+        "Monday": 50,
         "Saturday": 5,
-        "Thursday": 38,
-        "Wednesday": 12,
-        "Friday": 18,
+        "Thursday": 41,
+        "Wednesday": 13,
+        "Friday": 14,
         "Sunday": 2,
-        "Tuesday": 20
+        "Tuesday": 16
       },
       "metrics_30d": {
         "total": 19,
@@ -3733,8 +3721,8 @@
         "days_count": {
           "Monday": 11,
           "Saturday": 1,
-          "Thursday": 3,
-          "Wednesday": 2,
+          "Thursday": 2,
+          "Wednesday": 3,
           "Friday": 1,
           "Sunday": 1
         }
@@ -3754,17 +3742,17 @@
       "area_desc": "Ward 6 / Ward 8 \u2022 Southwest Employment Area, Southwest/Waterfront, Fort McNair (ANC 6B, 6D, 8F)",
       "total": 49,
       "unique_addrs": 43,
-      "repeat_addrs": 5,
-      "single_addrs": 38,
-      "repeat_rate": 11.6,
+      "repeat_addrs": 4,
+      "single_addrs": 39,
+      "repeat_rate": 9.3,
       "req_per_addr": 1.14,
       "days_count": {
-        "Friday": 7,
-        "Tuesday": 15,
-        "Thursday": 8,
-        "Wednesday": 6,
+        "Friday": 4,
+        "Tuesday": 14,
+        "Thursday": 10,
+        "Wednesday": 7,
         "Monday": 12,
-        "Sunday": 1
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 17,
@@ -3776,8 +3764,8 @@
         "days_count": {
           "Friday": 1,
           "Tuesday": 7,
-          "Thursday": 2,
-          "Wednesday": 1,
+          "Thursday": 1,
+          "Wednesday": 2,
           "Monday": 6
         }
       }
@@ -3796,25 +3784,25 @@
       "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C)",
       "total": 153,
       "unique_addrs": 103,
-      "repeat_addrs": 24,
-      "single_addrs": 79,
-      "repeat_rate": 23.3,
+      "repeat_addrs": 21,
+      "single_addrs": 82,
+      "repeat_rate": 20.4,
       "req_per_addr": 1.49,
       "days_count": {
-        "Monday": 45,
-        "Friday": 33,
-        "Thursday": 49,
-        "Tuesday": 21,
+        "Monday": 48,
+        "Friday": 26,
+        "Thursday": 55,
+        "Tuesday": 18,
         "Sunday": 1,
         "Saturday": 1,
-        "Wednesday": 3
+        "Wednesday": 4
       },
       "metrics_30d": {
         "total": 20,
         "unique_addrs": 19,
-        "repeat_addrs": 1,
-        "single_addrs": 18,
-        "repeat_rate": 5.3,
+        "repeat_addrs": 0,
+        "single_addrs": 19,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.05,
         "days_count": {
           "Monday": 7,
@@ -3839,25 +3827,25 @@
       "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C)",
       "total": 128,
       "unique_addrs": 99,
-      "repeat_addrs": 19,
-      "single_addrs": 80,
-      "repeat_rate": 19.2,
+      "repeat_addrs": 17,
+      "single_addrs": 82,
+      "repeat_rate": 17.2,
       "req_per_addr": 1.29,
       "days_count": {
-        "Monday": 29,
-        "Saturday": 9,
-        "Thursday": 39,
-        "Tuesday": 28,
+        "Monday": 31,
+        "Saturday": 7,
+        "Thursday": 41,
+        "Tuesday": 27,
         "Friday": 16,
-        "Sunday": 3,
-        "Wednesday": 4
+        "Sunday": 4,
+        "Wednesday": 2
       },
       "metrics_30d": {
         "total": 18,
         "unique_addrs": 15,
-        "repeat_addrs": 3,
-        "single_addrs": 12,
-        "repeat_rate": 20.0,
+        "repeat_addrs": 2,
+        "single_addrs": 13,
+        "repeat_rate": 13.3,
         "req_per_addr": 1.2,
         "days_count": {
           "Monday": 8,
@@ -3882,17 +3870,17 @@
       "area_desc": "Ward 7 / Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 7D)",
       "total": 116,
       "unique_addrs": 79,
-      "repeat_addrs": 16,
-      "single_addrs": 63,
-      "repeat_rate": 20.3,
+      "repeat_addrs": 14,
+      "single_addrs": 65,
+      "repeat_rate": 17.7,
       "req_per_addr": 1.47,
       "days_count": {
-        "Saturday": 4,
+        "Friday": 18,
         "Thursday": 38,
-        "Friday": 17,
-        "Monday": 30,
-        "Tuesday": 19,
-        "Wednesday": 7,
+        "Monday": 31,
+        "Tuesday": 20,
+        "Wednesday": 5,
+        "Saturday": 3,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -3903,9 +3891,8 @@
         "repeat_rate": 12.5,
         "req_per_addr": 1.12,
         "days_count": {
-          "Saturday": 1,
+          "Friday": 2,
           "Thursday": 2,
-          "Friday": 1,
           "Monday": 2,
           "Tuesday": 2,
           "Wednesday": 1
@@ -3932,11 +3919,11 @@
       "req_per_addr": 1.4,
       "days_count": {
         "Thursday": 19,
-        "Monday": 26,
+        "Monday": 29,
         "Tuesday": 22,
-        "Wednesday": 10,
+        "Wednesday": 8,
         "Saturday": 3,
-        "Friday": 11
+        "Friday": 10
       },
       "metrics_30d": {
         "total": 10,
@@ -3972,12 +3959,12 @@
       "repeat_rate": 26.2,
       "req_per_addr": 1.48,
       "days_count": {
-        "Monday": 34,
-        "Thursday": 30,
+        "Monday": 35,
+        "Thursday": 34,
         "Wednesday": 3,
         "Saturday": 2,
-        "Friday": 15,
-        "Tuesday": 8,
+        "Friday": 11,
+        "Tuesday": 7,
         "Sunday": 4
       },
       "metrics_30d": {
@@ -4016,10 +4003,10 @@
       "repeat_rate": 22.2,
       "req_per_addr": 1.37,
       "days_count": {
-        "Monday": 29,
-        "Friday": 8,
-        "Tuesday": 15,
-        "Thursday": 26,
+        "Monday": 31,
+        "Friday": 5,
+        "Tuesday": 14,
+        "Thursday": 28,
         "Wednesday": 7,
         "Saturday": 1
       },
@@ -4032,9 +4019,9 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Monday": 9,
-          "Friday": 2,
+          "Friday": 1,
           "Tuesday": 1,
-          "Thursday": 1,
+          "Thursday": 2,
           "Wednesday": 1
         }
       }
@@ -4058,13 +4045,13 @@
       "repeat_rate": 17.8,
       "req_per_addr": 1.31,
       "days_count": {
-        "Saturday": 5,
-        "Wednesday": 15,
-        "Tuesday": 17,
-        "Thursday": 5,
+        "Saturday": 6,
+        "Wednesday": 16,
+        "Tuesday": 18,
+        "Thursday": 3,
         "Friday": 12,
-        "Sunday": 3,
-        "Monday": 2
+        "Monday": 2,
+        "Sunday": 2
       },
       "metrics_30d": {
         "total": 7,
@@ -4095,18 +4082,18 @@
       "area_desc": "Ward 1 / Ward 6 / Ward 5 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D, 1E, 5E, 6B)",
       "total": 42,
       "unique_addrs": 24,
-      "repeat_addrs": 8,
-      "single_addrs": 16,
-      "repeat_rate": 33.3,
+      "repeat_addrs": 7,
+      "single_addrs": 17,
+      "repeat_rate": 29.2,
       "req_per_addr": 1.75,
       "days_count": {
-        "Wednesday": 14,
+        "Wednesday": 13,
         "Thursday": 4,
-        "Saturday": 8,
-        "Monday": 2,
-        "Friday": 5,
-        "Tuesday": 8,
-        "Sunday": 1
+        "Saturday": 7,
+        "Tuesday": 9,
+        "Monday": 1,
+        "Sunday": 2,
+        "Friday": 6
       },
       "metrics_30d": {
         "total": 6,
@@ -4167,14 +4154,14 @@
       "area_desc": "Ward 6 / Ward 7 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6A, 6C, 7D)",
       "total": 18,
       "unique_addrs": 13,
-      "repeat_addrs": 3,
-      "single_addrs": 10,
-      "repeat_rate": 23.1,
+      "repeat_addrs": 2,
+      "single_addrs": 11,
+      "repeat_rate": 15.4,
       "req_per_addr": 1.38,
       "days_count": {
-        "Friday": 5,
+        "Friday": 3,
         "Monday": 2,
-        "Thursday": 6,
+        "Thursday": 8,
         "Wednesday": 1,
         "Tuesday": 4
       },
@@ -4247,11 +4234,11 @@
       "repeat_rate": 30.2,
       "req_per_addr": 1.6,
       "days_count": {
-        "Wednesday": 45,
-        "Friday": 15,
-        "Monday": 11,
-        "Thursday": 25,
-        "Sunday": 2,
+        "Wednesday": 50,
+        "Friday": 14,
+        "Monday": 8,
+        "Sunday": 5,
+        "Thursday": 21,
         "Saturday": 2,
         "Tuesday": 1
       },
@@ -4263,10 +4250,9 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Wednesday": 2,
+          "Wednesday": 3,
           "Friday": 1,
-          "Monday": 2,
-          "Thursday": 1
+          "Monday": 2
         }
       }
     },
@@ -4323,10 +4309,9 @@
       "repeat_rate": 8.3,
       "req_per_addr": 1.08,
       "days_count": {
-        "Saturday": 2,
         "Friday": 4,
-        "Wednesday": 5,
-        "Thursday": 2
+        "Thursday": 4,
+        "Wednesday": 5
       },
       "metrics_30d": {
         "total": 3,
@@ -4336,8 +4321,8 @@
         "repeat_rate": 50.0,
         "req_per_addr": 1.5,
         "days_count": {
-          "Saturday": 1,
-          "Friday": 2
+          "Friday": 2,
+          "Thursday": 1
         }
       }
     },
@@ -4361,9 +4346,9 @@
       "req_per_addr": 1.25,
       "days_count": {
         "Saturday": 3,
-        "Friday": 8,
-        "Thursday": 8,
-        "Wednesday": 9,
+        "Friday": 7,
+        "Thursday": 7,
+        "Wednesday": 11,
         "Tuesday": 1,
         "Sunday": 1
       },
@@ -4377,8 +4362,8 @@
         "days_count": {
           "Saturday": 1,
           "Friday": 4,
-          "Thursday": 4,
-          "Wednesday": 1
+          "Thursday": 3,
+          "Wednesday": 2
         }
       }
     },
@@ -4401,13 +4386,12 @@
       "repeat_rate": 27.7,
       "req_per_addr": 1.51,
       "days_count": {
-        "Thursday": 21,
-        "Wednesday": 28,
+        "Wednesday": 31,
         "Tuesday": 6,
+        "Thursday": 18,
         "Friday": 9,
         "Monday": 3,
-        "Sunday": 1,
-        "Saturday": 3
+        "Saturday": 4
       },
       "metrics_30d": {
         "total": 3,
@@ -4417,8 +4401,7 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 1,
-          "Wednesday": 1,
+          "Wednesday": 2,
           "Tuesday": 1
         }
       }
@@ -4443,8 +4426,8 @@
       "req_per_addr": 1.06,
       "days_count": {
         "Friday": 6,
-        "Thursday": 12,
-        "Wednesday": 11,
+        "Thursday": 10,
+        "Wednesday": 13,
         "Tuesday": 3,
         "Sunday": 1
       },
@@ -4482,11 +4465,11 @@
       "repeat_rate": 21.7,
       "req_per_addr": 1.28,
       "days_count": {
-        "Thursday": 34,
-        "Wednesday": 25,
+        "Thursday": 28,
+        "Wednesday": 32,
         "Tuesday": 1,
         "Friday": 13,
-        "Saturday": 3,
+        "Saturday": 2,
         "Monday": 1
       },
       "metrics_30d": {
@@ -4518,14 +4501,14 @@
       "area_desc": "Ward 5 \u2022 North Michigan Park, Michigan Park, University Heights (ANC 5A)",
       "total": 27,
       "unique_addrs": 19,
-      "repeat_addrs": 2,
-      "single_addrs": 17,
-      "repeat_rate": 10.5,
+      "repeat_addrs": 1,
+      "single_addrs": 18,
+      "repeat_rate": 5.3,
       "req_per_addr": 1.42,
       "days_count": {
         "Tuesday": 1,
-        "Thursday": 9,
-        "Wednesday": 13,
+        "Thursday": 7,
+        "Wednesday": 15,
         "Friday": 2,
         "Saturday": 1,
         "Monday": 1
@@ -4556,15 +4539,15 @@
       "area_desc": "Ward 5 \u2022 Lamont Riggs, Queens Chapel, Fort Totten (ANC 5A, 5B)",
       "total": 38,
       "unique_addrs": 20,
-      "repeat_addrs": 7,
-      "single_addrs": 13,
-      "repeat_rate": 35.0,
+      "repeat_addrs": 6,
+      "single_addrs": 14,
+      "repeat_rate": 30.0,
       "req_per_addr": 1.9,
       "days_count": {
         "Saturday": 2,
         "Wednesday": 12,
-        "Friday": 8,
-        "Thursday": 13,
+        "Friday": 7,
+        "Thursday": 14,
         "Tuesday": 1,
         "Monday": 2
       },
@@ -4604,8 +4587,8 @@
         "Friday": 1,
         "Wednesday": 6,
         "Saturday": 1,
-        "Monday": 1,
-        "Tuesday": 4
+        "Monday": 2,
+        "Tuesday": 3
       },
       "metrics_30d": {
         "total": 3,
@@ -4640,12 +4623,12 @@
       "repeat_rate": 28.6,
       "req_per_addr": 1.51,
       "days_count": {
-        "Sunday": 1,
-        "Thursday": 19,
-        "Wednesday": 23,
-        "Friday": 6,
-        "Monday": 2,
-        "Saturday": 2
+        "Sunday": 2,
+        "Thursday": 18,
+        "Wednesday": 26,
+        "Friday": 5,
+        "Monday": 1,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 8,
@@ -4683,9 +4666,9 @@
       "req_per_addr": 1.38,
       "days_count": {
         "Monday": 2,
-        "Thursday": 12,
-        "Wednesday": 18,
-        "Friday": 8,
+        "Thursday": 10,
+        "Wednesday": 21,
+        "Friday": 7,
         "Saturday": 2,
         "Tuesday": 1,
         "Sunday": 1
@@ -4723,12 +4706,12 @@
       "repeat_rate": 33.3,
       "req_per_addr": 2.33,
       "days_count": {
-        "Thursday": 22,
-        "Wednesday": 18,
-        "Sunday": 3,
+        "Thursday": 17,
+        "Wednesday": 23,
+        "Sunday": 2,
         "Friday": 4,
-        "Tuesday": 1,
-        "Saturday": 1
+        "Saturday": 2,
+        "Tuesday": 1
       },
       "metrics_30d": {
         "total": 5,
@@ -4763,13 +4746,13 @@
       "repeat_rate": 19.7,
       "req_per_addr": 1.32,
       "days_count": {
-        "Monday": 4,
-        "Friday": 14,
-        "Thursday": 22,
-        "Wednesday": 33,
-        "Saturday": 3,
-        "Tuesday": 3,
-        "Sunday": 8
+        "Monday": 3,
+        "Thursday": 21,
+        "Wednesday": 35,
+        "Saturday": 2,
+        "Friday": 13,
+        "Tuesday": 4,
+        "Sunday": 9
       },
       "metrics_30d": {
         "total": 6,
@@ -4780,8 +4763,7 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Monday": 3,
-          "Friday": 1,
-          "Thursday": 1,
+          "Thursday": 2,
           "Wednesday": 1
         }
       }
@@ -4800,15 +4782,15 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E)",
       "total": 71,
       "unique_addrs": 47,
-      "repeat_addrs": 13,
-      "single_addrs": 34,
-      "repeat_rate": 27.7,
+      "repeat_addrs": 12,
+      "single_addrs": 35,
+      "repeat_rate": 25.5,
       "req_per_addr": 1.51,
       "days_count": {
-        "Wednesday": 25,
+        "Wednesday": 31,
         "Saturday": 4,
-        "Thursday": 24,
-        "Friday": 12,
+        "Thursday": 22,
+        "Friday": 8,
         "Tuesday": 2,
         "Monday": 2,
         "Sunday": 2
@@ -4839,15 +4821,15 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C, 4D)",
       "total": 20,
       "unique_addrs": 17,
-      "repeat_addrs": 3,
-      "single_addrs": 14,
-      "repeat_rate": 17.6,
+      "repeat_addrs": 2,
+      "single_addrs": 15,
+      "repeat_rate": 11.8,
       "req_per_addr": 1.18,
       "days_count": {
         "Sunday": 2,
         "Friday": 2,
-        "Wednesday": 9,
-        "Thursday": 6,
+        "Wednesday": 11,
+        "Thursday": 4,
         "Saturday": 1
       },
       "metrics_30d": {
@@ -4878,18 +4860,18 @@
       "area_desc": "Ward 5 \u2022 Edgewood, Bloomingdale, Truxton Circle (ANC 5E, 5F)",
       "total": 94,
       "unique_addrs": 72,
-      "repeat_addrs": 16,
-      "single_addrs": 56,
-      "repeat_rate": 22.2,
+      "repeat_addrs": 13,
+      "single_addrs": 59,
+      "repeat_rate": 18.1,
       "req_per_addr": 1.31,
       "days_count": {
-        "Thursday": 27,
-        "Wednesday": 31,
-        "Friday": 11,
-        "Monday": 18,
+        "Thursday": 23,
+        "Wednesday": 38,
+        "Monday": 15,
         "Tuesday": 1,
-        "Sunday": 5,
-        "Saturday": 1
+        "Sunday": 8,
+        "Saturday": 1,
+        "Friday": 8
       },
       "metrics_30d": {
         "total": 5,
@@ -4899,9 +4881,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 1,
-          "Wednesday": 3,
-          "Friday": 1
+          "Thursday": 2,
+          "Wednesday": 3
         }
       }
     },
@@ -4924,10 +4905,10 @@
       "repeat_rate": 6.7,
       "req_per_addr": 1.07,
       "days_count": {
-        "Thursday": 7,
+        "Thursday": 9,
         "Monday": 1,
         "Wednesday": 3,
-        "Friday": 4,
+        "Friday": 2,
         "Tuesday": 1
       },
       "metrics_30d": {
@@ -4959,8 +4940,8 @@
       "repeat_rate": 9.7,
       "req_per_addr": 1.1,
       "days_count": {
-        "Thursday": 14,
-        "Wednesday": 16,
+        "Thursday": 11,
+        "Wednesday": 19,
         "Friday": 4
       },
       "metrics_30d": {
@@ -5105,11 +5086,11 @@
       "repeat_rate": 22.2,
       "req_per_addr": 1.42,
       "days_count": {
-        "Wednesday": 11,
-        "Thursday": 23,
+        "Wednesday": 14,
+        "Thursday": 20,
         "Sunday": 2,
-        "Saturday": 4,
-        "Friday": 8,
+        "Saturday": 3,
+        "Friday": 9,
         "Tuesday": 1,
         "Monday": 2
       },
@@ -5124,8 +5105,8 @@
           "Wednesday": 2,
           "Thursday": 3,
           "Sunday": 1,
-          "Saturday": 2,
-          "Friday": 3
+          "Saturday": 1,
+          "Friday": 4
         }
       }
     },
@@ -5148,10 +5129,10 @@
       "repeat_rate": 20.6,
       "req_per_addr": 1.32,
       "days_count": {
-        "Thursday": 27,
-        "Friday": 5,
-        "Wednesday": 11,
+        "Wednesday": 17,
+        "Friday": 4,
         "Sunday": 1,
+        "Thursday": 22,
         "Saturday": 1
       },
       "metrics_30d": {
@@ -5162,9 +5143,8 @@
         "repeat_rate": 25.0,
         "req_per_addr": 1.25,
         "days_count": {
-          "Thursday": 1,
+          "Wednesday": 3,
           "Friday": 1,
-          "Wednesday": 2,
           "Sunday": 1
         }
       }
@@ -5188,10 +5168,10 @@
       "repeat_rate": 21.4,
       "req_per_addr": 1.43,
       "days_count": {
-        "Wednesday": 6,
+        "Wednesday": 7,
         "Friday": 4,
-        "Saturday": 2,
-        "Thursday": 8
+        "Thursday": 8,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 3,
@@ -5263,12 +5243,12 @@
       "repeat_rate": 12.9,
       "req_per_addr": 1.16,
       "days_count": {
-        "Thursday": 7,
-        "Friday": 5,
+        "Thursday": 4,
+        "Friday": 7,
         "Sunday": 1,
-        "Tuesday": 11,
-        "Wednesday": 9,
-        "Saturday": 3
+        "Tuesday": 12,
+        "Wednesday": 11,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 3,
@@ -5303,12 +5283,12 @@
       "repeat_rate": 22.7,
       "req_per_addr": 1.41,
       "days_count": {
-        "Thursday": 19,
-        "Tuesday": 30,
-        "Wednesday": 37,
-        "Monday": 2,
+        "Thursday": 18,
+        "Wednesday": 35,
+        "Tuesday": 33,
+        "Sunday": 2,
         "Friday": 4,
-        "Sunday": 1
+        "Monday": 1
       },
       "metrics_30d": {
         "total": 13,
@@ -5318,10 +5298,10 @@
         "repeat_rate": 8.3,
         "req_per_addr": 1.08,
         "days_count": {
-          "Thursday": 3,
+          "Thursday": 2,
+          "Wednesday": 3,
           "Tuesday": 7,
-          "Wednesday": 2,
-          "Monday": 1
+          "Sunday": 1
         }
       }
     },
@@ -5344,10 +5324,10 @@
       "repeat_rate": 17.6,
       "req_per_addr": 1.35,
       "days_count": {
-        "Tuesday": 14,
-        "Friday": 6,
-        "Wednesday": 13,
+        "Tuesday": 18,
+        "Friday": 4,
         "Thursday": 12,
+        "Wednesday": 11,
         "Monday": 1
       },
       "metrics_30d": {
@@ -5382,9 +5362,9 @@
       "repeat_rate": 20.8,
       "req_per_addr": 1.38,
       "days_count": {
-        "Wednesday": 18,
-        "Tuesday": 10,
-        "Thursday": 4,
+        "Wednesday": 16,
+        "Tuesday": 14,
+        "Thursday": 2,
         "Friday": 1
       },
       "metrics_30d": {
@@ -5449,9 +5429,9 @@
       "area_desc": "Ward 7 \u2022 Capitol View, Marshall Heights, Benning Heights (ANC 7E)",
       "total": 39,
       "unique_addrs": 29,
-      "repeat_addrs": 6,
-      "single_addrs": 23,
-      "repeat_rate": 20.7,
+      "repeat_addrs": 5,
+      "single_addrs": 24,
+      "repeat_rate": 17.2,
       "req_per_addr": 1.34,
       "days_count": {
         "Saturday": 1,
@@ -5496,8 +5476,8 @@
       "req_per_addr": 1.38,
       "days_count": {
         "Thursday": 12,
-        "Wednesday": 16,
-        "Tuesday": 23
+        "Wednesday": 14,
+        "Tuesday": 25
       },
       "metrics_30d": {
         "total": 10,
@@ -5508,8 +5488,8 @@
         "req_per_addr": 1.11,
         "days_count": {
           "Thursday": 4,
-          "Wednesday": 3,
-          "Tuesday": 3
+          "Wednesday": 2,
+          "Tuesday": 4
         }
       }
     },
@@ -5567,11 +5547,11 @@
       "repeat_rate": 15.4,
       "req_per_addr": 1.15,
       "days_count": {
+        "Wednesday": 4,
         "Thursday": 3,
-        "Wednesday": 3,
         "Tuesday": 6,
         "Sunday": 1,
-        "Friday": 2
+        "Friday": 1
       },
       "metrics_30d": {
         "total": 5,
@@ -5581,8 +5561,8 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Thursday": 2,
-          "Wednesday": 2,
+          "Wednesday": 3,
+          "Thursday": 1,
           "Tuesday": 1
         }
       }
@@ -5651,9 +5631,9 @@
       "metrics_30d": {
         "total": 4,
         "unique_addrs": 3,
-        "repeat_addrs": 1,
-        "single_addrs": 2,
-        "repeat_rate": 33.3,
+        "repeat_addrs": 0,
+        "single_addrs": 3,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.33,
         "days_count": {
           "Tuesday": 1,
@@ -5714,8 +5694,8 @@
       "req_per_addr": 1.14,
       "days_count": {
         "Monday": 1,
-        "Wednesday": 13,
-        "Tuesday": 10,
+        "Wednesday": 11,
+        "Tuesday": 12,
         "Thursday": 1
       },
       "metrics_30d": {
@@ -5785,9 +5765,9 @@
       "repeat_rate": 11.1,
       "req_per_addr": 1.17,
       "days_count": {
-        "Tuesday": 8,
+        "Tuesday": 9,
         "Thursday": 3,
-        "Wednesday": 8,
+        "Wednesday": 7,
         "Friday": 2
       },
       "metrics_30d": {
@@ -5853,18 +5833,18 @@
       "area_desc": "Ward 3 \u2022 Friendship Heights, American University Park, Tenleytown (ANC 3A, 3E)",
       "total": 179,
       "unique_addrs": 81,
-      "repeat_addrs": 30,
-      "single_addrs": 51,
-      "repeat_rate": 37.0,
+      "repeat_addrs": 29,
+      "single_addrs": 52,
+      "repeat_rate": 35.8,
       "req_per_addr": 2.21,
       "days_count": {
-        "Friday": 81,
+        "Friday": 67,
         "Monday": 12,
         "Sunday": 6,
-        "Saturday": 16,
-        "Thursday": 49,
-        "Wednesday": 5,
-        "Tuesday": 10
+        "Thursday": 65,
+        "Saturday": 15,
+        "Tuesday": 10,
+        "Wednesday": 4
       },
       "metrics_30d": {
         "total": 10,
@@ -5874,12 +5854,12 @@
         "repeat_rate": 25.0,
         "req_per_addr": 1.25,
         "days_count": {
-          "Friday": 5,
+          "Friday": 4,
           "Monday": 1,
           "Sunday": 1,
+          "Thursday": 2,
           "Saturday": 1,
-          "Thursday": 1,
-          "Wednesday": 1
+          "Tuesday": 1
         }
       }
     },
@@ -5904,8 +5884,8 @@
       "days_count": {
         "Friday": 22,
         "Tuesday": 3,
-        "Saturday": 9,
-        "Thursday": 17,
+        "Saturday": 6,
+        "Thursday": 20,
         "Monday": 10,
         "Sunday": 8
       },
@@ -5935,18 +5915,18 @@
       "area_desc": "Ward 3 \u2022 Spring Valley, Palisades, Wesley Heights (ANC 3D, 3E)",
       "total": 52,
       "unique_addrs": 36,
-      "repeat_addrs": 12,
-      "single_addrs": 24,
-      "repeat_rate": 33.3,
+      "repeat_addrs": 10,
+      "single_addrs": 26,
+      "repeat_rate": 27.8,
       "req_per_addr": 1.44,
       "days_count": {
-        "Friday": 11,
+        "Friday": 12,
         "Wednesday": 1,
         "Tuesday": 3,
         "Monday": 11,
-        "Saturday": 8,
-        "Thursday": 14,
-        "Sunday": 4
+        "Saturday": 7,
+        "Thursday": 15,
+        "Sunday": 3
       },
       "metrics_30d": {
         "total": 6,
@@ -5982,10 +5962,10 @@
       "repeat_rate": 22.6,
       "req_per_addr": 1.48,
       "days_count": {
-        "Friday": 18,
-        "Thursday": 10,
+        "Friday": 17,
+        "Thursday": 12,
         "Tuesday": 2,
-        "Saturday": 8,
+        "Saturday": 7,
         "Wednesday": 3,
         "Monday": 4,
         "Sunday": 1
@@ -6024,8 +6004,8 @@
       "days_count": {
         "Monday": 3,
         "Saturday": 4,
-        "Friday": 7,
-        "Thursday": 6,
+        "Friday": 3,
+        "Thursday": 10,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -6059,9 +6039,9 @@
       "repeat_rate": 29.0,
       "req_per_addr": 1.45,
       "days_count": {
-        "Friday": 22,
+        "Friday": 19,
         "Sunday": 5,
-        "Thursday": 11,
+        "Thursday": 14,
         "Tuesday": 1,
         "Monday": 4,
         "Saturday": 2
@@ -6093,17 +6073,17 @@
       "area_desc": "Ward 3 \u2022 Cleveland Park, Woodley Park, Massachusetts Avenue Heights (ANC 3A, 3C)",
       "total": 122,
       "unique_addrs": 56,
-      "repeat_addrs": 25,
-      "single_addrs": 31,
-      "repeat_rate": 44.6,
+      "repeat_addrs": 24,
+      "single_addrs": 32,
+      "repeat_rate": 42.9,
       "req_per_addr": 2.18,
       "days_count": {
         "Monday": 11,
-        "Friday": 54,
-        "Wednesday": 6,
-        "Saturday": 16,
-        "Thursday": 28,
-        "Tuesday": 7
+        "Friday": 49,
+        "Wednesday": 5,
+        "Tuesday": 8,
+        "Saturday": 13,
+        "Thursday": 36
       },
       "metrics_30d": {
         "total": 12,
@@ -6115,7 +6095,8 @@
         "days_count": {
           "Monday": 4,
           "Friday": 3,
-          "Wednesday": 2,
+          "Wednesday": 1,
+          "Tuesday": 1,
           "Saturday": 2,
           "Thursday": 1
         }
@@ -6212,11 +6193,11 @@
       "repeat_rate": 27.5,
       "req_per_addr": 1.3,
       "days_count": {
-        "Thursday": 9,
-        "Friday": 23,
+        "Thursday": 10,
+        "Friday": 22,
         "Monday": 5,
-        "Tuesday": 7,
-        "Sunday": 4,
+        "Tuesday": 6,
+        "Sunday": 5,
         "Wednesday": 1,
         "Saturday": 3
       },
@@ -6284,17 +6265,17 @@
       "area_desc": "Ward 4 \u2022 Brightwood Park, Crestwood, Petworth (ANC 4C)",
       "total": 55,
       "unique_addrs": 35,
-      "repeat_addrs": 9,
-      "single_addrs": 26,
-      "repeat_rate": 25.7,
+      "repeat_addrs": 8,
+      "single_addrs": 27,
+      "repeat_rate": 22.9,
       "req_per_addr": 1.57,
       "days_count": {
-        "Saturday": 12,
-        "Friday": 19,
+        "Saturday": 11,
+        "Friday": 17,
         "Tuesday": 2,
-        "Monday": 8,
-        "Sunday": 3,
-        "Thursday": 10,
+        "Monday": 7,
+        "Sunday": 4,
+        "Thursday": 13,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -6308,8 +6289,8 @@
           "Saturday": 7,
           "Friday": 3,
           "Tuesday": 1,
-          "Monday": 5,
-          "Sunday": 2,
+          "Monday": 4,
+          "Sunday": 3,
           "Thursday": 1
         }
       }
@@ -6333,8 +6314,8 @@
       "repeat_rate": 12.5,
       "req_per_addr": 1.12,
       "days_count": {
-        "Friday": 3,
-        "Thursday": 4,
+        "Friday": 2,
+        "Thursday": 5,
         "Sunday": 1,
         "Monday": 1
       },
@@ -6370,12 +6351,12 @@
       "repeat_rate": 40.9,
       "req_per_addr": 1.84,
       "days_count": {
-        "Monday": 10,
-        "Sunday": 8,
-        "Saturday": 17,
+        "Monday": 11,
+        "Sunday": 7,
+        "Saturday": 16,
         "Friday": 25,
-        "Thursday": 14,
-        "Tuesday": 6,
+        "Thursday": 16,
+        "Tuesday": 5,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -6411,9 +6392,8 @@
         "Tuesday": 2,
         "Thursday": 5,
         "Wednesday": 4,
-        "Friday": 2,
-        "Saturday": 4,
-        "Sunday": 1
+        "Friday": 3,
+        "Saturday": 4
       },
       "metrics_30d": {
         "total": 2,
@@ -6515,12 +6495,12 @@
       "repeat_rate": 13.5,
       "req_per_addr": 1.16,
       "days_count": {
-        "Wednesday": 17,
-        "Tuesday": 18,
-        "Monday": 3,
-        "Friday": 3,
-        "Thursday": 1,
-        "Sunday": 1
+        "Wednesday": 15,
+        "Tuesday": 17,
+        "Monday": 6,
+        "Thursday": 3,
+        "Sunday": 1,
+        "Friday": 1
       },
       "metrics_30d": {
         "total": 3,
@@ -6554,11 +6534,11 @@
       "repeat_rate": 16.7,
       "req_per_addr": 1.33,
       "days_count": {
-        "Wednesday": 4,
-        "Tuesday": 7,
-        "Monday": 7,
+        "Wednesday": 5,
+        "Tuesday": 5,
+        "Monday": 9,
         "Thursday": 4,
-        "Friday": 2
+        "Friday": 1
       },
       "metrics_30d": {
         "total": 5,
@@ -6568,10 +6548,10 @@
         "repeat_rate": 33.3,
         "req_per_addr": 1.67,
         "days_count": {
-          "Wednesday": 1,
+          "Wednesday": 2,
           "Tuesday": 1,
           "Monday": 1,
-          "Thursday": 2
+          "Thursday": 1
         }
       }
     },
@@ -6596,8 +6576,8 @@
       "days_count": {
         "Friday": 2,
         "Wednesday": 1,
-        "Tuesday": 6,
-        "Monday": 16
+        "Tuesday": 4,
+        "Monday": 18
       },
       "metrics_30d": {
         "total": 0,
@@ -6629,9 +6609,9 @@
       "req_per_addr": 1.4,
       "days_count": {
         "Wednesday": 4,
-        "Tuesday": 23,
-        "Monday": 17,
+        "Monday": 23,
         "Thursday": 10,
+        "Tuesday": 17,
         "Friday": 2
       },
       "metrics_30d": {
@@ -6643,9 +6623,9 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Wednesday": 1,
-          "Tuesday": 2,
-          "Monday": 1,
-          "Thursday": 1
+          "Monday": 2,
+          "Thursday": 1,
+          "Tuesday": 1
         }
       }
     },
@@ -6670,8 +6650,8 @@
       "days_count": {
         "Tuesday": 30,
         "Monday": 25,
-        "Thursday": 10,
-        "Wednesday": 10,
+        "Thursday": 7,
+        "Wednesday": 13,
         "Friday": 3,
         "Sunday": 1
       },
@@ -6685,8 +6665,8 @@
         "days_count": {
           "Tuesday": 8,
           "Monday": 5,
-          "Thursday": 4,
-          "Wednesday": 1
+          "Thursday": 3,
+          "Wednesday": 2
         }
       }
     },
@@ -6709,10 +6689,10 @@
       "repeat_rate": 34.5,
       "req_per_addr": 1.67,
       "days_count": {
-        "Thursday": 13,
-        "Wednesday": 8,
-        "Tuesday": 42,
-        "Monday": 31,
+        "Thursday": 11,
+        "Wednesday": 7,
+        "Tuesday": 39,
+        "Monday": 37,
         "Saturday": 1,
         "Friday": 2
       },
@@ -6725,9 +6705,9 @@
         "req_per_addr": 1.08,
         "days_count": {
           "Thursday": 4,
-          "Wednesday": 3,
-          "Tuesday": 5,
-          "Monday": 2
+          "Wednesday": 2,
+          "Tuesday": 4,
+          "Monday": 4
         }
       }
     },
@@ -6750,11 +6730,11 @@
       "repeat_rate": 23.9,
       "req_per_addr": 1.46,
       "days_count": {
-        "Monday": 44,
-        "Thursday": 8,
-        "Tuesday": 60,
-        "Wednesday": 18,
+        "Monday": 53,
+        "Thursday": 5,
+        "Tuesday": 52,
         "Saturday": 1,
+        "Wednesday": 20,
         "Friday": 3
       },
       "metrics_30d": {
@@ -6767,8 +6747,7 @@
         "days_count": {
           "Monday": 6,
           "Thursday": 2,
-          "Tuesday": 2,
-          "Wednesday": 1
+          "Tuesday": 3
         }
       }
     },
@@ -6792,9 +6771,9 @@
       "req_per_addr": 1.55,
       "days_count": {
         "Thursday": 5,
-        "Tuesday": 36,
-        "Monday": 23,
-        "Wednesday": 15,
+        "Tuesday": 35,
+        "Monday": 29,
+        "Wednesday": 10,
         "Friday": 3
       },
       "metrics_30d": {
@@ -6829,13 +6808,12 @@
       "repeat_rate": 30.3,
       "req_per_addr": 1.58,
       "days_count": {
-        "Tuesday": 13,
-        "Monday": 17,
+        "Monday": 19,
+        "Tuesday": 12,
         "Thursday": 7,
-        "Wednesday": 4,
-        "Friday": 8,
-        "Sunday": 1,
-        "Saturday": 2
+        "Friday": 7,
+        "Saturday": 3,
+        "Wednesday": 4
       },
       "metrics_30d": {
         "total": 0,
@@ -6861,16 +6839,16 @@
       "area_desc": "Ward 3 / Ward 4 \u2022 Hawthorne, Barnaby Woods, Chevy Chase (ANC 3/4G, 3E, 3F)",
       "total": 39,
       "unique_addrs": 28,
-      "repeat_addrs": 8,
-      "single_addrs": 20,
-      "repeat_rate": 28.6,
+      "repeat_addrs": 7,
+      "single_addrs": 21,
+      "repeat_rate": 25.0,
       "req_per_addr": 1.39,
       "days_count": {
-        "Monday": 14,
-        "Tuesday": 15,
-        "Friday": 2,
+        "Monday": 18,
+        "Tuesday": 11,
+        "Friday": 1,
         "Wednesday": 5,
-        "Thursday": 3
+        "Thursday": 4
       },
       "metrics_30d": {
         "total": 6,
@@ -6880,8 +6858,8 @@
         "repeat_rate": 50.0,
         "req_per_addr": 1.5,
         "days_count": {
-          "Monday": 2,
-          "Tuesday": 3,
+          "Monday": 3,
+          "Tuesday": 2,
           "Friday": 1
         }
       }
@@ -6906,10 +6884,9 @@
       "req_per_addr": 1.1,
       "days_count": {
         "Thursday": 4,
-        "Wednesday": 9,
-        "Tuesday": 16,
-        "Monday": 2,
-        "Friday": 1
+        "Wednesday": 10,
+        "Tuesday": 15,
+        "Monday": 3
       },
       "metrics_30d": {
         "total": 0,
@@ -6940,11 +6917,11 @@
       "repeat_rate": 34.9,
       "req_per_addr": 1.65,
       "days_count": {
-        "Monday": 27,
-        "Tuesday": 36,
+        "Monday": 32,
+        "Tuesday": 32,
         "Wednesday": 21,
         "Friday": 6,
-        "Thursday": 14
+        "Thursday": 13
       },
       "metrics_30d": {
         "total": 7,
@@ -6974,16 +6951,16 @@
       "area_desc": "Ward 3 \u2022 North Cleveland Park, Forest Hills, Van Ness (ANC 3F)",
       "total": 95,
       "unique_addrs": 66,
-      "repeat_addrs": 22,
-      "single_addrs": 44,
-      "repeat_rate": 33.3,
+      "repeat_addrs": 20,
+      "single_addrs": 46,
+      "repeat_rate": 30.3,
       "req_per_addr": 1.44,
       "days_count": {
         "Friday": 7,
-        "Thursday": 10,
-        "Wednesday": 17,
+        "Thursday": 9,
+        "Wednesday": 14,
         "Tuesday": 37,
-        "Monday": 22,
+        "Monday": 26,
         "Saturday": 1,
         "Sunday": 1
       },
@@ -7022,9 +6999,9 @@
       "days_count": {
         "Monday": 14,
         "Tuesday": 7,
-        "Saturday": 25,
-        "Friday": 19,
-        "Sunday": 7,
+        "Saturday": 23,
+        "Friday": 23,
+        "Sunday": 5,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -7056,32 +7033,32 @@
       "area_desc": "Ward 8 \u2022 Sheridan, Barry Farm, Buena Vista (ANC 8A, 8B, 8C)",
       "total": 46,
       "unique_addrs": 29,
-      "repeat_addrs": 8,
-      "single_addrs": 21,
-      "repeat_rate": 27.6,
+      "repeat_addrs": 7,
+      "single_addrs": 22,
+      "repeat_rate": 24.1,
       "req_per_addr": 1.59,
       "days_count": {
         "Tuesday": 6,
-        "Monday": 14,
-        "Sunday": 1,
-        "Saturday": 11,
-        "Friday": 12,
+        "Sunday": 4,
+        "Saturday": 8,
+        "Friday": 15,
+        "Monday": 11,
         "Thursday": 1,
         "Wednesday": 1
       },
       "metrics_30d": {
         "total": 8,
         "unique_addrs": 6,
-        "repeat_addrs": 2,
-        "single_addrs": 4,
-        "repeat_rate": 33.3,
+        "repeat_addrs": 1,
+        "single_addrs": 5,
+        "repeat_rate": 16.7,
         "req_per_addr": 1.33,
         "days_count": {
           "Tuesday": 3,
-          "Monday": 2,
-          "Sunday": 1,
+          "Sunday": 2,
           "Saturday": 1,
-          "Friday": 1
+          "Friday": 1,
+          "Monday": 1
         }
       }
     },
@@ -7107,8 +7084,8 @@
         "Thursday": 3,
         "Monday": 7,
         "Tuesday": 6,
-        "Friday": 11,
-        "Saturday": 6,
+        "Friday": 12,
+        "Saturday": 5,
         "Wednesday": 1,
         "Sunday": 3
       },
@@ -7141,12 +7118,12 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.6,
       "days_count": {
-        "Saturday": 7,
+        "Saturday": 6,
         "Thursday": 1,
-        "Tuesday": 4,
-        "Sunday": 4,
+        "Tuesday": 3,
+        "Sunday": 5,
         "Monday": 7,
-        "Friday": 9
+        "Friday": 10
       },
       "metrics_30d": {
         "total": 3,
@@ -7220,9 +7197,9 @@
       "req_per_addr": 1.08,
       "days_count": {
         "Sunday": 2,
-        "Saturday": 4,
+        "Saturday": 3,
         "Monday": 4,
-        "Friday": 14,
+        "Friday": 15,
         "Tuesday": 2,
         "Wednesday": 1
       },
@@ -7255,17 +7232,17 @@
       "area_desc": "Ward 7 \u2022 Fairfax Village, Naylor Gardens, Hillcrest (ANC 7B, 8B)",
       "total": 37,
       "unique_addrs": 25,
-      "repeat_addrs": 7,
-      "single_addrs": 18,
-      "repeat_rate": 28.0,
+      "repeat_addrs": 6,
+      "single_addrs": 19,
+      "repeat_rate": 24.0,
       "req_per_addr": 1.48,
       "days_count": {
         "Friday": 11,
         "Thursday": 3,
-        "Tuesday": 4,
+        "Tuesday": 5,
         "Sunday": 5,
         "Saturday": 6,
-        "Wednesday": 2,
+        "Wednesday": 1,
         "Monday": 6
       },
       "metrics_30d": {
@@ -7302,9 +7279,9 @@
       "repeat_rate": 24.2,
       "req_per_addr": 1.42,
       "days_count": {
-        "Friday": 11,
+        "Friday": 13,
         "Sunday": 5,
-        "Saturday": 14,
+        "Saturday": 12,
         "Monday": 9,
         "Wednesday": 3,
         "Thursday": 1,
@@ -7344,12 +7321,11 @@
       "req_per_addr": 1.22,
       "days_count": {
         "Monday": 12,
-        "Saturday": 4,
-        "Thursday": 3,
-        "Friday": 7,
+        "Saturday": 5,
+        "Thursday": 4,
+        "Friday": 6,
         "Tuesday": 4,
-        "Wednesday": 2,
-        "Sunday": 1
+        "Wednesday": 2
       },
       "metrics_30d": {
         "total": 3,
@@ -7382,12 +7358,12 @@
       "repeat_rate": 13.6,
       "req_per_addr": 1.14,
       "days_count": {
-        "Monday": 5,
+        "Monday": 4,
         "Tuesday": 4,
         "Friday": 10,
         "Saturday": 2,
         "Thursday": 2,
-        "Sunday": 2
+        "Sunday": 3
       },
       "metrics_30d": {
         "total": 5,
@@ -7424,9 +7400,9 @@
       "req_per_addr": 1.11,
       "days_count": {
         "Tuesday": 2,
-        "Sunday": 2,
+        "Sunday": 1,
         "Saturday": 8,
-        "Friday": 4,
+        "Friday": 5,
         "Monday": 5
       },
       "metrics_30d": {
@@ -7438,8 +7414,8 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Tuesday": 1,
-          "Sunday": 2,
-          "Saturday": 5
+          "Sunday": 1,
+          "Saturday": 6
         }
       }
     },
@@ -7457,15 +7433,15 @@
       "area_desc": "Ward 8 \u2022 Douglas, Shipley Terrace, Woodland/Fort Stanton (ANC 8B, 8C, 8E)",
       "total": 35,
       "unique_addrs": 17,
-      "repeat_addrs": 6,
-      "single_addrs": 11,
-      "repeat_rate": 35.3,
+      "repeat_addrs": 5,
+      "single_addrs": 12,
+      "repeat_rate": 29.4,
       "req_per_addr": 2.06,
       "days_count": {
         "Monday": 4,
         "Sunday": 8,
-        "Saturday": 8,
-        "Friday": 10,
+        "Friday": 13,
+        "Saturday": 5,
         "Tuesday": 4,
         "Wednesday": 1
       },
@@ -7479,8 +7455,8 @@
         "days_count": {
           "Monday": 1,
           "Sunday": 2,
-          "Saturday": 2,
-          "Friday": 1
+          "Friday": 2,
+          "Saturday": 1
         }
       }
     },
@@ -7504,10 +7480,10 @@
       "req_per_addr": 1.33,
       "days_count": {
         "Friday": 6,
-        "Monday": 6,
-        "Sunday": 5,
-        "Saturday": 4,
+        "Monday": 5,
+        "Saturday": 5,
         "Tuesday": 2,
+        "Sunday": 5,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -7536,16 +7512,16 @@
       "area_desc": "Ward 7 / Ward 8 \u2022 Twining, Fairlawn, Randle Highlands (ANC 7B, 8A)",
       "total": 22,
       "unique_addrs": 20,
-      "repeat_addrs": 2,
-      "single_addrs": 18,
-      "repeat_rate": 10.0,
+      "repeat_addrs": 1,
+      "single_addrs": 19,
+      "repeat_rate": 5.0,
       "req_per_addr": 1.1,
       "days_count": {
-        "Friday": 5,
-        "Saturday": 5,
-        "Monday": 4,
+        "Friday": 6,
+        "Saturday": 4,
+        "Monday": 5,
         "Sunday": 5,
-        "Tuesday": 2,
+        "Tuesday": 1,
         "Wednesday": 1
       },
       "metrics_30d": {
@@ -7572,14 +7548,14 @@
       "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6B)",
       "total": 49,
       "unique_addrs": 26,
-      "repeat_addrs": 7,
-      "single_addrs": 19,
-      "repeat_rate": 26.9,
+      "repeat_addrs": 6,
+      "single_addrs": 20,
+      "repeat_rate": 23.1,
       "req_per_addr": 1.88,
       "days_count": {
-        "Monday": 20,
-        "Wednesday": 9,
-        "Tuesday": 15,
+        "Monday": 21,
+        "Wednesday": 7,
+        "Tuesday": 16,
         "Friday": 1,
         "Thursday": 3,
         "Sunday": 1
@@ -7617,12 +7593,11 @@
       "repeat_rate": 27.3,
       "req_per_addr": 1.45,
       "days_count": {
-        "Thursday": 8,
-        "Monday": 21,
-        "Tuesday": 12,
-        "Wednesday": 5,
-        "Saturday": 1,
-        "Friday": 1
+        "Thursday": 7,
+        "Monday": 26,
+        "Tuesday": 7,
+        "Wednesday": 6,
+        "Friday": 2
       },
       "metrics_30d": {
         "total": 6,
@@ -7658,10 +7633,10 @@
       "req_per_addr": 1.29,
       "days_count": {
         "Friday": 3,
-        "Tuesday": 12,
+        "Tuesday": 13,
         "Thursday": 3,
-        "Monday": 12,
-        "Wednesday": 5,
+        "Monday": 13,
+        "Wednesday": 3,
         "Saturday": 1
       },
       "metrics_30d": {
@@ -7696,9 +7671,9 @@
       "repeat_rate": 29.0,
       "req_per_addr": 1.48,
       "days_count": {
-        "Monday": 17,
+        "Monday": 19,
         "Friday": 1,
-        "Thursday": 8,
+        "Thursday": 6,
         "Wednesday": 8,
         "Tuesday": 10,
         "Saturday": 2
@@ -7735,10 +7710,10 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.4,
       "days_count": {
-        "Monday": 26,
-        "Thursday": 10,
-        "Wednesday": 14,
-        "Tuesday": 18,
+        "Monday": 30,
+        "Thursday": 7,
+        "Wednesday": 16,
+        "Tuesday": 15,
         "Saturday": 2,
         "Friday": 3
       },
@@ -7774,10 +7749,11 @@
       "req_per_addr": 1.45,
       "days_count": {
         "Monday": 19,
-        "Sunday": 1,
+        "Sunday": 2,
         "Tuesday": 6,
-        "Friday": 4,
-        "Wednesday": 2
+        "Friday": 3,
+        "Thursday": 1,
+        "Wednesday": 1
       },
       "metrics_30d": {
         "total": 12,
@@ -7789,9 +7765,8 @@
         "days_count": {
           "Monday": 8,
           "Sunday": 1,
-          "Tuesday": 1,
-          "Friday": 1,
-          "Wednesday": 1
+          "Tuesday": 2,
+          "Friday": 1
         }
       }
     },
@@ -7809,16 +7784,16 @@
       "area_desc": "Ward 6 \u2022 Capitol Hill, Lincoln Park (ANC 6A, 6B)",
       "total": 58,
       "unique_addrs": 41,
-      "repeat_addrs": 9,
-      "single_addrs": 32,
-      "repeat_rate": 22.0,
+      "repeat_addrs": 7,
+      "single_addrs": 34,
+      "repeat_rate": 17.1,
       "req_per_addr": 1.41,
       "days_count": {
-        "Monday": 18,
+        "Monday": 20,
         "Thursday": 10,
-        "Wednesday": 12,
-        "Tuesday": 13,
-        "Friday": 4,
+        "Wednesday": 13,
+        "Tuesday": 11,
+        "Friday": 3,
         "Saturday": 1
       },
       "metrics_30d": {
@@ -7856,18 +7831,18 @@
       "req_per_addr": 1.67,
       "days_count": {
         "Thursday": 1,
-        "Wednesday": 3,
+        "Wednesday": 2,
         "Tuesday": 10,
         "Sunday": 2,
         "Friday": 2,
-        "Monday": 2
+        "Monday": 3
       },
       "metrics_30d": {
         "total": 5,
         "unique_addrs": 2,
-        "repeat_addrs": 2,
-        "single_addrs": 0,
-        "repeat_rate": 100.0,
+        "repeat_addrs": 1,
+        "single_addrs": 1,
+        "repeat_rate": 50.0,
         "req_per_addr": 2.5,
         "days_count": {
           "Thursday": 1,
@@ -7897,10 +7872,10 @@
       "req_per_addr": 1.34,
       "days_count": {
         "Tuesday": 10,
-        "Monday": 14,
+        "Monday": 17,
         "Friday": 3,
-        "Thursday": 5,
-        "Wednesday": 6,
+        "Wednesday": 5,
+        "Thursday": 3,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -7930,17 +7905,17 @@
       "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1E)",
       "total": 78,
       "unique_addrs": 46,
-      "repeat_addrs": 12,
-      "single_addrs": 34,
-      "repeat_rate": 26.1,
+      "repeat_addrs": 11,
+      "single_addrs": 35,
+      "repeat_rate": 23.9,
       "req_per_addr": 1.7,
       "days_count": {
-        "Wednesday": 30,
-        "Thursday": 11,
-        "Tuesday": 26,
+        "Tuesday": 33,
+        "Thursday": 8,
+        "Wednesday": 27,
         "Sunday": 2,
-        "Saturday": 3,
-        "Friday": 6
+        "Friday": 7,
+        "Saturday": 1
       },
       "metrics_30d": {
         "total": 8,
@@ -7950,9 +7925,9 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Wednesday": 5,
+          "Tuesday": 4,
           "Thursday": 1,
-          "Tuesday": 2
+          "Wednesday": 3
         }
       }
     },
@@ -7976,26 +7951,26 @@
       "req_per_addr": 1.77,
       "days_count": {
         "Monday": 3,
-        "Wednesday": 34,
-        "Tuesday": 28,
+        "Tuesday": 36,
         "Friday": 4,
-        "Thursday": 13,
-        "Saturday": 1,
-        "Sunday": 2
+        "Thursday": 11,
+        "Wednesday": 28,
+        "Saturday": 2,
+        "Sunday": 1
       },
       "metrics_30d": {
         "total": 12,
         "unique_addrs": 10,
-        "repeat_addrs": 2,
-        "single_addrs": 8,
-        "repeat_rate": 20.0,
+        "repeat_addrs": 1,
+        "single_addrs": 9,
+        "repeat_rate": 10.0,
         "req_per_addr": 1.2,
         "days_count": {
           "Monday": 1,
-          "Wednesday": 5,
-          "Tuesday": 2,
+          "Tuesday": 5,
           "Friday": 2,
-          "Thursday": 2
+          "Thursday": 1,
+          "Wednesday": 3
         }
       }
     },
@@ -8018,12 +7993,12 @@
       "repeat_rate": 35.7,
       "req_per_addr": 2.14,
       "days_count": {
-        "Tuesday": 20,
-        "Wednesday": 40,
+        "Tuesday": 28,
+        "Wednesday": 35,
         "Monday": 4,
         "Saturday": 3,
         "Friday": 10,
-        "Thursday": 11,
+        "Thursday": 8,
         "Sunday": 2
       },
       "metrics_30d": {
@@ -8058,8 +8033,8 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Wednesday": 4,
-        "Tuesday": 15,
+        "Tuesday": 17,
+        "Wednesday": 2,
         "Thursday": 1
       },
       "metrics_30d": {
@@ -8091,8 +8066,8 @@
       "repeat_rate": 25.0,
       "req_per_addr": 1.38,
       "days_count": {
-        "Wednesday": 6,
-        "Tuesday": 10,
+        "Wednesday": 4,
+        "Tuesday": 12,
         "Thursday": 3,
         "Friday": 3
       },
@@ -8128,13 +8103,13 @@
       "repeat_rate": 39.2,
       "req_per_addr": 1.69,
       "days_count": {
-        "Thursday": 14,
-        "Wednesday": 55,
-        "Tuesday": 49,
+        "Thursday": 13,
+        "Wednesday": 35,
+        "Tuesday": 71,
         "Saturday": 2,
         "Monday": 1,
         "Sunday": 2,
-        "Friday": 2
+        "Friday": 1
       },
       "metrics_30d": {
         "total": 13,
@@ -8145,8 +8120,8 @@
         "req_per_addr": 1.08,
         "days_count": {
           "Thursday": 2,
-          "Wednesday": 6,
-          "Tuesday": 5
+          "Wednesday": 5,
+          "Tuesday": 6
         }
       }
     },
@@ -8164,17 +8139,17 @@
       "area_desc": "Ward 1 \u2022 Columbia Heights, Mt. Pleasant, Pleasant Plains (ANC 1A, 1B, 1D)",
       "total": 86,
       "unique_addrs": 57,
-      "repeat_addrs": 21,
-      "single_addrs": 36,
-      "repeat_rate": 36.8,
+      "repeat_addrs": 19,
+      "single_addrs": 38,
+      "repeat_rate": 33.3,
       "req_per_addr": 1.51,
       "days_count": {
-        "Thursday": 16,
-        "Tuesday": 36,
-        "Wednesday": 24,
+        "Thursday": 13,
+        "Tuesday": 42,
+        "Wednesday": 22,
         "Friday": 5,
         "Monday": 2,
-        "Saturday": 3
+        "Saturday": 2
       },
       "metrics_30d": {
         "total": 6,
@@ -8185,8 +8160,8 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Thursday": 2,
-          "Tuesday": 2,
-          "Wednesday": 2
+          "Tuesday": 3,
+          "Wednesday": 1
         }
       }
     },
@@ -8204,13 +8179,13 @@
       "area_desc": "Ward 1 / Ward 2 \u2022 Howard University, Le Droit Park, Cardozo/Shaw (ANC 1B, 1E, 2G, 5E)",
       "total": 43,
       "unique_addrs": 29,
-      "repeat_addrs": 9,
-      "single_addrs": 20,
-      "repeat_rate": 31.0,
+      "repeat_addrs": 8,
+      "single_addrs": 21,
+      "repeat_rate": 27.6,
       "req_per_addr": 1.48,
       "days_count": {
-        "Wednesday": 13,
-        "Tuesday": 15,
+        "Wednesday": 12,
+        "Tuesday": 16,
         "Monday": 4,
         "Thursday": 5,
         "Friday": 5,
@@ -8219,9 +8194,9 @@
       "metrics_30d": {
         "total": 8,
         "unique_addrs": 6,
-        "repeat_addrs": 2,
-        "single_addrs": 4,
-        "repeat_rate": 33.3,
+        "repeat_addrs": 0,
+        "single_addrs": 6,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.33,
         "days_count": {
           "Wednesday": 5,
@@ -8251,8 +8226,8 @@
         "Friday": 1,
         "Wednesday": 5,
         "Saturday": 1,
-        "Thursday": 3,
-        "Tuesday": 9,
+        "Thursday": 2,
+        "Tuesday": 10,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -8287,9 +8262,9 @@
       "repeat_rate": 42.9,
       "req_per_addr": 1.61,
       "days_count": {
-        "Tuesday": 14,
-        "Thursday": 7,
-        "Wednesday": 16,
+        "Tuesday": 16,
+        "Thursday": 6,
+        "Wednesday": 15,
         "Monday": 2,
         "Friday": 3,
         "Sunday": 1,
@@ -8329,8 +8304,8 @@
       "req_per_addr": 1.09,
       "days_count": {
         "Monday": 4,
-        "Thursday": 4,
-        "Friday": 3,
+        "Thursday": 5,
+        "Friday": 2,
         "Sunday": 1
       },
       "metrics_30d": {
@@ -8364,11 +8339,11 @@
       "repeat_rate": 23.1,
       "req_per_addr": 1.31,
       "days_count": {
-        "Monday": 2,
-        "Thursday": 8,
-        "Saturday": 2,
-        "Friday": 3,
-        "Sunday": 1,
+        "Sunday": 2,
+        "Thursday": 10,
+        "Saturday": 1,
+        "Friday": 2,
+        "Monday": 1,
         "Tuesday": 1
       },
       "metrics_30d": {
@@ -8379,7 +8354,7 @@
         "repeat_rate": 0.0,
         "req_per_addr": 1.0,
         "days_count": {
-          "Monday": 1
+          "Sunday": 1
         }
       }
     },
@@ -8402,11 +8377,11 @@
       "repeat_rate": 29.4,
       "req_per_addr": 1.47,
       "days_count": {
-        "Friday": 10,
+        "Friday": 11,
         "Thursday": 7,
         "Monday": 1,
         "Tuesday": 2,
-        "Saturday": 2,
+        "Saturday": 1,
         "Wednesday": 1,
         "Sunday": 2
       },
@@ -8448,8 +8423,8 @@
         "Monday": 3,
         "Sunday": 3,
         "Saturday": 4,
-        "Friday": 15,
-        "Thursday": 9,
+        "Friday": 12,
+        "Thursday": 12,
         "Wednesday": 1,
         "Tuesday": 2
       },
@@ -8485,11 +8460,10 @@
       "repeat_rate": 11.1,
       "req_per_addr": 1.22,
       "days_count": {
-        "Saturday": 2,
+        "Friday": 3,
         "Thursday": 4,
         "Tuesday": 1,
         "Monday": 1,
-        "Friday": 1,
         "Wednesday": 1,
         "Sunday": 1
       },
@@ -8501,11 +8475,10 @@
         "repeat_rate": 16.7,
         "req_per_addr": 1.33,
         "days_count": {
-          "Saturday": 2,
+          "Friday": 3,
           "Thursday": 2,
           "Tuesday": 1,
           "Monday": 1,
-          "Friday": 1,
           "Wednesday": 1
         }
       }
@@ -8524,14 +8497,14 @@
       "area_desc": "Ward 6 \u2022 Union Station, Stanton Park, Kingman Park (ANC 6C)",
       "total": 29,
       "unique_addrs": 17,
-      "repeat_addrs": 5,
-      "single_addrs": 12,
-      "repeat_rate": 29.4,
+      "repeat_addrs": 4,
+      "single_addrs": 13,
+      "repeat_rate": 23.5,
       "req_per_addr": 1.71,
       "days_count": {
-        "Thursday": 12,
+        "Thursday": 16,
         "Tuesday": 3,
-        "Friday": 10,
+        "Friday": 6,
         "Monday": 2,
         "Wednesday": 2
       },
@@ -8566,12 +8539,12 @@
       "repeat_rate": 0.0,
       "req_per_addr": 1.0,
       "days_count": {
-        "Friday": 5,
-        "Saturday": 2,
-        "Wednesday": 2,
-        "Monday": 3,
+        "Friday": 6,
+        "Saturday": 1,
+        "Tuesday": 2,
+        "Monday": 4,
         "Sunday": 2,
-        "Tuesday": 2
+        "Wednesday": 1
       },
       "metrics_30d": {
         "total": 2,
@@ -8604,13 +8577,13 @@
       "repeat_rate": 35.4,
       "req_per_addr": 1.88,
       "days_count": {
-        "Thursday": 4,
-        "Monday": 20,
-        "Saturday": 16,
+        "Thursday": 5,
+        "Monday": 21,
+        "Friday": 22,
         "Tuesday": 12,
-        "Wednesday": 7,
-        "Friday": 20,
-        "Sunday": 11
+        "Saturday": 16,
+        "Wednesday": 5,
+        "Sunday": 9
       },
       "metrics_30d": {
         "total": 10,
@@ -8622,8 +8595,9 @@
         "days_count": {
           "Thursday": 1,
           "Monday": 5,
-          "Saturday": 2,
+          "Friday": 1,
           "Tuesday": 1,
+          "Saturday": 1,
           "Wednesday": 1
         }
       }
@@ -8647,13 +8621,13 @@
       "repeat_rate": 22.2,
       "req_per_addr": 1.37,
       "days_count": {
-        "Sunday": 6,
-        "Saturday": 7,
-        "Friday": 13,
-        "Monday": 3,
-        "Wednesday": 3,
-        "Thursday": 3,
-        "Tuesday": 2
+        "Sunday": 7,
+        "Friday": 16,
+        "Monday": 2,
+        "Wednesday": 4,
+        "Saturday": 4,
+        "Thursday": 1,
+        "Tuesday": 3
       },
       "metrics_30d": {
         "total": 2,
@@ -8664,7 +8638,7 @@
         "req_per_addr": 1.0,
         "days_count": {
           "Sunday": 1,
-          "Saturday": 1
+          "Friday": 1
         }
       }
     },
@@ -8688,8 +8662,8 @@
       "req_per_addr": 1.5,
       "days_count": {
         "Monday": 1,
-        "Saturday": 3,
-        "Friday": 6,
+        "Saturday": 2,
+        "Friday": 7,
         "Tuesday": 2
       },
       "metrics_30d": {
@@ -8761,22 +8735,20 @@
       "repeat_rate": 45.5,
       "req_per_addr": 1.91,
       "days_count": {
-        "Friday": 1,
-        "Thursday": 2,
-        "Tuesday": 9,
+        "Thursday": 3,
+        "Tuesday": 7,
         "Wednesday": 2,
-        "Monday": 7
+        "Monday": 9
       },
       "metrics_30d": {
         "total": 5,
         "unique_addrs": 4,
-        "repeat_addrs": 1,
-        "single_addrs": 3,
-        "repeat_rate": 25.0,
+        "repeat_addrs": 0,
+        "single_addrs": 4,
+        "repeat_rate": 0.0,
         "req_per_addr": 1.25,
         "days_count": {
-          "Friday": 1,
-          "Thursday": 2,
+          "Thursday": 3,
           "Tuesday": 2
         }
       }
@@ -8800,12 +8772,11 @@
       "repeat_rate": 18.5,
       "req_per_addr": 1.37,
       "days_count": {
-        "Wednesday": 14,
-        "Friday": 4,
-        "Thursday": 9,
+        "Wednesday": 15,
+        "Friday": 5,
+        "Thursday": 8,
         "Tuesday": 5,
         "Sunday": 3,
-        "Saturday": 1,
         "Monday": 1
       },
       "metrics_30d": {
@@ -8839,11 +8810,11 @@
       "repeat_rate": 23.1,
       "req_per_addr": 1.27,
       "days_count": {
-        "Wednesday": 13,
-        "Thursday": 9,
+        "Wednesday": 14,
+        "Thursday": 7,
         "Monday": 1,
-        "Tuesday": 8,
-        "Friday": 2
+        "Tuesday": 10,
+        "Friday": 1
       },
       "metrics_30d": {
         "total": 7,
@@ -8955,8 +8926,7 @@
         "Monday": 2,
         "Thursday": 4,
         "Wednesday": 4,
-        "Friday": 2,
-        "Saturday": 1
+        "Friday": 3
       },
       "metrics_30d": {
         "total": 4,

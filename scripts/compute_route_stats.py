@@ -15,9 +15,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_poly, get_poly_rings_list, get_bbox
 import json
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+NY_TZ = ZoneInfo('America/New_York')
 
 def format_trash_schedule(feats):
     """
@@ -153,28 +155,30 @@ def compute_route_stats():
 
     def compute_window_metrics(reqs_subset):
         total = len(reqs_subset)
-        addrs = defaultdict(int)
+        addr_dates = defaultdict(set)
         days_count = defaultdict(int)
 
-        for attrs in reqs_subset:
+        for idx, attrs in enumerate(reqs_subset):
             x_coord = attrs.get('LONGITUDE', attrs.get('x'))
             y_coord = attrs.get('LATITUDE', attrs.get('y'))
             addr = attrs.get('STREETADDRESS') or attrs.get('MARADDRESSREPOSITORYID') or f"COORD_{y_coord}_{x_coord}"
             addr = str(addr).strip().upper()
-            addrs[addr] += 1
             add_date = attrs.get('ADDDATE')
+            date_str = f"UNK_{idx}"
             if add_date:
                 try:
                     if isinstance(add_date, (int, float)):
-                        dt = datetime.fromtimestamp(add_date / 1000.0, tz=timezone.utc)
+                        dt = datetime.fromtimestamp(add_date / 1000.0, tz=NY_TZ)
                     else:
-                        dt = datetime.fromisoformat(str(add_date).replace('Z', '+00:00'))
+                        dt = datetime.fromisoformat(str(add_date).replace('Z', '+00:00')).astimezone(NY_TZ)
                     days_count[dt.strftime('%A')] += 1
+                    date_str = dt.strftime('%Y-%m-%d')
                 except Exception:
                     pass
+            addr_dates[addr].add(date_str)
 
-        unique_addrs = len(addrs)
-        repeat_addrs = sum(1 for a, count in addrs.items() if count > 1)
+        unique_addrs = len(addr_dates)
+        repeat_addrs = sum(1 for a, dates in addr_dates.items() if len(dates) >= 2)
         repeat_rate = round(repeat_addrs / unique_addrs * 100, 1) if unique_addrs > 0 else 0.0
         req_per_addr = round(total / unique_addrs, 2) if unique_addrs > 0 else 0.0
         return {
