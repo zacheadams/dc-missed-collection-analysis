@@ -18,7 +18,6 @@ import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
-import sys
 import json
 import re
 import math
@@ -193,7 +192,7 @@ def get_collection_points():
     else:
         print("Downloading collection points from Open Data DC...")
         req = urllib.request.Request(COLLECTION_POINTS_URL, headers={'User-Agent': 'DCMissedCollectionAnalysis/1.0'})
-        with urllib.request.urlopen(req) as resp:
+        with urllib.request.urlopen(req, timeout=30) as resp:
             data = json.loads(resp.read().decode('utf-8'))
         with open(LOCAL_POINTS_PATH, 'w', encoding='utf-8') as f:
             json.dump(data, f)

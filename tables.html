@@ -13,7 +13,6 @@
   <!-- Local Vendored Assets -->
   <script src="assets/vendor/chartjs/chart.umd.min.js"></script>
   <script src="assets/vendor/jspdf/jspdf.umd.min.js"></script>
-  <script src="assets/vendor/jspdf-autotable/jspdf.plugin.autotable.min.js"></script>
   <script src="assets/vendor/html2canvas/html2canvas.min.js"></script>
 
   <style>
@@ -547,8 +546,8 @@
               <td data-sort="1088" style="text-align: right;" class="kw-trash font-num">1,088</td>
               <td data-sort="306" style="text-align: right;" class="kw-recycle font-num">306</td>
               <td data-sort="766" style="text-align: right;" class="font-num">766</td>
-              <td data-sort="257" style="text-align: right;" class="font-num">257</td>
-              <td data-sort="33.6" style="text-align: right;" class="font-num"><span class="val-highlight">33.6%</span></td>
+              <td data-sort="255" style="text-align: right;" class="font-num">255</td>
+              <td data-sort="33.3" style="text-align: right;" class="font-num"><span class="val-highlight">33.3%</span></td>
               <td data-sort="8.1" style="text-align: right;" class="font-num">8.1%</td>
             </tr>
 
@@ -571,8 +570,8 @@
               <td data-sort="2252" style="text-align: right;" class="kw-trash font-num">2,252</td>
               <td data-sort="917" style="text-align: right;" class="kw-recycle font-num">917</td>
               <td data-sort="1910" style="text-align: right;" class="font-num">1,910</td>
-              <td data-sort="584" style="text-align: right;" class="font-num">584</td>
-              <td data-sort="30.6" style="text-align: right;" class="font-num"><span class="val-highlight">30.6%</span></td>
+              <td data-sort="586" style="text-align: right;" class="font-num">586</td>
+              <td data-sort="30.7" style="text-align: right;" class="font-num"><span class="val-highlight">30.7%</span></td>
               <td data-sort="18.4" style="text-align: right;" class="font-num">18.4%</td>
             </tr>
 
@@ -583,8 +582,8 @@
               <td data-sort="1906" style="text-align: right;" class="kw-trash font-num">1,906</td>
               <td data-sort="815" style="text-align: right;" class="kw-recycle font-num">815</td>
               <td data-sort="1618" style="text-align: right;" class="font-num">1,618</td>
-              <td data-sort="498" style="text-align: right;" class="font-num">498</td>
-              <td data-sort="30.8" style="text-align: right;" class="font-num"><span class="val-highlight">30.8%</span></td>
+              <td data-sort="497" style="text-align: right;" class="font-num">497</td>
+              <td data-sort="30.7" style="text-align: right;" class="font-num"><span class="val-highlight">30.7%</span></td>
               <td data-sort="15.8" style="text-align: right;" class="font-num">15.8%</td>
             </tr>
 
@@ -619,8 +618,8 @@
               <td data-sort="981" style="text-align: right;" class="kw-trash font-num">981</td>
               <td data-sort="349" style="text-align: right;" class="kw-recycle font-num">349</td>
               <td data-sort="771" style="text-align: right;" class="font-num">771</td>
-              <td data-sort="247" style="text-align: right;" class="font-num">247</td>
-              <td data-sort="32.0" style="text-align: right;" class="font-num"><span class="val-highlight">32.0%</span></td>
+              <td data-sort="245" style="text-align: right;" class="font-num">245</td>
+              <td data-sort="31.8" style="text-align: right;" class="font-num"><span class="val-highlight">31.8%</span></td>
               <td data-sort="7.7" style="text-align: right;" class="font-num">7.7%</td>
             </tr>
 
@@ -662,28 +661,31 @@
         <table class="data-table" id="anc-table">
           <thead>
             <tr>
-              <th data-col="0">ANC</th>
-              <th data-col="1" style="text-align: right;">Total Requests</th>
-              <th data-col="2" style="text-align: right;" class="kw-trash">Trash</th>
-              <th data-col="3" style="text-align: right;" class="kw-recycle">Recycling</th>
-              <th data-col="4" style="text-align: right;">Unique Addrs</th>
-              <th data-col="5" style="text-align: right;">Repeat Addrs</th>
-              <th data-col="6" style="text-align: right;">Repeat Rate</th>
+              <th data-col="0">Ward</th>
+              <th data-col="1">ANC</th>
+              <th data-col="2" style="text-align: right;">Total Requests</th>
+              <th data-col="3" style="text-align: right;" class="kw-trash">Trash</th>
+              <th data-col="4" style="text-align: right;" class="kw-recycle">Recycling</th>
+              <th data-col="5" style="text-align: right;">Unique Addrs</th>
+              <th data-col="6" style="text-align: right;">Repeat Addrs</th>
+              <th data-col="7" style="text-align: right;">Repeat Rate</th>
             </tr>
           </thead>
           <tbody id="anc-table-body">
 
             <tr data-anc="1A" data-ward="1">
+              <td data-sort="1">Ward 1</td>
               <td data-sort="1A" data-type="anc"><strong>ANC 1A</strong></td>
               <td data-sort="393" style="text-align: right;" class="kw-combined font-num"><strong>393</strong></td>
               <td data-sort="247" style="text-align: right;" class="kw-trash font-num">247</td>
               <td data-sort="146" style="text-align: right;" class="kw-recycle font-num">146</td>
               <td data-sort="224" style="text-align: right;" class="font-num">224</td>
-              <td data-sort="82" style="text-align: right;" class="font-num">82</td>
-              <td data-sort="36.6" style="text-align: right;" class="font-num"><span class="val-highlight">36.6%</span></td>
+              <td data-sort="81" style="text-align: right;" class="font-num">81</td>
+              <td data-sort="36.2" style="text-align: right;" class="font-num"><span class="val-highlight">36.2%</span></td>
             </tr>
 
             <tr data-anc="1B" data-ward="1">
+              <td data-sort="1">Ward 1</td>
               <td data-sort="1B" data-type="anc"><strong>ANC 1B</strong></td>
               <td data-sort="399" style="text-align: right;" class="kw-combined font-num"><strong>399</strong></td>
               <td data-sort="311" style="text-align: right;" class="kw-trash font-num">311</td>
@@ -694,6 +696,7 @@
             </tr>
 
             <tr data-anc="1C" data-ward="1">
+              <td data-sort="1">Ward 1</td>
               <td data-sort="1C" data-type="anc"><strong>ANC 1C</strong></td>
               <td data-sort="170" style="text-align: right;" class="kw-combined font-num"><strong>170</strong></td>
               <td data-sort="137" style="text-align: right;" class="kw-trash font-num">137</td>
@@ -704,16 +707,18 @@
             </tr>
 
             <tr data-anc="1D" data-ward="1">
+              <td data-sort="1">Ward 1</td>
               <td data-sort="1D" data-type="anc"><strong>ANC 1D</strong></td>
               <td data-sort="337" style="text-align: right;" class="kw-combined font-num"><strong>337</strong></td>
               <td data-sort="164" style="text-align: right;" class="kw-trash font-num">164</td>
               <td data-sort="173" style="text-align: right;" class="kw-recycle font-num">173</td>
               <td data-sort="192" style="text-align: right;" class="font-num">192</td>
-              <td data-sort="56" style="text-align: right;" class="font-num">56</td>
-              <td data-sort="29.2" style="text-align: right;" class="font-num">29.2%</td>
+              <td data-sort="57" style="text-align: right;" class="font-num">57</td>
+              <td data-sort="29.7" style="text-align: right;" class="font-num">29.7%</td>
             </tr>
 
             <tr data-anc="1E" data-ward="1">
+              <td data-sort="1">Ward 1</td>
               <td data-sort="1E" data-type="anc"><strong>ANC 1E</strong></td>
               <td data-sort="466" style="text-align: right;" class="kw-combined font-num"><strong>466</strong></td>
               <td data-sort="285" style="text-align: right;" class="kw-trash font-num">285</td>
@@ -724,16 +729,18 @@
             </tr>
 
             <tr data-anc="2A" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2A" data-type="anc"><strong>ANC 2A</strong></td>
               <td data-sort="79" style="text-align: right;" class="kw-combined font-num"><strong>79</strong></td>
               <td data-sort="59" style="text-align: right;" class="kw-trash font-num">59</td>
               <td data-sort="20" style="text-align: right;" class="kw-recycle font-num">20</td>
               <td data-sort="44" style="text-align: right;" class="font-num">44</td>
-              <td data-sort="15" style="text-align: right;" class="font-num">15</td>
-              <td data-sort="34.1" style="text-align: right;" class="font-num"><span class="val-highlight">34.1%</span></td>
+              <td data-sort="14" style="text-align: right;" class="font-num">14</td>
+              <td data-sort="31.8" style="text-align: right;" class="font-num"><span class="val-highlight">31.8%</span></td>
             </tr>
 
             <tr data-anc="2B" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2B" data-type="anc"><strong>ANC 2B</strong></td>
               <td data-sort="502" style="text-align: right;" class="kw-combined font-num"><strong>502</strong></td>
               <td data-sort="362" style="text-align: right;" class="kw-trash font-num">362</td>
@@ -744,6 +751,7 @@
             </tr>
 
             <tr data-anc="2C" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2C" data-type="anc"><strong>ANC 2C</strong></td>
               <td data-sort="5" style="text-align: right;" class="kw-combined font-num"><strong>5</strong></td>
               <td data-sort="4" style="text-align: right;" class="kw-trash font-num">4</td>
@@ -754,6 +762,7 @@
             </tr>
 
             <tr data-anc="2D" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2D" data-type="anc"><strong>ANC 2D</strong></td>
               <td data-sort="75" style="text-align: right;" class="kw-combined font-num"><strong>75</strong></td>
               <td data-sort="55" style="text-align: right;" class="kw-trash font-num">55</td>
@@ -764,6 +773,7 @@
             </tr>
 
             <tr data-anc="2E" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2E" data-type="anc"><strong>ANC 2E</strong></td>
               <td data-sort="297" style="text-align: right;" class="kw-combined font-num"><strong>297</strong></td>
               <td data-sort="249" style="text-align: right;" class="kw-trash font-num">249</td>
@@ -774,6 +784,7 @@
             </tr>
 
             <tr data-anc="2F" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2F" data-type="anc"><strong>ANC 2F</strong></td>
               <td data-sort="226" style="text-align: right;" class="kw-combined font-num"><strong>226</strong></td>
               <td data-sort="195" style="text-align: right;" class="kw-trash font-num">195</td>
@@ -784,36 +795,40 @@
             </tr>
 
             <tr data-anc="2G" data-ward="2">
+              <td data-sort="2">Ward 2</td>
               <td data-sort="2G" data-type="anc"><strong>ANC 2G</strong></td>
               <td data-sort="210" style="text-align: right;" class="kw-combined font-num"><strong>210</strong></td>
               <td data-sort="164" style="text-align: right;" class="kw-trash font-num">164</td>
               <td data-sort="46" style="text-align: right;" class="kw-recycle font-num">46</td>
               <td data-sort="144" style="text-align: right;" class="font-num">144</td>
-              <td data-sort="36" style="text-align: right;" class="font-num">36</td>
-              <td data-sort="25.0" style="text-align: right;" class="font-num">25.0%</td>
+              <td data-sort="35" style="text-align: right;" class="font-num">35</td>
+              <td data-sort="24.3" style="text-align: right;" class="font-num">24.3%</td>
             </tr>
 
             <tr data-anc="3/4G" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3/4G" data-type="anc"><strong>ANC 3/4G</strong></td>
               <td data-sort="1024" style="text-align: right;" class="kw-combined font-num"><strong>1,024</strong></td>
               <td data-sort="697" style="text-align: right;" class="kw-trash font-num">697</td>
               <td data-sort="327" style="text-align: right;" class="kw-recycle font-num">327</td>
               <td data-sort="544" style="text-align: right;" class="font-num">544</td>
-              <td data-sort="216" style="text-align: right;" class="font-num">216</td>
-              <td data-sort="39.7" style="text-align: right;" class="font-num"><span class="val-highlight">39.7%</span></td>
+              <td data-sort="217" style="text-align: right;" class="font-num">217</td>
+              <td data-sort="39.9" style="text-align: right;" class="font-num"><span class="val-highlight">39.9%</span></td>
             </tr>
 
             <tr data-anc="3A" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3A" data-type="anc"><strong>ANC 3A</strong></td>
               <td data-sort="129" style="text-align: right;" class="kw-combined font-num"><strong>129</strong></td>
               <td data-sort="64" style="text-align: right;" class="kw-trash font-num">64</td>
               <td data-sort="65" style="text-align: right;" class="kw-recycle font-num">65</td>
               <td data-sort="65" style="text-align: right;" class="font-num">65</td>
-              <td data-sort="31" style="text-align: right;" class="font-num">31</td>
-              <td data-sort="47.7" style="text-align: right;" class="font-num"><span class="val-highlight">47.7%</span></td>
+              <td data-sort="32" style="text-align: right;" class="font-num">32</td>
+              <td data-sort="49.2" style="text-align: right;" class="font-num"><span class="val-highlight">49.2%</span></td>
             </tr>
 
             <tr data-anc="3B" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3B" data-type="anc"><strong>ANC 3B</strong></td>
               <td data-sort="104" style="text-align: right;" class="kw-combined font-num"><strong>104</strong></td>
               <td data-sort="74" style="text-align: right;" class="kw-trash font-num">74</td>
@@ -824,6 +839,7 @@
             </tr>
 
             <tr data-anc="3C" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3C" data-type="anc"><strong>ANC 3C</strong></td>
               <td data-sort="317" style="text-align: right;" class="kw-combined font-num"><strong>317</strong></td>
               <td data-sort="163" style="text-align: right;" class="kw-trash font-num">163</td>
@@ -834,16 +850,18 @@
             </tr>
 
             <tr data-anc="3D" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3D" data-type="anc"><strong>ANC 3D</strong></td>
               <td data-sort="489" style="text-align: right;" class="kw-combined font-num"><strong>489</strong></td>
               <td data-sort="313" style="text-align: right;" class="kw-trash font-num">313</td>
               <td data-sort="176" style="text-align: right;" class="kw-recycle font-num">176</td>
               <td data-sort="305" style="text-align: right;" class="font-num">305</td>
-              <td data-sort="91" style="text-align: right;" class="font-num">91</td>
-              <td data-sort="29.8" style="text-align: right;" class="font-num">29.8%</td>
+              <td data-sort="90" style="text-align: right;" class="font-num">90</td>
+              <td data-sort="29.5" style="text-align: right;" class="font-num">29.5%</td>
             </tr>
 
             <tr data-anc="3E" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3E" data-type="anc"><strong>ANC 3E</strong></td>
               <td data-sort="779" style="text-align: right;" class="kw-combined font-num"><strong>779</strong></td>
               <td data-sort="355" style="text-align: right;" class="kw-trash font-num">355</td>
@@ -854,6 +872,7 @@
             </tr>
 
             <tr data-anc="3F" data-ward="3">
+              <td data-sort="3">Ward 3</td>
               <td data-sort="3F" data-type="anc"><strong>ANC 3F</strong></td>
               <td data-sort="375" style="text-align: right;" class="kw-combined font-num"><strong>375</strong></td>
               <td data-sort="240" style="text-align: right;" class="kw-trash font-num">240</td>
@@ -864,26 +883,29 @@
             </tr>
 
             <tr data-anc="4A" data-ward="4">
+              <td data-sort="4">Ward 4</td>
               <td data-sort="4A" data-type="anc"><strong>ANC 4A</strong></td>
               <td data-sort="384" style="text-align: right;" class="kw-combined font-num"><strong>384</strong></td>
               <td data-sort="297" style="text-align: right;" class="kw-trash font-num">297</td>
               <td data-sort="87" style="text-align: right;" class="kw-recycle font-num">87</td>
               <td data-sort="235" style="text-align: right;" class="font-num">235</td>
-              <td data-sort="68" style="text-align: right;" class="font-num">68</td>
-              <td data-sort="28.9" style="text-align: right;" class="font-num">28.9%</td>
+              <td data-sort="69" style="text-align: right;" class="font-num">69</td>
+              <td data-sort="29.4" style="text-align: right;" class="font-num">29.4%</td>
             </tr>
 
             <tr data-anc="4B" data-ward="4">
+              <td data-sort="4">Ward 4</td>
               <td data-sort="4B" data-type="anc"><strong>ANC 4B</strong></td>
               <td data-sort="803" style="text-align: right;" class="kw-combined font-num"><strong>803</strong></td>
               <td data-sort="507" style="text-align: right;" class="kw-trash font-num">507</td>
               <td data-sort="296" style="text-align: right;" class="kw-recycle font-num">296</td>
               <td data-sort="501" style="text-align: right;" class="font-num">501</td>
-              <td data-sort="133" style="text-align: right;" class="font-num">133</td>
-              <td data-sort="26.5" style="text-align: right;" class="font-num">26.5%</td>
+              <td data-sort="132" style="text-align: right;" class="font-num">132</td>
+              <td data-sort="26.3" style="text-align: right;" class="font-num">26.3%</td>
             </tr>
 
             <tr data-anc="4C" data-ward="4">
+              <td data-sort="4">Ward 4</td>
               <td data-sort="4C" data-type="anc"><strong>ANC 4C</strong></td>
               <td data-sort="424" style="text-align: right;" class="kw-combined font-num"><strong>424</strong></td>
               <td data-sort="282" style="text-align: right;" class="kw-trash font-num">282</td>
@@ -894,16 +916,18 @@
             </tr>
 
             <tr data-anc="4D" data-ward="4">
+              <td data-sort="4">Ward 4</td>
               <td data-sort="4D" data-type="anc"><strong>ANC 4D</strong></td>
               <td data-sort="528" style="text-align: right;" class="kw-combined font-num"><strong>528</strong></td>
               <td data-sort="381" style="text-align: right;" class="kw-trash font-num">381</td>
               <td data-sort="147" style="text-align: right;" class="kw-recycle font-num">147</td>
               <td data-sort="329" style="text-align: right;" class="font-num">329</td>
-              <td data-sort="93" style="text-align: right;" class="font-num">93</td>
-              <td data-sort="28.3" style="text-align: right;" class="font-num">28.3%</td>
+              <td data-sort="94" style="text-align: right;" class="font-num">94</td>
+              <td data-sort="28.6" style="text-align: right;" class="font-num">28.6%</td>
             </tr>
 
             <tr data-anc="4E" data-ward="4">
+              <td data-sort="4">Ward 4</td>
               <td data-sort="4E" data-type="anc"><strong>ANC 4E</strong></td>
               <td data-sort="410" style="text-align: right;" class="kw-combined font-num"><strong>410</strong></td>
               <td data-sort="331" style="text-align: right;" class="kw-trash font-num">331</td>
@@ -914,6 +938,7 @@
             </tr>
 
             <tr data-anc="5A" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5A" data-type="anc"><strong>ANC 5A</strong></td>
               <td data-sort="243" style="text-align: right;" class="kw-combined font-num"><strong>243</strong></td>
               <td data-sort="171" style="text-align: right;" class="kw-trash font-num">171</td>
@@ -924,16 +949,18 @@
             </tr>
 
             <tr data-anc="5B" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5B" data-type="anc"><strong>ANC 5B</strong></td>
               <td data-sort="772" style="text-align: right;" class="kw-combined font-num"><strong>772</strong></td>
               <td data-sort="558" style="text-align: right;" class="kw-trash font-num">558</td>
               <td data-sort="214" style="text-align: right;" class="kw-recycle font-num">214</td>
               <td data-sort="408" style="text-align: right;" class="font-num">408</td>
-              <td data-sort="147" style="text-align: right;" class="font-num">147</td>
-              <td data-sort="36.0" style="text-align: right;" class="font-num"><span class="val-highlight">36.0%</span></td>
+              <td data-sort="146" style="text-align: right;" class="font-num">146</td>
+              <td data-sort="35.8" style="text-align: right;" class="font-num"><span class="val-highlight">35.8%</span></td>
             </tr>
 
             <tr data-anc="5C" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5C" data-type="anc"><strong>ANC 5C</strong></td>
               <td data-sort="286" style="text-align: right;" class="kw-combined font-num"><strong>286</strong></td>
               <td data-sort="152" style="text-align: right;" class="kw-trash font-num">152</td>
@@ -944,6 +971,7 @@
             </tr>
 
             <tr data-anc="5D" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5D" data-type="anc"><strong>ANC 5D</strong></td>
               <td data-sort="352" style="text-align: right;" class="kw-combined font-num"><strong>352</strong></td>
               <td data-sort="259" style="text-align: right;" class="kw-trash font-num">259</td>
@@ -954,6 +982,7 @@
             </tr>
 
             <tr data-anc="5E" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5E" data-type="anc"><strong>ANC 5E</strong></td>
               <td data-sort="638" style="text-align: right;" class="kw-combined font-num"><strong>638</strong></td>
               <td data-sort="407" style="text-align: right;" class="kw-trash font-num">407</td>
@@ -964,6 +993,7 @@
             </tr>
 
             <tr data-anc="5F" data-ward="5">
+              <td data-sort="5">Ward 5</td>
               <td data-sort="5F" data-type="anc"><strong>ANC 5F</strong></td>
               <td data-sort="430" style="text-align: right;" class="kw-combined font-num"><strong>430</strong></td>
               <td data-sort="359" style="text-align: right;" class="kw-trash font-num">359</td>
@@ -974,6 +1004,7 @@
             </tr>
 
             <tr data-anc="6A" data-ward="6">
+              <td data-sort="6">Ward 6</td>
               <td data-sort="6A" data-type="anc"><strong>ANC 6A</strong></td>
               <td data-sort="547" style="text-align: right;" class="kw-combined font-num"><strong>547</strong></td>
               <td data-sort="406" style="text-align: right;" class="kw-trash font-num">406</td>
@@ -984,26 +1015,29 @@
             </tr>
 
             <tr data-anc="6B" data-ward="6">
+              <td data-sort="6">Ward 6</td>
               <td data-sort="6B" data-type="anc"><strong>ANC 6B</strong></td>
               <td data-sort="601" style="text-align: right;" class="kw-combined font-num"><strong>601</strong></td>
               <td data-sort="338" style="text-align: right;" class="kw-trash font-num">338</td>
               <td data-sort="263" style="text-align: right;" class="kw-recycle font-num">263</td>
               <td data-sort="374" style="text-align: right;" class="font-num">374</td>
-              <td data-sort="95" style="text-align: right;" class="font-num">95</td>
-              <td data-sort="25.4" style="text-align: right;" class="font-num">25.4%</td>
+              <td data-sort="96" style="text-align: right;" class="font-num">96</td>
+              <td data-sort="25.7" style="text-align: right;" class="font-num">25.7%</td>
             </tr>
 
             <tr data-anc="6C" data-ward="6">
+              <td data-sort="6">Ward 6</td>
               <td data-sort="6C" data-type="anc"><strong>ANC 6C</strong></td>
               <td data-sort="395" style="text-align: right;" class="kw-combined font-num"><strong>395</strong></td>
               <td data-sort="298" style="text-align: right;" class="kw-trash font-num">298</td>
               <td data-sort="97" style="text-align: right;" class="kw-recycle font-num">97</td>
               <td data-sort="270" style="text-align: right;" class="font-num">270</td>
-              <td data-sort="60" style="text-align: right;" class="font-num">60</td>
-              <td data-sort="22.2" style="text-align: right;" class="font-num">22.2%</td>
+              <td data-sort="59" style="text-align: right;" class="font-num">59</td>
+              <td data-sort="21.9" style="text-align: right;" class="font-num">21.9%</td>
             </tr>
 
             <tr data-anc="6D" data-ward="6">
+              <td data-sort="6">Ward 6</td>
               <td data-sort="6D" data-type="anc"><strong>ANC 6D</strong></td>
               <td data-sort="54" style="text-align: right;" class="kw-combined font-num"><strong>54</strong></td>
               <td data-sort="38" style="text-align: right;" class="kw-trash font-num">38</td>
@@ -1014,6 +1048,7 @@
             </tr>
 
             <tr data-anc="6E" data-ward="6">
+              <td data-sort="6">Ward 6</td>
               <td data-sort="6E" data-type="anc"><strong>ANC 6E</strong></td>
               <td data-sort="18" style="text-align: right;" class="kw-combined font-num"><strong>18</strong></td>
               <td data-sort="18" style="text-align: right;" class="kw-trash font-num">18</td>
@@ -1024,6 +1059,7 @@
             </tr>
 
             <tr data-anc="7B" data-ward="7">
+              <td data-sort="7">Ward 7</td>
               <td data-sort="7B" data-type="anc"><strong>ANC 7B</strong></td>
               <td data-sort="594" style="text-align: right;" class="kw-combined font-num"><strong>594</strong></td>
               <td data-sort="481" style="text-align: right;" class="kw-trash font-num">481</td>
@@ -1034,6 +1070,7 @@
             </tr>
 
             <tr data-anc="7C" data-ward="7">
+              <td data-sort="7">Ward 7</td>
               <td data-sort="7C" data-type="anc"><strong>ANC 7C</strong></td>
               <td data-sort="700" style="text-align: right;" class="kw-combined font-num"><strong>700</strong></td>
               <td data-sort="575" style="text-align: right;" class="kw-trash font-num">575</td>
@@ -1044,6 +1081,7 @@
             </tr>
 
             <tr data-anc="7D" data-ward="7">
+              <td data-sort="7">Ward 7</td>
               <td data-sort="7D" data-type="anc"><strong>ANC 7D</strong></td>
               <td data-sort="516" style="text-align: right;" class="kw-combined font-num"><strong>516</strong></td>
               <td data-sort="407" style="text-align: right;" class="kw-trash font-num">407</td>
@@ -1054,6 +1092,7 @@
             </tr>
 
             <tr data-anc="7E" data-ward="7">
+              <td data-sort="7">Ward 7</td>
               <td data-sort="7E" data-type="anc"><strong>ANC 7E</strong></td>
               <td data-sort="436" style="text-align: right;" class="kw-combined font-num"><strong>436</strong></td>
               <td data-sort="360" style="text-align: right;" class="kw-trash font-num">360</td>
@@ -1064,6 +1103,7 @@
             </tr>
 
             <tr data-anc="7F" data-ward="7">
+              <td data-sort="7">Ward 7</td>
               <td data-sort="7F" data-type="anc"><strong>ANC 7F</strong></td>
               <td data-sort="343" style="text-align: right;" class="kw-combined font-num"><strong>343</strong></td>
               <td data-sort="306" style="text-align: right;" class="kw-trash font-num">306</td>
@@ -1074,16 +1114,18 @@
             </tr>
 
             <tr data-anc="8A" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8A" data-type="anc"><strong>ANC 8A</strong></td>
               <td data-sort="361" style="text-align: right;" class="kw-combined font-num"><strong>361</strong></td>
               <td data-sort="274" style="text-align: right;" class="kw-trash font-num">274</td>
               <td data-sort="87" style="text-align: right;" class="kw-recycle font-num">87</td>
               <td data-sort="207" style="text-align: right;" class="font-num">207</td>
-              <td data-sort="69" style="text-align: right;" class="font-num">69</td>
-              <td data-sort="33.3" style="text-align: right;" class="font-num"><span class="val-highlight">33.3%</span></td>
+              <td data-sort="67" style="text-align: right;" class="font-num">67</td>
+              <td data-sort="32.4" style="text-align: right;" class="font-num"><span class="val-highlight">32.4%</span></td>
             </tr>
 
             <tr data-anc="8B" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8B" data-type="anc"><strong>ANC 8B</strong></td>
               <td data-sort="185" style="text-align: right;" class="kw-combined font-num"><strong>185</strong></td>
               <td data-sort="142" style="text-align: right;" class="kw-trash font-num">142</td>
@@ -1094,6 +1136,7 @@
             </tr>
 
             <tr data-anc="8C" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8C" data-type="anc"><strong>ANC 8C</strong></td>
               <td data-sort="406" style="text-align: right;" class="kw-combined font-num"><strong>406</strong></td>
               <td data-sort="292" style="text-align: right;" class="kw-trash font-num">292</td>
@@ -1104,6 +1147,7 @@
             </tr>
 
             <tr data-anc="8D" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8D" data-type="anc"><strong>ANC 8D</strong></td>
               <td data-sort="116" style="text-align: right;" class="kw-combined font-num"><strong>116</strong></td>
               <td data-sort="78" style="text-align: right;" class="kw-trash font-num">78</td>
@@ -1114,6 +1158,7 @@
             </tr>
 
             <tr data-anc="8E" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8E" data-type="anc"><strong>ANC 8E</strong></td>
               <td data-sort="220" style="text-align: right;" class="kw-combined font-num"><strong>220</strong></td>
               <td data-sort="175" style="text-align: right;" class="kw-trash font-num">175</td>
@@ -1124,6 +1169,7 @@
             </tr>
 
             <tr data-anc="8F" data-ward="8">
+              <td data-sort="8">Ward 8</td>
               <td data-sort="8F" data-type="anc"><strong>ANC 8F</strong></td>
               <td data-sort="42" style="text-align: right;" class="kw-combined font-num"><strong>42</strong></td>
               <td data-sort="20" style="text-align: right;" class="kw-trash font-num">20</td>
@@ -4134,7 +4180,7 @@
 
     <!-- Footer -->
     <footer class="site-footer">
-      <p>Last Updated November 15, 2026</p>
+      <p>Last Updated November 18, 2026</p>
     </footer>
 
   </div>
@@ -4224,13 +4270,13 @@
         datasets: [
           {
             label: 'Single-Incident Addrs',
-            data: [692, 509, 872, 1326, 1120, 786, 1171, 524],
+            data: [692, 511, 872, 1324, 1121, 786, 1171, 526],
             backgroundColor: '#2563eb',
             borderRadius: 2
           },
           {
             label: 'Repeat Addrs (>= 2 Days)',
-            data: [323, 257, 532, 584, 498, 265, 459, 247],
+            data: [323, 255, 532, 586, 497, 265, 459, 245],
             backgroundColor: '#d97706',
             borderRadius: 2
           }
@@ -4271,13 +4317,13 @@
         datasets: [
           {
             label: 'Trash (S0441)',
-            data: [925, 1451, 1263, 871, 1065],
+            data: [1030, 1611, 1385, 927, 1115],
             backgroundColor: '#dc2626',
             borderRadius: 2
           },
           {
             label: 'Recycling (S0321)',
-            data: [407, 420, 344, 253, 187],
+            data: [478, 498, 401, 307, 210],
             backgroundColor: '#16a34a',
             borderRadius: 2
           }

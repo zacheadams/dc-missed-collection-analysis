@@ -12,7 +12,6 @@ Strict standards:
 import os
 import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import sys
 import json
 import re
 import subprocess
@@ -436,42 +435,40 @@ def verify():
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
             dom_text = res.stdout
             m = re.search(r'<div id="test-results">([^<]+)</div>', dom_text)
-            if m:
-                results = json.loads(m.group(1))
-                print(f"Headless Chrome execution result: {results}")
-                assert results['ic106Has1C2D'], f"Headless Chrome: IC106 missing ANC 1C/2D: {results['ic106_ancs']}"
-                assert results['ic20HasAll'], f"Headless Chrome: IC20 missing required ANCs: {results['ic20_ancs']}"
-                assert results['r210PolyHas2B'], f"Headless Chrome: R210_5 polygon missing required ANCs: {results['r210_ancs']}"
-                assert results['lineHas2B'], "Headless Chrome: line 106_2 missing ANC 2B"
-                assert results['lineR210Has1C'], f"Headless Chrome: line R210_5 missing ANC 1C: {results['lineR210_ancs']}"
-                assert results['stats106Has2B'], "Headless Chrome: ROUTE_STATS['trash_106_2'] missing ANC 2B"
-                assert results['statsIC106Has1C2D'], "Headless Chrome: ROUTE_STATS['trash_IC106'] missing ANC 1C/2D"
-                assert results['statsR210PolyHas2B'], "Headless Chrome: ROUTE_STATS['recycle_R210_5'] missing ANC 2B/2A"
-                assert results['statsR210LineHas1C'], "Headless Chrome: ROUTE_STATS['recycle_line_R210_5'] missing ANC 1C"
-                assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
-                assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
-                assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
-                assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
-                assert results['smdInspectorPassed'], f"Headless Chrome: SMD inspector failed (sub: {results.get('smdSub')}, routeBox: {results.get('smdInspectorNoRoutes')}): {results}"
-                assert results['smdVacantPassed'], f"Headless Chrome: Vacant SMD inspector failed (yellow: {results.get('smdVacantYellow')}, link: {results.get('smdVacantLink')})"
-                assert results['citywideSubClean'], f"Headless Chrome: Citywide header contained past days window"
-                assert results['citywideLbl1Correct'], f"Headless Chrome: Combined Requests label not stylized properly"
-                assert results['citywideShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden when Citywide"
-                assert results['ward2CouncilCorrect'], f"Headless Chrome: Ward 2 councilmember incorrect: {results.get('ward2Sub')}"
-                assert results['ward2ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for Ward 2"
-                assert results['ward2Lbl2Correct'], f"Headless Chrome: Ward 2 label was not 'Percent of Requests in Ward'"
-                assert results['anc2BSubCorrect'], f"Headless Chrome: ANC 2B subheader incorrect: {results.get('anc2BSub')}"
-                assert results['anc2BShareVisible'], f"Headless Chrome: share tile was hidden for ANC 2B"
-                assert results['anc2BLbl2Correct'], f"Headless Chrome: ANC 2B label was not 'Percent of Citywide Requests': {results.get('anc2BLbl2')}"
-                assert results['smd2B08CommCorrect'], f"Headless Chrome: SMD 2B08 commissioner incorrect: {results.get('smd2B08Sub')}"
-                assert results['smd2B08ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for SMD 2B08"
-                assert results['smd2B08Lbl2Correct'], f"Headless Chrome: SMD 2B08 label was not 'Percent of Requests in Ward'"
-                assert results['smdDropdownCorrect'], f"Headless Chrome: SMD dropdown option for 2B08 incorrect: {results.get('smdDropdownCorrect')}"
-                assert results['resetShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden after resetToDefault"
-                assert results['resetSubClean'], f"Headless Chrome: Citywide subheader incorrect after resetToDefault"
-                print("PASS: Headless Chrome verification successful!")
-            else:
-                print("Note: DOM element rendered asynchronously (fallback verified via static DOM)")
+            assert m is not None, "Headless Chrome: #test-results failed to render in DOM"
+            results = json.loads(m.group(1))
+            print(f"Headless Chrome execution result: {results}")
+            assert results['ic106Has1C2D'], f"Headless Chrome: IC106 missing ANC 1C/2D: {results['ic106_ancs']}"
+            assert results['ic20HasAll'], f"Headless Chrome: IC20 missing required ANCs: {results['ic20_ancs']}"
+            assert results['r210PolyHas2B'], f"Headless Chrome: R210_5 polygon missing required ANCs: {results['r210_ancs']}"
+            assert results['lineHas2B'], "Headless Chrome: line 106_2 missing ANC 2B"
+            assert results['lineR210Has1C'], f"Headless Chrome: line R210_5 missing ANC 1C: {results['lineR210_ancs']}"
+            assert results['stats106Has2B'], "Headless Chrome: ROUTE_STATS['trash_106_2'] missing ANC 2B"
+            assert results['statsIC106Has1C2D'], "Headless Chrome: ROUTE_STATS['trash_IC106'] missing ANC 1C/2D"
+            assert results['statsR210PolyHas2B'], "Headless Chrome: ROUTE_STATS['recycle_R210_5'] missing ANC 2B/2A"
+            assert results['statsR210LineHas1C'], "Headless Chrome: ROUTE_STATS['recycle_line_R210_5'] missing ANC 1C"
+            assert results['ancSortCorrect'], f"Headless Chrome: compareAnc failed sorting: {results['sortedAncs']}"
+            assert results['smdSortCorrect'], f"Headless Chrome: compareSmd failed sorting: {results['sortedSmds']}"
+            assert results['multiFeatureSelectPassed'], f"Headless Chrome: multi-feature route RSP20_2 failed selection: selected {results.get('rspSelectedCount')}"
+            assert results['overlapPrecedencePassed'], f"Headless Chrome: overlapping route precedence failed: {results}"
+            assert results['smdInspectorPassed'], f"Headless Chrome: SMD inspector failed (sub: {results.get('smdSub')}, routeBox: {results.get('smdInspectorNoRoutes')}): {results}"
+            assert results['smdVacantPassed'], f"Headless Chrome: Vacant SMD inspector failed (yellow: {results.get('smdVacantYellow')}, link: {results.get('smdVacantLink')})"
+            assert results['citywideSubClean'], f"Headless Chrome: Citywide header contained past days window"
+            assert results['citywideLbl1Correct'], f"Headless Chrome: Combined Requests label not stylized properly"
+            assert results['citywideShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden when Citywide"
+            assert results['ward2CouncilCorrect'], f"Headless Chrome: Ward 2 councilmember incorrect: {results.get('ward2Sub')}"
+            assert results['ward2ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for Ward 2"
+            assert results['ward2Lbl2Correct'], f"Headless Chrome: Ward 2 label was not 'Percent of Requests in Ward'"
+            assert results['anc2BSubCorrect'], f"Headless Chrome: ANC 2B subheader incorrect: {results.get('anc2BSub')}"
+            assert results['anc2BShareVisible'], f"Headless Chrome: share tile was hidden for ANC 2B"
+            assert results['anc2BLbl2Correct'], f"Headless Chrome: ANC 2B label was not 'Percent of Citywide Requests': {results.get('anc2BLbl2')}"
+            assert results['smd2B08CommCorrect'], f"Headless Chrome: SMD 2B08 commissioner incorrect: {results.get('smd2B08Sub')}"
+            assert results['smd2B08ShareVisible'], f"Headless Chrome: Percent of Requests in Ward was hidden for SMD 2B08"
+            assert results['smd2B08Lbl2Correct'], f"Headless Chrome: SMD 2B08 label was not 'Percent of Requests in Ward'"
+            assert results['smdDropdownCorrect'], f"Headless Chrome: SMD dropdown option for 2B08 incorrect: {results.get('smdDropdownCorrect')}"
+            assert results['resetShareHidden'], f"Headless Chrome: Percent of Requests in Ward was not hidden after resetToDefault"
+            assert results['resetSubClean'], f"Headless Chrome: Citywide subheader incorrect after resetToDefault"
+            print("PASS: Headless Chrome verification successful!")
         finally:
             if os.path.exists(temp_html_path):
                 os.remove(temp_html_path)
@@ -486,37 +483,32 @@ def verify():
             const out = document.createElement('div');
             out.id = 'mobile-results';
 
-            const ctrlBody = document.getElementById('ctrl-panel-body');
-            const ctrlIcon = document.getElementById('ctrl-toggle-icon');
-            const inspBody = document.getElementById('insp-panel-body');
+            const cp = document.getElementById('control-panel');
+            const fab = document.getElementById('mobile-fab-filters');
             const legend = document.querySelector('.legend-panel');
             const legendBottom = legend ? window.getComputedStyle(legend).bottom : '';
-            const insp = document.getElementById('inspector-panel');
-            const inspMaxHeight = insp ? window.getComputedStyle(insp).maxHeight : '';
 
-            const initialCollapsed = ctrlBody ? ctrlBody.style.display === 'none' : false;
-            const initialIconDown = ctrlIcon ? ctrlIcon.innerText.trim() === '▾' : false;
+            const initialCollapsed = cp ? !cp.classList.contains('is-open') : false;
+            const initialFabLayers = fab ? fab.textContent.includes('Layers') : false;
 
-            toggleMobilePanel('control');
-            const toggledOpen = ctrlBody ? ctrlBody.style.display === 'block' : false;
-            const toggledIconUp = ctrlIcon ? ctrlIcon.innerText.trim() === '▴' : false;
+            toggleDrawer('control');
+            const toggledOpen = cp ? cp.classList.contains('is-open') : false;
+            const toggledFabClose = fab ? fab.textContent.includes('Close') : false;
 
             collapseMobileControlPanel();
-            const collapsedAgain = ctrlBody ? ctrlBody.style.display === 'none' : false;
+            const collapsedAgain = cp ? !cp.classList.contains('is-open') : false;
 
-            const toggleIndicator = document.getElementById('ctrl-toggle-icon');
-            const toggleRect = toggleIndicator ? toggleIndicator.getBoundingClientRect() : { width: 0, height: 0 };
+            const fabRect = fab ? fab.getBoundingClientRect() : { width: 0, height: 0 };
 
             out.innerText = JSON.stringify({
                 initialCollapsed,
-                initialIconDown,
+                initialFabLayers,
                 toggledOpen,
-                toggledIconUp,
+                toggledFabClose,
                 collapsedAgain,
                 legendBottom,
-                inspMaxHeight,
-                toggleWidth: toggleRect.width,
-                toggleHeight: toggleRect.height
+                fabWidth: fabRect.width,
+                fabHeight: fabRect.height
             });
             document.body.appendChild(out);
         }
@@ -546,17 +538,16 @@ def verify():
             ]
             res_mob = subprocess.run(cmd_mobile, capture_output=True, text=True, timeout=15)
             m_mob = re.search(r'<div id="mobile-results">([^<]+)</div>', res_mob.stdout)
-            if m_mob:
-                m_res = json.loads(m_mob.group(1))
-                print(f"Headless Chrome mobile result: {m_res}")
-                assert m_res['initialCollapsed'], "Mobile: control panel should start collapsed"
-                assert m_res['initialIconDown'], "Mobile: control toggle icon should start with ▾"
-                assert m_res['toggledOpen'], "Mobile: toggleMobilePanel should open control panel"
-                assert m_res['toggledIconUp'], "Mobile: control toggle icon should flip to ▴"
-                assert m_res['collapsedAgain'], "Mobile: collapseMobileControlPanel should collapse panel"
-                assert '80px' in m_res['legendBottom'], f"Mobile: legend bottom should be 80px, got {m_res['legendBottom']}"
-                assert m_res['toggleWidth'] >= 40, f"Mobile: toggle width should be >= 40px, got {m_res['toggleWidth']}"
-                print("PASS: Headless Chrome mobile verification successful!")
+            assert m_mob is not None, "Headless Chrome Mobile: #mobile-results failed to render in DOM"
+            m_res = json.loads(m_mob.group(1))
+            print(f"Headless Chrome mobile result: {m_res}")
+            assert m_res['initialCollapsed'], "Mobile: control panel should start collapsed"
+            assert m_res['initialFabLayers'], "Mobile: FAB should start with Layers label"
+            assert m_res['toggledOpen'], "Mobile: toggleDrawer('control') should open control panel"
+            assert m_res['toggledFabClose'], "Mobile: FAB should flip to Close label"
+            assert m_res['collapsedAgain'], "Mobile: collapseMobileControlPanel should collapse panel"
+            assert m_res['fabWidth'] >= 40, f"Mobile: FAB width should be >= 40px, got {m_res['fabWidth']}"
+            print("PASS: Headless Chrome mobile verification successful!")
         finally:
             if os.path.exists(temp_mobile_path):
                 os.remove(temp_mobile_path)

@@ -11,23 +11,12 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from spatial_utils import is_point_in_ring, is_point_in_poly, get_poly_rings_list, get_bbox, anc_sort_key
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(os.path.join(BASE_DIR, "scripts"))
 from update_map_data import get_smd_ward
-
-def extract_polys(geom):
-    gtype = geom.get("type")
-    coords = geom.get("coordinates", [])
-    if gtype == "Polygon":
-        return coords
-    elif gtype == "MultiPolygon":
-        res = []
-        for poly in coords:
-            res.extend(poly)
-        return res
-    return []
+NY_TZ = ZoneInfo("America/New_York")
 
 def analyze_repeat_addresses():
     smd_path = os.path.join(BASE_DIR, "data/dc_smds.geojson")
@@ -64,15 +53,13 @@ def analyze_repeat_addresses():
         smd_id = props.get("SMD_ID")
         anc_id = props.get("ANC_ID")
         ward = get_smd_ward(smd_id, anc_id)
-        rings = extract_polys(feat["geometry"])
-        all_lons = [p[0] for r in rings for p in r]
-        all_lats = [p[1] for r in rings for p in r]
-        bbox = (min(all_lons), min(all_lats), max(all_lons), max(all_lats)) if all_lons else (0,0,0,0)
+        polys = get_poly_rings_list(feat["geometry"])
+        bbox = get_bbox(polys)
         smd_cache.append({
             "smd_id": smd_id,
             "anc_id": anc_id,
             "ward": ward,
-            "rings": rings,
+            "polys": polys,
             "bbox": bbox,
             "trash": 0,
             "recycling": 0,
@@ -97,15 +84,15 @@ def analyze_repeat_addresses():
             unmatched += 1
             continue
 
-        dt = datetime.fromtimestamp(adddate_ms / 1000.0, tz=timezone.utc)
+        dt = datetime.fromtimestamp(adddate_ms / 1000.0, tz=NY_TZ)
         date_str = dt.strftime("%Y-%m-%d")
 
         found = False
         for smd in smd_cache:
             b = smd["bbox"]
             if b[0] <= lon <= b[2] and b[1] <= lat <= b[3]:
-                for ring in smd["rings"]:
-                    if is_point_in_ring(lon, lat, ring):
+                for poly_rings in smd["polys"]:
+                    if is_point_in_poly(lon, lat, poly_rings):
                         smd["total"] += 1
                         smd["addr_dates"][addr].add(date_str)
                         if code == "S0441":

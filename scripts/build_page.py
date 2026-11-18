@@ -1879,8 +1879,8 @@ html_page = f'''<!DOCTYPE html>
               const val = getSmdMetric(p, currentMetric, currentPeriod);
               const streamName = currentMetric === 'total' ? 'Combined' : (currentMetric === 'trash' ? 'Trash' : 'Recycling');
               smdTooltip.setContent(`
-                <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">SMD ${{p.smd_id}}</div>
-                <div style="font-size: 11px; color: var(--text-dim);">ANC ${{p.anc_id}} • Ward ${{p.ward}}</div>
+                <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">SMD ${{escapeHtml(p.smd_id)}}</div>
+                <div style="font-size: 11px; color: var(--text-dim);">ANC ${{escapeHtml(p.anc_id)}} • Ward ${{escapeHtml(p.ward)}}</div>
                 <div style="margin-top: 4px; font-size: 12px; font-weight: 700; color: ${{streamColor}};">
                   ${{val.toLocaleString()}} ${{streamName}} Requests (${{currentPeriod === '30d' ? '30d' : '180d'}})
                 </div>
@@ -2311,12 +2311,12 @@ html_page = f'''<!DOCTYPE html>
         const m = getRoutePeriodMetrics(stats, routeProps);
         const ancs = formatSortedAncs(routeProps.ancs || stats.ancs || '');
         return `
-          <div style="font-weight: 800; font-size: 12px; color: ${{colorVar}};">${{stream}} Route ${{routeProps.route}} (Polygon)</div>
-          <div style="font-size: 11px; color: var(--text-dim);">${{routeProps.area_desc || 'DPW Catchment Area'}}</div>
-          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancs}}</strong></div>` : ''}}
-          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{schedText}}</div>
+          <div style="font-weight: 800; font-size: 12px; color: ${{colorVar}};">${{escapeHtml(stream)}} Route ${{escapeHtml(routeProps.route)}} (Polygon)</div>
+          <div style="font-size: 11px; color: var(--text-dim);">${{escapeHtml(routeProps.area_desc || 'DPW Catchment Area')}}</div>
+          ${{ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{escapeHtml(ancs)}}</strong></div>` : ''}}
+          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{escapeHtml(schedText)}}</div>
           <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{colorVar}}; border-top: 1px solid rgba(${{borderRgba}},0.25); padding-top: 4px;">
-            ${{m.total.toLocaleString()}} ${{stream}} Requests (${{periodTag}})
+            ${{m.total.toLocaleString()}} ${{escapeHtml(stream)}} Requests (${{periodTag}})
           </div>
           <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
             Repeat Rate: ${{m.repeat_rate != null ? m.repeat_rate + '%' : 'N/A'}} • ${{m.unique_addrs || 0}} unique addresses
@@ -2342,14 +2342,14 @@ html_page = f'''<!DOCTYPE html>
 
           html = `
             <div style="font-weight: 800; font-size: 12px; color: var(--text-main);">Route Intersection</div>
-            <div style="font-size: 11px; color: var(--text-dim);">${{tr.area_desc || rr.area_desc || 'DPW Catchment Area'}}</div>
-            ${{ancsDisplay ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{ancsDisplay}}</strong></div>` : ''}}
+            <div style="font-size: 11px; color: var(--text-dim);">${{escapeHtml(tr.area_desc || rr.area_desc || 'DPW Catchment Area')}}</div>
+            ${{ancsDisplay ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{escapeHtml(ancsDisplay)}}</strong></div>` : ''}}
             <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: var(--combined-color); border-top: 1px solid rgba(37,99,235,0.25); padding-top: 4px;">
               ${{combTot.toLocaleString()}} Combined Requests (${{periodTag}})
             </div>
             <div style="margin-top: 4px; display: flex; flex-direction: column; gap: 2px; font-size: 11px;">
-              <span style="color: var(--trash-color);">Trash (${{tr.route}}): <strong>${{tTot.toLocaleString()}}</strong> (${{tSched}})</span>
-              <span style="color: var(--recycle-color);">Recycling (${{rr.route}}): <strong>${{rTot.toLocaleString()}}</strong> (${{rr.day}})</span>
+              <span style="color: var(--trash-color);">Trash (${{escapeHtml(tr.route)}}): <strong>${{tTot.toLocaleString()}}</strong> (${{escapeHtml(tSched)}})</span>
+              <span style="color: var(--recycle-color);">Recycling (${{escapeHtml(rr.route)}}): <strong>${{rTot.toLocaleString()}}</strong> (${{escapeHtml(rr.day)}})</span>
             </div>
           `;
         }} else if (tr) {{
@@ -2459,12 +2459,12 @@ html_page = f'''<!DOCTYPE html>
       const sched = p.day || 'Scheduled';
 
       const html = `
-        <div style="font-weight: 800; font-size: 12px; color: ${{color}};">${{stream}} Route ${{p.route}} (Line)</div>
-        <div style="font-size: 11px; color: var(--text-dim);">${{p.area_desc || p.neighborhoods || 'Residential Service Corridor'}}</div>
-        ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{formatSortedAncs(p.ancs)}}</strong></div>` : ''}}
-        <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{sched}} • ${{p.ward || 'DC'}}</div>
+        <div style="font-weight: 800; font-size: 12px; color: ${{color}};">${{escapeHtml(stream)}} Route ${{escapeHtml(p.route)}} (Line)</div>
+        <div style="font-size: 11px; color: var(--text-dim);">${{escapeHtml(p.area_desc || p.neighborhoods || 'Residential Service Corridor')}}</div>
+        ${{p.ancs ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">ANCs: <strong style="color: var(--text-main);">${{escapeHtml(formatSortedAncs(p.ancs))}}</strong></div>` : ''}}
+        <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Collection day: ${{escapeHtml(sched)}} • ${{escapeHtml(p.ward || 'DC')}}</div>
         <div style="margin-top: 5px; font-size: 12px; font-weight: 700; color: ${{color}}; border-top: 1px solid rgba(${{isTrash ? '220,38,38' : '22,163,74'}},0.25); padding-top: 4px;">
-          ${{totalReq}} ${{stream}} Requests (${{periodTag}})
+          ${{totalReq}} ${{escapeHtml(stream)}} Requests (${{periodTag}})
         </div>
         <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
           ${{(p.point_count || 0).toLocaleString()}} Collection Points • ${{(p.segment_count || 0).toLocaleString()}} Street Segments
@@ -2663,8 +2663,8 @@ html_page = f'''<!DOCTYPE html>
       )).sort(compareAnc);
 
       aSel.disabled = false;
-      aSel.innerHTML = `<option value="all">All ANCs in Ward ${{wardVal}}</option>` +
-        ancsInWard.map(a => `<option value="${{a}}">ANC ${{a}}</option>`).join('');
+      aSel.innerHTML = `<option value="all">All ANCs in Ward ${{escapeHtml(wardVal)}}</option>` +
+        ancsInWard.map(a => `<option value="${{escapeHtml(a)}}">ANC ${{escapeHtml(a)}}</option>`).join('');
       aSel.value = ancVal || 'all';
 
       if (!ancVal || ancVal === 'all') {{
@@ -2780,35 +2780,6 @@ html_page = f'''<!DOCTYPE html>
           return;
         }}
       }}
-    }}
-
-    function updateBreadcrumbs() {{
-      const bar = document.getElementById('breadcrumb-crumbs');
-      if (!bar) return;
-      if (selectedRouteId) {{
-        bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{selectedRouteStream}} Route ${{selectedRouteId}}${{selectedRouteType}}</span>`;
-        return;
-      }}
-      let html = '';
-      if (selectedWardNum) {{
-        html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedAncId ? 'active' : ''}}" onclick="selectWard(${{selectedWardNum}})">Ward ${{selectedWardNum}}</span>`;
-      }}
-      if (selectedAncId) {{
-        const safeAnc = escapeHtml(selectedAncId);
-        html += ` &rsaquo; <span class="breadcrumb-item ${{!selectedSmdId ? 'active' : ''}}" onclick="selectANC('${{safeAnc}}')">ANC ${{safeAnc}}</span>`;
-      }}
-      if (selectedSmdId) {{
-        const safeSmd = escapeHtml(selectedSmdId);
-        html += ` &rsaquo; <span class="breadcrumb-item active">SMD ${{safeSmd}}</span>`;
-      }}
-      bar.innerHTML = html;
-    }}
-
-    function updateBreadcrumbsRoute(p, stream, typeLabel = '') {{
-      const bar = document.getElementById('breadcrumb-crumbs');
-      if (!bar) return;
-      const rId = stream === 'Trash' ? (p.route_area || p.route) : p.route;
-      bar.innerHTML = ` &rsaquo; <span class="breadcrumb-item active">${{stream}} Route ${{rId}}${{typeLabel}}</span>`;
     }}
 
     function updateInspectorCitywide() {{
@@ -2965,7 +2936,7 @@ html_page = f'''<!DOCTYPE html>
 
       const isSplit = stats.schedule && stats.schedule.includes(' or ') && p.days && !p.days.includes('/');
       const schedDisplay = isSplit ? (p.days + ' (Route runs ' + stats.schedule + ')') : sched;
-      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} ${{typeBadge}}`;
+      document.getElementById('insp-title').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{escapeHtml(stream)}}</span> Route ${{escapeHtml(rId)}} ${{typeBadge}}`;
       document.getElementById('insp-sub').innerText = `Collection day: ${{schedDisplay}} • ${{ward}}`;
 
       const tileTotal = document.getElementById('insp-tile-total');
@@ -2989,7 +2960,7 @@ html_page = f'''<!DOCTYPE html>
       const ancsDesc = formatSortedAncs(p.ancs || stats.ancs || '');
       const geomType = isLine ? 'street network alignment' : 'polygon catchment area';
 
-      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{stream}}</span> Route ${{rId}} covers ${{areaSqMi > 0 ? areaSqMi + ' sq mi in ' : ''}}${{ward}} (${{nbhDesc}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{repRate}}% repeat rate over ${{periodText}} (viewed via ${{geomType}}).`;
+      document.getElementById('insp-details').innerHTML = `<span class="${{stream === 'Trash' ? 'kw-trash' : 'kw-recycle'}}">${{escapeHtml(stream)}}</span> Route ${{escapeHtml(rId)}} covers ${{areaSqMi > 0 ? escapeHtml(areaSqMi) + ' sq mi in ' : ''}}${{escapeHtml(ward)}} (${{escapeHtml(nbhDesc)}}), recording ${{total.toLocaleString()}} missed collection service requests across ${{uniqAddrs.toLocaleString()}} unique addresses with a ${{escapeHtml(repRate)}}% repeat rate over ${{periodText}} (viewed via ${{geomType}}).`;
 
       const pointInfo = isLine
         ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Collection Points: <strong style="color: var(--text-main);">${{(p.point_count || 0).toLocaleString()}}</strong> (${{(p.segment_count || 0).toLocaleString()}} street segments)</div>`
@@ -2998,9 +2969,9 @@ html_page = f'''<!DOCTYPE html>
       const rBox = document.getElementById('insp-route-box');
       rBox.innerHTML = `
         <div style="font-weight: 700; font-size: 11px; margin-bottom: 4px; text-transform: uppercase;">Route Geography & Service:</div>
-        <div style="font-size: 11px; color: var(--text-dim);">Neighborhoods: <strong style="color: var(--text-main);">${{nbhDesc}}</strong></div>
-        ${{ancsDesc ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">ANCs: <strong style="color: var(--text-main);">${{ancsDesc}}</strong></div>` : ''}}
-        ${{areaSqMi > 0 ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Area: <strong style="color: var(--text-main);">${{areaSqMi}} sq mi</strong> (${{density}} req/sq mi)</div>` : ''}}
+        <div style="font-size: 11px; color: var(--text-dim);">Neighborhoods: <strong style="color: var(--text-main);">${{escapeHtml(nbhDesc)}}</strong></div>
+        ${{ancsDesc ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">ANCs: <strong style="color: var(--text-main);">${{escapeHtml(ancsDesc)}}</strong></div>` : ''}}
+        ${{areaSqMi > 0 ? `<div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Area: <strong style="color: var(--text-main);">${{escapeHtml(areaSqMi)}} sq mi</strong> (${{escapeHtml(density)}} req/sq mi)</div>` : ''}}
         ${{pointInfo}}
       `;
       rBox.style.display = 'block';
@@ -3412,7 +3383,7 @@ html_page = f'''<!DOCTYPE html>
 
         const canvas = await html2canvas(mapEl, {{
           useCORS: true,
-          allowTaint: true,
+          allowTaint: false,
           scale: 2.0
         }});
 
@@ -3451,7 +3422,7 @@ html_page = f'''<!DOCTYPE html>
         const mapEl = document.getElementById('map-interactive');
         const canvas = await html2canvas(mapEl, {{
           useCORS: true,
-          allowTaint: true,
+          allowTaint: false,
           scale: 2.0
         }});
         const url = canvas.toDataURL('image/png');
@@ -3764,7 +3735,7 @@ html_page = f'''<!DOCTYPE html>
             <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-bottom: 12px;">
               ${{isFile
                 ? 'Browsers restrict asynchronous fetch requests over direct <code>file://</code> URLs. To run locally, start a local server:<br><br><code style="background: var(--bg-surface); padding: 3px 6px; border: 1px solid var(--border);">python3 -m http.server 8000</code><br><br>then open <code style="background: var(--bg-surface); padding: 3px 6px; border: 1px solid var(--border);">http://localhost:8000/map.html</code>.'
-                : 'Failed to fetch <code>data/dc_map_data_v2.json</code> (' + err.message + ').'}}
+                : 'Failed to fetch <code>data/dc_map_data_v2.json</code> (' + escapeHtml(err.message) + ').'}}
             </div>
             ${{isFile ? '<div style="font-size: 11px; color: var(--text-dim);">Alternatively, view the live hosted map on <a href="https://zacheadams.github.io/dc-missed-collection-analysis/map.html" target="_blank" rel="noopener" style="color: var(--accent-combined); text-decoration: underline;">GitHub Pages</a>.</div>' : ''}}
           `;

@@ -215,7 +215,6 @@ html_content = f"""<!DOCTYPE html>
   <!-- Local Vendored Assets -->
   <script src="assets/vendor/chartjs/chart.umd.min.js"></script>
   <script src="assets/vendor/jspdf/jspdf.umd.min.js"></script>
-  <script src="assets/vendor/jspdf-autotable/jspdf.plugin.autotable.min.js"></script>
   <script src="assets/vendor/html2canvas/html2canvas.min.js"></script>
 
   <style>
@@ -791,13 +790,14 @@ html_content += f"""
         <table class="data-table" id="anc-table">
           <thead>
             <tr>
-              <th data-col="0">ANC</th>
-              <th data-col="1" style="text-align: right;">Total Requests</th>
-              <th data-col="2" style="text-align: right;" class="kw-trash">Trash</th>
-              <th data-col="3" style="text-align: right;" class="kw-recycle">Recycling</th>
-              <th data-col="4" style="text-align: right;">Unique Addrs</th>
-              <th data-col="5" style="text-align: right;">Repeat Addrs</th>
-              <th data-col="6" style="text-align: right;">Repeat Rate</th>
+              <th data-col="0">Ward</th>
+              <th data-col="1">ANC</th>
+              <th data-col="2" style="text-align: right;">Total Requests</th>
+              <th data-col="3" style="text-align: right;" class="kw-trash">Trash</th>
+              <th data-col="4" style="text-align: right;" class="kw-recycle">Recycling</th>
+              <th data-col="5" style="text-align: right;">Unique Addrs</th>
+              <th data-col="6" style="text-align: right;">Repeat Addrs</th>
+              <th data-col="7" style="text-align: right;">Repeat Rate</th>
             </tr>
           </thead>
           <tbody id="anc-table-body">
@@ -809,6 +809,7 @@ for anc in ancs_list:
     anc_ward_esc = escape(str(anc['ward']))
     html_content += f"""
             <tr data-anc="{anc_id_esc}" data-ward="{anc_ward_esc}">
+              <td data-sort="{anc_ward_esc}">Ward {anc_ward_esc}</td>
               <td data-sort="{anc_id_esc}" data-type="anc"><strong>ANC {anc_id_esc}</strong></td>
               <td data-sort="{anc['total']}" style="text-align: right;" class="kw-combined font-num"><strong>{anc['total']:,}</strong></td>
               <td data-sort="{anc['trash']}" style="text-align: right;" class="kw-trash font-num">{anc['trash']:,}</td>
